@@ -1,0 +1,9 @@
+{
+  "CA-ALG-01": {"jurisdiction": "CA", "category": "algorithmic_rent_setting", "text_pattern": "AB\\s*325|SB\\s*763|common pricing"},
+  "HOB-ALG-01": {"jurisdiction": "Hoboken, NJ", "category": "algorithmic_rent_setting"},
+  "JC-ALG-01": {"jurisdiction": "Jersey City, NJ", "category": "algorithmic_rent_setting"},
+  "NJ-ALG-01": {"jurisdiction": "NJ", "category": "algorithmic_rent_setting", "text_pattern": "FAIR|2026.*43|algorithm"},
+  "MA-ALG-P1": {"jurisdiction": "MA", "category": "algorithmic_rent_setting", "text_pattern": "S[.\\s]*2983"},
+  "MA-ALG-P2": {"jurisdiction": "MA", "category": "algorithmic_rent_setting", "text_pattern": "H[.\\s]*5222"},
+  "MA-RENT-P1": {"jurisdiction": "MA", "category": "rent_increase_limits", "text_pattern": "25[–-]21|ballot|initiative"}
+}

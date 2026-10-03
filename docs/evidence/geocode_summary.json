@@ -1,0 +1,259 @@
+{
+  "recorded_at": "2026-10-03T21:05:28.861961+00:00",
+  "counts": {
+    "Los Angeles, CA": 80,
+    "Hoboken, NJ": 39,
+    "Newark, NJ": 47,
+    "Berkeley, CA": 40,
+    "Boston, MA": 55,
+    "Jersey City, NJ": 49,
+    "unresolved": 21,
+    "Cambridge, MA": 48,
+    "San Francisco, CA": 72,
+    "San Diego, CA": 49
+  },
+  "spot_checks": {
+    "A0001": {
+      "property": {
+        "address_id": "A0001",
+        "raw_address": {
+          "street_address": "6238 DE LONGPRE AVE",
+          "postal_city": "Los Angeles",
+          "state": "CA",
+          "zip": "90028"
+        },
+        "normalized_address": "6238 DE LONGPRE AVE, LOS ANGELES, CA, 90028",
+        "facts": {
+          "residential": true,
+          "year_built": 1927,
+          "units": 32
+        },
+        "bounds": {},
+        "missing_facts": [
+          "certificate_of_occupancy",
+          "owner_type",
+          "owner_occupied",
+          "tenancy_start"
+        ],
+        "provenance": {
+          "state": "Assessor dataset: LA County eGIS parcels; retrieved 2026-10-01T22:50Z",
+          "residential": "Participant guide: sample of multifamily properties (dataset convention)",
+          "year_built": "Assessor dataset: LA County eGIS parcels; retrieved 2026-10-01T22:50Z",
+          "units": "Assessor dataset: LA County eGIS parcels; retrieved 2026-10-01T22:50Z"
+        }
+      },
+      "resolution": {
+        "address_id": "A0001",
+        "state": "CA",
+        "county": "Los Angeles County",
+        "municipality": "Los Angeles",
+        "identifiers": {
+          "municipality_geoid": "0644000",
+          "geography_type": "G4110",
+          "response_cache_key": "137abc84acb6b06a14ca6de0235fcbb78d96e4925c7539c48d97e325fa2b19c0"
+        },
+        "method": "census_geographies",
+        "match_quality": "resolved",
+        "benchmark": "Public_AR_Current",
+        "vintage": "Current_Current",
+        "retrieved_at": "2026-10-03T20:49:07.098925+00:00",
+        "response_hash": "30037a68c8184248c67537f3224ef2b7eccc210b09c4c131c8b37d4c92f73154",
+        "unresolved": [],
+        "attempts": [
+          {
+            "street": "6238 DE LONGPRE AVE",
+            "zip": "90028",
+            "cache_key": "137abc84acb6b06a14ca6de0235fcbb78d96e4925c7539c48d97e325fa2b19c0",
+            "quality": "resolved"
+          }
+        ]
+      }
+    },
+    "A0002": {
+      "property": {
+        "address_id": "A0002",
+        "raw_address": {
+          "street_address": "1031-1035 CLINTON ST",
+          "postal_city": "Hoboken",
+          "state": "NJ",
+          "zip": "07030"
+        },
+        "normalized_address": "1031-1035 CLINTON ST, HOBOKEN, NJ, 07030",
+        "facts": {
+          "residential": true,
+          "year_built": 2001
+        },
+        "bounds": {},
+        "missing_facts": [
+          "units",
+          "certificate_of_occupancy",
+          "owner_type",
+          "owner_occupied",
+          "tenancy_start"
+        ],
+        "provenance": {
+          "state": "Assessor dataset: NJOGIS Parcels & MOD-IV Composite; retrieved 2026-10-01T22:50Z",
+          "residential": "Participant guide: sample of multifamily properties (dataset convention)",
+          "year_built": "Assessor dataset: NJOGIS Parcels & MOD-IV Composite; retrieved 2026-10-01T22:50Z"
+        }
+      },
+      "resolution": {
+        "address_id": "A0002",
+        "state": "NJ",
+        "county": "Hudson County",
+        "municipality": "Hoboken",
+        "identifiers": {
+          "municipality_geoid": "3432250",
+          "geography_type": "G4110",
+          "response_cache_key": "86f7fe035d86e0c45a8dfe0e572864a0df4c042ff9c5f4b484d4d8a8518307e9"
+        },
+        "method": "census_geographies",
+        "match_quality": "resolved",
+        "benchmark": "Public_AR_Current",
+        "vintage": "Current_Current",
+        "retrieved_at": "2026-10-03T20:49:07.102416+00:00",
+        "response_hash": "7de5b5e05ac01ec6a1fcbe444afea4355686e45d3974d0f3aacdec27cbe950ca",
+        "unresolved": [],
+        "attempts": [
+          {
+            "street": "1031-1035 CLINTON ST",
+            "zip": "07030",
+            "cache_key": "86f7fe035d86e0c45a8dfe0e572864a0df4c042ff9c5f4b484d4d8a8518307e9",
+            "quality": "resolved"
+          }
+        ]
+      }
+    },
+    "A0003": {
+      "property": {
+        "address_id": "A0003",
+        "raw_address": {
+          "street_address": "876-878 S 14TH ST",
+          "postal_city": "Newark",
+          "state": "NJ",
+          "zip": "11219"
+        },
+        "normalized_address": "876-878 S 14TH ST, NEWARK, NJ, 11219",
+        "facts": {
+          "residential": true
+        },
+        "bounds": {},
+        "missing_facts": [
+          "units",
+          "year_built",
+          "certificate_of_occupancy",
+          "owner_type",
+          "owner_occupied",
+          "tenancy_start"
+        ],
+        "provenance": {
+          "state": "Assessor dataset: NJOGIS Parcels & MOD-IV Composite; retrieved 2026-10-01T22:50Z",
+          "residential": "Participant guide: sample of multifamily properties (dataset convention)"
+        }
+      },
+      "resolution": {
+        "address_id": "A0003",
+        "state": "NJ",
+        "county": "Essex County",
+        "municipality": "Newark",
+        "identifiers": {
+          "municipality_geoid": "3451000",
+          "geography_type": "G4110",
+          "response_cache_key": "65cf50186b31d76da57a4dcdf8c225291d89876649b8380a2230a4ed50fd3ee8"
+        },
+        "method": "census_geographies",
+        "match_quality": "resolved",
+        "benchmark": "Public_AR_Current",
+        "vintage": "Current_Current",
+        "retrieved_at": "2026-10-03T20:49:07.121127+00:00",
+        "response_hash": "8cead280dc1fdf9f7d60d672c43dec273d4917b1d96f079a2f337c77dac2497e",
+        "unresolved": [],
+        "attempts": [
+          {
+            "street": "876-878 S 14TH ST",
+            "zip": "11219",
+            "cache_key": "65cf50186b31d76da57a4dcdf8c225291d89876649b8380a2230a4ed50fd3ee8",
+            "quality": "resolved"
+          }
+        ]
+      }
+    },
+    "A0009": {
+      "property": {
+        "address_id": "A0009",
+        "raw_address": {
+          "street_address": "322-322.5 Western Ave",
+          "postal_city": "Cambridge",
+          "state": "MA",
+          "zip": ""
+        },
+        "normalized_address": "322-322.5 WESTERN AVE, CAMBRIDGE, MA, ",
+        "facts": {
+          "residential": true,
+          "year_built": 1915,
+          "units": 6
+        },
+        "bounds": {},
+        "missing_facts": [
+          "certificate_of_occupancy",
+          "owner_type",
+          "owner_occupied",
+          "tenancy_start"
+        ],
+        "provenance": {
+          "state": "Assessor dataset: Cambridge Property Database FY2026 (waa7-ibdu); retrieved 2026-10-01T22:50Z",
+          "residential": "Participant guide: sample of multifamily properties (dataset convention)",
+          "year_built": "Assessor dataset: Cambridge Property Database FY2026 (waa7-ibdu); retrieved 2026-10-01T22:50Z",
+          "units": "Assessor dataset: Cambridge Property Database FY2026 (waa7-ibdu); retrieved 2026-10-01T22:50Z"
+        }
+      },
+      "resolution": {
+        "address_id": "A0009",
+        "state": "MA",
+        "county": null,
+        "municipality": null,
+        "identifiers": {},
+        "method": "census_geographies",
+        "match_quality": "ambiguous",
+        "benchmark": "Public_AR_Current",
+        "vintage": "Current_Current",
+        "retrieved_at": "2026-10-03T20:51:44.899439+00:00",
+        "response_hash": "a1f2e4a482b1fe7a89ec25a080b9de0fdabb5136375692ef1152c1eb380983aa",
+        "unresolved": [
+          "Multiple Census matches"
+        ],
+        "attempts": [
+          {
+            "street": "322-322.5 Western Ave",
+            "zip": "",
+            "cache_key": "405866ad30633120f96a500b41a105c4f8a0e517fa251f3f208896e1a2d8b693",
+            "quality": "ambiguous"
+          }
+        ]
+      }
+    }
+  },
+  "unresolved_ids": [
+    "A0009",
+    "A0098",
+    "A0115",
+    "A0128",
+    "A0156",
+    "A0168",
+    "A0229",
+    "A0279",
+    "A0291",
+    "A0295",
+    "A0328",
+    "A0346",
+    "A0352",
+    "A0357",
+    "A0364",
+    "A0376",
+    "A0380",
+    "A0384",
+    "A0400",
+    "A0428",
+    "A0484"
+  ]
+}

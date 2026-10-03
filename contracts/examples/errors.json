@@ -1,0 +1,24 @@
+{
+  "fixture_mode": "synthetic",
+  "unknown_address": {
+    "detail": {
+      "code": "unknown_id",
+      "message": "Unknown address ID MISSING"
+    }
+  },
+  "invalid_input": {
+    "detail": [
+      {
+        "type": "value_error",
+        "loc": [
+          "body"
+        ],
+        "msg": "Value error, Supply exactly one of address_id or address",
+        "input": {},
+        "ctx": {
+          "error": {}
+        }
+      }
+    ]
+  }
+}

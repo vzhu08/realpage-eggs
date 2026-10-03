@@ -1,0 +1,26 @@
+{
+  "run_id": "60afd10e090b48379e1a468c23841c46",
+  "operation": "ingest",
+  "mode": "local",
+  "started_at": "2026-10-03T20:49:01.036335+00:00",
+  "finished_at": "2026-10-03T20:49:01.146855+00:00",
+  "elapsed_seconds": 0.111,
+  "outcome": "success",
+  "input_hashes": {
+    "manifest": "a5e2a29265d5c29f8cb033c360fdb8d4d9604efc21774f4ed9162ee07ca40dae",
+    "addresses": "0a5ebe8cd9c422f5999831f668cc787da5a22f3ca78ba94cb941a801e68af95d"
+  },
+  "config": {},
+  "versions": {
+    "pipeline": "0.1.0",
+    "evaluator": "0.1.0"
+  },
+  "counts": {
+    "manifest_entries": 87,
+    "source_texts": 54,
+    "addresses": 500,
+    "hash_mismatches": 54
+  },
+  "errors": [],
+  "artifacts": []
+}

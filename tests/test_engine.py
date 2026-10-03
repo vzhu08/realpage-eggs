@@ -1,0 +1,119 @@
+from datetime import date
+
+import pytest
+from pydantic import ValidationError
+
+from navigator.engine import evaluate_rule, evaluate_rules, temporal
+from navigator.models import Expression, Bound, Interaction, StatusEvent
+from navigator.predicates import evaluate_expression
+
+DAY = date(2026, 11, 15)
+
+
+@pytest.mark.parametrize("op,known,expected", [("all", False, "false"), ("any", True, "true"), ("all", True, "unknown"), ("any", False, "unknown")])
+def test_three_valued_short_circuit(prop, op, known, expected):
+    expr = Expression(op=op, args=[Expression(op="literal", value=known), Expression(op="eq", fact="owner_occupied", value=True)])
+    result = evaluate_expression(expr, prop, DAY)
+    assert result.value == expected
+    assert result.missing_facts == (["owner_occupied"] if expected == "unknown" else [])
+
+
+def test_ruled_out_exemption_does_not_request_owner_fact(rule, prop, resolution):
+    rule.exemption_conditions = Expression(op="all", args=[Expression(op="lte", fact="units", value=2), Expression(op="eq", fact="owner_occupied", value=True)])
+    result = evaluate_rule(rule, prop, resolution, DAY)
+    assert result.result == "applies"
+    assert not result.missing_facts
+
+
+@pytest.mark.parametrize("day,expected", [(date(2026, 11, 14), "not_yet_effective"), (DAY, "applies"), (date(2026, 11, 16), "applies")])
+def test_effective_date_inclusive(rule, prop, resolution, day, expected):
+    assert evaluate_rule(rule, prop, resolution, day).result == expected
+
+
+def test_pending_never_activates_on_proposed_effective_date(rule):
+    rule.lifecycle, rule.status_events, rule.status_as_of = "pending", [], "2026-01-01"
+    assert temporal(rule, date(2030, 1, 1)) == "pending"
+    rule.lifecycle = "failed"
+    assert temporal(rule, date(2030, 1, 1)) == "failed"
+
+
+def test_partial_effective_date_and_history(rule):
+    rule.effective_date = "2026-11"
+    assert temporal(rule, date(2026, 11, 1)) == "unknown"
+    assert temporal(rule, date(2026, 11, 30)) == "in_force"
+    rule.status_events = []
+    rule.status_as_of = "2026-12-01"
+    assert temporal(rule, date(2026, 11, 30)) == "unknown"
+
+
+def test_year_proxy_preserves_cutoff_ambiguity(prop):
+    prop.facts["year_built"] = 1978
+    expr = Expression(op="date_on_or_before", fact="certificate_of_occupancy", value="1978-10-01")
+    assert evaluate_expression(expr, prop, DAY).value == "unknown"
+    prop.facts["year_built"] = 1977
+    answer = evaluate_expression(expr, prop, DAY)
+    assert answer.value == "true"
+    assert "proxy" in answer.supporting_facts["certificate_of_occupancy"]["provenance"]
+
+
+def test_verified_units_bound_can_rule_out_exception(prop):
+    prop.facts.pop("units")
+    prop.bounds["units"] = Bound(lower=5, provenance="five or more apartments")
+    assert evaluate_expression(Expression(op="lte", fact="units", value=2), prop, DAY).value == "false"
+    assert evaluate_expression(Expression(op="gte", fact="units", value=8), prop, DAY).value == "unknown"
+
+
+def test_unsupported_conditions_are_unknown_and_eval_is_rejected(prop):
+    assert evaluate_expression(Expression(op="unsupported", reason="requires legal interpretation"), prop, DAY).value == "unknown"
+    with pytest.raises(ValidationError): Expression(op="eval", value="__import__('os')")
+    with pytest.raises(ValidationError): Expression(op="all", args=[])
+
+
+def test_municipal_uncertainty_keeps_state_answer(rule, prop, resolution):
+    resolution.municipality, resolution.match_quality = None, "unresolved"
+    assert evaluate_rule(rule, prop, resolution, DAY).result == "unknown"
+    rule.jurisdiction, rule.level = "CA", "state"
+    assert evaluate_rule(rule, prop, resolution, DAY).result == "applies"
+
+
+def state_rule(rule):
+    state = rule.model_copy(deep=True)
+    state.team_rule_id, state.jurisdiction, state.level, state.citation = "state", "CA", "state", "Synthetic State Code 1"
+    return state
+
+
+def test_supersession_requires_supported_scope_and_known_local_coverage(rule, prop, resolution):
+    state = state_rule(rule)
+    rule.interactions = [Interaction(kind="supersedes", target_citation=state.citation, target_jurisdiction="CA", category=rule.category, scope=Expression(op="literal", value=True), evidence=rule.evidence, note="synthetic priority evidence")]
+    answer = {e.team_rule_id: e for e in evaluate_rules([rule, state], prop, resolution, DAY)}
+    assert answer["state"].result == "superseded"
+    rule.coverage_conditions = Expression(op="eq", fact="exemption_filed", value=False)
+    answer = {e.team_rule_id: e for e in evaluate_rules([rule, state], prop, resolution, DAY)}
+    assert answer["state"].result == "applies"
+    assert answer["state"].conflict_flag
+
+
+def test_cyclic_interactions_surface_conflicts(rule, prop, resolution):
+    state = state_rule(rule)
+    for source, target in [(rule, state), (state, rule)]:
+        source.interactions = [Interaction(kind="supersedes", target_citation=target.citation, target_jurisdiction=target.jurisdiction, category=target.category, scope=Expression(op="literal", value=True), evidence=source.evidence, note="synthetic cycle")]
+    answers = evaluate_rules([state, rule], prop, resolution, DAY)
+    assert all(e.conflict_flag for e in answers)
+    assert all(e.result == "applies" for e in answers)
+
+
+def test_deterministic_evaluation(rule, prop, resolution):
+    assert evaluate_rules([rule], prop, resolution, DAY) == evaluate_rules([rule], prop, resolution, DAY)
+
+
+def test_no_possible_members_does_not_require_missing_fact(prop):
+    result = evaluate_expression(Expression(op="in", fact="owner_type", value=[]), prop, DAY)
+    assert result.value == "false" and not result.missing_facts
+
+
+def test_overlapping_versions_need_evidenced_precedence(rule, prop, resolution):
+    other = rule.model_copy(deep=True)
+    other.team_rule_id = "other-version"
+    other.key_value = "different cap"
+    results = evaluate_rules([rule, other], prop, resolution, DAY)
+    assert all(e.result == "unknown" and e.conflict_flag for e in results)

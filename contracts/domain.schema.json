@@ -1,0 +1,1632 @@
+{
+  "Rule": {
+    "$defs": {
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "doc_id": {
+            "title": "Doc Id",
+            "type": "string"
+          },
+          "quote": {
+            "minLength": 20,
+            "title": "Quote",
+            "type": "string"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Start"
+          },
+          "end": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "End"
+          },
+          "supports": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Supports",
+            "type": "array"
+          }
+        },
+        "required": [
+          "doc_id",
+          "quote",
+          "supports"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "Expression": {
+        "additionalProperties": false,
+        "properties": {
+          "op": {
+            "enum": [
+              "all",
+              "any",
+              "not",
+              "eq",
+              "ne",
+              "lt",
+              "lte",
+              "gt",
+              "gte",
+              "in",
+              "date_before",
+              "date_on_or_before",
+              "age_at_least",
+              "literal",
+              "unsupported"
+            ],
+            "title": "Op",
+            "type": "string"
+          },
+          "args": {
+            "items": {
+              "$ref": "#/$defs/Expression"
+            },
+            "title": "Args",
+            "type": "array"
+          },
+          "fact": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Fact"
+          },
+          "value": {
+            "default": null,
+            "title": "Value"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Reason"
+          }
+        },
+        "required": [
+          "op"
+        ],
+        "title": "Expression",
+        "type": "object"
+      },
+      "Interaction": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "supersedes",
+              "conflicts_with"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "target_citation": {
+            "title": "Target Citation",
+            "type": "string"
+          },
+          "target_jurisdiction": {
+            "title": "Target Jurisdiction",
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "rent_increase_limits",
+              "just_cause_eviction",
+              "security_deposits",
+              "application_screening_fees",
+              "screening_restrictions",
+              "algorithmic_rent_setting"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/$defs/Expression"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "target_citation",
+          "target_jurisdiction",
+          "category",
+          "scope",
+          "evidence",
+          "note"
+        ],
+        "title": "Interaction",
+        "type": "object"
+      },
+      "StatusEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "enum": [
+              "enacted",
+              "pending",
+              "failed",
+              "repealed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "on": {
+            "title": "On",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "status",
+          "on",
+          "evidence"
+        ],
+        "title": "StatusEvent",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "jurisdiction": {
+        "title": "Jurisdiction",
+        "type": "string"
+      },
+      "level": {
+        "enum": [
+          "state",
+          "city"
+        ],
+        "title": "Level",
+        "type": "string"
+      },
+      "category": {
+        "enum": [
+          "rent_increase_limits",
+          "just_cause_eviction",
+          "security_deposits",
+          "application_screening_fees",
+          "screening_restrictions",
+          "algorithmic_rent_setting"
+        ],
+        "title": "Category",
+        "type": "string"
+      },
+      "provision_key": {
+        "description": "Stable short name for a distinct obligation within its citation",
+        "minLength": 1,
+        "title": "Provision Key",
+        "type": "string"
+      },
+      "title": {
+        "title": "Title",
+        "type": "string"
+      },
+      "requirement": {
+        "title": "Requirement",
+        "type": "string"
+      },
+      "key_value": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Key Value"
+      },
+      "citation": {
+        "title": "Citation",
+        "type": "string"
+      },
+      "quoted_span": {
+        "minLength": 20,
+        "title": "Quoted Span",
+        "type": "string"
+      },
+      "source_doc_id": {
+        "title": "Source Doc Id",
+        "type": "string"
+      },
+      "source_url": {
+        "title": "Source Url",
+        "type": "string"
+      },
+      "coverage_conditions": {
+        "$ref": "#/$defs/Expression"
+      },
+      "exemption_conditions": {
+        "$ref": "#/$defs/Expression"
+      },
+      "exemptions": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Exemptions"
+      },
+      "lifecycle": {
+        "enum": [
+          "enacted",
+          "pending",
+          "failed",
+          "unknown"
+        ],
+        "title": "Lifecycle",
+        "type": "string"
+      },
+      "effective_date": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Effective Date"
+      },
+      "end_date": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "End Date"
+      },
+      "status_as_of": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Status As Of"
+      },
+      "status_events": {
+        "items": {
+          "$ref": "#/$defs/StatusEvent"
+        },
+        "title": "Status Events",
+        "type": "array"
+      },
+      "evidence": {
+        "items": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "minItems": 1,
+        "title": "Evidence",
+        "type": "array"
+      },
+      "interactions": {
+        "items": {
+          "$ref": "#/$defs/Interaction"
+        },
+        "title": "Interactions",
+        "type": "array"
+      },
+      "penalties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Penalties"
+      },
+      "review_issues": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Review Issues",
+        "type": "array"
+      },
+      "conflict_flag": {
+        "default": false,
+        "title": "Conflict Flag",
+        "type": "boolean"
+      },
+      "conflict_note": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Conflict Note"
+      },
+      "team_rule_id": {
+        "title": "Team Rule Id",
+        "type": "string"
+      },
+      "evidence_mode": {
+        "enum": [
+          "live",
+          "synthetic",
+          "replay"
+        ],
+        "title": "Evidence Mode",
+        "type": "string"
+      },
+      "extraction_run_id": {
+        "title": "Extraction Run Id",
+        "type": "string"
+      },
+      "semantic_verification": {
+        "enum": [
+          "model_reviewed",
+          "needs_review",
+          "synthetic_fixture"
+        ],
+        "title": "Semantic Verification",
+        "type": "string"
+      }
+    },
+    "required": [
+      "jurisdiction",
+      "level",
+      "category",
+      "provision_key",
+      "title",
+      "requirement",
+      "citation",
+      "quoted_span",
+      "source_doc_id",
+      "source_url",
+      "coverage_conditions",
+      "lifecycle",
+      "evidence",
+      "team_rule_id",
+      "evidence_mode",
+      "extraction_run_id",
+      "semantic_verification"
+    ],
+    "title": "Rule",
+    "type": "object"
+  },
+  "SourceDocument": {
+    "additionalProperties": false,
+    "properties": {
+      "doc_id": {
+        "pattern": "^[A-Za-z0-9_-]+$",
+        "title": "Doc Id",
+        "type": "string"
+      },
+      "jurisdictions": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Jurisdictions",
+        "type": "array"
+      },
+      "url": {
+        "title": "Url",
+        "type": "string"
+      },
+      "retrieved_at": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Retrieved At"
+      },
+      "text": {
+        "default": "",
+        "title": "Text",
+        "type": "string"
+      },
+      "sha256": {
+        "title": "Sha256",
+        "type": "string"
+      },
+      "manifest_sha256": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Manifest Sha256"
+      },
+      "capture_status": {
+        "enum": [
+          "supplied",
+          "link_only",
+          "failed",
+          "terms_review",
+          "supplementary",
+          "synthetic"
+        ],
+        "title": "Capture Status",
+        "type": "string"
+      },
+      "authority": {
+        "title": "Authority",
+        "type": "string"
+      },
+      "source_type": {
+        "default": "unclassified",
+        "title": "Source Type",
+        "type": "string"
+      },
+      "issues": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Issues",
+        "type": "array"
+      },
+      "duplicate_of": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Duplicate Of"
+      }
+    },
+    "required": [
+      "doc_id",
+      "jurisdictions",
+      "url",
+      "retrieved_at",
+      "sha256",
+      "capture_status",
+      "authority"
+    ],
+    "title": "SourceDocument",
+    "type": "object"
+  },
+  "PropertyFacts": {
+    "$defs": {
+      "Bound": {
+        "additionalProperties": false,
+        "properties": {
+          "lower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Lower"
+          },
+          "upper": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Upper"
+          },
+          "provenance": {
+            "title": "Provenance",
+            "type": "string"
+          }
+        },
+        "required": [
+          "provenance"
+        ],
+        "title": "Bound",
+        "type": "object"
+      },
+      "RawAddress": {
+        "additionalProperties": false,
+        "properties": {
+          "street_address": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Street Address",
+            "type": "string"
+          },
+          "postal_city": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Postal City",
+            "type": "string"
+          },
+          "state": {
+            "pattern": "^[A-Z]{2}$",
+            "title": "State",
+            "type": "string"
+          },
+          "zip": {
+            "default": "",
+            "pattern": "^([0-9]{5}(-[0-9]{4})?)?$",
+            "title": "Zip",
+            "type": "string"
+          }
+        },
+        "required": [
+          "street_address",
+          "postal_city",
+          "state"
+        ],
+        "title": "RawAddress",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "address_id": {
+        "title": "Address Id",
+        "type": "string"
+      },
+      "raw_address": {
+        "$ref": "#/$defs/RawAddress"
+      },
+      "normalized_address": {
+        "title": "Normalized Address",
+        "type": "string"
+      },
+      "facts": {
+        "additionalProperties": true,
+        "title": "Facts",
+        "type": "object"
+      },
+      "bounds": {
+        "additionalProperties": {
+          "$ref": "#/$defs/Bound"
+        },
+        "title": "Bounds",
+        "type": "object"
+      },
+      "missing_facts": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Missing Facts",
+        "type": "array"
+      },
+      "provenance": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Provenance",
+        "type": "object"
+      }
+    },
+    "required": [
+      "address_id",
+      "raw_address",
+      "normalized_address"
+    ],
+    "title": "PropertyFacts",
+    "type": "object"
+  },
+  "JurisdictionResolution": {
+    "additionalProperties": false,
+    "properties": {
+      "address_id": {
+        "title": "Address Id",
+        "type": "string"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "State"
+      },
+      "county": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "County"
+      },
+      "municipality": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Municipality"
+      },
+      "identifiers": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Identifiers",
+        "type": "object"
+      },
+      "method": {
+        "default": "assessor_state_only",
+        "title": "Method",
+        "type": "string"
+      },
+      "match_quality": {
+        "default": "unresolved",
+        "enum": [
+          "resolved",
+          "unresolved",
+          "ambiguous",
+          "failed"
+        ],
+        "title": "Match Quality",
+        "type": "string"
+      },
+      "benchmark": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Benchmark"
+      },
+      "vintage": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Vintage"
+      },
+      "retrieved_at": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Retrieved At"
+      },
+      "response_hash": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Response Hash"
+      },
+      "unresolved": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Unresolved",
+        "type": "array"
+      },
+      "attempts": {
+        "items": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "title": "Attempts",
+        "type": "array"
+      }
+    },
+    "required": [
+      "address_id"
+    ],
+    "title": "JurisdictionResolution",
+    "type": "object"
+  },
+  "Evaluation": {
+    "$defs": {
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "doc_id": {
+            "title": "Doc Id",
+            "type": "string"
+          },
+          "quote": {
+            "minLength": 20,
+            "title": "Quote",
+            "type": "string"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Start"
+          },
+          "end": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "End"
+          },
+          "supports": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Supports",
+            "type": "array"
+          }
+        },
+        "required": [
+          "doc_id",
+          "quote",
+          "supports"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "PredicateResult": {
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "enum": [
+              "true",
+              "false",
+              "unknown"
+            ],
+            "title": "Value",
+            "type": "string"
+          },
+          "matched": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Matched",
+            "type": "array"
+          },
+          "unresolved": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved",
+            "type": "array"
+          },
+          "missing_facts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing Facts",
+            "type": "array"
+          },
+          "supporting_facts": {
+            "additionalProperties": true,
+            "title": "Supporting Facts",
+            "type": "object"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "title": "PredicateResult",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "team_rule_id": {
+        "title": "Team Rule Id",
+        "type": "string"
+      },
+      "result": {
+        "enum": [
+          "applies",
+          "unknown",
+          "superseded",
+          "not_yet_effective",
+          "pending",
+          "inapplicable",
+          "failed"
+        ],
+        "title": "Result",
+        "type": "string"
+      },
+      "jurisdiction": {
+        "enum": [
+          "true",
+          "false",
+          "unknown"
+        ],
+        "title": "Jurisdiction",
+        "type": "string"
+      },
+      "coverage": {
+        "$ref": "#/$defs/PredicateResult"
+      },
+      "temporal_status": {
+        "title": "Temporal Status",
+        "type": "string"
+      },
+      "missing_facts": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Missing Facts",
+        "type": "array"
+      },
+      "uncertainty_reasons": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Uncertainty Reasons",
+        "type": "array"
+      },
+      "applied_interactions": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Applied Interactions",
+        "type": "array"
+      },
+      "explanation": {
+        "title": "Explanation",
+        "type": "string"
+      },
+      "conflict_flag": {
+        "default": false,
+        "title": "Conflict Flag",
+        "type": "boolean"
+      },
+      "evidence": {
+        "items": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "title": "Evidence",
+        "type": "array"
+      }
+    },
+    "required": [
+      "team_rule_id",
+      "result",
+      "jurisdiction",
+      "coverage",
+      "temporal_status",
+      "explanation",
+      "evidence"
+    ],
+    "title": "Evaluation",
+    "type": "object"
+  },
+  "RunManifest": {
+    "additionalProperties": false,
+    "properties": {
+      "run_id": {
+        "title": "Run Id",
+        "type": "string"
+      },
+      "operation": {
+        "title": "Operation",
+        "type": "string"
+      },
+      "mode": {
+        "enum": [
+          "live",
+          "replay",
+          "synthetic",
+          "local"
+        ],
+        "title": "Mode",
+        "type": "string"
+      },
+      "started_at": {
+        "title": "Started At",
+        "type": "string"
+      },
+      "finished_at": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Finished At"
+      },
+      "elapsed_seconds": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Elapsed Seconds"
+      },
+      "outcome": {
+        "default": "running",
+        "enum": [
+          "running",
+          "success",
+          "partial",
+          "failed"
+        ],
+        "title": "Outcome",
+        "type": "string"
+      },
+      "input_hashes": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Input Hashes",
+        "type": "object"
+      },
+      "config": {
+        "additionalProperties": true,
+        "title": "Config",
+        "type": "object"
+      },
+      "versions": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Versions",
+        "type": "object"
+      },
+      "counts": {
+        "additionalProperties": {
+          "type": "integer"
+        },
+        "title": "Counts",
+        "type": "object"
+      },
+      "errors": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Errors",
+        "type": "array"
+      },
+      "artifacts": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Artifacts",
+        "type": "array"
+      }
+    },
+    "required": [
+      "run_id",
+      "operation",
+      "mode",
+      "started_at"
+    ],
+    "title": "RunManifest",
+    "type": "object"
+  },
+  "ExtractionBundle": {
+    "$defs": {
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "doc_id": {
+            "title": "Doc Id",
+            "type": "string"
+          },
+          "quote": {
+            "minLength": 20,
+            "title": "Quote",
+            "type": "string"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Start"
+          },
+          "end": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "End"
+          },
+          "supports": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Supports",
+            "type": "array"
+          }
+        },
+        "required": [
+          "doc_id",
+          "quote",
+          "supports"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "Expression": {
+        "additionalProperties": false,
+        "properties": {
+          "op": {
+            "enum": [
+              "all",
+              "any",
+              "not",
+              "eq",
+              "ne",
+              "lt",
+              "lte",
+              "gt",
+              "gte",
+              "in",
+              "date_before",
+              "date_on_or_before",
+              "age_at_least",
+              "literal",
+              "unsupported"
+            ],
+            "title": "Op",
+            "type": "string"
+          },
+          "args": {
+            "items": {
+              "$ref": "#/$defs/Expression"
+            },
+            "title": "Args",
+            "type": "array"
+          },
+          "fact": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Fact"
+          },
+          "value": {
+            "default": null,
+            "title": "Value"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Reason"
+          }
+        },
+        "required": [
+          "op"
+        ],
+        "title": "Expression",
+        "type": "object"
+      },
+      "Interaction": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "supersedes",
+              "conflicts_with"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "target_citation": {
+            "title": "Target Citation",
+            "type": "string"
+          },
+          "target_jurisdiction": {
+            "title": "Target Jurisdiction",
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "rent_increase_limits",
+              "just_cause_eviction",
+              "security_deposits",
+              "application_screening_fees",
+              "screening_restrictions",
+              "algorithmic_rent_setting"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/$defs/Expression"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "target_citation",
+          "target_jurisdiction",
+          "category",
+          "scope",
+          "evidence",
+          "note"
+        ],
+        "title": "Interaction",
+        "type": "object"
+      },
+      "NegativeFinding": {
+        "additionalProperties": false,
+        "properties": {
+          "jurisdiction": {
+            "title": "Jurisdiction",
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "rent_increase_limits",
+              "just_cause_eviction",
+              "security_deposits",
+              "application_screening_fees",
+              "screening_restrictions",
+              "algorithmic_rent_setting"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "jurisdiction",
+          "category",
+          "statement",
+          "evidence"
+        ],
+        "title": "NegativeFinding",
+        "type": "object"
+      },
+      "RuleDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "jurisdiction": {
+            "title": "Jurisdiction",
+            "type": "string"
+          },
+          "level": {
+            "enum": [
+              "state",
+              "city"
+            ],
+            "title": "Level",
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "rent_increase_limits",
+              "just_cause_eviction",
+              "security_deposits",
+              "application_screening_fees",
+              "screening_restrictions",
+              "algorithmic_rent_setting"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "provision_key": {
+            "description": "Stable short name for a distinct obligation within its citation",
+            "minLength": 1,
+            "title": "Provision Key",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "requirement": {
+            "title": "Requirement",
+            "type": "string"
+          },
+          "key_value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Key Value"
+          },
+          "citation": {
+            "title": "Citation",
+            "type": "string"
+          },
+          "quoted_span": {
+            "minLength": 20,
+            "title": "Quoted Span",
+            "type": "string"
+          },
+          "source_doc_id": {
+            "title": "Source Doc Id",
+            "type": "string"
+          },
+          "source_url": {
+            "title": "Source Url",
+            "type": "string"
+          },
+          "coverage_conditions": {
+            "$ref": "#/$defs/Expression"
+          },
+          "exemption_conditions": {
+            "$ref": "#/$defs/Expression"
+          },
+          "exemptions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Exemptions"
+          },
+          "lifecycle": {
+            "enum": [
+              "enacted",
+              "pending",
+              "failed",
+              "unknown"
+            ],
+            "title": "Lifecycle",
+            "type": "string"
+          },
+          "effective_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Effective Date"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "End Date"
+          },
+          "status_as_of": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Status As Of"
+          },
+          "status_events": {
+            "items": {
+              "$ref": "#/$defs/StatusEvent"
+            },
+            "title": "Status Events",
+            "type": "array"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "interactions": {
+            "items": {
+              "$ref": "#/$defs/Interaction"
+            },
+            "title": "Interactions",
+            "type": "array"
+          },
+          "penalties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Penalties"
+          },
+          "review_issues": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Review Issues",
+            "type": "array"
+          },
+          "conflict_flag": {
+            "default": false,
+            "title": "Conflict Flag",
+            "type": "boolean"
+          },
+          "conflict_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Conflict Note"
+          }
+        },
+        "required": [
+          "jurisdiction",
+          "level",
+          "category",
+          "provision_key",
+          "title",
+          "requirement",
+          "citation",
+          "quoted_span",
+          "source_doc_id",
+          "source_url",
+          "coverage_conditions",
+          "lifecycle",
+          "evidence"
+        ],
+        "title": "RuleDraft",
+        "type": "object"
+      },
+      "StatusEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "enum": [
+              "enacted",
+              "pending",
+              "failed",
+              "repealed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "on": {
+            "title": "On",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "status",
+          "on",
+          "evidence"
+        ],
+        "title": "StatusEvent",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "source_kind": {
+        "default": "unclassified",
+        "enum": [
+          "legal_text",
+          "status_record",
+          "agency_guidance",
+          "secondary",
+          "unclassified"
+        ],
+        "title": "Source Kind",
+        "type": "string"
+      },
+      "rules": {
+        "items": {
+          "$ref": "#/$defs/RuleDraft"
+        },
+        "title": "Rules",
+        "type": "array"
+      },
+      "negative_findings": {
+        "items": {
+          "$ref": "#/$defs/NegativeFinding"
+        },
+        "title": "Negative Findings",
+        "type": "array"
+      },
+      "issues": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Issues",
+        "type": "array"
+      }
+    },
+    "required": [
+      "rules"
+    ],
+    "title": "ExtractionBundle",
+    "type": "object"
+  }
+}

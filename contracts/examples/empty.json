@@ -1,0 +1,62 @@
+{
+  "fixture_mode": "synthetic",
+  "request": {
+    "address_id": "SYNTH-002",
+    "as_of": "2026-11-15"
+  },
+  "response": {
+    "address": {
+      "address_id": "SYNTH-002",
+      "raw_address": {
+        "street_address": "2 Test Street",
+        "postal_city": "Maple Harbor",
+        "state": "CA",
+        "zip": ""
+      },
+      "normalized_address": "2 TEST STREET, MAPLE HARBOR, CA, ",
+      "facts": {
+        "residential": true,
+        "units": 2
+      },
+      "bounds": {},
+      "missing_facts": [],
+      "provenance": {
+        "residential": "Synthetic fixture",
+        "units": "Synthetic fixture"
+      }
+    },
+    "as_of": "2026-11-15",
+    "jurisdiction": {
+      "address_id": "SYNTH-002",
+      "state": "CA",
+      "county": null,
+      "municipality": "Maple Harbor",
+      "identifiers": {},
+      "method": "synthetic_fixture_not_geocoded",
+      "match_quality": "resolved",
+      "benchmark": null,
+      "vintage": null,
+      "retrieved_at": null,
+      "response_hash": null,
+      "unresolved": [],
+      "attempts": []
+    },
+    "evaluations": [],
+    "rules": [],
+    "sources": [],
+    "warnings": [],
+    "metadata": {
+      "version": "0.1.0",
+      "dataset": {
+        "mode": "synthetic",
+        "label": "SYNTHETIC_NOT_ACTUAL_LAW"
+      },
+      "rule_modes": [],
+      "extraction_run_ids": [],
+      "partial_data": false,
+      "missing_source_ids": [],
+      "unprocessed_source_ids": []
+    },
+    "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+  }
+}
