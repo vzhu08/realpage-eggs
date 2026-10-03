@@ -1,7 +1,8 @@
 # CORE-02: independent temporal and interaction review
 
-- Human owner: Core owner, name/claim pending. Tool/session: unallocated.
-- Branch/checkout/base/result commit: unallocated. Dependency: BOOT-01 contracts and tests (available).
+- Human owner: Daniel. Tool/session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+- Branch: codex/core-backend. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`.
+- Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Result: `644680cbc1187e8dfb54a519af7f030518732903`. Dependency: BOOT-01 contracts and tests (available).
 - Allowed: `navigator/engine.py`, `predicates.py`, `changes.py`, `tests/test_engine.py`, `test_change_adapters.py`, this card.
 - Reserved: extraction writer paths, models/contracts, API/geocoder, frontend and shared board.
 - Read first: AGENTS, CONTRACTS, evaluator, tests, supplied test definitions (validation only).
@@ -41,3 +42,5 @@ cross-document enactment or finer-grained precedence was added. Full regression 
 Final adversarial regression: parallel supersedes/conflicts_with edges to the same target must retain
 conflict. Reproduced failure, then required edge kind and true scope for each applied supersession.
 Both interaction orders are tested. Final check totals are in docs/core/CORE_HANDOFF.md.
+
+Final combined candidate: `0c32ec447e1e9f3d352702a252493843c7871682`; 82 focused and 96 full-suite tests passed; compileall, contracts generation (disposable copy), and diff check passed. See docs/core/CORE_HANDOFF.md.

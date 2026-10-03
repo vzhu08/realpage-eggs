@@ -1,7 +1,8 @@
 # CORE-03 — P0/P1 evaluator trace and residual AST
 
-State: Ready, unclaimed. Human owner Core developer (name pending); session, branch, checkout, base and result commit unallocated.
-Allocate from the released follow-up contract commit before writing.
+State: Review (local). Human owner: Daniel. Session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+Branch: codex/core-backend. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`.
+Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Result: `49ac41ff2fb9fd2526438f929aa949a0acc0ebcb`.
 Dependencies: COORD-01.
 Read first: AGENTS, OWNERSHIP, ASSIST_CONTRACT, canonical follow-up specification and relevant code.
 Allowed write paths: navigator/engine.py, predicates.py; tests/test_engine.py, test_question_planner.py; this card and lane-owned notes/tests travel with implementation.
@@ -10,7 +11,7 @@ request changes there. Core internals and frontend are reserved to their lanes. 
 Outcome: Stable predicate paths and true/false/unknown trace tree expose only relevant residual facts.
 Acceptance: Short circuit irrelevant fields; correlated predicates; review legacy year-built proxy so actual occupancy facts are not silently established; decisive versus irrelevant fact removal.
 Checks (use project .venv Python): python -m pytest tests/test_engine.py tests/test_question_planner.py -q.
-Next action / blocker: Allocate human claim/isolated checkout, then implement for CORE-04.
+Next action: Vincent reviews this Core candidate through the existing merge queue; CORE-04 implemented locally.
 Non-goals: extra evaluator/provider/database, copied unlicensed code, taking another lane's task.
 Handoff: actual commit, changed files, tests, limitations, contract requests and dependency status in this card.
 Integration: single ordered queue, recheck combined code; local commits allowed, no push/merge/deploy authority.
@@ -36,3 +37,5 @@ Baseline full suite in a disposable copy with the actual pack: 44 passed, one ex
 Intentional expectation change: year_built=1977 no longer proves certificate<=1978 cutoff.
 Platform should update the legacy proxy sentence in docs/CONTRACTS.md; no schema change needed.
 Result: see the local commit containing this card; integration remains pending.
+
+Final combined candidate: `0c32ec447e1e9f3d352702a252493843c7871682`; 82 focused and 96 full-suite tests passed; compileall, contracts generation (disposable copy), and diff check passed. See docs/core/CORE_HANDOFF.md.

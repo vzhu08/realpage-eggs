@@ -1,7 +1,8 @@
 # CORE-05 — P1 deterministic encoded-rule renderer
 
-State: Ready, unclaimed. Human owner Core developer (name pending); session, branch, checkout, base and result commit unallocated.
-Allocate from the released follow-up contract commit before writing.
+State: Review (local). Human owner: Daniel. Session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+Branch: codex/core-backend. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`.
+Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Result: `87b92f091cac25ad6ef3b1e95d7ea3f479abbc29`.
 Dependencies: COORD-01 Rule/Expression contract.
 Read first: AGENTS, OWNERSHIP, ASSIST_CONTRACT, canonical follow-up specification and relevant code.
 Allowed write paths: navigator/rule_renderer.py; tests/test_rule_renderer.py; renderer export in core_assist.py coordinated with CORE-04; this card and lane-owned notes/tests travel with implementation.
@@ -10,7 +11,7 @@ request changes there. Core internals and frontend are reserved to their lanes. 
 Outcome: render_rule(Rule)->EncodedRuleRendering without a model.
 Acceptance: Preserve operators/grouping/thresholds/precision/exemptions/unsupported nodes/effective dates; stable hash; distinct from property explanation and legal verification.
 Checks (use project .venv Python): python -m pytest tests/test_rule_renderer.py -q.
-Next action / blocker: Allocate isolated claim; this compact task does not depend on planner.
+Next action: Platform consumes render_rule from core_assist; review through existing merge queue.
 Non-goals: extra evaluator/provider/database, copied unlicensed code, taking another lane's task.
 Handoff: actual commit, changed files, tests, limitations, contract requests and dependency status in this card.
 Integration: single ordered queue, recheck combined code; local commits allowed, no push/merge/deploy authority.
@@ -39,3 +40,5 @@ No schema, route, dependency or frontend changes. Integration awaits Platform.
 
 Final review: fractional or out-of-calendar-range age_at_least values are visibly unsupported and
 included in unresolved_nodes, matching evaluator capability instead of implying valid whole years.
+
+Final combined candidate: `0c32ec447e1e9f3d352702a252493843c7871682`; 82 focused and 96 full-suite tests passed; compileall, contracts generation (disposable copy), and diff check passed. See docs/core/CORE_HANDOFF.md.

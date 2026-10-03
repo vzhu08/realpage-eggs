@@ -1,7 +1,8 @@
 # CORE-04 — P1 bounded useful-question planner
 
-State: Planned, unclaimed. Human owner Core developer (name pending); session, branch, checkout, base and result commit unallocated.
-Allocate from the released follow-up contract commit before writing.
+State: Review (local). Human owner: Daniel. Session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+Branch: codex/core-backend. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`.
+Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Result: `eaa5d10f2ec822f19a31c3f05aa720649924f442`.
 Dependencies: CORE-03 + COORD-01.
 Read first: AGENTS, OWNERSHIP, ASSIST_CONTRACT, canonical follow-up specification and relevant code.
 Allowed write paths: navigator/core_assist.py (coordinate one Core writer), question_planner.py; tests/test_question_planner.py; this card and lane-owned notes/tests travel with implementation.
@@ -10,7 +11,7 @@ request changes there. Core internals and frontend are reserved to their lanes. 
 Outcome: plan_questions(AssistContext)->QuestionPlan at the shared boundary.
 Acceptance: Bounds, correlated variables, inclusive date/numeric partitions, joint materiality, deterministic ranks/budgets and partial status; all probes reproduce via evaluate_rules; occupancy answer with two exemptions remains unknown.
 Checks (use project .venv Python): python -m pytest tests/test_question_planner.py -q; fixed-set unnecessary-question/incorrect-certainty counts versus baselines.
-Next action / blocker: Begin after traces; no API/schema/frontend edits.
+Next action: Platform wires the actual assist route to the Core functions; no API/schema/frontend edits made here.
 Non-goals: extra evaluator/provider/database, copied unlicensed code, taking another lane's task.
 Handoff: actual commit, changed files, tests, limitations, contract requests and dependency status in this card.
 Integration: single ordered queue, recheck combined code; local commits allowed, no push/merge/deploy authority.
@@ -52,3 +53,5 @@ a supported date partition. Missing interaction targets remain explicit cross-re
 Fixed synthetic evaluation: docs/core/evaluate_planner.py and planner_evaluation.json (8 cases, 11
 questions versus 14 ask-all; 0 versus 3 unnecessary; 0 incorrect certainty / 16 alternatives, 6 certain).
 Expectations were authored by the implementing agent, not independently/human reviewed legal outcomes.
+
+Final combined candidate: `0c32ec447e1e9f3d352702a252493843c7871682`; 82 focused and 96 full-suite tests passed; compileall, contracts generation (disposable copy), and diff check passed. See docs/core/CORE_HANDOFF.md.

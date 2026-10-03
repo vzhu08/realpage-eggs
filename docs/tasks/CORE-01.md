@@ -1,7 +1,8 @@
 # CORE-01: live extraction and evidence review
 
-- Human owner: Core owner, name/claim pending. Tool/session: unallocated.
-- Branch/checkout/base/result commit: unallocated.
+- Human owner: Daniel. Tool/session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+- Branch: codex/core-backend. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`.
+- Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Result: `30cdfb7630b7bac81b7464e980ab6033ee69a239`.
 - Dependency/blocker: user sets OPENAI_API_KEY and OPENAI_MODEL in local .env; never paste keys into chat.
 - Allowed: `navigator/extraction.py`, `tests/test_extraction.py`, a new core evidence report and this card;
   isolated data/cache directory for the writer. Model/schema changes require Platform stewardship.
@@ -35,3 +36,5 @@ Focused tests reproduced missing end_date/status_as_of field-support checks; fix
 prompt version extract-v2-core-dates and actual-occupancy wording. 8 extraction tests pass.
 Actual run IDs, timing, validation/export/lookup outcomes and next action: docs/core/EXTRACTION_EVIDENCE.md.
 Corpus run and real source review remain blocked only on provider configuration and subsequent quality review.
+
+Final combined candidate: `0c32ec447e1e9f3d352702a252493843c7871682`; 82 focused and 96 full-suite tests passed; compileall, contracts generation (disposable copy), and diff check passed. See docs/core/CORE_HANDOFF.md.
