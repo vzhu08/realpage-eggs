@@ -1,3 +1,31 @@
+# Current plan — four developers
+
+The user's October 3 staffing update supersedes the historical three-lane plan below. Read the current
+playbook, OWNERSHIP and four starter prompts. The Git fix/pull is complete: current branch tracks
+origin/main, merge 1f12f5b preserves Platform a034e2b. Existing Core candidate c92ad8f is separate.
+
+| Lane | First independent work | Next dependency / acceptance |
+| --- | --- | --- |
+| Platform / Vincent | Coordinate Core B path release and review the existing Core candidate; keep APIs/exports stable | After authorized integration, actual Core HTTP answers/rendering and official exports pass; refresh shared fixtures |
+| Core A / existing author Daniel | Review existing extraction/date/trace repairs; prepare real D001 extraction | Key/model for live run; stable rule_traces/evaluate_rules for Core B; no invented occupancy or lifecycle |
+| Core B / new human pending | Read/review delivered planner/renderer and comparison; write after handoff | Isolated checkout + path release; planner uses Core A traces and one evaluator; bounded correlated alternatives reproduce |
+| Frontend / Claude | Entire UI with working calls and labeled fixtures | Consume actual integrated planner/renderer; verify unknown -> question -> answer plus still-unknown case |
+
+Existing Core features must be reviewed and continued, not implemented a second time. Remote candidate
+reports 96 tests; local Platform's last software suite has 74. Neither number is a combined integration
+result. Current checkout still lacks the Core module until coordinated integration. Model credentials,
+missing source material and independent legal review remain separate blockers.
+
+Order: P0 real extraction/source/schema/export correctness and candidate integration; P1 handoff/complete
+question-renderer-frontend integration; P2 independently reviewed boundaries and broader source/reference
+coverage. Core A owns legal/evaluator cases; Core B owns the planner comparison and rendering fidelity;
+Platform stewards the candidate manifest/shared reports. Keep richer ranking/translations/features later.
+Names and actual checkouts beyond the evidenced existing author are not invented; Vincent records them.
+
+## Historical planning snapshots
+
+The material below records earlier assumptions and checkpoints; the current four-lane plan above controls.
+
 # Plan from actual clock
 
 ## Follow-up at October 3, 17:32 ET

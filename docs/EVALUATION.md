@@ -123,3 +123,13 @@ actual legal extraction and semantic quality, missing sources, Core planner/rend
 Local HTTP smoke check after restarting the API: health, facts, D001 context and OpenAPI return 200;
 OpenAPI includes /lookup/assist; real assist returns explicit dataset_unavailable 503 with zero extracted
 rules. Recorded in evidence/research-http-smoke.json. Server binds to 127.0.0.1:8000.
+
+## Four-developer documentation revision
+
+This revision changes staffing/docs only, following the requested upstream repair and pull. Current checkout
+preserves a034e2b and merges origin/main 354089f via 1f12f5b. The pull completed without conflicts.
+Previous local 74-test result remains the software evidence; tests were not rerun for documentation edits.
+The fetched Core branch c92ad8f reports 96 tests at 0c32ec4 in docs/core/CORE_HANDOFF.md on that branch.
+That is attributed remote evidence, not a result produced here or a verified combined candidate.
+Documentation checks cover links, distinct Core file ownership, all four starters, preserved original references,
+and Git whitespace checks. Canonical production schemas/code were not modified by the staffing pass.

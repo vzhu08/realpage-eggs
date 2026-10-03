@@ -17,3 +17,7 @@ Integration: single ordered queue, recheck combined code; local commits allowed,
 
 
 Local result: Inventory/verifier implementation and fixture/replay checks passed; live review remains blocked by absent OpenAI key/model and real rules. Full suite: 74 passed. No merge/deployment claimed.
+
+Four-developer coordination: use the current playbook and OWNERSHIP. Core A owns extraction/evaluator/traces;
+Core B owns planner/renderer. Existing Core candidate c92ad8f awaits combined review/integration; do not duplicate it.
+Platform stewards shared contracts and UX owns the entire frontend. Prior task results remain historical evidence.

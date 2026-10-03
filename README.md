@@ -121,8 +121,11 @@ and [handoff](docs/HANDOFF.md) for evidence, missing inputs, ownership and next 
 ## Follow-up / frontend start
 
 The entire frontend belongs to Claude/UX: [starter prompt](docs/starters/FRONTEND_CLAUDE.md).
-Use a separate checkout. Core's [starter](docs/starters/CORE_BACKEND.md) covers trace, question planner
-and deterministic renderer. Platform API/evidence work is implemented on codex/research-platform.
+Use the [four-developer playbook](docs/Hackathon_Development_Playbook.txt) and separate checkouts:
+[Core A — Rules & Evaluation](docs/starters/CORE_RULES.md) owns extraction/evaluator/traces;
+[Core B — Questions & Rendering](docs/starters/CORE_NAVIGATION.md) owns planner/renderer.
+Platform/Vincent owns API/evidence and shared contracts. Daniel's Core implementation already exists
+on candidate origin/codex/core-backend at c92ad8f; hand it off and continue it rather than rebuilding.
 See [current handoff](docs/HANDOFF.md), [assist contract](docs/ASSIST_CONTRACT.md) and generated OpenAPI.
 
 ```powershell
@@ -134,4 +137,6 @@ Review is explicit and may call the configured OpenAI API; an existing exact-ver
 without a call. --refresh requests a fresh review. No model calls occur on lookup/evidence HTTP routes.
 GET /api/v1/facts defines accepted supplemental inputs. POST /api/v1/lookup/assist accepts typed,
 request-local answers and reports missing Core capabilities explicitly. The full suite has 74 passing
-tests; live legal extraction and complete Core/UX integration remain unverified.
+tests at a034e2b; live legal extraction and combined Core/UX integration remain unverified.
+The Git upstream was repaired to origin/main and pulled locally; remote feature branches may be deleted
+after merge. See HANDOFF for actual commits and the existing Core candidate.

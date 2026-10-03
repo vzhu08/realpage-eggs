@@ -72,6 +72,12 @@ explicit CLI operation; HTTP requests never call a model. evidence_checks.json i
 not an extra field in official rules/lookups/changes. Cached semantic review binds to rule/source versions.
 A source reformat may invalidate evidence anchors without constituting a substantive legal amendment.
 
-One known Core issue remains: the baseline ingestion/evaluator accepts labeled year-built occupancy
-proxies. CORE-03 must review this distinct-trigger behavior. The new input registry never creates a
+Local baseline caveat: its evaluator accepts labeled year-built occupancy proxies. Core A's CORE-03
+candidate removes this behavior and requires actual occupancy facts; the repair is not yet integrated
+in this checkout. Confirm it in combined API/export checks before updating current behavior claims.
+The new input registry never creates a
 certificate/occupancy answer from construction year; it asks for the actual defined field.
+
+Ownership is now four lanes: Platform stewards canonical schemas and routes; Core A produces rule_traces
+and evaluate_rules; Core B owns plan_questions/render_rule and the adapter; UX owns the frontend.
+ASSIST_CONTRACT defines the existing candidate boundary. This staffing change does not change schemas.

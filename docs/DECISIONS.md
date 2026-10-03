@@ -51,3 +51,20 @@ no new provider dependency or API endpoint. It permits one schema/span repair (t
 each uses the provider's existing bounded transport retries). Results record live/fixture/replay,
 rule/source/verifier versions, exact spans, model metadata and remaining gaps. A verifier cannot remove
 structural failures or turn missing references into support. Model assessment is not independent accuracy.
+
+## User-requested four-developer revision and Git repair
+
+Core is split by stable producer/consumer outputs, not arbitrary file counts: Core A owns source/evaluator/
+trace correctness; Core B owns planner/rendering and its adapter. Engine tests and planner tests have different
+writers. Platform retains models/routes/generated contracts; UX retains the entire frontend. The full adapted
+playbook is docs/Hackathon_Development_Playbook.txt; original reference documents remain unchanged.
+
+The requested Git fetch found main 354089f, deleted remote bootstrap/research branches and Daniel's separate
+Core candidate c92ad8f. Current research branch now tracks origin/main; requested non-rebasing pull created
+1f12f5b, preserving a034e2b. No force operation, remote push or Core candidate merge was performed.
+The separate 'not a git repository' log cannot be attributed to a specific external working directory from the
+provided log; rev-parse succeeds for this checkout. It is not evidence this repository needs reinitialization.
+
+Existing Core work is preserved and explicitly reused in the staffing plan. Daniel's candidate reports 96
+tests; this pass did not run those tests or certify combined Platform/Core integration. Core B's future scope
+requires a recorded handoff from the original writer; no teammate was messaged or launched by this session.

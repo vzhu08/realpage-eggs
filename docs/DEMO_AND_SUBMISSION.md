@@ -45,3 +45,11 @@ injected authored-plan tests are not that integrated demo.
 Show evidence status beside the original source and, after CORE-05 lands, the deterministic encoded-rule
 rendering. Until then, the authored source-comparison fixture is for UI development only. Submission
 priority remains reviewed real extraction/export correctness, followed by Core/UX question integration.
+
+## Four-developer rehearsal responsibilities
+
+Frontend owns the full visible demo. Platform checks HTTP/export integration and local/deployed environment.
+Core A owns extraction/source/date/evaluator evidence. Core B owns useful questions, remaining uncertainty
+and faithful encoded-rule rendering. All four rehearse the same flow after actual integration.
+Use existing Core candidate c92ad8f through the review/handoff process; the staffing split alone does not
+verify the full demo or publish any branch. Current playbook: docs/Hackathon_Development_Playbook.txt.

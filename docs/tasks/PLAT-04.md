@@ -17,3 +17,7 @@ Integration: single ordered queue, recheck combined code; local commits allowed,
 
 
 Local result: Answers/API implemented; 17 focused API tests passed; full Core planner/renderer integration remains blocked on CORE-04/05. Full suite: 74 passed. No merge/deployment claimed.
+
+Four-developer coordination: use the current playbook and OWNERSHIP. Core A owns extraction/evaluator/traces;
+Core B owns planner/renderer. Existing Core candidate c92ad8f awaits combined review/integration; do not duplicate it.
+Platform stewards shared contracts and UX owns the entire frontend. Prior task results remain historical evidence.

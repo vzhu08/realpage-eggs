@@ -1,20 +1,25 @@
 # Current follow-up handoff
 
-Planning complete; Platform implementation complete for local review; full Core/frontend integration
-pending. Branch codex/research-platform; base 5ef1de1; shared contract checkpoint 3349851. Implementation
-commit is the branch HEAD reported in the final chat handoff. No merge, push, deployment or submission.
+Four-developer staffing revision complete for review. Platform implementation a034e2b remains locally
+verified; combined Core/frontend integration is pending. Branch codex/research-platform. The user-requested
+pull merged origin/main 354089f as 1f12f5b, preserving a034e2b and fixing the deleted upstream. Current
+tracking is origin/main. Earlier bootstrap/contracts are already on remote main. No remote push, deployment
+or submission was performed by this session. The documentation result commit follows the pull.
 
 | Human lane | Ownership / ready starter |
 | --- | --- |
 | Vincent / Platform (this session) | API, validated answers, evidence/context/review/inventory, exports and shared contracts; docs/starters/PLATFORM_API.md |
-| Core developer (unclaimed) | Existing extraction/evaluator plus traces, bounded question planner and deterministic renderer; docs/starters/CORE_BACKEND.md |
+| Core A — Rules & Evaluation / existing author Daniel | Extraction, evaluator/date/interaction correctness and traces; docs/starters/CORE_RULES.md |
+| Core B — Questions & Rendering / new human pending | Existing planner/renderer continuation, tests and sole core_assist.py ownership after handoff; docs/starters/CORE_NAVIGATION.md |
 | Claude / UX (unclaimed) | Entire frontend/**, design/state/tests; docs/starters/FRONTEND_CLAUDE.md |
 
-Shared specification: docs/reference/RealPage_Codex_Research_Followup_Prompt.txt.
+Current operating playbook: docs/Hackathon_Development_Playbook.txt (complete four-developer adaptation).
+Feature specification: docs/reference/RealPage_Codex_Research_Followup_Prompt.txt; original staffing is
+superseded by the user's four-developer revision. Original reference documents remain unchanged.
 Contract: docs/ASSIST_CONTRACT.md, navigator/models.py, contracts/openapi.json, contracts/research.schema.json.
 Fixtures: contracts/research_examples/ (five authored plans), contracts/evidence_examples/ (actual evidence,
 authored renderer expectation), contracts/examples/assist.json (actual Platform response).
-Tasks/claims: docs/TASKS.md, docs/OWNERSHIP.md, docs/tasks/COORD-01.md, PLAT-03/04/05.md,
+Tasks/claims: docs/TASKS.md, docs/OWNERSHIP.md, docs/tasks/COORD-02.md, PLAT-03/04/05.md,
 CORE-03/04/05.md and UX-03.md. Ongoing shared-document steward: Platform/Vincent.
 
 Implemented: four additive routes, strict field/type/provenance validation, ephemeral answers, current
@@ -28,12 +33,20 @@ retain valid official shapes and all address IDs. Three missing-support mutation
 authored decisive alternatives reproduce; occupancy plus two unresolved exemptions stays unknown.
 D001 inventory accounts for all 8,000 supplied characters in 15 unresolved units. Full evidence in EVALUATION.
 
-Ready immediately: UX-03 full frontend using working calls/fixtures; Core-03 traces and Core-05 renderer,
-then Core-04 planner. For integration supply navigator.core_assist.plan_questions/render_rule exactly as
-ASSIST_CONTRACT specifies. No teammate was contacted or claimed started by this session.
+Existing Core work was discovered during the requested fetch: origin/codex/core-backend at c92ad8f,
+authored by Daniel in /Users/danny/Documents/ChatGPT/RealPage/core-backend. It includes traces, planner,
+renderer and date/extraction repairs. Its handoff reports 96 tests on 0c32ec4; those were not rerun here.
+The separate Core candidate was read, not merged, changed or deployed. Core task cards preserve its
+reported results and distinguish historical single-Core claims from the new split.
+
+Ready now: UX builds the entire frontend with current Platform calls/fixtures. Core A reviews source/
+evaluator/traces and prepares live extraction; Core B reviews existing planner/renderer, then writes after
+Vincent records Daniel's path release and the new human's isolated checkout/base. Only Core B owns the
+adapter. Platform reviews the combined candidate and runs actual HTTP/export integration checks.
+No teammate was contacted or interrupted; no new developer session was launched.
 
 P0 blockers: OpenAI key/model and actual reviewed extraction (zero real rules), source gaps, official
-scorer/brief clarification. P1: Core planner/renderer + UX integration. P2: broader references, reviewed
+scorer/brief clarification. P1: review/integrate existing Core candidate, complete path handoff and UX integration. P2: broader references, reviewed
 12-case benchmark (0/12 reviewed), planner baseline comparison, then richer ranking/features.
 Platform's injected fixture tests do not certify actual planner behavior, legal accuracy, or human review.
 

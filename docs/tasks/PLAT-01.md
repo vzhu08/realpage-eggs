@@ -13,3 +13,7 @@
 - Non-goals: guessed street numbers, city count targeting, law thresholds, new geography vendor without reason.
 - Handoff: before/after counts, IDs, evidence hashes, failure causes and commit in this card.
 - Integration authority: user/Platform reviewer; no deployment or main merge without authority.
+
+Four-developer coordination: use the current playbook and OWNERSHIP. Core A owns extraction/evaluator/traces;
+Core B owns planner/renderer. Existing Core candidate c92ad8f awaits combined review/integration; do not duplicate it.
+Platform stewards shared contracts and UX owns the entire frontend. Prior task results remain historical evidence.

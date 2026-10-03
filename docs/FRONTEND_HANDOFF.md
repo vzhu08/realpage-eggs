@@ -82,3 +82,13 @@ Core output (502). The actual service never supplies authored fixture plans as a
 Integration verified: input validation, stateless answer/re-evaluation, evidence/context routes,
 and injected fixture question -> real answer. Full Core question/trace/rendering and browser UI
 integration are not verified. Keep fixture mode visibly labeled while developing those UI states.
+
+## Four-developer ownership update
+
+Use docs/Hackathon_Development_Playbook.txt and OWNERSHIP. Frontend remains one developer's entire lane.
+Core A (existing author Daniel) owns extraction/evaluator/traces; Core B (new human pending) owns planner,
+renderer and core_assist.py. Platform remains the API/schema/generated-fixture steward. Route question/UI
+behavior issues to Core B, truth/source issues to Core A and contract requests to Platform.
+Existing Core candidate c92ad8f contains both services but is not in this local API checkout. The unavailable
+states documented above remain correct here until the combined candidate is integrated and checked.
+Do not ask either Core developer to rebuild features already present on that branch.

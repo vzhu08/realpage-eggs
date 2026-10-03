@@ -16,3 +16,7 @@ Handoff: actual commit, changed files, tests, limitations, contract requests and
 Integration: single ordered queue, recheck combined code; local commits allowed, no push/merge/deploy authority.
 
 Local result: Evidence/context implemented; 12 focused evidence/retrieval tests passed; D001 inventory 15 unresolved units across 8,000 snapshot characters. Full suite: 74 passed. No merge/deployment claimed.
+
+Four-developer coordination: use the current playbook and OWNERSHIP. Core A owns extraction/evaluator/traces;
+Core B owns planner/renderer. Existing Core candidate c92ad8f awaits combined review/integration; do not duplicate it.
+Platform stewards shared contracts and UX owns the entire frontend. Prior task results remain historical evidence.
