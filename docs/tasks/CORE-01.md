@@ -50,3 +50,22 @@ Current prerequisite check: neither key nor model configured; no local .env. Exi
 snapshots are valid; no re-ingestion/reset needed. Fresh D001 attempt is ProviderUnavailable.
 Offline work reproduces and repairs lifecycle-history loss during duplicate-rule merge and malformed
 cache metadata escaping failure handling; valid empty results and valid cache reuse remain supported.
+
+Continuation implementation: `4155617a05b9a24ef0c6093d1910e7113359dbdf` (**Review**).
+18 extraction tests; disposable runner 92 focused / 106 full-suite passed, compileall/contracts/diff
+passed, working contracts unchanged. Repeated equivalent alternative histories retain all evidence.
+No production files beyond extraction.py changed; no shared board/models/contracts/API/dependencies edited.
+
+Live acceptance remains **Blocked**: fresh run `fff936be69f04f6296a4e7efe0f32ba7` failed
+ProviderUnavailable in 0.040 seconds, processed=0, rules=0, model absent, no calls/usage.
+All 54 original texts match the reused store; 87 sources/500 addresses remain. Full corpus not attempted.
+Automated D001 source-only checklist records exact offsets, exclusions and the absence of final-adoption/
+effective evidence; this is not provider or human legal review. No construction-year occupancy trigger.
+
+Evaluation/validation/export at 2026-10-01 remain explicitly partial; all 500 IDs retained, no rule
+references, 500 unresolved municipalities, all T1–T5 blocked. CLI lookup unavailable; actual local HTTP
+lookup 503 and assist 404. Platform retrieval/evidence/geography and route wiring remain dependencies.
+Current source-review limitations, 33 missing source IDs, commands/run IDs/counts/errors and direct local
+key/model setup are in `docs/core/EXTRACTION_EVIDENCE.md`; current verification log is
+`docs/core/verification.json`. Next: configure locally, review live D001, then resume captured corpus.
+No push, merge, deployment, contact or legal-accuracy claim; Daniel pushes manually.

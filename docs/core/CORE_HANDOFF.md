@@ -1,5 +1,64 @@
 # Daniel / Core handoff
 
+## Current CORE-01 continuation — 2026-10-03
+
+Software fixes: **Review**. Real extraction acceptance: **Blocked** on locally configured
+`OPENAI_API_KEY` and `OPENAI_MODEL`, followed by actual output review. Presence checks after dotenv
+loading found both absent. No model or usage is claimed. Starting HEAD was
+`c92ad8fbd27a2175a41cb74428cdc03fb76ab14a`; branch `codex/core-backend` tracks origin/codex/core-backend.
+Tested implementation commit: **`4155617a05b9a24ef0c6093d1910e7113359dbdf`**.
+Any following continuation commit changes only Core documentation/evidence.
+User's existing untracked `docs/.DS_Store` is preserved. Daniel retains manual pushing.
+
+Changed implementation/tests: `navigator/extraction.py`, `tests/test_extraction.py`.
+Different lifecycle histories and snapshot dates survive merge as explicitly conflicting variants;
+equivalent histories retain accumulated rule/event evidence, including repeated alternative variants.
+Invalid cache metadata now produces a finished failure without overwriting previous rules/cache or
+making new provider calls. Valid empty output and cache reuse are preserved. No prompt/schema/dependency
+change; no completed planner/renderer rebuild. Regressions use temporary synthetic fixtures only.
+
+Changed notes: this file, `EXTRACTION_EVIDENCE.md`, `D001_SOURCE_PREFLIGHT.md`, `core01_preflight.json`,
+`core01_pipeline_results.json`, `core01_service_results.json`, `verification.json`, archived
+`verification_initial.json`, and `docs/tasks/CORE-01.md`. All writes remain in Daniel's claimed scope.
+
+Actual fresh evidence:
+
+- Existing explicit store `/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session`:
+  87 sources, 54 captured texts, 500 addresses, zero rules/cache entries, 500 unresolved municipalities.
+  All 54 stored texts match original pack files and actual hashes. No reset, re-ingestion, source
+  replacement, teammate-data writes, scraping, Census requests or invented geography.
+- D001 run `fff936be69f04f6296a4e7efe0f32ba7`, 22:42:49 UTC, 0.040 seconds: failed
+  ProviderUnavailable, zero processed/rules, no model identifier or provider usage. Full corpus was
+  not attempted after the missing-configuration result. The 54 captured texts comprise 76 chunks.
+- D001 automated source preflight has exact original-text offsets. Passage to print dated November
+  18, 2025 does not establish final adoption/effective date. No explicit end date or construction-year
+  occupancy condition appears. This is source-only preparation, not model output or independent/human
+  legal review. Exact quote matches and passing tests do not prove semantic support.
+- Benchmark 2026-10-01 evaluation/validation/export ran through existing CLI interfaces. Export remains
+  `PARTIAL_NOT_JUDGE_READY`; all 500 input IDs retained, zero references (resolution check vacuous),
+  all T1–T5 blocked. CLI lookup exit 2; real-store HTTP lookup 503. `/api/v1/lookup/assist` is still 404
+  with the actual app. Platform route integration remains a dependency; no routes were edited.
+- Requested `.venv/bin/python docs/core/verify_candidate.py` inspected and run: **92 focused / 106
+  full-suite tests passed**, compileall passed, contract generator passed in disposable copy, diff
+  check passed. One existing Starlette/httpx deprecation warning. Working contracts hash-unchanged;
+  seven generated example differences remain Platform-owned. Standalone extraction tests: **18 passed**.
+  Initial 96-test report is preserved in `verification_initial.json`; current logs are `verification.json`.
+
+Exact commands, run IDs/timing/counts, provider setup, failure handling and missing-source priorities
+are in `EXTRACTION_EVIDENCE.md` and the three `core01_*.json` records. The 33 missing text captures
+include state code references, Massachusetts CORI and terms-review municipal sources. These potential
+dependencies need Platform evidence work; overlapping support elsewhere has not been ruled out.
+
+Next bounded action: Daniel configures the ignored local `.env` using the direct setup instructions in
+`EXTRACTION_EVIDENCE.md` (recommended starting model `gpt-6.1-sol`, account availability untested).
+Then run D001 in the same explicit store, review its actual quotations/conditions/exemptions/lifecycle,
+fix demonstrated scoped defects, and resume the captured corpus using valid caches and existing bounded
+retries. Record actual provider/model usage; repeat partial evaluation/export after extraction. Human or
+independent legal review and complete geography are still outstanding. No push, merge, deployment or
+teammate contact occurred in this session.
+
+## Historical completed Core implementation handoff (preserved)
+
 Core-02/03/04/05: **Review**, locally completed. CORE-01 software repairs: **Review**;
 live extraction and source review: **Blocked** on missing OPENAI_API_KEY and OPENAI_MODEL.
 No HTTP assist/frontend integration, merge, deployment or submission is claimed.
