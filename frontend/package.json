@@ -1,0 +1,40 @@
+{
+  "name": "navigator-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Research workspace for the Rental Housing Law Navigator API (UX-03). Not legal advice.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "vite",
+    "dev:demo": "vite --mode demo",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate": "node scripts/generate-contract-types.mjs",
+    "generate:check": "node scripts/generate-contract-types.mjs --check",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "npm run test:unit",
+    "test:unit": "tsx --test tests/unit/*.test.ts",
+    "test:e2e": "playwright test",
+    "verify": "npm run generate:check && npm run typecheck && npm run test:unit && npm run build",
+    "verify:all": "npm run verify && npm run test:e2e",
+    "screenshots": "playwright test screenshots"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^6.0.2",
+    "vite": "^7.1.0"
+  }
+}

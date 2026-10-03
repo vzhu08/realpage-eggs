@@ -1,0 +1,2185 @@
+{
+ "digest": "208abb7377f47b4c",
+ "defs": {
+  "AddressItem": {
+   "properties": {
+    "property": {
+     "$ref": "PropertyFacts"
+    },
+    "resolution": {
+     "$ref": "JurisdictionResolution"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "property",
+    "resolution"
+   ]
+  },
+  "AddressPage": {
+   "properties": {
+    "total": {
+     "type": "integer"
+    },
+    "offset": {
+     "type": "integer"
+    },
+    "limit": {
+     "type": "integer"
+    },
+    "items": {
+     "items": {
+      "$ref": "AddressItem"
+     },
+     "type": "array"
+    },
+    "disclaimer": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "total",
+    "offset",
+    "limit",
+    "items",
+    "disclaimer"
+   ]
+  },
+  "AlternativeOutcome": {
+   "additionalProperties": false,
+   "properties": {
+    "alternative_id": {
+     "type": "string"
+    },
+    "label": {
+     "type": "string"
+    },
+    "probe_facts": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "interval": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "evaluations": {
+     "items": {
+      "$ref": "Evaluation"
+     },
+     "type": "array"
+    },
+    "remaining_uncertainty": {
+     "items": {
+      "$ref": "Uncertainty"
+     },
+     "type": "array"
+    },
+    "hypothetical": {
+     "const": true,
+     "default": true,
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "alternative_id",
+    "label",
+    "probe_facts",
+    "evaluations",
+    "remaining_uncertainty"
+   ],
+   "type": "object"
+  },
+  "AnalysisLimits": {
+   "additionalProperties": false,
+   "properties": {
+    "max_questions": {
+     "default": 5,
+     "maximum": 10,
+     "minimum": 1,
+     "type": "integer"
+    },
+    "max_fields": {
+     "default": 8,
+     "maximum": 12,
+     "minimum": 1,
+     "type": "integer"
+    },
+    "max_evaluations": {
+     "default": 64,
+     "maximum": 256,
+     "minimum": 1,
+     "type": "integer"
+    },
+    "max_joint_fields": {
+     "default": 3,
+     "maximum": 4,
+     "minimum": 1,
+     "type": "integer"
+    }
+   },
+   "type": "object"
+  },
+  "AssistContext": {
+   "additionalProperties": false,
+   "properties": {
+    "property": {
+     "$ref": "PropertyFacts"
+    },
+    "jurisdiction": {
+     "$ref": "JurisdictionResolution"
+    },
+    "as_of": {
+     "format": "date",
+     "type": "string"
+    },
+    "rules": {
+     "items": {
+      "$ref": "Rule"
+     },
+     "type": "array"
+    },
+    "evaluations": {
+     "items": {
+      "$ref": "Evaluation"
+     },
+     "type": "array"
+    },
+    "evidence_reports": {
+     "items": {
+      "$ref": "EvidenceReport"
+     },
+     "type": "array"
+    },
+    "fact_definitions": {
+     "additionalProperties": {
+      "$ref": "FactDefinition"
+     },
+     "type": "object"
+    },
+    "limits": {
+     "$ref": "AnalysisLimits"
+    }
+   },
+   "required": [
+    "property",
+    "jurisdiction",
+    "as_of",
+    "rules",
+    "evaluations",
+    "evidence_reports",
+    "fact_definitions",
+    "limits"
+   ],
+   "type": "object"
+  },
+  "AssistRequest": {
+   "additionalProperties": false,
+   "properties": {
+    "address_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "address": {
+     "anyOf": [
+      {
+       "$ref": "RawAddress"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "as_of": {
+     "default": "2026-10-01",
+     "format": "date",
+     "type": "string"
+    },
+    "supplemental_facts": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "answers": {
+     "items": {
+      "$ref": "SupplementalAnswer"
+     },
+     "maxItems": 20,
+     "type": "array"
+    },
+    "scenario_id": {
+     "anyOf": [
+      {
+       "maxLength": 100,
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "limits": {
+     "$ref": "AnalysisLimits"
+    }
+   },
+   "type": "object"
+  },
+  "AssistResponse": {
+   "additionalProperties": false,
+   "properties": {
+    "lookup": {
+     "$ref": "LookupResponse"
+    },
+    "question_plan": {
+     "$ref": "QuestionPlan"
+    },
+    "evidence_reports": {
+     "items": {
+      "$ref": "EvidenceReport"
+     },
+     "type": "array"
+    },
+    "encoded_rules": {
+     "items": {
+      "$ref": "EncodedRuleRendering"
+     },
+     "type": "array"
+    },
+    "answers_applied": {
+     "items": {
+      "$ref": "SupplementalAnswer"
+     },
+     "type": "array"
+    },
+    "scenario_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "capabilities": {
+     "additionalProperties": {
+      "enum": [
+       "implemented",
+       "dependency_unavailable"
+      ],
+      "type": "string"
+     },
+     "type": "object"
+    },
+    "mode": {
+     "enum": [
+      "dataset",
+      "synthetic",
+      "contract_fixture"
+     ],
+     "type": "string"
+    }
+   },
+   "required": [
+    "lookup",
+    "question_plan",
+    "evidence_reports",
+    "encoded_rules",
+    "answers_applied",
+    "capabilities",
+    "mode"
+   ],
+   "type": "object"
+  },
+  "Bound": {
+   "properties": {
+    "lower": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "upper": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "provenance": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "provenance"
+   ]
+  },
+  "ChangeRequest": {
+   "properties": {
+    "test_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "before": {
+     "anyOf": [
+      {
+       "type": "string",
+       "format": "date"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "after": {
+     "anyOf": [
+      {
+       "type": "string",
+       "format": "date"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "rule_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "scenario": {
+     "type": "string",
+     "enum": [
+      "actual",
+      "if_enacted"
+     ],
+     "default": "actual"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object"
+  },
+  "ChangeResult": {
+   "properties": {
+    "test_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "scenario": {
+     "type": "string"
+    },
+    "status": {
+     "type": "string",
+     "enum": [
+      "complete",
+      "partial",
+      "blocked"
+     ]
+    },
+    "before": {
+     "type": "string",
+     "format": "date"
+    },
+    "after": {
+     "type": "string",
+     "format": "date"
+    },
+    "affected_address_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "uncertain_address_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "conflict_flag_address_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "differences": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "mapped_rule_ids": {
+     "additionalProperties": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "type": "object"
+    },
+    "notes": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "disclaimer": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "scenario",
+    "status",
+    "before",
+    "after",
+    "affected_address_ids",
+    "uncertain_address_ids",
+    "conflict_flag_address_ids",
+    "differences",
+    "notes",
+    "disclaimer"
+   ]
+  },
+  "EncodedRuleRendering": {
+   "additionalProperties": false,
+   "properties": {
+    "rule_id": {
+     "type": "string"
+    },
+    "text": {
+     "type": "string"
+    },
+    "expression_hash": {
+     "type": "string"
+    },
+    "renderer_version": {
+     "type": "string"
+    },
+    "unresolved_nodes": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "kind": {
+     "const": "encoded_rule_not_legal_validation",
+     "default": "encoded_rule_not_legal_validation",
+     "type": "string"
+    }
+   },
+   "required": [
+    "rule_id",
+    "text",
+    "expression_hash",
+    "renderer_version"
+   ],
+   "type": "object"
+  },
+  "Evaluation": {
+   "properties": {
+    "team_rule_id": {
+     "type": "string"
+    },
+    "result": {
+     "type": "string",
+     "enum": [
+      "applies",
+      "unknown",
+      "superseded",
+      "not_yet_effective",
+      "pending",
+      "inapplicable",
+      "failed"
+     ]
+    },
+    "jurisdiction": {
+     "type": "string",
+     "enum": [
+      "true",
+      "false",
+      "unknown"
+     ]
+    },
+    "coverage": {
+     "$ref": "PredicateResult"
+    },
+    "temporal_status": {
+     "type": "string"
+    },
+    "missing_facts": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "uncertainty_reasons": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "applied_interactions": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "explanation": {
+     "type": "string"
+    },
+    "conflict_flag": {
+     "type": "boolean",
+     "default": false
+    },
+    "evidence": {
+     "items": {
+      "$ref": "Evidence"
+     },
+     "type": "array"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "team_rule_id",
+    "result",
+    "jurisdiction",
+    "coverage",
+    "temporal_status",
+    "explanation",
+    "evidence"
+   ]
+  },
+  "Evidence": {
+   "properties": {
+    "doc_id": {
+     "type": "string"
+    },
+    "quote": {
+     "type": "string",
+     "minLength": 20
+    },
+    "start": {
+     "anyOf": [
+      {
+       "type": "integer",
+       "minimum": 0
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "end": {
+     "anyOf": [
+      {
+       "type": "integer",
+       "minimum": 0
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "supports": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array",
+     "minItems": 1
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "doc_id",
+    "quote",
+    "supports"
+   ]
+  },
+  "EvidenceCheck": {
+   "additionalProperties": false,
+   "properties": {
+    "kind": {
+     "enum": [
+      "source_availability",
+      "source_identity",
+      "citation_anchor",
+      "quote_presence",
+      "semantic_support",
+      "dependencies"
+     ],
+     "type": "string"
+    },
+    "status": {
+     "enum": [
+      "pass",
+      "fail",
+      "missing",
+      "ambiguous",
+      "not_checked",
+      "supported",
+      "contradicted",
+      "insufficient",
+      "stale"
+     ],
+     "type": "string"
+    },
+    "message": {
+     "type": "string"
+    },
+    "field": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "spans": {
+     "items": {
+      "$ref": "SourceSpan"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "kind",
+    "status",
+    "message"
+   ],
+   "type": "object"
+  },
+  "EvidenceReport": {
+   "additionalProperties": false,
+   "properties": {
+    "rule_id": {
+     "type": "string"
+    },
+    "rule_hash": {
+     "type": "string"
+    },
+    "checks": {
+     "items": {
+      "$ref": "EvidenceCheck"
+     },
+     "type": "array"
+    },
+    "context": {
+     "$ref": "SourceContext"
+    },
+    "semantic_review": {
+     "anyOf": [
+      {
+       "$ref": "SemanticReview"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "blocking_issues": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "disclaimer": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "rule_id",
+    "rule_hash",
+    "checks",
+    "context",
+    "blocking_issues",
+    "disclaimer"
+   ],
+   "type": "object"
+  },
+  "Expression": {
+   "properties": {
+    "op": {
+     "type": "string",
+     "enum": [
+      "all",
+      "any",
+      "not",
+      "eq",
+      "ne",
+      "lt",
+      "lte",
+      "gt",
+      "gte",
+      "in",
+      "date_before",
+      "date_on_or_before",
+      "age_at_least",
+      "literal",
+      "unsupported"
+     ]
+    },
+    "args": {
+     "items": {
+      "$ref": "Expression"
+     },
+     "type": "array"
+    },
+    "fact": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "value": {},
+    "reason": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "op"
+   ]
+  },
+  "FactDefinition": {
+   "additionalProperties": false,
+   "properties": {
+    "field": {
+     "type": "string"
+    },
+    "meaning": {
+     "type": "string"
+    },
+    "data_type": {
+     "enum": [
+      "boolean",
+      "integer",
+      "number",
+      "date",
+      "enum",
+      "string"
+     ],
+     "type": "string"
+    },
+    "unit": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "allowed_values": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "minimum": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "maximum": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "answer_effort": {
+     "default": 1,
+     "maximum": 5,
+     "minimum": 1,
+     "type": "integer"
+    },
+    "allow_partial_date": {
+     "default": true,
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "field",
+    "meaning",
+    "data_type"
+   ],
+   "type": "object"
+  },
+  "FactQuestion": {
+   "additionalProperties": false,
+   "properties": {
+    "question_id": {
+     "type": "string"
+    },
+    "fact": {
+     "$ref": "FactDefinition"
+    },
+    "prompt": {
+     "type": "string"
+    },
+    "why": {
+     "type": "string"
+    },
+    "rule_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "predicate_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "evidence": {
+     "items": {
+      "$ref": "Evidence"
+     },
+     "type": "array"
+    },
+    "alternatives": {
+     "items": {
+      "$ref": "AlternativeOutcome"
+     },
+     "type": "array"
+    },
+    "rank_score": {
+     "type": "number"
+    },
+    "ranking_rationale": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "question_id",
+    "fact",
+    "prompt",
+    "why",
+    "rule_ids",
+    "predicate_ids",
+    "evidence",
+    "alternatives",
+    "rank_score",
+    "ranking_rationale"
+   ],
+   "type": "object"
+  },
+  "HealthResponse": {
+   "properties": {
+    "status": {
+     "type": "string",
+     "const": "ok"
+    },
+    "version": {
+     "type": "string"
+    },
+    "dataset_readiness": {
+     "type": "string",
+     "enum": [
+      "absent",
+      "partial",
+      "available"
+     ]
+    },
+    "sources": {
+     "type": "integer"
+    },
+    "rules": {
+     "type": "integer"
+    },
+    "addresses": {
+     "type": "integer"
+    },
+    "resolved_municipalities": {
+     "type": "integer"
+    },
+    "last_extraction_outcome": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "disclaimer": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "status",
+    "version",
+    "dataset_readiness",
+    "sources",
+    "rules",
+    "addresses",
+    "resolved_municipalities",
+    "last_extraction_outcome",
+    "disclaimer"
+   ]
+  },
+  "Interaction": {
+   "properties": {
+    "kind": {
+     "type": "string",
+     "enum": [
+      "supersedes",
+      "conflicts_with"
+     ]
+    },
+    "target_citation": {
+     "type": "string"
+    },
+    "target_jurisdiction": {
+     "type": "string"
+    },
+    "category": {
+     "type": "string",
+     "enum": [
+      "rent_increase_limits",
+      "just_cause_eviction",
+      "security_deposits",
+      "application_screening_fees",
+      "screening_restrictions",
+      "algorithmic_rent_setting"
+     ]
+    },
+    "scope": {
+     "$ref": "Expression"
+    },
+    "evidence": {
+     "items": {
+      "$ref": "Evidence"
+     },
+     "type": "array",
+     "minItems": 1
+    },
+    "note": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "kind",
+    "target_citation",
+    "target_jurisdiction",
+    "category",
+    "scope",
+    "evidence",
+    "note"
+   ]
+  },
+  "JurisdictionResolution": {
+   "properties": {
+    "address_id": {
+     "type": "string"
+    },
+    "state": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "county": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "municipality": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "identifiers": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object"
+    },
+    "method": {
+     "type": "string",
+     "default": "assessor_state_only"
+    },
+    "match_quality": {
+     "type": "string",
+     "enum": [
+      "resolved",
+      "unresolved",
+      "ambiguous",
+      "failed"
+     ],
+     "default": "unresolved"
+    },
+    "benchmark": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "vintage": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "retrieved_at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "response_hash": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "unresolved": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "attempts": {
+     "items": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "type": "array"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "address_id"
+   ]
+  },
+  "LookupRequest": {
+   "properties": {
+    "address_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "address": {
+     "anyOf": [
+      {
+       "$ref": "RawAddress"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "as_of": {
+     "type": "string",
+     "format": "date",
+     "default": "2026-10-01"
+    },
+    "supplemental_facts": {
+     "additionalProperties": true,
+     "type": "object"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object"
+  },
+  "LookupResponse": {
+   "properties": {
+    "address": {
+     "$ref": "PropertyFacts"
+    },
+    "as_of": {
+     "type": "string",
+     "format": "date"
+    },
+    "jurisdiction": {
+     "$ref": "JurisdictionResolution"
+    },
+    "evaluations": {
+     "items": {
+      "$ref": "Evaluation"
+     },
+     "type": "array"
+    },
+    "rules": {
+     "items": {
+      "$ref": "Rule"
+     },
+     "type": "array"
+    },
+    "sources": {
+     "items": {
+      "$ref": "SourceDocument"
+     },
+     "type": "array"
+    },
+    "warnings": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "metadata": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "disclaimer": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "address",
+    "as_of",
+    "jurisdiction",
+    "evaluations",
+    "rules",
+    "sources",
+    "warnings",
+    "metadata",
+    "disclaimer"
+   ]
+  },
+  "PredicateResult": {
+   "properties": {
+    "value": {
+     "type": "string",
+     "enum": [
+      "true",
+      "false",
+      "unknown"
+     ]
+    },
+    "matched": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "unresolved": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "missing_facts": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "supporting_facts": {
+     "additionalProperties": true,
+     "type": "object"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "value"
+   ]
+  },
+  "PredicateTrace": {
+   "additionalProperties": false,
+   "properties": {
+    "predicate_id": {
+     "type": "string"
+    },
+    "rule_id": {
+     "type": "string"
+    },
+    "path": {
+     "type": "string"
+    },
+    "expression": {
+     "$ref": "Expression"
+    },
+    "result": {
+     "enum": [
+      "true",
+      "false",
+      "unknown"
+     ],
+     "type": "string"
+    },
+    "field": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "relevant": {
+     "default": true,
+     "type": "boolean"
+    },
+    "residual": {
+     "anyOf": [
+      {
+       "$ref": "Expression"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "source_refs": {
+     "items": {
+      "$ref": "Evidence"
+     },
+     "type": "array"
+    },
+    "children": {
+     "items": {
+      "$ref": "PredicateTrace"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "predicate_id",
+    "rule_id",
+    "path",
+    "expression",
+    "result"
+   ],
+   "type": "object"
+  },
+  "PropertyFacts": {
+   "properties": {
+    "address_id": {
+     "type": "string"
+    },
+    "raw_address": {
+     "$ref": "RawAddress"
+    },
+    "normalized_address": {
+     "type": "string"
+    },
+    "facts": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "bounds": {
+     "additionalProperties": {
+      "$ref": "Bound"
+     },
+     "type": "object"
+    },
+    "missing_facts": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "provenance": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "address_id",
+    "raw_address",
+    "normalized_address"
+   ]
+  },
+  "QuestionPlan": {
+   "additionalProperties": false,
+   "properties": {
+    "status": {
+     "enum": [
+      "complete",
+      "partial",
+      "unavailable"
+     ],
+     "type": "string"
+    },
+    "questions": {
+     "items": {
+      "$ref": "FactQuestion"
+     },
+     "type": "array"
+    },
+    "remaining_uncertainty": {
+     "items": {
+      "$ref": "Uncertainty"
+     },
+     "type": "array"
+    },
+    "traces": {
+     "items": {
+      "$ref": "PredicateTrace"
+     },
+     "type": "array"
+    },
+    "limits": {
+     "$ref": "AnalysisLimits"
+    },
+    "evaluations_used": {
+     "default": 0,
+     "minimum": 0,
+     "type": "integer"
+    },
+    "limits_hit": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "algorithm_version": {
+     "type": "string"
+    },
+    "exhaustive": {
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "status",
+    "questions",
+    "remaining_uncertainty",
+    "limits",
+    "algorithm_version"
+   ],
+   "type": "object"
+  },
+  "RawAddress": {
+   "properties": {
+    "street_address": {
+     "type": "string",
+     "maxLength": 200,
+     "minLength": 1
+    },
+    "postal_city": {
+     "type": "string",
+     "maxLength": 100,
+     "minLength": 1
+    },
+    "state": {
+     "type": "string",
+     "pattern": "^[A-Z]{2}$"
+    },
+    "zip": {
+     "type": "string",
+     "pattern": "^([0-9]{5}(-[0-9]{4})?)?$",
+     "default": ""
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "street_address",
+    "postal_city",
+    "state"
+   ]
+  },
+  "Rule": {
+   "properties": {
+    "jurisdiction": {
+     "type": "string"
+    },
+    "level": {
+     "type": "string",
+     "enum": [
+      "state",
+      "city"
+     ]
+    },
+    "category": {
+     "type": "string",
+     "enum": [
+      "rent_increase_limits",
+      "just_cause_eviction",
+      "security_deposits",
+      "application_screening_fees",
+      "screening_restrictions",
+      "algorithmic_rent_setting"
+     ]
+    },
+    "provision_key": {
+     "type": "string",
+     "minLength": 1,
+     "description": "Stable short name for a distinct obligation within its citation"
+    },
+    "title": {
+     "type": "string"
+    },
+    "requirement": {
+     "type": "string"
+    },
+    "key_value": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "citation": {
+     "type": "string"
+    },
+    "quoted_span": {
+     "type": "string",
+     "minLength": 20
+    },
+    "source_doc_id": {
+     "type": "string"
+    },
+    "source_url": {
+     "type": "string"
+    },
+    "coverage_conditions": {
+     "$ref": "Expression"
+    },
+    "exemption_conditions": {
+     "$ref": "Expression"
+    },
+    "exemptions": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "lifecycle": {
+     "type": "string",
+     "enum": [
+      "enacted",
+      "pending",
+      "failed",
+      "unknown"
+     ]
+    },
+    "effective_date": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "end_date": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "status_as_of": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "status_events": {
+     "items": {
+      "$ref": "StatusEvent"
+     },
+     "type": "array"
+    },
+    "evidence": {
+     "items": {
+      "$ref": "Evidence"
+     },
+     "type": "array",
+     "minItems": 1
+    },
+    "interactions": {
+     "items": {
+      "$ref": "Interaction"
+     },
+     "type": "array"
+    },
+    "penalties": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "review_issues": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "conflict_flag": {
+     "type": "boolean",
+     "default": false
+    },
+    "conflict_note": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "team_rule_id": {
+     "type": "string"
+    },
+    "evidence_mode": {
+     "type": "string",
+     "enum": [
+      "live",
+      "synthetic",
+      "replay"
+     ]
+    },
+    "extraction_run_id": {
+     "type": "string"
+    },
+    "semantic_verification": {
+     "type": "string",
+     "enum": [
+      "model_reviewed",
+      "needs_review",
+      "synthetic_fixture"
+     ]
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "jurisdiction",
+    "level",
+    "category",
+    "provision_key",
+    "title",
+    "requirement",
+    "citation",
+    "quoted_span",
+    "source_doc_id",
+    "source_url",
+    "coverage_conditions",
+    "lifecycle",
+    "evidence",
+    "team_rule_id",
+    "evidence_mode",
+    "extraction_run_id",
+    "semantic_verification"
+   ]
+  },
+  "RuleDetail": {
+   "properties": {
+    "rule": {
+     "$ref": "Rule"
+    },
+    "versions": {
+     "items": {
+      "$ref": "Rule"
+     },
+     "type": "array"
+    },
+    "disclaimer": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "rule",
+    "versions",
+    "disclaimer"
+   ]
+  },
+  "SemanticDecision": {
+   "additionalProperties": false,
+   "properties": {
+    "field": {
+     "type": "string"
+    },
+    "status": {
+     "enum": [
+      "supported",
+      "contradicted",
+      "insufficient"
+     ],
+     "type": "string"
+    },
+    "explanation": {
+     "type": "string"
+    },
+    "spans": {
+     "items": {
+      "$ref": "SourceSpan"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "field",
+    "status",
+    "explanation"
+   ],
+   "type": "object"
+  },
+  "SemanticReview": {
+   "additionalProperties": false,
+   "properties": {
+    "rule_id": {
+     "type": "string"
+    },
+    "rule_hash": {
+     "type": "string"
+    },
+    "source_hashes": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object"
+    },
+    "mode": {
+     "enum": [
+      "live",
+      "fixture",
+      "replay"
+     ],
+     "type": "string"
+    },
+    "verifier_version": {
+     "type": "string"
+    },
+    "model": {
+     "type": "string"
+    },
+    "decisions": {
+     "items": {
+      "$ref": "SemanticDecision"
+     },
+     "type": "array"
+    },
+    "limitations": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "human_reviewed": {
+     "const": false,
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "rule_id",
+    "rule_hash",
+    "source_hashes",
+    "mode",
+    "verifier_version",
+    "model",
+    "decisions",
+    "limitations"
+   ],
+   "type": "object"
+  },
+  "SourceContext": {
+   "additionalProperties": false,
+   "properties": {
+    "spans": {
+     "items": {
+      "$ref": "SourceSpan"
+     },
+     "type": "array"
+    },
+    "dependencies": {
+     "items": {
+      "$ref": "SourceDependency"
+     },
+     "type": "array"
+    },
+    "status": {
+     "enum": [
+      "available",
+      "partial",
+      "missing"
+     ],
+     "type": "string"
+    },
+    "limits": {
+     "additionalProperties": {
+      "type": "integer"
+     },
+     "type": "object"
+    },
+    "limits_hit": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "retrieval_method": {
+     "default": "exact_anchors_and_bounded_lexical_retrieval",
+     "type": "string"
+    },
+    "semantic_verification": {
+     "const": false,
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "spans",
+    "dependencies",
+    "status",
+    "limits",
+    "limits_hit"
+   ],
+   "type": "object"
+  },
+  "SourceDependency": {
+   "additionalProperties": false,
+   "properties": {
+    "reference": {
+     "type": "string"
+    },
+    "origin": {
+     "$ref": "SourceSpan"
+    },
+    "status": {
+     "enum": [
+      "resolved",
+      "missing",
+      "ambiguous",
+      "cycle",
+      "depth_limit",
+      "budget_limit"
+     ],
+     "type": "string"
+    },
+    "target_doc_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "target_section": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "spans": {
+     "items": {
+      "$ref": "SourceSpan"
+     },
+     "type": "array"
+    },
+    "explanation": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "reference",
+    "origin",
+    "status",
+    "explanation"
+   ],
+   "type": "object"
+  },
+  "SourceDocument": {
+   "properties": {
+    "doc_id": {
+     "type": "string",
+     "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "jurisdictions": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "url": {
+     "type": "string"
+    },
+    "retrieved_at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "text": {
+     "type": "string",
+     "default": ""
+    },
+    "sha256": {
+     "type": "string"
+    },
+    "manifest_sha256": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "capture_status": {
+     "type": "string",
+     "enum": [
+      "supplied",
+      "link_only",
+      "failed",
+      "terms_review",
+      "supplementary",
+      "synthetic"
+     ]
+    },
+    "authority": {
+     "type": "string"
+    },
+    "source_type": {
+     "type": "string",
+     "default": "unclassified"
+    },
+    "issues": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "duplicate_of": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "doc_id",
+    "jurisdictions",
+    "url",
+    "retrieved_at",
+    "sha256",
+    "capture_status",
+    "authority"
+   ]
+  },
+  "SourceSpan": {
+   "additionalProperties": false,
+   "properties": {
+    "doc_id": {
+     "type": "string"
+    },
+    "source_hash": {
+     "type": "string"
+    },
+    "start": {
+     "minimum": 0,
+     "type": "integer"
+    },
+    "end": {
+     "minimum": 0,
+     "type": "integer"
+    },
+    "text": {
+     "type": "string"
+    },
+    "section": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "required": [
+    "doc_id",
+    "source_hash",
+    "start",
+    "end",
+    "text"
+   ],
+   "type": "object"
+  },
+  "StatusEvent": {
+   "properties": {
+    "status": {
+     "type": "string",
+     "enum": [
+      "enacted",
+      "pending",
+      "failed",
+      "repealed"
+     ]
+    },
+    "on": {
+     "type": "string"
+    },
+    "evidence": {
+     "items": {
+      "$ref": "Evidence"
+     },
+     "type": "array",
+     "minItems": 1
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "status",
+    "on",
+    "evidence"
+   ]
+  },
+  "SupplementalAnswer": {
+   "additionalProperties": false,
+   "properties": {
+    "field": {
+     "type": "string"
+    },
+    "value": {},
+    "provenance": {
+     "default": "user_provided",
+     "enum": [
+      "user_provided",
+      "demo"
+     ],
+     "type": "string"
+    },
+    "note": {
+     "anyOf": [
+      {
+       "maxLength": 500,
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "required": [
+    "field",
+    "value"
+   ],
+   "type": "object"
+  },
+  "Uncertainty": {
+   "additionalProperties": false,
+   "properties": {
+    "kind": {
+     "enum": [
+      "property_fact",
+      "jurisdiction",
+      "source_gap",
+      "cross_reference",
+      "interpretation",
+      "conflict",
+      "analysis_limit",
+      "service_dependency"
+     ],
+     "type": "string"
+    },
+    "message": {
+     "type": "string"
+    },
+    "remedy": {
+     "type": "string"
+    },
+    "rule_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "predicate_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "field": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "source_refs": {
+     "items": {
+      "$ref": "SourceSpan"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "kind",
+    "message",
+    "remedy"
+   ],
+   "type": "object"
+  }
+ }
+}
