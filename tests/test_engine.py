@@ -121,3 +121,61 @@ def test_overlapping_versions_need_evidenced_precedence(rule, prop, resolution):
     other.key_value = "different cap"
     results = evaluate_rules([rule, other], prop, resolution, DAY)
     assert all(e.result == "unknown" and e.conflict_flag for e in results)
+
+
+def link(source, target, scope=True):
+    return Interaction(kind='supersedes', target_citation=target.citation,
+        target_jurisdiction=target.jurisdiction, category=target.category,
+        scope=Expression(op='literal', value=scope), evidence=source.evidence, note='Synthetic priority')
+
+
+def test_false_scope_reverse_edge_does_not_create_cycle(rule, prop, resolution):
+    state = state_rule(rule)
+    rule.interactions = [link(rule, state)]
+    state.interactions = [link(state, rule, False)]
+    answers = {e.team_rule_id: e for e in evaluate_rules([rule, state], prop, resolution, DAY)}
+    assert answers['state'].result == 'superseded'
+    assert not any(e.conflict_flag for e in answers.values())
+
+
+def test_false_scope_priority_does_not_hide_overlapping_version_conflict(rule, prop, resolution):
+    other = rule.model_copy(deep=True)
+    other.team_rule_id, other.requirement = 'other-version', 'A different obligation'
+    rule.interactions = [link(rule, other, False)]
+    assert all(e.result == 'unknown' and e.conflict_flag for e in evaluate_rules([rule, other], prop, resolution, DAY))
+
+
+def test_same_citation_override_does_not_target_itself(rule, prop, resolution):
+    other = rule.model_copy(deep=True)
+    other.team_rule_id, other.requirement = 'other-version', 'Older obligation'
+    rule.interactions = [link(rule, other)]
+    answers = {e.team_rule_id: e for e in evaluate_rules([rule, other], prop, resolution, DAY)}
+    assert answers['other-version'].result == 'superseded'
+    assert answers[rule.team_rule_id].result == 'applies'
+    assert not any(e.conflict_flag for e in answers.values())
+
+
+@pytest.mark.parametrize('first,second', [('2026-01-15', '2026-01'), ('2026-01-15', '2026-01-15')])
+def test_overlapping_status_events_do_not_invent_order(rule, first, second):
+    rule.effective_date = '2026-01-01'
+    events = [StatusEvent(status='enacted', on=first, evidence=rule.evidence), StatusEvent(status='failed', on=second, evidence=rule.evidence)]
+    for order in (events, list(reversed(events))):
+        rule.status_events = order
+        assert temporal(rule, DAY) == 'unknown'
+    rule.status_events.append(StatusEvent(status='enacted', on='2026-02-01', evidence=rule.evidence))
+    assert temporal(rule, DAY) == 'in_force'
+
+
+def test_undated_failed_snapshot_does_not_establish_history(rule):
+    rule.lifecycle, rule.status_events, rule.status_as_of = 'failed', [], None
+    assert temporal(rule, date(1900, 1, 1)) == 'unknown'
+
+
+def test_exclusive_end_and_partial_end_boundaries(rule):
+    rule.end_date = '2026-12-01'
+    assert temporal(rule, date(2026, 11, 30)) == 'in_force'
+    assert temporal(rule, date(2026, 12, 1)) == 'inapplicable'
+    rule.end_date = '2026-12'
+    assert temporal(rule, date(2026, 11, 30)) == 'in_force'
+    assert temporal(rule, date(2026, 12, 1)) == 'unknown'
+    assert temporal(rule, date(2026, 12, 31)) == 'inapplicable'

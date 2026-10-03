@@ -8,23 +8,26 @@ def temporal(rule: Rule, as_of: date, hypothetical=False) -> str:
     if hypothetical and rule.lifecycle == "pending":
         return "in_force"
     lifecycle = rule.lifecycle
-    events = sorted(rule.status_events, key=lambda e: date_bounds(e.on)[0])
+    events = [(event, *date_bounds(event.on)) for event in rule.status_events]
     if events:
-        lifecycle = "unknown"
-        for event in events:
-            lo, hi = date_bounds(event.on)
-            if lo <= as_of < hi:
-                return "unknown"
-            if hi <= as_of:
-                lifecycle = event.status
-        if lifecycle == "unknown":
-            # A documented future enactment supports pre-effective, not current force.
-            if any(e.status == "enacted" for e in events):
-                return "not_yet_effective"
+        occurred = [(event, lo, hi) for event, lo, hi in events if hi <= as_of]
+        possible = [(event, lo, hi) for event, lo, hi in events if lo <= as_of]
+        if not possible:
+            return "not_yet_effective" if any(e.status == "enacted" for e, _, _ in events) else "unknown"
+        if not occurred:
+            return "unknown"  # The first partial-date event may still be in the future.
+        # An event can be latest unless another definitely occurred strictly after
+        # its latest possible date. Overlapping/same-day conflicting events have
+        # no established order; input list order is not lifecycle evidence.
+        statuses = {event.status for event, lo, hi in possible
+                    if not any(other_lo > min(hi, as_of) for _, other_lo, _ in occurred)}
+        if len(statuses) != 1:
             return "unknown"
+        lifecycle = statuses.pop()
     elif rule.status_as_of and as_of < date_bounds(rule.status_as_of)[1]:
-        # A snapshot does not establish historical lifecycle before that snapshot.
         return "unknown"
+    elif not rule.status_as_of and lifecycle in {"pending", "failed", "unknown"}:
+        return "unknown"  # An undated snapshot cannot establish arbitrary history.
     if lifecycle == "pending": return "pending"
     if lifecycle == "failed": return "failed"
     if lifecycle == "repealed": return "inapplicable"
@@ -121,15 +124,22 @@ def evaluate_rules(rules: list[Rule], prop: PropertyFacts, resolution: Jurisdict
     hypothetical_ids = set(hypothetical_ids or [])
     rules = sorted(rules, key=lambda r: r.team_rule_id)
     evaluations = {r.team_rule_id: evaluate_rule(r, prop, resolution, as_of, r.team_rule_id in hypothetical_ids) for r in rules}
-    # Resolve supported citations to IDs. No precedence inferred from government level.
+    # Resolve only potentially operative, non-self edges. False scopes and
+    # inactive rules cannot establish priority or create interaction cycles.
+    inactive = {"inapplicable", "failed", "pending", "not_yet_effective"}
+    base = {k: v.result for k, v in evaluations.items()}
     edges = []
     for rule in rules:
+        if base[rule.team_rule_id] in inactive: continue
         for interaction in rule.interactions:
+            scope = evaluate_expression(interaction.scope, prop, as_of)
+            if scope.value == "false": continue
             for target in rules:
+                if target.team_rule_id == rule.team_rule_id or base[target.team_rule_id] in inactive: continue
                 if target.citation.casefold() == interaction.target_citation.casefold() and target.jurisdiction.casefold() == interaction.target_jurisdiction.casefold() and target.category == interaction.category:
-                    edges.append((rule.team_rule_id, target.team_rule_id, interaction))
+                    edges.append((rule.team_rule_id, target.team_rule_id, interaction, scope))
     graph = {}
-    for source, target, interaction in edges:
+    for source, target, interaction, scope in edges:
         if interaction.kind == "supersedes": graph.setdefault(source, set()).add(target)
 
     def reaches(start, target, visited):
@@ -137,13 +147,17 @@ def evaluate_rules(rules: list[Rule], prop: PropertyFacts, resolution: Jurisdict
         if start in visited: return False
         return any(reaches(n, target, visited | {start}) for n in graph.get(start, set()))
 
-    base = {k: v.result for k, v in evaluations.items()}
+    definite_priority = {(source, target) for source, target, interaction, scope in edges
+                         if interaction.kind == "supersedes" and scope.value == "true"
+                         and base[source] == base[target] == "applies"
+                         and not evaluations[source].conflict_flag
+                         and not reaches(target, source, set())}
     for i, first in enumerate(rules):
         for second in rules[i + 1:]:
             same_provision = (first.jurisdiction, first.category, first.citation.casefold(), first.provision_key.casefold()) == (second.jurisdiction, second.category, second.citation.casefold(), second.provision_key.casefold())
             overlapping = base[first.team_rule_id] == base[second.team_rule_id] == "applies"
             different = (first.requirement, first.key_value) != (second.requirement, second.key_value)
-            explicit_priority = second.team_rule_id in graph.get(first.team_rule_id, set()) or first.team_rule_id in graph.get(second.team_rule_id, set())
+            explicit_priority = (first.team_rule_id, second.team_rule_id) in definite_priority or (second.team_rule_id, first.team_rule_id) in definite_priority
             if same_provision and overlapping and different and not explicit_priority:
                 for rule in (first, second):
                     answer = evaluations[rule.team_rule_id]
@@ -151,17 +165,12 @@ def evaluate_rules(rules: list[Rule], prop: PropertyFacts, resolution: Jurisdict
                     answer.conflict_flag = True
                     answer.uncertainty_reasons.append("conflicting_legal_evidence: overlapping versions of one provision without established precedence")
                     answer.explanation += " Conflicting overlapping versions require review."
-    for source, target, interaction in edges:
+    supersessions = []
+    for source, target, interaction, scope in edges:
         parent, child = evaluations[source], evaluations[target]
-        if base[source] in {"inapplicable", "failed", "pending", "not_yet_effective"} or base[target] in {"inapplicable", "failed"}: continue
-        scope = evaluate_expression(interaction.scope, prop, as_of)
-        if scope.value == "false": continue
         cycle = interaction.kind == "supersedes" and reaches(target, source, set())
-        active = base[source] == "applies" and not parent.conflict_flag and scope.value == "true"
-        if interaction.kind == "supersedes" and active and base[target] == "applies" and not cycle:
-            child.result = "superseded"
-            child.applied_interactions.append(source)
-            child.explanation += f" Superseded by {source} within supported scope: {interaction.note}."
+        if (source, target) in definite_priority:
+            supersessions.append((source, target, interaction))
         else:
             child.conflict_flag = parent.conflict_flag = True
             note = f"{'cyclic_interaction' if cycle else 'possible_interaction'}: {source} {interaction.kind} {target}: {interaction.note}"
@@ -169,4 +178,13 @@ def evaluate_rules(rules: list[Rule], prop: PropertyFacts, resolution: Jurisdict
             parent.uncertainty_reasons.append(note)
             child.explanation += " " + note
             parent.explanation += " " + note
+    # Resolve conflicts first so interaction order cannot turn a disputed priority
+    # into a definite supersession and drop an obligation.
+    for source, target, interaction in supersessions:
+        parent, child = evaluations[source], evaluations[target]
+        if parent.conflict_flag or child.conflict_flag:
+            continue
+        child.result = "superseded"
+        child.applied_interactions.append(source)
+        child.explanation += f" Superseded by {source} within supported scope: {interaction.note}."
     return list(evaluations.values())

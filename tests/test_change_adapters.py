@@ -71,3 +71,20 @@ def test_t5_failed_proposal_is_not_operational(scenarios):
     result = compute_changes(scenarios, ChangeRequest(test_id="T5"))
     assert result.status == "complete"
     assert not result.affected_address_ids and not result.uncertain_address_ids
+
+
+def test_partial_end_date_preserves_uncertain_changes(demo, rule):
+    rule.end_date = '2026-12'
+    demo.save_collection('rules', {rule.team_rule_id: rule})
+    before = demo.read('rules.json')
+    result = compute_changes(demo, ChangeRequest(before=date(2026, 11, 30), after=date(2026, 12, 1)))
+    assert not result.affected_address_ids
+    assert result.uncertain_address_ids == ['SYNTH-001']
+    assert result.status == 'partial'
+    assert demo.read('rules.json') == before
+    exact = rule.model_copy(deep=True)
+    exact.end_date = '2026-12-01'
+    demo.save_collection('rules', {exact.team_rule_id: exact})
+    result = compute_changes(demo, ChangeRequest(before=date(2026, 11, 30), after=date(2026, 12, 1)))
+    assert result.affected_address_ids == ['SYNTH-001']
+    assert result.uncertain_address_ids == ['SYNTH-003']
