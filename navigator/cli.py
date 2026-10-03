@@ -7,6 +7,7 @@ from pathlib import Path
 from .changes import compute_changes
 from .config import data_dir, pack_dir, DEFAULT_DATE, DISCLAIMER
 from .engine import evaluate_rules
+from .evidence import prepare_rules, EvidenceStoreView
 from .export import export_all
 from .extraction import extract, ProviderUnavailable, ProviderFailure
 from .geocode import resolve_addresses
@@ -18,6 +19,8 @@ from .validation import validate
 
 
 def batch_evaluate(store, as_of, output, allow_partial=False):
+    prepared, _ = prepare_rules(store)
+    store = EvidenceStoreView(store, prepared)
     rules = list(store.rules().values())
     if not rules and not allow_partial: raise ValueError("No extracted rules; use --allow-partial for an explicit incomplete batch")
     props, resolutions = store.addresses(), store.resolutions()
@@ -66,6 +69,13 @@ def parser():
         if name == "export": cmd.add_argument("--synthetic", action="store_true")
     sub.add_parser("demo", help="Build a clearly labeled synthetic pipeline in a separate directory")
     sub.add_parser("contracts", help="Generate OpenAPI, schemas and synthetic response examples")
+    cmd = sub.add_parser("source-inventory", help="Targeted structural source inventory; not legal completeness")
+    cmd.add_argument("doc_id")
+    cmd.add_argument("--output", type=Path)
+    cmd = sub.add_parser("review-rule", help="Explicit bounded semantic review via configured OpenAI provider")
+    cmd.add_argument("rule_id")
+    cmd.add_argument("--refresh", action="store_true", help="Perform a new paid review instead of replaying cached output")
+    cmd.add_argument("--output", type=Path)
     return p
 
 
@@ -79,11 +89,13 @@ def main(argv=None):
         elif args.command == "resolve": result = resolve_addresses(store, args.limit, args.workers, args.retry_unresolved)
         elif args.command == "lookup": result = lookup(store, LookupRequest(address_id=args.address_id, as_of=args.as_of))
         elif args.command == "changes":
-            result = compute_changes(store, ChangeRequest(test_id=args.test_id, before=args.before, after=args.after, rule_ids=args.rule_id, scenario=args.scenario))
+            prepared, _ = prepare_rules(store)
+            result = compute_changes(EvidenceStoreView(store, prepared), ChangeRequest(test_id=args.test_id, before=args.before, after=args.after, rule_ids=args.rule_id, scenario=args.scenario))
             if args.output: write_json(args.output, result)
         elif args.command == "evaluate": result = batch_evaluate(store, args.as_of, args.output, args.allow_partial)
         elif args.command == "validate":
-            result = validate(store, args.as_of)
+            prepared, _ = prepare_rules(store)
+            result = validate(EvidenceStoreView(store, prepared), args.as_of)
             write_json(args.output, result)
         elif args.command == "export": result = export_all(store, args.output, args.as_of, args.allow_partial, args.synthetic)
         elif args.command == "demo":
@@ -92,6 +104,14 @@ def main(argv=None):
         elif args.command == "contracts":
             from .contracts import generate
             result = generate()
+        elif args.command == "source-inventory":
+            from .source_inventory import inventory_source
+            result = inventory_source(store, args.doc_id)
+            if args.output: write_json(args.output, result)
+        elif args.command == "review-rule":
+            from .semantic_review import review_rule
+            result = review_rule(store, args.rule_id, refresh=args.refresh)
+            if args.output: write_json(args.output, result)
         if isinstance(result, Model): result = result.model_dump(mode="json")
         print(json.dumps(result, indent=2, ensure_ascii=False, default=str))
         return 1 if isinstance(result, dict) and (result.get("outcome") == "failed" or result.get("errors")) else 0

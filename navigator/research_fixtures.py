@@ -1,4 +1,4 @@
-"""Reviewed contract examples, not a question planner or production fallback."""
+"""Authored contract examples, not a question planner or production fallback."""
 from datetime import date
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -56,7 +56,7 @@ def generate_research_fixtures():
                 questions[0].alternatives = questions[0].alternatives[:1]
                 remaining.append(Uncertainty(kind="analysis_limit", message="Only one alternative evaluated", remedy="Increase the explicit evaluation budget or retain uncertainty"))
             plan = QuestionPlan(status="partial" if partial else "complete", questions=questions, remaining_uncertainty=remaining, limits=limits, evaluations_used=sum(len(q.alternatives) for q in questions), limits_hit=["max_evaluations"] if case == "bounded_partial_analysis" else [], algorithm_version="authored-contract-fixture-v1", exhaustive=False)
-            result = AssistResponse(lookup=response, question_plan=plan, evidence_reports=[], encoded_rules=[], answers_applied=[], capabilities={"question_planner": "dependency_unavailable", "rule_renderer": "dependency_unavailable", "evidence_checks": "dependency_unavailable"}, mode="contract_fixture")
+            result = AssistResponse(lookup=response, question_plan=plan, evidence_reports=[], encoded_rules=[], answers_applied=[], capabilities={"question_planner": "dependency_unavailable", "rule_renderer": "dependency_unavailable", "evidence": "dependency_unavailable"}, mode="contract_fixture")
             output = {"fixture_mode": "synthetic", "contract_status": "proposed_core_output_not_live_service", "case": case, "request": {"address_id": ident, "as_of": "2026-11-15"}, "response": result.model_dump(mode="json")}
             write_json(ROOT / f"contracts/research_examples/{case}.json", output)
             outputs[case] = output

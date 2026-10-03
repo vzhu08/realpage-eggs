@@ -117,3 +117,26 @@ so restart/reload consumers after a completed pipeline and do not run two writer
 Planning deadline assumption: October 4, 2026, 09:00 America/New_York.
 See [evaluation](docs/EVALUATION.md), [decisions](docs/DECISIONS.md), [tasks](docs/TASKS.md),
 and [handoff](docs/HANDOFF.md) for evidence, missing inputs, ownership and next work.
+
+## Follow-up / frontend start
+
+The entire frontend belongs to Claude/UX: [starter prompt](docs/starters/FRONTEND_CLAUDE.md).
+Use the [four-developer playbook](docs/Hackathon_Development_Playbook.txt) and separate checkouts:
+[Core A — Rules & Evaluation](docs/starters/CORE_RULES.md) owns extraction/evaluator/traces;
+[Core B — Questions & Rendering](docs/starters/CORE_NAVIGATION.md) owns planner/renderer.
+Platform/Vincent owns API/evidence and shared contracts. Daniel's Core implementation already exists
+on candidate origin/codex/core-backend at c92ad8f; hand it off and continue it rather than rebuilding.
+See [current handoff](docs/HANDOFF.md), [assist contract](docs/ASSIST_CONTRACT.md) and generated OpenAPI.
+
+```powershell
+.\.venv\Scripts\python.exe -m navigator source-inventory D001 --output artifacts/D001-inventory.json
+.\.venv\Scripts\python.exe -m navigator review-rule YOUR_EXTRACTED_RULE_ID --output artifacts/semantic-review.json
+```
+
+Review is explicit and may call the configured OpenAI API; an existing exact-version review replays
+without a call. --refresh requests a fresh review. No model calls occur on lookup/evidence HTTP routes.
+GET /api/v1/facts defines accepted supplemental inputs. POST /api/v1/lookup/assist accepts typed,
+request-local answers and reports missing Core capabilities explicitly. The full suite has 74 passing
+tests at a034e2b; live legal extraction and combined Core/UX integration remain unverified.
+The Git upstream was repaired to origin/main and pulled locally; remote feature branches may be deleted
+after merge. See HANDOFF for actual commits and the existing Core candidate.
