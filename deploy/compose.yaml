@@ -1,0 +1,28 @@
+# Local deployment candidate. No public ingress or provider credentials.
+services:
+  api:
+    image: realpage-navigator:local
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "127.0.0.1:${NAVIGATOR_PORT:-8000}:8000"
+    environment:
+      NAVIGATOR_DATA_DIR: /data
+      PYTHON_DOTENV_DISABLED: "1"
+      NAVIGATOR_CORS_ORIGINS: "${NAVIGATOR_CORS_ORIGINS:-http://localhost:3000,http://localhost:5173}"
+    volumes:
+      - type: bind
+        source: "${NAVIGATOR_DATA_PATH:?Set an absolute path to a reviewed data snapshot}"
+        target: /data
+        read_only: true
+        bind:
+          create_host_path: false
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: "no"

@@ -6,15 +6,15 @@ an explicit dependency. Ready means technically ready, not a human claim or perm
 Four human lanes: Platform/API, Core A (Rules & Evaluation), Core B (Questions & Rendering), Frontend/UX.
 Daniel's existing Core candidate is fetched at c92ad8f; Core A retains evaluator/extraction ownership.
 Core B is a new human assignment and requires the existing writer's path handoff before new edits.
-The current user-assigned Platform session claims PLAT-01; no remote writer was interrupted or contacted.
+The current user-assigned Platform session claims PLAT-02 after merging PLAT-01; no remote writer was interrupted or contacted.
 
 | ID | Lane | State | Outcome / dependency |
 | --- | --- | --- | --- |
 | BOOT-01 | User / bootstrap | Review | Backend and integration baseline locally checked; live extraction acceptance blocked on local provider configuration |
 | UX-01 | UX owner | Ready, unclaimed | Address/date/evidence UI using generated contracts and labeled fixtures |
 | UX-02 | UX owner | Ready, unclaimed | Change view with definite/uncertain/blocked/hypothetical states |
-| PLAT-01 | Vincent / Platform | Review | Recovered 12/21: 491/500 resolved in isolated real store; 28 focused / 96 total tests pass; report and nine remaining causes in card |
-| PLAT-02 | Platform/API owner | Ready, unclaimed | Reproducible launch/export/deployment package; deployment itself awaits authority |
+| PLAT-01 | Vincent / Platform | Merged | PR #5 at 9a96fda; recovered 12/21: 491/500 in isolated store; 28 focused / 96 total tests pass; no deployment |
+| PLAT-02 | Vincent / Platform | Review | Fresh lock install, 96 tests, native HTTP and both export replays pass; Compose validated; Docker engine stopped so image/runtime unverified |
 | CORE-01 | Core A / Daniel | Review software; live Blocked | Repairs exist on Core candidate; credentials/model still required for real extraction |
 | CORE-02 | Core A / Daniel | Review candidate | Date/interaction repairs on c92ad8f; combined integration pending |
 | COORD-01 | Vincent / Platform | Review P0 | Original shared contract checkpoint 3349851; historical three-lane staffing superseded |
@@ -29,12 +29,12 @@ The current user-assigned Platform session claims PLAT-01; no remote writer was 
 
 Cards: `docs/tasks/<ID>.md`. Shared stewards and exact paths: OWNERSHIP.
 Core candidate c92ad8f is awaiting coordinated review/integration; it is not marked Queued or Merged here.
-Platform a034e2b and the four-developer docs also need remote publication/authorized integration.
-Main already contains the earlier bootstrap and contract commits through 354089f; that does not establish deployment verification.
+Main contains Platform implementation and four-developer docs through PR #4 at 22d271c, plus PLAT-01
+through user-authorized PR #5 at 9a96fda. This does not establish deployment verification.
 For each candidate: owner reviews diff/scope -> steward orders dependencies -> update clean candidate
 against current main -> rerun required checks -> human-authorized merge -> verify main -> separately
 verify deployed demo. Never rebase an active writer. Preserve user work and actual base SHA.
 
-UX-01/02 are subflows of UX-03, not competing implementations. PLAT-01 is in Review on base 22d271c;
-PLAT-02 remains Ready after evidence/API work. CORE-01 keeps extraction ownership in Core A. Core B alone owns planner/renderer and core_assist.py. Priorities: P0 correctness/configuration and
+UX-01/02 are subflows of UX-03, not competing implementations. PLAT-01 is merged;
+PLAT-02 packaging is in Review. CORE-01 keeps extraction ownership in Core A. Core B alone owns planner/renderer and core_assist.py. Priorities: P0 correctness/configuration and
 contracts; P1 bounded useful-question/evidence journey; P2 broader references, ranking and reviewed benchmarks.
