@@ -8,7 +8,8 @@ import httpx
 from pydantic import ValidationError
 
 from .config import VERSION
-from .models import ExtractionBundle, Rule
+from .fact_inputs import FACT_DEFINITIONS
+from .models import Expression, ExtractionBundle, Rule
 from .store import digest
 
 PROMPT_VERSION = "extract-v3-core-json-input"
@@ -111,6 +112,23 @@ def anchor_evidence(evidence, sources):
             raise ValueError(f"Invalid evidence offsets in {span.doc_id}")
 
 
+def guard_fact_contract(expression, issues, path):
+    """Keep incompatible enum encodings unresolved, without guessing legal aliases."""
+    expression.args = [guard_fact_contract(child, issues, f"{path}/args/{i}")
+                       for i, child in enumerate(expression.args)]
+    definition = FACT_DEFINITIONS.get(expression.fact)
+    if definition and definition.data_type == "enum":
+        values = expression.value if expression.op == "in" else [expression.value]
+        if (expression.op not in {"eq", "ne", "in"}
+                or any(type(value) is not str or value not in definition.allowed_values for value in values)):
+            original = json.dumps(expression.model_dump(exclude_defaults=True), ensure_ascii=False, sort_keys=True)
+            issue = (f"Fact contract mismatch at {path}: {original}; registered {expression.fact} values are "
+                     f"{definition.allowed_values}. Source interpretation is unresolved; no alias inferred.")
+            if issue not in issues: issues.append(issue)
+            return Expression(op="unsupported", reason=issue)
+    return expression
+
+
 def validate_bundle(bundle, sources, allowed_doc_id=None):
     for rule in bundle.rules:
         source = sources.get(rule.source_doc_id)
@@ -124,6 +142,10 @@ def validate_bundle(bundle, sources, allowed_doc_id=None):
         if allowed_doc_id and any(e.doc_id != allowed_doc_id for e in spans):
             raise ValueError("Evidence uses source not provided to this extraction")
         anchor_evidence(spans, sources)
+        rule.coverage_conditions = guard_fact_contract(rule.coverage_conditions, rule.review_issues, "coverage_conditions")
+        rule.exemption_conditions = guard_fact_contract(rule.exemption_conditions, rule.review_issues, "exemption_conditions")
+        for i, interaction in enumerate(rule.interactions):
+            interaction.scope = guard_fact_contract(interaction.scope, rule.review_issues, f"interactions/{i}/scope")
         required = {"requirement", "coverage_conditions", "exemption_conditions", "lifecycle"}
         if rule.key_value: required.add("key_value")
         if rule.effective_date: required.add("effective_date")
@@ -216,6 +238,7 @@ def extract(store, doc_ids=None, provider=None, limit=None):
         store.finish(run, "failed", processed=0, rules=0)
         raise
     run.config["model"] = provider.model
+    run.config["fact_contract_validation"] = "enum-literals-v1"
     run.config["draft_replays"] = []
     if isinstance(provider, OpenAIProvider):
         run.config["read_timeout_seconds"] = provider.client.timeout.read
