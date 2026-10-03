@@ -28,3 +28,16 @@ def test_duplicate_answers_and_untrusted_verified_provenance_rejected():
         AssistRequest(address_id="X", supplemental_facts={"units": 10}, answers=[{"field": "units", "value": 12}])
     with pytest.raises(ValidationError):
         AssistRequest(address_id="X", answers=[{"field": "units", "value": 12, "provenance": "verified"}])
+
+
+def test_evidence_ui_examples_keep_renderer_expectation_separate():
+    from navigator.config import ROOT
+    from navigator.store import read_json
+    from navigator.models import EncodedRuleRendering, EvidenceReport
+    failure = AssistResponse.model_validate(read_json(ROOT / "contracts/evidence_examples/missing_support.json")["response"])
+    assert failure.lookup.evaluations[0].result == "unknown"
+    assert failure.evidence_reports[0].blocking_issues
+    comparison = read_json(ROOT / "contracts/evidence_examples/source_comparison.json")
+    EvidenceReport.model_validate(comparison["evidence"])
+    rendering = EncodedRuleRendering.model_validate(comparison["encoded_rule"])
+    assert rendering.renderer_version == "authored-fixture-not-Core-output"

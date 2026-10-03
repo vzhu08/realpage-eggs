@@ -241,7 +241,7 @@ class Evaluation(Model):
 class RunManifest(Model):
     run_id: str
     operation: str
-    mode: Literal["live", "replay", "synthetic", "local"]
+    mode: Literal["live", "replay", "synthetic", "fixture", "local"]
     started_at: str
     finished_at: str | None = None
     elapsed_seconds: float | None = None
