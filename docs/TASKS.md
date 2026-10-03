@@ -6,14 +6,14 @@ an explicit dependency. Ready means technically ready, not a human claim or perm
 Four human lanes: Platform/API, Core A (Rules & Evaluation), Core B (Questions & Rendering), Frontend/UX.
 Daniel's existing Core candidate is fetched at c92ad8f; Core A retains evaluator/extraction ownership.
 Core B is a new human assignment and requires the existing writer's path handoff before new edits.
-Only this documentation session is currently claimed here; no remote writer was interrupted or contacted.
+The current user-assigned Platform session claims PLAT-01; no remote writer was interrupted or contacted.
 
 | ID | Lane | State | Outcome / dependency |
 | --- | --- | --- | --- |
 | BOOT-01 | User / bootstrap | Review | Backend and integration baseline locally checked; live extraction acceptance blocked on local provider configuration |
 | UX-01 | UX owner | Ready, unclaimed | Address/date/evidence UI using generated contracts and labeled fixtures |
 | UX-02 | UX owner | Ready, unclaimed | Change view with definite/uncertain/blocked/hypothetical states |
-| PLAT-01 | Platform/API owner | Ready, unclaimed | Evidence-based recovery of remaining 21 unresolved municipalities |
+| PLAT-01 | Vincent / Platform | Review | Recovered 12/21: 491/500 resolved in isolated real store; 28 focused / 96 total tests pass; report and nine remaining causes in card |
 | PLAT-02 | Platform/API owner | Ready, unclaimed | Reproducible launch/export/deployment package; deployment itself awaits authority |
 | CORE-01 | Core A / Daniel | Review software; live Blocked | Repairs exist on Core candidate; credentials/model still required for real extraction |
 | CORE-02 | Core A / Daniel | Review candidate | Date/interaction repairs on c92ad8f; combined integration pending |
@@ -35,6 +35,6 @@ For each candidate: owner reviews diff/scope -> steward orders dependencies -> u
 against current main -> rerun required checks -> human-authorized merge -> verify main -> separately
 verify deployed demo. Never rebase an active writer. Preserve user work and actual base SHA.
 
-UX-01/02 are subflows of UX-03, not competing implementations. PLAT-01/02 remain ready after
-evidence/API work. CORE-01 keeps extraction ownership in Core A. Core B alone owns planner/renderer and core_assist.py. Priorities: P0 correctness/configuration and
+UX-01/02 are subflows of UX-03, not competing implementations. PLAT-01 is in Review on base 22d271c;
+PLAT-02 remains Ready after evidence/API work. CORE-01 keeps extraction ownership in Core A. Core B alone owns planner/renderer and core_assist.py. Priorities: P0 correctness/configuration and
 contracts; P1 bounded useful-question/evidence journey; P2 broader references, ranking and reviewed benchmarks.

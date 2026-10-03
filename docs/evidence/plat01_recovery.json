@@ -1,0 +1,1319 @@
+{
+  "task": "PLAT-01",
+  "status": "Review",
+  "artifact_label": "REAL_CENSUS_GEOGRAPHY_RECOVERY_NOT_LEGAL_VALIDATION",
+  "branch": "codex/research-platform",
+  "base_commit": "22d271cb827e6f4606b7f7025eafe1c890d1d6b8",
+  "data_store": "data/plat01-recovery",
+  "original_store": "data (unchanged)",
+  "run": {
+    "run_id": "6db6a1bae8e1420da587fb49c0571176",
+    "operation": "geocode",
+    "mode": "live",
+    "started_at": "2026-10-03T23:22:05.436469+00:00",
+    "finished_at": "2026-10-03T23:22:06.332669+00:00",
+    "elapsed_seconds": 0.896,
+    "outcome": "partial",
+    "input_hashes": {
+      "addresses": "22a052a13f29d8b310a6b2474edeee44419c6872739d811cbe9286b37f23ae37"
+    },
+    "config": {
+      "workers": 4,
+      "benchmark": "Public_AR_Current",
+      "vintage": "Current_Current",
+      "cache_policy": "immutable request snapshots; Current identifiers can change upstream"
+    },
+    "versions": {
+      "pipeline": "0.1.0",
+      "evaluator": "0.1.0"
+    },
+    "counts": {
+      "attempted": 21,
+      "resolved": 491,
+      "unresolved": 9,
+      "failed": 0
+    },
+    "errors": [],
+    "artifacts": []
+  },
+  "evidence_mode": "Real baseline Census cache replay plus 14 new live Census response snapshots; tests use synthetic examples.",
+  "before": {
+    "addresses": 500,
+    "resolved": 479,
+    "unresolved": 21
+  },
+  "after": {
+    "addresses": 500,
+    "resolved": 491,
+    "unresolved": 9
+  },
+  "recovered_address_ids": [
+    "A0115",
+    "A0156",
+    "A0168",
+    "A0229",
+    "A0279",
+    "A0291",
+    "A0328",
+    "A0357",
+    "A0364",
+    "A0400",
+    "A0428",
+    "A0484"
+  ],
+  "unresolved_address_ids": [
+    "A0009",
+    "A0098",
+    "A0128",
+    "A0295",
+    "A0346",
+    "A0352",
+    "A0376",
+    "A0380",
+    "A0384"
+  ],
+  "decisions": [
+    "Only strip leading zero padding from street ordinal tokens; preserve house numbers and raw inputs.",
+    "All returned candidates must preserve the requested house number and independently identify the same active legal municipality by state, GEOID and geography type. No voting or postal-city filtering.",
+    "Resolve both explicit range endpoints or both numbered compound streets; do not accept a raw match that silently picks one number.",
+    "Fractional numbers remain exact; do not round them or infer a municipality from the integer endpoint.",
+    "Keep each original attempt, cache key, full response hash and retrieval timestamp. Compound/range response_hash combines ordered component response hashes.",
+    "No municipality, law, threshold or address-specific recovery mapping is hard-coded."
+  ],
+  "remaining_causes": {
+    "missing_house_number": [
+      "A0098",
+      "A0128",
+      "A0295",
+      "A0346",
+      "A0376",
+      "A0380"
+    ],
+    "no_census_match": [
+      "A0384"
+    ],
+    "fractional_number_misread_as_5_instead_of_322_5": [
+      "A0009"
+    ],
+    "conflicting_Newark_and_Verona_boundaries": [
+      "A0352"
+    ]
+  },
+  "checks": {
+    "focused_pytest": "28 passed",
+    "full_pytest": "96 passed, 1 existing Starlette/httpx deprecation warning",
+    "resolve": "exit 0; partial, 21 attempted, 491 resolved, 9 unresolved, 0 failed",
+    "validate": "exit 0; schema_valid=true, ready_for_submission=false, zero rules, 33 missing source texts; software validation only",
+    "contracts": "navigator contracts CLI via runpy with generator ROOTs isolated to artifacts/plat01-contract-check; four generated schemas byte-identical to tracked contracts",
+    "offline_replay": "All 21 recovery results reproduced from exact cached snapshots with network denied",
+    "baseline_cache_files_unchanged": true,
+    "baseline_resolutions_unchanged": true,
+    "previous_479_resolved_records_unchanged": true,
+    "raw_addresses_and_source_snapshots_unchanged": true
+  },
+  "limitations": [
+    "Resolves municipal geography only; multiple-match methods do not claim a unique physical location.",
+    "Range endpoint agreement retains the existing endpoint policy and does not prove every intervening parcel or segment lies within the boundary.",
+    "Current Census benchmark/vintage names are not historical boundary verification for the legal as-of date.",
+    "Nine cases need independent authoritative address/boundary evidence; no source corrections or guessed numbers were introduced.",
+    "Recovered data and immutable full responses are in the ignored isolated local store; the baseline default data directory and historical validation report remain unchanged.",
+    "No live legal extraction, Core candidate integration, deployment or official submission validation was performed."
+  ],
+  "addresses": [
+    {
+      "address_id": "A0009",
+      "raw_address": {
+        "street_address": "322-322.5 Western Ave",
+        "postal_city": "Cambridge",
+        "state": "MA",
+        "zip": ""
+      },
+      "before_quality": "ambiguous",
+      "after_quality": "ambiguous",
+      "municipality": null,
+      "municipality_geoid": null,
+      "method": "assessor_state_only",
+      "response_hash": null,
+      "unresolved": [
+        "Address components do not all establish one legal municipality"
+      ],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "322-322.5 Western Ave",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "405866ad30633120f96a500b41a105c4f8a0e517fa251f3f208896e1a2d8b693",
+          "quality": "ambiguous",
+          "response_hash": "a1f2e4a482b1fe7a89ec25a080b9de0fdabb5136375692ef1152c1eb380983aa",
+          "retrieved_at": "2026-10-03T20:51:44.899439+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Census matched house number does not preserve the requested address"
+          ],
+          "candidate_count": 2,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "5 WESTERN AVE, CAMBRIDGE, MA, 02163",
+            "5 WESTERN AVE, CAMBRIDGE, MA, 02139"
+          ]
+        },
+        {
+          "street": "322 Western Ave",
+          "zip": "",
+          "purpose": "range_endpoints",
+          "cache_key": "47f5a137430cb24cd8954d1bbda060b89f673b06fd5bd2983f356380f5043ebe",
+          "quality": "resolved",
+          "response_hash": "633d6330bc5327d33b9d3acda96d2895eecb09a2c6c63668a3b9c70f40d340ec",
+          "retrieved_at": "2026-10-03T23:22:05.695333+00:00",
+          "method": "census_geographies",
+          "unresolved": [],
+          "candidate_count": 1,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "322 WESTERN AVE, CAMBRIDGE, MA, 02139"
+          ]
+        },
+        {
+          "street": "322.5 Western Ave",
+          "zip": "",
+          "purpose": "range_endpoints",
+          "cache_key": "08383067fcf7071e41a43291d7cbfb153b402a1ffa79883121eea63d27ad8a8f",
+          "quality": "ambiguous",
+          "response_hash": "30187edda5e38d4d20074f5baf9ae3da7fb9b54735a8286e349cb8e46914bb25",
+          "retrieved_at": "2026-10-03T23:22:05.841109+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Census matched house number does not preserve the requested address"
+          ],
+          "candidate_count": 2,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "5 WESTERN AVE, CAMBRIDGE, MA, 02163",
+            "5 WESTERN AVE, CAMBRIDGE, MA, 02139"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0098",
+      "raw_address": {
+        "street_address": "WILLOWWOOD ST",
+        "postal_city": "Dorchester",
+        "state": "MA",
+        "zip": "02124"
+      },
+      "before_quality": "unresolved",
+      "after_quality": "unresolved",
+      "municipality": null,
+      "municipality_geoid": null,
+      "method": "census_geographies",
+      "response_hash": "f07a9940a1de9ccf7ee0b7c904636874e3e3714f26023df9deae29a9cf6e0c61",
+      "unresolved": [
+        "No Census address match"
+      ],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "WILLOWWOOD ST",
+          "zip": "02124",
+          "purpose": "original_address",
+          "cache_key": "35b120dec4dbe4d8ce8e48d2d20f85fefba2f0f0a476d9bf1f7188fe5f22aa6c",
+          "quality": "unresolved",
+          "response_hash": "6a01298b2fd7f74a972862a81bf29467289b20ba2f77e865054d000c2b12082b",
+          "retrieved_at": "2026-10-03T20:51:46.918912+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "WILLOWWOOD ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "aead375a8a663f2ed61984de017301d3f7a2ac4787c7efb6a2ad0cd02ebb4324",
+          "quality": "unresolved",
+          "response_hash": "f07a9940a1de9ccf7ee0b7c904636874e3e3714f26023df9deae29a9cf6e0c61",
+          "retrieved_at": "2026-10-03T20:51:47.047910+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        }
+      ]
+    },
+    {
+      "address_id": "A0115",
+      "raw_address": {
+        "street_address": "397 05TH AV",
+        "postal_city": "San Francisco",
+        "state": "CA",
+        "zip": ""
+      },
+      "before_quality": "unresolved",
+      "after_quality": "resolved",
+      "municipality": "San Francisco",
+      "municipality_geoid": "0667000",
+      "method": "census_geographies",
+      "response_hash": "7d7413a391fa694472d730fb7e3ee1f552905745fb2feecb2b8b9113e272a1af",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "397 05TH AV",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "7f29869b5821298513f9bfd16ab513907298681d59cd3b01b47b6bd8bb51c213",
+          "quality": "unresolved",
+          "response_hash": "782c6519f16acf78f2a4934b6da8a47c9af1f3a8a23d0ccefa648067d638d4a8",
+          "retrieved_at": "2026-10-03T20:51:47.379811+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "397 5TH AV",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "532fc642773d50ff2193afdf91111df5060ab1464778b3b370a752daa8d53e58",
+          "quality": "resolved",
+          "response_hash": "7d7413a391fa694472d730fb7e3ee1f552905745fb2feecb2b8b9113e272a1af",
+          "retrieved_at": "2026-10-03T23:22:05.694334+00:00",
+          "method": "census_geographies",
+          "unresolved": [],
+          "candidate_count": 1,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "397 5TH AVE, SAN FRANCISCO, CA, 94118"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0128",
+      "raw_address": {
+        "street_address": "Harvard ST",
+        "postal_city": "Dorchester",
+        "state": "MA",
+        "zip": "02124"
+      },
+      "before_quality": "unresolved",
+      "after_quality": "unresolved",
+      "municipality": null,
+      "municipality_geoid": null,
+      "method": "census_geographies",
+      "response_hash": "5aed1863c50062b5e10c362ca5f4941fff819d59dc9cd4551be9f87fd0c9fc50",
+      "unresolved": [
+        "No Census address match"
+      ],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "Harvard ST",
+          "zip": "02124",
+          "purpose": "original_address",
+          "cache_key": "e549945a635860fca5c4c6d985e68ea9c5e39c1e6600b09454ff4abdf33a24ee",
+          "quality": "unresolved",
+          "response_hash": "f88aadae82b40e1dcbdd740323978009b28fc203d498df0350dd7a0f0e7a3b9e",
+          "retrieved_at": "2026-10-03T20:51:47.651515+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "Harvard ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "16a6162cdaa4ef421365a8fd646e247a5451afe8831dbd0662706cc2fb88fd41",
+          "quality": "unresolved",
+          "response_hash": "5aed1863c50062b5e10c362ca5f4941fff819d59dc9cd4551be9f87fd0c9fc50",
+          "retrieved_at": "2026-10-03T20:51:47.753873+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        }
+      ]
+    },
+    {
+      "address_id": "A0156",
+      "raw_address": {
+        "street_address": "290 GREEN ST",
+        "postal_city": "San Francisco",
+        "state": "CA",
+        "zip": ""
+      },
+      "before_quality": "ambiguous",
+      "after_quality": "resolved",
+      "municipality": "San Francisco",
+      "municipality_geoid": "0667000",
+      "method": "census_multiple_matches_agree",
+      "response_hash": "23cdc84e5c4d79c9c1e39bb6e729b36fccec949ed90b7d88b284c80df971c7f9",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "290 GREEN ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "847c0425c847e37b91462e74263a3c97bd455507c6cc869f88dc533c88704022",
+          "quality": "resolved",
+          "response_hash": "23cdc84e5c4d79c9c1e39bb6e729b36fccec949ed90b7d88b284c80df971c7f9",
+          "retrieved_at": "2026-10-03T20:51:48.292586+00:00",
+          "method": "census_multiple_matches_agree",
+          "unresolved": [],
+          "candidate_count": 2,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "290 GREEN ST, SAN FRANCISCO, CA, 94111",
+            "290 GREEN ST, SAN FRANCISCO, CA, 94133"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0168",
+      "raw_address": {
+        "street_address": "600 JACKSON/601 HARRISON",
+        "postal_city": "Hoboken",
+        "state": "NJ",
+        "zip": "07030"
+      },
+      "before_quality": "unresolved",
+      "after_quality": "resolved",
+      "municipality": "Hoboken",
+      "municipality_geoid": "3432250",
+      "method": "census_compound_addresses_agree",
+      "response_hash": "15b9b0bd9855a9ac25fc0dff95bdc006a5be97f7929a5d9a7f90567a725371ef",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "600 JACKSON/601 HARRISON",
+          "zip": "07030",
+          "purpose": "original_address",
+          "cache_key": "415583ba56c22da85bc7c9f60fe465905460d91d9bf7c98f6f861509974f4e48",
+          "quality": "unresolved",
+          "response_hash": "67a2fee7bb3630da92259bab3f22c549bb6a3f6f237a18614fc0ddf5e0c916e4",
+          "retrieved_at": "2026-10-03T20:51:48.541175+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "600 JACKSON/601 HARRISON",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "31ce1fad5da240af0181bafdc015e33b03758bb7d6255d8ead299da3f85be24c",
+          "quality": "unresolved",
+          "response_hash": "79d26acde72ec83325ac5df7d5b1c2a2fa365a60bff1768bd7ba6a0cea5531c8",
+          "retrieved_at": "2026-10-03T20:51:48.644964+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "600 JACKSON",
+          "zip": "07030",
+          "purpose": "compound_addresses",
+          "cache_key": "0cd0ac670b56c0b019b6b2a5dcf0768965e68dab5aed53ad39670a0e58384af2",
+          "quality": "resolved",
+          "response_hash": "fc2e7a65b79eff395dc27f111a862115747f06b697923c1df1ec0be271498195",
+          "retrieved_at": "2026-10-03T23:22:05.695333+00:00",
+          "method": "census_geographies",
+          "unresolved": [],
+          "candidate_count": 1,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "600 JACKSON ST, HOBOKEN, NJ, 07030"
+          ]
+        },
+        {
+          "street": "601 HARRISON",
+          "zip": "07030",
+          "purpose": "compound_addresses",
+          "cache_key": "d7d03b3509cf6d881060684a525abe4584e5ce9d89adea7d24e9bacf9aebb952",
+          "quality": "resolved",
+          "response_hash": "f199329f6f599ca96e9ded8f1bd03272f61aaaa08be28d6226f3e477c5555443",
+          "retrieved_at": "2026-10-03T23:22:05.824112+00:00",
+          "method": "census_geographies",
+          "unresolved": [],
+          "candidate_count": 1,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "601 HARRISON ST, HOBOKEN, NJ, 07030"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0229",
+      "raw_address": {
+        "street_address": "5164 03RD ST",
+        "postal_city": "San Francisco",
+        "state": "CA",
+        "zip": ""
+      },
+      "before_quality": "unresolved",
+      "after_quality": "resolved",
+      "municipality": "San Francisco",
+      "municipality_geoid": "0667000",
+      "method": "census_geographies",
+      "response_hash": "f3efcdd4097fc067fea037283429665c922d46b909ad43cc871a084e295c5d15",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "5164 03RD ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "ac294dbd421a24fd49420b3a457fef60aae3942c8c1443d3602f33fdf21d03eb",
+          "quality": "unresolved",
+          "response_hash": "82a83c286edb5a5faa89378b633c451e646f4576a3bb228382e50ccf66404d1a",
+          "retrieved_at": "2026-10-03T20:51:50.010655+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "5164 3RD ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "23f3205a01518f0c6d2231c1d9e8572be7509af9ff54619c0e8fa81278fac4da",
+          "quality": "resolved",
+          "response_hash": "f3efcdd4097fc067fea037283429665c922d46b909ad43cc871a084e295c5d15",
+          "retrieved_at": "2026-10-03T23:22:05.709326+00:00",
+          "method": "census_geographies",
+          "unresolved": [],
+          "candidate_count": 1,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "5164 3RD ST, SAN FRANCISCO, CA, 94124"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0279",
+      "raw_address": {
+        "street_address": "90 KENSINGTON AVE.",
+        "postal_city": "Jersey City",
+        "state": "NJ",
+        "zip": "07302"
+      },
+      "before_quality": "ambiguous",
+      "after_quality": "resolved",
+      "municipality": "Jersey City",
+      "municipality_geoid": "3436000",
+      "method": "census_multiple_matches_agree",
+      "response_hash": "7391a516841a726cc0383b6b09e39b3895aa275b1fac0d1d8e30e940c9dbe30f",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "90 KENSINGTON AVE.",
+          "zip": "07302",
+          "purpose": "original_address",
+          "cache_key": "bae562e5d9d8fb84810be2e9112434bc0b5aec066c089bbe37656b78aa24b609",
+          "quality": "resolved",
+          "response_hash": "7391a516841a726cc0383b6b09e39b3895aa275b1fac0d1d8e30e940c9dbe30f",
+          "retrieved_at": "2026-10-03T20:51:51.158664+00:00",
+          "method": "census_multiple_matches_agree",
+          "unresolved": [],
+          "candidate_count": 2,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "90 KENSINGTON AVE, JERSEY CITY, NJ, 07304",
+            "90 KENSINGTON AVE, JERSEY CITY, NJ, 07306"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0291",
+      "raw_address": {
+        "street_address": "165 Cambridgepark Dr",
+        "postal_city": "Cambridge",
+        "state": "MA",
+        "zip": ""
+      },
+      "before_quality": "ambiguous",
+      "after_quality": "resolved",
+      "municipality": "Cambridge",
+      "municipality_geoid": "2511000",
+      "method": "census_multiple_matches_agree",
+      "response_hash": "ccecc0e41f27fd36c0266bb97fa5c6c379e63803a273d9a85662c381df36f6a0",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "165 Cambridgepark Dr",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "f72a411fb40253945a93a1783863c2065a5e0dcd8a1ccc7a24355faa337d706f",
+          "quality": "resolved",
+          "response_hash": "ccecc0e41f27fd36c0266bb97fa5c6c379e63803a273d9a85662c381df36f6a0",
+          "retrieved_at": "2026-10-03T20:51:51.486095+00:00",
+          "method": "census_multiple_matches_agree",
+          "unresolved": [],
+          "candidate_count": 2,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "165 CAMBRIDGEPARK DR, CAMBRIDGE, MA, 02140",
+            "165 CAMBRIDGE PARK DR, CAMBRIDGE, MA, 02140"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0295",
+      "raw_address": {
+        "street_address": "Harvard ST LOT 2A-13",
+        "postal_city": "Dorchester",
+        "state": "MA",
+        "zip": "02124"
+      },
+      "before_quality": "unresolved",
+      "after_quality": "unresolved",
+      "municipality": null,
+      "municipality_geoid": null,
+      "method": "census_geographies",
+      "response_hash": "7cc7d87107d6bf02b521cc79e34eb82b0588b998ccb4dc7281831ddc34ffd1fd",
+      "unresolved": [
+        "No Census address match"
+      ],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "Harvard ST LOT 2A-13",
+          "zip": "02124",
+          "purpose": "original_address",
+          "cache_key": "568dc7aea9dd20692d91f50e39fb8f8ae61280c0e134e95e75516c8303a7390c",
+          "quality": "unresolved",
+          "response_hash": "f0f0a23740cd580a7f4e5a82f6bcf044875d3c86f8d2e421e593c1890ce7c6e1",
+          "retrieved_at": "2026-10-03T20:51:51.501100+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "Harvard ST LOT 2A-13",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "59055908787769f1e82dcc8c1d7deae2a383eb2f4f301ed75d11d07c1c04680c",
+          "quality": "unresolved",
+          "response_hash": "7cc7d87107d6bf02b521cc79e34eb82b0588b998ccb4dc7281831ddc34ffd1fd",
+          "retrieved_at": "2026-10-03T20:51:51.606917+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        }
+      ]
+    },
+    {
+      "address_id": "A0328",
+      "raw_address": {
+        "street_address": "1845 08TH AV",
+        "postal_city": "San Francisco",
+        "state": "CA",
+        "zip": ""
+      },
+      "before_quality": "unresolved",
+      "after_quality": "resolved",
+      "municipality": "San Francisco",
+      "municipality_geoid": "0667000",
+      "method": "census_geographies",
+      "response_hash": "92e6b39e265f7abe467ad69fed673344c9d5dbe969bcaeac96b0c12d3acac299",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "1845 08TH AV",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "4f5781860a629ede68712fb092ac491190220db542a57a819438006ad20c7da3",
+          "quality": "unresolved",
+          "response_hash": "1513c9597392a8cfab4ed62e16618c27da71bbe4dffd858224914e19fa402e13",
+          "retrieved_at": "2026-10-03T20:51:52.374016+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "1845 8TH AV",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "206d13a1227bef732aa29ef84f9d883abe57659d429bbedd1891e06a87f35771",
+          "quality": "resolved",
+          "response_hash": "92e6b39e265f7abe467ad69fed673344c9d5dbe969bcaeac96b0c12d3acac299",
+          "retrieved_at": "2026-10-03T23:22:05.828110+00:00",
+          "method": "census_geographies",
+          "unresolved": [],
+          "candidate_count": 1,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "1845 8TH AVE, SAN FRANCISCO, CA, 94122"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0346",
+      "raw_address": {
+        "street_address": "AUBURN DR",
+        "postal_city": "San Diego",
+        "state": "CA",
+        "zip": "92105"
+      },
+      "before_quality": "unresolved",
+      "after_quality": "unresolved",
+      "municipality": null,
+      "municipality_geoid": null,
+      "method": "census_geographies",
+      "response_hash": "e493de36fe79a02ea3b42dd0ef54a2d18189202198c74f7592ec1821f88f1894",
+      "unresolved": [
+        "No Census address match"
+      ],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "AUBURN DR",
+          "zip": "92105",
+          "purpose": "original_address",
+          "cache_key": "20c178fb7520250cba4c934710bcb9df352a23208734f941ad60542cac27f00a",
+          "quality": "unresolved",
+          "response_hash": "c4c10f15b084861e90c8d16269f2950439a23a93b1bb9f111563369d56d9e21d",
+          "retrieved_at": "2026-10-03T20:51:52.778609+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "AUBURN DR",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "1c96579736795c93b2a24f2399aa7a2f33d308b26837c430547fa9bed1857999",
+          "quality": "unresolved",
+          "response_hash": "e493de36fe79a02ea3b42dd0ef54a2d18189202198c74f7592ec1821f88f1894",
+          "retrieved_at": "2026-10-03T20:51:52.875632+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        }
+      ]
+    },
+    {
+      "address_id": "A0352",
+      "raw_address": {
+        "street_address": "40-42 MT PROSPECT AVE",
+        "postal_city": "Newark",
+        "state": "NJ",
+        "zip": "07083"
+      },
+      "before_quality": "ambiguous",
+      "after_quality": "ambiguous",
+      "municipality": null,
+      "municipality_geoid": null,
+      "method": "assessor_state_only",
+      "response_hash": null,
+      "unresolved": [
+        "Address components do not all establish one legal municipality"
+      ],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "40-42 MT PROSPECT AVE",
+          "zip": "07083",
+          "purpose": "original_address",
+          "cache_key": "ca73495982b3ea1c63975df2bf59fd83d5bc092fa52bd6b21ef6dc49e9f2890b",
+          "quality": "ambiguous",
+          "response_hash": "6b01ae43f175abd6ff776799ceb8de1ef9f9c7fa38df9cdbc7148f196c2aaa43",
+          "retrieved_at": "2026-10-03T20:51:53.035647+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Census matched house number does not preserve the requested address"
+          ],
+          "candidate_count": 3,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "42 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "42 MOUNT PROSPECT AVE, NEWARK, NJ, 07102",
+            "42 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        },
+        {
+          "street": "40-42 MT PROSPECT AVE",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "00c3022dbf41078eb8422863cadbf4317de555f8afa20acfb8d3765e6ed62923",
+          "quality": "ambiguous",
+          "response_hash": "ac0d6707c1d7cf108eb18f077ccbff094b731fc2c3bb705760b3fb381688cbd0",
+          "retrieved_at": "2026-10-03T20:51:53.197335+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Census matched house number does not preserve the requested address"
+          ],
+          "candidate_count": 3,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "42 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "42 MOUNT PROSPECT AVE, NEWARK, NJ, 07102",
+            "42 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        },
+        {
+          "street": "40 MT PROSPECT AVE",
+          "zip": "07083",
+          "purpose": "range_endpoints",
+          "cache_key": "659934deee84f4de0e00a4acf8a2e85cda5bc7012182b17f9bd5a2f731277dcc",
+          "quality": "ambiguous",
+          "response_hash": "c28530e25986616ef7e28062ceecef7b48d128be05c71a82cd89fb757ebf90dd",
+          "retrieved_at": "2026-10-03T23:22:05.873123+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Multiple Census matches do not all establish the same active legal municipality"
+          ],
+          "candidate_count": 3,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "40 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "40 MOUNT PROSPECT AVE, NEWARK, NJ, 07102",
+            "40 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        },
+        {
+          "street": "40 MT PROSPECT AVE",
+          "zip": "",
+          "purpose": "range_endpoints",
+          "cache_key": "ee8957b01d8505a46a013ae2a0dd14b07b753dff0f2fa35abcb0ddb22bceb898",
+          "quality": "ambiguous",
+          "response_hash": "f60cdf73c4fe85224dc6dee3e35145dd1fda5aa4501bfc12f98703e1c61afe96",
+          "retrieved_at": "2026-10-03T20:55:29.087209+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Multiple Census matches do not all establish the same active legal municipality"
+          ],
+          "candidate_count": 3,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "40 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "40 MOUNT PROSPECT AVE, NEWARK, NJ, 07102",
+            "40 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        },
+        {
+          "street": "42 MT PROSPECT AVE",
+          "zip": "07083",
+          "purpose": "range_endpoints",
+          "cache_key": "6615792b54db04b24ee93fb209a8ccae1824707f1591229d83c43a4edca25324",
+          "quality": "ambiguous",
+          "response_hash": "d392d7d83df89c146d42d02593b62e112ef15fb125b4f5bbe43d3b78b2189368",
+          "retrieved_at": "2026-10-03T23:22:06.091794+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Multiple Census matches do not all establish the same active legal municipality"
+          ],
+          "candidate_count": 3,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "42 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "42 MOUNT PROSPECT AVE, NEWARK, NJ, 07102",
+            "42 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        },
+        {
+          "street": "42 MT PROSPECT AVE",
+          "zip": "",
+          "purpose": "range_endpoints",
+          "cache_key": "16c4e9fc6c8c39f4332af1f78cb12aa5fbe494205bc59db853c65db16ab158a0",
+          "quality": "ambiguous",
+          "response_hash": "41e88833ff175f3927fce776cec4454bf98b9392b88053977c3bd870608c5894",
+          "retrieved_at": "2026-10-03T20:55:29.284436+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Multiple Census matches do not all establish the same active legal municipality"
+          ],
+          "candidate_count": 3,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "42 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "42 MOUNT PROSPECT AVE, NEWARK, NJ, 07102",
+            "42 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0357",
+      "raw_address": {
+        "street_address": "173 07TH ST",
+        "postal_city": "San Francisco",
+        "state": "CA",
+        "zip": ""
+      },
+      "before_quality": "unresolved",
+      "after_quality": "resolved",
+      "municipality": "San Francisco",
+      "municipality_geoid": "0667000",
+      "method": "census_geographies",
+      "response_hash": "3f38bbc2956c57e873205a7ee31fca9f3c650d29c2902de455ec551f1a9376a0",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "173 07TH ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "20f8bacaf6fe285307944917d764418d98f82f3165932a2d68b1b8ea6869596c",
+          "quality": "unresolved",
+          "response_hash": "3a261430c48a6c957974280d3dcea43cefe3b7c8b6a72fc85bc6143a27068855",
+          "retrieved_at": "2026-10-03T20:51:53.101029+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "173 7TH ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "1c67a6bf6ce9d272c15791b51334dae69f470640b9481be8dc07575f5f2da0bc",
+          "quality": "resolved",
+          "response_hash": "3f38bbc2956c57e873205a7ee31fca9f3c650d29c2902de455ec551f1a9376a0",
+          "retrieved_at": "2026-10-03T23:22:05.976650+00:00",
+          "method": "census_geographies",
+          "unresolved": [],
+          "candidate_count": 1,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "173 7TH ST, SAN FRANCISCO, CA, 94103"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0364",
+      "raw_address": {
+        "street_address": "125 03RD AV",
+        "postal_city": "San Francisco",
+        "state": "CA",
+        "zip": ""
+      },
+      "before_quality": "unresolved",
+      "after_quality": "resolved",
+      "municipality": "San Francisco",
+      "municipality_geoid": "0667000",
+      "method": "census_geographies",
+      "response_hash": "0d1627f1ba6a0b02ea4362596db74869564e796f22f5bf88036620688b624102",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "125 03RD AV",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "8f1dc60350007072ef6c5379143d9c1a547d0b2e175ba823fb5f4f1603835095",
+          "quality": "unresolved",
+          "response_hash": "b6475996c5f65eeb8005b6e0815b1ed0b628d6f28ed9175a3d940409501b925c",
+          "retrieved_at": "2026-10-03T20:51:53.273493+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "125 3RD AV",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "e139b8b5b12bc15c832749d1c0c1a7a7c6cfa7af709f4422440b7f889f8031bb",
+          "quality": "resolved",
+          "response_hash": "0d1627f1ba6a0b02ea4362596db74869564e796f22f5bf88036620688b624102",
+          "retrieved_at": "2026-10-03T23:22:05.956640+00:00",
+          "method": "census_geographies",
+          "unresolved": [],
+          "candidate_count": 1,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "125 3RD AVE, SAN FRANCISCO, CA, 94118"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0376",
+      "raw_address": {
+        "street_address": "ST JAMES ST",
+        "postal_city": "Roxbury",
+        "state": "MA",
+        "zip": "02119"
+      },
+      "before_quality": "unresolved",
+      "after_quality": "unresolved",
+      "municipality": null,
+      "municipality_geoid": null,
+      "method": "census_geographies",
+      "response_hash": "66cede697989a57561a5766582110ba4e27d40520c2509e2b26adc77bd130cc1",
+      "unresolved": [
+        "No Census address match"
+      ],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "ST JAMES ST",
+          "zip": "02119",
+          "purpose": "original_address",
+          "cache_key": "aec200af272c26f073718fa3c16bd66008fc7345d9cbcee96ccf5ad7b08baf3c",
+          "quality": "unresolved",
+          "response_hash": "33c6730febb95a7326c061cb1064dd99125ceece097be71415b68a003f6590d4",
+          "retrieved_at": "2026-10-03T20:55:29.158197+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "ST JAMES ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "a88dc707441656abbdc4433700b1a1af156300482790fcc507e385cb762f5d19",
+          "quality": "unresolved",
+          "response_hash": "66cede697989a57561a5766582110ba4e27d40520c2509e2b26adc77bd130cc1",
+          "retrieved_at": "2026-10-03T20:55:29.262832+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        }
+      ]
+    },
+    {
+      "address_id": "A0380",
+      "raw_address": {
+        "street_address": "GREENVILLE ST",
+        "postal_city": "Roxbury",
+        "state": "MA",
+        "zip": "02119"
+      },
+      "before_quality": "unresolved",
+      "after_quality": "unresolved",
+      "municipality": null,
+      "municipality_geoid": null,
+      "method": "census_geographies",
+      "response_hash": "25a745a9d8131f679940ebad0c16767244e016d752110d7ebfa7ead4a6083e87",
+      "unresolved": [
+        "No Census address match"
+      ],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "GREENVILLE ST",
+          "zip": "02119",
+          "purpose": "original_address",
+          "cache_key": "253eb7a67dfc0dedc558737cd7b282a1f750dd2705d7fe0f917e63dfdd14a67c",
+          "quality": "unresolved",
+          "response_hash": "d0455c65da5eaad3792610785ca8dca7e3320fef6b261debcce46ad05f130992",
+          "retrieved_at": "2026-10-03T20:55:29.272250+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "GREENVILLE ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "b8807ca0a3349e7293059442d51f48eba3342ca8ddc8073cfc6ec36fc5530e3e",
+          "quality": "unresolved",
+          "response_hash": "25a745a9d8131f679940ebad0c16767244e016d752110d7ebfa7ead4a6083e87",
+          "retrieved_at": "2026-10-03T20:55:29.375505+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        }
+      ]
+    },
+    {
+      "address_id": "A0384",
+      "raw_address": {
+        "street_address": "21 GUERRERO ST",
+        "postal_city": "San Francisco",
+        "state": "CA",
+        "zip": ""
+      },
+      "before_quality": "unresolved",
+      "after_quality": "unresolved",
+      "municipality": null,
+      "municipality_geoid": null,
+      "method": "census_geographies",
+      "response_hash": "78d0591b58afb3b150f498f7ee55d6103d50c5fe4954c5197664fae3d30ef80d",
+      "unresolved": [
+        "No Census address match"
+      ],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "21 GUERRERO ST",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "00b5689f82a3eff5372518cb97cbae391bfcdad5c6fcddb4db9a120b4a468992",
+          "quality": "unresolved",
+          "response_hash": "78d0591b58afb3b150f498f7ee55d6103d50c5fe4954c5197664fae3d30ef80d",
+          "retrieved_at": "2026-10-03T20:55:29.422366+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        }
+      ]
+    },
+    {
+      "address_id": "A0400",
+      "raw_address": {
+        "street_address": "174 MT PROSPECT AVE",
+        "postal_city": "Newark",
+        "state": "NJ",
+        "zip": "07107"
+      },
+      "before_quality": "ambiguous",
+      "after_quality": "resolved",
+      "municipality": "Newark",
+      "municipality_geoid": "3451000",
+      "method": "census_multiple_matches_agree",
+      "response_hash": "7b5dfe5480c4ad908b21eb5fc37f80658f502effdd07312e5825f3ae56cc0007",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "174 MT PROSPECT AVE",
+          "zip": "07107",
+          "purpose": "original_address",
+          "cache_key": "a16d491a7a58a5d878776e0ca7014a10e3baec4be0deac691ba2658a3b8b02b5",
+          "quality": "resolved",
+          "response_hash": "7b5dfe5480c4ad908b21eb5fc37f80658f502effdd07312e5825f3ae56cc0007",
+          "retrieved_at": "2026-10-03T20:55:29.821350+00:00",
+          "method": "census_multiple_matches_agree",
+          "unresolved": [],
+          "candidate_count": 2,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "174 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "174 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0428",
+      "raw_address": {
+        "street_address": "312-314 MT PROSPECT AVE",
+        "postal_city": "Newark",
+        "state": "NJ",
+        "zip": "07109"
+      },
+      "before_quality": "ambiguous",
+      "after_quality": "resolved",
+      "municipality": "Newark",
+      "municipality_geoid": "3451000",
+      "method": "census_range_endpoints_agree",
+      "response_hash": "a3566af993965f67068464858cd4d12caa9c8b52d25270f8392f887878a9432b",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "312-314 MT PROSPECT AVE",
+          "zip": "07109",
+          "purpose": "original_address",
+          "cache_key": "7e16e21f2fc69c8c32b2e50d4361642543c052a245d7279829ec59eea9c5eb57",
+          "quality": "ambiguous",
+          "response_hash": "e7f0ce9f790445555fd81a421e1f617aa5c431fec4cdf28b26449823d64ba2c1",
+          "retrieved_at": "2026-10-03T20:55:30.636039+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Census matched house number does not preserve the requested address"
+          ],
+          "candidate_count": 2,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "314 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "314 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        },
+        {
+          "street": "312-314 MT PROSPECT AVE",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "ad263c21beed4fc2ed85d9d31bb83baac0bf987172684b6b3916531de54f0c84",
+          "quality": "ambiguous",
+          "response_hash": "9a51e106f3544f2478ed439bbc6ba23eeaf8c6545ce5f9d3d78b6497b05e1109",
+          "retrieved_at": "2026-10-03T20:55:31.053100+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "Census matched house number does not preserve the requested address"
+          ],
+          "candidate_count": 2,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": [
+            "314 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "314 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        },
+        {
+          "street": "312 MT PROSPECT AVE",
+          "zip": "07109",
+          "purpose": "range_endpoints",
+          "cache_key": "8f503c3b0c4b6f5cf414bcf341c7ce6fe6201bab50c7264a73d31b9a705d0724",
+          "quality": "resolved",
+          "response_hash": "c9cb2cee5dd9b1838849be8dbdc7600a665bda3de177535989dbe920873fa867",
+          "retrieved_at": "2026-10-03T23:22:06.055175+00:00",
+          "method": "census_multiple_matches_agree",
+          "unresolved": [],
+          "candidate_count": 2,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "312 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "312 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        },
+        {
+          "street": "314 MT PROSPECT AVE",
+          "zip": "07109",
+          "purpose": "range_endpoints",
+          "cache_key": "f2beebdcb232b4ff8685b9c915edf75e00766450d6a7f5fee5e95e9b40cf8f46",
+          "quality": "resolved",
+          "response_hash": "d36494750d971647471118becc7852d14d58411214964f3b739ca4c65e52e843",
+          "retrieved_at": "2026-10-03T23:22:06.266790+00:00",
+          "method": "census_multiple_matches_agree",
+          "unresolved": [],
+          "candidate_count": 2,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "314 MT PROSPECT AVE, NEWARK, NJ, 07104",
+            "314 MOUNT PROSPECT AVE, NEWARK, NJ, 07104"
+          ]
+        }
+      ]
+    },
+    {
+      "address_id": "A0484",
+      "raw_address": {
+        "street_address": "1801 08TH AV",
+        "postal_city": "San Francisco",
+        "state": "CA",
+        "zip": ""
+      },
+      "before_quality": "unresolved",
+      "after_quality": "resolved",
+      "municipality": "San Francisco",
+      "municipality_geoid": "0667000",
+      "method": "census_geographies",
+      "response_hash": "fbf0beac95647f947e7d3e7778da9b7eb2cc5d67f0b52cb7c6dab3309628d71f",
+      "unresolved": [],
+      "previous_attempts_preserved": true,
+      "recovery_attempts": [
+        {
+          "street": "1801 08TH AV",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "29d01483e51c40b01c959719fc9464edb841e0fd0f6d6ab2bccfb5177f1ecb9b",
+          "quality": "unresolved",
+          "response_hash": "f2cee44380049eb1b0c4dcb88bcacb7a76a7e7223f9f63157388a34354e368a7",
+          "retrieved_at": "2026-10-03T20:55:32.143368+00:00",
+          "method": "census_geographies",
+          "unresolved": [
+            "No Census address match"
+          ],
+          "candidate_count": 0,
+          "snapshot_mode": "baseline_cache",
+          "matched_addresses": []
+        },
+        {
+          "street": "1801 8TH AV",
+          "zip": "",
+          "purpose": "original_address",
+          "cache_key": "92bbbbebedf0bfa7e563e26412c8144046eb80dfa43af442b4dc011cf383d7fd",
+          "quality": "resolved",
+          "response_hash": "fbf0beac95647f947e7d3e7778da9b7eb2cc5d67f0b52cb7c6dab3309628d71f",
+          "retrieved_at": "2026-10-03T23:22:06.134787+00:00",
+          "method": "census_geographies",
+          "unresolved": [],
+          "candidate_count": 1,
+          "snapshot_mode": "new_live_response",
+          "matched_addresses": [
+            "1801 8TH AVE, SAN FRANCISCO, CA, 94122"
+          ]
+        }
+      ]
+    }
+  ]
+}
