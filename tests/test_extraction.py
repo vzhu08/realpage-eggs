@@ -72,6 +72,22 @@ def test_openai_refusal_or_http_error_never_becomes_empty_success(monkeypatch):
     with pytest.raises(ProviderFailure, match="no output text"): OpenAIProvider(client).generate("test", {})
 
 
+def test_json_mode_requirement_is_explicit_in_api_input(monkeypatch):
+    monkeypatch.setenv('OPENAI_API_KEY', 'synthetic-test-key')
+    monkeypatch.setenv('OPENAI_MODEL', 'synthetic-test-model')
+    original = {'source_text': 'Ordinary source material without a format instruction.', 'schema': {}}
+    def handler(request):
+        sent = json.loads(request.content)
+        # The live endpoint rejected a JSON-only payload even with JSON in instructions.
+        if 'json' not in sent['input'].lower():
+            return httpx.Response(400, json={'error': {'param': 'input', 'type': 'invalid_request_error'}})
+        assert json.loads(sent['input'].split('\n', 1)[1]) == original
+        return httpx.Response(200, json={'id': 'synthetic-response', 'status': 'completed',
+                                       'output': [{'content': [{'type': 'output_text', 'text': '{"rules": []}'}]}]})
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        assert OpenAIProvider(client).generate('Extract.', original) == {'rules': []}
+
+
 @pytest.mark.parametrize('field,value', [('end_date', '2027-01-01'), ('status_as_of', '2026-10-01')])
 def test_lifecycle_boundaries_require_field_level_evidence(demo, field, value):
     source = next(iter(demo.sources().values()))
