@@ -88,6 +88,21 @@ def test_json_mode_requirement_is_explicit_in_api_input(monkeypatch):
         assert OpenAIProvider(client).generate('Extract.', original) == {'rules': []}
 
 
+def test_incomplete_response_is_rejected_even_with_parseable_json(monkeypatch):
+    monkeypatch.setenv('OPENAI_API_KEY', 'synthetic-test-key')
+    monkeypatch.setenv('OPENAI_MODEL', 'synthetic-test-model')
+    def handler(request):
+        return httpx.Response(200, json={'id': 'synthetic-incomplete', 'status': 'incomplete',
+                                       'usage': {'output_tokens': 16000},
+                                       'output': [{'content': [{'type': 'output_text', 'text': '{"rules": []}'}]}]})
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        provider = OpenAIProvider(client)
+        with pytest.raises(ProviderFailure, match='incomplete'):
+            provider.generate('Extract.', {})
+        assert provider.usage[0]['status'] == 'incomplete'
+        assert provider.usage[0]['usage']['output_tokens'] == 16000
+
+
 @pytest.mark.parametrize('field,value', [('end_date', '2027-01-01'), ('status_as_of', '2026-10-01')])
 def test_lifecycle_boundaries_require_field_level_evidence(demo, field, value):
     source = next(iter(demo.sources().values()))

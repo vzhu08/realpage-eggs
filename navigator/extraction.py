@@ -49,11 +49,12 @@ class ProviderFailure(RuntimeError): pass
 
 class OpenAIProvider:
     mode = "live"
+    max_output_tokens = 32000
 
     def __init__(self, client=None):
         self.key = os.getenv("OPENAI_API_KEY")
         self.model = os.getenv("OPENAI_MODEL")
-        self.client = client or httpx.Client(timeout=httpx.Timeout(120, read=300))
+        self.client = client or httpx.Client(timeout=httpx.Timeout(120, read=600))
         self.usage = []
         if not self.key or not self.model:
             raise ProviderUnavailable("Set OPENAI_API_KEY and OPENAI_MODEL locally in .env; no live extraction was performed")
@@ -65,7 +66,7 @@ class OpenAIProvider:
         input_text = "Return JSON matching the supplied schema.\n" + json.dumps(payload, ensure_ascii=False)
         for attempt in range(3):
             try:
-                response = self.client.post("https://api.openai.com/v1/responses", headers={"Authorization": f"Bearer {self.key}"}, json={"model": self.model, "store": False, "instructions": SYSTEM + instruction, "input": input_text, "text": {"format": {"type": "json_object"}}, "max_output_tokens": 16000})
+                response = self.client.post("https://api.openai.com/v1/responses", headers={"Authorization": f"Bearer {self.key}"}, json={"model": self.model, "store": False, "instructions": SYSTEM + instruction, "input": input_text, "text": {"format": {"type": "json_object"}}, "max_output_tokens": self.max_output_tokens})
                 if response.status_code in {429, 500, 502, 503, 504} and attempt < 2:
                     time.sleep(2 ** attempt)
                     continue
@@ -218,6 +219,7 @@ def extract(store, doc_ids=None, provider=None, limit=None):
     run.config["draft_replays"] = []
     if isinstance(provider, OpenAIProvider):
         run.config["read_timeout_seconds"] = provider.client.timeout.read
+        run.config["max_output_tokens"] = provider.max_output_tokens
     store.save_run(run)
     rules = store.rules()
     index = store.read("extraction_index.json", {})
