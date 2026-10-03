@@ -79,3 +79,100 @@ def test_lifecycle_boundaries_require_field_level_evidence(demo, field, value):
     setattr(bundle.rules[0], field, value)
     validated = validate_bundle(bundle, demo.sources())
     assert f'Missing field-level evidence for {field}' in validated.rules[0].review_issues
+
+
+def test_merge_preserves_distinct_supported_lifecycle_history(rule):
+    from datetime import date
+    from navigator.engine import temporal
+    from navigator.extraction import merge_rules
+    from navigator.models import StatusEvent
+
+    later = rule.model_copy(deep=True)
+    later.status_events.append(StatusEvent(status='repealed', on='2026-12-01', evidence=rule.evidence))
+    merged = merge_rules({rule.team_rule_id: rule}, [later])
+    assert len(merged) == 2
+    assert all(r.conflict_flag for r in merged.values())
+    assert {temporal(r, date(2026, 12, 1)) for r in merged.values()} == {'in_force', 'inapplicable'}
+
+
+def test_merge_preserves_distinct_lifecycle_snapshot(rule):
+    from navigator.extraction import merge_rules
+    rule.status_events = []
+    rule.status_as_of = '2026-10-01'
+    incoming = rule.model_copy(deep=True)
+    incoming.status_as_of = '2026-09-01'
+    merged = merge_rules({rule.team_rule_id: rule}, [incoming])
+    assert len(merged) == 2
+    assert {r.status_as_of for r in merged.values()} == {'2026-09-01', '2026-10-01'}
+
+
+@pytest.mark.parametrize('corrupt', [{}, [], {'origin_run_id': 'fixture-origin'}, {'bundle': {}, 'origin_run_id': None}])
+def test_invalid_cache_metadata_finishes_failure_without_new_provider_calls(demo, corrupt):
+    source = next(iter(demo.sources().values()))
+    cache_path = next((demo.root / 'extraction_cache').glob('*.json'))
+    before = demo.read('rules.json')
+    demo.write(str(cache_path.relative_to(demo.root)), corrupt)
+    class NoCalls(SyntheticProvider):
+        def generate(self, *_):
+            pytest.fail('Invalid cached metadata must fail explicitly without a new provider call')
+    run = extract(demo, provider=NoCalls(source))
+    assert run.outcome == 'failed' and run.finished_at
+    assert any('cache metadata' in error for error in run.errors)
+    assert demo.read('rules.json') == before
+    assert demo.read(str(cache_path.relative_to(demo.root))) == corrupt
+    assert demo.read('latest_extract.json')['outcome'] == 'failed'
+
+
+def test_valid_empty_result_is_preserved_and_replays_without_provider_calls(demo):
+    class Empty:
+        model, mode = 'synthetic-empty-result', 'synthetic'
+        usage = []
+        calls = 0
+        def generate(self, *_):
+            self.calls += 1
+            return {'source_kind': 'legal_text', 'rules': [], 'negative_findings': [], 'issues': []}
+    provider = Empty()
+    first = extract(demo, provider=provider)
+    assert first.outcome == 'success' and demo.rules() == {} and provider.calls == 2
+    second = extract(demo, provider=provider)
+    assert second.outcome == 'success' and second.counts['cache_hits'] == 1
+    assert provider.calls == 2 and demo.rules() == {}
+
+
+def test_equivalent_event_order_does_not_create_conflicting_rule(rule):
+    from navigator.extraction import merge_rules
+    from navigator.models import StatusEvent
+    rule.status_events.append(StatusEvent(status='pending', on='2026-08-01', evidence=rule.evidence))
+    incoming = rule.model_copy(deep=True)
+    incoming.status_events.reverse()
+    merged = merge_rules({rule.team_rule_id: rule}, [incoming])
+    assert len(merged) == 1 and not rule.conflict_flag
+
+
+def test_equivalent_history_retains_additional_event_evidence(rule):
+    from navigator.extraction import merge_rules
+    incoming = rule.model_copy(deep=True)
+    incoming.status_events[0].evidence[0].doc_id = 'OTHER-SYNTHETIC-SNAPSHOT'
+    merged = merge_rules({rule.team_rule_id: rule}, [incoming])
+    assert len(merged) == 1
+    assert {e.doc_id for e in rule.status_events[0].evidence} == {'SYNTHETIC-42', 'OTHER-SYNTHETIC-SNAPSHOT'}
+
+
+def test_repeated_alternative_history_preserves_all_supporting_evidence(rule):
+    from navigator.extraction import merge_rules
+    from navigator.models import StatusEvent
+    alternatives = []
+    for doc_id in ('SYNTHETIC-B', 'SYNTHETIC-C'):
+        alternative = rule.model_copy(deep=True)
+        for span in alternative.evidence:
+            span.doc_id = doc_id
+        alternative.status_events.append(StatusEvent(status='repealed', on='2026-12-01', evidence=alternative.evidence))
+        alternative.review_issues = [f'Review {doc_id}']
+        alternatives.append(alternative)
+    merged = merge_rules({rule.team_rule_id: rule}, alternatives)
+    assert len(merged) == 2 and all(r.conflict_flag for r in merged.values())
+    variant = next(r for r in merged.values() if r.team_rule_id != rule.team_rule_id)
+    assert {e.doc_id for e in variant.evidence} == {'SYNTHETIC-B', 'SYNTHETIC-C'}
+    repeal = next(e for e in variant.status_events if e.status == 'repealed')
+    assert {e.doc_id for e in repeal.evidence} == {'SYNTHETIC-B', 'SYNTHETIC-C'}
+    assert set(variant.review_issues) == {'Review SYNTHETIC-B', 'Review SYNTHETIC-C'}

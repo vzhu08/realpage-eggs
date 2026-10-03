@@ -147,7 +147,12 @@ def stable_id(draft):
 
 
 def substantive(rule):
-    return rule.model_dump(include={"jurisdiction", "category", "citation", "requirement", "key_value", "coverage_conditions", "exemption_conditions", "lifecycle", "effective_date", "end_date", "interactions"})
+    value = rule.model_dump(include={"jurisdiction", "category", "citation", "requirement", "key_value", "coverage_conditions", "exemption_conditions", "lifecycle", "effective_date", "end_date", "status_as_of", "interactions"})
+    # History can change historical/current force even when the static lifecycle
+    # is identical. Preserve alternative histories through the existing conflict
+    # path; neither chunk order nor retrieval recency establishes precedence.
+    value["status_events"] = sorted({(e.on, e.status) for e in rule.status_events})
+    return value
 
 
 def merge_rules(existing, incoming):
@@ -157,10 +162,16 @@ def merge_rules(existing, incoming):
             previous.conflict_flag = rule.conflict_flag = True
             previous.conflict_note = rule.conflict_note = "Different supported interpretations of the same provision/version; no automatic precedence"
             rule.team_rule_id += "-" + digest(substantive(rule))[:8]
-        elif previous:
+            previous = existing.get(rule.team_rule_id)
+        if previous:
             spans = {digest(e.model_dump()): e for e in previous.evidence + rule.evidence}
             previous.evidence = list(spans.values())
             previous.review_issues = sorted(set(previous.review_issues + rule.review_issues))
+            for event in previous.status_events:
+                incoming_spans = [span for incoming_event in rule.status_events
+                                  if (incoming_event.on, incoming_event.status) == (event.on, event.status)
+                                  for span in incoming_event.evidence]
+                event.evidence = list({digest(e.model_dump()): e for e in event.evidence + incoming_spans}.values())
             continue
         existing[rule.team_rule_id] = rule
     return existing
@@ -193,8 +204,13 @@ def extract(store, doc_ids=None, provider=None, limit=None):
             try:
                 for offset, text in chunks(source.text):
                     cache_key = digest([source.doc_id, source.sha256, source.url, source.retrieved_at, source.authority, provider.model, provider.mode, PROMPT_VERSION, VERSION, schema, offset, text])
-                    cached = store.read(f"extraction_cache/{cache_key}.json")
-                    if cached:
+                    cache_name = f"extraction_cache/{cache_key}.json"
+                    cached = store.read(cache_name)
+                    if store.path(cache_name).exists():
+                        if (not isinstance(cached, dict) or "bundle" not in cached
+                                or not isinstance(cached.get("origin_run_id"), str) or not cached["origin_run_id"]
+                                or cached.get("mode") != provider.mode or cached.get("model") != provider.model):
+                            raise ValueError(f"Invalid extraction cache metadata for {cache_key}; entry preserved, no new provider call")
                         bundle = validate_bundle(ExtractionBundle.model_validate(cached["bundle"]), sources, source.doc_id)
                         cache_hits += 1
                     else:

@@ -38,3 +38,15 @@ Actual run IDs, timing, validation/export/lookup outcomes and next action: docs/
 Corpus run and real source review remain blocked only on provider configuration and subsequent quality review.
 
 Final combined candidate: `0c32ec447e1e9f3d352702a252493843c7871682`; 82 focused and 96 full-suite tests passed; compileall, contracts generation (disposable copy), and diff check passed. See docs/core/CORE_HANDOFF.md.
+
+## CORE-01 continuation — 2026-10-03
+
+Daniel reassigns this same session/checkout to live extraction and review, starting from
+`c92ad8fbd27a2175a41cb74428cdc03fb76ab14a`. Branch now tracks origin/codex/core-backend;
+existing untracked docs/.DS_Store is preserved. This agent does not push.
+Allowed writes remain extraction.py, test_extraction.py, this card, docs/core notes and the existing
+ignored data/core-session store. No shared paths or completed planner/renderer changes are claimed.
+Current prerequisite check: neither key nor model configured; no local .env. Existing pack and source
+snapshots are valid; no re-ingestion/reset needed. Fresh D001 attempt is ProviderUnavailable.
+Offline work reproduces and repairs lifecycle-history loss during duplicate-rule merge and malformed
+cache metadata escaping failure handling; valid empty results and valid cache reuse remain supported.
