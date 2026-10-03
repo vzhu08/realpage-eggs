@@ -1,0 +1,108 @@
+{
+  "evidence_kind": "automated cross-source comparison of supplied original texts; not provider review or human/independent legal review",
+  "sources": {
+    "D005": "agency guidance",
+    "D026": "captured Civil Code 1950.6",
+    "D007": "agency guidance",
+    "D025": "captured Civil Code 1950.5"
+  },
+  "findings": [
+    {
+      "topic": "Reusable report",
+      "spans": {
+        "D026": [
+          [
+            1794,
+            1921
+          ],
+          [
+            5911,
+            6029
+          ]
+        ]
+      },
+      "finding": "D026 permits applicant-provided credit reports and references reusable reports under 1950.1; it does not establish D005 mandatory use. 1950.1 has no dedicated captured manifest source. Keep interpretation unresolved; ordinary consumer report and qualifying reusable report may differ."
+    },
+    {
+      "topic": "Unit availability",
+      "spans": {
+        "D026": [
+          [
+            2654,
+            2885
+          ]
+        ]
+      },
+      "finding": "D026 includes knows-or-should-know and availability now or within a reasonable period; D005 shorthand omits material qualifications."
+    },
+    {
+      "topic": "2026 cap",
+      "spans": {
+        "D026": [
+          [
+            1922,
+            2653
+          ]
+        ]
+      },
+      "finding": "Primary statute caps actual out-of-pocket costs plus reasonable time and CPI-adjusts $30 base from January1,1998. It does not compute the $68.96 amount; preserve D005 as reported annual amount."
+    },
+    {
+      "topic": "Fee refund paths",
+      "spans": {
+        "D026": [
+          [
+            3169,
+            3457
+          ],
+          [
+            3684,
+            4536
+          ],
+          [
+            4537,
+            4845
+          ]
+        ]
+      },
+      "finding": "Completed-application order, written criteria, concurrent-submission safeguards, applicant-selected transfer option, considered-denial qualification and routeB earlier-of-seven-days-after-selection/or30days-after-submission are supplied by captured D026, omitted from D005 summary."
+    },
+    {
+      "topic": "Credit report deadline",
+      "spans": {
+        "D026": [
+          [
+            5605,
+            5910
+          ]
+        ]
+      },
+      "finding": "Seven days after landlord receipt confirmed."
+    },
+    {
+      "topic": "Deposit owner exception",
+      "spans": {
+        "D025": [
+          [
+            4867,
+            5013
+          ],
+          [
+            5014,
+            5097
+          ],
+          [
+            5551,
+            5898
+          ]
+        ]
+      },
+      "finding": "D025 specifies at most2 residential rental properties and at most4 dwelling units offered for rent, excludes prospective service members from exception and defines qualifying natural persons/family trusts. Generic owner_total_units and family_trust labels do not establish these narrower conditions."
+    }
+  ],
+  "limitations": [
+    "D025/D026 were available in the original pack during this review but had not yet reached the serial extraction workflow. These are per-guidance omissions, not globally missing primary documents.",
+    "No automatic source precedence, legal resolution, cache alteration or target rule count was imposed.",
+    "Source/interpretation review and fact-registry integration remain required; no municipality or property facts were invented."
+  ]
+}

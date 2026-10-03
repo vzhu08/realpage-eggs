@@ -1,0 +1,132 @@
+{
+  "evidence_kind": "real provider extraction; automated original-source review, not human or independent legal review",
+  "run": {
+    "run_id": "6a01da26bbd44b0ca364b8f4988dcacd",
+    "operation": "extract",
+    "mode": "live",
+    "started_at": "2026-10-03T23:18:21.187362+00:00",
+    "finished_at": "2026-10-03T23:24:15.653165+00:00",
+    "elapsed_seconds": 354.466,
+    "outcome": "success",
+    "input_hashes": {
+      "D003": "a008c846fc4edd842994d8c5ea0367546e55319670e9687c5d1c7ccfdfa1ce40"
+    },
+    "config": {
+      "prompt_version": "extract-v3-core-json-input",
+      "chunk_chars": 18000,
+      "overlap_chars": 1500,
+      "concurrency": 1,
+      "transport_attempts": 3,
+      "repair_attempts": 1,
+      "model": "gpt-6.1-sol",
+      "draft_replays": [],
+      "read_timeout_seconds": 600,
+      "max_output_tokens": 32000
+    },
+    "versions": {
+      "pipeline": "0.1.0",
+      "evaluator": "0.1.0"
+    },
+    "counts": {
+      "processed": 1,
+      "rules": 24,
+      "cache_hits": 0,
+      "draft_replays": 0
+    },
+    "errors": [],
+    "artifacts": [
+      "rules.json",
+      "extraction_index.json",
+      "provider_outputs/6a01da26bbd44b0ca364b8f4988dcacd/usage.json"
+    ]
+  },
+  "usage": [
+    {
+      "response_id": "resp_00c11c6f3821b281016ac18d3d8f8c87d1a4b9806d36dffe3e",
+      "usage": {
+        "input_tokens": 3703,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 3700
+        },
+        "output_tokens": 15144,
+        "output_tokens_details": {
+          "reasoning_tokens": 700
+        },
+        "total_tokens": 18847
+      },
+      "model": "gpt-6.1-sol",
+      "status": "completed"
+    },
+    {
+      "response_id": "resp_0f03ccb15a114aff016ac18de77a9087d1bb29d0f57572a949",
+      "usage": {
+        "input_tokens": 16844,
+        "input_tokens_details": {
+          "cache_write_tokens": 16841,
+          "cached_tokens": 0
+        },
+        "output_tokens": 16754,
+        "output_tokens_details": {
+          "reasoning_tokens": 364
+        },
+        "total_tokens": 33598
+      },
+      "model": "gpt-6.1-sol",
+      "status": "completed"
+    }
+  ],
+  "usage_totals": {
+    "input_tokens": 20547,
+    "output_tokens": 31898,
+    "total_tokens": 52445
+  },
+  "audit": {
+    "index": {
+      "status": "review",
+      "sha256": "a008c846fc4edd842994d8c5ea0367546e55319670e9687c5d1c7ccfdfa1ce40",
+      "run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+      "mode": "live",
+      "rules": 14,
+      "issues": [
+        "All six categories were reviewed. The source supplies no application-screening-fee or algorithmic-rent-setting provision and no express negative finding for either category; silence is not evidence that no rule exists.",
+        "City Council passage on April 14, 2020 supports the dated enactment event. No separately dated lifecycle snapshot is supplied; status_as_of is null. The retrieval timestamp is not a legal status date.",
+        "Complaint filing and answering are described as available procedures, not mandatory housing-provider obligations.",
+        "No effective date, exclusive end date, amendment, repeal, directional supersession, or conflict event is supported by this source.",
+        "Ordinance-wide penalties are captured in the criminal_history_inquiries rule for storage; that placement does not limit them to inquiries. The overview does not explain how actual damages and three times one month's rent are selected or combined, so no further damages formula is inferred.",
+        "Potential exemption branches retain unsupported conditions for omitted specific requirements and obligation-specific scope. Public-housing/Section 8 status is not equated with every form of subsidized housing.",
+        "The general prohibition on using criminal history or criminal background checks was added because it is stated in the opening summary and is not exhausted by the separately listed inquiries and adverse decisions.",
+        "The lifetime-sex-offender exemption's precise definition, whose status controls, and permissible actions are not supplied.",
+        "The owner-return reference to BMC 13.76.130 A.9 is an exemption cross-reference, not evidence of supersession or conflict.",
+        "The source is official agency guidance summarizing BMC 13.106, not the municipal code text. Linked ordinance, notice, FAQs, forms, and administrative regulation texts were not supplied."
+      ]
+    },
+    "rules": 14,
+    "lifecycle": {
+      "enacted": 14
+    },
+    "semantic_verification": {
+      "needs_review": 14
+    },
+    "evidence_instances": 70,
+    "distinct_spans": 15,
+    "invalid_evidence": [],
+    "non_verbatim_primary_quotes": [],
+    "construction_or_occupancy_predicates": [],
+    "unsupported_predicates": 58
+  },
+  "source_integrity": {
+    "original_matches_stored": true,
+    "actual_sha256_matches_stored": true
+  },
+  "review_findings": [
+    "14 final rules; semantic review added broader criminal-history background-check use from original [294,560), beyond 13 draft rules.",
+    "70 evidence instances / 15 distinct spans exact; 14 principal quotations verbatim.",
+    "Owner exemption requires owner occupancy, owner-of-record primary residence and 1\u20133 units inclusive together; missing ordinance-specific requirements remain unsupported.",
+    "Section 8 and lifetime-offender status do not automatically establish exemptions.",
+    "Enacted event 2020-04-14 supported by council passage; effective/end/status_as_of null. Review removed unsupported snapshot date.",
+    "Notice, opportunity to respond and prominent notice distribution retained. Ordinance-wide remedies recorded with explicit scope limitation.",
+    "No construction-year/occupancy proxy, general rent/deposit cap or unsupported directional interaction.",
+    "All 14 need review: underlying ordinance, exemption scope, notice process and effective date remain dependencies."
+  ]
+}

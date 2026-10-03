@@ -1,0 +1,480 @@
+{
+  "evidence_kind": "synthetic in-memory canonical-fact probe against a real extracted D007 rule; not a real property conclusion",
+  "before": {
+    "team_rule_id": "r-710522e0c2ff928cefe1",
+    "result": "inapplicable",
+    "jurisdiction": "true",
+    "coverage": {
+      "value": "false",
+      "matched": [
+        "owner_type eq limited_liability_company: false",
+        "owner_type in ['natural_person', 'family_trust']: false"
+      ],
+      "unresolved": [],
+      "missing_facts": [],
+      "supporting_facts": {
+        "owner_type": {
+          "value": "individual",
+          "bound": null,
+          "provenance": "Hypothetical canonical-contract probe, not a real property fact"
+        }
+      }
+    },
+    "temporal_status": "in_force",
+    "missing_facts": [],
+    "uncertainty_reasons": [],
+    "applied_interactions": [],
+    "explanation": "As of 2026-10-01, Two-month deposit limit for specified small owners does not cover this property on this date. Facts used: owner type: individual. Source: Assembly Bill 12 (section not supplied) (D007).",
+    "conflict_flag": false,
+    "evidence": [
+      {
+        "doc_id": "D007",
+        "quote": "Starting July 1, 2024, landlords who own only two rental properties with no more than four residential units total can charge up to two months' rent for furnished and unfurnished units if ownership is held by a natural person, family trust, or limited liability company (LLC) where all members are natural persons",
+        "start": 513,
+        "end": 826,
+        "supports": [
+          "category",
+          "provision_key",
+          "title",
+          "requirement",
+          "key_value",
+          "coverage_conditions",
+          "effective_date"
+        ]
+      },
+      {
+        "doc_id": "D007",
+        "quote": "A California law,\nAssembly Bill 12\n, changed the amount landlords can charge as a security deposit to the amounts described above starting July 1, 2024.",
+        "start": 954,
+        "end": 1106,
+        "supports": [
+          "jurisdiction",
+          "level",
+          "citation",
+          "lifecycle"
+        ]
+      }
+    ]
+  },
+  "original_rule": {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "security_deposits",
+    "provision_key": "small_owner_deposit_cap",
+    "title": "Two-month deposit limit for specified small owners",
+    "requirement": "Starting July 1, 2024, landlords meeting the stated property-count, residential-unit-count, and ownership-form conditions may charge up to two months' rent for furnished and unfurnished units.",
+    "key_value": "Two months' rent",
+    "citation": "Assembly Bill 12 (section not supplied)",
+    "quoted_span": "Starting July 1, 2024, landlords who own only two rental properties with no more than four residential units total can charge up to two months' rent for furnished and unfurnished units if ownership is held by a natural person, family trust, or limited liability company (LLC) where all members are natural persons",
+    "source_doc_id": "D007",
+    "source_url": "https://rentboard.berkeleyca.gov/rights-responsibilities/security-deposits",
+    "coverage_conditions": {
+      "op": "all",
+      "args": [
+        {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "The phrase 'own only two rental properties' does not resolve whether the property-count condition means exactly two or no more than two."
+        },
+        {
+          "op": "lte",
+          "args": [],
+          "fact": "owner_total_units",
+          "value": 4,
+          "reason": null
+        },
+        {
+          "op": "any",
+          "args": [
+            {
+              "op": "in",
+              "args": [],
+              "fact": "owner_type",
+              "value": [
+                "natural_person",
+                "family_trust"
+              ],
+              "reason": null
+            },
+            {
+              "op": "all",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [],
+                  "fact": "owner_type",
+                  "value": "limited_liability_company",
+                  "reason": null
+                },
+                {
+                  "op": "eq",
+                  "args": [],
+                  "fact": "all_llc_members_natural_persons",
+                  "value": true,
+                  "reason": null
+                }
+              ],
+              "fact": null,
+              "value": null,
+              "reason": null
+            }
+          ],
+          "fact": null,
+          "value": null,
+          "reason": null
+        }
+      ],
+      "fact": null,
+      "value": null,
+      "reason": null
+    },
+    "exemption_conditions": {
+      "op": "unsupported",
+      "args": [],
+      "fact": null,
+      "value": null,
+      "reason": "The source does not specify further exceptions to this limit."
+    },
+    "exemptions": null,
+    "lifecycle": "enacted",
+    "effective_date": "2024-07-01",
+    "end_date": null,
+    "status_as_of": null,
+    "status_events": [],
+    "evidence": [
+      {
+        "doc_id": "D007",
+        "quote": "Starting July 1, 2024, landlords who own only two rental properties with no more than four residential units total can charge up to two months' rent for furnished and unfurnished units if ownership is held by a natural person, family trust, or limited liability company (LLC) where all members are natural persons",
+        "start": 513,
+        "end": 826,
+        "supports": [
+          "category",
+          "provision_key",
+          "title",
+          "requirement",
+          "key_value",
+          "coverage_conditions",
+          "effective_date"
+        ]
+      },
+      {
+        "doc_id": "D007",
+        "quote": "A California law,\nAssembly Bill 12\n, changed the amount landlords can charge as a security deposit to the amounts described above starting July 1, 2024.",
+        "start": 954,
+        "end": 1106,
+        "supports": [
+          "jurisdiction",
+          "level",
+          "citation",
+          "lifecycle"
+        ]
+      }
+    ],
+    "interactions": [],
+    "penalties": null,
+    "review_issues": [
+      "AB 12 and the Berkeley Rent Ordinance are named legal instruments. Where no specific instrument or section is identified, citation fields explicitly describe the cited law and the missing section; no codified citation has been supplied from outside the source.",
+      "All six categories were reviewed. No substantive provision or express negative finding is supplied for rent increase limits, just-cause eviction, application or screening fees, screening restrictions, or algorithmic rent setting. Absence here is not evidence that no such rule exists.",
+      "Executable predicates capture source-supported factual triggers and stated branches. They do not establish complete statutory coverage, resolve unstated exemptions, or automatically determine qualitative standards such as reasonable necessity.",
+      "Further statutory exclusions are not supplied.",
+      "Missing field-level evidence for exemption_conditions",
+      "No directional interaction is compiled: the source describes the AB 12 change but does not identify an exact target legal citation for supersession, and it does not establish state-local conflicts or precedence.",
+      "Null effective dates, end dates, and penalties indicate information not supplied, not findings that dates or penalties do not exist.",
+      "State jurisdictions are normalized to CA to satisfy the required ST or City, ST format; Berkeley, CA is retained for municipal provisions.",
+      "The Rent Board's inability to determine whether a landlord may charge one or two months' rent is an agency limitation, not an exemption or finding that either cap is inapplicable.",
+      "The page describes California state requirements and Berkeley-specific interest requirements. State provisions are attributed to CA rather than treated as municipal enactments.",
+      "The property-count wording requires verification against the underlying law.",
+      "The retrieval timestamp is not a supported lifecycle snapshot or enactment-event date. status_as_of remains null and status_events remain empty.",
+      "This is official agency guidance, not underlying legal text or a legislative status record. Enacted lifecycle labels reflect the agency's description of existing law, not independently verified enactment events.",
+      "owner_total_units represents the owner's total residential units for this provision."
+    ],
+    "conflict_flag": false,
+    "conflict_note": null,
+    "team_rule_id": "r-710522e0c2ff928cefe1",
+    "evidence_mode": "live",
+    "extraction_run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+    "semantic_verification": "needs_review"
+  },
+  "probe_facts": {
+    "residential": true,
+    "owner_type": "individual",
+    "owner_total_units": 2
+  },
+  "date": "2026-10-01",
+  "after": {
+    "team_rule_id": "r-710522e0c2ff928cefe1",
+    "result": "unknown",
+    "jurisdiction": "true",
+    "coverage": {
+      "value": "unknown",
+      "matched": [
+        "owner_total_units lte 4: true"
+      ],
+      "unresolved": [
+        "missing_property_fact: all_llc_members_natural_persons",
+        "unsupported_condition: Fact contract mismatch at coverage_conditions/args/2/args/0: {\"fact\": \"owner_type\", \"op\": \"in\", \"value\": [\"natural_person\", \"family_trust\"]}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.",
+        "unsupported_condition: Fact contract mismatch at coverage_conditions/args/2/args/1/args/0: {\"fact\": \"owner_type\", \"op\": \"eq\", \"value\": \"limited_liability_company\"}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.",
+        "unsupported_condition: The phrase 'own only two rental properties' does not resolve whether the property-count condition means exactly two or no more than two.",
+        "unsupported_condition: The source does not specify further exceptions to this limit."
+      ],
+      "missing_facts": [
+        "all_llc_members_natural_persons"
+      ],
+      "supporting_facts": {
+        "owner_total_units": {
+          "value": 2,
+          "bound": null,
+          "provenance": "Hypothetical canonical-contract probe, not a real property fact"
+        }
+      }
+    },
+    "temporal_status": "in_force",
+    "missing_facts": [
+      "all_llc_members_natural_persons"
+    ],
+    "uncertainty_reasons": [
+      "missing_property_fact: all_llc_members_natural_persons",
+      "unsupported_condition: Fact contract mismatch at coverage_conditions/args/2/args/0: {\"fact\": \"owner_type\", \"op\": \"in\", \"value\": [\"natural_person\", \"family_trust\"]}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.",
+      "unsupported_condition: Fact contract mismatch at coverage_conditions/args/2/args/1/args/0: {\"fact\": \"owner_type\", \"op\": \"eq\", \"value\": \"limited_liability_company\"}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.",
+      "unsupported_condition: The phrase 'own only two rental properties' does not resolve whether the property-count condition means exactly two or no more than two.",
+      "unsupported_condition: The source does not specify further exceptions to this limit.",
+      "unresolved_extraction: AB 12 and the Berkeley Rent Ordinance are named legal instruments. Where no specific instrument or section is identified, citation fields explicitly describe the cited law and the missing section; no codified citation has been supplied from outside the source.",
+      "unresolved_extraction: All six categories were reviewed. No substantive provision or express negative finding is supplied for rent increase limits, just-cause eviction, application or screening fees, screening restrictions, or algorithmic rent setting. Absence here is not evidence that no such rule exists.",
+      "unresolved_extraction: Executable predicates capture source-supported factual triggers and stated branches. They do not establish complete statutory coverage, resolve unstated exemptions, or automatically determine qualitative standards such as reasonable necessity.",
+      "unresolved_extraction: Fact contract mismatch at coverage_conditions/args/2/args/0: {\"fact\": \"owner_type\", \"op\": \"in\", \"value\": [\"natural_person\", \"family_trust\"]}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.",
+      "unresolved_extraction: Fact contract mismatch at coverage_conditions/args/2/args/1/args/0: {\"fact\": \"owner_type\", \"op\": \"eq\", \"value\": \"limited_liability_company\"}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.",
+      "unresolved_extraction: Further statutory exclusions are not supplied.",
+      "unresolved_extraction: Missing field-level evidence for exemption_conditions",
+      "unresolved_extraction: No directional interaction is compiled: the source describes the AB 12 change but does not identify an exact target legal citation for supersession, and it does not establish state-local conflicts or precedence.",
+      "unresolved_extraction: Null effective dates, end dates, and penalties indicate information not supplied, not findings that dates or penalties do not exist.",
+      "unresolved_extraction: State jurisdictions are normalized to CA to satisfy the required ST or City, ST format; Berkeley, CA is retained for municipal provisions.",
+      "unresolved_extraction: The Rent Board's inability to determine whether a landlord may charge one or two months' rent is an agency limitation, not an exemption or finding that either cap is inapplicable.",
+      "unresolved_extraction: The page describes California state requirements and Berkeley-specific interest requirements. State provisions are attributed to CA rather than treated as municipal enactments.",
+      "unresolved_extraction: The property-count wording requires verification against the underlying law.",
+      "unresolved_extraction: The retrieval timestamp is not a supported lifecycle snapshot or enactment-event date. status_as_of remains null and status_events remain empty.",
+      "unresolved_extraction: This is official agency guidance, not underlying legal text or a legislative status record. Enacted lifecycle labels reflect the agency's description of existing law, not independently verified enactment events.",
+      "unresolved_extraction: owner_total_units represents the owner's total residential units for this provision.",
+      "unresolved_extraction: semantic support needs review"
+    ],
+    "applied_interactions": [],
+    "explanation": "As of 2026-10-01, Two-month deposit limit for specified small owners needs more information before coverage can be established. Facts used: owner total units: 2. Review: missing_property_fact: all_llc_members_natural_persons; unsupported_condition: Fact contract mismatch at coverage_conditions/args/2/args/0: {\"fact\": \"owner_type\", \"op\": \"in\", \"value\": [\"natural_person\", \"family_trust\"]}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.; unsupported_condition: Fact contract mismatch at coverage_conditions/args/2/args/1/args/0: {\"fact\": \"owner_type\", \"op\": \"eq\", \"value\": \"limited_liability_company\"}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.; unsupported_condition: The phrase 'own only two rental properties' does not resolve whether the property-count condition means exactly two or no more than two.; unsupported_condition: The source does not specify further exceptions to this limit.; unresolved_extraction: AB 12 and the Berkeley Rent Ordinance are named legal instruments. Where no specific instrument or section is identified, citation fields explicitly describe the cited law and the missing section; no codified citation has been supplied from outside the source.; unresolved_extraction: All six categories were reviewed. No substantive provision or express negative finding is supplied for rent increase limits, just-cause eviction, application or screening fees, screening restrictions, or algorithmic rent setting. Absence here is not evidence that no such rule exists.; unresolved_extraction: Executable predicates capture source-supported factual triggers and stated branches. They do not establish complete statutory coverage, resolve unstated exemptions, or automatically determine qualitative standards such as reasonable necessity.; unresolved_extraction: Fact contract mismatch at coverage_conditions/args/2/args/0: {\"fact\": \"owner_type\", \"op\": \"in\", \"value\": [\"natural_person\", \"family_trust\"]}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.; unresolved_extraction: Fact contract mismatch at coverage_conditions/args/2/args/1/args/0: {\"fact\": \"owner_type\", \"op\": \"eq\", \"value\": \"limited_liability_company\"}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.; unresolved_extraction: Further statutory exclusions are not supplied.; unresolved_extraction: Missing field-level evidence for exemption_conditions; unresolved_extraction: No directional interaction is compiled: the source describes the AB 12 change but does not identify an exact target legal citation for supersession, and it does not establish state-local conflicts or precedence.; unresolved_extraction: Null effective dates, end dates, and penalties indicate information not supplied, not findings that dates or penalties do not exist.; unresolved_extraction: State jurisdictions are normalized to CA to satisfy the required ST or City, ST format; Berkeley, CA is retained for municipal provisions.; unresolved_extraction: The Rent Board's inability to determine whether a landlord may charge one or two months' rent is an agency limitation, not an exemption or finding that either cap is inapplicable.; unresolved_extraction: The page describes California state requirements and Berkeley-specific interest requirements. State provisions are attributed to CA rather than treated as municipal enactments.; unresolved_extraction: The property-count wording requires verification against the underlying law.; unresolved_extraction: The retrieval timestamp is not a supported lifecycle snapshot or enactment-event date. status_as_of remains null and status_events remain empty.; unresolved_extraction: This is official agency guidance, not underlying legal text or a legislative status record. Enacted lifecycle labels reflect the agency's description of existing law, not independently verified enactment events.; unresolved_extraction: owner_total_units represents the owner's total residential units for this provision.; unresolved_extraction: semantic support needs review. Source: Assembly Bill 12 (section not supplied) (D007).",
+    "conflict_flag": false,
+    "evidence": [
+      {
+        "doc_id": "D007",
+        "quote": "Starting July 1, 2024, landlords who own only two rental properties with no more than four residential units total can charge up to two months' rent for furnished and unfurnished units if ownership is held by a natural person, family trust, or limited liability company (LLC) where all members are natural persons",
+        "start": 513,
+        "end": 826,
+        "supports": [
+          "category",
+          "provision_key",
+          "title",
+          "requirement",
+          "key_value",
+          "coverage_conditions",
+          "effective_date"
+        ]
+      },
+      {
+        "doc_id": "D007",
+        "quote": "A California law,\nAssembly Bill 12\n, changed the amount landlords can charge as a security deposit to the amounts described above starting July 1, 2024.",
+        "start": 954,
+        "end": 1106,
+        "supports": [
+          "jurisdiction",
+          "level",
+          "citation",
+          "lifecycle"
+        ]
+      }
+    ]
+  },
+  "guarded_rule": {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "security_deposits",
+    "provision_key": "small_owner_deposit_cap",
+    "title": "Two-month deposit limit for specified small owners",
+    "requirement": "Starting July 1, 2024, landlords meeting the stated property-count, residential-unit-count, and ownership-form conditions may charge up to two months' rent for furnished and unfurnished units.",
+    "key_value": "Two months' rent",
+    "citation": "Assembly Bill 12 (section not supplied)",
+    "quoted_span": "Starting July 1, 2024, landlords who own only two rental properties with no more than four residential units total can charge up to two months' rent for furnished and unfurnished units if ownership is held by a natural person, family trust, or limited liability company (LLC) where all members are natural persons",
+    "source_doc_id": "D007",
+    "source_url": "https://rentboard.berkeleyca.gov/rights-responsibilities/security-deposits",
+    "coverage_conditions": {
+      "op": "all",
+      "args": [
+        {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "The phrase 'own only two rental properties' does not resolve whether the property-count condition means exactly two or no more than two."
+        },
+        {
+          "op": "lte",
+          "args": [],
+          "fact": "owner_total_units",
+          "value": 4,
+          "reason": null
+        },
+        {
+          "op": "any",
+          "args": [
+            {
+              "op": "unsupported",
+              "args": [],
+              "fact": null,
+              "value": null,
+              "reason": "Fact contract mismatch at coverage_conditions/args/2/args/0: {\"fact\": \"owner_type\", \"op\": \"in\", \"value\": [\"natural_person\", \"family_trust\"]}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred."
+            },
+            {
+              "op": "all",
+              "args": [
+                {
+                  "op": "unsupported",
+                  "args": [],
+                  "fact": null,
+                  "value": null,
+                  "reason": "Fact contract mismatch at coverage_conditions/args/2/args/1/args/0: {\"fact\": \"owner_type\", \"op\": \"eq\", \"value\": \"limited_liability_company\"}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred."
+                },
+                {
+                  "op": "eq",
+                  "args": [],
+                  "fact": "all_llc_members_natural_persons",
+                  "value": true,
+                  "reason": null
+                }
+              ],
+              "fact": null,
+              "value": null,
+              "reason": null
+            }
+          ],
+          "fact": null,
+          "value": null,
+          "reason": null
+        }
+      ],
+      "fact": null,
+      "value": null,
+      "reason": null
+    },
+    "exemption_conditions": {
+      "op": "unsupported",
+      "args": [],
+      "fact": null,
+      "value": null,
+      "reason": "The source does not specify further exceptions to this limit."
+    },
+    "exemptions": null,
+    "lifecycle": "enacted",
+    "effective_date": "2024-07-01",
+    "end_date": null,
+    "status_as_of": null,
+    "status_events": [],
+    "evidence": [
+      {
+        "doc_id": "D007",
+        "quote": "Starting July 1, 2024, landlords who own only two rental properties with no more than four residential units total can charge up to two months' rent for furnished and unfurnished units if ownership is held by a natural person, family trust, or limited liability company (LLC) where all members are natural persons",
+        "start": 513,
+        "end": 826,
+        "supports": [
+          "category",
+          "provision_key",
+          "title",
+          "requirement",
+          "key_value",
+          "coverage_conditions",
+          "effective_date"
+        ]
+      },
+      {
+        "doc_id": "D007",
+        "quote": "A California law,\nAssembly Bill 12\n, changed the amount landlords can charge as a security deposit to the amounts described above starting July 1, 2024.",
+        "start": 954,
+        "end": 1106,
+        "supports": [
+          "jurisdiction",
+          "level",
+          "citation",
+          "lifecycle"
+        ]
+      }
+    ],
+    "interactions": [],
+    "penalties": null,
+    "review_issues": [
+      "AB 12 and the Berkeley Rent Ordinance are named legal instruments. Where no specific instrument or section is identified, citation fields explicitly describe the cited law and the missing section; no codified citation has been supplied from outside the source.",
+      "All six categories were reviewed. No substantive provision or express negative finding is supplied for rent increase limits, just-cause eviction, application or screening fees, screening restrictions, or algorithmic rent setting. Absence here is not evidence that no such rule exists.",
+      "Executable predicates capture source-supported factual triggers and stated branches. They do not establish complete statutory coverage, resolve unstated exemptions, or automatically determine qualitative standards such as reasonable necessity.",
+      "Fact contract mismatch at coverage_conditions/args/2/args/0: {\"fact\": \"owner_type\", \"op\": \"in\", \"value\": [\"natural_person\", \"family_trust\"]}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.",
+      "Fact contract mismatch at coverage_conditions/args/2/args/1/args/0: {\"fact\": \"owner_type\", \"op\": \"eq\", \"value\": \"limited_liability_company\"}; registered owner_type values are ['individual', 'corporation', 'llc', 'partnership', 'trust', 'government', 'nonprofit']. Source interpretation is unresolved; no alias inferred.",
+      "Further statutory exclusions are not supplied.",
+      "Missing field-level evidence for exemption_conditions",
+      "No directional interaction is compiled: the source describes the AB 12 change but does not identify an exact target legal citation for supersession, and it does not establish state-local conflicts or precedence.",
+      "Null effective dates, end dates, and penalties indicate information not supplied, not findings that dates or penalties do not exist.",
+      "State jurisdictions are normalized to CA to satisfy the required ST or City, ST format; Berkeley, CA is retained for municipal provisions.",
+      "The Rent Board's inability to determine whether a landlord may charge one or two months' rent is an agency limitation, not an exemption or finding that either cap is inapplicable.",
+      "The page describes California state requirements and Berkeley-specific interest requirements. State provisions are attributed to CA rather than treated as municipal enactments.",
+      "The property-count wording requires verification against the underlying law.",
+      "The retrieval timestamp is not a supported lifecycle snapshot or enactment-event date. status_as_of remains null and status_events remain empty.",
+      "This is official agency guidance, not underlying legal text or a legislative status record. Enacted lifecycle labels reflect the agency's description of existing law, not independently verified enactment events.",
+      "owner_total_units represents the owner's total residential units for this provision."
+    ],
+    "conflict_flag": false,
+    "conflict_note": null,
+    "team_rule_id": "r-710522e0c2ff928cefe1",
+    "evidence_mode": "replay",
+    "extraction_run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+    "semantic_verification": "needs_review"
+  },
+  "replay_run": {
+    "run_id": "eb389c18dd4b4af28c6b3acdfc2fc2c9",
+    "operation": "extract",
+    "mode": "live",
+    "started_at": "2026-10-03T23:47:44.678295+00:00",
+    "finished_at": "2026-10-03T23:47:44.723967+00:00",
+    "elapsed_seconds": 0.046,
+    "outcome": "success",
+    "input_hashes": {
+      "D007": "2ba3028382b89ee70810a45e25dd9707297bd65512e2723f4f9bda514af57203"
+    },
+    "config": {
+      "prompt_version": "extract-v3-core-json-input",
+      "chunk_chars": 18000,
+      "overlap_chars": 1500,
+      "concurrency": 1,
+      "transport_attempts": 3,
+      "repair_attempts": 1,
+      "model": "gpt-6.1-sol",
+      "fact_contract_validation": "enum-literals-v1",
+      "draft_replays": [],
+      "read_timeout_seconds": 600,
+      "max_output_tokens": 32000
+    },
+    "versions": {
+      "pipeline": "0.1.0",
+      "evaluator": "0.1.0"
+    },
+    "counts": {
+      "processed": 1,
+      "rules": 84,
+      "cache_hits": 1,
+      "draft_replays": 0
+    },
+    "errors": [],
+    "artifacts": [
+      "rules.json",
+      "extraction_index.json",
+      "provider_outputs/eb389c18dd4b4af28c6b3acdfc2fc2c9/usage.json"
+    ]
+  },
+  "provider_usage": [],
+  "limitations": [
+    "Original provider/cache evidence retained. Incompatible literals become unsupported; no legal aliases or thresholds supplied.",
+    "Canonical fact definitions are consumed read-only; broader-count and family-trust qualifiers still need source review."
+  ]
+}

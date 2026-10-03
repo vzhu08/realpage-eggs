@@ -145,3 +145,148 @@ The response retains missing-source, incomplete-extraction and unresolved-local-
 `POST /api/v1/lookup/assist` still returns HTTP 404. No Platform routes were edited.
 Evidence: `core01_live_lookup.json`, with complete CLI response in ignored `core01-live/d001-lookup.json`.
 This is real-store CLI/local TestClient evidence, not a deployed HTTP endpoint or synthetic replay.
+
+## Successful D003 retry and current corpus resumption
+
+D003 run **`6a01da26bbd44b0ca364b8f4988dcacd`** completed at 23:24:15 UTC in **354.466 seconds**,
+using `gpt-6.1-sol`, 32,000 output allowance and 600-second read timeout. It added **14 rules**,
+zero errors; store total became 24. Two completed responses consumed **20,547 input + 31,898 output
+= 52,445 tokens**. The actual command added `--doc-id D003` to the extraction command above.
+Safe manifest, usage and audit: `core01_d003_live.json`.
+
+The final review added a broader criminal-history/background-check-use prohibition supported by
+`[294,560)` and removed a separate unsupported lifecycle snapshot. All **70 evidence instances /
+15 distinct spans** and all 14 main quotations match the original text. Owner exemption retains
+owner occupancy, owner-of-record primary residence, and **1–3 units inclusive** together; missing
+ordinance-specific requirements remain unsupported. Section 8/lifetime-offender references do not
+supply blanket exemptions. Notice, opportunity to respond and prominent notice distribution remain.
+The council-passage event is **2020-04-14**; effective/end/status_as_of remain null. No construction-
+year/occupancy substitution, general rent/deposit cap, or unsupported interaction was found. All 14
+records remain **needs_review**; ordinance details, exemption scope and effective date are unresolved.
+
+Full-corpus run **`dec1982a0b2e4fe29ce31e8862b01430`**, started 23:26:06 UTC, reuses D001/D003/D004
+full caches. Same command, store, configured model and bounded limits. Captured output:
+`core01-live/corpus-final.stdout.json` / `corpus-final.stderr.log`. It is still running; no final counts
+or full billing total are claimed. `audit_live_store.py` performs a repeatable read-only structural/
+original-text audit with explicit store and original-text paths; it does not certify legal accuracy.
+
+## D005 automated source comparison
+
+The current corpus run saved **15 rules** after draft extraction (11), semantic/omission review (15),
+and the existing single structural repair. The model initially wrote `California` where the shared
+contract requires `CA`; repair normalized the representation and explicit false conflict flags without
+changing the reviewed legal content. This handled provider-format error did not require a schema or
+code change. Four review-added provisions separately cover policy order/selection, unconsidered-
+applicant fees, fee-cap disclosure and Chapter 13.78 contractual applicability.
+
+All **39 evidence instances / 20 distinct spans** and 15 principal quotations match the original.
+The **$68.96** cap remains specific to **2026** (`[459,510)`, `fee_year == 2026`); no exact effective/end
+dates were invented. Credit-report timing is **seven days from landlord receipt** (`[624,739)`), with
+the agency's “should expect” qualification retained. The unselected-applicant refund alternative
+requires **all three** policy elements (`[1098,1375)`); unused-fee refunds remain separate (`[868,914)`).
+Nonrefundable existing-tenancy fees retain renewal/roommate scope (`[2647,2961)`), not a universal
+fee ban. Pre-fee rights/cap disclosure, unresolved City URL placeholder, broad contractual applicability
+(`[3022,3169)`) and violating-term unenforceability (`[3170,3288)`) remain represented.
+
+All 15 retain **needs_review**, unknown operative dates and unresolved primary statutory/exemption
+support. No invented precedence, penalties or occupancy proxy was found. This is automated source
+comparison, not human or independent legal review. Evidence: `core01_d005_live.json`; aggregate usage
+and elapsed time await the finished corpus manifest.
+
+## D006 automated source comparison
+
+The current corpus run saved **25 rules** after draft (23) and semantic review. All **90 evidence
+instances** match original offsets. Selected high-risk checks found no demonstrated contradiction:
+**5% limits the Annual General Adjustment**, with banked increases over 5% retained (`[11884,12265)`);
+nonpayment requires debt **at least one month of regional HUD Fair Market Rent**, not contract rent
+(`[6660,7033)`). The notice tenancy threshold **2024-12-20** (`[8886,9296)`) is distinct from the
+utility-tenancy/charge threshold **2024-02-06** (`[9758,10071)`). Shared-facility exemption includes
+landlord residence at tenancy start (`[3350,3556)`). Subsidy full/partial coverage and flattened-table
+qualifiers remain unresolved (`[4029,4234)`).
+
+No effective/end/status-snapshot/event dates were invented. All 25 remain **needs_review**. Many
+predicates depend on facts outside the shared registry; particularly `rent_ordinance_coverage` is a
+legal classification requiring source/reviewer work, not a renter factual question. No fact registry,
+models or planner changes were made. Evidence: `core01_d006_live.json`.
+
+## Cross-source limits found in captured primary text
+
+Read-only comparison of D005 with **captured D026 (Civil Code 1950.6)** found consequential agency-
+summary omissions. D026 permits applicant-provided credit reports (`[1794,1921)`) and references
+reusable reports under 1950.1 (`[5911,6029)`); it does **not establish D005's mandatory-use claim**.
+Ordinary and qualifying reusable reports may differ. No dedicated 1950.1 capture is in the manifest;
+this interpretation remains unresolved. The no-availability prohibition includes knowledge and
+availability within a reasonable period (`[2654,2885)`). Actual screening costs/reasonable time and
+CPI adjustment of a $30 base (`[1922,2653)`) do not independently calculate the reported **$68.96**.
+
+Primary refund paths additionally require completed-application order and written criteria
+(`[3169,3457)`), concurrent-submission safeguards/transfer option/considered-denial qualification
+(`[3684,4536)`), or the earlier of **seven days after tenant selection / 30 days after submission**
+(`[4537,4845)`). The credit-report receipt deadline is confirmed (`[5605,5910)`).
+
+Captured **D025 (Civil Code 1950.5)** clarifies D007's owner shorthand: **at most two residential
+rental properties and four dwelling units offered for rent** (`[4867,5013)`), a prospective-service-
+member exclusion (`[5014,5097)`) and qualifying ownership/trust definitions (`[5551,5898)`). Generic
+`owner_total_units` or `family_trust` labels do not establish those narrower conditions. These are
+primary texts already available for the forthcoming extraction, not globally missing documents.
+Safe findings: `core01_cross_source_review.json`. No automatic legal precedence, manual cache rewrite,
+property-fact invention, or human/independent legal review is claimed.
+
+## D007/D008 review and demonstrated fact-contract repair
+
+D007 produced **18 rules**, with **33 exact evidence instances**, after the existing single structural
+repair normalized state identifiers. Source dates/caps, strict post-January-1-2003 cleaning threshold,
+21-day return, and local annual/prorated interest were preserved. No numeric interest rate was invented.
+Cross-source owner qualifications are described above. Evidence: `core01_d007_live.json`.
+
+A read-only runtime check found a **demonstrated encoding defect**: two D007 rules used registered
+`owner_type` values `natural_person`, `family_trust`, and `limited_liability_company`, incompatible with
+the existing registry's `individual`, `trust`, and `llc`. The small-owner rule
+`r-710522e0c2ff928cefe1` returned definite **inapplicable / coverage=false** for a hypothetical canonical
+`individual` input despite an unresolved ownership qualification. This was a synthetic in-memory probe
+against a real extracted rule, not a claim about an actual property. Record: `core01_fact_contract_fix.json`.
+
+Core repair **`a422fb3`** consumes the shared definitions read-only. At extraction/cache validation,
+incompatible enum comparisons in coverage, exemption and interaction scopes become **unsupported**,
+with original expression/path and a review issue retained. It never guesses legal aliases: family-trust
+qualification cannot be broadened to every trust. Valid enum values and explicit source-specific facts
+remain unchanged. Original provider/cache files are preserved, and current validation applies on replay;
+no prompt/schema/cache-key change or fresh model call is required for compatible completed evidence.
+New manifests identify `fact_contract_validation: enum-literals-v1`.
+
+Five focused regressions failed before this fix; **30 extraction tests pass** after it. The disposable
+runner at `a422fb3` passed **104 focused / 118 full-suite**, compileall, isolated contracts and diff check;
+working contracts unchanged, same seven Platform-owned generated-example differences and existing
+Starlette/httpx warning. Read-only peer review found no blocker; repeated guard application is idempotent.
+Real D007 cache revalidation run **`eb389c18dd4b4af28c6b3acdfc2fc2c9`**: **0.046 seconds**, one document,
+one cache hit, 84 total rules, **zero provider calls/usage**. The same hypothetical probe now yields
+**unknown / coverage=unknown**, with source-interpretation uncertainty retained.
+
+D008 produced **two rules / ten exact evidence instances**. The rate remains **1.0%**, distinct from
+65% of CPI / 1.5% CPI; rounding uncertainty is retained. Adoption **2025-10-16**, earliest adjustment
+**2026-01-01**, signed snapshot **2025-10-17** apply to the AGA version, with no invented end date.
+Exemption requires **tenancy_start >= 2025-01-01 AND Costa-Hawkins-set rents**. Missing Regulation1148
+eligibility and notice details stay unsupported. Evidence: `core01_d008_live.json`.
+
+The corpus was interrupted after D008 to install the demonstrated repair. Run
+**`dec1982a0b2e4fe29ce31e8862b01430`** finalized **partial** after **1,207.285 seconds**, seven processed
+documents, 84 total rules, three full cache hits and no source failure. Observed usage **87,052 input +
+101,037 output = 188,089 tokens**; an interrupted request's usage remains unavailable, so this is not
+complete billing. Evidence: `core01_corpus_contract_pause.json`.
+
+Corpus resumed as **`296de71f2c794d6c9ca3ed48f133ebb2`** at **23:48:10 UTC**, same full-corpus command,
+model, explicit store and bounded limits, with seven completed caches reused. Output files:
+`core01-live/corpus-guarded.stdout.json` / `corpus-guarded.stderr.log`. Final corpus results remain pending.
+
+## D009 automated source comparison
+
+The resumed run saved **three category rules / 13 exact evidence references**. Rent-control-only
+exclusions remain separate from eviction/deposit-interest coverage. New construction uses actual
+completion **and** certificate-of-occupancy dates, never construction year as an occupancy proxy.
+Subsidy/HUD conjunctions, Golden Duplex historical/current occupancy, shared-facility tenancy-start
+condition and strict post-2018-11-07 ADU date remain. “Most” and overlapping rooming-house categories
+stay unsupported. Lifecycle is **unknown**, all dates null; no rate or penalty was invented.
+
+A conservative redundant before-1996/or-not-before-1996 partition in two rules can retain uncertainty
+when tenancy_start is absent despite identical coverage on both sides. No unsupported legal
+simplification or planner rebuild was made. Evidence: `core01_d009_live.json`.

@@ -1,0 +1,110 @@
+{
+  "evidence_kind": "real provider extraction; automated original-source review, not human or independent legal review",
+  "provider_origin_run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+  "model": "gpt-6.1-sol",
+  "audit": {
+    "index": {
+      "status": "review",
+      "sha256": "bddd7d3ab24d2717a0393cf879bad9a849af3aa10dd2e426bc9da34dcd19c5e3",
+      "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+      "mode": "live",
+      "rules": 3,
+      "issues": [
+        "All six requested categories were reviewed. No provisions concerning application or screening fees, screening restrictions, or algorithmic rent setting are supplied. Source silence does not establish that no such rules exist.",
+        "Coverage exclusions concern this ordinance's listed protections only and do not establish exemptions from other laws.",
+        "Registration is a distinct table column but falls outside the six supplied categories.",
+        "The 1979 owner-occupancy date, 1980 construction and certificate threshold, 1996 tenancy threshold and 2018 ADU tenancy threshold are factual coverage triggers, not evidenced enactment events or effective dates.",
+        "The guide cautions that individual circumstances may differ. Its 'Most' qualifiers and overlapping rent-control categories require additional legal text before complete executable applicability can be established.",
+        "The guide supplies no amendments, directional supersession or conflict provisions, dated status events, or penalties.",
+        "The source is official agency guidance, not ordinance text or a dated status record. The retrieval timestamp does not establish lifecycle, effective dates or status_as_of."
+      ]
+    },
+    "rules": 3,
+    "lifecycle": {
+      "unknown": 3
+    },
+    "semantic_verification": {
+      "needs_review": 3
+    },
+    "evidence_instances": 13,
+    "distinct_spans": 6,
+    "invalid_evidence": [],
+    "non_verbatim_primary_quotes": [],
+    "construction_or_occupancy_predicates": [
+      {
+        "rule_id": "r-4bf8e008d56950bba8de",
+        "predicate": {
+          "op": "lt",
+          "args": [],
+          "fact": "year_built",
+          "value": 1980,
+          "reason": null
+        }
+      },
+      {
+        "rule_id": "r-4bf8e008d56950bba8de",
+        "predicate": {
+          "op": "date_before",
+          "args": [],
+          "fact": "certificate_of_occupancy",
+          "value": "1980-07-01",
+          "reason": null
+        }
+      },
+      {
+        "rule_id": "r-a88b2bed36531241f07b",
+        "predicate": {
+          "op": "lt",
+          "args": [],
+          "fact": "year_built",
+          "value": 1980,
+          "reason": null
+        }
+      },
+      {
+        "rule_id": "r-a88b2bed36531241f07b",
+        "predicate": {
+          "op": "date_before",
+          "args": [],
+          "fact": "certificate_of_occupancy",
+          "value": "1980-07-01",
+          "reason": null
+        }
+      },
+      {
+        "rule_id": "r-ccfd2679096aaefff0c4",
+        "predicate": {
+          "op": "lt",
+          "args": [],
+          "fact": "year_built",
+          "value": 1980,
+          "reason": null
+        }
+      },
+      {
+        "rule_id": "r-ccfd2679096aaefff0c4",
+        "predicate": {
+          "op": "date_before",
+          "args": [],
+          "fact": "certificate_of_occupancy",
+          "value": "1980-07-01",
+          "reason": null
+        }
+      }
+    ],
+    "unsupported_predicates": 8
+  },
+  "source_integrity": {
+    "original_matches_stored": true,
+    "actual_sha256_matches_stored": true
+  },
+  "review_findings": [
+    "3 final category rules, 13 evidence references exact.",
+    "Separate rent-control exclusions versus just-cause and deposit-interest coverage retained.",
+    "New construction branch requires actual completion date plus certificate-of-occupancy date; no year-built-as-occupancy proxy.",
+    "Subsidy plus HUD conjunction, Golden Duplex historical/current occupancy conditions, shared-facility tenancy-start condition and strict post-2018-11-07 ADU date retained.",
+    "Most and overlapping rooming-house categories remain unsupported.",
+    "Lifecycle unknown, dates null; no invented numeric rate or penalties.",
+    "Conservative limitation: two non-rent-control rules retain a redundant before1996-or-not-before1996 partition; absent tenancy_start may remain unknown despite same coverage on both sides. No automatic legal simplification applied."
+  ]
+}

@@ -2,8 +2,8 @@
 
 - Human owner: Daniel. Tool/session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
 - Branch: codex/core-backend. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`.
-- Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Result: `30cdfb7630b7bac81b7464e980ab6033ee69a239`.
-- Current dependency/blocker: key/model are configured; API diagnostic reports credit_balance_exhausted / insufficient_quota. User adds API credits locally; never paste keys into chat.
+- Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Current tested extraction implementation: `a422fb3`.
+- Current state: funded live extraction is working; D001/D003–D008 reviewed; enum-contract defect repaired; captured corpus running. Current evidence: `docs/core/CORE01_LIVE_REVIEW.md`. Earlier setup blockers below are historical.
 - Allowed: `navigator/extraction.py`, `tests/test_extraction.py`, a new core evidence report and this card;
   isolated data/cache directory for the writer. Model/schema changes require Platform stewardship.
 - Reserved: API, geocoder, frontend, canonical models/contracts, original corpus, shared board.

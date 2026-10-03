@@ -1,6 +1,26 @@
-# CORE-01 evidence — blocked live extraction; local checks completed
+# CORE-01 evidence — live extraction and automated source review
 
-## Latest configured attempts — 2026-10-03
+## Current funded run — 2026-10-03
+
+Funding/configuration is now working. Real D001 extraction and automated source review completed;
+D001/D003–D008 completed, for 84 records (all retain review limitations). Current model:
+`gpt-6.1-sol`. The captured-corpus workflow is running as `296de71f2c794d6c9ca3ed48f133ebb2`,
+reusing seven valid full caches in the same explicit `data/core-session` store.
+Do not interpret the historical setup failures below as the current state.
+
+Current detailed commands, actual run IDs, source comparisons, observed usage and limitations are in
+`CORE01_LIVE_REVIEW.md`, with `core01_d001_live.json`, `core01_d003_live.json` and
+`core01_d004_live.json`. Funded HTTP 400 was diagnosed and repaired by explicitly requesting JSON
+in the API input. Interrupted-draft resumption, finalized interruption manifests, and bounded response
+allowance repairs plus incompatible-fact-enum guard are tested at `a422fb3`: **30 extraction / 104 focused / 118 full-suite tests pass**;
+compile/contracts/diff pass, working contracts unchanged. Historical verification reports are retained.
+
+First real CLI lookup succeeded; actual-app local HTTP lookup returned 200, while the assist endpoint
+returned 404 (Platform dependency). Final corpus evaluation/validation/export and full counts are pending.
+Original source texts/hashes and all 500 unresolved municipalities remain preserved. No human or
+independent legal review, complete coverage, deployment or push is claimed. Daniel pushes manually.
+
+## Historical configured attempts — 2026-10-03
 
 The user created the ignored local `.env`. Secure parsing found an invalid first line (preserved as
 a comment) and a duplicated model-setting prefix (corrected). Other parsed settings, including the
