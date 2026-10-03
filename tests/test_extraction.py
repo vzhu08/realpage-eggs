@@ -70,3 +70,12 @@ def test_openai_refusal_or_http_error_never_becomes_empty_success(monkeypatch):
         return httpx.Response(200, json={"id": "fixture", "status": "completed", "output": [{"content": [{"type": "refusal", "refusal": "refused"}]}]})
     client = httpx.Client(transport=httpx.MockTransport(handler))
     with pytest.raises(ProviderFailure, match="no output text"): OpenAIProvider(client).generate("test", {})
+
+
+@pytest.mark.parametrize('field,value', [('end_date', '2027-01-01'), ('status_as_of', '2026-10-01')])
+def test_lifecycle_boundaries_require_field_level_evidence(demo, field, value):
+    source = next(iter(demo.sources().values()))
+    bundle = ExtractionBundle.model_validate(synthetic_bundle(source))
+    setattr(bundle.rules[0], field, value)
+    validated = validate_bundle(bundle, demo.sources())
+    assert f'Missing field-level evidence for {field}' in validated.rules[0].review_issues

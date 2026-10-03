@@ -16,3 +16,22 @@
 - Target: 30–60 minutes for first real slice; split full-corpus quality review if needed.
 - Handoff: provider/model identifier, run IDs, usage, semantic spot checks, errors and commit in this card (no keys).
 - Integration authority: user/Core reviewer and Platform contract steward; no publication/deployment authority.
+
+## Daniel's Core implementation claim — 2026-10-03
+
+Human owner: Daniel. Sole writing agent: Codex /root, session 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend` (dedicated clone; no pre-existing changes).
+Branch: `codex/core-backend`. Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`.
+The user assigns this session to Core; earlier unallocated metadata is superseded by this claim.
+Claimed paths: the exact allowed implementation/tests/card above, plus `docs/core/**` and ignored `data/core-session/**` for evidence.
+Work is serialized CORE-03 -> CORE-04 -> CORE-05 -> focused CORE-02; adapter changes have one writer.
+State: Blocked for live extraction: OPENAI_API_KEY and OPENAI_MODEL absent; participant pack located at /Users/danny/Downloads/participant-final-no-hour16.
+No push, merge, deployment, external messages or submission authorized.
+
+### Local result — software fixes Review; live acceptance Blocked
+Pack located and ingested in isolated ignored data/core-session. D001 returned ProviderUnavailable;
+OPENAI_API_KEY and OPENAI_MODEL are both missing. No live rules, token usage or legal review claimed.
+Focused tests reproduced missing end_date/status_as_of field-support checks; fixed with extraction
+prompt version extract-v2-core-dates and actual-occupancy wording. 8 extraction tests pass.
+Actual run IDs, timing, validation/export/lookup outcomes and next action: docs/core/EXTRACTION_EVIDENCE.md.
+Corpus run and real source review remain blocked only on provider configuration and subsequent quality review.
