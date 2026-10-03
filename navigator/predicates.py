@@ -3,7 +3,7 @@ import calendar
 from datetime import date
 from math import inf
 
-from .models import Expression, PredicateResult, PropertyFacts, date_bounds
+from .models import Evidence, Expression, PredicateResult, PredicateTrace, PropertyFacts, date_bounds
 
 
 def combine(op: str, results: list[PredicateResult]) -> PredicateResult:
@@ -30,16 +30,57 @@ def compare_interval(low, high, op, threshold):
     return "unknown"
 
 
-def evaluate_expression(expr: Expression, prop: PropertyFacts, as_of: date, depth=0) -> PredicateResult:
+def mark_irrelevant(trace: PredicateTrace) -> None:
+    """Keep the audit tree, but remove uncertainty that cannot affect its parent."""
+    trace.relevant = False
+    trace.residual = None
+    for child in trace.children:
+        mark_irrelevant(child)
+
+
+def evaluate_with_trace(expr: Expression, prop: PropertyFacts, as_of: date,
+                        rule_id: str, path: str, evidence: list[Evidence] = (), depth=0):
+    """One semantic traversal for both the public result and the canonical trace."""
+    children = []
     if depth > 32:
-        return PredicateResult(value="unknown", unresolved=["unsupported_condition: expression nesting exceeds limit"])
-    if expr.op in {"all", "any", "not"}:
-        children = [evaluate_expression(a, prop, as_of, depth + 1) for a in expr.args]
+        result = PredicateResult(value="unknown", unresolved=["unsupported_condition: expression nesting exceeds limit"])
+    elif expr.op in {"all", "any", "not"}:
+        evaluated = [evaluate_with_trace(a, prop, as_of, rule_id, f"{path}/args/{i}", evidence, depth + 1)
+                     for i, a in enumerate(expr.args)]
+        results, children = [r for r, _ in evaluated], [t for _, t in evaluated]
         if expr.op == "not":
-            result = children[0].model_copy(deep=True)
+            result = results[0].model_copy(deep=True)
             result.value = {"true": "false", "false": "true", "unknown": "unknown"}[result.value]
-            return result
-        return combine(expr.op, children)
+        else:
+            result = combine(expr.op, results)
+            decisive = "false" if expr.op == "all" else "true"
+            if result.value == decisive:
+                for child in children:
+                    if child.result != decisive:
+                        mark_irrelevant(child)
+    else:
+        result = _evaluate_leaf(expr, prop, as_of)
+    residual = None
+    if result.value == "unknown":
+        if children:
+            residual = Expression(op=expr.op, args=[c.residual.model_copy(deep=True)
+                                                   for c in children if c.residual is not None])
+        else:
+            residual = expr.model_copy(deep=True)
+    refs = [e.model_copy(deep=True) for e in evidence if any(
+        path == support or path.startswith(support + "/") or support.startswith(path + "/")
+        for support in e.supports)]
+    trace = PredicateTrace(predicate_id=f"{rule_id}:{path}", rule_id=rule_id, path=path,
+                           expression=expr.model_copy(deep=True), result=result.value, field=expr.fact,
+                           residual=residual, source_refs=refs, children=children)
+    return result, trace
+
+
+def evaluate_expression(expr: Expression, prop: PropertyFacts, as_of: date, depth=0) -> PredicateResult:
+    return evaluate_with_trace(expr, prop, as_of, "", "expression", depth=depth)[0]
+
+
+def _evaluate_leaf(expr: Expression, prop: PropertyFacts, as_of: date) -> PredicateResult:
     if expr.op == "literal":
         return PredicateResult(value="true" if expr.value else "false", matched=[f"literal {expr.value}"])
     if expr.op == "unsupported":
@@ -50,10 +91,7 @@ def evaluate_expression(expr: Expression, prop: PropertyFacts, as_of: date, dept
     value = prop.facts.get(fact)
     bound = prop.bounds.get(fact)
     provenance = prop.provenance.get(fact, "not supplied")
-    # The guide permits a year proxy, but never a fabricated day or month.
-    if value is None and fact == "certificate_of_occupancy" and prop.facts.get("year_built"):
-        value = str(prop.facts["year_built"])
-        provenance = "Participant-guide modeling proxy: year_built as a whole-year occupancy interval; not an actual certificate date"
+    # Construction year is a distinct fact, never evidence of actual occupancy.
     if value is None and bound is None:
         return PredicateResult(value="unknown", unresolved=[f"missing_property_fact: {fact}"], missing_facts=[fact])
     support = {fact: {"value": value, "bound": bound.model_dump() if bound else None, "provenance": bound.provenance if bound else provenance}}

@@ -46,14 +46,18 @@ def test_partial_effective_date_and_history(rule):
     assert temporal(rule, date(2026, 11, 30)) == "unknown"
 
 
-def test_year_proxy_preserves_cutoff_ambiguity(prop):
-    prop.facts["year_built"] = 1978
-    expr = Expression(op="date_on_or_before", fact="certificate_of_occupancy", value="1978-10-01")
-    assert evaluate_expression(expr, prop, DAY).value == "unknown"
-    prop.facts["year_built"] = 1977
-    answer = evaluate_expression(expr, prop, DAY)
-    assert answer.value == "true"
-    assert "proxy" in answer.supporting_facts["certificate_of_occupancy"]["provenance"]
+@pytest.mark.parametrize("year", [1977, 1978, 1979])
+def test_year_built_never_establishes_certificate_or_occupancy(prop, year):
+    prop.facts["year_built"] = year
+    for field in ("certificate_of_occupancy", "first_occupancy_date"):
+        expr = Expression(op="date_on_or_before", fact=field, value="1978-10-01")
+        answer = evaluate_expression(expr, prop, DAY)
+        assert answer.value == "unknown" and answer.missing_facts == [field]
+        assert field not in answer.supporting_facts
+        prop.facts[field] = "1978"
+        assert evaluate_expression(expr, prop, DAY).value == "unknown"
+        prop.facts[field] = "1978-10-01"
+        assert evaluate_expression(expr, prop, DAY).value == "true"
 
 
 def test_verified_units_bound_can_rule_out_exception(prop):

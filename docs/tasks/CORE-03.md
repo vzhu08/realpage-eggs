@@ -15,3 +15,24 @@ Non-goals: extra evaluator/provider/database, copied unlicensed code, taking ano
 Handoff: actual commit, changed files, tests, limitations, contract requests and dependency status in this card.
 Integration: single ordered queue, recheck combined code; local commits allowed, no push/merge/deploy authority.
 
+
+## Daniel's Core implementation claim — 2026-10-03
+
+Human owner: Daniel. Sole writing agent: Codex /root, session 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend` (dedicated clone; no pre-existing changes).
+Branch: `codex/core-backend`. Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`.
+The user assigns this session to Core; earlier unallocated metadata is superseded by this claim.
+Claimed paths: the exact allowed implementation/tests/card above, plus `docs/core/**` and ignored `data/core-session/**` for evidence.
+Work is serialized CORE-03 -> CORE-04 -> CORE-05 -> focused CORE-02; adapter changes have one writer.
+State: Running
+No push, merge, deployment, external messages or submission authorized.
+
+### Local result — Review
+Implemented the canonical trace in the predicate evaluation traversal; existing result shapes remain unchanged.
+Stable original AST paths, grouping, evidence, relevant residuals and exemption truth are preserved.
+Removed the legacy construction-year occupancy fallback; actual partial occupancy dates retain uncertainty.
+Checks: `.venv/bin/python -m pytest tests/test_engine.py tests/test_question_planner.py -q`: 26 passed.
+Baseline full suite in a disposable copy with the actual pack: 44 passed, one existing deprecation warning.
+Intentional expectation change: year_built=1977 no longer proves certificate<=1978 cutoff.
+Platform should update the legacy proxy sentence in docs/CONTRACTS.md; no schema change needed.
+Result: see the local commit containing this card; integration remains pending.

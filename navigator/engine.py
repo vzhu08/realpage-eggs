@@ -1,7 +1,7 @@
 from datetime import date
 
 from .models import Rule, JurisdictionResolution, PropertyFacts, Evaluation, PredicateResult, date_bounds
-from .predicates import evaluate_expression, combine
+from .predicates import evaluate_expression, evaluate_with_trace, mark_irrelevant, combine
 
 
 def temporal(rule: Rule, as_of: date, hypothetical=False) -> str:
@@ -51,12 +51,37 @@ def jurisdiction_match(rule, resolution):
     return "true" if f"{resolution.municipality}, {resolution.state}".casefold() == rule.jurisdiction.casefold() else "false"
 
 
+def evaluate_coverage(rule: Rule, prop: PropertyFacts, as_of: date):
+    inclusion, included = evaluate_with_trace(rule.coverage_conditions, prop, as_of,
+                                              rule.team_rule_id, "coverage_conditions", rule.evidence)
+    exemption, exempted = evaluate_with_trace(rule.exemption_conditions, prop, as_of,
+                                              rule.team_rule_id, "exemption_conditions", rule.evidence)
+    nonexempt = exemption.model_copy(deep=True)
+    nonexempt.value = {"true": "false", "false": "true", "unknown": "unknown"}[exemption.value]
+    coverage = combine("all", [inclusion, nonexempt])
+    if inclusion.value == "false":
+        mark_irrelevant(exempted)
+    if exemption.value == "true":
+        mark_irrelevant(included)
+    return coverage, [included, exempted]
+
+
+def rule_traces(rule: Rule, prop: PropertyFacts, resolution: JurisdictionResolution, as_of: date):
+    """AST paths retain their own truth; exemption negation is applied by coverage."""
+    _, traces = evaluate_coverage(rule, prop, as_of)
+    if jurisdiction_match(rule, resolution) == "false" or temporal(rule, as_of) != "in_force":
+        for trace in traces:
+            mark_irrelevant(trace)
+    for i, interaction in enumerate(rule.interactions):
+        _, trace = evaluate_with_trace(interaction.scope, prop, as_of, rule.team_rule_id,
+                                      f"interactions/{i}/scope", interaction.evidence)
+        traces.append(trace)
+    return traces
+
+
 def evaluate_rule(rule: Rule, prop: PropertyFacts, resolution: JurisdictionResolution, as_of: date, hypothetical=False):
     jurisdiction = jurisdiction_match(rule, resolution)
-    inclusion = evaluate_expression(rule.coverage_conditions, prop, as_of)
-    exemption = evaluate_expression(rule.exemption_conditions, prop, as_of)
-    exemption.value = {"true": "false", "false": "true", "unknown": "unknown"}[exemption.value]
-    coverage = combine("all", [inclusion, exemption])
+    coverage, _ = evaluate_coverage(rule, prop, as_of)
     time = temporal(rule, as_of, hypothetical)
     reasons = []
     if jurisdiction == "false" or coverage.value == "false" or time == "inapplicable":
