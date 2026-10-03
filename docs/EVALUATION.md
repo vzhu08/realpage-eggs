@@ -69,3 +69,57 @@ Unverified: actual model output quality, corpus omissions, legal semantic correc
 T6 (not supplied), official scoring, frontend, deployed behavior and submission. Highest-value next work:
 configure OpenAI, run/review D001 then the corpus, obtain consequential missing legal/status text legitimately,
 review unresolved geocodes and cross-document status/interaction linking. See CORE-01, PLAT-01 and UX-01 cards.
+
+## Follow-up Platform verification, October 3, 2026
+
+Baseline 5ef1de1: 42 tests passed; contract checkpoint 3349851 added two checks. Current follow-up:
+**74 passed**, one existing Starlette/httpx deprecation warning, no failures. New checks cover Platform
+services and authored contracts; none establish human-reviewed legal correctness.
+
+Commands (same .venv Python):
+
+```text
+python -m pytest tests/test_evidence.py tests/test_retrieval.py -q
+python -m pytest tests/test_assist_api.py -q
+python -m navigator contracts
+python -m pytest -q --junitxml=artifacts/research-test-results.xml
+python -m navigator export --allow-partial --output artifacts/research-submission
+python -m navigator --data-dir data/synthetic export --as-of 2026-11-15 --allow-partial --synthetic --output artifacts/research-synthetic
+```
+
+Targeted D001 inventory/retrieval was also run directly through inventory_source/ContextRetriever:
+15 units cover all 8,000 original snapshot characters; 0 mapped, 15 unresolved with zero real rules.
+This is snapshot coverage, not complete law coverage. Summary: evidence/research_inventory_summary.json;
+full ignored result: artifacts/research/D001-inventory.json. No full-corpus extraction was rerun.
+
+| Exact tested cases | Observation / denominator |
+| --- | --- |
+| Opposite operator with genuine quote | 1/1 remains semantically not_checked before authored verifier contradiction; no lexical verification |
+| Remove source record, empty its text, remove supporting quote | 3/3 change previously applicable synthetic lookup to unknown with evidence failure |
+| Missing exception, cycle, duplicate heading, depth budget, oversized reference, long section tail | All six retrieval behaviors asserted; no silent prefix truncation |
+| Invalid supplemental fact combinations | 11/11 rejected on both lookup routes (22 requests) |
+| Decisive authored question alternatives | 2/2 real answer outcomes reproduce through production evaluator |
+| Occupancy <= cutoff with two unresolved exemptions | 1/1 stays unknown after occupancy answer |
+| Remove decisive units versus irrelevant owner type | Decisive removal unknown; irrelevant removal preserves applies (2 cases) |
+| Semantic review cache/repair | Replay makes zero new calls; changed hash invalidates; invalid spans stop after two attempts, no accepted cache |
+| Source-only whitespace change | Cache/evidence version changes; no duplicate substantive rule from Core merge |
+| Real partial export | 500/500 address IDs, all references resolve, zero rules; T1-T5 blocked |
+| Synthetic export | 3/3 IDs; one quote/schema-valid rule; clearly not for submission |
+
+Question counts in authored fixtures are 1,0,1,0,1 for the five named cases; they are design expectations.
+Observed production planner question quality, unnecessary-question rate, ranking reproducibility,
+correlated-fact enumeration and comparison with ask-every-missing-field/generic-unknown remain **not
+measured**, because CORE-03/04 are absent. Core owns that fixed-set comparison and renderer operator/
+exception/effective-boundary tests. Injected fixture orchestration is explicitly not full integration.
+
+The actual-legal benchmark candidate manifest (evidence/legal_benchmark_candidates.json) spans all six
+categories with 12 ordinary/boundary candidates, six reserved from prompt tuning. **0/12 reviewed**, no
+expected results or accuracy score. Core/human review must define precise cases and independent expected
+outcomes against source spans before it becomes a scored benchmark. Reviewer fields remain null.
+
+No new baseline software regression remains. Unverified dependencies remain local API credentials/model,
+actual legal extraction and semantic quality, missing sources, Core planner/renderer and frontend integration.
+
+Local HTTP smoke check after restarting the API: health, facts, D001 context and OpenAPI return 200;
+OpenAPI includes /lookup/assist; real assist returns explicit dataset_unavailable 503 with zero extracted
+rules. Recorded in evidence/research-http-smoke.json. Server binds to 127.0.0.1:8000.

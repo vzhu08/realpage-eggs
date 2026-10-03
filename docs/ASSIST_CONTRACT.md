@@ -35,7 +35,7 @@ Rule renderer returns encoded-rule text, expression hash, renderer version and u
 It is distinct from the property-specific Evaluation.explanation and is not legal verification.
 Render comparison operators, grouping, dates, exemption structure, unsupported nodes and effective boundaries.
 
-## Proposed API additions / implementation status
+## API additions / implementation status
 
 - `POST /api/v1/lookup/assist`: AssistRequest -> AssistResponse. Platform wires lookup, questions,
   evidence and rendering. Missing Core module returns an explicit unavailable plan/capability, never a mock plan.
@@ -44,7 +44,7 @@ Render comparison operators, grouping, dates, exemption structure, unsupported n
 - `GET /api/v1/sources/{id}/context`: bounded original text around exact source offsets, plus references.
 - `GET /api/v1/facts`: allowed fact definitions and answer forms.
 
-At initial contract release these endpoints are planned; see FRONTEND_HANDOFF and OpenAPI after Platform implementation.
+All four endpoints are now implemented and tested locally. Core planner/renderer remain dependency_unavailable until CORE-03/04/05 land. The injected fixture tests verify orchestration only.
 Existing `/lookup`, `/rules`, `/sources`, `/changes` and export schemas remain compatible.
 
 AssistRequest extends LookupRequest with `answers`, optional request-local `scenario_id`, and limits.
@@ -72,7 +72,7 @@ bounded_partial_analysis. Their plans are authored expectations, not implemented
 Alternative evaluation records are produced by the existing evaluator. The modified-rule examples are
 algorithmic fixtures, not source-verified legal interpretations. Core must replace assumptions with tested
 planner output; UX can build loading/partial/unavailable/answered states now.
-Renderer/source-comparison and evidence-failure examples will be supplied by Platform's evidence task.
+Implemented evidence-failure and source-comparison examples are in contracts/evidence_examples/. The comparison's renderer text is an authored expectation, not Core output. contracts/examples/assist.json shows the actual Platform API with Core unavailable.
 
 Platform is the sole writer of models, contracts generator/generated artifacts, API routes, fact registry,
 and shared coordination docs. Core owns its implementation/tests/card; UX owns frontend/tests/card.

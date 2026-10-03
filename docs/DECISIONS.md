@@ -21,3 +21,33 @@ Integration references consulted for implementation:
 [Census geocoding API](https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html),
 [Census TIGER layers](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/layers).
 These establish API behavior, not legal interpretations.
+
+## Follow-up provenance and decisions
+
+Retained FastAPI, atomic JSON, the bounded Expression AST, original evaluator, extraction provider
+boundary and competition projections. No graph/vector database, second evaluator or generated code.
+Input validation and evidence services are separate Platform modules; Core extraction ownership stays intact.
+
+No third-party source code was copied or vendored. Retrieval uses an independently written standard
+TF-IDF/cosine implementation over all source units, retaining exact original offsets. No licensing
+assumption or architectural dependency on the supplied upstream projects is needed.
+
+The supplied research document identifies Citrus at dcab7bbc3cc8f23f043368db3d1b1359b81478a2 as a
+retrieval-pattern candidate, ClauseWise at a414468a1f2e672bf59c645a3799083d8b971dc6 as inventory/renderer
+inspiration, and Know Your Rights at 8945d487e901e9db34c4aaf5b0a110ea06b94bee as targeted-question UI
+inspiration. These are attributed findings from the supplied research, not a new runtime or license audit.
+The reported ClauseWise award identity remains uncertain; no verified public Tracy engine was imported.
+Attempts to fetch the pinned upstream pages through the web tool did not return source. Since no code
+was imported, work continued independently without asserting license verification.
+
+Rejected policies: semantic support from lexical score, fabrication from corpus absence, chunk-prefix
+truncation, generated eval formulas and exceptions silently becoming false/zero. Quote, source identity,
+section anchor, semantic support and dependency gaps are machine-readable independent checks.
+References are recognized by a bounded explicit-reference parser; unrecognized legal dependencies may
+remain. A structural inventory is a coverage-review aid, not complete or human-reviewed law mapping.
+
+The CLI semantic verifier reuses Core's OpenAIProvider transport with a task-specific review instruction;
+no new provider dependency or API endpoint. It permits one schema/span repair (two generation attempts;
+each uses the provider's existing bounded transport retries). Results record live/fixture/replay,
+rule/source/verifier versions, exact spans, model metadata and remaining gaps. A verifier cannot remove
+structural failures or turn missing references into support. Model assessment is not independent accuracy.

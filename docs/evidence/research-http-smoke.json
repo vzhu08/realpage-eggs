@@ -1,0 +1,9 @@
+{
+  "/api/v1/health": 200,
+  "/api/v1/facts": 200,
+  "/api/v1/sources/D001/context": 200,
+  "/openapi.json": 200,
+  "assist_route_present": true,
+  "real_assist": 503,
+  "real_assist_code": "dataset_unavailable"
+}

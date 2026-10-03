@@ -60,3 +60,19 @@ Cut until required pipeline is credible: graph visualization, Spanish, extra jur
 authentication, broad scraping, database/queue infrastructure expansions. Do not cut citation,
 uncertainty, date behavior or partial/failure labeling. Public deployment still needs access controls
 appropriate to its surface; no billable ingestion endpoint exists in this baseline.
+
+## Follow-up implementation checkpoint
+
+Planning and minimal contract release complete locally (3349851); Platform implementation complete
+for review, with 74 passing tests. PLAT-03/04/05 are Review, not merged/deployed. Live semantic review
+remains unverified because credentials/model and real rules are absent. Core/UX have no claimed run.
+
+Ready next: Core CORE-03 + CORE-05, UX UX-03 entire frontend from fixtures/working Platform calls.
+CORE-04 follows trace work. Full question/renderer integration is blocked on those implementations.
+Core CORE-01 remains P0: configure OpenAI locally, extract/review D001, then selectively expand.
+Keep submission/export failures ahead of richer ranking, acquisition, translations or product extras.
+
+Follow-up acceptance owners: Core-02/04 + human reviewer complete the 12-case ordinary/boundary candidate
+manifest into an independently reviewed benchmark and measure planner versus both simple baselines;
+UX verifies complete question/evidence/change flows; Platform reruns combined API/official projection
+checks after Core lands. Remaining geocode recovery PLAT-01 and packaging PLAT-02 stay ready but unclaimed.

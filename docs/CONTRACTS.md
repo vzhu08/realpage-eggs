@@ -51,3 +51,27 @@ Single-writer atomic JSON persistence is local and replayable. Cache hits retain
 Live provider output, real replay, local processing and synthetic fixture modes are distinct.
 Schema changes go through the Platform steward, with consumer impact, regenerated fixtures and
 coordinated migration before affected tasks resume. Keep unrelated tasks moving.
+
+## Follow-up additions (Platform implemented)
+
+See ASSIST_CONTRACT for complete types and Core function signatures. Generated research.schema.json
+and OpenAPI include POST /lookup/assist, GET /facts, GET /rules/{id}/evidence and
+GET /sources/{id}/context. Existing official competition record shapes are unchanged.
+Source context accepts zero-based start/end, max_depth 0..4, max_chars 100..48000,
+max_spans 1..24; unresolved references and bounded windows stay explicitly partial.
+
+Supplemental field names/types are now validated against /facts. JSON booleans, integer counts,
+ISO dates with preserved precision, and exact enumerations are required. Unknown fields are 422.
+Null removes a request-local value/bound and restores unknown; all answers must be resent per request.
+Client provenance is user_provided or demo; verified cannot be asserted by the client.
+Demo answers only work in a synthetic dataset. No original property facts are modified.
+
+Rule evidence is recomputed for lookup, assist, batch, changes, validation and exports. Missing or
+changed support attaches review issues before the existing evaluator runs. Semantic review is an
+explicit CLI operation; HTTP requests never call a model. evidence_checks.json is a companion export,
+not an extra field in official rules/lookups/changes. Cached semantic review binds to rule/source versions.
+A source reformat may invalidate evidence anchors without constituting a substantive legal amendment.
+
+One known Core issue remains: the baseline ingestion/evaluator accepts labeled year-built occupancy
+proxies. CORE-03 must review this distinct-trigger behavior. The new input registry never creates a
+certificate/occupancy answer from construction year; it asks for the actual defined field.

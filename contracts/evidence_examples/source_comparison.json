@@ -1,0 +1,264 @@
+{
+  "fixture_mode": "synthetic",
+  "contract_status": "implemented_evidence_with_authored_renderer_expectation",
+  "rule": {
+    "jurisdiction": "Maple Harbor, CA",
+    "level": "city",
+    "category": "security_deposits",
+    "provision_key": "deposit-cap",
+    "title": "Synthetic Maple Harbor deposit cap",
+    "requirement": "Covered buildings must limit security deposits to one month's rent.",
+    "key_value": "one month's rent",
+    "citation": "Maple Harbor Ordinance TEST-42, section 2",
+    "quoted_span": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+    "source_doc_id": "SYNTHETIC-42",
+    "source_url": "https://example.invalid/synthetic-42",
+    "coverage_conditions": {
+      "op": "all",
+      "args": [
+        {
+          "op": "eq",
+          "args": [],
+          "fact": "residential",
+          "value": true,
+          "reason": null
+        },
+        {
+          "op": "gte",
+          "args": [],
+          "fact": "units",
+          "value": 8,
+          "reason": null
+        }
+      ],
+      "fact": null,
+      "value": null,
+      "reason": null
+    },
+    "exemption_conditions": {
+      "op": "literal",
+      "args": [],
+      "fact": null,
+      "value": false,
+      "reason": null
+    },
+    "exemptions": "None",
+    "lifecycle": "enacted",
+    "effective_date": "2026-11-15",
+    "end_date": null,
+    "status_as_of": null,
+    "status_events": [
+      {
+        "status": "enacted",
+        "on": "2026-09-01",
+        "evidence": [
+          {
+            "doc_id": "SYNTHETIC-42",
+            "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+            "start": 77,
+            "end": 146,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "doc_id": "SYNTHETIC-42",
+        "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+        "start": 147,
+        "end": 287,
+        "supports": [
+          "requirement",
+          "key_value",
+          "coverage_conditions",
+          "effective_date"
+        ]
+      },
+      {
+        "doc_id": "SYNTHETIC-42",
+        "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
+        "start": 288,
+        "end": 389,
+        "supports": [
+          "exemptions",
+          "exemption_conditions"
+        ]
+      },
+      {
+        "doc_id": "SYNTHETIC-42",
+        "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+        "start": 77,
+        "end": 146,
+        "supports": [
+          "lifecycle"
+        ]
+      }
+    ],
+    "interactions": [],
+    "penalties": null,
+    "review_issues": [],
+    "conflict_flag": false,
+    "conflict_note": null,
+    "team_rule_id": "r-694ad9fbae9083966e86",
+    "evidence_mode": "synthetic",
+    "extraction_run_id": "ed6932efce95444f930ca4c44c39db71",
+    "semantic_verification": "synthetic_fixture"
+  },
+  "evidence": {
+    "rule_id": "r-694ad9fbae9083966e86",
+    "rule_hash": "e19ef4386412cf60cad54a32a52a29d4387f0c0a565773a9042d9c86c8cc3186",
+    "checks": [
+      {
+        "kind": "source_availability",
+        "status": "pass",
+        "message": "SYNTHETIC-42: snapshot available",
+        "field": null,
+        "spans": []
+      },
+      {
+        "kind": "source_identity",
+        "status": "pass",
+        "message": "SYNTHETIC-42: current text hash and recorded source URL match",
+        "field": null,
+        "spans": []
+      },
+      {
+        "kind": "quote_presence",
+        "status": "pass",
+        "message": "Primary quoted_span occurs verbatim",
+        "field": "quoted_span",
+        "spans": [
+          {
+            "doc_id": "SYNTHETIC-42",
+            "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+            "start": 147,
+            "end": 287,
+            "text": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+            "section": null
+          }
+        ]
+      },
+      {
+        "kind": "quote_presence",
+        "status": "pass",
+        "message": "Exact original span found; meaning is a separate check",
+        "field": "requirement,key_value,coverage_conditions,effective_date",
+        "spans": [
+          {
+            "doc_id": "SYNTHETIC-42",
+            "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+            "start": 147,
+            "end": 287,
+            "text": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+            "section": null
+          }
+        ]
+      },
+      {
+        "kind": "quote_presence",
+        "status": "pass",
+        "message": "Exact original span found; meaning is a separate check",
+        "field": "exemptions,exemption_conditions",
+        "spans": [
+          {
+            "doc_id": "SYNTHETIC-42",
+            "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+            "start": 288,
+            "end": 389,
+            "text": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
+            "section": null
+          }
+        ]
+      },
+      {
+        "kind": "quote_presence",
+        "status": "pass",
+        "message": "Exact original span found; meaning is a separate check",
+        "field": "lifecycle",
+        "spans": [
+          {
+            "doc_id": "SYNTHETIC-42",
+            "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+            "start": 77,
+            "end": 146,
+            "text": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+            "section": null
+          }
+        ]
+      },
+      {
+        "kind": "quote_presence",
+        "status": "pass",
+        "message": "Exact original span found; meaning is a separate check",
+        "field": "lifecycle",
+        "spans": [
+          {
+            "doc_id": "SYNTHETIC-42",
+            "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+            "start": 77,
+            "end": 146,
+            "text": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+            "section": null
+          }
+        ]
+      },
+      {
+        "kind": "citation_anchor",
+        "status": "not_checked",
+        "message": "Citation section 2: no unique structured section anchor in this snapshot",
+        "field": null,
+        "spans": []
+      },
+      {
+        "kind": "dependencies",
+        "status": "pass",
+        "message": "Recognized explicit references resolved within bounded snapshot context; not exhaustive legal reference coverage",
+        "field": null,
+        "spans": []
+      },
+      {
+        "kind": "semantic_support",
+        "status": "not_checked",
+        "message": "Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.",
+        "field": null,
+        "spans": []
+      }
+    ],
+    "context": {
+      "spans": [
+        {
+          "doc_id": "SYNTHETIC-42",
+          "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+          "start": 0,
+          "end": 390,
+          "text": "SYNTHETIC TEST DOCUMENT. Fictional Maple Harbor, California. Not actual law.\nMaple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nBeginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.\nThere are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.\n",
+          "section": null
+        }
+      ],
+      "dependencies": [],
+      "status": "available",
+      "limits": {
+        "max_depth": 2,
+        "max_chars": 24000,
+        "max_spans": 12
+      },
+      "limits_hit": [],
+      "retrieval_method": "exact_anchors_and_bounded_lexical_retrieval",
+      "semantic_verification": false
+    },
+    "semantic_review": null,
+    "blocking_issues": [],
+    "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+  },
+  "encoded_rule": {
+    "rule_id": "r-694ad9fbae9083966e86",
+    "text": "Authored expected rendering: from 2026-11-15 inclusive, residential = true AND units >= 8; exemption = false. Requirement: limit the security deposit to one month's rent. No end date is encoded.",
+    "expression_hash": "e3043d08c8a94c1b3858a6877a21dc8ab7a0ae21bdca34cf6f7d45138cfa4496",
+    "renderer_version": "authored-fixture-not-Core-output",
+    "unresolved_nodes": [],
+    "kind": "encoded_rule_not_legal_validation"
+  }
+}

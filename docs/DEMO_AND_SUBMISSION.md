@@ -33,3 +33,15 @@ keep the synthetic walkthrough clearly separate and use it only if allowed.
 Final checklist for the human coordinator: confirm organizer version/logistics/licensing; run fresh-session
 demo on deployed build; verify credentials/failure states/claims; compare deployed commit to reviewed code;
 prepare required JSON/method note/videos; start upload by Oct 4 08:15 ET; submit with authority and verify receipt.
+
+## Follow-up demonstration status
+
+Platform API journey is verified in synthetic tests: SYNTH-003 at 2026-11-15 is unknown, a units=8
+labeled answer produces applies; removing units returns unknown without changing stored data. The
+modified synthetic occupancy/two-exemption case correctly stays unknown. Source removal creates a
+visible evidence failure. Full useful-question -> answered fact -> changed trace awaits Core and UX;
+injected authored-plan tests are not that integrated demo.
+
+Show evidence status beside the original source and, after CORE-05 lands, the deterministic encoded-rule
+rendering. Until then, the authored source-comparison fixture is for UI development only. Submission
+priority remains reviewed real extraction/export correctness, followed by Core/UX question integration.

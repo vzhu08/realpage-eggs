@@ -1,7 +1,6 @@
 {
   "fixture_mode": "synthetic",
-  "contract_status": "proposed_core_output_not_live_service",
-  "case": "unresolved_source_coverage",
+  "contract_status": "implemented_platform_api",
   "request": {
     "address_id": "SYNTH-003",
     "as_of": "2026-11-15"
@@ -218,7 +217,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "7306809d45f6489399c28055965c0014",
+          "extraction_run_id": "ed6932efce95444f930ca4c44c39db71",
           "semantic_verification": "synthetic_fixture"
         }
       ],
@@ -241,8 +240,7 @@
         }
       ],
       "warnings": [
-        "SYNTHETIC DEMONSTRATION: not actual housing law",
-        "CONTRACT FIXTURE: question plans/renderings are authored expectations, not implemented Core output; modified rule cases are algorithmic tests, not legal interpretations"
+        "SYNTHETIC DEMONSTRATION: not actual housing law"
       ],
       "metadata": {
         "version": "0.1.0",
@@ -254,26 +252,23 @@
           "synthetic"
         ],
         "extraction_run_ids": [
-          "7306809d45f6489399c28055965c0014"
+          "ed6932efce95444f930ca4c44c39db71"
         ],
         "partial_data": false,
         "missing_source_ids": [],
-        "unprocessed_source_ids": [],
-        "fixture_case": "unresolved_source_coverage"
+        "unprocessed_source_ids": []
       },
       "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
     },
     "question_plan": {
-      "status": "complete",
+      "status": "unavailable",
       "questions": [],
       "remaining_uncertainty": [
         {
-          "kind": "source_gap",
-          "message": "Referenced exception source is not supplied",
-          "remedy": "Platform/Core must obtain and verify the cited exception; do not ask the renter to decide the law",
-          "rule_ids": [
-            "r-694ad9fbae9083966e86"
-          ],
+          "kind": "service_dependency",
+          "message": "Core question planner has not been integrated",
+          "remedy": "Complete CORE-03/04 and supply navigator.core_assist.plan_questions",
+          "rule_ids": [],
           "predicate_ids": [],
           "field": null,
           "source_refs": []
@@ -288,18 +283,166 @@
       },
       "evaluations_used": 0,
       "limits_hit": [],
-      "algorithm_version": "authored-contract-fixture-v1",
+      "algorithm_version": "unavailable",
       "exhaustive": false
     },
-    "evidence_reports": [],
+    "evidence_reports": [
+      {
+        "rule_id": "r-694ad9fbae9083966e86",
+        "rule_hash": "e19ef4386412cf60cad54a32a52a29d4387f0c0a565773a9042d9c86c8cc3186",
+        "checks": [
+          {
+            "kind": "source_availability",
+            "status": "pass",
+            "message": "SYNTHETIC-42: snapshot available",
+            "field": null,
+            "spans": []
+          },
+          {
+            "kind": "source_identity",
+            "status": "pass",
+            "message": "SYNTHETIC-42: current text hash and recorded source URL match",
+            "field": null,
+            "spans": []
+          },
+          {
+            "kind": "quote_presence",
+            "status": "pass",
+            "message": "Primary quoted_span occurs verbatim",
+            "field": "quoted_span",
+            "spans": [
+              {
+                "doc_id": "SYNTHETIC-42",
+                "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+                "start": 147,
+                "end": 287,
+                "text": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+                "section": null
+              }
+            ]
+          },
+          {
+            "kind": "quote_presence",
+            "status": "pass",
+            "message": "Exact original span found; meaning is a separate check",
+            "field": "requirement,key_value,coverage_conditions,effective_date",
+            "spans": [
+              {
+                "doc_id": "SYNTHETIC-42",
+                "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+                "start": 147,
+                "end": 287,
+                "text": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+                "section": null
+              }
+            ]
+          },
+          {
+            "kind": "quote_presence",
+            "status": "pass",
+            "message": "Exact original span found; meaning is a separate check",
+            "field": "exemptions,exemption_conditions",
+            "spans": [
+              {
+                "doc_id": "SYNTHETIC-42",
+                "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+                "start": 288,
+                "end": 389,
+                "text": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
+                "section": null
+              }
+            ]
+          },
+          {
+            "kind": "quote_presence",
+            "status": "pass",
+            "message": "Exact original span found; meaning is a separate check",
+            "field": "lifecycle",
+            "spans": [
+              {
+                "doc_id": "SYNTHETIC-42",
+                "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+                "start": 77,
+                "end": 146,
+                "text": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+                "section": null
+              }
+            ]
+          },
+          {
+            "kind": "quote_presence",
+            "status": "pass",
+            "message": "Exact original span found; meaning is a separate check",
+            "field": "lifecycle",
+            "spans": [
+              {
+                "doc_id": "SYNTHETIC-42",
+                "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+                "start": 77,
+                "end": 146,
+                "text": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+                "section": null
+              }
+            ]
+          },
+          {
+            "kind": "citation_anchor",
+            "status": "not_checked",
+            "message": "Citation section 2: no unique structured section anchor in this snapshot",
+            "field": null,
+            "spans": []
+          },
+          {
+            "kind": "dependencies",
+            "status": "pass",
+            "message": "Recognized explicit references resolved within bounded snapshot context; not exhaustive legal reference coverage",
+            "field": null,
+            "spans": []
+          },
+          {
+            "kind": "semantic_support",
+            "status": "not_checked",
+            "message": "Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.",
+            "field": null,
+            "spans": []
+          }
+        ],
+        "context": {
+          "spans": [
+            {
+              "doc_id": "SYNTHETIC-42",
+              "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+              "start": 0,
+              "end": 390,
+              "text": "SYNTHETIC TEST DOCUMENT. Fictional Maple Harbor, California. Not actual law.\nMaple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nBeginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.\nThere are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.\n",
+              "section": null
+            }
+          ],
+          "dependencies": [],
+          "status": "available",
+          "limits": {
+            "max_depth": 2,
+            "max_chars": 24000,
+            "max_spans": 12
+          },
+          "limits_hit": [],
+          "retrieval_method": "exact_anchors_and_bounded_lexical_retrieval",
+          "semantic_verification": false
+        },
+        "semantic_review": null,
+        "blocking_issues": [],
+        "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+      }
+    ],
     "encoded_rules": [],
     "answers_applied": [],
     "scenario_id": null,
     "capabilities": {
+      "lookup": "implemented",
+      "evidence": "implemented",
       "question_planner": "dependency_unavailable",
-      "rule_renderer": "dependency_unavailable",
-      "evidence": "dependency_unavailable"
+      "rule_renderer": "dependency_unavailable"
     },
-    "mode": "contract_fixture"
+    "mode": "synthetic"
   }
 }

@@ -1,3 +1,44 @@
+# Current follow-up handoff
+
+Planning complete; Platform implementation complete for local review; full Core/frontend integration
+pending. Branch codex/research-platform; base 5ef1de1; shared contract checkpoint 3349851. Implementation
+commit is the branch HEAD reported in the final chat handoff. No merge, push, deployment or submission.
+
+| Human lane | Ownership / ready starter |
+| --- | --- |
+| Vincent / Platform (this session) | API, validated answers, evidence/context/review/inventory, exports and shared contracts; docs/starters/PLATFORM_API.md |
+| Core developer (unclaimed) | Existing extraction/evaluator plus traces, bounded question planner and deterministic renderer; docs/starters/CORE_BACKEND.md |
+| Claude / UX (unclaimed) | Entire frontend/**, design/state/tests; docs/starters/FRONTEND_CLAUDE.md |
+
+Shared specification: docs/reference/RealPage_Codex_Research_Followup_Prompt.txt.
+Contract: docs/ASSIST_CONTRACT.md, navigator/models.py, contracts/openapi.json, contracts/research.schema.json.
+Fixtures: contracts/research_examples/ (five authored plans), contracts/evidence_examples/ (actual evidence,
+authored renderer expectation), contracts/examples/assist.json (actual Platform response).
+Tasks/claims: docs/TASKS.md, docs/OWNERSHIP.md, docs/tasks/COORD-01.md, PLAT-03/04/05.md,
+CORE-03/04/05.md and UX-03.md. Ongoing shared-document steward: Platform/Vincent.
+
+Implemented: four additive routes, strict field/type/provenance validation, ephemeral answers, current
+source/quote/anchor/dependency checks before evaluator use, bounded reference retrieval and whole-snapshot
+lexical search, selective source inventory, explicit bounded semantic-review CLI/cache, companion evidence
+exports, honest missing Core capability responses and prepared developer prompts. No frontend/Core internals
+were implemented in this lane. Independent TF-IDF and research design ideas only; no third-party code copied.
+
+Verification: 74 passing tests, one existing dependency warning; both synthetic and real partial exports
+retain valid official shapes and all address IDs. Three missing-support mutations return unknown; both
+authored decisive alternatives reproduce; occupancy plus two unresolved exemptions stays unknown.
+D001 inventory accounts for all 8,000 supplied characters in 15 unresolved units. Full evidence in EVALUATION.
+
+Ready immediately: UX-03 full frontend using working calls/fixtures; Core-03 traces and Core-05 renderer,
+then Core-04 planner. For integration supply navigator.core_assist.plan_questions/render_rule exactly as
+ASSIST_CONTRACT specifies. No teammate was contacted or claimed started by this session.
+
+P0 blockers: OpenAI key/model and actual reviewed extraction (zero real rules), source gaps, official
+scorer/brief clarification. P1: Core planner/renderer + UX integration. P2: broader references, reviewed
+12-case benchmark (0/12 reviewed), planner baseline comparison, then richer ranking/features.
+Platform's injected fixture tests do not certify actual planner behavior, legal accuracy, or human review.
+
+The original bootstrap handoff below is historical; current scope/status above takes precedence.
+
 # BOOT-01 handoff
 
 Status: **Review**. Backend baseline locally verified; real extraction acceptance blocked on local

@@ -117,3 +117,21 @@ so restart/reload consumers after a completed pipeline and do not run two writer
 Planning deadline assumption: October 4, 2026, 09:00 America/New_York.
 See [evaluation](docs/EVALUATION.md), [decisions](docs/DECISIONS.md), [tasks](docs/TASKS.md),
 and [handoff](docs/HANDOFF.md) for evidence, missing inputs, ownership and next work.
+
+## Follow-up / frontend start
+
+The entire frontend belongs to Claude/UX: [starter prompt](docs/starters/FRONTEND_CLAUDE.md).
+Use a separate checkout. Core's [starter](docs/starters/CORE_BACKEND.md) covers trace, question planner
+and deterministic renderer. Platform API/evidence work is implemented on codex/research-platform.
+See [current handoff](docs/HANDOFF.md), [assist contract](docs/ASSIST_CONTRACT.md) and generated OpenAPI.
+
+```powershell
+.\.venv\Scripts\python.exe -m navigator source-inventory D001 --output artifacts/D001-inventory.json
+.\.venv\Scripts\python.exe -m navigator review-rule YOUR_EXTRACTED_RULE_ID --output artifacts/semantic-review.json
+```
+
+Review is explicit and may call the configured OpenAI API; an existing exact-version review replays
+without a call. --refresh requests a fresh review. No model calls occur on lookup/evidence HTTP routes.
+GET /api/v1/facts defines accepted supplemental inputs. POST /api/v1/lookup/assist accepts typed,
+request-local answers and reports missing Core capabilities explicitly. The full suite has 74 passing
+tests; live legal extraction and complete Core/UX integration remain unverified.

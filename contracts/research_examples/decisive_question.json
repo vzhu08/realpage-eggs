@@ -218,7 +218,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "92df2ee3e7264dacb823d65b35a347a6",
+          "extraction_run_id": "7306809d45f6489399c28055965c0014",
           "semantic_verification": "synthetic_fixture"
         }
       ],
@@ -254,7 +254,7 @@
           "synthetic"
         ],
         "extraction_run_ids": [
-          "92df2ee3e7264dacb823d65b35a347a6"
+          "7306809d45f6489399c28055965c0014"
         ],
         "partial_data": false,
         "missing_source_ids": [],
@@ -495,7 +495,7 @@
     "capabilities": {
       "question_planner": "dependency_unavailable",
       "rule_renderer": "dependency_unavailable",
-      "evidence_checks": "dependency_unavailable"
+      "evidence": "dependency_unavailable"
     },
     "mode": "contract_fixture"
   }

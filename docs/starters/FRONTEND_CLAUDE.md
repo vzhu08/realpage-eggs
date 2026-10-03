@@ -12,4 +12,3 @@ Use implemented calls from FRONTEND_HANDOFF; handle dependency_unavailable visib
 Choose a frontend stack under frontend/, record and run exact typecheck/test/build commands. Return a local commit,
 interaction checks and integration blockers. No push/merge/deploy authority. This prompt is prepared for Vincent;
 it does not claim any teammate has received it or started.
-

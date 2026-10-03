@@ -11,4 +11,3 @@ Use agreed fixtures with explicit labels for missing Core dependencies; do not i
 Live question flow awaits Core module; live semantic review awaits key/model. Record those separately from working routes.
 Return local commits, exact checks, provenance modes, bounds and blockers through the existing queue. No external
 messages, push, merge or deployment authority is implied.
-

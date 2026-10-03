@@ -16,9 +16,9 @@ not claimed started. Ready is not a claim or permission to write in another deve
 | CORE-01 | Core owner | Blocked, unclaimed | First live source + corpus run/review; OPENAI_API_KEY and OPENAI_MODEL required |
 | CORE-02 | Core owner | Ready, unclaimed | Independent review of temporal/interactions and extraction omissions; prioritize unresolved lifecycle linking |
 | COORD-01 | Vincent / Platform | Review P0 | Shared contracts/5 fixtures/starter prompts released; 2 contract checks passed |
-| PLAT-03 | Vincent / Platform | Running P0/P1 | Evidence identity/quote/anchor distinctions and bounded context/reference retrieval |
-| PLAT-04 | Vincent / Platform | Ready P1 | Validated answers and assist API; full flow depends CORE-04/05 |
-| PLAT-05 | Vincent / Platform | Ready P1 | Targeted source-unit inventory and semantic verifier; live mode blocked by key/model |
+| PLAT-03 | Vincent / Platform | Review P0/P1 | Implemented evidence/context checks; targeted inventory verified; 12 focused tests pass |
+| PLAT-04 | Vincent / Platform | Review P1 | Answers/API implemented; 17 focused tests pass; full flow depends CORE-04/05 |
+| PLAT-05 | Vincent / Platform | Review P1 | Inventory/verifier implemented; fixture/replay verified; live mode blocked by key/model |
 | CORE-03 | Core owner | Ready P0/P1, unclaimed | Stable trace/residual AST; factual occupancy-date semantics review |
 | CORE-04 | Core owner | Planned P1, unclaimed | Bounded correlated-fact question planner; depends CORE-03 |
 | CORE-05 | Core owner | Ready P1, unclaimed | Deterministic rule renderer; independent of planner |

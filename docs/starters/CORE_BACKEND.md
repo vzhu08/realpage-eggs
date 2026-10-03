@@ -12,4 +12,3 @@ Use the same evaluate_rules for all probes; enforce correlated facts, bounds, ex
 No second evaluator, model renderer or fabricated certainty. Test each task, then full suite; benchmark expectations
 must identify reviewer and synthetic/non-independent status. Handoff actual commit/checks/limitations and contract requests.
 No remote push/merge/deploy authority. Keep Core-owned adapter changes serialized between planner/renderer tasks.
-
