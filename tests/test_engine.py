@@ -179,3 +179,14 @@ def test_exclusive_end_and_partial_end_boundaries(rule):
     assert temporal(rule, date(2026, 11, 30)) == 'in_force'
     assert temporal(rule, date(2026, 12, 1)) == 'unknown'
     assert temporal(rule, date(2026, 12, 31)) == 'inapplicable'
+
+
+def test_parallel_conflict_edge_cannot_be_treated_as_supersession(rule, prop, resolution):
+    state = state_rule(rule)
+    priority = link(rule, state)
+    conflict = priority.model_copy(update={'kind': 'conflicts_with'}, deep=True)
+    for order in ([priority, conflict], [conflict, priority]):
+        rule.interactions = order
+        answers = evaluate_rules([rule, state], prop, resolution, DAY)
+        assert all(e.conflict_flag for e in answers)
+        assert all(e.result == 'applies' and not e.applied_interactions for e in answers)

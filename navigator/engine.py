@@ -169,7 +169,7 @@ def evaluate_rules(rules: list[Rule], prop: PropertyFacts, resolution: Jurisdict
     for source, target, interaction, scope in edges:
         parent, child = evaluations[source], evaluations[target]
         cycle = interaction.kind == "supersedes" and reaches(target, source, set())
-        if (source, target) in definite_priority:
+        if interaction.kind == "supersedes" and scope.value == "true" and (source, target) in definite_priority:
             supersessions.append((source, target, interaction))
         else:
             child.conflict_flag = parent.conflict_flag = True

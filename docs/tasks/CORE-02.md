@@ -37,3 +37,7 @@ Checks: `.venv/bin/python -m pytest tests/test_engine.py tests/test_change_adapt
 New end-date change test preserves definite versus uncertain address sets and store immutability.
 Scope/provision matching still uses the shared citation/jurisdiction/category contract; no inferred
 cross-document enactment or finer-grained precedence was added. Full regression is in Core handoff.
+
+Final adversarial regression: parallel supersedes/conflicts_with edges to the same target must retain
+conflict. Reproduced failure, then required edge kind and true scope for each applied supersession.
+Both interaction orders are tested. Final check totals are in docs/core/CORE_HANDOFF.md.
