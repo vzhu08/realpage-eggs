@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-03T22:55:37.127548+00:00",
+  "mode": "synthetic_connection_diagnostic_not_legal_extraction",
+  "model": "gpt-6.1-sol",
+  "http_status": 429,
+  "error_code": "credit_balance_exhausted",
+  "error_type": "insufficient_quota",
+  "error_parameter": null,
+  "message_flags": {
+    "json_object": false,
+    "not supported": false,
+    "unsupported": false,
+    "verification": false,
+    "verified": false,
+    "max_output_tokens": false,
+    "quota": false,
+    "billing": true,
+    "temperature": false,
+    "reasoning": false
+  },
+  "response_id": null,
+  "usage": null
+}

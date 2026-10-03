@@ -3,7 +3,7 @@
 - Human owner: Daniel. Tool/session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
 - Branch: codex/core-backend. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`.
 - Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Result: `30cdfb7630b7bac81b7464e980ab6033ee69a239`.
-- Dependency/blocker: user sets OPENAI_API_KEY and OPENAI_MODEL in local .env; never paste keys into chat.
+- Current dependency/blocker: key/model are configured; API diagnostic reports credit_balance_exhausted / insufficient_quota. User adds API credits locally; never paste keys into chat.
 - Allowed: `navigator/extraction.py`, `tests/test_extraction.py`, a new core evidence report and this card;
   isolated data/cache directory for the writer. Model/schema changes require Platform stewardship.
 - Reserved: API, geocoder, frontend, canonical models/contracts, original corpus, shared board.
@@ -69,3 +69,16 @@ Current source-review limitations, 33 missing source IDs, commands/run IDs/count
 key/model setup are in `docs/core/EXTRACTION_EVIDENCE.md`; current verification log is
 `docs/core/verification.json`. Next: configure locally, review live D001, then resume captured corpus.
 No push, merge, deployment, contact or legal-accuracy claim; Daniel pushes manually.
+
+### Latest local setup and provider attempts
+
+Both settings are now configured. Corrected malformed first `.env` line and duplicated model prefix,
+preserving key/other settings and keeping the file ignored, mode 0600. Actual D001 runs:
+`4edb554e813f40ff943a641fff17d0f7` (malformed model value, HTTP 404, 1.034s) and
+`7a402a6829d942a59c705954bce8db44` (gpt-6.1-sol, HTTP 400, 0.402s), both zero processed/rules.
+One minimal API diagnostic then returned 429 credit_balance_exhausted / insufficient_quota.
+The original 400 cause remains unclassified; calls stopped at the confirmed credit blocker.
+No completed model response/usage, no corpus extraction. Source inputs and 500 unresolved addresses
+preserved. Current records: `core01_configured_attempts.json`, `core01_provider_diagnostic.json`.
+Next bounded action: add API credits for this key's organization, then retry D001 and inspect any
+remaining request error before proceeding. Existing 106-test code result is unchanged.

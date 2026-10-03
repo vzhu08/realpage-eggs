@@ -1,6 +1,40 @@
 # CORE-01 evidence — blocked live extraction; local checks completed
 
-## Current continuation — 2026-10-03
+## Latest configured attempts — 2026-10-03
+
+The user created the ignored local `.env`. Secure parsing found an invalid first line (preserved as
+a comment) and a duplicated model-setting prefix (corrected). Other parsed settings, including the
+key, were preserved. Both key and model are now present; file permissions are 0600. No credentials
+were shown, logged, staged or committed.
+
+Same explicit `data/core-session` path and unchanged real inputs; D001 commands were identical to
+the command below. Actual outcomes:
+
+| Request | Model identifier | Actual result |
+| --- | --- | --- |
+| D001 run `4edb554e813f40ff943a641fff17d0f7` | Incorrect local value `OPENAI_MODEL=gpt-6.1-sol` | HTTP 404, failed; 22:54:23 UTC; 1.034 seconds; processed/rules/cache hits all zero |
+| D001 run `7a402a6829d942a59c705954bce8db44` | Corrected `gpt-6.1-sol` | HTTP 400, failed; 22:55:12 UTC; 0.402 seconds; processed/rules/cache hits all zero |
+| One minimal connection diagnostic (request for empty JSON, no legal input) | `gpt-6.1-sol` | HTTP 429; `credit_balance_exhausted`, type `insufficient_quota`; no response ID or usage |
+
+The HTTP 400 cause remains unclassified. The diagnostic logged only allowlisted error metadata and
+boolean message flags, never the raw error body or key. It establishes an API-credit blocker; it does
+not prove the original 400 had the same cause. These were three HTTP attempts, no completed model
+response, no token-usage record and no accepted rules. No actual extraction or replay quality claim.
+All further calls, including corpus extraction, stopped after the funding error.
+
+Safe records are `core01_configured_attempts.json` and `core01_provider_diagnostic.json`; run manifests
+and empty usage lists remain in the same ignored store. Source JSON hash is unchanged; 87 sources,
+54 texts, 500 addresses, zero rules and 500 unresolved municipalities remain. Existing benchmark
+partial evaluation/export evidence remains applicable; no fabricated output replaces the failed runs.
+No production code changed in this setup turn; the existing 106-test verification is still the code
+verification record. `CORPUS_REVIEW_CHECKLIST.md` adds bounded source-only checks for the next real run.
+
+Next: use [API billing](https://platform.openai.com/account/billing/overview) for the organization
+that owns this key to add credits, then retry D001 with the existing explicit store. If HTTP 400
+persists after funding, inspect sanitized request-error metadata before further corpus calls.
+No key replacement or additional dotenv edits are needed based on the current evidence.
+
+## Earlier continuation before local configuration — 2026-10-03
 
 Started from `c92ad8fbd27a2175a41cb74428cdc03fb76ab14a` on `codex/core-backend`.
 Fresh configuration checks after loading the existing dotenv configuration found both

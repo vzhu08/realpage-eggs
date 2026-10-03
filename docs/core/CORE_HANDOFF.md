@@ -1,6 +1,27 @@
 # Daniel / Core handoff
 
-## Current CORE-01 continuation — 2026-10-03
+## Current provider setup result — 2026-10-03
+
+Both key/model are now configured locally. Fixed an invalid first `.env` line by commenting it, then
+removed a duplicated `OPENAI_MODEL=` prefix from its value. Key and other settings were preserved;
+`.env` stays ignored with mode 0600. No secret values were printed or committed.
+
+Live CORE-01 acceptance remains **Blocked**, now on API funding: a minimal request returned HTTP 429,
+`credit_balance_exhausted` / `insufficient_quota`. Calls stopped. Two preceding D001 manifests record
+HTTP 404 for the malformed model value (run `4edb554e813f40ff943a641fff17d0f7`, 1.034 seconds), then
+HTTP 400 with corrected `gpt-6.1-sol` (run `7a402a6829d942a59c705954bce8db44`, 0.402 seconds).
+The HTTP 400 cause was not established; the following minimal diagnostic conclusively reported the
+credit blocker. After funding, retry D001 and diagnose any remaining request error within Core scope.
+No completed model output or usage record was returned. No corpus run or live legal review occurred.
+
+Evidence: `core01_configured_attempts.json`, `core01_provider_diagnostic.json`, and latest section in
+`EXTRACTION_EVIDENCE.md`. Store unchanged in substance: zero rules, 87 sources, 500 addresses,
+zero resolved municipalities; source JSON hash unchanged. Prior explicit partial exports remain partial.
+`CORPUS_REVIEW_CHECKLIST.md` adds source-only review targets for overlap, exemptions and proposal history.
+No production-code change since the verified 106-test implementation. No push or teammate contact.
+Next bounded action: Daniel adds API credits for the key's organization, then retries D001 here.
+
+## Earlier CORE-01 continuation before local configuration — 2026-10-03
 
 Software fixes: **Review**. Real extraction acceptance: **Blocked** on locally configured
 `OPENAI_API_KEY` and `OPENAI_MODEL`, followed by actual output review. Presence checks after dotenv
