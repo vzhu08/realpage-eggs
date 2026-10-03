@@ -1,5 +1,31 @@
 # Plan from actual clock
 
+## Follow-up at October 3, 17:32 ET
+
+Approximately 15h28m remain before the planning deadline. Canonical follow-up lives in docs/reference/;
+execution is lane-scoped, not a request for one session to build every feature. Vincent/Platform owns this session.
+Shared additions are in ASSIST_CONTRACT and contracts/research.schema.json; lane prompts are in docs/starters/.
+
+| Capability at follow-up baseline 5ef1de1 | Classification / evidence | Owner / next step |
+| --- | --- | --- |
+| Bounded AST, three-valued/date/interaction evaluator | Verified software baseline: 42 tests pass | Core preserves and adds trace |
+| Actual corpus extraction / legal T1–T5 outcomes | Blocked: no key/model, zero rules | CORE-01; no synthetic substitutes |
+| 500-address ingestion / 479 Census municipalities | Verified real-data baseline | PLAT-01 retains 21 unresolved |
+| Typed supplemental facts | Partial: scalars accepted without domain typing | PLAT-04 P0 input validation |
+| Predicate tree/residual IDs / question planner | Missing; flat matched/unresolved lists exist | CORE-03/04 |
+| Encoded-rule renderer | Missing; property explanation already exists | CORE-05 |
+| Literal quotes and bounded model extraction review | Implemented, live model review unverified | CORE-01 retains extractor |
+| Distinct source/anchor/semantic/dependency checks | Partial/missing; stale removed support not consistently guarded in API | PLAT-03 P0 |
+| Context/reference retrieval and source-unit inventory | Missing | PLAT-03/05 |
+| Frontend | Missing, entirely UX-owned | UX-03 can start with contracts/fixtures |
+| Official export formatting | Verified synthetic/partial tests; legal submission blocked | Preserve formats in PLAT-04 |
+
+No pre-existing software test failures reproduced. Blocking demo dependencies are provider configuration,
+source gaps and missing Core assist services. They do not block UX fixtures or local evidence work.
+Sequencing: contracts/ownership release -> PLAT-03 local evidence -> PLAT-04 answers/API -> PLAT-05 targeted review.
+Core traces/planner and compact renderer proceed in its own checkout; UX builds the entire frontend in its checkout.
+Target integrated journey remains unverified until actual Core services land. An injected fixture test is not live integration.
+
 Initial inspection: October 3, 2026 16:41 America/New_York (20:41 UTC).
 Planning deadline: October 4, 2026 09:00 America/New_York (13:00 UTC), approximately 16h19m
 remaining at inspection. This is the team's assumption, not a confirmed organizer update.
