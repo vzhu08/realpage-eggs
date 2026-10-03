@@ -1,0 +1,83 @@
+/*
+ * Design tokens. One warm paper ground, one ink, one restrained accent, and a small set of
+ * status tones that always appear with a word and a shape, never as color alone.
+ * Text/background pairs are checked for WCAG AA contrast in tests/unit/contrast.test.ts.
+ */
+:root {
+  color-scheme: light;
+
+  /* Ground and ink */
+  --paper: #f5f2ea;
+  --paper-deep: #ebe6d9;
+  --surface: #fffdf9;
+  --ink: #17212b;
+  --ink-2: #3a4653;
+  --ink-3: #596573;
+  --line: #dcd6c7;
+  --line-strong: #c3bba8;
+
+  /* Accent: used for actions, links, focus and selection only */
+  --accent: #1d3557;
+  --accent-hover: #142741;
+  --accent-wash: #e3e9f2;
+  --on-accent: #ffffff;
+
+  /* Status tones (text on wash) */
+  --applies: #1b5e41;
+  --applies-wash: #e0efe6;
+  --unknown: #7a4a00;
+  --unknown-wash: #fbeed3;
+  --future: #40448a;
+  --future-wash: #e8e8f6;
+  --pending: #5a3f8a;
+  --pending-wash: #eee8f6;
+  --muted: #55606c;
+  --muted-wash: #e9e5db;
+  --danger: #962a21;
+  --danger-wash: #f9e3df;
+  --info: #1d4a73;
+  --info-wash: #e2ecf5;
+
+  /* Evidence */
+  --highlight: #fbe7a1;
+  --quote-rule: #c9a227;
+
+  /* Synthetic banner */
+  --synthetic-bg: #17212b;
+  --synthetic-ink: #f5f2ea;
+  --synthetic-tag: #f2bd45;
+
+  /* Type */
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: Charter, 'Bitstream Charter', 'Iowan Old Style', 'Sitka Text', Cambria, Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 2rem;
+
+  /* Space (4px base) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow-panel: 0 1px 2px rgb(23 33 43 / 6%), 0 12px 32px rgb(23 33 43 / 10%);
+  --focus: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --banner-h: 0px;
+}
+
+.app--demo {
+  --banner-h: 2.25rem;
+}
