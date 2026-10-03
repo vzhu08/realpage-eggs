@@ -1,0 +1,35 @@
+{
+  "run_id": "2d6ad7733eba4236ba09572b79bf7451",
+  "operation": "export",
+  "mode": "local",
+  "started_at": "2026-10-03T21:04:07.658520+00:00",
+  "finished_at": "2026-10-03T21:04:07.783535+00:00",
+  "elapsed_seconds": 0.125,
+  "outcome": "partial",
+  "input_hashes": {
+    "rules": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "addresses": "22a052a13f29d8b310a6b2474edeee44419c6872739d811cbe9286b37f23ae37",
+    "resolutions": "06a0c8fd7dd433a11e38166c8bcda16fb7d84ce4b9e435bdc6807025aa78f79d"
+  },
+  "config": {
+    "as_of": "2026-10-01",
+    "allow_partial": true
+  },
+  "versions": {
+    "pipeline": "0.1.0",
+    "evaluator": "0.1.0"
+  },
+  "counts": {
+    "rules": 0,
+    "addresses": 500
+  },
+  "errors": [],
+  "artifacts": [
+    "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\submission\\rules.json",
+    "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\submission\\lookups.json",
+    "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\submission\\changes.json",
+    "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\submission\\validation.json",
+    "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\submission\\change_details.json",
+    "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\submission\\evidence_inventory.json"
+  ]
+}

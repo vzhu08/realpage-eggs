@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+.env.*
+!.env.example
+data/
+artifacts/
+*.egg-info/
+.coverage
+# Organizer input stays untouched and is not redistributed by this bootstrap.
+MIT-hackathon-PARTICIPANT-PACK-CLEAN-NO-HOUR16/

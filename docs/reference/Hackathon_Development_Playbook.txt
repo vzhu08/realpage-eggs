@@ -1,0 +1,329 @@
+Hackathon Development Playbook
+
+Three developers using Codex Claude Code or both
+
+Use this playbook to build an ambitious, demoable product in a short hackathon. Humans own product decisions, interfaces, and acceptance. Agents implement bounded tasks in isolated checkouts. Integrate small working increments throughout the event.
+
+The goal is a strong deployed demo with little waiting and manageable integration. Zero merge conflicts cannot be guaranteed. Separate files can still contain incompatible assumptions; contracts and integration checks address that risk.
+
+Read and apply
+
+- Developers read the whole playbook. Agents read the operating rules on page 5, their task card, and the referenced project files before editing.
+
+- At kickoff, fill in the ownership map, checks, demo path, and submission deadline. Examples in this document are defaults to adapt, not claims about an existing repository.
+
+- Keep shared rules in AGENTS.md and load them into Claude Code through CLAUDE.md. See section 7 for setup. Keep task cards in an issue tracker or a shared task board.
+
+
+
+Core rules
+
+- One active writer owns each file or explicitly assigned file set. Every task has one accountable human owner.
+
+- Every concurrent writing session gets its own branch and checkout. Agents do not push directly to main.
+
+- Agree on interfaces before parallel implementation. Frontend and backend use the same representative fixtures.
+
+- Shared files have a named steward. A task needing a shared change routes it to that steward.
+
+- Only independently implementable tasks run in parallel. Split tasks by outputs and acceptance criteria, not arbitrary file counts.
+
+- Merge through one ordered queue. Validate the combined result against the current main branch.
+
+- Keep main buildable and the core demo usable. Fix or revert a broken integration before adding dependent work.
+
+
+
+First hour
+
+Choose the judge demo and one technically distinctive capability. Agree on request and response schemas, error behavior, persistence, and deployment. Create a thin end-to-end skeleton, initially using clearly marked mocks where needed. Assign the first independent tasks only after their interfaces are stable.
+
+Success is measured by working capabilities, demo quality, evaluation evidence, and time from assignment to integration. Commit count and agent count are not productivity targets.
+
+1 Ownership and parallel work
+
+Each developer owns a lane and reviews the agents working in it. Ownership includes decisions and integration, not just writing code. Rotate the merge coordinator as needed; this is a lightweight duty, not a full-time role.
+
+Lane | Typical ownership | Human responsibility
+
+Product and UX | UI components, client state, demo flow | Usability, user-visible states, visual quality
+
+Platform and API | Routes, persistence, deployment | Contracts, integration, reliability
+
+Core capability | AI pipeline, algorithms, evaluation | Technical differentiation, quality, latency
+
+
+
+Map actual files before starting
+
+Use the project’s real structure. For a Next.js application, an example is: UX owns src/components/** and selected app pages; platform owns src/app/api/** and src/server/**; core owns src/core/** and evaluation code. Tests belong to the task that changes the behavior unless separately assigned.
+
+Name one steward for each shared area: contracts, dependency manifest and lockfile, root layout, global styles, environment examples, database migrations, and deployment configuration. Announcing a change is not a lock: record its owner and release the claim after integration.
+
+Choose concurrency the team can review
+
+Start with one writing agent per developer. Add a second writer only when its task is independent, its scope is exclusive, and its output can be reviewed promptly. This gives a practical starting range of three to six writing jobs across the team; it is a workflow choice, not a product limit.
+
+Read-only investigation and review can run alongside implementation. Reviewers identify the commit they inspected. A test-writing agent is still a writer and needs its own file scope and checkout. A reviewer that proposes to fix code must first claim a writing task.
+
+Reduce concurrency when completed work waits for review, shared files become bottlenecks, or integration failures increase. Do not launch jobs just to keep every agent busy. Available independent work and human review capacity determine the useful limit.
+
+Use one shared task board
+
+Track each task as Planned, Ready, Running, Review, Queued, Merged, Verified, or Blocked. Record its ID, human owner, agent/session, branch, base commit, claimed paths, dependencies, acceptance checks, and result commit. A task becomes Ready when its inputs are sufficient to implement independently.
+
+Keep one or two Ready tasks ahead of each developer. If a task blocks, record the exact dependency and switch to an independent Ready task. Do not create overlapping work to bypass a blocker.
+
+2 Contracts and task cards
+
+Contracts describe observable behavior. They must cover input and output schemas, required and optional fields, error cases, units, empty results, and any streaming or persistence behavior. Include one normal fixture and a failure or empty-result fixture. Validate data at runtime boundaries when malformed input would break the demo.
+
+Handle interface changes explicitly
+
+The proposer states the change and affected consumers. The contract steward coordinates it, updates the schema and fixtures, and records migration work. Keep an existing interface compatible where practical. For a breaking change, pause affected tasks until the new contract is agreed and landed; unaffected tasks continue.
+
+Mocks use the real contract and are visibly identified in development and any fallback demo. Integrate a real result early. A matching TypeScript type alone does not prove the services agree on actual behavior.
+
+Reusable task card
+
+Task ID and title: [ID] [one bounded outcome]
+Human owner: [name]   Tool and session: [identifier]
+Branch and checkout: [branch] [absolute path]
+Base commit: [SHA]   Dependencies: [IDs or none]
+Allowed files: [explicit paths or narrow globs]
+Reserved files: [shared paths and files owned by others]
+Read first: [instructions, contracts, relevant source]
+Outcome: [observable behavior and its demo purpose]
+Acceptance: [normal case, relevant failure, constraints]
+Checks: [exact commands and manual check if needed]
+Non-goals: [excluded features and refactors]
+Handoff: [commit, changed files, evidence, limits]
+Integration authority: [who may merge or deploy]
+
+Example task
+
+CORE-03 implements analyze(request) under src/core/analysis/** using the agreed AnalysisRequest and AnalysisResult contracts. It accepts text, returns validated structured output, and produces the agreed error for provider failure. It may add tests under tests/core/analysis/**. It may not change the API route, shared schema, dependencies, or environment files.
+
+Acceptance requires a representative request to produce the expected shape, an invalid provider response to be handled, and secrets to stay out of logs. The owner supplies the repository’s exact checks and a fixture. The agent returns the commit and actual results, including anything it could not verify.
+
+Keep tasks reviewable
+
+Aim for tasks that take roughly 20–60 minutes as an initial planning guide. Split a task when it combines unrelated outcomes or delays usable integration. A technically difficult task can take longer; deliver its smallest working boundary first. Investigation tasks end with a decision, evidence, and a recommended next action rather than unbounded exploration.
+
+3 Branches and integration
+
+Each developer uses a separate clone on their own machine. Within a clone, use one worktree per concurrent writing job. Worktrees isolate files but share Git repository state; they do not isolate external databases, credentials, deployment targets, or all caches. Give sessions distinct local ports and avoid concurrent changes to shared services.
+
+Create a task checkout
+
+Example commands for an existing repository. Replace the task ID and paths. Run each step only after the previous one succeeds.
+
+git fetch origin
+git worktree add ../project-core-03 -b task/core-03 origin/main
+cd ../project-core-03
+git rev-parse HEAD
+
+Record the base SHA, install from the existing lockfile, and configure local environment values through the team’s agreed secret mechanism. Commit only task files. Keep keys, local environment files, generated caches, and unintended artifacts out of commits.
+
+Merge queue
+
+- The feature owner reviews the diff, checks scope, confirms behavior, and submits a small PR or equivalent reviewable change. Agents may commit and push their task branch when authorized by the task card.
+
+- The coordinator orders queued changes by dependency. One change integrates at a time. Ownership of this queue can rotate while all three developers continue feature work.
+
+- Immediately before integration, update the candidate against current main in a clean task checkout or integration checkout. Run the required checks on the combined code. Never rebase a branch another session is actively writing.
+
+- Resolve conflicts with the affected owners. After any conflict resolution or main update, rerun affected checks. Earlier passing checks cover the earlier code only.
+
+- Merge the reviewed candidate using the team’s chosen strategy. If main advances before merge, update and recheck, or let an available merge queue perform that validation.
+
+- Verify the core demo on the resulting main and its deployment. Mark Merged and Verified separately. Announce interface, dependency, or migration changes so consumers update.
+
+
+
+Keep integration small and continuous
+
+Choose one merge strategy at kickoff; squash merges are a reasonable default for task PRs. Agents can make useful local checkpoints without manufacturing commits after every tool call. Merge a working interface, then a basic implementation, then independent improvements as they become usable.
+
+Pull or fetch main at task boundaries and after relevant shared changes. Do not interrupt a running writer by changing its checkout underneath it. Integrate at least one real end-to-end improvement regularly; a branch with hours of unreviewed work is a warning sign.
+
+If integration breaks the core path, pause dependent merges. Make a bounded repair or revert the faulty change. Do not rewrite shared history to erase the failure. Confirm the recovered main and deployment before resuming.
+
+4 Agent operating instructions
+
+Give each coding agent the following instructions together with a completed task card. Put project-specific paths and check commands in repository instructions. A task is not ready for a writer if its ownership or required interface is unresolved.
+
+You are implementing one bounded hackathon task.
+
+1. Read repository instructions, your task card, contracts,
+   fixtures, and relevant source before changing code.
+2. Confirm the assigned checkout, branch, and base commit.
+   Inspect existing changes; preserve work you did not create.
+3. Write only within your allowed files. Read outside scope
+   as needed. Do not refactor unrelated code or silently
+   change dependencies, schemas, routes, or global config.
+4. Follow the agreed contract and existing project patterns.
+   Maintain behavior outside the requested change. Add
+   concise comments where the reasoning needs explanation.
+5. If another file must change, report the exact path,
+   proposed change, reason, and affected consumers to the
+   human owner. Continue independent work in scope.
+6. Do not claim files owned by another active task. If using
+   subagents is authorized, give each writer a disjoint scope
+   and separate checkout; you remain responsible for review.
+7. Build the smallest complete behavior that meets acceptance.
+   Check the normal case and relevant failures. Prefer tests
+   of observable behavior; do not generate redundant tests.
+8. Run assigned checks. Report commands and actual results.
+   Never claim a test, integration, deployment, or quality
+   result that you did not verify.
+9. Keep secrets out of commits and logs. Use the established
+   environment configuration. Label mocks and fallbacks.
+10. Commit only your task changes. Push your task branch only
+    if authorized. Merge to main or deploy only under the
+    authority recorded in your task card.
+11. Return a concise handoff. If blocked, state the blocker,
+    completed work, and the smallest decision or change needed.
+
+Required handoff
+
+Task ID: [ID]   Status: [Review or Blocked]
+Branch: [branch]   Commit: [SHA]
+Changed files: [paths]
+Behavior delivered: [what now works]
+Checks and results: [commands, pass/fail, manual evidence]
+Contract or environment changes: [none or approved details]
+Known limits and unverified behavior: [specific items]
+Next action: [review, dependent task, or blocker resolution]
+
+Human owners reject a handoff that exceeds scope, changes the contract without coordination, or claims success without evidence. “Done” means accepted behavior and relevant checks; integration and deployed verification remain separate steps.
+
+5 The 24 hour build schedule
+
+Use this as a starting schedule. Scale it to the event and work backward from the actual submission deadline. Complete required submission fields early and leave a buffer for uploads or platform problems.
+
+Time | Target | Parallel work
+
+0–1 h | Agree on demo, contracts, ownership, and skeleton | Choose stack, deploy skeleton, assign first Ready tasks
+
+1–4 h | Make the core path work with real output | UX uses fixtures; platform wires API; core delivers baseline
+
+4–8 h | Deploy and prove the differentiator | Replace remaining core mocks; run representative examples
+
+8–16 h | Improve technical quality and product value | Evaluate core quality; add useful features; polish UX
+
+16–18 h | Converge on the strongest demo | Cut weak features; resolve failures; prepare presentation
+
+18–22 h | Freeze architecture and stabilize | UX polish; deployment reliability; core tuning and evidence
+
+22–24 h | Freeze features and submit | Rehearse, capture backup, verify final build, submit with buffer
+
+
+
+Demonstrate progress regularly
+
+Every 60–90 minutes, hold a brief demo checkpoint. Show the current core path, inspect latency and output quality, identify the biggest integration risk, and replenish Ready tasks. Use async handoffs between checkpoints instead of meetings for every commit.
+
+At hour 4, aim to have a real end-to-end path, even if rough. If it still does not work, reduce optional scope and concentrate on the failing boundary. At hour 8, demand visible evidence of the project’s distinctive capability. A large agent architecture with no compelling result is not enough.
+
+Assign the final phase
+
+The UX owner makes the judge path clear and presentation-ready. The platform owner verifies deployment, environment values, failure handling, and recovery. The core owner improves the capability and prepares representative examples plus honest evaluation evidence. All three rehearse the same demo.
+
+Freeze rules
+
+An architecture freeze stops stack swaps, broad refactors, and major contract changes. A feature freeze stops new capabilities. Focus on fixing existing behavior and completing the submission. Reopen scope only when the team explicitly agrees that the change is necessary and can still be verified.
+
+Keep a known-good deployed version and identify its commit. Prepare a backup recording and a clearly labeled fallback if the event permits them. Do not present cached, simulated, or manually prepared output as a live result.
+
+6 Recovery and final acceptance
+
+Respond to common blockers
+
+Situation | Response
+
+Two tasks need the same file | Stop overlapping writers. Assign one owner; split the other task or queue the shared change.
+
+An agent needs an interface change | Record the proposal. The steward updates contracts and fixtures; affected consumers coordinate migration.
+
+An agent is stuck or making no useful progress | Inspect the blocker and diff. Narrow or replace the task; preserve useful work in its branch.
+
+Checks fail outside the assigned scope | Report the failing command and evidence. The responsible owner fixes it; do not authorize a repository-wide cleanup.
+
+Provider outage or rate limit | Use bounded retries and agreed timeout behavior. Switch to a permitted, labeled fallback or narrow the live demo.
+
+Review or integration backlog grows | Stop launching writers. Help review and integrate accepted work, then resume with smaller tasks.
+
+Merged build breaks the demo | Pause dependent merges. Repair or revert, verify recovery, and record the known-good commit.
+
+
+
+Before accepting a task
+
+- The diff stays within its assigned or explicitly coordinated scope.
+
+- Observable behavior matches the contract and task acceptance criteria.
+
+- Relevant checks passed on the candidate combined with current main; skipped checks are identified.
+
+- Failures, empty states, timeouts, or invalid outputs relevant to this task are handled.
+
+- The handoff identifies the result commit, setup changes, and remaining limits.
+
+
+
+Before submission
+
+- Run the exact judge demo on the final deployment from a fresh session.
+
+- Confirm loading and failure states, credentials, provider access, and representative outputs.
+
+- Verify that each claimed capability is supported by the live result or disclosed evidence.
+
+- Check the event’s eligibility, required sponsor usage, attribution, and submission materials.
+
+- Match the deployed build to its commit and preserve the known-good version and backup.
+
+- Submit before the deadline buffer expires and verify the submission receipt or status.
+
+
+
+After the event, record what created waiting, what broke integration, and which agent tasks produced useful accepted work. Adjust ownership, task size, and concurrency for the next hackathon using those results.
+
+7 Mixed coding tools
+
+Developers may use Codex, Claude Code, or both. Assign work by task and file ownership, regardless of the tool. Each session uses the same contracts, task board, checks, merge queue, and handoff format. No cross-tool agent integration is required; Git and task cards carry the shared state.
+
+Keep one shared instruction source
+
+Maintain the project rules in the root AGENTS.md: ownership, shared-file stewards, setup, contracts, exact checks, and the operating instructions in section 4. Keep it concise. Put event planning and background details in this playbook or linked documents.
+
+Tool | Repository setup
+
+Codex | Use AGENTS.md for project instructions. Check relevant nested instruction files and overrides.
+
+Claude Code | Keep CLAUDE.md beside AGENTS.md with the import below. Add only necessary Claude-specific guidance.
+
+Root CLAUDE.md content
+
+@AGENTS.md
+
+The explicit import keeps the shared rules available across Claude Code versions and instruction-loading settings. It also avoids a Windows symlink dependency. Newer Claude Code versions can load AGENTS.md directly in some configurations; the import remains a useful compatibility option.
+
+Verify setup and control writers
+
+Start each session in its assigned checkout. Before implementation, ask it to identify the instruction files, branch, allowed paths, and checks. Resolve missing or conflicting instructions before assigning code. Treat file-scope rules as coordination instructions; they are not enforced access controls.
+
+A built-in subagent or agent team does not automatically get permission to edit shared files. Read-only exploration can share context. Every concurrent writer still needs an exclusive scope and separate checkout. If that isolation is unavailable, serialize edits.
+
+Switch tools without losing work
+
+Stop the first writer before handing its task to another tool. Preserve changes in a task-branch checkpoint or patch. Record the task ID, branch, base and result commits, changed files, checks, decisions, and next step. The receiving session reads that handoff and the current diff before editing. Never run Codex and Claude Code as simultaneous writers in the same checkout.
+
+Use a second tool for read-only review when it helps assess a risky change. Judge the result by behavior and evidence; different tools agreeing is not a substitute for checks. Do not duplicate implementation of the same task just to use both subscriptions.
+
+Instruction file references
+
+Verified October 3 2026
+OpenAI https://learn.chatgpt.com/docs/agent-configuration/agents-md
+Claude Code https://code.claude.com/docs/en/memory

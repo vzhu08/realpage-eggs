@@ -1,0 +1,1589 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Rental Housing Law Navigator",
+    "description": "Not legal advice. Coverage is not a finding of compliance or a violation.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/addresses": {
+      "get": {
+        "summary": "Addresses",
+        "operationId": "addresses_api_v1_addresses_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressPage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/lookup": {
+      "post": {
+        "summary": "Address Lookup",
+        "operationId": "address_lookup_api_v1_lookup_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookupResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/rules/{rule_id}": {
+      "get": {
+        "summary": "Rule Detail",
+        "operationId": "rule_detail_api_v1_rules__rule_id__get",
+        "parameters": [
+          {
+            "name": "rule_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Rule Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/sources/{doc_id}": {
+      "get": {
+        "summary": "Source Detail",
+        "operationId": "source_detail_api_v1_sources__doc_id__get",
+        "parameters": [
+          {
+            "name": "doc_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Doc Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceDocument"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/changes": {
+      "post": {
+        "summary": "Changes",
+        "operationId": "changes_api_v1_changes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangeResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddressItem": {
+        "properties": {
+          "property": {
+            "$ref": "#/components/schemas/PropertyFacts"
+          },
+          "resolution": {
+            "$ref": "#/components/schemas/JurisdictionResolution"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "property",
+          "resolution"
+        ],
+        "title": "AddressItem"
+      },
+      "AddressPage": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AddressItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "total",
+          "offset",
+          "limit",
+          "items",
+          "disclaimer"
+        ],
+        "title": "AddressPage"
+      },
+      "Bound": {
+        "properties": {
+          "lower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lower"
+          },
+          "upper": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upper"
+          },
+          "provenance": {
+            "type": "string",
+            "title": "Provenance"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "provenance"
+        ],
+        "title": "Bound"
+      },
+      "ChangeRequest": {
+        "properties": {
+          "test_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Test Id"
+          },
+          "before": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before"
+          },
+          "after": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After"
+          },
+          "rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rule Ids"
+          },
+          "scenario": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "if_enacted"
+            ],
+            "title": "Scenario",
+            "default": "actual"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ChangeRequest"
+      },
+      "ChangeResult": {
+        "properties": {
+          "test_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Test Id"
+          },
+          "scenario": {
+            "type": "string",
+            "title": "Scenario"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "partial",
+              "blocked"
+            ],
+            "title": "Status"
+          },
+          "before": {
+            "type": "string",
+            "format": "date",
+            "title": "Before"
+          },
+          "after": {
+            "type": "string",
+            "format": "date",
+            "title": "After"
+          },
+          "affected_address_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Affected Address Ids"
+          },
+          "uncertain_address_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Uncertain Address Ids"
+          },
+          "conflict_flag_address_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Conflict Flag Address Ids"
+          },
+          "differences": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Differences"
+          },
+          "mapped_rule_ids": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Mapped Rule Ids"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scenario",
+          "status",
+          "before",
+          "after",
+          "affected_address_ids",
+          "uncertain_address_ids",
+          "conflict_flag_address_ids",
+          "differences",
+          "notes",
+          "disclaimer"
+        ],
+        "title": "ChangeResult"
+      },
+      "Evaluation": {
+        "properties": {
+          "team_rule_id": {
+            "type": "string",
+            "title": "Team Rule Id"
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "applies",
+              "unknown",
+              "superseded",
+              "not_yet_effective",
+              "pending",
+              "inapplicable",
+              "failed"
+            ],
+            "title": "Result"
+          },
+          "jurisdiction": {
+            "type": "string",
+            "enum": [
+              "true",
+              "false",
+              "unknown"
+            ],
+            "title": "Jurisdiction"
+          },
+          "coverage": {
+            "$ref": "#/components/schemas/PredicateResult"
+          },
+          "temporal_status": {
+            "type": "string",
+            "title": "Temporal Status"
+          },
+          "missing_facts": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Missing Facts"
+          },
+          "uncertainty_reasons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Uncertainty Reasons"
+          },
+          "applied_interactions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Applied Interactions"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "conflict_flag": {
+            "type": "boolean",
+            "title": "Conflict Flag",
+            "default": false
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "title": "Evidence"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "team_rule_id",
+          "result",
+          "jurisdiction",
+          "coverage",
+          "temporal_status",
+          "explanation",
+          "evidence"
+        ],
+        "title": "Evaluation"
+      },
+      "Evidence": {
+        "properties": {
+          "doc_id": {
+            "type": "string",
+            "title": "Doc Id"
+          },
+          "quote": {
+            "type": "string",
+            "minLength": 20,
+            "title": "Quote"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start"
+          },
+          "end": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End"
+          },
+          "supports": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Supports"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "doc_id",
+          "quote",
+          "supports"
+        ],
+        "title": "Evidence"
+      },
+      "Expression": {
+        "properties": {
+          "op": {
+            "type": "string",
+            "enum": [
+              "all",
+              "any",
+              "not",
+              "eq",
+              "ne",
+              "lt",
+              "lte",
+              "gt",
+              "gte",
+              "in",
+              "date_before",
+              "date_on_or_before",
+              "age_at_least",
+              "literal",
+              "unsupported"
+            ],
+            "title": "Op"
+          },
+          "args": {
+            "items": {
+              "$ref": "#/components/schemas/Expression"
+            },
+            "type": "array",
+            "title": "Args"
+          },
+          "fact": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fact"
+          },
+          "value": {
+            "title": "Value"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "op"
+        ],
+        "title": "Expression"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "dataset_readiness": {
+            "type": "string",
+            "enum": [
+              "absent",
+              "partial",
+              "available"
+            ],
+            "title": "Dataset Readiness"
+          },
+          "sources": {
+            "type": "integer",
+            "title": "Sources"
+          },
+          "rules": {
+            "type": "integer",
+            "title": "Rules"
+          },
+          "addresses": {
+            "type": "integer",
+            "title": "Addresses"
+          },
+          "resolved_municipalities": {
+            "type": "integer",
+            "title": "Resolved Municipalities"
+          },
+          "last_extraction_outcome": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Extraction Outcome"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "version",
+          "dataset_readiness",
+          "sources",
+          "rules",
+          "addresses",
+          "resolved_municipalities",
+          "last_extraction_outcome",
+          "disclaimer"
+        ],
+        "title": "HealthResponse"
+      },
+      "Interaction": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "supersedes",
+              "conflicts_with"
+            ],
+            "title": "Kind"
+          },
+          "target_citation": {
+            "type": "string",
+            "title": "Target Citation"
+          },
+          "target_jurisdiction": {
+            "type": "string",
+            "title": "Target Jurisdiction"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "rent_increase_limits",
+              "just_cause_eviction",
+              "security_deposits",
+              "application_screening_fees",
+              "screening_restrictions",
+              "algorithmic_rent_setting"
+            ],
+            "title": "Category"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Expression"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Evidence"
+          },
+          "note": {
+            "type": "string",
+            "title": "Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "target_citation",
+          "target_jurisdiction",
+          "category",
+          "scope",
+          "evidence",
+          "note"
+        ],
+        "title": "Interaction"
+      },
+      "JurisdictionResolution": {
+        "properties": {
+          "address_id": {
+            "type": "string",
+            "title": "Address Id"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          },
+          "county": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "County"
+          },
+          "municipality": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Municipality"
+          },
+          "identifiers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Identifiers"
+          },
+          "method": {
+            "type": "string",
+            "title": "Method",
+            "default": "assessor_state_only"
+          },
+          "match_quality": {
+            "type": "string",
+            "enum": [
+              "resolved",
+              "unresolved",
+              "ambiguous",
+              "failed"
+            ],
+            "title": "Match Quality",
+            "default": "unresolved"
+          },
+          "benchmark": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Benchmark"
+          },
+          "vintage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vintage"
+          },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          },
+          "response_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Response Hash"
+          },
+          "unresolved": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unresolved"
+          },
+          "attempts": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Attempts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "address_id"
+        ],
+        "title": "JurisdictionResolution"
+      },
+      "LookupRequest": {
+        "properties": {
+          "address_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address Id"
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RawAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date",
+            "title": "As Of",
+            "default": "2026-10-01"
+          },
+          "supplemental_facts": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Supplemental Facts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "LookupRequest"
+      },
+      "LookupResponse": {
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/PropertyFacts"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date",
+            "title": "As Of"
+          },
+          "jurisdiction": {
+            "$ref": "#/components/schemas/JurisdictionResolution"
+          },
+          "evaluations": {
+            "items": {
+              "$ref": "#/components/schemas/Evaluation"
+            },
+            "type": "array",
+            "title": "Evaluations"
+          },
+          "rules": {
+            "items": {
+              "$ref": "#/components/schemas/Rule"
+            },
+            "type": "array",
+            "title": "Rules"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceDocument"
+            },
+            "type": "array",
+            "title": "Sources"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "address",
+          "as_of",
+          "jurisdiction",
+          "evaluations",
+          "rules",
+          "sources",
+          "warnings",
+          "metadata",
+          "disclaimer"
+        ],
+        "title": "LookupResponse"
+      },
+      "PredicateResult": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "true",
+              "false",
+              "unknown"
+            ],
+            "title": "Value"
+          },
+          "matched": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched"
+          },
+          "unresolved": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unresolved"
+          },
+          "missing_facts": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Missing Facts"
+          },
+          "supporting_facts": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Supporting Facts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "title": "PredicateResult"
+      },
+      "PropertyFacts": {
+        "properties": {
+          "address_id": {
+            "type": "string",
+            "title": "Address Id"
+          },
+          "raw_address": {
+            "$ref": "#/components/schemas/RawAddress"
+          },
+          "normalized_address": {
+            "type": "string",
+            "title": "Normalized Address"
+          },
+          "facts": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Facts"
+          },
+          "bounds": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Bound"
+            },
+            "type": "object",
+            "title": "Bounds"
+          },
+          "missing_facts": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Missing Facts"
+          },
+          "provenance": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Provenance"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "address_id",
+          "raw_address",
+          "normalized_address"
+        ],
+        "title": "PropertyFacts"
+      },
+      "RawAddress": {
+        "properties": {
+          "street_address": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Street Address"
+          },
+          "postal_city": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Postal City"
+          },
+          "state": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "title": "State"
+          },
+          "zip": {
+            "type": "string",
+            "pattern": "^([0-9]{5}(-[0-9]{4})?)?$",
+            "title": "Zip",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "street_address",
+          "postal_city",
+          "state"
+        ],
+        "title": "RawAddress"
+      },
+      "Rule": {
+        "properties": {
+          "jurisdiction": {
+            "type": "string",
+            "title": "Jurisdiction"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "state",
+              "city"
+            ],
+            "title": "Level"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "rent_increase_limits",
+              "just_cause_eviction",
+              "security_deposits",
+              "application_screening_fees",
+              "screening_restrictions",
+              "algorithmic_rent_setting"
+            ],
+            "title": "Category"
+          },
+          "provision_key": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Provision Key",
+            "description": "Stable short name for a distinct obligation within its citation"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "requirement": {
+            "type": "string",
+            "title": "Requirement"
+          },
+          "key_value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key Value"
+          },
+          "citation": {
+            "type": "string",
+            "title": "Citation"
+          },
+          "quoted_span": {
+            "type": "string",
+            "minLength": 20,
+            "title": "Quoted Span"
+          },
+          "source_doc_id": {
+            "type": "string",
+            "title": "Source Doc Id"
+          },
+          "source_url": {
+            "type": "string",
+            "title": "Source Url"
+          },
+          "coverage_conditions": {
+            "$ref": "#/components/schemas/Expression"
+          },
+          "exemption_conditions": {
+            "$ref": "#/components/schemas/Expression"
+          },
+          "exemptions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exemptions"
+          },
+          "lifecycle": {
+            "type": "string",
+            "enum": [
+              "enacted",
+              "pending",
+              "failed",
+              "unknown"
+            ],
+            "title": "Lifecycle"
+          },
+          "effective_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Effective Date"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Date"
+          },
+          "status_as_of": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status As Of"
+          },
+          "status_events": {
+            "items": {
+              "$ref": "#/components/schemas/StatusEvent"
+            },
+            "type": "array",
+            "title": "Status Events"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Evidence"
+          },
+          "interactions": {
+            "items": {
+              "$ref": "#/components/schemas/Interaction"
+            },
+            "type": "array",
+            "title": "Interactions"
+          },
+          "penalties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Penalties"
+          },
+          "review_issues": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Review Issues"
+          },
+          "conflict_flag": {
+            "type": "boolean",
+            "title": "Conflict Flag",
+            "default": false
+          },
+          "conflict_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Conflict Note"
+          },
+          "team_rule_id": {
+            "type": "string",
+            "title": "Team Rule Id"
+          },
+          "evidence_mode": {
+            "type": "string",
+            "enum": [
+              "live",
+              "synthetic",
+              "replay"
+            ],
+            "title": "Evidence Mode"
+          },
+          "extraction_run_id": {
+            "type": "string",
+            "title": "Extraction Run Id"
+          },
+          "semantic_verification": {
+            "type": "string",
+            "enum": [
+              "model_reviewed",
+              "needs_review",
+              "synthetic_fixture"
+            ],
+            "title": "Semantic Verification"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "jurisdiction",
+          "level",
+          "category",
+          "provision_key",
+          "title",
+          "requirement",
+          "citation",
+          "quoted_span",
+          "source_doc_id",
+          "source_url",
+          "coverage_conditions",
+          "lifecycle",
+          "evidence",
+          "team_rule_id",
+          "evidence_mode",
+          "extraction_run_id",
+          "semantic_verification"
+        ],
+        "title": "Rule"
+      },
+      "RuleDetail": {
+        "properties": {
+          "rule": {
+            "$ref": "#/components/schemas/Rule"
+          },
+          "versions": {
+            "items": {
+              "$ref": "#/components/schemas/Rule"
+            },
+            "type": "array",
+            "title": "Versions"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rule",
+          "versions",
+          "disclaimer"
+        ],
+        "title": "RuleDetail"
+      },
+      "SourceDocument": {
+        "properties": {
+          "doc_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Doc Id"
+          },
+          "jurisdictions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Jurisdictions"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text",
+            "default": ""
+          },
+          "sha256": {
+            "type": "string",
+            "title": "Sha256"
+          },
+          "manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manifest Sha256"
+          },
+          "capture_status": {
+            "type": "string",
+            "enum": [
+              "supplied",
+              "link_only",
+              "failed",
+              "terms_review",
+              "supplementary",
+              "synthetic"
+            ],
+            "title": "Capture Status"
+          },
+          "authority": {
+            "type": "string",
+            "title": "Authority"
+          },
+          "source_type": {
+            "type": "string",
+            "title": "Source Type",
+            "default": "unclassified"
+          },
+          "issues": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Issues"
+          },
+          "duplicate_of": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duplicate Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "doc_id",
+          "jurisdictions",
+          "url",
+          "retrieved_at",
+          "sha256",
+          "capture_status",
+          "authority"
+        ],
+        "title": "SourceDocument"
+      },
+      "StatusEvent": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "enacted",
+              "pending",
+              "failed",
+              "repealed"
+            ],
+            "title": "Status"
+          },
+          "on": {
+            "type": "string",
+            "title": "On"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Evidence"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "on",
+          "evidence"
+        ],
+        "title": "StatusEvent"
+      }
+    }
+  }
+}

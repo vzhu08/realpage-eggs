@@ -1,0 +1,32 @@
+{
+  "run_id": "d4d4d448299e4b6bb511e68d506b7943",
+  "operation": "extract",
+  "mode": "live",
+  "started_at": "2026-10-03T21:06:16.785261+00:00",
+  "finished_at": "2026-10-03T21:06:16.873880+00:00",
+  "elapsed_seconds": 0.089,
+  "outcome": "failed",
+  "input_hashes": {
+    "D001": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17"
+  },
+  "config": {
+    "prompt_version": "extract-v1",
+    "chunk_chars": 18000,
+    "overlap_chars": 1500,
+    "concurrency": 1,
+    "transport_attempts": 3,
+    "repair_attempts": 1
+  },
+  "versions": {
+    "pipeline": "0.1.0",
+    "evaluator": "0.1.0"
+  },
+  "counts": {
+    "processed": 0,
+    "rules": 0
+  },
+  "errors": [
+    "Set OPENAI_API_KEY and OPENAI_MODEL locally in .env; no live extraction was performed"
+  ],
+  "artifacts": []
+}

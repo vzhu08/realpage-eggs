@@ -1,0 +1,27 @@
+{
+  "run_id": "180f41a687a04ba3a4dc5332ae0e3694",
+  "operation": "geocode",
+  "mode": "live",
+  "started_at": "2026-10-03T20:55:28.717572+00:00",
+  "finished_at": "2026-10-03T20:55:32.561927+00:00",
+  "elapsed_seconds": 3.844,
+  "outcome": "partial",
+  "input_hashes": {
+    "addresses": "22a052a13f29d8b310a6b2474edeee44419c6872739d811cbe9286b37f23ae37"
+  },
+  "config": {
+    "workers": 6
+  },
+  "versions": {
+    "pipeline": "0.1.0",
+    "evaluator": "0.1.0"
+  },
+  "counts": {
+    "attempted": 149,
+    "resolved": 479,
+    "unresolved": 21,
+    "failed": 0
+  },
+  "errors": [],
+  "artifacts": []
+}

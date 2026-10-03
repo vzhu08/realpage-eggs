@@ -1,0 +1,258 @@
+Implement the initial working version of our RealPage Rental Housing Law Navigator for Hack Nation 7. This is an execution request: inspect the repository and supplied documents, make a short plan, implement the backend and evaluation pipeline, run meaningful checks, and leave the project ready for three developers to continue. Do not stop after creating a plan or a scaffold.
+
+Our team has three capable student developers using Codex and Claude Code. Frontend implementation belongs exclusively to our Claude Code teammate. Your initial ownership is backend, contracts, tooling, evaluation, and project coordination documentation. Preserve any existing frontend. Supply everything its owner needs to integrate without having to guess backend behavior.
+
+Read the attached Hackathon_Development_Playbook.txt in full before starting. Apply it to the actual repository, including any existing AGENTS.md and nested instructions. The playbook is already provided; do not ask for it again if it is accessible. This prompt supplies project-specific scope and acceptance criteria.
+
+1. OBJECTIVE, INPUTS, AND TIME
+
+Build an auditable system that automatically reads the supplied housing-law corpus, extracts structured rules, resolves sample properties to legal jurisdictions, evaluates rule coverage on a selected date, and reports which properties a law change affects. Every substantive conclusion must be traceable to source evidence and the facts used.
+
+Inputs to locate in the current conversation or workspace:
+- The RealPage Rental Housing Law Navigator challenge brief, potentially named file (7).pdf.
+- MIT-hackathon-PARTICIPANT-PACK-CLEAN-NO-HOUR16.zip or its extracted contents.
+- Hackathon_Development_Playbook.txt.
+- Any existing repository instructions, source code, credentials configuration, or organizer updates.
+
+Use the files actually supplied here. Do not assume paths from another ChatGPT workspace exist. Preserve original source files. If an input is missing, identify the exact missing item, use an authorized referenced source if available, and continue independent implementation. Never invent a corpus, answer key, or official score.
+
+Planning deadline previously supplied by the team: October 4, 2026, 09:00 America/New_York (13:00 UTC). Check the actual current time and work backward. Treat this as the planning assumption until an authoritative update changes it. The benchmark's DEFAULT QUERY DATE is 2026-10-01, which is separate from the actual current date.
+
+Known version conflict to verify against the files you receive:
+- The fuller challenge brief describes 6 change tests, an hour-16 surprise ordinance, a dev answer key, and score.py. It assigns 75/100 points to automated extraction, coverage, citations, and change tracking.
+- The previously inspected CLEAN-NO-HOUR16 pack contains T1-T5, an included brief explicitly saying no surprise release is required, and no scoring script or dev answer key.
+- That pack had 87 manifest entries but 54 actual source-text files. Other entries include links without supplied text and a failed capture. There are 500 addresses in 9 cities; Santa Ana is extraction-only.
+
+Inspect the actual inputs instead of assuming these observations still hold. Record discrepancies with their source and an organizer question. Do not block the initial build on this conflict. Implement T1-T5 and general new-document ingestion so T6 can use the same pipeline if required. Treat the stated scoring weights as provisional until confirmed. Never describe a self-created evaluator as the official scorer.
+
+Aim for an early real end-to-end result, then broaden coverage. Do not spend the first several hours on infrastructure or documentation alone. Keep the first working path small, but continue until the bootstrap acceptance criteria below are met or a concrete external blocker is documented.
+
+2. REPOSITORY AND EXECUTION RULES
+
+Before editing, identify the active branch, HEAD SHA, instruction files, existing changes, relevant stack, available environment configuration, and assigned checkout. Preserve user work and existing functionality. Work from the supplied current code, including relevant existing modifications; do not silently substitute an older version.
+
+Create a bootstrap task branch if appropriate. Do not commit to main, discard changes, rewrite shared history, or operate in another active writer's checkout. Local commits containing only your task work are allowed when practical; pushing, merging to main, deploying, messaging teammates, and submitting to the event require authority already established in this session or a task card. Otherwise prepare the result and hand it off without performing those actions.
+
+Use an existing suitable stack. For an empty repository, prefer a small Python backend using FastAPI, runtime-validated models, a straightforward JSON or SQLite store, and pytest. Reuse the configured LLM provider where possible. Keep model selection configurable and check current official provider documentation when implementing an unfamiliar API. Do not introduce a graph database, vector database, distributed queue, or several competing provider integrations without a concrete need.
+
+Frontend files, pages, components, styling, and branding remain reserved for the UX owner. Do not generate a production frontend as part of this bootstrap. An API/CLI end-to-end demonstration is sufficient here. A fresh repository can reserve frontend/ for Claude Code; an existing repository must use its actual layout.
+
+Do not assume subagent writing is authorized merely because the playbook discusses agents. If delegation is authorized by the surrounding session, each concurrent writer needs an exclusive path scope, an independent task card, a separate branch and checkout, and an accountable human owner. Shared files still have one steward. If isolation or authorization is unavailable, serialize implementation. Do not assign another writer the active root checkout.
+
+Keep secret values out of output, logs, source files, and commits. Inspect only the configuration needed for this task. Provide .env.example with the environment variable names actually consumed by the code. Do not ask the user to paste credentials into chat.
+
+3. FIRST DELIVERABLE: CONTRACTS AND A REAL VERTICAL SLICE
+
+First establish the core records and observable API contracts, representative fixtures, and ownership map. Then make one actual source document flow through automated extraction, validation, rule storage, coverage evaluation, a lookup, and export. If a live provider is unavailable, implement the same boundary with clearly labeled synthetic test fixtures and record the missing prerequisite; do not present fixture extraction as a real model run.
+
+Use one authoritative domain representation with adapters for API responses and the exact competition export formats. Avoid independently maintained versions of the same schema.
+
+Domain records must support:
+- SourceDocument: original text, doc_id, URL, retrieval timestamp, content hash, capture status, authority/type, and source offsets or equivalent stable anchors.
+- Rule: stable team_rule_id, jurisdiction, level, category, title, requirement, key value, coverage conditions, exemptions, legal status, dates and date precision, citation, source references, supported interactions, conflict flags, and evidence.
+- PropertyFacts: address ID, raw and normalized address, known building facts, missing facts, provenance, and verified bounds or intervals where appropriate.
+- JurisdictionResolution: state, county, municipality and identifiers where available, method, match quality, boundary/geocoder version, and unresolved aspects.
+- Evaluation: rule ID, result, matched and unresolved predicates, supporting facts, missing facts, applied interactions, explanation, and evidence references.
+- ChangeResult: before/after dates or versions, definitely affected addresses, uncertain impacts where relevant, conflicts, per-address differences, and explicit scenario status.
+- RunManifest: input hashes, configuration/model identifier, extraction/evaluation version, actual execution outcomes, timings, and artifact provenance. Never record secrets.
+
+Inspect schema/rule_record.schema.json and submission_templates/ before fixing field names. Keep the prescribed enum values and JSON shapes. Preserve richer evidence, date history, penalties, and retrieval metadata internally when the provided schema does not represent them. Do not invent unsupported export fields as a substitute for the required fields.
+
+For a new project, expose a small versioned API with equivalent behavior to:
+- GET /api/v1/health: basic service status and dataset readiness, without secret configuration.
+- GET /api/v1/addresses: paginated/searchable sample properties and resolution state.
+- POST /api/v1/lookup: address_id or an address input, as_of date, and optional explicitly labeled supplemental facts; returns jurisdiction, evaluated rules, evidence, warnings, and data/run metadata.
+- GET /api/v1/rules/{rule_id}: the rule, evidence, versions, and interactions.
+- GET /api/v1/sources/{doc_id}: source metadata and the relevant text/anchors.
+- POST /api/v1/changes: a supported test, date comparison, or supported scenario; returns affected sets and per-address differences.
+
+Provide a documented CLI for source ingestion/extraction, jurisdiction resolution, batch evaluation, change cases, validation, and export. New-document ingestion must work through the CLI; an HTTP ingestion/job endpoint is optional if it fits the remaining time and real implementation. Avoid exposing unauthenticated billable ingestion on a public deployment.
+
+Define invalid-input, unknown-ID, absent-dataset, and provider-failure behavior. A legal coverage result of unknown is a successful evaluation, not an HTTP error. A failed pipeline must not masquerade as an empty successful result. Include normal, empty, uncertain, and relevant failure fixtures. Date selectors use the requested date, not a hidden wall-clock default.
+
+Provide generated OpenAPI and machine-readable examples. Keep any frontend contract types derived from the canonical schema where practical. If the repo already has suitable interfaces, retain them and document the mapping instead of introducing needless breaking changes.
+
+4. AUTOMATED EXTRACTION AND EVIDENCE
+
+Read the source manifest and distinguish supplied text, link-only records, failed captures, duplicates, and sources whose terms require review. Preserve the original text for exact quotation checks. Strip navigation or split long documents only in processing views, retaining a mapping to the original source.
+
+Implement a bounded extraction workflow:
+1. Identify relevant legal provisions across the six required categories, allowing multiple rules per document and documents with no relevant provisions.
+2. Extract structured rules and their executable conditions with field-level support where possible.
+3. Validate schema, identifiers, dates, enumerations, and required evidence.
+4. Verify quoted spans against the actual original document. Quoted text must meet the provided schema's length requirements and must not be synthesized from separated passages.
+5. Check semantic support for the requirement, key numbers/formulas, effective dates, exemptions, and relationships. An exact quote alone does not establish a correct interpretation.
+6. Use a targeted verification or repair pass for questionable records and omission risks. Bound attempts and retain unresolved issues honestly.
+7. Deduplicate equivalent descriptions of the same provision, preserving distinct amendments, statuses, and temporal versions. Stable IDs must survive reordering or repeated extraction.
+
+Keep official legal text, official status records, agency guidance, and secondary descriptions distinguishable. Conflicting sources must produce traceable uncertainty; a newer retrieval timestamp alone does not establish legal precedence. A proposal's text is not evidence it was enacted.
+
+Do not use competition examples, test descriptions, or an answer key as replacement legal evidence. Use them for validation only. Do not hand-code individual corpus laws, exemptions, per-address outcomes, or change-test address sets. General comparison operators, lifecycle handling, source validation, and export logic belong in code; legal thresholds and relationships must come from supported extracted records.
+
+Maintain a jurisdiction-by-category evidence inventory: supported rule, supported negative finding, incomplete source coverage, or unresolved extraction. No extracted rule is not proof that no law exists. Do not force the output to a target count such as 58 rules.
+
+Cache extraction by source hash and relevant configuration. Record real provider usage and errors, use bounded concurrency and retry/backoff, and allow interrupted runs to resume. Do not silently fall back to fabricated rules after a provider failure.
+
+If source text is missing, identify the consequential coverage gaps. Use permitted official sources or organizer-provided additions where available. Respect publisher terms and access controls. Save any legitimately obtained supplementary snapshot with provenance, and distinguish it from the supplied corpus when evaluating citation checks.
+
+5. EXECUTABLE COVERAGE, UNCERTAINTY, AND TIME
+
+Represent coverage in a constrained JSON expression format with validated operators such as all, any, not, comparisons, membership, and explicit date/age conditions. Do not execute model-generated Python, SQL, or expressions through eval. Unsupported legal conditions must remain visible and unresolved rather than becoming true by default.
+
+Use three-valued predicate logic: true, false, unknown. Implement correct short-circuit semantics. For example, false AND unknown is false; true OR unknown is true. Missing a fact produces unknown only when it can change the conclusion. An exemption ruled out by a known fact does not remain possible simply because a different exemption fact is missing.
+
+Preserve the distinction between:
+- Legal jurisdiction uncertainty.
+- Missing property or tenancy facts.
+- Missing source material.
+- Conflicting legal evidence.
+- Unsupported or uncompiled conditions.
+
+These may lead to a cautious result, but their explanations and remediation differ. Do not attach a misleading calibrated confidence percentage to an unvalidated model judgment. Prefer evidence-based indicators and explicit review reasons.
+
+Handle the supplied dataset's known gaps without pretending they were filled. Missing numeric units can sometimes be bounded by a documented description such as five or more apartments. Preserve the bound and provenance; do not invent an exact count or guess from an unexplained use code. Building year is not certificate-of-occupancy date. Follow the participant guide's declared modeling conventions, label proxies, and treat a cutoff-year property as unresolved when a month/day would determine coverage.
+
+Evaluate jurisdiction, substantive coverage/exemptions, temporal status, and interactions separately so the explanation can show each step. Report governing rules and obligations; do not confuse applicability with proof that a landlord has violated a rule.
+
+Store enactment/status events and effective intervals when supported. Preserve year-only or month-only precision instead of silently converting it to January 1 or the first day of a month. Derive query-date status from supported information; do not freeze the status at extraction time. Pending bills never become enacted merely because a proposed effective date has passed. Failed or withdrawn measures remain available in the audit history and do not create current protections.
+
+Interactions must use explicit direction and scope. A local rule does not automatically override a state rule. Apply a supported supersession only when the governing rule's applicability is established. If local applicability is unresolved, do not claim definite supersession. Possible NJ preemption remains a conflict for human review unless evidence resolves it. Detect contradictory or cyclic relationships and surface them without crashing or silently dropping obligations.
+
+Submission lookup values in the inspected pack are applies, unknown, superseded, not_yet_effective, and pending. Exclude genuinely inapplicable rules from lookup exports. A failed measure can exist in rules/history even though failed is not a lookup-result value. Inspect the actual schema and templates to confirm this behavior.
+
+6. JURISDICTION RESOLUTION
+
+Resolve legal geography from actual geocoding/boundary evidence, not postal_city alone. The mailing city can differ from the municipality. Preserve state-level answers when the state is established but local jurisdiction is unresolved, and clearly identify the local coverage limit.
+
+Use Census Geocoder/geographic lookup or a suitable existing authoritative integration, cache responses, and record benchmark/vintage. Confirm the chosen response includes the municipal information you need; if it does not, resolve coordinates against appropriate official boundaries or use the supported geography lookup. Do not equate a postal label or any statistical place with a legal municipality.
+
+Normalize carefully, preserving original addresses and documenting retries that omit conflicting ZIP codes or resolve address ranges. Ambiguous matches need explicit treatment. Do not infer municipality from address-ID ranges, test descriptions, or expected city counts. Never claim every address is resolved unless the results support it.
+
+7. CHANGE TRACKING AND EXPLANATIONS
+
+Use the same evaluator for lookups and changes. Compare normalized governing obligations, applicability, and conflict state before and after a date or rule-version change. Do not mark every property changed merely because run IDs, generation timestamps, or explanation wording differ.
+
+Implement the supplied test definitions as adapters over extracted rules and the general engine:
+- T1: California AB 325 / SB 763 across 2025-12-31 and 2026-01-02.
+- T2: Hoboken versus Jersey City local bans, excluding unrelated municipalities.
+- T3: NJ FAIR Act before and after the supplied future effective date, with possible local conflicts.
+- T4: Massachusetts pending bills remain pending; calculate a clearly labeled if-enacted affected set.
+- T5: the struck Massachusetts ballot proposal does not become an operative rent cap; expected affected set is empty.
+- T6 if actually supplied: ingest the unfamiliar ordinance through the same general pipeline. Do not implement a Cambridge-specific synthetic-law shortcut.
+
+Map test reference identifiers to your stable rule identities through a documented adapter. This mapping must not contain hard-coded coverage answers. Do not mutate current law when running a hypothetical scenario. Separate definitely affected and potentially affected properties internally; implement export treatment according to actual published scoring guidance and document unresolved ambiguity.
+
+Generate explanations from the evaluated facts, predicates, interactions, and evidence. Explain why a rule applies, why it is uncertain, or why another rule governs. Identify which missing information would settle a material unknown. Supplemental facts must be labeled, scoped to the request, and kept separate from the original benchmark data. Unsupported-address building facts must remain unknown until a real source or explicitly identified user input provides them.
+
+Show source URL, exact evidence, retrieval date, query date, and not-legal-advice language in API presentation metadata and require these in the frontend handoff. Avoid legal-compliance certification or suggestions for evading a rule.
+
+8. COMMANDS, ARTIFACTS, AND VALIDATION
+
+Implement a reproducible documented workflow from the raw inputs to rules.json, lookups.json for all 500 sample IDs, and changes.json. Use the exact supplied formats, stable IDs, consistent rule references, deterministic evaluation ordering, and the benchmark default date. Keep generated artifacts and raw data in explicit locations with sensible Git-ignore and attribution treatment. Never commit provider secrets or irrelevant caches.
+
+Run the complete extraction and batch evaluation when credentials, data, and network access permit. Otherwise, attempt the available real portion, preserve its evidence, and explicitly report what prevented the rest. A checked-in or cached artifact from an actual run is valid replay evidence when labeled as such; synthetic fixtures are not real extraction results.
+
+Separate live provider output, replayed real artifacts, and synthetic fixtures in run metadata and documentation. Do not let fixture mode silently produce files described as judge-ready output. Exports with unresolved coverage or partial extraction must be accompanied by an honest validation summary.
+
+Use the official scorer unchanged if actually present. Preserve its full report and the tested input/version. If unavailable, implement a clearly labeled internal validation report and meaningful tests of observable behavior. Do not fabricate hidden-key accuracy or a score out of 100.
+
+Required checks should cover the material risks:
+- Schema validity and source-quote existence, plus representative semantic support review.
+- A real extraction result when live credentials are available; an explicit provider-unavailable path otherwise.
+- Three-valued predicate and exemption behavior, including missing facts that do not affect the answer.
+- Effective-date boundaries, including the effective day itself; pending and failed proposals.
+- Supported supersession and uncertain local coverage; conflict behavior.
+- Municipal scoping with genuine resolution evidence, and unresolved/failed geocoding behavior.
+- All 500 sample IDs represented; every exported team_rule_id resolves to an exported rule.
+- Supplied T1-T5 behavior, without coding expected sets into production logic.
+- Invalid provider responses, empty data, and relevant API failures.
+- Repeated evaluation of identical inputs gives identical substantive results.
+- At least one independently authored, clearly labeled synthetic ordinance for generalization testing, distinct from any organizer test. Keep expected outcomes in tests, not the extraction pipeline.
+
+Use small justified tests of these behaviors. Avoid broad test generation, implementation-mirroring assertions, or chasing unrelated coverage targets. Do not describe an internally authored example as an organizer's held-out test.
+
+9. REQUIRED AGENT DOCUMENTS AND CONTINUATION PLAN
+
+Create or update the following, adapting to actual existing structure. Keep each concise, concrete, and internally consistent. Copy the supplied playbook into a project documentation location if permitted and accessible, retaining its content instead of replacing it with a different policy.
+
+AGENTS.md
+- Single source of shared agent rules: actual ownership paths, shared stewards, setup, contracts, exact check commands, branch/checkouts, task claims, and integration authority.
+- Include the playbook's 11 operating rules in concise project-specific form: read first; verify checkout; preserve scope/work; follow contracts; route out-of-scope needs; exclusive writers; smallest complete behavior; honest checks; secret/mock handling; commit/push/merge authority; evidence-backed handoff.
+- Link to detailed task and planning documents. Do not bury current instructions in an enormous narrative.
+
+CLAUDE.md
+- At the root, import the shared instructions using a literal line: @AGENTS.md
+- Avoid duplicating the rules. Preserve compatible existing Claude-specific guidance if present.
+
+README.md
+- Actual setup, input locations, environment variables, executed local API/CLI commands, real-data versus fixture modes, tests, exports, and current limitations.
+
+docs/OWNERSHIP.md
+- Actual lane path map and named role stewards for contracts, dependency manifests/lockfiles, shared models, environment examples, migrations, deployment config, task board/merge queue, and frontend shared files.
+- Use provisional role labels UX owner, Platform/API owner, and Core owner until human names are known; do not invent teammate names. Record the user/current bootstrap owner as accountable for this initial task. Future writer assignments require a real human owner/claim before starting.
+- Frontend belongs to the UX/Claude Code lane. Platform owns API, persistence, geocoding integration, export orchestration, deployment setup, and contract stewardship. Core owns extraction, executable legal predicates/interactions, change computation, and core quality evaluation. Adjust exact files to avoid overlap.
+- Bootstrap is temporarily the single writer of its stated backend/shared scope. Record ownership transfer when it ends. No reserved frontend file is opened for implementation by this instruction.
+
+docs/CONTRACTS.md plus machine-readable schemas/fixtures
+- Requests, responses, enum values, defaults, date semantics, units, error behavior, missing data, source anchors, supplemental facts, persistence, and any supported job lifecycle.
+- Realistic normal, empty, unknown, and error examples. State which examples are synthetic. Document the change-proposal process and affected consumers.
+
+docs/PLAN.md
+- Current implementation status, remaining time calculated from the actual clock, core demo path, one visible differentiator, major risks, and milestone exit criteria.
+- Work backward from the deadline, reserve submission/upload buffer, and define architecture and feature freezes. Separate implemented behavior from proposed work.
+- Include a cut list: optional graph visualization, Spanish, additional jurisdictions, production authentication, broad scraping, and infrastructure expansions wait until the required pipeline is credible. Do not cut the citation, uncertainty, and date behavior that defines the challenge.
+
+docs/TASKS.md and bounded task cards under docs/tasks/
+- One board with Planned, Ready, Running, Review, Queued, Merged, Verified, and Blocked states. Keep merge/deployment verification separate from local task completion.
+- Each card contains the playbook's fields: ID/title, human owner, tool/session, branch and absolute checkout when allocated, base SHA when allocated, dependencies, allowed files, reserved files, read-first materials, observable outcome, acceptance, exact checks, non-goals, handoff, and integration authority.
+- Unknown future checkout/commit values must be marked unallocated, not invented. Distinguish technically ready work from a claimed writing session. No writer starts before assignment, isolation, and ownership are established.
+- Plan roughly 20-60 minute tasks around bounded observable outcomes. Seed one or two technically ready next tasks per lane once their contracts and inputs exist; otherwise mark the dependency honestly.
+- Suggested follow-up outcomes, revised according to what you actually finish: UX address/evidence view; UX change comparison; platform unresolved-geocode recovery; platform deployment/export reproducibility; core evidence/omission review; core hard exemption/temporal interactions. Add only useful actual gaps, not duplicate implementations of completed work.
+- Only the board/queue steward edits the shared board. Other writers update their owned task card and submit handoff information for coordination. Follow a single ordered merge queue and recheck against current main; never rebase an actively written branch.
+
+docs/FRONTEND_HANDOFF.md
+- Exact backend URL/configuration, startup procedure, OpenAPI/fixture locations, and implemented endpoints.
+- Concrete user flows: address lookup with date selector; evidence and missing-fact explanation; change comparison with affected addresses and conflicts.
+- All necessary loading, empty, uncertain, failed, and partial-data states, and clear live/replay/fixture labeling.
+- State the remaining backend gaps instead of asking Claude to invent missing behavior. Do not prescribe visual design or edit the frontend.
+
+docs/DECISIONS.md
+- Brief decisions and unresolved questions with evidence: document-version mismatch, absent scorer/key, missing source text, unsupported coverage logic, uncertain change-set export semantics, and deployment decisions. Assign an owner/next action to each genuine blocker.
+
+docs/EVALUATION.md
+- What actually ran, exact commands, input and result versions/hashes, extraction and resolution counts, quote/schema failures, test results, timing where measured, and manual spot-check evidence.
+- Separate official scoring, internal validation, and unverified claims. Track failure causes and the next highest-value fixes. Do not turn record counts into legal accuracy percentages.
+
+docs/DEMO_AND_SUBMISSION.md
+- A concrete judge path using real available examples: overlapping rules, a meaningful unknown, and a date change with address impacts and citations. Use actual sample IDs once verified.
+- List the materials described by each source: required JSON exports, runnable repository/README, live demo, and any method note/videos. The fuller brief requests team, demo, and technical videos, official score display if available, and T1-T6 evidence. The reduced pack differs; record confirmation needed.
+- Record the known-good commit/deployment only when one actually exists. Include a backup-recording plan and final fresh-session verification, submission buffer, and receipt check. Do not claim a deployment or submission was made without evidence.
+
+docs/HANDOFF.md
+- Required initial handoff: task ID/status, branch/result commit if any, changed files, behavior delivered, actual checks/results, contract/environment changes, known limits, unverified behavior, and next action.
+- Include the next task for each developer and any urgent organizer/configuration question. Identify current shared-file stewards and what scope the bootstrap has released.
+
+Do not spend disproportionate time manufacturing paperwork. Documents must reflect the implementation, make coordination concrete, and remain short enough to use during the hackathon. Exact commands must exist and be attempted before being described as verified. Do not label this task Merged or deployment Verified based on local passing tests.
+
+10. INITIAL BOOTSTRAP ACCEPTANCE AND FINAL RESPONSE
+
+Before finishing, deliver the strongest complete baseline available in this environment:
+- Working backend and CLI, with a real end-to-end path when its external prerequisites exist.
+- Automated corpus extraction implementation, exact evidence checks, and reproducible run artifacts.
+- A general three-valued coverage engine with temporal status and supported rule interactions.
+- Real jurisdiction-resolution integration, cache/provenance, and honest unresolved states.
+- General change computation and adapters for all supplied tests.
+- Exact competition export commands, all-address handling, and an honest validation report.
+- Stable API contracts and fixtures that let Claude Code start frontend work immediately.
+- The shared agent instructions, ownership map, task board/cards, future plan, evaluation record, and handoff described above.
+
+If a live credential, source, geocoding service, official scorer, or deployment authorization is unavailable, finish all independently implementable work and identify the exact blocked acceptance item. Do not disguise missing live functionality with plausible-looking fixtures. Do not stop the whole task for a routine reversible implementation choice.
+
+Use short progress updates during implementation. In your final response report:
+1. What works now and which parts were verified with real data.
+2. Branch/commit and the exact commands to run the backend, pipeline, checks, and exports.
+3. Actual evaluation results and material unresolved issues.
+4. The next bounded task for each of the three developers, with its task-card path.
+5. Any remaining decision or credential needed, and whether merge/deployment is still awaiting authority.
+
+Begin by reading the playbook and inspecting the actual repository and inputs. Then implement.
