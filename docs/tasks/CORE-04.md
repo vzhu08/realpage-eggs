@@ -15,3 +15,29 @@ Non-goals: extra evaluator/provider/database, copied unlicensed code, taking ano
 Handoff: actual commit, changed files, tests, limitations, contract requests and dependency status in this card.
 Integration: single ordered queue, recheck combined code; local commits allowed, no push/merge/deploy authority.
 
+
+## Daniel's Core implementation claim — 2026-10-03
+
+Human owner: Daniel. Sole writing agent: Codex /root, session 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend` (dedicated clone; no pre-existing changes).
+Branch: `codex/core-backend`. Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`.
+The user assigns this session to Core; earlier unallocated metadata is superseded by this claim.
+Claimed paths: the exact allowed implementation/tests/card above, plus `docs/core/**` and ignored `data/core-session/**` for evidence.
+Work is serialized CORE-03 -> CORE-04 -> CORE-05 -> focused CORE-02; adapter changes have one writer.
+State: Ready, reserved to this session; no concurrent writes.
+No push, merge, deployment, external messages or submission authorized.
+
+### Local result — Review
+Implemented `plan_questions(AssistContext) -> QuestionPlan` in the Core adapter and planner.
+Actual baseline and every hypothetical use `engine.evaluate_rules`; the baseline counts toward the budget.
+The planner enumerates supported Boolean/enums and threshold-partitioned numeric/date domains, clipped
+to known bounds/partial dates. Correlated predicates share a value; bounded joint probes establish
+conditional materiality. Displayed alternatives change one field and preserve all other uncertainty.
+Rank: relevant unresolved predicate count / shared answer effort, deterministic field tie-break.
+Budget/field/question/joint limits stay explicit; unsupported domains remain partial. Exhaustive refers
+only to supplied encoded property domains, never source coverage or legal validation.
+Checks: `.venv/bin/python -m pytest tests/test_engine.py tests/test_question_planner.py -q`: 50 passed.
+Related serialized CORE-03 adjustments retain questions under unknown temporal status and retain
+hypothetical provenance when a precise probe is accompanied by an existing numeric bound.
+Fixed synthetic comparison and final integration results will be in docs/core/CORE_HANDOFF.md.
+Platform HTTP assist route is absent on the inspected base; service integration verified directly.

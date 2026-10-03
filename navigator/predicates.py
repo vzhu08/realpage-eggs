@@ -94,7 +94,7 @@ def _evaluate_leaf(expr: Expression, prop: PropertyFacts, as_of: date) -> Predic
     # Construction year is a distinct fact, never evidence of actual occupancy.
     if value is None and bound is None:
         return PredicateResult(value="unknown", unresolved=[f"missing_property_fact: {fact}"], missing_facts=[fact])
-    support = {fact: {"value": value, "bound": bound.model_dump() if bound else None, "provenance": bound.provenance if bound else provenance}}
+    support = {fact: {"value": value, "bound": bound.model_dump() if bound else None, "provenance": bound.provenance if bound and value is None else provenance}}
     try:
         if expr.op in {"date_before", "date_on_or_before", "age_at_least"}:
             low, high = date_bounds(str(value))

@@ -69,7 +69,7 @@ def evaluate_coverage(rule: Rule, prop: PropertyFacts, as_of: date):
 def rule_traces(rule: Rule, prop: PropertyFacts, resolution: JurisdictionResolution, as_of: date):
     """AST paths retain their own truth; exemption negation is applied by coverage."""
     _, traces = evaluate_coverage(rule, prop, as_of)
-    if jurisdiction_match(rule, resolution) == "false" or temporal(rule, as_of) != "in_force":
+    if jurisdiction_match(rule, resolution) == "false" or temporal(rule, as_of) in {"inapplicable", "failed", "pending", "not_yet_effective"}:
         for trace in traces:
             mark_irrelevant(trace)
     for i, interaction in enumerate(rule.interactions):
