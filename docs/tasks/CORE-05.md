@@ -36,3 +36,6 @@ property/temporal/interaction semantics, excluding retrieval IDs/offsets; versio
 The contract's encoded_rule_not_legal_validation designation is preserved.
 Checks: `.venv/bin/python -m pytest tests/test_rule_renderer.py tests/test_question_planner.py -q`: 34 passed.
 No schema, route, dependency or frontend changes. Integration awaits Platform.
+
+Final review: fractional or out-of-calendar-range age_at_least values are visibly unsupported and
+included in unresolved_nodes, matching evaluator capability instead of implying valid whole years.

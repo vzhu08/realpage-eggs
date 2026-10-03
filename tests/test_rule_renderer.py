@@ -68,3 +68,10 @@ def test_hash_excludes_retrieval_artifacts_and_includes_temporal_history(rule):
     assert render_rule(changed).expression_hash == initial.expression_hash
     changed.status_events[0].on = '2026-08-01'
     assert render_rule(changed).expression_hash != initial.expression_hash
+
+
+def test_fractional_age_is_visibly_unsupported(rule):
+    rule.coverage_conditions = Expression(op='age_at_least', fact='first_occupancy_date', value=1.5)
+    rendered = render_rule(rule)
+    assert 'coverage_conditions' in rendered.unresolved_nodes
+    assert 'UNSUPPORTED [coverage_conditions]: age_at_least 1.5' in rendered.text
