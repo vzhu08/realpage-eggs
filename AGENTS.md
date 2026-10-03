@@ -20,7 +20,13 @@ The original team playbook is `docs/reference/Hackathon_Development_Playbook.txt
 Platform stewards models, API contracts, dependencies, environment configuration, persistence and exports.
 Core owns extraction, predicates, evaluator and change computation. UX owns frontend and visual design.
 See the exact file map in OWNERSHIP. Board/merge queue steward: Platform/API owner (provisional role).
-The user is accountable for BOOT-01; current bootstrap is its only writer, on `codex/realpage-bootstrap`.
+BOOT-01 is checkpointed at `5ef1de1`. Follow-up coordinator: Vincent / Platform/API.
+Current session claims COORD-01, PLAT-03/04/05 on `codex/research-platform`.
+Read `docs/ASSIST_CONTRACT.md` and `docs/starters/` for the additive contract and lane boundaries.
+Core retains extraction/evaluator/change/validation internals and owns the question planner/renderer.
+Platform adds separate evidence/retrieval/input services and wires routes; no extraction transfer occurred.
+Use one evaluator for probes and actual answers. Source identity, quote presence, anchor validity,
+semantic support and dependency gaps are separate; lexical retrieval never proves legal support.
 Do not switch/rebase another active writer's checkout. Use the `codex/` branch prefix.
 
 PowerShell setup: `py -3.12 -m venv .venv`, then

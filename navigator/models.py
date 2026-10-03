@@ -339,3 +339,205 @@ class HealthResponse(Model):
     resolved_municipalities: int
     last_extraction_outcome: str | None
     disclaimer: str
+
+
+# Additive research contracts. Platform is the sole shared-schema steward.
+class SourceSpan(Model):
+    doc_id: str
+    source_hash: str
+    start: int = Field(ge=0)
+    end: int = Field(ge=0)
+    text: str
+    section: str | None = None
+
+    @model_validator(mode="after")
+    def offsets(self):
+        if self.end <= self.start or self.end - self.start != len(self.text):
+            raise ValueError("Span offsets must identify the exact nonempty original text")
+        return self
+
+
+class Uncertainty(Model):
+    kind: Literal["property_fact", "jurisdiction", "source_gap", "cross_reference", "interpretation", "conflict", "analysis_limit", "service_dependency"]
+    message: str
+    remedy: str
+    rule_ids: list[str] = Field(default_factory=list)
+    predicate_ids: list[str] = Field(default_factory=list)
+    field: str | None = None
+    source_refs: list[SourceSpan] = Field(default_factory=list)
+
+
+class PredicateTrace(Model):
+    predicate_id: str
+    rule_id: str
+    path: str
+    expression: Expression
+    result: Truth
+    field: str | None = None
+    relevant: bool = True
+    residual: Expression | None = None
+    source_refs: list[Evidence] = Field(default_factory=list)
+    children: list["PredicateTrace"] = Field(default_factory=list)
+
+
+class FactDefinition(Model):
+    field: str
+    meaning: str
+    data_type: Literal["boolean", "integer", "number", "date", "enum", "string"]
+    unit: str | None = None
+    allowed_values: list[str] = Field(default_factory=list)
+    minimum: float | None = None
+    maximum: float | None = None
+    answer_effort: int = Field(default=1, ge=1, le=5)
+    allow_partial_date: bool = True
+
+
+class SupplementalAnswer(Model):
+    field: str
+    value: Any
+    provenance: Literal["user_provided", "demo"] = "user_provided"
+    note: str | None = Field(default=None, max_length=500)
+
+
+class AnalysisLimits(Model):
+    max_questions: int = Field(default=5, ge=1, le=10)
+    max_fields: int = Field(default=8, ge=1, le=12)
+    max_evaluations: int = Field(default=64, ge=1, le=256)
+    max_joint_fields: int = Field(default=3, ge=1, le=4)
+
+
+class AlternativeOutcome(Model):
+    alternative_id: str
+    label: str
+    # Values here are hypothetical probes, never inserted into benchmark facts.
+    probe_facts: dict[str, Any]
+    interval: dict[str, Any] | None = None
+    evaluations: list[Evaluation]
+    remaining_uncertainty: list[Uncertainty]
+    hypothetical: Literal[True] = True
+
+
+class FactQuestion(Model):
+    question_id: str
+    fact: FactDefinition
+    prompt: str
+    why: str
+    rule_ids: list[str]
+    predicate_ids: list[str]
+    evidence: list[Evidence]
+    alternatives: list[AlternativeOutcome]
+    rank_score: float
+    ranking_rationale: str
+
+
+class QuestionPlan(Model):
+    status: Literal["complete", "partial", "unavailable"]
+    questions: list[FactQuestion]
+    remaining_uncertainty: list[Uncertainty]
+    traces: list[PredicateTrace] = Field(default_factory=list)
+    limits: AnalysisLimits
+    evaluations_used: int = Field(default=0, ge=0)
+    limits_hit: list[str] = Field(default_factory=list)
+    algorithm_version: str
+    exhaustive: bool = False
+
+
+class EncodedRuleRendering(Model):
+    rule_id: str
+    text: str
+    expression_hash: str
+    renderer_version: str
+    unresolved_nodes: list[str] = Field(default_factory=list)
+    kind: Literal["encoded_rule_not_legal_validation"] = "encoded_rule_not_legal_validation"
+
+
+class EvidenceCheck(Model):
+    kind: Literal["source_availability", "source_identity", "citation_anchor", "quote_presence", "semantic_support", "dependencies"]
+    status: Literal["pass", "fail", "missing", "ambiguous", "not_checked", "supported", "contradicted", "insufficient", "stale"]
+    message: str
+    field: str | None = None
+    spans: list[SourceSpan] = Field(default_factory=list)
+
+
+class SourceDependency(Model):
+    reference: str
+    origin: SourceSpan
+    status: Literal["resolved", "missing", "ambiguous", "cycle", "depth_limit", "budget_limit"]
+    target_doc_id: str | None = None
+    target_section: str | None = None
+    spans: list[SourceSpan] = Field(default_factory=list)
+    explanation: str
+
+
+class SourceContext(Model):
+    spans: list[SourceSpan]
+    dependencies: list[SourceDependency]
+    status: Literal["available", "partial", "missing"]
+    limits: dict[str, int]
+    limits_hit: list[str]
+    retrieval_method: str = "exact_anchors_and_bounded_lexical_retrieval"
+    semantic_verification: Literal[False] = False
+
+
+class SemanticDecision(Model):
+    field: str
+    status: Literal["supported", "contradicted", "insufficient"]
+    explanation: str
+    spans: list[SourceSpan] = Field(default_factory=list)
+
+
+class SemanticReview(Model):
+    rule_id: str
+    rule_hash: str
+    source_hashes: dict[str, str]
+    mode: Literal["live", "fixture", "replay"]
+    verifier_version: str
+    model: str
+    decisions: list[SemanticDecision]
+    limitations: list[str]
+    human_reviewed: Literal[False] = False
+
+
+class EvidenceReport(Model):
+    rule_id: str
+    rule_hash: str
+    checks: list[EvidenceCheck]
+    context: SourceContext
+    semantic_review: SemanticReview | None = None
+    blocking_issues: list[str]
+    disclaimer: str
+
+
+class AssistRequest(LookupRequest):
+    answers: list[SupplementalAnswer] = Field(default_factory=list, max_length=20)
+    scenario_id: str | None = Field(default=None, max_length=100)
+    limits: AnalysisLimits = Field(default_factory=AnalysisLimits)
+
+    @model_validator(mode="after")
+    def unique_answers(self):
+        fields = [a.field for a in self.answers]
+        if len(set(fields)) != len(fields) or set(fields) & set(self.supplemental_facts):
+            raise ValueError("A field may be supplied only once across answers and supplemental_facts")
+        return self
+
+
+class AssistContext(Model):
+    property: PropertyFacts
+    jurisdiction: JurisdictionResolution
+    as_of: date
+    rules: list[Rule]
+    evaluations: list[Evaluation]
+    evidence_reports: list[EvidenceReport]
+    fact_definitions: dict[str, FactDefinition]
+    limits: AnalysisLimits
+
+
+class AssistResponse(Model):
+    lookup: LookupResponse
+    question_plan: QuestionPlan
+    evidence_reports: list[EvidenceReport]
+    encoded_rules: list[EncodedRuleRendering]
+    answers_applied: list[SupplementalAnswer]
+    scenario_id: str | None = None
+    capabilities: dict[str, Literal["implemented", "dependency_unavailable"]]
+    mode: Literal["dataset", "synthetic", "contract_fixture"]

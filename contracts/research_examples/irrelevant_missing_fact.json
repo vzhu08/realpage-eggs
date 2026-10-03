@@ -1,0 +1,202 @@
+{
+  "fixture_mode": "synthetic",
+  "contract_status": "proposed_core_output_not_live_service",
+  "case": "irrelevant_missing_fact",
+  "request": {
+    "address_id": "SYNTH-002",
+    "as_of": "2026-11-15"
+  },
+  "response": {
+    "lookup": {
+      "address": {
+        "address_id": "SYNTH-002",
+        "raw_address": {
+          "street_address": "2 Test Street",
+          "postal_city": "Maple Harbor",
+          "state": "CA",
+          "zip": ""
+        },
+        "normalized_address": "2 TEST STREET, MAPLE HARBOR, CA, ",
+        "facts": {
+          "residential": true,
+          "units": 2
+        },
+        "bounds": {},
+        "missing_facts": [],
+        "provenance": {
+          "residential": "Synthetic fixture",
+          "units": "Synthetic fixture"
+        }
+      },
+      "as_of": "2026-11-15",
+      "jurisdiction": {
+        "address_id": "SYNTH-002",
+        "state": "CA",
+        "county": null,
+        "municipality": "Maple Harbor",
+        "identifiers": {},
+        "method": "synthetic_fixture_not_geocoded",
+        "match_quality": "resolved",
+        "benchmark": null,
+        "vintage": null,
+        "retrieved_at": null,
+        "response_hash": null,
+        "unresolved": [],
+        "attempts": []
+      },
+      "evaluations": [],
+      "rules": [
+        {
+          "jurisdiction": "Maple Harbor, CA",
+          "level": "city",
+          "category": "security_deposits",
+          "provision_key": "deposit-cap",
+          "title": "Synthetic Maple Harbor deposit cap",
+          "requirement": "Covered buildings must limit security deposits to one month's rent.",
+          "key_value": "one month's rent",
+          "citation": "Maple Harbor Ordinance TEST-42, section 2",
+          "quoted_span": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+          "source_doc_id": "SYNTHETIC-42",
+          "source_url": "https://example.invalid/synthetic-42",
+          "coverage_conditions": {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "residential",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "gte",
+                "args": [],
+                "fact": "units",
+                "value": 8,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          "exemption_conditions": {
+            "op": "literal",
+            "args": [],
+            "fact": null,
+            "value": false,
+            "reason": null
+          },
+          "exemptions": "None",
+          "lifecycle": "enacted",
+          "effective_date": "2026-11-15",
+          "end_date": null,
+          "status_as_of": null,
+          "status_events": [
+            {
+              "status": "enacted",
+              "on": "2026-09-01",
+              "evidence": [
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+                  "start": 77,
+                  "end": 146,
+                  "supports": [
+                    "lifecycle"
+                  ]
+                }
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "doc_id": "SYNTHETIC-42",
+              "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+              "start": 147,
+              "end": 287,
+              "supports": [
+                "requirement",
+                "key_value",
+                "coverage_conditions",
+                "effective_date"
+              ]
+            },
+            {
+              "doc_id": "SYNTHETIC-42",
+              "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
+              "start": 288,
+              "end": 389,
+              "supports": [
+                "exemptions",
+                "exemption_conditions"
+              ]
+            },
+            {
+              "doc_id": "SYNTHETIC-42",
+              "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+              "start": 77,
+              "end": 146,
+              "supports": [
+                "lifecycle"
+              ]
+            }
+          ],
+          "interactions": [],
+          "penalties": null,
+          "review_issues": [],
+          "conflict_flag": false,
+          "conflict_note": null,
+          "team_rule_id": "r-694ad9fbae9083966e86",
+          "evidence_mode": "synthetic",
+          "extraction_run_id": "92df2ee3e7264dacb823d65b35a347a6",
+          "semantic_verification": "synthetic_fixture"
+        }
+      ],
+      "sources": [],
+      "warnings": [
+        "CONTRACT FIXTURE: question plans/renderings are authored expectations, not implemented Core output; modified rule cases are algorithmic tests, not legal interpretations"
+      ],
+      "metadata": {
+        "version": "0.1.0",
+        "dataset": {
+          "mode": "synthetic",
+          "label": "SYNTHETIC_NOT_ACTUAL_LAW"
+        },
+        "rule_modes": [],
+        "extraction_run_ids": [],
+        "partial_data": false,
+        "missing_source_ids": [],
+        "unprocessed_source_ids": [],
+        "fixture_case": "irrelevant_missing_fact"
+      },
+      "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+    },
+    "question_plan": {
+      "status": "complete",
+      "questions": [],
+      "remaining_uncertainty": [],
+      "traces": [],
+      "limits": {
+        "max_questions": 5,
+        "max_fields": 8,
+        "max_evaluations": 64,
+        "max_joint_fields": 3
+      },
+      "evaluations_used": 0,
+      "limits_hit": [],
+      "algorithm_version": "authored-contract-fixture-v1",
+      "exhaustive": false
+    },
+    "evidence_reports": [],
+    "encoded_rules": [],
+    "answers_applied": [],
+    "scenario_id": null,
+    "capabilities": {
+      "question_planner": "dependency_unavailable",
+      "rule_renderer": "dependency_unavailable",
+      "evidence_checks": "dependency_unavailable"
+    },
+    "mode": "contract_fixture"
+  }
+}

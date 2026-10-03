@@ -1,0 +1,269 @@
+REALPAGE / RULEDELTA: COORDINATE THREE DEVELOPERS, THEN IMPLEMENT YOUR ASSIGNED LANE
+
+The initial one-shot is complete. Turn the improvement specification below into a concrete parallel execution plan for our existing three-developer team, prepare the shared contracts and developer handoffs, and then implement only your assigned lane.
+
+Preserve the initial prompt's requirements, supplied challenge schemas, existing functionality and ownership, and the Hackathon Development Playbook. Frontend implementation remains exclusively with the Claude Code teammate. The detailed requirements and prior-project research are included here so this file can be uploaded as one prompt.
+
+0. EXECUTION MODE AND TEAM COORDINATION
+
+This section controls how the rest of the document is executed. Sections 2-5 are the team's shared specification, not an instruction for this one session to implement every feature. Produce actual repository tasks and handoff artifacts, then continue the work you own. Planning must result in work other developers can start immediately.
+
+Start with the current repository and active assignments. Reconcile the existing task board instead of creating a competing plan. Honor any already-established lane for this session. If there is no existing assignment, use Platform/API as this session's lane because Vincent is coordinating that lane. Do not take over an active teammate's files or tasks to make this default fit.
+
+Use these three lanes, adjusting exact file boundaries to the real repository:
+- Core/backend: bounded missing-fact planner, evaluator trace/residual-expression changes, alternative outcomes, supplemental-fact evaluation semantics, deterministic AST-to-English renderer, and focused unit tests.
+- Platform/API: evidence verification, source/context/cross-reference retrieval, targeted extraction coverage work, public API wiring and input validation, export compatibility, integration checks, and their tests. Preserve a pre-existing extraction owner; transfer any affected task explicitly before editing.
+- Frontend/Claude Code: question-and-answer flow, hypothetical outcome display, remaining uncertainty, evidence states, source-versus-encoded-rule display, and frontend interaction checks.
+
+The Core lane owns evaluator internals and the rule renderer. Platform owns API route wiring and source-verification services. Frontend consumes the agreed contracts and fixtures. Do not let both backend lanes edit the evaluator or shared route/schema files concurrently. Assign one named lane as steward of each shared file and route cross-lane changes through that steward.
+
+These are three human developers' working sessions. Prepare handoffs for the other sessions; do not substitute an unrequested fleet of agents for the teammate assignments. Any permitted helper agents must stay within the parent session's claimed file scope.
+
+A. INSPECT AND DEFINE THE MINIMUM CONTRACTS
+
+Keep this coordination pass brief and practical:
+1. Inspect the current build, existing tasks, active ownership, and baseline checks. Classify each requested capability as already verified, present but unverified, partially implemented, missing, or blocked. Link to actual implementation and checks.
+2. Identify baseline failures that block the demo or official exports, and assign them to the appropriate lane before new feature work. Do not make unrelated tasks wait for an unrelated failure.
+3. Write the smallest compatible contract additions needed for parallel work: question plan, hypothetical outcomes, supplemental-answer request, remaining uncertainty, evidence checks, and encoded-rule rendering. Include service function interfaces at the Core/Platform boundary, enum/date/unit semantics, error behavior, and source/predicate references.
+4. Provide schema-valid example responses immediately so Frontend can work before the services are finished. Mark synthetic fixtures and distinguish a proposed contract from an implemented endpoint. Never present fixture-backed behavior as a working live service.
+5. Assign a contract steward and a single writer for each shared schema, route, fixture, and coordination document. Record contract changes and affected consumers. Preserve official export formats.
+
+Implement only the minimal shared schema/type/fixture changes necessary to establish these contracts where doing so is within an uncontested bootstrap scope. Record when that scope is released to the normal owners. Avoid speculative service scaffolding or broad refactors.
+
+B. CREATE SMALL, EXECUTABLE TASKS
+
+Update the existing PLAN, TASKS, ownership map, and task-card structure. Every task must include:
+- A stable ID, outcome, and priority.
+- Owner lane and concrete files/directories it may write.
+- Shared files it may consume but must request changes to through their steward.
+- Dependencies expressed as task IDs and required contracts/artifacts.
+- Acceptance criteria and meaningful verification commands.
+- Current state, known blockers, and the next action.
+- Actual checkout/branch/base commit where known; otherwise explicitly unallocated.
+- Handoff and integration requirements.
+
+Split large features into reviewable tasks. Each implementation task includes its tests and relevant documentation; testing is not a final phase postponed until all development is done.
+
+Prioritize:
+P0: blocking extraction/evaluator/API/export failures and the small shared contracts.
+P1: a bounded useful-question flow, correct preservation of uncertainty, essential evidence distinctions, and one integrated frontend journey.
+P2: richer question ranking, wider cross-reference coverage, provision inventories, expanded reviewed benchmarks, and broader review displays.
+
+Assign the deterministic renderer to a compact Core task; it can proceed after the shared representation is understood, without blocking the first working question flow. Promote any P2 issue to P0/P1 when the actual build shows it is necessary for correctness. Optional external-code adaptation should save time, not create an additional research project.
+
+C. PREPARE STARTER PROMPTS FOR THE OTHER DEVELOPERS
+
+Write one short repository-local starter prompt per lane, using existing handoff conventions. Each must identify:
+- The lane, task IDs, allowed write paths, and shared-file stewards.
+- The current contracts and fixture paths to read.
+- The first ready task and its dependencies/acceptance checks.
+- The worktree/branch and claim process from the playbook.
+- The requirement to preserve teammate changes and stop at an ownership conflict without blocking unrelated work.
+
+The prompts must be usable in separate Codex/Claude Code sessions without relying on this chat's history. Reference the checked-in task cards and shared specification rather than copying the entire plan into three diverging documents. If this uploaded specification is not already retained in the repository, preserve one canonical copy in the existing docs structure and link to it.
+
+Reserve Frontend ownership for the Claude Code teammate, but do not claim that a teammate has started, accepted a task, or received a message. Prepare the handoffs for Vincent to distribute; do not send external messages.
+
+D. RELEASE THE HANDOFFS, THEN CONTINUE YOUR LANE
+
+Once contracts, task ownership, fixtures, and starter prompts are ready, give a concise progress update listing where they are and which tasks can start concurrently. Do not wait for a routine planning approval. Claim and implement the first ready task in this session's established lane; if no lane was previously assigned, follow the Platform/API default above. Continue ready work inside that lane and its dependencies only.
+
+If a dependency is unfinished, use agreed fixtures for development/testing and work on another ready task you own. Do not claim live integration works before it does. If all remaining work in your lane is blocked, report the exact missing artifact and owner instead of taking a teammate's task.
+
+Integrate one complete flow early: lookup -> useful question -> labeled factual answer -> reevaluation -> supporting evidence. Include a case that correctly stays unknown. Use the existing merge queue and integration authority. Only report commits, merges, deployments, and teammate task states that actually occurred; this prompt does not add blanket remote push/deploy authority.
+
+1. START FROM THE ACTUAL BUILD
+
+Read the applicable AGENTS.md files, the playbook, the attached strategy, the current implementation, and the current handoff/plan/contracts/evaluation documents. Inspect the working tree and other active ownership before editing. Do not overwrite another developer's work. Work within the existing task/branch/ownership process.
+
+First identify what the one-shot already implemented and what is still missing. Keep working behavior and reuse existing modules. Do not duplicate a feature just because this prompt describes it differently. Establish the current runnable baseline, assign blocking regressions to their owners, and fix those in your lane before expanding dependent functionality. Describe pre-existing failures separately from failures introduced by this pass.
+
+Keep the existing bounded predicate AST, deterministic three-valued evaluator, storage, extraction provider boundary, API framework, and submission adapters. These improvements do not justify an FSM rewrite, a graph database, a vector database, another application server, or another provider dependency. Keep official exports schema-compatible. Add internal records or optional API fields through the existing contract stewardship process.
+
+If the actual build replaced structured predicates with prose-only decisions or generated executable code, make that a foundational Core task with explicit dependencies and explain the necessary scope. Otherwise organize the additive work below under the three lanes.
+
+2. PRIORITY ONE: ACTIONABLE MISSING-FACT NAVIGATOR
+
+Build this over the existing evaluator. A generic list of all absent property fields is insufficient.
+
+Preserve stable predicate IDs, field references, source references, AND/OR/NOT structure, and true/false/unknown results in the evaluation trace. Preserve enough of the residual expression to determine which unknown facts can still affect an outcome. If these already exist, consume them rather than adding a second representation.
+
+Generate a bounded QuestionPlan for a lookup:
+- Which property fact is needed, its precise meaning, data type/unit, and acceptable answer form.
+- Why it matters, referencing the affected rules, predicate IDs, and evidence.
+- Relevant alternative values or intervals.
+- The evaluation resulting from each alternative, including all remaining uncertainty.
+- A reproducible ranking rationale.
+- Limits on the analysis, such as incomplete enumeration or an unsupported expression.
+Use existing naming conventions and schemas; this is a conceptual contract, not a demand to invent another incompatible model.
+
+Use partial evaluation and short-circuit semantics first. For supported Boolean or small enumerated domains, enumerate feasible alternatives. For numeric/date comparisons, partition the valid domain at the actual predicate thresholds and preserve inclusive/exclusive boundaries and date precision. Representatives are internal probes, never invented property facts.
+
+Treat repeated uses of the same property field as one variable. Do not independently assign truth values to predicates that depend on the same fact and thereby create impossible branches. Respect known bounds and supplied relationships between facts.
+
+A question can be useful even if answering it alone leaves the full rule unknown. Where bounded joint exploration is supported, establish materiality by finding feasible completions differing in that fact that change the outcome. Do not discard every question merely because another unresolved exemption remains. Conversely, do not ask about fields in branches already ruled out.
+
+Use explicit exploration limits and deterministic ordering. Report a partial analysis when those limits are reached; do not turn an unexamined branch into certainty or claim an exhaustive/minimal question set. Do not add a general theorem prover for this MVP.
+
+Rank questions using an explainable heuristic such as affected unresolved predicates or distinguishable outcomes divided by a small, documented answer-effort weight. These weights are heuristics, not probabilities. Tie-break deterministically. A simple well-tested ranking is preferable to a sophisticated but unverifiable planner.
+
+Separate uncertainty remedies:
+- Missing property fact: ask a factual question.
+- Ambiguous jurisdiction/address: request the appropriate location clarification or evidence.
+- Missing source or unresolved cross-reference: identify the source-retrieval/extraction gap.
+- Unsupported legal condition or unresolved conflicting authority: identify the interpretation/review gap.
+Do not ask a renter to supply a legal conclusion or resolve a source conflict.
+
+Construction year does not automatically establish first-occupancy date, certificate date, or another distinct legal trigger. Ask for the actual fact required by the rule.
+
+Accept supplemental answers through the existing request mechanism or a compatible extension. Validate them, record provenance as user-provided/verified/demo, scope them to the request or explicit scenario, and preserve the original benchmark data. Re-evaluate using the same evaluator. Both displayed alternatives and the result after a real answer must be reproducible through that evaluator.
+
+Core and Platform must provide frontend-ready fixtures for: one decisive question; an irrelevant missing fact; two unresolved exemptions; unresolved source coverage; and a bounded/partial question analysis. The Frontend lane implements the interaction using these contracts; backend sessions leave frontend files to that lane.
+
+3. PRIORITY TWO: SEPARATE EVIDENCE CHECKS AND EXPOSE WHAT THE RULE ENCODING SAYS
+
+Reuse or strengthen the existing evidence pipeline.
+
+Maintain distinct checks for:
+- Source availability and identity/version.
+- Citation or section anchor validity.
+- Quoted-span presence in the source snapshot.
+- Whether the cited context supports the extracted condition, threshold, exception, date, and interaction.
+- Unsupported or unresolved dependencies.
+
+A literal quote match proves the text occurs, not that it supports the interpretation. Lexical similarity is retrieval evidence, not semantic verification. An absent document in the supplied corpus is a coverage gap, not proof the law or authority does not exist. Keep these distinctions in machine-readable statuses and the handoff.
+
+Use exact span references where possible. If normalizing whitespace/OCR for quote matching, record the transformation and retain a defensible mapping to the original source. Do not silently convert a fuzzy match into an exact quote.
+
+Retrieve surrounding section context and explicit definitions, exception sections, and cross-references needed by a rule. Use the current source loader and a small in-process lexical index if necessary. Preserve section/source/span identity throughout retrieval. Never keep only the beginning of each chunk if that discards potentially decisive text. Mark missing references and cycles explicitly. Do not build an open-ended research agent.
+
+Use a bounded semantic verification pass only where useful, comparing the proposed structured rule against supplied source passages and relevant dependencies. It may report supported, contradicted, or insufficient evidence, with supporting spans and specific discrepancies. The verifier must not substitute model memory for an absent source. Record live, fixture, and replay modes honestly. A model's self-rated confidence is not an accuracy measurement.
+
+Add a deterministic AST-to-English renderer, or extend the existing explanation renderer, so a reviewer can see “what the encoded rule says” next to its source. It should preserve operators, grouping, dates, units, thresholds, exemptions, and unresolved/unsupported nodes. It must not use another LLM to invent a paraphrase of the law.
+
+Keep this rule-level rendering distinct from a property-specific evaluation explanation. Both should derive from the same encoded rule. Stable output is useful for review and semantic diffs, but does not prove the legal interpretation is correct.
+
+Where extraction omissions are a real gap, add a small source-unit inventory: provision/definition/exception/date -> source span -> mapped rule/predicate IDs, explicitly out of scope, or unresolved with a reason. If using a two-pass extraction approach, ground both passes in the original text; the first model's notes are not ground truth. Apply it selectively to consequential/risky documents and cache by source version and extractor version. Avoid needlessly reprocessing the full corpus.
+
+Do not label model-detected inventory coverage as complete coverage of the law or as human-reviewed coverage.
+
+4. REQUIRED VERIFICATION WITHIN EACH IMPLEMENTATION TASK
+
+Extend the existing tests where these cases are missing. Prefer meaningful behavioral checks over tests that merely repeat the implementation.
+
+Navigator:
+- false AND unknown remains false; true OR unknown remains true.
+- An irrelevant missing fact generates no question.
+- With a synthetic rule “units >= 4 AND occupancy <= cutoff AND NOT exempt,” answering occupancy while exemption remains unknown does not create certainty.
+- Correlated predicates on the same fact cannot produce impossible branches.
+- Both hypothetical outcomes reproduce through the production evaluator.
+- Question ranking is reproducible, and hitting the exploration budget is visible.
+
+Evidence:
+- A real quote used to support the opposite meaning does not pass merely because words overlap.
+- A missing cross-referenced exception remains a visible gap.
+- Missing source text does not become “no law,” “fabricated,” or verified inapplicability.
+- Removing the only supporting evidence surfaces an evidence failure rather than leaving an unchanged verified result.
+- The rule renderer preserves a changed comparison operator, exception, and effective-date boundary.
+
+System:
+- Removing a decisive fact creates the expected uncertainty; removing an irrelevant fact preserves the result.
+- Crossing an effective date changes only the justified outcomes.
+- Changing jurisdiction changes relevant local candidates while preserving unrelated property facts.
+- Duplicate source ingestion does not duplicate rules.
+- A whitespace-only source revision does not create a substantive legal change, while a threshold/exception/date change is detectable.
+
+Use original synthetic fixtures for algorithmic traps and clearly label them. For actual legal correctness, add a small benchmark spanning the required categories, ordinary cases, and boundaries. Keep some examples out of active prompt tuning. Record who reviewed expectations; do not claim human review if none occurred. A model-generated expected answer checked by the same model is not an independent benchmark.
+
+Report question counts, unnecessary questions, incorrect certainty, source-support failures, and exact cases tested where feasible. Compare the navigator to “ask every missing field” and “return generic unknown” on a small fixed set. Report denominators and limitations, not invented accuracy or official competition scores.
+
+5. WHAT TO REUSE FROM THE PRIOR PROJECTS
+
+These findings come from static inspection of public source snapshots on 2026-10-03. They are not runtime certification or proof of the projects' advertised accuracy. Verify any upstream code you actually import. Do not spend the remaining build window repeating a broad search for every same-named project.
+
+A. Citrus / Objection Hallucination — best candidate for narrow direct reuse
+Repository:
+https://github.com/hackthelaw-cambridge/2026-Objection-Hallucination
+Reviewed commit:
+dcab7bbc3cc8f23f043368db3d1b1359b81478a2
+Source:
+https://github.com/hackthelaw-cambridge/2026-Objection-Hallucination/blob/dcab7bbc3cc8f23f043368db3d1b1359b81478a2/app.py
+License declaration:
+https://github.com/hackthelaw-cambridge/2026-Objection-Hallucination/blob/dcab7bbc3cc8f23f043368db3d1b1359b81478a2/README.md
+
+Useful functions to examine: tfidf_vectors, cosine_dict, rank_passages_by_tfidf, retrieve_passage_candidates. The first three offer a small local retrieval pattern. Prefer the retrieval component already in our repo; if none exists and adaptation genuinely saves time, isolate the minimal suitable helper code behind our own interface. Replace case-law-specific tokenization and preserve our source/span metadata. Do not import the monolithic Streamlit app just to call a helper.
+
+The README explicitly declares “license: mit” in its metadata, but the inspected tree has no separate LICENSE file and GitHub metadata did not recognize one. Do not describe it as having no license, and do not treat an absent license badge as proof of absent permission. Before copying, verify the declaration's applicability to the intended code, preserve upstream notices and attribution, and record the commit/files/modifications in our third-party notice. Do not infer that bundled judgments, other assets, or dependencies have identical terms. If scope remains unclear, implement the small standard retrieval algorithm independently and keep moving; no architectural dependency on permission is needed.
+
+Do not copy Citrus's verdict policy:
+- grounded_verify can return Verified from TF-IDF similarity thresholds.
+- landmark_principle_verified contains case-specific keyword shortcuts.
+- analyze labels a corpus no-match “Fabrication / Hallucination,” although its README acknowledges corpus incompleteness.
+- Its chunk retrieval truncates chunks to their first 1,600 characters.
+These behaviors are unsuitable for validating housing-law rules. Do not borrow their thresholds, confidence scores, UK citation heuristics, case corpus, frontend, or provider-specific integration.
+
+B. ClauseWise candidate — architectural inspiration, not an engine dependency
+Repository:
+https://github.com/yuvrajy/clausewise
+Reviewed commit:
+a414468a1f2e672bf59c645a3799083d8b971dc6
+Useful files:
+contracts/extractor.py
+contracts/validator.py
+contracts/decompiler.py
+contracts/pipeline.py
+Inspect contracts/executor.py to understand why not to import the runtime.
+
+This repository's name, event-period commits, and executable-contract design match the referenced project closely, but the review did not conclusively establish that it is the exact award-winning submission. Preserve that qualification in provenance.
+
+Useful ideas: inventory before schema mapping, explicit unmappable elements, bounded structural validation/repair, deterministic rendering back to readable language, and adversarial cross-clause examples. Implement these ideas independently within our housing-rule representation.
+
+No license declaration/file was found in the inspected tree/README. Do not vendor its source without a usable grant. More fundamentally, its runtime uses eval on generated formulas/guards and turns some exceptions into zero amounts or false guards. Its validator checks structural properties and formula syntax, not legal meaning or safe execution. Its README also limits amendment layering and systematic cross-reference resolution.
+
+Keep our bounded JSON AST and explicit unknown/error semantics. Do not execute downloaded pickle artifacts, generated Python, or the repository's demo as a shortcut.
+
+C. Know Your Rights — interaction inspiration, no verified reusable legislation engine
+Author repository:
+https://github.com/Hidde-Heijnen/know-your-rights
+Organizer mirror:
+https://github.com/hackthelaw-cambridge/2025-know-your-rights
+Both inspected repository trees resolve to:
+8945d487e901e9db34c4aaf5b0a110ea06b94bee
+Useful inspection paths:
+components/screening-chat.tsx
+app/(preview)/api/chat/route.ts
+app/api/save-screening/route.ts
+
+The public snapshot contains a fixed consumer-law screening flow, Gemini-based preprocessing, and a generic model reasoning/chat route. The advertised legislation-tree traversal backend was not located in this complete public tree. No license declaration/file was found.
+
+Borrow the product idea of targeted factual questions and a visible history. Implement questions from our actual evaluator trace. Do not copy its frontend or present model-authored reasoning steps as a deterministic legal proof.
+
+D. Tracy AI — documented precedent, no verified public code to import
+Primary description:
+https://hackthelaw-cambridge.com/hackathon-2025/
+The organizer describes deterministic T&C analysis backed by a proprietary API-connected database. The review did not locate a verified public implementation or reusable license. Do not confuse it with unrelated projects called Tracy. Traceability is already part of our design; do not create a new service dependency.
+
+For all reused code, record repository, revision, paths, license evidence, notices, modifications, and focused tests. For design inspiration, say so explicitly rather than implying code was imported.
+
+6. AGENT DOCS, HANDOFF, AND FUTURE PLAN
+
+During the coordination pass, update existing documentation in place and assign its ongoing steward. During parallel implementation, each lane updates only its owned documentation or task notes and sends shared-document changes through that steward. Avoid creating competing sources of truth:
+- AGENTS.md: reinforce one evaluator, bounded predicates, evidence distinctions, and current ownership only where missing. Keep CLAUDE.md's existing shared-instruction import.
+- Contracts and schema/fixture docs: describe the question plan, supplemental-answer flow, evidence statuses, version/date semantics, and backward compatibility.
+- FRONTEND_HANDOFF: provide exact proposed or working backend calls and fixtures for a useful question, remaining uncertainty after an answer, evidence failure, and source/encoded-rule comparison. Clearly label proposed, fixture-only, implemented, and integration-verified behavior. Leave visual design and frontend files to Claude Code.
+- PLAN/TASKS/task cards: mark actual completion and verification state. Record any remaining work with owner role, dependency, acceptance criterion, and priority. Do not mark a local implementation as merged or deployed.
+- DECISIONS: explain why the architecture was retained and which external patterns/code were adopted or rejected.
+- EVALUATION: commands run, results, independent-vs-synthetic cases, review status, limitations, and unresolved failures.
+- DEMO_AND_SUBMISSION/HANDOFF: define the target example showing unknown -> useful question -> labeled answer -> changed trace, plus one case that correctly stays unknown. Record it as verified only after actual integration checks. Keep official submission exports and deadlines as the first priority.
+- Add a compact third-party reuse/provenance record if code is imported, or fold this information into the existing appropriate document.
+
+Future phases should preserve this order:
+1. Fix remaining corpus extraction, official-schema, export, and test failures.
+2. Complete the bounded missing-fact navigator and its frontend integration.
+3. Extend evidence review, cross-reference coverage, and rule rendering.
+4. Broaden reviewed boundary cases and semantic version/change comparisons.
+5. Only after the core is stable, consider richer question ranking, additional source acquisition, translations from structured results, or broader product features.
+
+If time is tight, reduce ranking sophistication and review UI scope before compromising evaluator correctness, evidence honesty, official exports, or submission readiness. Put any substantive unfinished enhancement into a concrete task with its blocker; do not silently omit it or claim it is complete.
+
+Finish with: the three-lane ownership map; actual paths to the shared specification, contracts, fixtures, task cards, and lane starter prompts; this session's implemented changes and verification results; third-party code reused versus ideas independently implemented; which tasks teammates can start immediately; and remaining dependencies and priorities. Report planning completion separately from implementation and integration completion. Continue ready work in your assigned lane without stopping for routine reversible choices; do not implement other lanes merely because their requirements also appear in this shared prompt.
