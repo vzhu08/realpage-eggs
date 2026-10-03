@@ -41,3 +41,8 @@ Related serialized CORE-03 adjustments retain questions under unknown temporal s
 hypothetical provenance when a precise probe is accompanied by an existing numeric bound.
 Fixed synthetic comparison and final integration results will be in docs/core/CORE_HANDOFF.md.
 Platform HTTP assist route is absent on the inspected base; service integration verified directly.
+
+Read-only adversarial review led to focused repairs: inactive rules cannot create false sensitivity or
+poison date partitions; source/lifecycle remedies survive negative factual answers; real-number
+membership with type-sensitive integer/float semantics is explicitly unsupported rather than exhaustive;
+nonmaterial residuals no longer request a useless fact. 58 combined engine/planner/renderer tests pass.

@@ -56,6 +56,9 @@ def _domain(definition: FactDefinition, expressions: list[Expression], prop, as_
         if len(values) > 16:
             return [], False
         return [Cell(v, v) for v in values], supported and bool(values)
+    if kind == "number" and any(e.op == "in" for e in expressions):
+        # Membership is type-sensitive (1 versus 1.0) in the shared evaluator.
+        return [], False
     if kind not in {"integer", "number", "date"}:
         return [], False
     is_date = kind == "date"
@@ -154,7 +157,8 @@ def _domain(definition: FactDefinition, expressions: list[Expression], prop, as_
 
 def _signature(evaluations):
     return tuple((e.team_rule_id, e.result, e.coverage.value, e.conflict_flag,
-                  tuple(e.applied_interactions)) for e in evaluations)
+                  tuple(e.applied_interactions)) for e in evaluations
+                 if e.jurisdiction != "false" and e.temporal_status not in {"inapplicable", "failed", "pending", "not_yet_effective"})
 
 
 def _needs_fact(node, prop):
@@ -191,6 +195,25 @@ def _uncertainty(context, evaluations, traces, prop=None):
                     add("interpretation", node.expression.reason or "Encoded comparison or legal threshold precision remains unresolved despite the supplied fact",
                         "Core/legal reviewer must resolve the encoding against source evidence",
                         [node.rule_id], [node.predicate_id])
+    # Source/lifecycle limitations belong to the rule, even when a factual answer
+    # rules this property out. They must not disappear with a single probe.
+    if context.jurisdiction.match_quality != "resolved":
+        add("jurisdiction", "Legal location/boundary resolution remains incomplete",
+            "Platform must verify location and legal boundaries")
+    for rule in context.rules:
+        if engine.jurisdiction_match(rule, context.jurisdiction) == "false": continue
+        for issue in rule.review_issues:
+            add("interpretation", f"unresolved_extraction: {issue}",
+                "Review the encoded condition, dates or lifecycle against source evidence", [rule.team_rule_id])
+        if rule.semantic_verification == "needs_review":
+            add("interpretation", "unresolved_extraction: semantic support needs review",
+                "Review the encoded condition, dates or lifecycle against source evidence", [rule.team_rule_id])
+        if engine.temporal(rule, context.as_of) == "unknown":
+            add("interpretation", "temporal_uncertainty: date precision or lifecycle history insufficient",
+                "Review the encoded condition, dates or lifecycle against source evidence", [rule.team_rule_id])
+        if rule.conflict_flag:
+            add("conflict", rule.conflict_note or "Authority conflict remains unresolved",
+                "Review source authority; factual answers do not resolve legal conflicts", [rule.team_rule_id])
     for ev in evaluations:
         if ev.result in {"inapplicable", "failed"}: continue
         if ev.jurisdiction == "unknown":
@@ -212,6 +235,11 @@ def _uncertainty(context, evaluations, traces, prop=None):
         for dep in report.context.dependencies:
             if dep.status != "resolved":
                 add("cross_reference", f"{dep.reference}: {dep.explanation}", "Resolve the cited source dependency", [report.rule_id], source_refs=[dep.origin])
+        if report.semantic_review:
+            for decision in report.semantic_review.decisions:
+                if decision.status != "supported":
+                    add("interpretation", decision.explanation, "Review semantic support against cited source evidence",
+                        [report.rule_id], source_refs=decision.spans)
         for issue in report.blocking_issues:
             add("interpretation", issue, "Resolve this evidence review issue before relying on the encoding", [report.rule_id])
     # AssistContext carries rule reports, not a complete jurisdiction/category inventory.
@@ -267,7 +295,10 @@ def plan_questions(context: AssistContext) -> QuestionPlan:
         fields = fields[:limits.max_fields]
     domains = {}
     for field in fields:
-        expressions = [e for r in context.rules for root in [r.coverage_conditions, r.exemption_conditions, *[i.scope for i in r.interactions]]
+        expressions = [e for r in context.rules
+                       if engine.jurisdiction_match(r, context.jurisdiction) != "false"
+                       and engine.temporal(r, context.as_of) not in {"inapplicable", "failed", "pending", "not_yet_effective"}
+                       for root in [r.coverage_conditions, r.exemption_conditions, *[i.scope for i in r.interactions]]
                        for e in _expressions(root) if e.fact == field]
         cells, complete = _domain(definitions[field], expressions, context.property, context.as_of) if field in definitions else ([], False)
         if not complete:
@@ -329,6 +360,12 @@ def plan_questions(context: AssistContext) -> QuestionPlan:
             others = json.dumps({f: v for f, v in values.items() if f != field}, sort_keys=True)
             grouped.setdefault(others, set()).add(_signature(evaluations))
         if any(len(signatures) > 1 for signatures in grouped.values()): material.add(field)
+    if exhaustive:
+        for uncertainty in remaining:
+            if uncertainty.kind == "property_fact" and uncertainty.field in fields and uncertainty.field not in material:
+                uncertainty.kind = "interpretation"
+                uncertainty.message = f"All explored completions of {uncertainty.field} leave the same encoded outcome; evaluator uncertainty remains"
+                uncertainty.remedy = "Review the residual encoding or legal threshold; supplying this fact would not change the analyzed outcome"
     questions = []
     for field in fields:
         if exhaustive and field not in material: continue

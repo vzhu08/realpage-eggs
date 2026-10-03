@@ -312,3 +312,40 @@ def test_age_leap_day_cutoff_and_strict_date_boundary(rule, prop, resolution):
     cutoff = next(a for a in alt if a.probe_facts['first_occupancy_date'] == '2023-02-28')
     assert cutoff.evaluations[0].result == 'applies'
     assert any(a.probe_facts['first_occupancy_date'] > '2023-02-28' and a.evaluations[0].result == 'inapplicable' for a in alt)
+
+
+def test_inactive_rules_do_not_create_false_materiality_or_poison_domains(rule, prop, resolution):
+    prop.facts.pop('units')
+    rule.coverage_conditions = Expression(op='all', args=[Expression(op='lt', fact='units', value=4), Expression(op='gte', fact='units', value=4)])
+    wrong = rule.model_copy(deep=True)
+    wrong.team_rule_id, wrong.jurisdiction = 'wrong-city', 'Wrong City, CA'
+    wrong.coverage_conditions = Expression(op='gte', fact='units', value=10)
+    ctx = context_for(rule, prop, resolution)
+    ctx.rules.append(wrong)
+    plan = plan_questions(ctx)
+    assert not plan.questions and plan.exhaustive
+    assert not any(u.kind == 'property_fact' for u in plan.remaining_uncertainty)
+    rule.coverage_conditions = Expression(op='date_before', fact='first_occupancy_date', value='2020-01-01')
+    wrong.coverage_conditions = Expression(op='eq', fact='first_occupancy_date', value='2020')
+    ctx.rules = [rule, wrong]
+    assert question(plan_questions(ctx), 'first_occupancy_date')
+
+
+def test_source_and_temporal_remedies_survive_inapplicable_probe(rule, prop, resolution):
+    prop.facts.pop('units')
+    rule.review_issues = ['Synthetic source definition unresolved']
+    rule.effective_date = '2026-11'
+    plan = plan_questions(context_for(rule, prop, resolution))
+    alt = next(a for a in question(plan, 'units').alternatives if a.probe_facts['units'] < 8)
+    assert alt.evaluations[0].result == 'inapplicable'
+    assert any('temporal_uncertainty' in u.message for u in alt.remaining_uncertainty)
+    assert any('Synthetic source definition unresolved' in u.message for u in alt.remaining_uncertainty)
+
+
+def test_number_membership_type_sensitivity_is_not_called_exhaustive(rule, prop, resolution):
+    rule.coverage_conditions = Expression(op='in', fact='amount', value=[1])
+    ctx = context_for(rule, prop, resolution)
+    ctx.fact_definitions['amount'] = FactDefinition(field='amount', meaning='Measured amount', data_type='number')
+    plan = plan_questions(ctx)
+    assert plan.status == 'partial' and not plan.exhaustive
+    assert any(u.kind == 'interpretation' and u.field == 'amount' for u in plan.remaining_uncertainty)
