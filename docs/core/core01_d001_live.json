@@ -1,0 +1,818 @@
+{
+  "mode": "real_live_extraction_then_automated_source_review_not_human_legal_review",
+  "run": {
+    "run_id": "2c214d19d3b944a29f98847f16db16ca",
+    "operation": "extract",
+    "mode": "live",
+    "started_at": "2026-10-03T22:59:40.464545+00:00",
+    "finished_at": "2026-10-03T23:02:13.052294+00:00",
+    "elapsed_seconds": 152.588,
+    "outcome": "success",
+    "input_hashes": {
+      "D001": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17"
+    },
+    "config": {
+      "prompt_version": "extract-v3-core-json-input",
+      "chunk_chars": 18000,
+      "overlap_chars": 1500,
+      "concurrency": 1,
+      "transport_attempts": 3,
+      "repair_attempts": 1,
+      "model": "gpt-6.1-sol"
+    },
+    "versions": {
+      "pipeline": "0.1.0",
+      "evaluator": "0.1.0"
+    },
+    "counts": {
+      "processed": 1,
+      "rules": 2,
+      "cache_hits": 0
+    },
+    "errors": [],
+    "artifacts": [
+      "rules.json",
+      "extraction_index.json",
+      "provider_outputs/2c214d19d3b944a29f98847f16db16ca/usage.json"
+    ]
+  },
+  "usage": [
+    {
+      "response_id": "resp_0940a48925a2463b016ac188dcac1487d1aa49d455cba0880e",
+      "usage": {
+        "input_tokens": 4425,
+        "input_tokens_details": {
+          "cache_write_tokens": 4422,
+          "cached_tokens": 0
+        },
+        "output_tokens": 5814,
+        "output_tokens_details": {
+          "reasoning_tokens": 191
+        },
+        "total_tokens": 10239
+      },
+      "model": "gpt-6.1-sol",
+      "status": "completed"
+    },
+    {
+      "response_id": "resp_0c1f0e5a318c0a19016ac18921895087d1931937ad50f60138",
+      "usage": {
+        "input_tokens": 9356,
+        "input_tokens_details": {
+          "cache_write_tokens": 9353,
+          "cached_tokens": 0
+        },
+        "output_tokens": 6634,
+        "output_tokens_details": {
+          "reasoning_tokens": 351
+        },
+        "total_tokens": 15990
+      },
+      "model": "gpt-6.1-sol",
+      "status": "completed"
+    }
+  ],
+  "totals": {
+    "input_tokens": 13781,
+    "output_tokens": 12448,
+    "total_tokens": 26229
+  },
+  "provider_calls_with_usage": 2,
+  "rules": [
+    {
+      "jurisdiction": "Berkeley, CA",
+      "level": "city",
+      "category": "algorithmic_rent_setting",
+      "provision_key": "prohibit_algorithm_provision",
+      "title": "Prohibition on providing coordinated pricing algorithms",
+      "requirement": "Prohibits selling, licensing, or otherwise providing Berkeley landlords a coordinated pricing algorithm that sets or recommends rents or occupancy levels for residential dwelling units in Berkeley. The algorithm must satisfy the definitions of coordinated pricing algorithm and Competitor Data, and the definition's exclusions apply.",
+      "key_value": "Sale, licensing, and other provision prohibited",
+      "citation": "Berkeley Municipal Code § 13.63.030(A), as proposed by Ordinance No. 7,992-N.S.",
+      "quoted_span": "It shall be unlawful to sell, license, or otherwise provide to City of Berkeley \nlandlords any coordinated pricing algorithm that sets or recommends rents or occupancy \nlevels that may be achieved for residential dwelling units in the City of Berkeley.",
+      "source_doc_id": "D001",
+      "source_url": "https://berkeleyca.gov/sites/default/files/documents/2025-12-02%20Item%2001%20Ordinance%207992.pdf",
+      "coverage_conditions": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "residential",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "dwelling_unit_city",
+            "value": "Berkeley",
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "recipient_is_berkeley_landlord",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "in",
+            "args": [],
+            "fact": "algorithm_provision_action",
+            "value": [
+              "sell",
+              "license",
+              "otherwise_provide"
+            ],
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "algorithm_sets_or_recommends_rents_or_occupancy_levels",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "product_or_process_uses_or_incorporates_analytical_or_computation_process",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "process_uses_identified_input_data_to_calculate_and_recommend_future_lease_rents_fees_occupancy_or_other_terms",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "process_coordinates_berkeley_landlord_with_one_or_more_competitors",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "identified_input_data_available_to_general_public",
+            "value": false,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "identified_input_data_concerns_actual_rents_occupancy_lease_dates_or_similar_property_data",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "identified_input_data_property_owned_or_managed_by_recommendation_recipient_or_user",
+            "value": false,
+            "reason": null
+          },
+          {
+            "op": "lt",
+            "args": [],
+            "fact": "identified_input_data_age_days",
+            "value": 90,
+            "reason": null
+          }
+        ],
+        "fact": null,
+        "value": null,
+        "reason": null
+      },
+      "exemption_conditions": {
+        "op": "any",
+        "args": [
+          {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "product_or_process_publishes_aggregated_anonymous_rental_data_report_study_or_presentation",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "product_or_process_recommends_future_lease_rents_fees_occupancy_or_other_terms",
+                "value": false,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "product_used_to_establish_rent_or_income_limits_under_government_affordable_housing_guidelines",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "information_provided_or_used_for_project_financing_market_research",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "information_provided_or_used_for_appraisal",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "information_provided_or_used_for_software_development_research_testing_or_training",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "any",
+                "args": [
+                  {
+                    "op": "not",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [],
+                        "fact": "software_development_activity_uses_or_processes_competitor_data_to_develop_train_or_test_predictive_or_machine_learning_models",
+                        "value": true,
+                        "reason": null
+                      }
+                    ],
+                    "fact": null,
+                    "value": null,
+                    "reason": null
+                  },
+                  {
+                    "op": "not",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [],
+                        "fact": "such_competitor_data_used_as_operational_model_input_when_recommendation_calculated_for_publication_or_provision_to_berkeley_landlord",
+                        "value": true,
+                        "reason": null
+                      }
+                    ],
+                    "fact": null,
+                    "value": null,
+                    "reason": null
+                  }
+                ],
+                "fact": null,
+                "value": null,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          }
+        ],
+        "fact": null,
+        "value": null,
+        "reason": null
+      },
+      "exemptions": "Excluded from the definition are aggregated anonymous rental-data publications that do not recommend future lease terms; products establishing rent or income limits under governmental affordable-housing guidelines; information provided or used for project-financing market research or appraisals; and software-development research, testing, or training. The express clarification includes Competitor Data used to develop, train, or test predictive or machine-learning models only so long as such data is not an operational model input when a recommendation is calculated for publication or provision to a Berkeley landlord.",
+      "lifecycle": "pending",
+      "effective_date": null,
+      "end_date": null,
+      "status_as_of": "2025-11-18",
+      "status_events": [
+        {
+          "status": "pending",
+          "on": "2025-11-18",
+          "evidence": [
+            {
+              "doc_id": "D001",
+              "quote": "At a regular meeting of the Council of the City of Berkeley held on November 18, \n2025, this Ordinance was passed to print and ordered published by posting by the \nfollowing vote:",
+              "start": 7695,
+              "end": 7874,
+              "supports": [
+                "status",
+                "on"
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "doc_id": "D001",
+          "quote": "A. It shall be unlawful to sell, license, or otherwise provide to City of Berkeley \nlandlords any coordinated pricing algorithm that sets or recommends rents or occupancy \nlevels that may be achieved for residential dwelling units in the City of Berkeley.",
+          "start": 4826,
+          "end": 5081,
+          "supports": [
+            "jurisdiction",
+            "level",
+            "category",
+            "provision_key",
+            "title",
+            "requirement",
+            "key_value",
+            "citation",
+            "quoted_span",
+            "coverage_conditions"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "ORDINANCE NO. 7,992-N.S. \nAMENDING CHAPTER 13.63 OF THE BERKELEY MUNICIPAL CODE",
+          "start": 140,
+          "end": 219,
+          "supports": [
+            "citation"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "13.63.030   Use and sale of coordinated pricing algorithms prohibited.",
+          "start": 4703,
+          "end": 4773,
+          "supports": [
+            "citation"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "“Coordinated pricing algorithm” means any analytical or computation process that \nuses Competitor Data to calculate and recommend rent prices, fees, occupancy rates or \nother rental contract terms for future leases in coordination between one City of Berkeley \nlandlord and one or more of such landlord’s competitors, including through a third-party \nvendor. A “coordinated pricing algorithm” includes a product that incorporates a \ncoordinated pricing algorithm, but does not include (a) a product or process that \ngenerates or presents any report, study, or presentation that publishes rental data in an \naggregated and anonymous manner but does not recommend rent prices, fees, or \noccupancy rates or other rental contract terms for future leases; (b) a product used for \nthe purpose of establishing rent or income limits in accordance with the affordable \nhousing guidelines of a local government, the state, the federal government, or other \npolitical subdivision; or (c) a product or process that provides or uses, or the provision or \nuse of, information for the purpose of (i) conducting market research for project financing, \n(ii) conducting an appraisal, or (iii) conducting research, testing, or training for software \ndevelopment. For clarity, “research, testing, or training for software development” \nincludes without limitation the use or processing of Competitor Data in the development, \ntraining, or testing of predictive or machine learning models so long as any such data is \nnot used as an input in the operation of the model at the time a recommendation is \ncalculated for publication or provision to a City of Berkeley landlord.",
+          "start": 2683,
+          "end": 4335,
+          "supports": [
+            "coverage_conditions",
+            "exemption_conditions",
+            "exemptions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "“Competitor Data” means information that is not available to the general public \nconcerning actual rent prices, occupancy rates, lease start and end dates, and similar \ndata regarding a property other than a property that is owned or managed by the landlord \nwho is the recipient or user of the generated recommendation, when such data is less \nthan 90 days old.",
+          "start": 4339,
+          "end": 4701,
+          "supports": [
+            "coverage_conditions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "At a regular meeting of the Council of the City of Berkeley held on November 18, \n2025, this Ordinance was passed to print and ordered published by posting by the \nfollowing vote:",
+          "start": 7695,
+          "end": 7874,
+          "supports": [
+            "lifecycle",
+            "status_as_of",
+            "status_events"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "The City Attorney may file a civil action for violations of section 13.63.030, \nsubsections A and/or B, for damages, injunctive relief, restitution/return of illegal profits, \nand/or civil penalties of up to $1,000 per violation. The court shall award reasonable \nattorney’s fees and costs to the City Attorney if the City Attorney is the prevailing party \nin such a civil action.",
+          "start": 5534,
+          "end": 5914,
+          "supports": [
+            "penalties"
+          ]
+        }
+      ],
+      "interactions": [],
+      "penalties": "Under § 13.63.040(A), the City Attorney may seek damages, injunctive relief, restitution/return of illegal profits, and/or civil penalties up to $1,000 per violation. A prevailing City Attorney must receive reasonable attorney’s fees and costs.",
+      "review_issues": [
+        "All six categories were reviewed. No provisions concerning just-cause eviction, security deposits, application or screening fees, or screening restrictions were identified in this source; this does not establish that such rules do not exist.",
+        "No end date is established.",
+        "The chapter's general-welfare undertaking and severability provisions do not create additional housing obligations within the six extraction categories. Enforcement remedies, mandatory prevailing-party fee awards, and the restriction on tenant fee-waiver provisions are retained internally under penalties.",
+        "The identified-input-data predicates refer to the same qualifying data used by the process. They do not require every input to be Competitor Data.",
+        "The ordinance amends Chapter 13.63, but the source does not supply prior versions, their dates, or sufficient evidence for a directional supersedes or conflicts_with interaction with another identified legal rule.",
+        "The reference time for the less-than-90-days data-age threshold is not expressly stated.",
+        "The separate-month and separate-unit violation language appears in subsection B. Its application to provider violations under subsection A is not expressly established.",
+        "The software-development operational-input restriction is compiled for the predictive or machine-learning model activity expressly described in the clarification, not imposed on all software-development research. The clarification says 'includes without limitation'; application to other development activities may require interpretation.",
+        "The source is proposed amending ordinance text with a dated passage-to-print record. It does not establish final adoption; the URL's date and retrieval date are not enactment evidence.",
+        "The source records passage to print, not final adoption. Enactment and an effective date are not established; pending describes the supported 2025-11-18 snapshot, not a finding about later status."
+      ],
+      "conflict_flag": false,
+      "conflict_note": null,
+      "team_rule_id": "r-12c99cf95c4f2cd2242e",
+      "evidence_mode": "live",
+      "extraction_run_id": "2c214d19d3b944a29f98847f16db16ca",
+      "semantic_verification": "needs_review"
+    },
+    {
+      "jurisdiction": "Berkeley, CA",
+      "level": "city",
+      "category": "algorithmic_rent_setting",
+      "provision_key": "prohibit_landlord_algorithm_use",
+      "title": "Prohibition on landlord use of coordinated pricing algorithms",
+      "requirement": "Prohibits a landlord from using a coordinated pricing algorithm described in § 13.63.030(A) when setting rents or occupancy levels for residential dwelling units in Berkeley. The algorithm must satisfy the definitions of coordinated pricing algorithm and Competitor Data, and the definition's exclusions apply.",
+      "key_value": "Landlord use prohibited",
+      "citation": "Berkeley Municipal Code § 13.63.030(B), as proposed by Ordinance No. 7,992-N.S.",
+      "quoted_span": "It shall be unlawful for a landlord to use a coordinated pricing algorithm described \nin subsection A when setting rents or occupancy levels for residential dwelling units in \nthe City of Berkeley.",
+      "source_doc_id": "D001",
+      "source_url": "https://berkeleyca.gov/sites/default/files/documents/2025-12-02%20Item%2001%20Ordinance%207992.pdf",
+      "coverage_conditions": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "residential",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "dwelling_unit_city",
+            "value": "Berkeley",
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "actor_is_landlord",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "landlord_uses_algorithm_to_set_rents_or_occupancy_levels",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "algorithm_sets_or_recommends_rents_or_occupancy_levels",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "product_or_process_uses_or_incorporates_analytical_or_computation_process",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "process_uses_identified_input_data_to_calculate_and_recommend_future_lease_rents_fees_occupancy_or_other_terms",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "process_coordinates_berkeley_landlord_with_one_or_more_competitors",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "identified_input_data_available_to_general_public",
+            "value": false,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "identified_input_data_concerns_actual_rents_occupancy_lease_dates_or_similar_property_data",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "identified_input_data_property_owned_or_managed_by_recommendation_recipient_or_user",
+            "value": false,
+            "reason": null
+          },
+          {
+            "op": "lt",
+            "args": [],
+            "fact": "identified_input_data_age_days",
+            "value": 90,
+            "reason": null
+          }
+        ],
+        "fact": null,
+        "value": null,
+        "reason": null
+      },
+      "exemption_conditions": {
+        "op": "any",
+        "args": [
+          {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "product_or_process_publishes_aggregated_anonymous_rental_data_report_study_or_presentation",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "product_or_process_recommends_future_lease_rents_fees_occupancy_or_other_terms",
+                "value": false,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "product_used_to_establish_rent_or_income_limits_under_government_affordable_housing_guidelines",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "information_provided_or_used_for_project_financing_market_research",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "information_provided_or_used_for_appraisal",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "information_provided_or_used_for_software_development_research_testing_or_training",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "any",
+                "args": [
+                  {
+                    "op": "not",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [],
+                        "fact": "software_development_activity_uses_or_processes_competitor_data_to_develop_train_or_test_predictive_or_machine_learning_models",
+                        "value": true,
+                        "reason": null
+                      }
+                    ],
+                    "fact": null,
+                    "value": null,
+                    "reason": null
+                  },
+                  {
+                    "op": "not",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [],
+                        "fact": "such_competitor_data_used_as_operational_model_input_when_recommendation_calculated_for_publication_or_provision_to_berkeley_landlord",
+                        "value": true,
+                        "reason": null
+                      }
+                    ],
+                    "fact": null,
+                    "value": null,
+                    "reason": null
+                  }
+                ],
+                "fact": null,
+                "value": null,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          }
+        ],
+        "fact": null,
+        "value": null,
+        "reason": null
+      },
+      "exemptions": "Excluded from the definition are aggregated anonymous rental-data publications that do not recommend future lease terms; products establishing rent or income limits under governmental affordable-housing guidelines; information provided or used for project-financing market research or appraisals; and software-development research, testing, or training. The express clarification includes Competitor Data used to develop, train, or test predictive or machine-learning models only so long as such data is not an operational model input when a recommendation is calculated for publication or provision to a Berkeley landlord.",
+      "lifecycle": "pending",
+      "effective_date": null,
+      "end_date": null,
+      "status_as_of": "2025-11-18",
+      "status_events": [
+        {
+          "status": "pending",
+          "on": "2025-11-18",
+          "evidence": [
+            {
+              "doc_id": "D001",
+              "quote": "At a regular meeting of the Council of the City of Berkeley held on November 18, \n2025, this Ordinance was passed to print and ordered published by posting by the \nfollowing vote:",
+              "start": 7695,
+              "end": 7874,
+              "supports": [
+                "status",
+                "on"
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "doc_id": "D001",
+          "quote": "B. It shall be unlawful for a landlord to use a coordinated pricing algorithm described \nin subsection A when setting rents or occupancy levels for residential dwelling units in \nthe City of Berkeley. Each separate month that a violation exists or continues, and each \nseparate residential dwelling unit for which the landlord used the coordinated pricing \nalgorithm, shall constitute a separate and distinct violation.",
+          "start": 5083,
+          "end": 5502,
+          "supports": [
+            "jurisdiction",
+            "level",
+            "category",
+            "provision_key",
+            "title",
+            "requirement",
+            "key_value",
+            "citation",
+            "quoted_span",
+            "coverage_conditions",
+            "penalties"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "ORDINANCE NO. 7,992-N.S. \nAMENDING CHAPTER 13.63 OF THE BERKELEY MUNICIPAL CODE",
+          "start": 140,
+          "end": 219,
+          "supports": [
+            "citation"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "13.63.030   Use and sale of coordinated pricing algorithms prohibited.",
+          "start": 4703,
+          "end": 4773,
+          "supports": [
+            "citation"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "It shall be unlawful to sell, license, or otherwise provide to City of Berkeley \nlandlords any coordinated pricing algorithm that sets or recommends rents or occupancy \nlevels that may be achieved for residential dwelling units in the City of Berkeley.",
+          "start": 4829,
+          "end": 5081,
+          "supports": [
+            "coverage_conditions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "“Coordinated pricing algorithm” means any analytical or computation process that \nuses Competitor Data to calculate and recommend rent prices, fees, occupancy rates or \nother rental contract terms for future leases in coordination between one City of Berkeley \nlandlord and one or more of such landlord’s competitors, including through a third-party \nvendor. A “coordinated pricing algorithm” includes a product that incorporates a \ncoordinated pricing algorithm, but does not include (a) a product or process that \ngenerates or presents any report, study, or presentation that publishes rental data in an \naggregated and anonymous manner but does not recommend rent prices, fees, or \noccupancy rates or other rental contract terms for future leases; (b) a product used for \nthe purpose of establishing rent or income limits in accordance with the affordable \nhousing guidelines of a local government, the state, the federal government, or other \npolitical subdivision; or (c) a product or process that provides or uses, or the provision or \nuse of, information for the purpose of (i) conducting market research for project financing, \n(ii) conducting an appraisal, or (iii) conducting research, testing, or training for software \ndevelopment. For clarity, “research, testing, or training for software development” \nincludes without limitation the use or processing of Competitor Data in the development, \ntraining, or testing of predictive or machine learning models so long as any such data is \nnot used as an input in the operation of the model at the time a recommendation is \ncalculated for publication or provision to a City of Berkeley landlord.",
+          "start": 2683,
+          "end": 4335,
+          "supports": [
+            "coverage_conditions",
+            "exemption_conditions",
+            "exemptions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "“Competitor Data” means information that is not available to the general public \nconcerning actual rent prices, occupancy rates, lease start and end dates, and similar \ndata regarding a property other than a property that is owned or managed by the landlord \nwho is the recipient or user of the generated recommendation, when such data is less \nthan 90 days old.",
+          "start": 4339,
+          "end": 4701,
+          "supports": [
+            "coverage_conditions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "At a regular meeting of the Council of the City of Berkeley held on November 18, \n2025, this Ordinance was passed to print and ordered published by posting by the \nfollowing vote:",
+          "start": 7695,
+          "end": 7874,
+          "supports": [
+            "lifecycle",
+            "status_as_of",
+            "status_events"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "The City Attorney may file a civil action for violations of section 13.63.030, \nsubsections A and/or B, for damages, injunctive relief, restitution/return of illegal profits, \nand/or civil penalties of up to $1,000 per violation. The court shall award reasonable \nattorney’s fees and costs to the City Attorney if the City Attorney is the prevailing party \nin such a civil action.",
+          "start": 5534,
+          "end": 5914,
+          "supports": [
+            "penalties"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "An aggrieved tenant may file a civil action for violations of section 13.63.030, \nsubsection B, for injunctive relief, money damages, and/or civil penalties of up to $1,000 \nper violation. The court shall award reasonable attorney’s fees and costs to the tenant if \nthe tenant is the prevailing party in such a civil action. A lease provision that limits a \nprevailing tenant from obtaining attorneys’ fees shall not be enforceable against a \ntenant’s claim for attorneys’ fees that arises under this subsection 13.63.040(B).",
+          "start": 5919,
+          "end": 6444,
+          "supports": [
+            "penalties"
+          ]
+        }
+      ],
+      "interactions": [],
+      "penalties": "Each separate month that a violation exists or continues, and each separate residential dwelling unit for which the landlord used the algorithm, constitutes a separate and distinct violation. Under § 13.63.040(A), the City Attorney may seek damages, injunctive relief, restitution/return of illegal profits, and/or civil penalties up to $1,000 per violation, with reasonable attorney’s fees and costs mandatory if prevailing. Under § 13.63.040(B), an aggrieved tenant may seek injunctive relief, money damages, and/or civil penalties up to $1,000 per violation, with reasonable attorney’s fees and costs mandatory if prevailing. A lease provision limiting a prevailing tenant’s attorney-fee recovery is unenforceable against a fee claim arising under that subsection.",
+      "review_issues": [
+        "All six categories were reviewed. No provisions concerning just-cause eviction, security deposits, application or screening fees, or screening restrictions were identified in this source; this does not establish that such rules do not exist.",
+        "No end date is established.",
+        "The chapter's general-welfare undertaking and severability provisions do not create additional housing obligations within the six extraction categories. Enforcement remedies, mandatory prevailing-party fee awards, and the restriction on tenant fee-waiver provisions are retained internally under penalties.",
+        "The identified-input-data predicates refer to the same qualifying data used by the process. They do not require every input to be Competitor Data.",
+        "The ordinance amends Chapter 13.63, but the source does not supply prior versions, their dates, or sufficient evidence for a directional supersedes or conflicts_with interaction with another identified legal rule.",
+        "The reference time for the less-than-90-days data-age threshold is not expressly stated.",
+        "The software-development operational-input restriction is compiled for the predictive or machine-learning model activity expressly described in the clarification, not imposed on all software-development research. The clarification says 'includes without limitation'; application to other development activities may require interpretation.",
+        "The source is proposed amending ordinance text with a dated passage-to-print record. It does not establish final adoption; the URL's date and retrieval date are not enactment evidence.",
+        "The source records passage to print, not final adoption. Enactment and an effective date are not established; pending describes the supported 2025-11-18 snapshot, not a finding about later status.",
+        "The text establishes separate violations by month and dwelling unit but does not expressly state an arithmetic formula combining those dimensions."
+      ],
+      "conflict_flag": false,
+      "conflict_note": null,
+      "team_rule_id": "r-f372d8d7042cb492998b",
+      "evidence_mode": "live",
+      "extraction_run_id": "2c214d19d3b944a29f98847f16db16ca",
+      "semantic_verification": "needs_review"
+    }
+  ],
+  "negative_findings": [
+    {
+      "jurisdiction": "Berkeley, CA",
+      "category": "rent_increase_limits",
+      "statement": "The proposed Chapter 13.63 expressly does not regulate the amount of rent a landlord may charge. This is a limitation of this chapter, not a finding that Berkeley has no rent-increase limits.",
+      "evidence": [
+        {
+          "doc_id": "D001",
+          "quote": "Nor does this \nChapter regulate the amount of rent that a landlord may charge. This Chapter solely \nregulates the use and sale of the coordinated pricing algorithms, to prevent the harms \ndescribed above.",
+          "start": 2446,
+          "end": 2650,
+          "supports": [
+            "category",
+            "statement"
+          ]
+        },
+        {
+          "doc_id": "D001",
+          "quote": "BE IT ORDAINED by the Council of the City of Berkeley as follows:",
+          "start": 327,
+          "end": 392,
+          "supports": [
+            "jurisdiction"
+          ]
+        }
+      ]
+    }
+  ],
+  "source_review": {
+    "quote_instances_checked": 20,
+    "exact_original_offsets_valid": true,
+    "source_sha256": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+    "original_text_sha256_valid": true,
+    "strict_less_than_90_days_preserved": true,
+    "distinct_vendor_landlord_obligations_preserved": true,
+    "exclusions_preserved_with_review_limits": true,
+    "final_adoption_effective_end_date_not_invented": true,
+    "construction_year_not_used_as_occupancy": true,
+    "remaining_limits": [
+      "Final adoption/effective evidence absent",
+      "Data-age reference time unspecified",
+      "Software-development clarification interpretation retained for review",
+      "Operational/data facts absent from address inputs and current fact-answer registry",
+      "Prior version and directional interaction evidence absent",
+      "No human or independent legal review"
+    ]
+  }
+}
