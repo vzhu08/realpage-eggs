@@ -1,0 +1,37 @@
+{
+  "report_type": "internal_validation_not_official_scoring",
+  "as_of": "2026-11-15",
+  "schema_valid": true,
+  "quote_valid": true,
+  "ready_for_submission": false,
+  "counts": {
+    "sources": 1,
+    "source_texts": 1,
+    "addresses": 3,
+    "rules": 1,
+    "exportable_rules": 1,
+    "quote_failures": 0,
+    "schema_failures": 0,
+    "resolved_municipalities": 3,
+    "synthetic_rules": 1,
+    "review_rules": 0
+  },
+  "capture_status_counts": {
+    "synthetic": 1
+  },
+  "missing_source_ids": [],
+  "unresolved_extraction_ids": [],
+  "unresolved_address_ids": [],
+  "exportable_rule_ids": [
+    "r-694ad9fbae9083966e86"
+  ],
+  "errors": [],
+  "warnings": [
+    "Synthetic rules present: not competition output"
+  ],
+  "official_score": null,
+  "change_status": {},
+  "all_input_addresses_represented": true,
+  "all_lookup_references_resolve": true,
+  "artifact_label": "SYNTHETIC_NOT_FOR_SUBMISSION"
+}

@@ -1,5 +1,32 @@
 # CORE-05 — P1 deterministic encoded-rule renderer
 
+## Current four-developer assignment (supersedes historical claims below)
+
+- Lane / future owner: Core B / Questions & Rendering. New human/name/session/checkout unallocated; Daniel authored the existing candidate. Vincent records path release before another writer starts.
+- State: Review for existing candidate; new writer handoff/allocation required.
+- Read first: AGENTS, current four-developer playbook, OWNERSHIP, ASSIST_CONTRACT, existing candidate handoff.
+- Existing candidate: origin/codex/core-backend at c92ad8f; tested candidate reported as 0c32ec4.
+  Existing author checkout: /Users/danny/Documents/ChatGPT/RealPage/core-backend. Preserve it and its commits.
+- Future branch/absolute checkout/base/result commit: record at handoff; do not assume current main includes this candidate.
+- Exclusive allowed paths for this task: navigator/rule_renderer.py, core_assist.py; tests/test_rule_renderer.py; tests/fixtures/core_navigation/**; docs/core_navigation/**; this card.
+- Reserved: the other Core lane's runtime/tests/cards, frontend, Platform APIs/services, models/contracts,
+  dependencies, tests/conftest.py and shared docs/board. Core B exclusively owns core_assist.py.
+- Dependency: Existing shared models; planner consumes Core A rule_traces/evaluate_rules. Renderer has no live extraction dependency.
+- Next bounded action: Review existing renderer independently of live extraction; after handoff, preserve operators/exemptions/date boundaries and coordinate actual source-comparison UI integration.
+- Checks (checkout Python): python -m pytest tests/test_rule_renderer.py -q.
+- Acceptance: retain the task's behavioral acceptance below; preserve one evaluator and evidence uncertainty.
+  Platform must test actual combined HTTP/exports before marking integration verified.
+- Non-goals: rewriting delivered features, changing another owner's files, model-authored legal certainty.
+- Handoff: actual commit, paths, exact checks/results, remaining dependencies and whether combined integration ran.
+- Authority: local task commits; no push, merge, deployment, external messages or new agents implied.
+
+## Prior author record — preserved from Core candidate 3cf0361
+
+The following is the existing author’s record, imported without alteration.
+Current four-lane scope above governs new work; candidate results remain reported evidence until rerun.
+
+# CORE-05 — P1 deterministic encoded-rule renderer
+
 State: Review (local). Human owner: Daniel. Session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
 Branch: codex/core-backend. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`.
 Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Result: `87b92f091cac25ad6ef3b1e95d7ea3f479abbc29`.

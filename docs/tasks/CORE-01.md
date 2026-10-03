@@ -1,5 +1,32 @@
 # CORE-01: live extraction and evidence review
 
+## Current four-developer assignment (supersedes historical claims below)
+
+- Lane / future owner: Core A / Rules & Evaluation. Existing author Daniel; Vincent confirms continued session/base before edits.
+- State: Review for candidate software repairs; live extraction Blocked on OPENAI_API_KEY and OPENAI_MODEL.
+- Read first: AGENTS, current four-developer playbook, OWNERSHIP, ASSIST_CONTRACT, existing candidate handoff.
+- Existing candidate: origin/codex/core-backend at c92ad8f; tested candidate reported as 0c32ec4.
+  Existing author checkout: /Users/danny/Documents/ChatGPT/RealPage/core-backend. Preserve it and its commits.
+- Future branch/absolute checkout/base/result commit: record at handoff; do not assume current main includes this candidate.
+- Exclusive allowed paths for this task: navigator/extraction.py; tests/test_extraction.py; docs/core_rules/**; this card; private ignored run data.
+- Reserved: the other Core lane's runtime/tests/cards, frontend, Platform APIs/services, models/contracts,
+  dependencies, tests/conftest.py and shared docs/board. Core B exclusively owns core_assist.py.
+- Dependency: Existing shared models and Platform contracts; keep the trace checkpoint independent of live extraction.
+- Next bounded action: Review 30cdfb7, configure locally when available, then run and independently review D001 before broader extraction.
+- Checks (checkout Python): python -m pytest tests/test_extraction.py -q; configured-only: python -m navigator extract --doc-id D001.
+- Acceptance: retain the task's behavioral acceptance below; preserve one evaluator and evidence uncertainty.
+  Platform must test actual combined HTTP/exports before marking integration verified.
+- Non-goals: rewriting delivered features, changing another owner's files, model-authored legal certainty.
+- Handoff: actual commit, paths, exact checks/results, remaining dependencies and whether combined integration ran.
+- Authority: local task commits; no push, merge, deployment, external messages or new agents implied.
+
+## Prior author record — preserved from Core candidate 3cf0361
+
+The following is the existing author’s record, imported without alteration.
+Current four-lane scope above governs new work; candidate results remain reported evidence until rerun.
+
+# CORE-01: live extraction and evidence review
+
 - Human owner: Daniel. Tool/session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
 - Branch: codex/core-backend. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`.
 - Base: `354089fa9d1cfbaae3f6c8ad6595e6f024de4e26`. Result: `30cdfb7630b7bac81b7464e980ab6033ee69a239`.

@@ -7,15 +7,22 @@ from .config import DISCLAIMER, VERSION, data_dir
 from .models import LookupRequest, LookupResponse, ChangeRequest, ChangeResult, SourceDocument, HealthResponse, AddressPage, RuleDetail
 from .service import DatasetUnavailable, lookup
 from .store import Store
+from .assist_service import assist, CoreUnavailable, CoreContractError
+from .evidence import prepare_rules, EvidenceStoreView
+from .fact_inputs import FACT_DEFINITIONS
+from .models import AssistRequest, AssistResponse, EvidenceReport, FactDefinition, SourceContext
+from .retrieval import ContextRetriever, span
 
 
-def create_app(root=None):
+def create_app(root=None, core_services=None):
     store = Store(root or data_dir())
     app = FastAPI(title="Rental Housing Law Navigator", version=VERSION, description=DISCLAIMER, responses={404: {"description": "Unknown ID"}, 422: {"description": "Invalid request"}, 503: {"description": "Dataset or extracted rules unavailable"}})
     app.add_middleware(CORSMiddleware, allow_origins=[x.strip() for x in os.getenv("NAVIGATOR_CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",") if x.strip()], allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
 
     def call(fn, *args):
         try: return fn(*args)
+        except CoreContractError as exc: raise HTTPException(502, detail={"code": "core_contract_error", "message": str(exc)}) from None
+        except CoreUnavailable as exc: raise HTTPException(503, detail={"code": "core_unavailable", "message": str(exc)}) from None
         except DatasetUnavailable as exc: raise HTTPException(503, detail={"code": "dataset_unavailable", "message": str(exc)}) from None
         except KeyError as exc: raise HTTPException(404, detail={"code": "unknown_id", "message": str(exc).strip("'")}) from None
         except ValueError as exc: raise HTTPException(422, detail={"code": "invalid_input", "message": str(exc)}) from None
@@ -36,6 +43,28 @@ def create_app(root=None):
     @app.post("/api/v1/lookup", response_model=LookupResponse)
     def address_lookup(request: LookupRequest): return call(lookup, store, request)
 
+    @app.post("/api/v1/lookup/assist", response_model=AssistResponse, responses={502: {"description": "Core output violated the shared contract"}})
+    def assisted_lookup(request: AssistRequest): return call(assist, store, request, core_services)
+
+    @app.get("/api/v1/facts", response_model=dict[str, FactDefinition])
+    def fact_definitions(): return FACT_DEFINITIONS
+
+    @app.get("/api/v1/rules/{rule_id}/evidence", response_model=EvidenceReport)
+    def rule_evidence(rule_id: str):
+        _, reports = prepare_rules(store)
+        if rule_id not in reports: raise HTTPException(404, detail={"code": "unknown_id", "message": "Unknown rule ID"})
+        return reports[rule_id]
+
+    @app.get("/api/v1/sources/{doc_id}/context", response_model=SourceContext)
+    def source_context(doc_id: str, start: int = Query(default=0, ge=0), end: int | None = Query(default=None, ge=1), max_depth: int = Query(default=2, ge=0, le=4), max_chars: int = Query(default=24000, ge=100, le=48000), max_spans: int = Query(default=12, ge=1, le=24)):
+        sources = store.sources()
+        if doc_id not in sources: raise HTTPException(404, detail={"code": "unknown_id", "message": "Unknown document ID"})
+        source = sources[doc_id]
+        if not source.text: return SourceContext(spans=[], dependencies=[], status="missing", limits={"max_depth": max_depth, "max_chars": max_chars, "max_spans": max_spans}, limits_hit=["missing_source_text"])
+        stop = min(start+1, len(source.text)) if end is None else end
+        if not 0 <= start < stop <= len(source.text): raise HTTPException(422, detail={"code": "invalid_input", "message": "Offsets must select an original source span"})
+        return ContextRetriever(sources).context([span(source, start, stop)], max_depth=max_depth, max_chars=max_chars, max_spans=max_spans)
+
     @app.get("/api/v1/rules/{rule_id}", response_model=RuleDetail)
     def rule_detail(rule_id: str):
         rules = store.rules()
@@ -52,7 +81,8 @@ def create_app(root=None):
     @app.post("/api/v1/changes", response_model=ChangeResult)
     def changes(request: ChangeRequest):
         if not store.addresses(): raise HTTPException(503, detail={"code": "dataset_unavailable", "message": "Run navigator ingest"})
-        return call(compute_changes, store, request)
+        prepared, _ = prepare_rules(store)
+        return call(compute_changes, EvidenceStoreView(store, prepared), request)
 
     return app
 
