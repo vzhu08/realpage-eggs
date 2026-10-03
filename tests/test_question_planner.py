@@ -349,3 +349,13 @@ def test_number_membership_type_sensitivity_is_not_called_exhaustive(rule, prop,
     plan = plan_questions(ctx)
     assert plan.status == 'partial' and not plan.exhaustive
     assert any(u.kind == 'interpretation' and u.field == 'amount' for u in plan.remaining_uncertainty)
+
+
+def test_absent_interaction_target_cannot_poison_date_partition(rule, prop, resolution):
+    rule.coverage_conditions = Expression(op='date_before', fact='first_occupancy_date', value='2020-06-01')
+    rule.interactions = [Interaction(kind='supersedes', target_citation='Absent target', target_jurisdiction='CA',
+        category=rule.category, scope=Expression(op='eq', fact='first_occupancy_date', value='2020'),
+        evidence=rule.evidence, note='Unresolved target')]
+    plan = plan_questions(context_for(rule, prop, resolution))
+    assert question(plan, 'first_occupancy_date')
+    assert any(u.kind == 'cross_reference' and 'Absent target' in u.message for u in plan.remaining_uncertainty)

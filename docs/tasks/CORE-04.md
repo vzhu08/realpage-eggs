@@ -46,3 +46,9 @@ Read-only adversarial review led to focused repairs: inactive rules cannot creat
 poison date partitions; source/lifecycle remedies survive negative factual answers; real-number
 membership with type-sensitive integer/float semantics is explicitly unsupported rather than exhaustive;
 nonmaterial residuals no longer request a useless fact. 58 combined engine/planner/renderer tests pass.
+
+Final review: partition only relevant traced expressions, so an absent interaction target cannot poison
+a supported date partition. Missing interaction targets remain explicit cross-reference remedies.
+Fixed synthetic evaluation: docs/core/evaluate_planner.py and planner_evaluation.json (8 cases, 11
+questions versus 14 ask-all; 0 versus 3 unnecessary; 0 incorrect certainty / 16 alternatives, 6 certain).
+Expectations were authored by the implementing agent, not independently/human reviewed legal outcomes.

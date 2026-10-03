@@ -29,12 +29,6 @@ def _walk(trace):
         yield from _walk(child)
 
 
-def _expressions(expr):
-    yield expr
-    for child in expr.args:
-        yield from _expressions(child)
-
-
 @dataclass(frozen=True)
 class Cell:
     value: object
@@ -202,6 +196,13 @@ def _uncertainty(context, evaluations, traces, prop=None):
             "Platform must verify location and legal boundaries")
     for rule in context.rules:
         if engine.jurisdiction_match(rule, context.jurisdiction) == "false": continue
+        for interaction in rule.interactions:
+            if not any(target.team_rule_id != rule.team_rule_id
+                       and target.citation.casefold() == interaction.target_citation.casefold()
+                       and target.jurisdiction.casefold() == interaction.target_jurisdiction.casefold()
+                       and target.category == interaction.category for target in context.rules):
+                add("cross_reference", f"Interaction target is not supplied: {interaction.target_citation} in {interaction.target_jurisdiction}",
+                    "Platform/Core must retrieve and encode the referenced authority", [rule.team_rule_id])
         for issue in rule.review_issues:
             add("interpretation", f"unresolved_extraction: {issue}",
                 "Review the encoded condition, dates or lifecycle against source evidence", [rule.team_rule_id])
@@ -295,11 +296,8 @@ def plan_questions(context: AssistContext) -> QuestionPlan:
         fields = fields[:limits.max_fields]
     domains = {}
     for field in fields:
-        expressions = [e for r in context.rules
-                       if engine.jurisdiction_match(r, context.jurisdiction) != "false"
-                       and engine.temporal(r, context.as_of) not in {"inapplicable", "failed", "pending", "not_yet_effective"}
-                       for root in [r.coverage_conditions, r.exemption_conditions, *[i.scope for i in r.interactions]]
-                       for e in _expressions(root) if e.fact == field]
+        expressions = [node.expression for trace in traces for node in _walk(trace)
+                       if node.relevant and node.field == field]
         cells, complete = _domain(definitions[field], expressions, context.property, context.as_of) if field in definitions else ([], False)
         if not complete:
             supported = False
