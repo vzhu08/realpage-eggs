@@ -4,9 +4,9 @@ Board steward: Platform/API owner (provisional role). Other lanes edit only thei
 States: Planned -> Ready -> Running -> Review -> Queued -> Merged -> Verified; Blocked names
 an explicit dependency. Ready means technically ready, not a human claim or permission to start.
 Four human lanes: Platform/API, Core A (Rules & Evaluation), Core B (Questions & Rendering), Frontend/UX.
-Daniel's existing Core candidate is fetched at c92ad8f; Core A retains evaluator/extraction ownership.
+Daniel's PR #3 head 3cf0361 is integrated locally with main 9a96fda; Core A retains evaluator/extraction ownership.
 Core B is a new human assignment and requires the existing writer's path handoff before new edits.
-The current user-assigned Platform session claims PLAT-01; no remote writer was interrupted or contacted.
+The current user-assigned Platform session claims COORD-03 for the authorized Core merge; no remote writer was interrupted or contacted.
 
 | ID | Lane | State | Outcome / dependency |
 | --- | --- | --- | --- |
@@ -15,22 +15,23 @@ The current user-assigned Platform session claims PLAT-01; no remote writer was 
 | UX-02 | UX owner | Ready, unclaimed | Change view with definite/uncertain/blocked/hypothetical states |
 | PLAT-01 | Vincent / Platform | Review | Recovered 12/21: 491/500 resolved in isolated real store; 28 focused / 96 total tests pass; report and nine remaining causes in card |
 | PLAT-02 | Platform/API owner | Ready, unclaimed | Reproducible launch/export/deployment package; deployment itself awaits authority |
-| CORE-01 | Core A / Daniel | Review software; live Blocked | Repairs exist on Core candidate; credentials/model still required for real extraction |
-| CORE-02 | Core A / Daniel | Review candidate | Date/interaction repairs on c92ad8f; combined integration pending |
+| CORE-01 | Core A / Daniel | Queued software; corpus incomplete | PR #3 includes reported D001/D004 live slices and bounded resumption repairs; no local provider rerun |
+| CORE-02 | Core A / Daniel | Queued | Date/interaction implementation combined with Platform; 167 total tests pass |
 | COORD-01 | Vincent / Platform | Review P0 | Original shared contract checkpoint 3349851; historical three-lane staffing superseded |
 | COORD-02 | Vincent / Platform | Review P0 | Four-developer playbook, exclusive Core split, candidate-aware cards and starters |
+| COORD-03 | Vincent / Platform | Queued | PR #3 doc conflicts resolved with author history retained; actual Core/API verification and unchanged schemas |
 | PLAT-03 | Vincent / Platform | Review P0/P1 | Implemented evidence/context checks; targeted inventory verified; 12 focused tests pass |
-| PLAT-04 | Vincent / Platform | Review P1 | Answers/API implemented; 17 focused tests pass; full flow depends CORE-04/05 |
+| PLAT-04 | Vincent / Platform | Review P1 | Actual Core/API integration passes 19 focused tests; synthetic alternatives and answers reproduce through HTTP |
 | PLAT-05 | Vincent / Platform | Review P1 | Inventory/verifier implemented; fixture/replay verified; live mode blocked by key/model |
-| CORE-03 | Core A / Daniel | Review candidate P0/P1 | Existing rule_traces and actual occupancy semantics; hand off stable boundary to Core B |
-| CORE-04 | Core B / new human pending | Review candidate P1; handoff required | Continue existing planner; production integration depends Core A trace/evaluator candidate |
-| CORE-05 | Core B / new human pending | Review candidate P1; handoff required | Continue existing renderer; review independent of live extraction |
+| CORE-03 | Core A / Daniel | Queued | rule_traces and actual occupancy semantics verified in combined suite; future lane handoff remains required |
+| CORE-04 | Core B / new human pending | Queued; future writer handoff required | Daniel's planner works through Platform HTTP; no new writer allocated |
+| CORE-05 | Core B / new human pending | Queued; future writer handoff required | Daniel's renderer works through Platform HTTP; no new writer allocated |
 | UX-03 | UX / Claude | Ready P1, unclaimed | Entire frontend including questions and evidence; contracts/fixtures ready |
 
 Cards: `docs/tasks/<ID>.md`. Shared stewards and exact paths: OWNERSHIP.
-Core candidate c92ad8f is awaiting coordinated review/integration; it is not marked Queued or Merged here.
-Platform a034e2b and the four-developer docs also need remote publication/authorized integration.
-Main already contains the earlier bootstrap and contract commits through 354089f; that does not establish deployment verification.
+PR #3 integration is queued for the user-authorized merge; COORD-03 records exact bases and checks.
+Main already contains Platform and four-developer docs through PR #4 and PLAT-01 through PR #5 at 9a96fda.
+PLAT-02 is published separately in PR #6 at aa7a226; it is not part of PR #3. No deployment is verified.
 For each candidate: owner reviews diff/scope -> steward orders dependencies -> update clean candidate
 against current main -> rerun required checks -> human-authorized merge -> verify main -> separately
 verify deployed demo. Never rebase an active writer. Preserve user work and actual base SHA.

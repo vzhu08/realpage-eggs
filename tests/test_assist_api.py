@@ -92,6 +92,8 @@ def test_occupancy_answer_still_unknown_with_two_exemptions(demo):
         body = client.post("/api/v1/lookup/assist", json={**REQUEST, "supplemental_facts": {"units": 12, "certificate_of_occupancy": "2020-06-30"}}).json()
         assert body["lookup"]["evaluations"][0]["result"] == "unknown"
         assert set(body["lookup"]["evaluations"][0]["missing_facts"]) == {"owner_occupied", "exemption_filed"}
+        assert body["capabilities"]["question_planner"] == "implemented"
+        assert {q["fact"]["field"] for q in body["question_plan"]["questions"]} == {"owner_occupied", "exemption_filed"}
 
 
 def test_core_failure_malformed_output_and_budget_violation_are_distinct(demo):
@@ -112,3 +114,49 @@ def test_absent_dataset_and_unknown_selection_remain_distinct(tmp_path, demo):
         assert client.post("/api/v1/lookup/assist", json=REQUEST).status_code == 503
     with TestClient(create_app(demo.root)) as client:
         assert client.post("/api/v1/lookup/assist", json={**REQUEST, "address_id": "absent"}).status_code == 404
+
+
+def test_real_core_questions_reproduce_through_http_without_persisting_probes(demo):
+    original = demo.read("addresses.json")
+    with TestClient(create_app(demo.root)) as client:
+        response = client.post("/api/v1/lookup/assist", json=REQUEST)
+        assert response.status_code == 200
+        body = response.json()
+        assert body["capabilities"]["question_planner"] == "implemented"
+        assert body["capabilities"]["rule_renderer"] == "implemented"
+        assert body["lookup"]["evaluations"][0]["result"] == "unknown"
+        assert body["encoded_rules"][0]["renderer_version"] == "encoded-rule-v1"
+        assert body["encoded_rules"][0]["rule_id"] == body["lookup"]["rules"][0]["team_rule_id"]
+        question, = body["question_plan"]["questions"]
+        assert question["fact"]["field"] == "units" and question["alternatives"]
+        for alternative in question["alternatives"]:
+            answered = client.post("/api/v1/lookup/assist", json={**REQUEST, "supplemental_facts": alternative["probe_facts"]})
+            assert answered.status_code == 200
+            actual = answered.json()
+            expected = [(e["team_rule_id"], e["result"]) for e in alternative["evaluations"] if e["result"] not in {"inapplicable", "failed"}]
+            assert [(e["team_rule_id"], e["result"]) for e in actual["lookup"]["evaluations"]] == expected
+            assert actual["question_plan"]["questions"] == []
+            assert "User-supplied" in actual["lookup"]["address"]["provenance"]["units"]
+        removed = client.post("/api/v1/lookup/assist", json={**REQUEST, "answers": [{"field": "units", "value": None}]}).json()
+        assert removed["lookup"]["evaluations"][0]["result"] == "unknown"
+        assert [q["fact"]["field"] for q in removed["question_plan"]["questions"]] == ["units"]
+    assert demo.read("addresses.json") == original
+
+
+def test_real_core_budget_and_missing_support_stay_explicit_through_http(demo):
+    with TestClient(create_app(demo.root)) as client:
+        bounded = client.post("/api/v1/lookup/assist", json={**REQUEST, "limits": {"max_evaluations": 1}})
+        assert bounded.status_code == 200
+        plan = bounded.json()["question_plan"]
+        assert plan["status"] == "partial" and not plan["exhaustive"]
+        assert plan["evaluations_used"] <= 1 and plan["limits_hit"]
+        sources = demo.sources()
+        for source in sources.values():
+            source.text = ""
+        demo.save_collection("sources", sources)
+        missing = client.post("/api/v1/lookup/assist", json={**REQUEST, "supplemental_facts": {"units": 8}})
+        assert missing.status_code == 200
+        body = missing.json()
+        assert body["lookup"]["evaluations"][0]["result"] == "unknown"
+        assert body["evidence_reports"][0]["blocking_issues"]
+        assert body["question_plan"]["remaining_uncertainty"]

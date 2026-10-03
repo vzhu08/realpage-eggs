@@ -1,0 +1,330 @@
+{
+  "mode": "local_offline_preflight_not_live_extraction",
+  "base_commit": "c92ad8fbd27a2175a41cb74428cdc03fb76ab14a",
+  "data_dir": "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session",
+  "pack_dir": "/Users/danny/Downloads/participant-final-no-hour16",
+  "provider_configured": {
+    "OPENAI_API_KEY": false,
+    "OPENAI_MODEL": false
+  },
+  "sources": 87,
+  "captured_texts": 54,
+  "addresses": 500,
+  "rules": 0,
+  "cache_entries": 0,
+  "resolved_municipalities": 0,
+  "source_hashes_match": true,
+  "original_files_missing": [],
+  "original_text_mismatches": [],
+  "capture_status_counts": {
+    "supplied": 54,
+    "link_only": 23,
+    "terms_review": 9,
+    "failed": 1
+  },
+  "captured_segments": 76,
+  "D001": {
+    "characters": 8000,
+    "segments": 1,
+    "sha256": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17"
+  },
+  "source_store_file_sha256": "bd9ed5d5670e57a812d98b5cba82e06d80e6680bd5a8b7e299568cc115d3a842",
+  "last_attempt": {
+    "run_id": "fff936be69f04f6296a4e7efe0f32ba7",
+    "operation": "extract",
+    "mode": "live",
+    "started_at": "2026-10-03T22:42:49.238668+00:00",
+    "finished_at": "2026-10-03T22:42:49.278667+00:00",
+    "elapsed_seconds": 0.04,
+    "outcome": "failed",
+    "input_hashes": {
+      "D001": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17"
+    },
+    "config": {
+      "prompt_version": "extract-v2-core-dates",
+      "chunk_chars": 18000,
+      "overlap_chars": 1500,
+      "concurrency": 1,
+      "transport_attempts": 3,
+      "repair_attempts": 1
+    },
+    "versions": {
+      "pipeline": "0.1.0",
+      "evaluator": "0.1.0"
+    },
+    "counts": {
+      "processed": 0,
+      "rules": 0
+    },
+    "errors": [
+      "Set OPENAI_API_KEY and OPENAI_MODEL locally in .env; no live extraction was performed"
+    ],
+    "artifacts": []
+  },
+  "missing_documents": [
+    {
+      "doc_id": "D002",
+      "jurisdictions": [
+        "Berkeley, CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://morganlewis.com/pubs/2026/08/algorithmic-rent-pricing-litigation-expands-under-new-state-and-local-laws"
+    },
+    {
+      "doc_id": "D015",
+      "jurisdictions": [
+        "CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://caanet.org/compliance-reminder-section-8-acceptance-and-criminal-background-checks-are-fair-housing-issues/"
+    },
+    {
+      "doc_id": "D017",
+      "jurisdictions": [
+        "CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://california.public.law/codes/civil_code_section_1950.6"
+    },
+    {
+      "doc_id": "D018",
+      "jurisdictions": [
+        "CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://law.justia.com/codes/california/code-civ/division-3/part-4/title-5/chapter-2/section-1946-2/"
+    },
+    {
+      "doc_id": "D019",
+      "jurisdictions": [
+        "CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://law.justia.com/codes/california/code-civ/division-3/part-4/title-5/chapter-2/section-1947-12/"
+    },
+    {
+      "doc_id": "D020",
+      "jurisdictions": [
+        "CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://law.justia.com/codes/california/code-civ/division-3/part-4/title-5/chapter-2/section-1950-5/"
+    },
+    {
+      "doc_id": "D021",
+      "jurisdictions": [
+        "CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://law.justia.com/codes/california/code-gov/title-2/division-3/part-2-8/chapter-6/article-2/section-12955/"
+    },
+    {
+      "doc_id": "D028",
+      "jurisdictions": [
+        "CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://www.clearygottlieb.com/news-and-insights/publication-listing/californias-antitrust-law-amendments-kick-in-targeting-algorithmic-pricing"
+    },
+    {
+      "doc_id": "D030",
+      "jurisdictions": [
+        "Cambridge, MA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://www.cambridgeday.com/?p=158097"
+    },
+    {
+      "doc_id": "D032",
+      "jurisdictions": [
+        "Hoboken, NJ"
+      ],
+      "capture_status": "terms_review",
+      "url": "https://ecode360.com/15252438"
+    },
+    {
+      "doc_id": "D033",
+      "jurisdictions": [
+        "Hoboken, NJ"
+      ],
+      "capture_status": "terms_review",
+      "url": "https://ecode360.com/15252470"
+    },
+    {
+      "doc_id": "D034",
+      "jurisdictions": [
+        "Hoboken, NJ"
+      ],
+      "capture_status": "terms_review",
+      "url": "https://ecode360.com/46833413"
+    },
+    {
+      "doc_id": "D035",
+      "jurisdictions": [
+        "Jersey City, NJ"
+      ],
+      "capture_status": "link_only",
+      "url": "https://hudsoncountyview.com/jersey-city-council-approves-realpage-ban-and-increasing-benefits-for-laborers/"
+    },
+    {
+      "doc_id": "D037",
+      "jurisdictions": [
+        "Jersey City, NJ"
+      ],
+      "capture_status": "link_only",
+      "url": "https://www.morganlewis.com/pubs/2026/08/algorithmic-rent-pricing-litigation-expands-under-new-state-and-local-laws"
+    },
+    {
+      "doc_id": "D038",
+      "jurisdictions": [
+        "Los Angeles, CA"
+      ],
+      "capture_status": "terms_review",
+      "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-322208"
+    },
+    {
+      "doc_id": "D044",
+      "jurisdictions": [
+        "Los Angeles, CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://members.aagla.org/news/city-of-la-security-deposit-interest-requirement"
+    },
+    {
+      "doc_id": "D054",
+      "jurisdictions": [
+        "MA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://masslandlords.net/can-massachusetts-landlords-charge-an-application-fee/"
+    },
+    {
+      "doc_id": "D055",
+      "jurisdictions": [
+        "MA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://massrealestatelawblog.com/tag/cella-v-attorney-general/"
+    },
+    {
+      "doc_id": "D056",
+      "jurisdictions": [
+        "MA"
+      ],
+      "capture_status": "failed",
+      "url": "https://www.mass.gov/doc/803-cmr-5-criminal-offender-record-information-cori-housing/download"
+    },
+    {
+      "doc_id": "D059",
+      "jurisdictions": [
+        "MA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://www.wbur.org/news/2026/06/23/massachusetts-high-court-rent-control-ballot-question-struck"
+    },
+    {
+      "doc_id": "D060",
+      "jurisdictions": [
+        "NJ"
+      ],
+      "capture_status": "link_only",
+      "url": "https://daypitney.com/new-jersey-enacts-fair-act-to-prohibit-algorithmic-rent-setting-practices"
+    },
+    {
+      "doc_id": "D061",
+      "jurisdictions": [
+        "NJ"
+      ],
+      "capture_status": "link_only",
+      "url": "https://law.justia.com/codes/new-jersey/title-10/section-10-5-12/"
+    },
+    {
+      "doc_id": "D062",
+      "jurisdictions": [
+        "NJ"
+      ],
+      "capture_status": "link_only",
+      "url": "https://law.justia.com/codes/new-jersey/title-2a/section-2a-18-61-1/"
+    },
+    {
+      "doc_id": "D063",
+      "jurisdictions": [
+        "NJ"
+      ],
+      "capture_status": "link_only",
+      "url": "https://law.justia.com/codes/new-jersey/title-46/section-46-8-21-2/"
+    },
+    {
+      "doc_id": "D064",
+      "jurisdictions": [
+        "NJ"
+      ],
+      "capture_status": "link_only",
+      "url": "https://law.justia.com/codes/new-jersey/title-46/section-46-8-26/"
+    },
+    {
+      "doc_id": "D070",
+      "jurisdictions": [
+        "Newark, NJ"
+      ],
+      "capture_status": "terms_review",
+      "url": "https://ecode360.com/36623772"
+    },
+    {
+      "doc_id": "D071",
+      "jurisdictions": [
+        "Newark, NJ"
+      ],
+      "capture_status": "terms_review",
+      "url": "https://ecode360.com/36637822"
+    },
+    {
+      "doc_id": "D072",
+      "jurisdictions": [
+        "Newark, NJ"
+      ],
+      "capture_status": "terms_review",
+      "url": "https://ecode360.com/36642000"
+    },
+    {
+      "doc_id": "D074",
+      "jurisdictions": [
+        "San Diego, CA"
+      ],
+      "capture_status": "terms_review",
+      "url": "https://gocodebook.com/library/us/ca/san-diego-zoning/division-11-prohibition-of-anti-competitive-automated-rent-price-fixing/98.1103-use-and-sale-of-algorithmic-devices-prohibited"
+    },
+    {
+      "doc_id": "D075",
+      "jurisdictions": [
+        "San Diego, CA"
+      ],
+      "capture_status": "terms_review",
+      "url": "https://gocodebook.com/library/us/ca/san-diego-zoning/division-8-prohibition-of-discrimination-based-on-a-tenant-s-source-of-income"
+    },
+    {
+      "doc_id": "D077",
+      "jurisdictions": [
+        "San Diego, CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://www.lassd.org/resource/city-of-san-diego-tenant-protection-ordinance/"
+    },
+    {
+      "doc_id": "D086",
+      "jurisdictions": [
+        "Santa Ana, CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://www.ocbj.com/real-estate/santa-ana-bans-landlords-from-using-ai-apartment-rent-pricing-software/"
+    },
+    {
+      "doc_id": "D087",
+      "jurisdictions": [
+        "Santa Ana, CA"
+      ],
+      "capture_status": "link_only",
+      "url": "https://www.publicceo.com/2026/02/santa-ana-city-council-continues-to-strengthen-tenant-protections-by-banning-anticompetitive-rent-setting-software/"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "mode": "real_input_local_processing_no_extracted_laws",
+  "commands": [
+    {
+      "command": ".venv/bin/python -m navigator --data-dir /Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session evaluate --as-of 2026-10-01 --allow-partial --output /Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/evaluations.json",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/bin/python -m navigator --data-dir /Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session validate --as-of 2026-10-01 --output /Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/validation.json",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/bin/python -m navigator --data-dir /Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session export --as-of 2026-10-01 --allow-partial --output /Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/partial-export",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/bin/python -m navigator --data-dir /Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session lookup A0001 --as-of 2026-10-01",
+      "exit_code": 2
+    }
+  ],
+  "evaluation_run": {
+    "run_id": "8f67d4a2da454266bb29dbda00450937",
+    "operation": "evaluate",
+    "mode": "local",
+    "started_at": "2026-10-03T22:45:35.765983+00:00",
+    "finished_at": "2026-10-03T22:45:35.776407+00:00",
+    "elapsed_seconds": 0.01,
+    "outcome": "partial",
+    "input_hashes": {
+      "rules": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "addresses": "22a052a13f29d8b310a6b2474edeee44419c6872739d811cbe9286b37f23ae37",
+      "resolutions": "ea64caf36ca76e2d08e7acf12da3ac450d74acb96dedfce3cd0280b0d385a57a"
+    },
+    "config": {
+      "as_of": "2026-10-01"
+    },
+    "versions": {
+      "pipeline": "0.1.0",
+      "evaluator": "0.1.0"
+    },
+    "counts": {
+      "addresses": 500,
+      "rules": 0
+    },
+    "errors": [],
+    "artifacts": [
+      "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/evaluations.json"
+    ]
+  },
+  "export_run": {
+    "run_id": "92e67f0601524a369b83ea63eb86bf07",
+    "operation": "export",
+    "mode": "local",
+    "started_at": "2026-10-03T22:45:36.167410+00:00",
+    "finished_at": "2026-10-03T22:45:36.206972+00:00",
+    "elapsed_seconds": 0.04,
+    "outcome": "partial",
+    "input_hashes": {
+      "rules": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "addresses": "22a052a13f29d8b310a6b2474edeee44419c6872739d811cbe9286b37f23ae37",
+      "resolutions": "ea64caf36ca76e2d08e7acf12da3ac450d74acb96dedfce3cd0280b0d385a57a"
+    },
+    "config": {
+      "as_of": "2026-10-01",
+      "allow_partial": true
+    },
+    "versions": {
+      "pipeline": "0.1.0",
+      "evaluator": "0.1.0"
+    },
+    "counts": {
+      "rules": 0,
+      "addresses": 500
+    },
+    "errors": [],
+    "artifacts": [
+      "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/partial-export/rules.json",
+      "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/partial-export/lookups.json",
+      "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/partial-export/changes.json",
+      "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/partial-export/validation.json",
+      "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/partial-export/change_details.json",
+      "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session/core01-followup/partial-export/evidence_inventory.json"
+    ]
+  },
+  "counts": {
+    "sources": 87,
+    "source_texts": 54,
+    "addresses": 500,
+    "rules": 0,
+    "exportable_rules": 0,
+    "quote_failures": 0,
+    "schema_failures": 0,
+    "resolved_municipalities": 0,
+    "synthetic_rules": 0,
+    "review_rules": 0
+  },
+  "ready_for_submission": false,
+  "warnings": [
+    "No extracted rules: empty lookup arrays do not establish absence of law",
+    "Missing text for 33 manifest sources",
+    "Incomplete/review-needed extraction for 54 sources",
+    "Legal municipality unresolved for 500 addresses"
+  ],
+  "all_input_addresses_represented": true,
+  "all_lookup_references_resolve": true,
+  "export_label": "PARTIAL_NOT_JUDGE_READY",
+  "change_status": {
+    "T1": "blocked",
+    "T2": "blocked",
+    "T3": "blocked",
+    "T4": "blocked",
+    "T5": "blocked"
+  },
+  "source_store_sha256_unchanged": true
+}

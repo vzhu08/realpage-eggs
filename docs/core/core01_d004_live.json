@@ -1,0 +1,35 @@
+{
+  "mode": "real_extraction_with_draft_replay_then_automated_source_review_not_human_legal_review",
+  "source": "D004",
+  "source_sha256": "bb1b00d69bd3ead225e5bd758bf642256df1cb89dfa4275a5699266b78df30e1",
+  "review_run_id": "b0f3490db6d54a2e97f6c7be92334240",
+  "draft_origin_run_id": "a2c106ffc11b44258bc0e207a2970777",
+  "rule_ids": [
+    "r-1b6aea5f64fee0e22f0b",
+    "r-38ec69a5603c80534e29",
+    "r-850897beb5fe9f38cb17",
+    "r-ba2792094796609db031",
+    "r-c0fb590248e1b865c18e",
+    "r-ce3965ab5db4c8858d1c",
+    "r-df8959740b5e9ad0d82a",
+    "r-fb4cf71c9e6f8b178617"
+  ],
+  "evidence_instances": 38,
+  "distinct_spans": 10,
+  "exact_original_offsets_valid": true,
+  "all_need_review": true,
+  "findings": [
+    "Standard relocation payment $19,413 and additional $6,471 match source",
+    "1.5% adjusts relocation payments, not rent or interest",
+    "Approval 2025-10-16 and adjustment effective 2026-01-01 separately supported",
+    "Snapshot 2025-10-27 is the source update date, not retrieval",
+    "Additional-household qualification and missing exemptions remain unsupported",
+    "Two publication records are Board duties, not landlord obligations"
+  ],
+  "limitations": [
+    "Official agency guidance, underlying ordinance/staff report not supplied in this source",
+    "No human or independent legal review",
+    "eviction_reason and responsible_actor outside shared fact registry",
+    "No new legal-geography resolution"
+  ]
+}

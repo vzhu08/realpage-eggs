@@ -25,12 +25,12 @@ Core B (Questions & Rendering) owns the planner, renderer and core_assist adapte
 UX owns the entire frontend. These are four human lanes, not additional agent sessions.
 See the exact file map in OWNERSHIP. Board/merge queue steward: Platform/API owner (provisional role).
 BOOT-01 is checkpointed at `5ef1de1`. Follow-up coordinator: Vincent / Platform/API.
-Current session claims COORD-02 (four-developer coordination) on `codex/research-platform`.
+Current session claims COORD-03 (Daniel PR #3 integration) on `codex/core-integration`.
 COORD-01 and PLAT-03/04/05 are in Review at the recorded checkpoints.
 Read `docs/ASSIST_CONTRACT.md` and `docs/starters/` for the additive contract and lane boundaries.
 Core A retains extraction/evaluator/change/validation internals and owns rule_traces.
 Core B consumes that boundary and exclusively owns navigator/core_assist.py.
-Existing Core candidate: origin/codex/core-backend at c92ad8f, authored by Daniel. Preserve it;
+Imported Core candidate: PR #3 at 3cf0361, authored by Daniel; integration record: docs/tasks/COORD-03.md. Preserve it;
 record the release of Core B paths before a new writer starts. See OWNERSHIP and the Core cards.
 Platform adds separate evidence/retrieval/input services and wires routes; no extraction transfer occurred.
 Use one evaluator for probes and actual answers. Source identity, quote presence, anchor validity,
