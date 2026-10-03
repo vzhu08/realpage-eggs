@@ -192,3 +192,55 @@ def test_repeated_alternative_history_preserves_all_supporting_evidence(rule):
     repeal = next(e for e in variant.status_events if e.status == 'repealed')
     assert {e.doc_id for e in repeal.evidence} == {'SYNTHETIC-B', 'SYNTHETIC-C'}
     assert set(variant.review_issues) == {'Review SYNTHETIC-B', 'Review SYNTHETIC-C'}
+
+
+def test_interruption_preserves_rules_and_reuses_draft_but_still_reviews(demo):
+    source = next(iter(demo.sources().values()))
+    before = demo.read('rules.json')
+    class Interrupted(SyntheticProvider):
+        model = 'synthetic-interruption-checkpoint'
+        calls = 0
+        def generate(self, instruction, payload):
+            self.calls += 1
+            if self.calls == 2:
+                raise KeyboardInterrupt()
+            return super().generate(instruction, payload)
+    first = Interrupted(source)
+    interrupted = extract(demo, provider=first)
+    assert interrupted.outcome == 'failed' and interrupted.finished_at
+    assert demo.read('rules.json') == before and first.calls == 2
+    assert any('Interrupted' in error for error in interrupted.errors)
+    class Resume(SyntheticProvider):
+        model = Interrupted.model
+        calls = 0
+        def generate(self, instruction, payload):
+            self.calls += 1
+            assert 'Review the draft' in instruction and payload['draft']
+            return super().generate(instruction, payload)
+    class ReviewInterrupted(Resume):
+        def generate(self, instruction, payload):
+            super().generate(instruction, payload)
+            raise KeyboardInterrupt()
+    second = extract(demo, provider=ReviewInterrupted(source))
+    assert second.outcome == 'failed' and second.finished_at
+    assert second.config['draft_replays'][0]['origin_run_id'] == interrupted.run_id
+    resumed_provider = Resume(source)
+    resumed = extract(demo, provider=resumed_provider)
+    assert resumed.outcome == 'success' and resumed_provider.calls == 1
+    assert resumed.counts['draft_replays'] == 1
+    assert resumed.config['draft_replays'][0]['origin_run_id'] == second.run_id
+
+
+@pytest.mark.parametrize('section,field', [('config', 'model'), ('config', 'prompt_version'), ('versions', 'pipeline'), (None, 'mode')])
+def test_saved_draft_rejects_incompatible_provenance(demo, section, field):
+    from navigator.extraction import saved_draft
+    path = next(demo.path('provider_outputs').glob('*/*-draft.json'))
+    key = path.name.removesuffix('-draft.json')
+    name = f'runs/{path.parent.name}.json'
+    origin = demo.read(name)
+    target = origin[section] if section else origin
+    target[field] = 'incompatible'
+    demo.write(name, origin)
+    source = next(iter(demo.sources().values()))
+    assert saved_draft(demo, key, SyntheticProvider(source)) == (None, None)
+    assert path.exists() and demo.read(name) == origin

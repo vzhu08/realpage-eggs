@@ -53,7 +53,7 @@ class OpenAIProvider:
     def __init__(self, client=None):
         self.key = os.getenv("OPENAI_API_KEY")
         self.model = os.getenv("OPENAI_MODEL")
-        self.client = client or httpx.Client(timeout=120)
+        self.client = client or httpx.Client(timeout=httpx.Timeout(120, read=300))
         self.usage = []
         if not self.key or not self.model:
             raise ProviderUnavailable("Set OPENAI_API_KEY and OPENAI_MODEL locally in .env; no live extraction was performed")
@@ -180,6 +180,27 @@ def merge_rules(existing, incoming):
     return existing
 
 
+def saved_draft(store, cache_key, provider):
+    """Resume an interrupted segment, without treating its draft as reviewed evidence."""
+    paths = sorted(store.path("provider_outputs").glob(f"*/{cache_key}-draft.json"),
+                   key=lambda path: path.stat().st_mtime, reverse=True)
+    for path in paths:
+        origin = store.read(f"runs/{path.parent.name}.json", {})
+        if (not isinstance(origin, dict) or not isinstance(origin.get("config", {}), dict)
+                or not isinstance(origin.get("versions", {}), dict)):
+            raise ValueError(f"Invalid saved draft provenance for {cache_key}; original preserved")
+        config = origin.get("config", {})
+        if (origin.get("run_id") != path.parent.name or origin.get("mode") != provider.mode
+                or config.get("model") != provider.model or config.get("prompt_version") != PROMPT_VERSION
+                or origin.get("versions", {}).get("pipeline") != VERSION):
+            continue
+        output = store.read(str(path.relative_to(store.root)))
+        if not isinstance(output, dict):
+            raise ValueError(f"Invalid saved draft for {cache_key}; original preserved")
+        return output, path.parent.name
+    return None, None
+
+
 def extract(store, doc_ids=None, provider=None, limit=None):
     sources = store.sources()
     if not sources: raise ValueError("Dataset absent; ingest source documents first")
@@ -194,6 +215,9 @@ def extract(store, doc_ids=None, provider=None, limit=None):
         store.finish(run, "failed", processed=0, rules=0)
         raise
     run.config["model"] = provider.model
+    run.config["draft_replays"] = []
+    if isinstance(provider, OpenAIProvider):
+        run.config["read_timeout_seconds"] = provider.client.timeout.read
     store.save_run(run)
     rules = store.rules()
     index = store.read("extraction_index.json", {})
@@ -218,7 +242,12 @@ def extract(store, doc_ids=None, provider=None, limit=None):
                         cache_hits += 1
                     else:
                         payload = {"schema": schema, "doc_id": source.doc_id, "source_url": source.url, "retrieved_at": source.retrieved_at, "jurisdictions": source.jurisdictions, "source_authority": source.authority, "original_offset": offset, "source_text": text}
-                        output = provider.generate("\nExtract the supported rules from this source segment.", payload)
+                        output, origin_run_id = saved_draft(store, cache_key, provider)
+                        if origin_run_id:
+                            run.config["draft_replays"].append({"doc_id": source.doc_id, "offset": offset, "origin_run_id": origin_run_id})
+                            store.save_run(run)
+                        else:
+                            output = provider.generate("\nExtract the supported rules from this source segment.", payload)
                         store.write(f"provider_outputs/{run.run_id}/{cache_key}-draft.json", output)
                         # Every segment gets a separate semantic/omission pass, including empty results.
                         reviewed = provider.generate("\nReview the draft against the source. Check interpretation, numeric values/formulas, all coverage/exemptions, date/status support, directional interactions and omitted provisions across all categories. Correct it; retain unresolved issues. Return the complete corrected ExtractionBundle JSON, not a verdict.", {**payload, "draft": output})
@@ -258,8 +287,10 @@ def extract(store, doc_ids=None, provider=None, limit=None):
             if consecutive_failures >= 3:
                 run.errors.append("Stopped after three consecutive source failures; remaining documents are unprocessed and resumable")
                 break
+    except KeyboardInterrupt:
+        run.errors.append("Interrupted; completed documents and saved drafts/caches preserved; remaining documents are resumable")
     finally:
         store.write(f"provider_outputs/{run.run_id}/usage.json", getattr(provider, "usage", []))
         if isinstance(provider, OpenAIProvider): provider.client.close()
     run.artifacts = ["rules.json", "extraction_index.json", f"provider_outputs/{run.run_id}/usage.json"]
-    return store.finish(run, "partial" if run.errors and processed else "failed" if run.errors else "success", processed=processed, rules=len(rules), cache_hits=cache_hits)
+    return store.finish(run, "partial" if run.errors and processed else "failed" if run.errors else "success", processed=processed, rules=len(rules), cache_hits=cache_hits, draft_replays=len(run.config["draft_replays"]))
