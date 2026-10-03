@@ -78,17 +78,27 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outcome]);
 
+  // Move focus to the result area without jumping the page; scroll only if it is off screen
+  // (on narrow screens the property list sits above it).
+  const revealMain = () => {
+    const main = mainRef.current;
+    if (!main) return;
+    main.focus({ preventScroll: true });
+    const top = main.getBoundingClientRect().top;
+    if (top < 0 || top > window.innerHeight * 0.6) main.scrollIntoView({ block: 'start' });
+  };
+
   const choose = (item: AddressItem) => {
     setInspecting(null);
     setFinderOpen(false);
     session.select(item);
-    window.requestAnimationFrame(() => mainRef.current?.focus());
+    window.requestAnimationFrame(revealMain);
   };
   const chooseCase = (item: AddressItem, fixtureCase: FixtureCaseSummary) => {
     setInspecting(null);
     setFinderOpen(false);
     session.selectCase(item, fixtureCase);
-    window.requestAnimationFrame(() => mainRef.current?.focus());
+    window.requestAnimationFrame(revealMain);
   };
 
   const relatedCases = state.selection && !state.fixtureCase && outcome ? (catalog?.cases.filter((candidate) => candidate.address_id === outcome.query.address_id && candidate.as_of === outcome.query.as_of) ?? []) : [];

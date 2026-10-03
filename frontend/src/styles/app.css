@@ -1223,6 +1223,10 @@ select.input {
   outline: none;
 }
 
+.workspace__main {
+  scroll-margin-top: calc(var(--banner-h) + var(--s-2));
+}
+
 .finder-toggle {
   display: none;
 }

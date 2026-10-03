@@ -40,7 +40,12 @@ export function useRoute(): { route: Route; go: (view: View, params?: Record<str
   const replaceParams = useCallback((params: Record<string, string | null | undefined>) => {
     const current = parseHash(window.location.hash);
     const next = buildHash(current.view, params);
-    if (next !== window.location.hash) window.history.replaceState(null, '', next);
+    if (next === window.location.hash) return;
+    try {
+      window.history.replaceState(null, '', next);
+    } catch {
+      // Some embedded frames refuse history changes; the URL then simply stays as it was.
+    }
   }, []);
   return { route, go, replaceParams };
 }
