@@ -156,6 +156,46 @@ def test_structural_repair_and_contract_repair_share_one_slot(demo):
     assert any('Fact contract mismatch' in issue for issue in rule.review_issues)
 
 
+def test_quote_repair_retains_original_interpretation_issues(demo):
+    source, repaired = fixture_bundle(demo)
+    reviewed = deepcopy(repaired)
+    reviewed['rules'][0]['quoted_span'] = 'This quotation is deliberately absent from the fixture.'
+    reviewed['issues'] = ['Unresolved source-wide qualification.']
+    reviewed['rules'][0]['review_issues'] = ['Unresolved actor-scope interpretation.']
+    provider = ScriptedProvider(source, reviewed, reviewed, repaired)
+    run = extraction.extract(demo, provider=provider)
+    assert run.outcome == 'success' and len(provider.requests) == 3
+    rule = next(iter(demo.rules().values()))
+    assert set(rule.review_issues) == {*reviewed['issues'], *reviewed['rules'][0]['review_issues']}
+    assert demo.read('extraction_index.json')[source.doc_id]['status'] == 'review'
+
+
+@pytest.mark.parametrize('drop', [False, True])
+def test_rule_contract_repair_cannot_drop_reviewed_negative_finding(demo, drop):
+    source, reviewed = fixture_bundle(demo)
+    reviewed['negative_findings'] = [{
+        'jurisdiction': reviewed['rules'][0]['jurisdiction'], 'category': reviewed['rules'][0]['category'],
+        'statement': 'Synthetic fixture states that this section has no exemptions.',
+        'evidence': [{'doc_id': source.doc_id,
+                      'quote': 'There are no exemptions to this section.', 'supports': ['statement']}]}]
+    invalid_enum(reviewed)
+    repaired = deepcopy(reviewed)
+    repaired['rules'][0]['coverage_conditions']['value'] = 'individual'
+    if drop:
+        repaired['negative_findings'] = []
+    before = demo.read('rules.json')
+    provider = ScriptedProvider(source, reviewed, reviewed, repaired)
+    run = extraction.extract(demo, provider=provider)
+    assert len(provider.requests) == 3
+    if drop:
+        assert run.outcome == 'failed'
+        assert 'changed reviewed negative findings' in run.errors[0]
+        assert demo.read('rules.json') == before
+    else:
+        assert run.outcome == 'success'
+        assert len(demo.read('negative_findings.json')[source.doc_id]) == 1
+
+
 @pytest.mark.parametrize('change', ['omit_rule', 'rename_rule', 'invalid_schema'])
 def test_mechanical_repair_cannot_discard_reviewed_rule_identity(demo, change):
     source, bundle = fixture_bundle(demo)

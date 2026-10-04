@@ -17,11 +17,12 @@ the 174-record corpus-only archive, not the later hosted 666-candidate research 
 | T4: Massachusetts bills | D045–D047 contain procedure/history, not substantive bill provisions; both bill mappings are empty. | Review/admit retained H.5222/S.2983 text and status versions, then run automated extraction. Keep pending actual status distinct from the hypothetical comparison. |
 | T5: Massachusetts initiative | No mapped IP25-21 failed-proposal record. D048 is a different statute. | Use the retained petition and official docket disposition with accurate lineage. The July 21 county judgment entry is already captured; older claims that no official disposition was obtained are stale. |
 
-The supplemental drafts and captures are useful evidence, but they are not saved
-automated extraction results. The published submission applies a supplied-corpus-only
-admission rule; see [its scope and exclusions](../submission/README.md). Preserve
-that distinction when producing a new research or competition artifact. Do not
-substitute expected address sets from the scenario descriptions.
+The earlier supplemental drafts and source captures are distinct from fresh
+automated extraction results. The historical submission chose supplied-corpus-only
+scope; see [its scope and exclusions](../submission/README.md). That choice does not
+establish a blanket organizer prohibition on official public supplementation. Keep
+source provenance and final admission decisions explicit. Do not substitute expected
+address sets from the scenario descriptions.
 
 ## Current deployed-data diagnosis
 
@@ -69,10 +70,17 @@ necessary; the software changes do not alter these observed case results.
   Their text, roles and hashes are bound to run/cache identity; official status
   documents cannot supply substantive requirements or interactions. Outside-context
   records retain their original lineage instead of absorbing unprovided evidence.
+- The v5 extractor supplies registered fact meanings, types and enum values to
+  every provider pass, with the contract digest bound to run/cache identity.
+  Machine-detected field-evidence and enum issues can use one bounded repair;
+  unresolved legal issues and incompatible interpretations remain visible.
+- Retrieval preserves external chapter qualifiers. A reference to section 4 of
+  another chapter no longer becomes a false cycle with the proposal's section 4.
+  A chapter identity that the index cannot establish remains unresolved.
 
 These repairs do not retroactively clear review issues, change source roles, supply
-missing dates or create legal rules. Fresh extraction requires a configured provider;
-no API credentials were available in this local checkout during the diagnosis.
+missing dates or create legal rules. The initial diagnosis ran without provider
+credentials; subsequent extraction uses separately recorded live runs and spending.
 
 ## Run the data gate before publishing
 

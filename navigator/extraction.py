@@ -495,18 +495,24 @@ def extract(store, doc_ids=None, provider=None, limit=None, *, supporting_doc_id
                         reviewed = provider.generate(instruction + REVIEW_INSTRUCTIONS, {**payload, "draft": output})
                         store.write(f"provider_outputs/{run.run_id}/{cache_key}-review.json", reviewed)
                         prior_review = None
+                        reviewed_negatives = None
                         for repair in range(2):
                             try:
                                 candidate = ExtractionBundle.model_validate(reviewed)
                                 original = candidate.model_copy(deep=True)
+                                if not repair:
+                                    prior_review = original
                                 bundle = validate_bundle(candidate, sources, source.doc_id, supporting_doc_ids=support_ids)
-                                if prior_review is not None:
+                                if repair and prior_review is not None:
                                     preserve_prior_review(prior_review, bundle)
+                                if repair and reviewed_negatives is not None and bundle.negative_findings != reviewed_negatives:
+                                    raise ValueError("Rule-contract repair changed reviewed negative findings; prior candidates preserved")
                                 machine_issues = added_contract_issues(original, bundle)
                                 if repair or not machine_issues:
                                     break
-                                prior_review = original
-                                validation_error = json.dumps({"machine_detected_issues": machine_issues})[:2000]
+                                reviewed_negatives = [item.model_copy(deep=True) for item in bundle.negative_findings]
+                                validation_error = json.dumps({"retain_reviewed_negative_findings": True,
+                                                               "machine_detected_issues": machine_issues})[:2000]
                             except (ValueError, ValidationError) as exc:
                                 if repair: raise ValueError(f"Extraction validation failed for {source.doc_id}: {str(exc)[:500]}") from None
                                 validation_error = str(exc)[:2000]
