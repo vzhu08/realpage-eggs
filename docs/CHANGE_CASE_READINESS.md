@@ -23,6 +23,35 @@ admission rule; see [its scope and exclusions](../submission/README.md). Preserv
 that distinction when producing a new research or competition artifact. Do not
 substitute expected address sets from the scenario descriptions.
 
+## Current deployed-data diagnosis
+
+The October 4 API capture contains 666 rules, 83 sources and 500 properties with
+487 resolved municipalities. The canonical gate evaluated all rules and properties
+in 384.94 seconds: T1 is partial (250 uncertain, four mapped rules), T2 is partial
+(43 uncertain, one Hoboken rule), T3 is partial (140 uncertain, eight mapped rules),
+and T4/T5 are blocked with no mapped rules. No case has a definite affected set or
+passes readiness. [The captured-data diagnosis](evidence/deployed_change_case_diagnosis.json)
+records hashes, case blockers and the exact scope. Inputs were unchanged; provider
+calls were zero. This is separate from the saved 174-record competition archive.
+
+All 49 captured extraction-index entries are marked review, not failed API calls.
+The Jersey City and Massachusetts primary texts are present but unprocessed. The
+official Massachusetts disposition dockets are retained in this repository but were
+absent from the deployed source collection. California's primary extraction needs
+explicit related-definition/date evidence; merely repeating the single-document
+prompt cannot supply that evidence.
+
+The analysis Store reconstructs original evidence-package inputs plus a separate
+bounded address capture. It is not the original release freeze: historical provider
+outputs/run files, caches and other unexposed records were not recovered. Stable
+health counts during address capture do not establish an atomic server snapshot.
+
+The new [source bundle](change_case_sources/README.md) preserves 24 exact captures
+and a nine-primary extraction plan. Follow the [bounded rerun runbook](change_case_sources/RUNBOOK.md)
+to supply explicit supporting documents, record fresh extraction lineage and rerun
+the data gate. Fresh provider results and unresolved source/version decisions remain
+necessary; the software changes do not alter these observed case results.
+
 ## Software repairs
 
 - Missing resolution records now retain the property's known state and leave
@@ -36,6 +65,10 @@ substitute expected address sets from the scenario descriptions.
   genuine unresolved review issues continue to block unsupported conclusions.
 - The extraction prompt version changes so old provider caches are not silently
   treated as products of the corrected instructions. Existing output remains intact.
+- Explicit related documents can now supply definitions and temporal evidence.
+  Their text, roles and hashes are bound to run/cache identity; official status
+  documents cannot supply substantive requirements or interactions. Outside-context
+  records retain their original lineage instead of absorbing unprovided evidence.
 
 These repairs do not retroactively clear review issues, change source roles, supply
 missing dates or create legal rules. Fresh extraction requires a configured provider;

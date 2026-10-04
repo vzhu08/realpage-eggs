@@ -884,7 +884,7 @@
         "navigator/evidence.py": "845c81cdd8687917f6a8d81331e1c9270894d68115da7eccd7d2f5da60424d81",
         "navigator/evidence_package.py": "c380327a7c2a3582c4a575e95703adba9c43f8a2f448ecaeff6234d0bf4eef99",
         "navigator/export.py": "3c4f2b6d13c93bd1be916321d30040e10b9039dcc7ae0ab65f3a81e9ebee7fdc",
-        "navigator/extraction.py": "8011266eb6b0202aa9cdb93809ed0112071e7d4ce659cd037f951013a36ca9c4",
+        "navigator/extraction.py": "3184f804deaf1984c7432457f6f17f14744a747a162b2228dab941f716794a83",
         "navigator/fact_inputs.py": "c9c503e1e1d36a61c417bb85c9b705d7ec42294f65e28079a7b5d14e5f26e054",
         "navigator/geocode.py": "f5ce5fd996950fe701f8dc556f706c4eac80db396efd39d2c9703517dd9f7d27",
         "navigator/ingest.py": "3c72d47b0adea5c4559cc3fa6da4e9e5d5296b2f88bdc7486eb8370602915dd8",
@@ -903,11 +903,11 @@
         "navigator/validation.py": "3210f6145fd4a9398ed1cea132b63226c5fecc78912f37f2c8a6cbfb47c8b90a",
         "requirements.lock": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8"
       },
-      "fingerprint": "0a307c577061965e3a2dc6870e92325c9fb756fded17659546dd6bd98135dceb"
+      "fingerprint": "e5dd814b6b0dc3963c1df6586f4b548d280cc0563a0eb0a7326e38b397ad2e8a"
     },
     "input_sha256": "543cf4f35da12265fec2ce06d0d2b8572ea3b83b057f25035bf73f40fcce19a8",
     "response_sha256": "3021b3cc0788f691489671b7b572111f7171ca96a365781f674160f31cba4141",
-    "package_sha256": "a968e0ea59351f49ccc974075701443dd451e9f694b7d8e4030c149d59601c39",
+    "package_sha256": "4d0e036dbab67d192154f3d8340f352ebb8d1985bfde263fe10c5dcc47c2f4d1",
     "limitations": [
       "Reproduction verifies software output, not legal accuracy or complete source coverage.",
       "Original facts and submitted answers are separate; answers remain unverified and request-local.",
