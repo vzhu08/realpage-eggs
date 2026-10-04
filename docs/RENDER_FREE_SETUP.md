@@ -2,14 +2,15 @@
 
 The root Blueprint now uses one **Free** Docker web service, with no paid disk, database or
 workspace upgrade. It serves the existing frontend and Python API together. The saved research
-dataset is supplied privately to Render as a secret file and packaged into Render's private
+dataset is supplied privately to Render as two secret files and packaged into Render's private
 container image. Caches are prepared by the existing evaluator during the build. Normal startup,
 lookup and browsing make no OpenAI calls.
 
-The prepared file is 821,268 bytes, below Render's combined 1 MB secret-file limit. It contains
+The prepared transport is 821,268 bytes, split into two 410,634-byte files. Each is below Docker
+BuildKit's 500 KiB per-secret limit; their total is below Render's combined 1 MB limit. It contains
 only the verified `real-002` serving snapshot (500 addresses, 140 rules, 87 sources), encoded for
 transport. It is not a credential and contains no API keys. It remains outside GitHub. The Docker
-build context excludes it; only the explicit BuildKit secret mount makes it available to the build.
+build context excludes both parts; only explicit BuildKit secret mounts make them available to the build.
 The resulting serving data lives outside the public frontend directory.
 
 ## Website steps
@@ -24,21 +25,26 @@ The resulting serving data lives outside the public frontend directory.
    f2e384742924b1555b25c44205585367d039983daaf1d131e0095a4fda076e77
    ```
 
-4. Create the service. Then open **Environment → Secret Files → Add Secret File**. Set its filename
-   to **`snapshot.b64`**. Copy the prepared contents with this PowerShell command on Vincent's laptop:
+4. Create the service. Then open **Environment → Secret Files → Add file**. Add both files, using
+   these exact names. Copy and paste each prepared file's contents into its corresponding Contents field:
 
    ```powershell
-   Get-Content -Raw 'C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/render-setup/artifacts/render/free/snapshot.b64' | Set-Clipboard
+   # First file: snapshot.b64
+   Get-Content -Raw 'C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/render-setup/artifacts/render/free-split/snapshot.b64' | Set-Clipboard
+   # After pasting the first file, copy the second: snapshot-part-2.b64
+   Get-Content -Raw 'C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/render-setup/artifacts/render/free-split/snapshot-part-2.b64' | Set-Clipboard
    ```
 
-   Paste into Render's Contents field and save. The first build may fail before this file is added,
-   with an explicit `Add Render secret file snapshot.b64` message. Saving the file triggers a new
-   deployment. If needed, use **Manual Deploy → Clear build cache & deploy**.
+   Choose **Save, rebuild, and deploy** after adding both. The first build may fail before the files
+   are added, with an explicit missing-file message. Do not use the old unsplit 821,268-byte file:
+   Render accepts its upload, but BuildKit rejects it with `secret snapshot_b64 too big. max size 500KiB`.
+   When fixing an existing setup, replace `snapshot.b64` with the first smaller part and add the second.
+   If needed, use **Manual Deploy → Clear build cache & deploy**.
 5. Wait for the deployment to become Live, then open its `onrender.com` URL. Send that URL to the
    setup assistant for the public HTTP checks. There is no SSH upload or paid disk activation step.
 
-Do not upload `.env`, an OpenAI key, or an SSH private key. The only file needed here is the prepared
-snapshot. Adding it publishes the research data through the app's existing unauthenticated API.
+Do not upload `.env`, an OpenAI key, or an SSH private key. Only the two prepared snapshot parts are
+needed. Adding them publishes the research data through the app's existing unauthenticated API.
 The corpus remains partial and review-needed: T1 is partial and T2-T5 are blocked. Deployment
 does not establish legal accuracy, evidence completeness or submission readiness.
 
@@ -81,7 +87,8 @@ $snapshotHash = (Get-Content artifacts/render/package-v2/snapshot.zip.sha256 -Ra
 & $python scripts/render_snapshot.py secret-file --archive artifacts/render/package-v2/snapshot.zip --sha256 $snapshotHash --output artifacts/render/free-v2/snapshot.b64
 ```
 
-Update both the Render secret file and `NAVIGATOR_SNAPSHOT_SHA256`, then rebuild. The hash changes
+The helper creates `snapshot.b64` and `snapshot-part-2.b64`. Update both Render secret files and
+`NAVIGATOR_SNAPSHOT_SHA256`, then rebuild. The hash changes
 invalidate the data build layer. If the snapshot grows beyond the 1 MB encoded limit, the helper
-refuses to create the file; that future release needs a different transfer method. Original input
-stores are never overwritten. Keep the previous private file/hash for rollback.
+refuses to create the files; that future release needs a different transfer method. Original input
+stores are never overwritten. Keep the previous private files/hash for rollback.

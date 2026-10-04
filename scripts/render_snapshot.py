@@ -17,6 +17,7 @@ from scripts.platform_ops import SERVING_FILES, fingerprint, require, save, veri
 REQUIRED = {"addresses.json", "resolutions.json", "rules.json", "sources.json", "dataset.json"}
 LABELS = {"SYNTHETIC_NOT_FOR_SUBMISSION", "RESEARCH_RELEASE_NOT_VALIDATED"}
 SECRET_FILE_LIMIT = 1_000_000  # Render's combined secret-file limit; use decimal MB conservatively.
+SECRET_PART_LIMIT = 500 * 1024  # BuildKit rejects individual secrets larger than 500 KiB.
 
 
 def allowed(name):
@@ -121,25 +122,41 @@ def install(archive, expected_sha256, data_root, name):
     return receipt
 
 
+def secret_part_two(output):
+    return output.with_name(f"{output.stem}-part-2{output.suffix}")
+
+
 def secret_file(archive, expected_sha256, output):
     """Create plaintext transport without putting the dataset in the repository."""
     verify_archive(archive, expected_sha256)
     content = b64encode(archive.read_bytes())
     require(len(content) <= SECRET_FILE_LIMIT, "Snapshot exceeds Render's 1 MB secret-file allowance")
+    outputs = (output, secret_part_two(output))
+    if any(path.exists() for path in outputs):
+        raise FileExistsError("Choose new paths for both secret-file parts")
+    midpoint = (len(content) + 1) // 2
+    parts = (content[:midpoint], content[midpoint:])
+    require(all(len(part) <= SECRET_PART_LIMIT for part in parts), "Secret part exceeds BuildKit's 500 KiB limit")
     output.parent.mkdir(parents=True, exist_ok=True)
-    with output.open("xb") as stream:
-        stream.write(content)
+    for path, part in zip(outputs, parts):
+        with path.open("xb") as stream:
+            stream.write(part)
     return {"status": "prepared", "secret_file": str(output), "bytes": len(content),
+            "secret_files": [{"path": str(path), "bytes": len(part)} for path, part in zip(outputs, parts)],
             "NAVIGATOR_SNAPSHOT_SHA256": expected_sha256}
 
 
-def build_secret(secret, expected_sha256, data_root, required):
+def build_secret(secret, expected_sha256, data_root, required, part_two=None):
     """Initialize the image at build time so free-service cold starts do no work."""
     if not secret.exists():
-        require(not required, "Add Render secret file snapshot.b64, then rebuild. No snapshot was installed.")
+        require(not required and (part_two is None or not part_two.exists()),
+                "Add Render secret files snapshot.b64 and snapshot-part-2.b64, then rebuild. No snapshot was installed.")
         return {"status": "snapshot_not_configured"}
-    require(secret.stat().st_size <= SECRET_FILE_LIMIT, "Secret file exceeds 1 MB")
-    content = b64decode(secret.read_bytes().strip(), validate=True)
+    secrets = [secret] if part_two is None else [secret, part_two]
+    require(all(path.exists() for path in secrets), "Add both snapshot secret-file parts, then rebuild")
+    require(sum(path.stat().st_size for path in secrets) <= SECRET_FILE_LIMIT, "Secret files exceed 1 MB")
+    require(all(path.stat().st_size <= SECRET_PART_LIMIT for path in secrets), "Secret part exceeds BuildKit's 500 KiB limit")
+    content = b64decode(b"".join(path.read_bytes().strip() for path in secrets), validate=True)
     with TemporaryDirectory(prefix="navigator-snapshot-") as temporary:
         archive = Path(temporary) / "snapshot.zip"
         archive.write_bytes(content)
@@ -165,6 +182,7 @@ def main():
     secret.add_argument("--output", required=True, type=Path)
     build = commands.add_parser("build-secret", help="Prepare an image from a BuildKit secret; never run on each startup")
     build.add_argument("--secret-file", required=True, type=Path)
+    build.add_argument("--secret-file-part-2", type=Path)
     build.add_argument("--sha256", default="")
     build.add_argument("--data-root", required=True, type=Path)
     build.add_argument("--require-snapshot", choices=("0", "1"), default="0")
@@ -179,7 +197,8 @@ def main():
     elif args.command == "secret-file":
         result = secret_file(args.archive, args.sha256, args.output)
     else:
-        result = build_secret(args.secret_file, args.sha256, args.data_root, args.require_snapshot == "1")
+        result = build_secret(args.secret_file, args.sha256, args.data_root, args.require_snapshot == "1",
+                              args.secret_file_part_2)
     print(json.dumps(result, indent=2))
 
 

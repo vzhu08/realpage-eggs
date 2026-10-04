@@ -1,5 +1,16 @@
 # RENDER-01: local Render deployment preparation
 
+## Dashboard repair (October 4)
+
+The user now explicitly requested computer use to repair Render and approved uploading the prepared
+dataset and deploying the public demo on the free service. Service `realpage-navigator` exists on
+Render Free, on this branch. The initial build lacked its snapshot; the checksum also had a leading
+space, now corrected. Uploading the original single file exposed BuildKit's separate 500 KiB
+per-secret limit, despite fitting Render's combined 1 MB allowance. The helper now produces two
+410,634-byte parts, mounted and concatenated before the unchanged SHA-256/archive checks. The data
+and evaluator are unchanged. Existing path claims cover this repair; no additional writers.
+The earlier account/dashboard and no-deployment restrictions below describe the historical setup.
+
 ## Free-hosting follow-up (October 4)
 
 The user asked to deploy on a free platform. This session now replaces the default paid Blueprint

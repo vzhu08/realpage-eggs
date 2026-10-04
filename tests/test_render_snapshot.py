@@ -139,8 +139,10 @@ def test_secret_file_build_installs_verified_inputs_and_hides_content(tmp_path, 
     archive, digest = package
     output = tmp_path / "private/snapshot.b64"
     report = render.secret_file(archive, digest, output)
-    assert report["bytes"] == output.stat().st_size < render.SECRET_FILE_LIMIT
-    receipt = render.build_secret(output, digest, tmp_path / "image-data", required=True)
+    part_two = render.secret_part_two(output)
+    assert report["bytes"] == output.stat().st_size + part_two.stat().st_size < render.SECRET_FILE_LIMIT
+    assert all(part["bytes"] <= render.SECRET_PART_LIMIT for part in report["secret_files"])
+    receipt = render.build_secret(output, digest, tmp_path / "image-data", required=True, part_two=part_two)
     assert receipt["counts"]["addresses"] == 3
     assert receipt["artifact_label"] == "SYNTHETIC_NOT_FOR_SUBMISSION"
     assert Path(receipt["NAVIGATOR_DATA_DIR"]).is_dir()
@@ -175,8 +177,32 @@ def test_invalid_or_mismatched_secret_is_never_installed(tmp_path, package):
     output = tmp_path / "snapshot.b64"
     render.secret_file(archive, digest, output)
     with pytest.raises(RuntimeError, match="SHA-256 mismatch"):
-        render.build_secret(output, "0" * 64, tmp_path / "image-data", required=True)
+        render.build_secret(output, "0" * 64, tmp_path / "image-data", required=True,
+                            part_two=render.secret_part_two(output))
     output.write_bytes(b"not-base64!")
     with pytest.raises(Base64Error):
         render.build_secret(output, digest, tmp_path / "image-data", required=True)
+    assert not (tmp_path / "image-data").exists()
+
+
+def test_missing_or_corrupted_second_secret_is_not_installed(tmp_path, package):
+    archive, digest = package
+    output = tmp_path / "snapshot.b64"
+    render.secret_file(archive, digest, output)
+    part_two = render.secret_part_two(output)
+    saved = part_two.read_bytes()
+    part_two.unlink()
+    with pytest.raises(RuntimeError, match="both snapshot secret-file parts"):
+        render.build_secret(output, digest, tmp_path / "image-data", True, part_two)
+    part_two.write_bytes((b"B" if saved[:1] == b"A" else b"A") + saved[1:])
+    with pytest.raises(RuntimeError, match="SHA-256 mismatch"):
+        render.build_secret(output, digest, tmp_path / "image-data", True, part_two)
+    assert not (tmp_path / "image-data").exists()
+
+
+def test_buildkit_limit_is_checked_independently_of_render_total(tmp_path):
+    oversized = tmp_path / "snapshot.b64"
+    oversized.write_bytes(b"A" * (render.SECRET_PART_LIMIT + 1))
+    with pytest.raises(RuntimeError, match="500 KiB"):
+        render.build_secret(oversized, "0" * 64, tmp_path / "image-data", True)
     assert not (tmp_path / "image-data").exists()

@@ -40,8 +40,10 @@ COPY --from=frontend /build/frontend/dist/ public/
 ARG NAVIGATOR_SNAPSHOT_SHA256=""
 ARG NAVIGATOR_REQUIRE_SNAPSHOT="0"
 RUN --mount=type=secret,id=snapshot_b64,target=/run/secrets/snapshot.b64 \
+    --mount=type=secret,id=snapshot_part_2_b64,target=/run/secrets/snapshot-part-2.b64 \
     python scripts/render_snapshot.py build-secret \
       --secret-file /run/secrets/snapshot.b64 \
+      --secret-file-part-2 /run/secrets/snapshot-part-2.b64 \
       --sha256 "${NAVIGATOR_SNAPSHOT_SHA256}" \
       --require-snapshot "${NAVIGATOR_REQUIRE_SNAPSHOT}" \
       --data-root /opt/navigator-snapshot
