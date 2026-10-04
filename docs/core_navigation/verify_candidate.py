@@ -13,7 +13,7 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
-OUTPUT = Path(__file__).resolve().parent
+OUTPUT = Path(__file__).resolve().parent / 'core07_validation'
 
 
 def hashes(directory):
@@ -22,26 +22,32 @@ def hashes(directory):
 
 
 def main():
+    OUTPUT.mkdir(parents=True, exist_ok=True)
     original = hashes(ROOT / 'contracts')
     base = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     environment = dict(os.environ)
     runs = []
     with tempfile.TemporaryDirectory(prefix='realpage-core-b-validation-') as temporary:
         copied = Path(temporary)
-        for name in ('navigator', 'tests', 'fixtures', 'config', 'contracts'):
+        for name in ('navigator', 'tests', 'fixtures', 'config', 'contracts', 'scripts'):
             shutil.copytree(ROOT / name, copied / name, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
-        shutil.copy2(ROOT / 'pyproject.toml', copied / 'pyproject.toml')
+        for name in ('pyproject.toml', 'requirements.lock'):
+            shutil.copy2(ROOT / name, copied / name)
         # This original comparison is read-only; retain its fixed cases/denominators.
         (copied / 'docs/core').mkdir(parents=True)
-        shutil.copy2(ROOT / 'docs/core/evaluate_planner.py', copied / 'docs/core/evaluate_planner.py')
+        for name in ('evaluate_planner.py', 'core01_d001_live.json'):
+            shutil.copy2(ROOT / 'docs/core' / name, copied / 'docs/core' / name)
+        (copied / 'docs/core_navigation').mkdir(parents=True)
+        shutil.copy2(ROOT / 'docs/core_navigation/benchmark.py', copied / 'docs/core_navigation/benchmark.py')
         environment['NAVIGATOR_DATA_DIR'] = str(copied / 'data/core-b-session')
-        source_hashes = {f'{name}/{path}': sha for name in ('navigator', 'tests')
+        source_hashes = {f'{name}/{path}': sha for name in ('navigator', 'tests', 'scripts')
                          for path, sha in hashes(copied / name).items()}
         commands = [
             ['-m', 'pytest', '-q', '-rs'],
             ['-m', 'compileall', '-q', 'navigator', 'tests'],
             ['-m', 'navigator', 'contracts'],
             ['docs/core/evaluate_planner.py'],
+            ['docs/core_navigation/benchmark.py', str(OUTPUT / 'benchmark_results.json')],
         ]
         for command in commands:
             result = subprocess.run([sys.executable, *command], cwd=copied, env=environment,
@@ -65,7 +71,9 @@ def main():
                  'stdout': check.stdout, 'stderr': check.stderr})
     preserved = original == hashes(ROOT / 'contracts')
     report = {'base_commit_at_verification': base, 'source_sha256': source_hashes,
-              'python': sys.version.split()[0], 'requirements': 'Exact requirements.lock installed in checkout .venv',
+              'python': sys.version.split()[0], 'requirements': 'Reused Core B Python environment; requirements.lock matches installed prior checkout',
+              'python_executable': sys.executable,
+              'requirements_sha256': hashlib.sha256((ROOT / 'requirements.lock').read_bytes()).hexdigest(),
               'pack': environment.get('NAVIGATOR_PACK'), 'disposable_copy': True,
               'working_contracts_unchanged': preserved,
               'generated_contract_differences': differences, 'checks': runs}

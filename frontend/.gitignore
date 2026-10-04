@@ -7,3 +7,6 @@ playwright-report/
 
 # Root .gitignore hides .env.*; this one holds no secrets and selects the synthetic demo.
 !.env.demo
+
+# The backup recording is regenerated locally (DEMO_BACKUP=1 npm run demo:backup); its frames are checked in.
+docs/demo-backup/*.webm

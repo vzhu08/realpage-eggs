@@ -20,9 +20,11 @@ interface Props {
   initial: { address: string | null; asOf: string | null; fixtureCase: string | null };
   onParams: (params: { address: string | null; as_of: string | null; case: string | null }) => void;
   onSwitchToDemo?: () => void;
+  disagreementHref: (addressId: string, asOf: string) => string;
+  apiBase?: string;
 }
 
-export function LookupView({ mode, initial, onParams, onSwitchToDemo }: Props) {
+export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreementHref, apiBase }: Props) {
   const source = useSource();
   const session = useSession(source, initial.asOf && isIsoDay(initial.asOf) ? initial.asOf : DEFAULT_AS_OF);
   const { state } = session;
@@ -204,6 +206,9 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo }: Props) {
                 onAnswer={session.answer}
                 onRemoveAnswer={session.removeAnswer}
                 onRun={session.run}
+                mode={mode}
+                apiBase={apiBase}
+                disagreementHref={disagreementHref}
               />
             )}
           </>

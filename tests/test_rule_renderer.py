@@ -121,3 +121,70 @@ def test_real_renderer_http_source_comparison_and_stable_hash(demo):
         changed = client.post('/api/v1/lookup/assist', json=request).json()['encoded_rules'][0]
         assert changed['expression_hash'] != rendered['expression_hash']
         assert 'units [dwelling units] > 8' in changed['text']
+
+
+def test_renderer_effective_date_gap_with_dated_snapshot_and_exact_sources(rule):
+    rule.effective_date = None
+    rule.status_as_of = '2026-10'
+    rendered = render_rule(rule)
+    assert 'effective_date' in rendered.unresolved_nodes
+    assert '2026-10 (month precision' in rendered.text
+    assert rule.citation in rendered.text and rule.source_url in rendered.text
+    assert rule.team_rule_id in rendered.text and rendered.expression_hash in rendered.text
+    assert rule.evidence[0].quote in rendered.text
+    assert rule.status_events[0].evidence[0].quote in rendered.text
+    assert 'a lifecycle snapshot does not establish effectiveness' in rendered.text
+
+
+def test_change_renderer_consumes_actual_http_outputs_without_evaluating(demo, monkeypatch):
+    from fastapi.testclient import TestClient
+    from navigator.api import create_app
+    from navigator.core_assist import render_change
+    from navigator.models import ChangeResult
+    from navigator import engine
+
+    with TestClient(create_app(demo.root)) as client:
+        response = client.post('/api/v1/changes', json={'before': '2026-11-14', 'after': '2026-11-15'})
+        assert response.status_code == 200
+        change = ChangeResult.model_validate(response.json())
+    before = change.model_dump_json()
+    def forbidden(*args, **kwargs):
+        raise AssertionError('A renderer must not evaluate law')
+    monkeypatch.setattr(engine, 'evaluate_rules', forbidden)
+    text = render_change(change, list(demo.rules().values()))
+    assert change.model_dump_json() == before
+    assert '2026-11-14 → 2026-11-15' in text
+    assert f'{len(change.affected_address_ids)} definitely affected' in text
+    assert f'{len(change.uncertain_address_ids)} uncertain' in text
+    assert 'Core result: not_yet_effective' in text and 'Core result: applies' in text
+    assert 'Core result: unknown' in text
+    assert next(iter(demo.rules().values())).source_url in text
+    assert render_change(change, list(demo.rules().values())) == text
+    change.status = 'blocked'
+    change.scenario = 'if_enacted'
+    change.differences = {'test': [{'team_rule_id': 'missing'}, 'bad-entry']}
+    text = render_change(change, [])
+    assert 'Hypothetical enactment only' in text
+    assert 'do not establish zero impact' in text
+    assert text.count('Unresolved change detail:') == 2
+    assert 'Next action — source acquisition' in text
+
+
+def test_conflict_rendering_preserves_core_reason_and_rule_pair(rule, prop, resolution):
+    from navigator.core_assist import render_evaluation
+    from navigator.engine import evaluate_rules
+    from datetime import date
+    other = rule.model_copy(deep=True)
+    other.team_rule_id += '-other-version'
+    other.key_value = 'conflicting synthetic value'
+    evaluations = evaluate_rules([rule, other], prop, resolution, date(2026, 11, 15))
+    for evaluation, version in zip(evaluations, [rule, other]):
+        assert evaluation.conflict_flag
+        text = render_evaluation(evaluation, version, '2026-11-15')
+        assert 'overlapping versions' in text
+        assert version.team_rule_id in text
+        assert render_rule(version).expression_hash in text
+        assert evaluation.explanation in text
+        assert 'does not establish precedence' in text
+    with pytest.raises(ValueError, match='identifiers'):
+        render_evaluation(evaluations[0], other, '2026-11-15')

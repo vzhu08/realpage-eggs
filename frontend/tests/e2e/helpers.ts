@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { type Page, type Route, expect } from '@playwright/test';
+import { expandPooled } from '../../src/demo/pool';
 
 const read = (relative: string) => JSON.parse(readFileSync(fileURLToPath(new URL(`../../../${relative}`, import.meta.url)), 'utf8'));
 
@@ -132,4 +133,68 @@ export async function openEvidence(page: Page, title = RULE_TITLE) {
 export async function expectNoHorizontalOverflow(page: Page) {
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   expect(overflow).toBeLessThanOrEqual(1);
+}
+
+/* ---------- UX development fixture (fictional portfolio, backend-evaluated) ---------- */
+
+interface DevFixture {
+  addresses: Array<{ property: { address_id: string }; resolution: unknown }>;
+  assists: Array<{ request: { address_id: string; as_of: string }; response: any }>;
+  rules: Record<string, unknown>;
+  sources: Record<string, unknown>;
+  changes: Array<{ request: { before: string; after: string; scenario?: string }; response: any }>;
+}
+
+/** The recorded development fixture, expanded the same way the app expands it. */
+export function devFixture(): DevFixture {
+  return expandPooled<DevFixture>(read('frontend/src/demo/recorded/portfolio-dev-fixture.json'));
+}
+
+/**
+ * A live-API double that answers from the recorded development fixture: paged addresses, rule
+ * and source records, lookups and comparisons. Requests it holds no recording for get a 422.
+ */
+export function devHandlers(fixture = devFixture()): Record<string, Handler> {
+  const tail = (url: URL) => decodeURIComponent(url.pathname.split('/').pop() ?? '');
+  return {
+    'GET /health': () => ({ json: health({ addresses: fixture.addresses.length, rules: Object.keys(fixture.rules).length, sources: Object.keys(fixture.sources).length, resolved_municipalities: 12, dataset_readiness: 'partial' }) }),
+    'GET /addresses': ({ url }) => {
+      const q = (url.searchParams.get('q') ?? '').toLowerCase();
+      const offset = Number(url.searchParams.get('offset') ?? 0);
+      const limit = Number(url.searchParams.get('limit') ?? 25);
+      const items = fixture.addresses.filter((item) => JSON.stringify(item.property).toLowerCase().includes(q));
+      return { json: { total: items.length, offset, limit, items: items.slice(offset, offset + limit), disclaimer: examples.normal.response.disclaimer } };
+    },
+    'GET /rules/*': ({ url }) => {
+      if (url.pathname.endsWith('/evidence')) return { status: 404, json: { detail: 'Not Found' } };
+      const detail = fixture.rules[tail(url)];
+      return detail ? { json: detail } : { status: 404, json: { detail: { code: 'unknown_id', message: 'Unknown rule ID' } } };
+    },
+    'GET /sources/*': ({ url }) => {
+      const source = fixture.sources[tail(url)];
+      return source ? { json: source } : { status: 404, json: { detail: { code: 'unknown_id', message: 'Unknown document ID' } } };
+    },
+    'GET /facts': () => ({ json: {} }),
+    'POST /lookup/assist': ({ body }) => {
+      const entry = fixture.assists.find((candidate) => candidate.request.address_id === body.address_id && candidate.request.as_of === body.as_of);
+      return entry ? { json: entry.response } : { status: 422, json: { detail: { code: 'invalid_input', message: 'No recorded response for this request in the test double' } } };
+    },
+    'POST /changes': ({ body }) => {
+      const entry = fixture.changes.find((candidate) => candidate.request.before === body.before && candidate.request.after === body.after && (candidate.request.scenario ?? 'actual') === (body.scenario ?? 'actual'));
+      return entry ? { json: entry.response } : { status: 422, json: { detail: { code: 'invalid_input', message: 'No recorded response for this request in the test double' } } };
+    },
+  };
+}
+
+export const comparisonResult = (page: Page) => page.getByRole('article', { name: 'Comparison result' });
+
+/** Open the changes view in the demo and run the development portfolio's headline comparison. */
+export async function openPortfolio(page: Page, pill = 'Oct 1, 2026 → Jan 15, 2027') {
+  await openDemo(page, '#/changes?mode=demo');
+  await page.getByRole('button', { name: pill, exact: true }).click();
+  const result = comparisonResult(page);
+  await expect(result).toBeVisible();
+  // Names arrive after the comparison; wait for the label lookups to settle.
+  await expect(result.locator('.detail-status .spinner')).toHaveCount(0);
+  return result;
 }

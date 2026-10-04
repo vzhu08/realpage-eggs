@@ -1,0 +1,164 @@
+{
+  "version": "core07-v1",
+  "expectation_author": "Codex implementing Core B; agent-authored expectations, not held out",
+  "human_reviewer": null,
+  "review_status": "unassigned; no human or independent legal review",
+  "cases": [
+    {
+      "id": "decisive_fact",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "units"
+      ],
+      "expected_remedies": [
+        "property_fact",
+        "source_gap"
+      ]
+    },
+    {
+      "id": "irrelevant_fact",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [],
+      "expected_remedies": [
+        "source_gap"
+      ]
+    },
+    {
+      "id": "two_exemptions",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "owner_occupied",
+        "exemption_filed"
+      ],
+      "expected_remedies": [
+        "property_fact",
+        "source_gap"
+      ]
+    },
+    {
+      "id": "partial_occupancy",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "certificate_of_occupancy"
+      ],
+      "expected_remedies": [
+        "property_fact",
+        "source_gap"
+      ]
+    },
+    {
+      "id": "missing_source",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "units"
+      ],
+      "expected_remedies": [
+        "property_fact",
+        "source_gap",
+        "interpretation"
+      ]
+    },
+    {
+      "id": "conflicting_versions",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "units"
+      ],
+      "expected_remedies": [
+        "property_fact",
+        "source_gap"
+      ],
+      "expected_alternative_remedies": [
+        "conflict"
+      ],
+      "expectation_basis": "Core flags overlapping-version conflicts only once both versions apply; the units>=8 alternative must retain that conflict."
+    },
+    {
+      "id": "bounded_analysis",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "units",
+        "owner_occupied"
+      ],
+      "expected_remedies": [
+        "property_fact",
+        "analysis_limit",
+        "source_gap"
+      ]
+    },
+    {
+      "id": "berkeley_pending_and_missing_original",
+      "mode": "real_extraction_record_synthetic_property_missing_original_source",
+      "record": "docs/core/core01_d001_live.json",
+      "rule_ids": [
+        "r-12c99cf95c4f2cd2242e",
+        "r-f372d8d7042cb492998b"
+      ],
+      "as_of": "2026-10-01",
+      "expected_useful_fields": [],
+      "expected_remedies": [
+        "source_gap",
+        "interpretation"
+      ],
+      "expectation_basis": "Recorded D001 pending lifecycle does not auto-enact. Original source snapshot is unavailable locally; absent support cannot be resolved by property facts. Rules are imported unchanged; no original source text is reconstructed from snippets."
+    }
+  ],
+  "real_snapshot_cases_pending": [
+    {
+      "id": "real_decisive_fact",
+      "sources": [
+        "D007",
+        "D025"
+      ],
+      "basis": "docs/core/core01_cross_source_review.json",
+      "expected_remedy": "Keep narrower rental ownership/service-member qualifications unresolved; Core A must supply a consequential supported factual branch",
+      "blocked_on": "CORE-06 rule/property binding and expected useful field; PLAT-06 snapshot"
+    },
+    {
+      "id": "real_two_exemptions",
+      "sources": [
+        "D009"
+      ],
+      "basis": "docs/core/core01_d009_live.json",
+      "expected_remedy": "Retain subsidy/HUD and historical/current owner occupancy conditions separately; one answer must not settle both",
+      "blocked_on": "Complete saved rule/source/property inputs and reviewed useful field expectations"
+    },
+    {
+      "id": "real_partial_occupancy",
+      "sources": [
+        "D009"
+      ],
+      "rule_ids": [
+        "r-4bf8e008d56950bba8de"
+      ],
+      "basis": "docs/core/core01_d009_live.json",
+      "expected_useful_fields": [
+        "certificate_of_occupancy"
+      ],
+      "expected_remedy": "Ask for actual certificate precision only if Core marks the branch relevant; never infer it from construction year",
+      "blocked_on": "CORE-06 fixes/recorded branch; PLAT-06 source/property snapshot"
+    },
+    {
+      "id": "real_source_gap_outside_berkeley",
+      "sources": [
+        "D010",
+        "D056"
+      ],
+      "basis": "docs/core_rules/CORE_A_HANDOFF.md",
+      "expected_remedy": "Acquire missing CORI authority; property answers cannot establish program or legal coverage",
+      "blocked_on": "CORE-06 rule/property binding and PLAT-06 source snapshot"
+    },
+    {
+      "id": "real_nj_conflict",
+      "sources": [
+        "D069",
+        "D070",
+        "D071",
+        "D072"
+      ],
+      "basis": "docs/tasks/CORE-06.md",
+      "expected_remedy": "Preserve both source-backed claims and unresolved priority; do not hard-code the organizer's conflict expectation",
+      "blocked_on": "CORE-06 comparison evidence and PLAT-06 disagreement contract/snapshot"
+    }
+  ]
+}

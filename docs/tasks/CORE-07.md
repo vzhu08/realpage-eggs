@@ -46,3 +46,43 @@ Handoff: commit, renderer/planner versions, before/after examples, actual benchm
 reviewer status, contract requests and limitations. No provider calls in planner/renderer.
 Dependencies: CORE-06 evidence-backed cases and PLAT-06 snapshot for real-data acceptance;
 independent rendering, remedy and benchmark-harness work can start immediately.
+
+## Oliver / Core B execution — October 4, 2026
+
+State: existing-interface implementation verified locally; real-snapshot/human-review
+acceptance and new disagreement-contract integration remain pending CORE-06/PLAT-06.
+Sole writer: Codex /root, session `01a103bd-84d1-7c50-bd19-1fe9267bc139`.
+Actual checkout: `/Users/oliverchen/Documents/random shi/realpage-eggs-core-explanations`.
+Branch: `codex/core-b-explanations`; base: `0c441df4896cca844b9199597093267e1d4519a4`.
+Mutable data: private temporary `core07-benchmark-*` and `realpage-core-b-validation-*`
+directories, automatically cleaned after checks. Original Core B and Claude checkouts
+are preserved; Claude is separately implementing UX-04 on the user's instruction.
+
+Delivered: actionable fact/geography/source/interpretation/analysis remedies with dated
+rule/version references; exact recorded source quotes in rendering; missing effective
+dates remain unresolved despite a dated snapshot; Core result/change text helpers;
+request-local HTTP probe replay and fixed, honestly labeled benchmark cohorts.
+Planner `correlated-partitions-v3`; renderer `encoded-rule-v3`. Shared schemas unchanged.
+See `docs/core_navigation/CORE07_HANDOFF.md` for checks, metrics and integration requests.
+
+Checks: 59 focused tests; 267 full backend tests passed, 1 skipped (organizer pack absent);
+compileall/contracts succeeded in a disposable copy. All 17 new software alternatives
+reproduce through actual assist HTTP handlers. Original eight synthetic cases preserved.
+No complete corpus/legal score or human review is claimed. Named human reviewer was
+requested from Oliver and is unassigned until a response; do not fabricate a review.
+
+Local implementation checkpoint: `5a8e1cd`; runtime/tests match the recorded verification.
+
+## Combined integration follow-up — October 4, 2026
+
+The user authorized pushing both branches and fixing integration errors. Codex combined
+Core B `0161b95` and finished Claude UX-04 `43fa402` with main `84c2887` in the isolated
+`codex/core-b-ux04-integration` checkout. Original author checkouts are preserved.
+Compatibility fixes are at `af14cd8`; current checks, snapshot availability, and remaining
+acceptance gates are recorded in [the combined handoff](../core_navigation/UX04_INTEGRATION.md).
+This follow-up supersedes earlier toolchain-unavailable statements for the integrated build;
+the original task evidence above remains historical.
+
+PR #15 also includes main `607dce3` (Platform release PR #14) via clean merge `e5966b2`.
+Released additive contracts are available; frontend types are regenerated. New endpoint
+adoption and real-snapshot rehearsal remain follow-up acceptance work.
