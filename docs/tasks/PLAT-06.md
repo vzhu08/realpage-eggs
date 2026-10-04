@@ -2,6 +2,12 @@
 
 Priority: P0 data/release, then P1 evidence package.
 State: Platform software complete and verified locally; ready for integration review. Full release acceptance remains partial pending Core evidence/review and UX-04 adoption.
+
+Integration follow-up: [PR #14](https://github.com/vzhu08/realpage-eggs/pull/14) includes the
+PLAT-07 integrity fixes and unreadable-cache fallback. Combined backend verification passes
+351 tests with the organizer pack; all four contract schemas match and regenerated package
+examples replay. See `docs/evidence/plat06_integration.json`. The previously verified real-002
+bundle remains immutable at its recorded runtime commit and retains its original acceptance evidence.
 Owner: Vincent / Platform/API; current Codex session `01a104f0-cfea-7820-ac83-0bb1fb8349c5`.
 Claimed checkout: `C:\Users\vzhu0\PycharmProjects\realpage-eggs\artifacts\platform-release`.
 Branch: `codex/platform-release`; starting SHA: `a7f9447815b53860c0f4a644dc0e00ca776139a1`
