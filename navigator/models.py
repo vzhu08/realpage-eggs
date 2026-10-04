@@ -231,6 +231,7 @@ class ExtractionBundle(Model):
     rules: list[RuleDraft]
     negative_findings: list[NegativeFinding] = Field(default_factory=list)
     issues: list[str] = Field(default_factory=list)
+    notes: list[str] = Field(default_factory=list, description="Non-blocking extraction observations; do not use for unresolved legal meaning or incomplete rule support.")
 
 
 class PredicateResult(Model):
