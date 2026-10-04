@@ -1,9 +1,10 @@
 # PLAT-01: unresolved Census recovery
 
-- State: Review. Human owner: Vincent / Platform/API. Tool/session: current Codex session, user-assigned October 3, 2026.
+- State: Merged. Human owner: Vincent / Platform/API. Tool/session: current Codex session, user-assigned October 3, 2026.
 - Branch: `codex/research-platform`; checkout: `C:\Users\vzhu0\PycharmProjects\realpage-eggs`.
 - Base: `22d271cb827e6f4606b7f7025eafe1c890d1d6b8` after authorized fast-forward to origin/main; clean starting tree.
-- Result: local checkpoint `Recover Census municipalities with conservative address checks` (exact SHA in chat handoff and Git history).
+- Result: `5cef6d8e83b040e989faa87141cd238674c30ddd`; user-authorized [PR #5](https://github.com/vzhu08/realpage-eggs/pull/5)
+  merged as `9a96fda205c75536d81b17d7d1baf5b3c0ced0e6` on October 3, 2026. No deployment performed.
 - Dependencies: BOOT-01 and cached real Census evidence.
 - Allowed: `navigator/geocode.py`, `tests/test_geocode.py`, this card and a new recovery report.
 - Report claim: `docs/evidence/plat01_recovery.json`. Platform steward also claims this task's row in `docs/TASKS.md`.
@@ -63,5 +64,5 @@ Municipal agreement does not establish a unique physical location or legal appli
 agreement retains the existing policy and does not prove the geography of intervening parcels.
 Current Census snapshots are not historical boundary verification. Software checks do not establish legal accuracy.
 
-Next action: Platform review of this local checkpoint and isolated recovery report; PLAT-02 packaging
-is the next independent Ready task. No push, remote merge, deployment or teammate contact performed.
+Next action: PLAT-02 packaging, now assigned on the merged base. The later user request authorized
+the push and merge through PR #5; no deployment or teammate contact performed.

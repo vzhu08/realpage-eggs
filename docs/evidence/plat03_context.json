@@ -87,6 +87,37 @@
     "Cross-reference detection remains heuristic; this does not certify complete legal coverage.",
     "Windowed sections and references outside the returned window remain partial.",
     "Anchors exceeding the remaining budget are explicitly unretrieved; referenced sections are not silently clipped.",
-    "No live provider, legal review, deployment, push, or merge performed for this continuation."
-  ]
+    "Original implementation checks used no live provider or legal review; deployment remains unverified. Later PR publication and authorized merge verification are recorded separately."
+  ],
+  "merge_verification": {
+    "pr": "https://github.com/vzhu08/realpage-eggs/pull/7",
+    "updated_main": "e0cd133184ce76a9be69d58adb009b2f26ab78f2",
+    "conflicted_paths": [
+      "docs/TASKS.md"
+    ],
+    "resolution": "Preserve PLAT-01/02 merged status, Core ownership/status, and current PLAT-03 acceptance evidence.",
+    "full_suite": {
+      "command": "python -m pytest -q",
+      "passed": 176,
+      "exit_code": 0,
+      "isolated_copy": "artifacts/plat03-merge-check",
+      "log_sha256": "950288e1da1cf771d0fef2fe9d9f5a5b2493ab62a19ba0049fd71a54d82f9a76"
+    },
+    "contracts": {
+      "exit_code": 0,
+      "unchanged_schemas": [
+        "openapi.json",
+        "domain.schema.json",
+        "research.schema.json",
+        "competition_rule.schema.json"
+      ]
+    },
+    "packaging_smoke": {
+      "command": ".venv/Scripts/python.exe scripts/platform_ops.py smoke --output artifacts/plat03-merge-smoke --real-data data/plat01-recovery",
+      "status": "passed",
+      "report_sha256": "79526f2c551e92719d9901ae0845408994615ea4226122cbd3a92637e59e1616",
+      "original_real_store_unchanged": true
+    },
+    "merge_authority": "User requested merging PR #7 and fixing task-document conflicts; remote completion is checked separately."
+  }
 }

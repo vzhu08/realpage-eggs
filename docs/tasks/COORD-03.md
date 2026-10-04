@@ -1,9 +1,11 @@
 # COORD-03: integrate Daniel's Core PR and resolve documentation conflicts
 
-State: Queued for the user-authorized merge. Human owner Vincent / Platform. Session: current Codex session, user-assigned October 3, 2026.
+State: Merged. Human owner Vincent / Platform. Session: current Codex session, user-assigned October 3, 2026.
 Checkout: `C:\Users\vzhu0\PycharmProjects\realpage-eggs`; local branch `codex/core-integration`.
 PR: https://github.com/vzhu08/realpage-eggs/pull/3; Daniel's head `3cf0361abb81f073f7f9df02544995c4e8355097`.
 Main integration base: `9a96fda205c75536d81b17d7d1baf5b3c0ced0e6`.
+Conflict resolution: `5eefae07652cad6a10a9caaf0dc624a90cbafa3f`; confirmed PR #3 merge:
+`3b1ef065a69c832daf92740a910bd3f33d8b150b` on October 3, 2026.
 PLAT-02 is preserved independently at `aa7a226` in PR #6; it is not included in this merge.
 
 User authority: merge Daniel's PR, fix its documentation conflicts, and open a PR for PLAT-02.
@@ -37,5 +39,5 @@ Evidence: [core_integration.json](../evidence/core_integration.json). Local resu
 `Merge current main into Daniel's Core PR and reconcile task documentation`; GitHub PR #3 records
 the final integration/merge SHA. PLAT-02 PR #6 stays independently reviewable.
 Limits: one existing Starlette/httpx warning; no new live model run, independent legal validation,
-complete-corpus claim, deployed check or Core B path release. Next action: push this merge result
-without rewriting Daniel's history, merge PR #3, and verify the remote result.
+complete-corpus claim, deployed check or Core B path release. Remote merge is confirmed and Daniel's
+history is preserved. Next action: review the separately updated PLAT-02 PR #6.
