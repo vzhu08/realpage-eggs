@@ -1,5 +1,48 @@
 # PLAT-03 — P0/P1 evidence and bounded context retrieval
 
+## Current continuation
+
+State: Queued for the user-authorized PR #7 merge. Human owner Vincent; current Codex session.
+Branch: `codex/platform-evidence`; checkout: `C:\Users\vzhu0\PycharmProjects\realpage-eggs`.
+Original base: `3b1ef065a69c832daf92740a910bd3f33d8b150b`.
+Merge update base: `e0cd133184ce76a9be69d58adb009b2f26ab78f2` (PLAT-02 PR #6 merged).
+The original PLAT-03 implementation and COORD-01 contracts are already on main.
+No unmerged PLAT-02 work, new Core code, credentials, or frontend changes are required.
+
+Claimed paths for this continuation: `navigator/retrieval.py`, `tests/test_retrieval.py`,
+this card, `docs/TASKS.md`, and `docs/evidence/plat03_context.json`.
+Outcome: a bounded source-context request retains its exact anchor whenever that anchor
+fits the remaining character budget, with truthful partial/limit markers and original offsets.
+Repeated anchors within an already returned window must not consume the budget again.
+Oversized anchors and referenced sections remain explicitly bounded, never silently truncated.
+Checks: assigned evidence/retrieval suite, an HTTP context regression, and the full combined suite.
+User authorized starting this independent task, publishing PR #7, and then resolving
+its task-document conflicts and merging. Deployment remains separate.
+
+Result: source windows now fit the remaining character budget around the complete anchor;
+already returned windows satisfy repeated/contained anchors without another budget charge.
+Unicode offsets, source hashes, late missing-exception references and partial markers are retained.
+The regression suite reproduced six failures before the fix. After the fix: 21 focused
+evidence/retrieval checks and 176 combined tests passed, including the HTTP context regression.
+Full tests and `python -m navigator contracts` ran in `artifacts/plat03-context-check`;
+all four generated schemas are byte-identical to main. One existing Starlette/httpx warning remains.
+Exact request/response and check evidence: `docs/evidence/plat03_context.json`.
+Changed paths: the five paths claimed above. Models, routes, dependencies, Core and UX are unchanged.
+Implementation commit: `a9537ae2730f763c9fb7321ef0011175e69b9889` on `codex/platform-evidence`.
+Acceptance review: missing/changed support, opposite interpretation, unresolved exceptions,
+cycles, long-section tails and lexical-versus-semantic distinctions are covered by the
+passing evidence/retrieval suite. The bounded-context continuation is also complete.
+The update to main `e0cd133` conflicted only in `docs/TASKS.md`; resolution retains
+PLAT-01/02 merge status, Core ownership/status and the current PLAT-03 acceptance evidence.
+Combined verification: 176 tests passed in `artifacts/plat03-merge-check`; generated schemas
+remain byte-identical. Native HTTP, missing-provider behavior, synthetic and copied-real export
+replays passed in `artifacts/plat03-merge-smoke`; the original real store is unchanged.
+See `merge_verification` in the evidence JSON for the commands, log hashes and exact base.
+Next action: execute the authorized PR #7 merge and confirm GitHub's result. Cross-reference
+recognition remains heuristic and software checks do not establish legal accuracy.
+
+## Original implementation record
+
 State: Review. Human owner Vincent; current Codex session. Branch codex/research-platform.
 Checkout C:\Users\vzhu0\PycharmProjects\realpage-eggs; base 5ef1de1d6f1dd089c07c855bcb7e544198cde2a5. Result commit: codex/research-platform implementation checkpoint (see final handoff / branch HEAD).
 Dependencies: COORD-01.
