@@ -1,0 +1,209 @@
+{
+  "mode": "synthetic_software_evaluation",
+  "expectation_author": "Implementing Codex agent; read-only agent reviewed algorithmic traps; no human or independent legal review",
+  "baseline_definition": "Ask each absent field referenced by the encoded coverage/exemption AST; generic unknown asks nothing and asserts no certainty.",
+  "limitations": "Eight authored cases, not held out. Baselines assert no hypothetical certainty (0 claims); planner correctness denominator is displayed alternatives and their explicitly certain subset. Exhaustive covers property analysis only. No corpus/legal accuracy measured.",
+  "cases": [
+    {
+      "case": "decisive_units",
+      "expected_useful_fields": [
+        "units"
+      ],
+      "planner_fields": [
+        "units"
+      ],
+      "ask_every_missing_fields": [
+        "units"
+      ],
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "generic_unknown_missed": 1,
+      "displayed_alternatives": 3,
+      "certain_alternatives": 3,
+      "incorrect_certainty": 0,
+      "evaluations_used": 4,
+      "status": "complete",
+      "exhaustive": true
+    },
+    {
+      "case": "irrelevant_owner",
+      "expected_useful_fields": [],
+      "planner_fields": [],
+      "ask_every_missing_fields": [
+        "owner_occupied"
+      ],
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 1,
+      "planner_missed": 0,
+      "generic_unknown_missed": 0,
+      "displayed_alternatives": 0,
+      "certain_alternatives": 0,
+      "incorrect_certainty": 0,
+      "evaluations_used": 1,
+      "status": "complete",
+      "exhaustive": true
+    },
+    {
+      "case": "occupancy_two_exemptions",
+      "expected_useful_fields": [
+        "certificate_of_occupancy",
+        "exemption_filed",
+        "owner_occupied"
+      ],
+      "planner_fields": [
+        "certificate_of_occupancy",
+        "exemption_filed",
+        "owner_occupied"
+      ],
+      "ask_every_missing_fields": [
+        "certificate_of_occupancy",
+        "exemption_filed",
+        "owner_occupied"
+      ],
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "generic_unknown_missed": 3,
+      "displayed_alternatives": 7,
+      "certain_alternatives": 3,
+      "incorrect_certainty": 0,
+      "evaluations_used": 36,
+      "status": "complete",
+      "exhaustive": true
+    },
+    {
+      "case": "correlated_contradiction",
+      "expected_useful_fields": [],
+      "planner_fields": [],
+      "ask_every_missing_fields": [
+        "units"
+      ],
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 1,
+      "planner_missed": 0,
+      "generic_unknown_missed": 0,
+      "displayed_alternatives": 0,
+      "certain_alternatives": 0,
+      "incorrect_certainty": 0,
+      "evaluations_used": 4,
+      "status": "complete",
+      "exhaustive": true
+    },
+    {
+      "case": "joint_only",
+      "expected_useful_fields": [
+        "exemption_filed",
+        "owner_occupied",
+        "subsidized"
+      ],
+      "planner_fields": [
+        "exemption_filed",
+        "owner_occupied",
+        "subsidized"
+      ],
+      "ask_every_missing_fields": [
+        "exemption_filed",
+        "owner_occupied",
+        "subsidized"
+      ],
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "generic_unknown_missed": 3,
+      "displayed_alternatives": 6,
+      "certain_alternatives": 0,
+      "incorrect_certainty": 0,
+      "evaluations_used": 27,
+      "status": "complete",
+      "exhaustive": true
+    },
+    {
+      "case": "source_gap_only",
+      "expected_useful_fields": [],
+      "planner_fields": [],
+      "ask_every_missing_fields": [],
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "generic_unknown_missed": 0,
+      "displayed_alternatives": 0,
+      "certain_alternatives": 0,
+      "incorrect_certainty": 0,
+      "evaluations_used": 1,
+      "status": "partial",
+      "exhaustive": false
+    },
+    {
+      "case": "budget_exhausted",
+      "expected_useful_fields": [
+        "condominium",
+        "exemption_filed",
+        "owner_occupied",
+        "subsidized"
+      ],
+      "planner_fields": [
+        "condominium",
+        "exemption_filed",
+        "owner_occupied",
+        "subsidized"
+      ],
+      "ask_every_missing_fields": [
+        "condominium",
+        "exemption_filed",
+        "owner_occupied",
+        "subsidized"
+      ],
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "generic_unknown_missed": 4,
+      "displayed_alternatives": 0,
+      "certain_alternatives": 0,
+      "incorrect_certainty": 0,
+      "evaluations_used": 1,
+      "status": "partial",
+      "exhaustive": false
+    },
+    {
+      "case": "sufficient_known_bound",
+      "expected_useful_fields": [],
+      "planner_fields": [],
+      "ask_every_missing_fields": [
+        "units"
+      ],
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 1,
+      "planner_missed": 0,
+      "generic_unknown_missed": 0,
+      "displayed_alternatives": 0,
+      "certain_alternatives": 0,
+      "incorrect_certainty": 0,
+      "evaluations_used": 1,
+      "status": "complete",
+      "exhaustive": true
+    }
+  ],
+  "totals": {
+    "planner_unnecessary": 0,
+    "baseline_unnecessary": 3,
+    "planner_missed": 0,
+    "generic_unknown_missed": 11,
+    "displayed_alternatives": 16,
+    "certain_alternatives": 6,
+    "incorrect_certainty": 0,
+    "evaluations_used": 75,
+    "cases": 8,
+    "planner_questions": 11,
+    "ask_every_missing_questions": 14,
+    "generic_unknown_questions": 0
+  }
+}

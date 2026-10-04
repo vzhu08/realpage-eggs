@@ -1,0 +1,94 @@
+{
+  "task": "COORD-03",
+  "mode": "combined_software_integration_not_legal_validation",
+  "core_pr": "https://github.com/vzhu08/realpage-eggs/pull/3",
+  "core_head": "3cf0361abb81f073f7f9df02544995c4e8355097",
+  "main_base": "9a96fda205c75536d81b17d7d1baf5b3c0ced0e6",
+  "separate_platform_pr": "https://github.com/vzhu08/realpage-eggs/pull/6",
+  "separate_platform_commit": "aa7a2260d03d7a60bdb99a20aaf459ceada78b68",
+  "conflicts_resolved": [
+    "docs/tasks/CORE-01.md",
+    "docs/tasks/CORE-02.md",
+    "docs/tasks/CORE-03.md",
+    "docs/tasks/CORE-04.md",
+    "docs/tasks/CORE-05.md"
+  ],
+  "policy": "Retain current four-human ownership plus complete Daniel task record; preserve Core runtime/tests and historical evidence.",
+  "checks": {
+    "full_suite": {
+      "command": "python -m pytest -q",
+      "passed": 167,
+      "exit_code": 0,
+      "isolated_copy": "artifacts/core-integration-check"
+    },
+    "assist_api": {
+      "command": "python -m pytest tests/test_assist_api.py -q",
+      "passed": 19,
+      "exit_code": 0,
+      "real_core_imported": true
+    },
+    "contracts": {
+      "command": "python -m navigator contracts",
+      "exit_code": 0,
+      "unchanged_schemas": [
+        "openapi.json",
+        "domain.schema.json",
+        "research.schema.json",
+        "competition_rule.schema.json"
+      ],
+      "refreshed_actual_examples": [
+        "contracts/examples/assist.json",
+        "contracts/evidence_examples/missing_support.json"
+      ]
+    },
+    "compileall": {
+      "command": "python -m compileall -q navigator tests",
+      "exit_code": 0
+    },
+    "full_author_records_preserved": true,
+    "protected_git_blob_hashes": {
+      "navigator/core_assist.py": "1337c6760b20a33bab25bbd8cfa1a9834f269d18",
+      "navigator/engine.py": "eadce4ccce6604ddca1b817b0d8e8b7bb6024455",
+      "navigator/extraction.py": "6e3208ff42e90c8dc319cdba4af344b2fb3be9e6",
+      "navigator/predicates.py": "09658b598d417c2046549ad4382a2c615107e249",
+      "navigator/question_planner.py": "528a649308596679802237aa8b8fd64d589c7368",
+      "navigator/rule_renderer.py": "e2cfbc547732d805348a45a12025e53a526c8cbc",
+      "tests/test_engine.py": "89a504ec9daafa4ad440b098f1b5388449910f36",
+      "tests/test_extraction.py": "e0f2ca45ec0182003951a427382108f207b55520",
+      "tests/test_question_planner.py": "31b591d6eb2176a9d80f834c9e53fd23f34c1b08",
+      "tests/test_rule_renderer.py": "e294dc05bbdfe8595a8f8f7d452b85580776e812",
+      "tests/test_change_adapters.py": "7397579e9afd0f09c800ea9763cfa8c4ab27ec1f",
+      "docs/core/CORE01_LIVE_REVIEW.md": "392186d1e1f0bab16025713e4a2c4810fbe81751",
+      "docs/core/CORE_HANDOFF.md": "654bdbb3b21272839e0917c673427beeba8e41c5",
+      "docs/core/CORPUS_REVIEW_CHECKLIST.md": "b4d07af061db2c207a5273ac9d2a9b8192916506",
+      "docs/core/D001_SOURCE_PREFLIGHT.md": "90233c70c6e3f9371356068b8c57dde8b6815740",
+      "docs/core/EXTRACTION_EVIDENCE.md": "b8880537a3955ca08616f539d72811c9f1c95c63",
+      "docs/core/core01_configured_attempts.json": "1dbca836e1e7cd412079e6534a2b5195a31d371b",
+      "docs/core/core01_corpus_interrupted.json": "994da4a46b6e9c9931959b791c5934005972b08d",
+      "docs/core/core01_corpus_output_limit.json": "3e9e11cd6496826b2a6745d589dc22597953a0e0",
+      "docs/core/core01_d001_live.json": "ee489aca6780cbe1bf2f5c5fe3f3149551f9efc2",
+      "docs/core/core01_d004_live.json": "68c8397f9b3e65556dd99b1627a55c4477ccae8c",
+      "docs/core/core01_funded_diagnostic.json": "8c41baa07463ac3fa7f23fb42924a4dadf02d3ae",
+      "docs/core/core01_live_lookup.json": "60a1154926d30a5cd4a9646ad5de5919219612df",
+      "docs/core/core01_pipeline_results.json": "c5b3c71df71e2111dfb70a2980f35089b2fe7fb3",
+      "docs/core/core01_preflight.json": "c900553021f3f271bd2bf1d82f29904721f7421b",
+      "docs/core/core01_provider_diagnostic.json": "0307c6d92ee5e73bdf50c63cd32212e4a4b1d4b5",
+      "docs/core/core01_service_results.json": "c64762400aa55e80f8fdb21a7203f3fabefddccd",
+      "docs/core/evaluate_planner.py": "24871e88e8cb2019dae986eea638b740957ff648",
+      "docs/core/planner_evaluation.json": "d961ac9995bd07555daf4eb9b57ebce0884cdf95",
+      "docs/core/service_verification.json": "ce7c92f186b9b2b9c7a38280ab06651d969e3d25",
+      "docs/core/verification.json": "57843cb35b2f98b4f9a0ab3bb5b547da6feccfa1",
+      "docs/core/verification_initial.json": "026d0ced05392d2794bb21f087562cc0bb5afb93",
+      "docs/core/verification_pre_live.json": "047af85b58b34bba33233acbf42cbdea9c1c2326",
+      "docs/core/verify_candidate.py": "6799f047594bade65e8a9f41ec88f5fc807b9f3b"
+    }
+  },
+  "reported_live_evidence": "Daniel reports D001 two rules and D004 eight rules in docs/core/CORE01_LIVE_REVIEW.md; corpus incomplete. Historical credential/funding blocks are superseded by that report. No local provider rerun or ignored store import.",
+  "limitations": [
+    "Synthetic tests do not establish legal correctness.",
+    "One existing Starlette/httpx deprecation warning.",
+    "No complete-corpus or deployment verification.",
+    "Core B future writer/path handoff remains required.",
+    "PLAT-02 is separate and not merged by this action."
+  ]
+}

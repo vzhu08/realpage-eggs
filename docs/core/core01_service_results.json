@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-03T22:47:22.232119+00:00",
+  "mode": "real_store_local_http_testclient_no_extracted_rules",
+  "data_dir": "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session",
+  "interface": "fastapi.testclient.TestClient(create_app(explicit_core_store))",
+  "health": {
+    "status": 200,
+    "body": {
+      "status": "ok",
+      "version": "0.1.0",
+      "dataset_readiness": "partial",
+      "sources": 87,
+      "rules": 0,
+      "addresses": 500,
+      "resolved_municipalities": 0,
+      "last_extraction_outcome": "failed",
+      "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+    }
+  },
+  "lookup": {
+    "status": 503,
+    "body": {
+      "detail": {
+        "code": "dataset_unavailable",
+        "message": "No completed extraction; configure provider and run navigator extract"
+      }
+    }
+  },
+  "assist": {
+    "status": 404,
+    "body": {
+      "detail": "Not Found"
+    }
+  },
+  "stored_inputs_unchanged": true
+}

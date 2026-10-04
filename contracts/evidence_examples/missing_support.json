@@ -222,7 +222,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "ed6932efce95444f930ca4c44c39db71",
+          "extraction_run_id": "561a346fa8564db094ffa22d1e821f5e",
           "semantic_verification": "needs_review"
         }
       ],
@@ -259,7 +259,7 @@
           "synthetic"
         ],
         "extraction_run_ids": [
-          "ed6932efce95444f930ca4c44c39db71"
+          "561a346fa8564db094ffa22d1e821f5e"
         ],
         "partial_data": true,
         "missing_source_ids": [
@@ -270,29 +270,298 @@
       "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
     },
     "question_plan": {
-      "status": "unavailable",
+      "status": "partial",
       "questions": [],
       "remaining_uncertainty": [
         {
-          "kind": "service_dependency",
-          "message": "Core question planner has not been integrated",
-          "remedy": "Complete CORE-03/04 and supply navigator.core_assist.plan_questions",
+          "kind": "interpretation",
+          "message": "unresolved_extraction: evidence_check:extraction_source_version_stale",
+          "remedy": "Review the encoded condition, dates or lifecycle against source evidence",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "interpretation",
+          "message": "unresolved_extraction: evidence_check:missing_source:SYNTHETIC-42",
+          "remedy": "Review the encoded condition, dates or lifecycle against source evidence",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "interpretation",
+          "message": "unresolved_extraction: semantic support needs review",
+          "remedy": "Review the encoded condition, dates or lifecycle against source evidence",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "source_gap",
+          "message": "SYNTHETIC-42: no available source text; this is a coverage gap, not a fabrication verdict",
+          "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "source_gap",
+          "message": "Citation section 2: no unique structured section anchor in this snapshot",
+          "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "cross_reference",
+          "message": "Missing, ambiguous, cyclic or bounded context remains",
+          "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "interpretation",
+          "message": "Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.",
+          "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "source_gap",
+          "message": "Rule extraction used an older source snapshot; re-extract/review before relying on the current encoding",
+          "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "source_gap",
+          "message": "Source context is missing",
+          "remedy": "Retrieve missing source context",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "interpretation",
+          "message": "missing_source:SYNTHETIC-42",
+          "remedy": "Resolve this evidence review issue before relying on the encoding",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "interpretation",
+          "message": "extraction_source_version_stale",
+          "remedy": "Resolve this evidence review issue before relying on the encoding",
+          "rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "source_gap",
+          "message": "Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered",
+          "remedy": "Platform must verify the separate source inventory, including missing rules and references",
+          "rule_ids": [],
+          "predicate_ids": [],
+          "field": null,
+          "source_refs": []
+        },
+        {
+          "kind": "analysis_limit",
+          "message": "Unsupported analysis prevents exhaustive coverage",
+          "remedy": "Review the unsupported domain or expression",
           "rule_ids": [],
           "predicate_ids": [],
           "field": null,
           "source_refs": []
         }
       ],
-      "traces": [],
+      "traces": [
+        {
+          "predicate_id": "r-694ad9fbae9083966e86:coverage_conditions",
+          "rule_id": "r-694ad9fbae9083966e86",
+          "path": "coverage_conditions",
+          "expression": {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "residential",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "gte",
+                "args": [],
+                "fact": "units",
+                "value": 8,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          "result": "true",
+          "field": null,
+          "relevant": true,
+          "residual": null,
+          "source_refs": [
+            {
+              "doc_id": "SYNTHETIC-42",
+              "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+              "start": 147,
+              "end": 287,
+              "supports": [
+                "requirement",
+                "key_value",
+                "coverage_conditions",
+                "effective_date"
+              ]
+            }
+          ],
+          "children": [
+            {
+              "predicate_id": "r-694ad9fbae9083966e86:coverage_conditions/args/0",
+              "rule_id": "r-694ad9fbae9083966e86",
+              "path": "coverage_conditions/args/0",
+              "expression": {
+                "op": "eq",
+                "args": [],
+                "fact": "residential",
+                "value": true,
+                "reason": null
+              },
+              "result": "true",
+              "field": "residential",
+              "relevant": true,
+              "residual": null,
+              "source_refs": [
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+                  "start": 147,
+                  "end": 287,
+                  "supports": [
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "effective_date"
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "predicate_id": "r-694ad9fbae9083966e86:coverage_conditions/args/1",
+              "rule_id": "r-694ad9fbae9083966e86",
+              "path": "coverage_conditions/args/1",
+              "expression": {
+                "op": "gte",
+                "args": [],
+                "fact": "units",
+                "value": 8,
+                "reason": null
+              },
+              "result": "true",
+              "field": "units",
+              "relevant": true,
+              "residual": null,
+              "source_refs": [
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+                  "start": 147,
+                  "end": 287,
+                  "supports": [
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "effective_date"
+                  ]
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "predicate_id": "r-694ad9fbae9083966e86:exemption_conditions",
+          "rule_id": "r-694ad9fbae9083966e86",
+          "path": "exemption_conditions",
+          "expression": {
+            "op": "literal",
+            "args": [],
+            "fact": null,
+            "value": false,
+            "reason": null
+          },
+          "result": "false",
+          "field": null,
+          "relevant": true,
+          "residual": null,
+          "source_refs": [
+            {
+              "doc_id": "SYNTHETIC-42",
+              "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
+              "start": 288,
+              "end": 389,
+              "supports": [
+                "exemptions",
+                "exemption_conditions"
+              ]
+            }
+          ],
+          "children": []
+        }
+      ],
       "limits": {
         "max_questions": 5,
         "max_fields": 8,
         "max_evaluations": 64,
         "max_joint_fields": 3
       },
-      "evaluations_used": 0,
+      "evaluations_used": 1,
       "limits_hit": [],
-      "algorithm_version": "unavailable",
+      "algorithm_version": "correlated-partitions-v1",
       "exhaustive": false
     },
     "evidence_reports": [
@@ -357,14 +626,26 @@
         "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
       }
     ],
-    "encoded_rules": [],
+    "encoded_rules": [
+      {
+        "rule_id": "r-694ad9fbae9083966e86",
+        "text": "Encoded rule: Synthetic Maple Harbor deposit cap\nJurisdiction: Maple Harbor, CA (city); category: security_deposits.\nRequirement: Covered buildings must limit security deposits to one month's rent.\nKey value: one month's rent.\nCoverage: (residential == true AND units [dwelling units] >= 8).\nExemption: FALSE.\nCombined property condition: ((residential == true AND units [dwelling units] >= 8)) AND NOT (FALSE).\nRecorded exemption description: None\nRecorded lifecycle: enacted; snapshot: unspecified (unresolved).\nEffective boundary (inclusive): 2026-11-15 (day precision; 2026-11-15 through 2026-11-15).\nEnd boundary (exclusive): none encoded.\nStatus event 1: enacted on 2026-09-01 (day precision; 2026-09-01 through 2026-09-01).\nUnresolved review issue: evidence_check:extraction_source_version_stale\nUnresolved review issue: evidence_check:missing_source:SYNTHETIC-42\nThis displays the encoded rule, not legal validation or a property-specific evaluation. Pending measures do not automatically enact; partial dates may leave uncertainty.",
+        "expression_hash": "77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504",
+        "renderer_version": "encoded-rule-v1",
+        "unresolved_nodes": [
+          "review_issues/0",
+          "review_issues/1"
+        ],
+        "kind": "encoded_rule_not_legal_validation"
+      }
+    ],
     "answers_applied": [],
     "scenario_id": null,
     "capabilities": {
       "lookup": "implemented",
       "evidence": "implemented",
-      "question_planner": "dependency_unavailable",
-      "rule_renderer": "dependency_unavailable"
+      "question_planner": "implemented",
+      "rule_renderer": "implemented"
     },
     "mode": "synthetic"
   }

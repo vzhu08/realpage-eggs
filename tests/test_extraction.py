@@ -70,3 +70,192 @@ def test_openai_refusal_or_http_error_never_becomes_empty_success(monkeypatch):
         return httpx.Response(200, json={"id": "fixture", "status": "completed", "output": [{"content": [{"type": "refusal", "refusal": "refused"}]}]})
     client = httpx.Client(transport=httpx.MockTransport(handler))
     with pytest.raises(ProviderFailure, match="no output text"): OpenAIProvider(client).generate("test", {})
+
+
+def test_json_mode_requirement_is_explicit_in_api_input(monkeypatch):
+    monkeypatch.setenv('OPENAI_API_KEY', 'synthetic-test-key')
+    monkeypatch.setenv('OPENAI_MODEL', 'synthetic-test-model')
+    original = {'source_text': 'Ordinary source material without a format instruction.', 'schema': {}}
+    def handler(request):
+        sent = json.loads(request.content)
+        # The live endpoint rejected a JSON-only payload even with JSON in instructions.
+        if 'json' not in sent['input'].lower():
+            return httpx.Response(400, json={'error': {'param': 'input', 'type': 'invalid_request_error'}})
+        assert json.loads(sent['input'].split('\n', 1)[1]) == original
+        return httpx.Response(200, json={'id': 'synthetic-response', 'status': 'completed',
+                                       'output': [{'content': [{'type': 'output_text', 'text': '{"rules": []}'}]}]})
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        assert OpenAIProvider(client).generate('Extract.', original) == {'rules': []}
+
+
+def test_incomplete_response_is_rejected_even_with_parseable_json(monkeypatch):
+    monkeypatch.setenv('OPENAI_API_KEY', 'synthetic-test-key')
+    monkeypatch.setenv('OPENAI_MODEL', 'synthetic-test-model')
+    def handler(request):
+        return httpx.Response(200, json={'id': 'synthetic-incomplete', 'status': 'incomplete',
+                                       'usage': {'output_tokens': 16000},
+                                       'output': [{'content': [{'type': 'output_text', 'text': '{"rules": []}'}]}]})
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        provider = OpenAIProvider(client)
+        with pytest.raises(ProviderFailure, match='incomplete'):
+            provider.generate('Extract.', {})
+        assert provider.usage[0]['status'] == 'incomplete'
+        assert provider.usage[0]['usage']['output_tokens'] == 16000
+
+
+@pytest.mark.parametrize('field,value', [('end_date', '2027-01-01'), ('status_as_of', '2026-10-01')])
+def test_lifecycle_boundaries_require_field_level_evidence(demo, field, value):
+    source = next(iter(demo.sources().values()))
+    bundle = ExtractionBundle.model_validate(synthetic_bundle(source))
+    setattr(bundle.rules[0], field, value)
+    validated = validate_bundle(bundle, demo.sources())
+    assert f'Missing field-level evidence for {field}' in validated.rules[0].review_issues
+
+
+def test_merge_preserves_distinct_supported_lifecycle_history(rule):
+    from datetime import date
+    from navigator.engine import temporal
+    from navigator.extraction import merge_rules
+    from navigator.models import StatusEvent
+
+    later = rule.model_copy(deep=True)
+    later.status_events.append(StatusEvent(status='repealed', on='2026-12-01', evidence=rule.evidence))
+    merged = merge_rules({rule.team_rule_id: rule}, [later])
+    assert len(merged) == 2
+    assert all(r.conflict_flag for r in merged.values())
+    assert {temporal(r, date(2026, 12, 1)) for r in merged.values()} == {'in_force', 'inapplicable'}
+
+
+def test_merge_preserves_distinct_lifecycle_snapshot(rule):
+    from navigator.extraction import merge_rules
+    rule.status_events = []
+    rule.status_as_of = '2026-10-01'
+    incoming = rule.model_copy(deep=True)
+    incoming.status_as_of = '2026-09-01'
+    merged = merge_rules({rule.team_rule_id: rule}, [incoming])
+    assert len(merged) == 2
+    assert {r.status_as_of for r in merged.values()} == {'2026-09-01', '2026-10-01'}
+
+
+@pytest.mark.parametrize('corrupt', [{}, [], {'origin_run_id': 'fixture-origin'}, {'bundle': {}, 'origin_run_id': None}])
+def test_invalid_cache_metadata_finishes_failure_without_new_provider_calls(demo, corrupt):
+    source = next(iter(demo.sources().values()))
+    cache_path = next((demo.root / 'extraction_cache').glob('*.json'))
+    before = demo.read('rules.json')
+    demo.write(str(cache_path.relative_to(demo.root)), corrupt)
+    class NoCalls(SyntheticProvider):
+        def generate(self, *_):
+            pytest.fail('Invalid cached metadata must fail explicitly without a new provider call')
+    run = extract(demo, provider=NoCalls(source))
+    assert run.outcome == 'failed' and run.finished_at
+    assert any('cache metadata' in error for error in run.errors)
+    assert demo.read('rules.json') == before
+    assert demo.read(str(cache_path.relative_to(demo.root))) == corrupt
+    assert demo.read('latest_extract.json')['outcome'] == 'failed'
+
+
+def test_valid_empty_result_is_preserved_and_replays_without_provider_calls(demo):
+    class Empty:
+        model, mode = 'synthetic-empty-result', 'synthetic'
+        usage = []
+        calls = 0
+        def generate(self, *_):
+            self.calls += 1
+            return {'source_kind': 'legal_text', 'rules': [], 'negative_findings': [], 'issues': []}
+    provider = Empty()
+    first = extract(demo, provider=provider)
+    assert first.outcome == 'success' and demo.rules() == {} and provider.calls == 2
+    second = extract(demo, provider=provider)
+    assert second.outcome == 'success' and second.counts['cache_hits'] == 1
+    assert provider.calls == 2 and demo.rules() == {}
+
+
+def test_equivalent_event_order_does_not_create_conflicting_rule(rule):
+    from navigator.extraction import merge_rules
+    from navigator.models import StatusEvent
+    rule.status_events.append(StatusEvent(status='pending', on='2026-08-01', evidence=rule.evidence))
+    incoming = rule.model_copy(deep=True)
+    incoming.status_events.reverse()
+    merged = merge_rules({rule.team_rule_id: rule}, [incoming])
+    assert len(merged) == 1 and not rule.conflict_flag
+
+
+def test_equivalent_history_retains_additional_event_evidence(rule):
+    from navigator.extraction import merge_rules
+    incoming = rule.model_copy(deep=True)
+    incoming.status_events[0].evidence[0].doc_id = 'OTHER-SYNTHETIC-SNAPSHOT'
+    merged = merge_rules({rule.team_rule_id: rule}, [incoming])
+    assert len(merged) == 1
+    assert {e.doc_id for e in rule.status_events[0].evidence} == {'SYNTHETIC-42', 'OTHER-SYNTHETIC-SNAPSHOT'}
+
+
+def test_repeated_alternative_history_preserves_all_supporting_evidence(rule):
+    from navigator.extraction import merge_rules
+    from navigator.models import StatusEvent
+    alternatives = []
+    for doc_id in ('SYNTHETIC-B', 'SYNTHETIC-C'):
+        alternative = rule.model_copy(deep=True)
+        for span in alternative.evidence:
+            span.doc_id = doc_id
+        alternative.status_events.append(StatusEvent(status='repealed', on='2026-12-01', evidence=alternative.evidence))
+        alternative.review_issues = [f'Review {doc_id}']
+        alternatives.append(alternative)
+    merged = merge_rules({rule.team_rule_id: rule}, alternatives)
+    assert len(merged) == 2 and all(r.conflict_flag for r in merged.values())
+    variant = next(r for r in merged.values() if r.team_rule_id != rule.team_rule_id)
+    assert {e.doc_id for e in variant.evidence} == {'SYNTHETIC-B', 'SYNTHETIC-C'}
+    repeal = next(e for e in variant.status_events if e.status == 'repealed')
+    assert {e.doc_id for e in repeal.evidence} == {'SYNTHETIC-B', 'SYNTHETIC-C'}
+    assert set(variant.review_issues) == {'Review SYNTHETIC-B', 'Review SYNTHETIC-C'}
+
+
+def test_interruption_preserves_rules_and_reuses_draft_but_still_reviews(demo):
+    source = next(iter(demo.sources().values()))
+    before = demo.read('rules.json')
+    class Interrupted(SyntheticProvider):
+        model = 'synthetic-interruption-checkpoint'
+        calls = 0
+        def generate(self, instruction, payload):
+            self.calls += 1
+            if self.calls == 2:
+                raise KeyboardInterrupt()
+            return super().generate(instruction, payload)
+    first = Interrupted(source)
+    interrupted = extract(demo, provider=first)
+    assert interrupted.outcome == 'failed' and interrupted.finished_at
+    assert demo.read('rules.json') == before and first.calls == 2
+    assert any('Interrupted' in error for error in interrupted.errors)
+    class Resume(SyntheticProvider):
+        model = Interrupted.model
+        calls = 0
+        def generate(self, instruction, payload):
+            self.calls += 1
+            assert 'Review the draft' in instruction and payload['draft']
+            return super().generate(instruction, payload)
+    class ReviewInterrupted(Resume):
+        def generate(self, instruction, payload):
+            super().generate(instruction, payload)
+            raise KeyboardInterrupt()
+    second = extract(demo, provider=ReviewInterrupted(source))
+    assert second.outcome == 'failed' and second.finished_at
+    assert second.config['draft_replays'][0]['origin_run_id'] == interrupted.run_id
+    resumed_provider = Resume(source)
+    resumed = extract(demo, provider=resumed_provider)
+    assert resumed.outcome == 'success' and resumed_provider.calls == 1
+    assert resumed.counts['draft_replays'] == 1
+    assert resumed.config['draft_replays'][0]['origin_run_id'] == second.run_id
+
+
+@pytest.mark.parametrize('section,field', [('config', 'model'), ('config', 'prompt_version'), ('versions', 'pipeline'), (None, 'mode')])
+def test_saved_draft_rejects_incompatible_provenance(demo, section, field):
+    from navigator.extraction import saved_draft
+    path = next(demo.path('provider_outputs').glob('*/*-draft.json'))
+    key = path.name.removesuffix('-draft.json')
+    name = f'runs/{path.parent.name}.json'
+    origin = demo.read(name)
+    target = origin[section] if section else origin
+    target[field] = 'incompatible'
+    demo.write(name, origin)
+    source = next(iter(demo.sources().values()))
+    assert saved_draft(demo, key, SyntheticProvider(source)) == (None, None)
+    assert path.exists() and demo.read(name) == origin

@@ -1,0 +1,14 @@
+{
+  "mode": "synthetic_service_integration",
+  "response_roundtrip_valid": true,
+  "before": "unknown",
+  "question_fields": [
+    "units"
+  ],
+  "after_answer": "applies",
+  "stored_facts_unchanged": true,
+  "renderer_kind": "encoded_rule_not_legal_validation",
+  "assist_http_status": 404,
+  "assist_http_integration": "pending Platform; route absent (404)",
+  "source_review": "not verified"
+}

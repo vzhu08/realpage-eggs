@@ -32,7 +32,7 @@ source metadata; retrieve source detail for full text. Original and declared man
 
 Facts: unit counts are numeric dwelling units; ages are whole calendar years; dates use ISO strings.
 Explicit textual unit bounds have provenance. Unexplained assessor abbreviations are not decoded.
-Year-built occupancy proxies are explicitly labeled whole-year intervals. Supplemental facts are
+Construction year does not establish certificate/occupancy facts; actual supplied dates retain their precision. Supplemental facts are
 user-supplied, unverified, apply to one request and cannot override geography; raw inputs remain stored.
 Custom addresses reuse an exact existing normalized address when available; otherwise state is from
 the supplied address and local geography is unresolved (no automatic external/billable HTTP jobs).
@@ -72,10 +72,8 @@ explicit CLI operation; HTTP requests never call a model. evidence_checks.json i
 not an extra field in official rules/lookups/changes. Cached semantic review binds to rule/source versions.
 A source reformat may invalidate evidence anchors without constituting a substantive legal amendment.
 
-Local baseline caveat: its evaluator accepts labeled year-built occupancy proxies. Core A's CORE-03
-candidate removes this behavior and requires actual occupancy facts; the repair is not yet integrated
-in this checkout. Confirm it in combined API/export checks before updating current behavior claims.
-The new input registry never creates a
+Daniel's CORE-03 evaluator now requires actual occupancy facts; combined tests include construction-year
+non-inference and partial-date handling. The input registry never creates a
 certificate/occupancy answer from construction year; it asks for the actual defined field.
 
 Ownership is now four lanes: Platform stewards canonical schemas and routes; Core A produces rule_traces

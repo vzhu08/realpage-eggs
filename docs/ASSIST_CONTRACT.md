@@ -45,7 +45,10 @@ Render comparison operators, grouping, dates, exemption structure, unsupported n
 - `GET /api/v1/sources/{id}/context`: bounded original text around exact source offsets, plus references.
 - `GET /api/v1/facts`: allowed fact definitions and answer forms.
 
-All four endpoints are implemented and tested locally. Core services exist on candidate origin/codex/core-backend at c92ad8f, but are not integrated in this checkout, which still reports dependency_unavailable. The existing injected fixture tests verify orchestration only; combined real-Core HTTP tests remain to be run.
+All four endpoints and Daniel's Core services are combined in the PR #3 integration candidate.
+Actual planner/renderer HTTP tests verify questions, answer/probe outcomes, ephemeral provenance,
+budget limits and missing support. The combined suite passes 167 tests; see COORD-03. Missing-module
+behavior is still tested explicitly with an empty injected service. No schema change was required.
 Existing `/lookup`, `/rules`, `/sources`, `/changes` and export schemas remain compatible.
 
 AssistRequest extends LookupRequest with `answers`, optional request-local `scenario_id`, and limits.
@@ -73,7 +76,9 @@ bounded_partial_analysis. Their plans are authored expectations, not implemented
 Alternative evaluation records are produced by the existing evaluator. The modified-rule examples are
 algorithmic fixtures, not source-verified legal interpretations. Core must replace assumptions with tested
 planner output; UX can build loading/partial/unavailable/answered states now.
-Implemented evidence-failure and source-comparison examples are in contracts/evidence_examples/. The comparison's renderer text is an authored expectation, not Core output. contracts/examples/assist.json shows the actual Platform API with Core unavailable.
+Implemented evidence-failure and source-comparison examples are in contracts/evidence_examples/.
+The comparison's renderer text remains an authored expectation. contracts/examples/assist.json and
+evidence_examples/missing_support.json now show the actual combined Platform/Core API on synthetic data.
 
 Platform is the sole writer of models, contracts generator/generated artifacts, API routes, fact registry,
 and shared coordination docs. Core A owns engine/extraction tests and CORE-01/02/03; Core B owns
@@ -86,7 +91,7 @@ The fetched candidate already uses this boundary; retain its name instead of int
 
 ```python
 # Core A owns navigator/engine.py
-# Existing implementation in candidate c92ad8f; not yet in this checkout.
+# Implemented by Daniel and imported through PR #3; see COORD-03 integration evidence.
 def rule_traces(
     rule: Rule, prop: PropertyFacts, resolution: JurisdictionResolution, as_of: date
 ) -> list[PredicateTrace]: ...
