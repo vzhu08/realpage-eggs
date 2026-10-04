@@ -1,3 +1,4 @@
+import { ViewArtwork } from '../shell/TenentVisuals';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { type ApiError, isAbort, toApiError } from '../../api/errors';
 import { DEFAULT_AS_OF } from '../../api/generated/meta';
@@ -148,9 +149,10 @@ export function ChangesView({ initial, lookupHref, disagreementHref }: Props) {
 
   return (
     <div className="changes">
-      <header className="changes__intro">
-        <h1 className="page-title">What changes for the sample properties between two dates.</h1>
-        <p className="page-lead">Definite and uncertain impacts stay apart, and a blocked comparison is reported as blocked, never as “nothing changed”.</p>
+      <header className="changes__intro workspace-intro">
+        <div><p className="eyebrow">THE PORTFOLIO PERSPECTIVE</p><h1 className="page-title">See change.<br/>Understand its reach.</h1>
+        <p className="page-lead">Follow changing rules from their original source to the properties they reach. Definite impacts, uncertainty, and conflicts stay in view.</p></div>
+        <ViewArtwork kind="changes"/>
       </header>
 
       <form

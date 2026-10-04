@@ -60,7 +60,7 @@ test.describe('recorded demo · step 1: the start page', () => {
     await expect(compare).toContainText(/none is given a winner/i);
 
     // The property chooser sits below the examples and lists the recorded properties.
-    await expect(page.getByRole('heading', { name: 'Or choose a property' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Choose a property', exact: true })).toBeVisible();
     const list = page.getByRole('list', { name: 'Sample properties' });
     for (const item of dev().addresses.slice(0, 3)) await expect(list.getByRole('button', { name: new RegExp(escape(item.property.raw_address.street_address)) })).toBeVisible();
 
@@ -485,7 +485,7 @@ test.describe('recorded demo · step 9: restart', () => {
 
     // From another view, restart also lands on the lookup start page, still in the demo.
     await page.getByRole('link', { name: 'Portfolio changes' }).click();
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('What changes');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/See change\.\s*Understand its reach\./);
     await page.getByRole('button', { name: 'Restart demo' }).click();
     await expect(page.getByRole('heading', { name: 'Start with an example' })).toBeVisible();
     await expect(banner(page)).toBeVisible();

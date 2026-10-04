@@ -14,6 +14,7 @@ import { PropertyFinder, addressLine } from '../property/PropertyFinder';
 import { PropertySummary } from '../property/PropertySummary';
 import { AsOfControl } from './AsOfControl';
 import { Results } from './Results';
+import { ResearchGuide, TenentHero } from '../shell/TenentVisuals';
 
 interface Props {
   mode: DataMode;
@@ -95,6 +96,9 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
     const frame = window.requestAnimationFrame(() => {
       const results = document.getElementById('lookup-results');
       if (!results) return;
+      // A keyboard user may already have moved to a result control before this frame.
+      // Do not replace that deliberate focus with the automatic arrival announcement.
+      if (results.contains(document.activeElement)) return;
       const banner = document.querySelector<HTMLElement>('.synthetic')?.offsetHeight ?? 0;
       window.scrollTo({ top: Math.max(0, results.getBoundingClientRect().top + window.scrollY - banner) });
       document.getElementById('outcome-heading')?.focus({ preventScroll: true });
@@ -106,6 +110,7 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
   const revealMain = () => {
     const main = mainRef.current;
     if (!main) return;
+    if (document.activeElement !== main && main.contains(document.activeElement)) return;
     main.focus({ preventScroll: true });
     const top = main.getBoundingClientRect().top;
     if (top < 0 || top > window.innerHeight * 0.6) main.scrollIntoView({ block: 'start' });
@@ -159,10 +164,12 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
     <div className="lookup">
       {!state.selection ? (
         <div className="start" ref={mainRef} tabIndex={-1}>
-          <header className="start__intro">
-            <h1 className="page-title">Which rental rules reach a property on a given date, and what is still unknown.</h1>
-            <p className="page-lead">Choose a property and a date. Every result opens onto the exact source text it rests on, and anything unresolved says what would settle it.</p>
-          </header>
+          <TenentHero changesHref={viewHref('changes')} onFind={() => {
+            const input = document.querySelector<HTMLInputElement>('.start__picker input[type="search"]');
+            if (!input) return;
+            input.focus({ preventScroll: true });
+            input.scrollIntoView({ block: 'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+          }}/>
 
           {catalog && catalog.examples.length > 0 && (
             <section className="examples" aria-labelledby="examples-heading">
@@ -185,6 +192,7 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
                       <span className="example__title">{example.title}</span>
                       <span className="example__detail">{example.detail}</span>
                       <span className="example__meta">{example.meta}</span>
+                      <span className="example__arrow" aria-hidden="true"><Icon name="arrow" size={21}/></span>
                     </>
                   );
                   return (
@@ -249,12 +257,14 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
             </section>
           )}
 
-          <section className="start__picker" aria-labelledby="picker-heading">
-            <h2 id="picker-heading" className="examples__title">
-              {catalog && catalog.examples.length > 0 ? 'Or choose a property' : 'Choose a property'}
-            </h2>
-            {finder(false)}
-          </section>
+          <div className="research-workspace">
+            <section className="start__picker" aria-labelledby="picker-heading">
+              <div className="picker-heading"><div><p className="eyebrow">YOUR RESEARCH STARTS HERE</p><h2 id="picker-heading" className="examples__title">Choose a property</h2></div><Icon name="search" size={24}/></div>
+              <p className="start__picker-lead">Find an address in the available dataset to build its legal context.</p>
+              {finder(false)}
+            </section>
+            <ResearchGuide/>
+          </div>
         </div>
       ) : (
         <div className="lookup__result" ref={mainRef} tabIndex={-1}>
