@@ -1,5 +1,16 @@
 # Shared project instructions
 
+## Current Platform parallel-work authorization — October 4, 2026
+
+The user explicitly requested as many agents as useful for parallel Platform tasks and authorized
+pushes and merges between completed tasks. This supersedes the earlier prohibition on additional
+writing agents for this bounded Platform run. Root is the single integration/board writer.
+PLAT-07, PLAT-08 and PLAT-09 use separate branches/checkouts and disjoint paths recorded in their cards.
+Agents may commit locally; root reviews, pushes and merges. Core and frontend ownership stays unchanged.
+No paid extraction resumption, public deployment or teammate messaging is authorized by this request.
+After a PR is confirmed merged, delete its remote source branch. Delete its local branch only when
+no active checkout uses it; retain ignored artifacts and defer cleanup of active worktrees.
+
 Read [docs/OWNERSHIP.md](docs/OWNERSHIP.md), your card under `docs/tasks/`,
 [docs/CONTRACTS.md](docs/CONTRACTS.md), and [docs/TASKS.md](docs/TASKS.md).
 Read the current four-developer playbook: `docs/Hackathon_Development_Playbook.txt`.
