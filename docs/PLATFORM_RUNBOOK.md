@@ -209,6 +209,12 @@ re-evaluation. Keep the private output separate from Git and retain the original
 
 ## Recorded evidence
 
+For direct Python checks on Windows, set `$env:PYTHONUTF8='1'` before launching Python.
+The Platform subprocess helper and CI set this explicitly. The integrated Core benchmark reads
+a UTF-8 fixture using the process default encoding; a CP1252 default fails before evaluation.
+Explicit UTF-8 reads in that Core-owned benchmark remain an owner follow-up. Do not rewrite source
+bytes to make an environment-specific decoder accept them.
+
 The earlier [PLAT-02 evidence](evidence/plat02_packaging.json) remains historical installation and
 native HTTP/export evidence. Current release/integrity records are [PLAT-06](evidence/plat06_release.json),
 [combined integration](evidence/plat06_integration.json), [PLAT-07](evidence/plat07_integrity.json),

@@ -14,6 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  PYTHONUTF8: "1"
   PYTHON_DOTENV_DISABLED: "1"
   OPENAI_API_KEY: ""
   OPENAI_MODEL: ""

@@ -1,7 +1,7 @@
 # PLAT-09: reproducible release handoff bundle
 
 Owner: Platform handoff agent, delegated by the current user-authorized Platform run.
-State: Verified locally after independent integrity review; ready for root integration. Corpus remains partial and not submission-ready.
+State: Verified after independent integrity review and merged in PR #16; corpus remains partial and not submission-ready.
 Base: `b3358579256706a4c1c6f4af30c1273feb5e0933` (PLAT-06 plus parallel assignments).
 Branch: `codex/platform-handoff`.
 Checkout: `C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/platform-handoff`.

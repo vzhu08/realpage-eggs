@@ -1,9 +1,10 @@
 # Local frontend/API container
 
 PLAT-08 replaces the backend-only image with a production frontend build served by the existing API
-on one origin. This is a local deployment candidate. Docker Desktop's Linux engine was stopped on
-the verification host; the image build and Linux runtime remain unverified there. See
-[recorded evidence](evidence/plat08_container.json). No public host, authentication or TLS is added.
+on one origin. The complete image build and Linux runtime passed in GitHub Actions on labeled
+synthetic data. Docker Desktop's Linux engine remains stopped on the local Windows host. See
+[recorded evidence](evidence/plat08_container.json) and [combined CI results](evidence/plat10_ci.json).
+No public host, authentication or TLS is added.
 
 The frontend stage runs `npm ci`, regenerates types from the current contracts, then runs the existing
 UX `verify` command (contract check, typecheck, unit tests and production build). Only its `dist/`
@@ -86,8 +87,9 @@ docker compose --env-file artifacts/container-launch/empty.env -p navigator-revi
 
 For rollback, retain the earlier image ID and its matching immutable snapshot. Stop this project,
 select that image/snapshot and use `up -d --no-build --wait`; repeat the HTTP and snapshot checks.
-PLAT-06's verified native bundle remains the known-good local fallback until container runtime
-verification succeeds. Keep native port 8016 separate from container verification port 8028.
+PLAT-06's verified native bundle remains the known-good local fallback. Synthetic Linux CI verifies
+the container runtime; a real-data container rehearsal is still separate. Keep native port 8016
+separate from container verification port 8028.
 
 Published-scenario caches depend on evaluator inputs/code and Python/Pydantic versions. The pinned
 Python patch version avoids an unnecessary mismatch with PLAT-06, but changed code or data still

@@ -36,7 +36,7 @@ def snapshot_hashes(root):
 def child_env(data=None, frontend=None):
     env = os.environ.copy()
     # Offline checks and the HTTP-only launch never inherit extraction credentials.
-    env.update(OPENAI_API_KEY="", OPENAI_MODEL="", PYTHON_DOTENV_DISABLED="1", PYTHONDONTWRITEBYTECODE="1")
+    env.update(OPENAI_API_KEY="", OPENAI_MODEL="", PYTHON_DOTENV_DISABLED="1", PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1")
     env.pop("NAVIGATOR_FRONTEND_DIST", None)
     env.pop("PYTHONPATH", None)
     if data is not None:
