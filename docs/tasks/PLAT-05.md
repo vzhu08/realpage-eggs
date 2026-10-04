@@ -2,10 +2,11 @@
 
 ## Current continuation
 
-State: Software ready for review; live verification awaiting user-provided local inputs.
+State: Verified implementation and bounded live review; integration tracked by PR #10.
 Human owner Vincent; current Codex session. Branch `codex/platform-review`.
 Checkout: `C:\Users\vzhu0\PycharmProjects\realpage-eggs`.
 Base: `3b2d2011de3d0319f96702bbeddb6ec72323dc27` (merged Core A/B and frontend integration).
+Integrated main: `ad0881a15d3828a7ecc3bedb83167d6416912371`; tested merge `e81c3f4`.
 User requested completing, pushing and merging this task. PLAT-04 remains preserved
 separately at local `11afb55`; this continuation does not include that branch.
 
@@ -17,25 +18,39 @@ inventory span validation; targeted source inventory and all offline acceptance 
 Checks: evidence/retrieval tests, full suite and generated contracts in an isolated copy,
 targeted original D001 inventory, explicit missing-provider failure and labeled fixture replay.
 
-Live inputs checked without exposing secrets: local OPENAI_API_KEY and OPENAI_MODEL are
-both absent. Local stores contain no real extracted rules. Daniel's merged Core A handoff
-reports 140 live/replay rules in `/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session`,
-which is unavailable in this Windows checkout. The user has been asked for a local store
-path and local configuration. No corpus extraction is restarted, and no fixture is called live.
+The user supplied Daniel's internal `rules (1).json`: 140 schema-valid rules, with the same
+canonical digest recorded in Core A's saved-store closeout. All 541 evidence instances and
+54 captured source hashes validate. Original files remain unchanged; private input copies
+are in `data/plat05-internal-input`. The earlier 23-rule export is preserved separately.
+Local `.env.local` provides the key and `gpt-6.1-sol`; no secret values are recorded.
+The user explicitly approved sending one D001 rule and 4,940 source characters to OpenAI.
+No property/address records were included, and no corpus extraction was restarted.
 
 Software result: cache replay requires the requested provider mode/model and verifier version;
 live CLI review cannot silently consume a fixture cache. Exact live caches remain usable offline.
 Replay manifests preserve partial decisions and their original provenance. Inventory v2 validates
 both quote offsets before mapping evidence and invalidates prior inventory caches.
-Four regressions failed before these repairs; 26 focused checks and 226 full tests now pass.
+Four regressions failed before these repairs; the initial baseline passed 26 focused and 226 full tests.
 Contracts regenerate with all four schemas unchanged. Targeted D001 inventory ran on an isolated
 copy of original text: 15 unresolved units, then exact cache replay; source inputs unchanged.
 The authored missing-exception review and its replay both remain partial. The CLI rejects absent
 provider configuration even when a fixture review is cached. One existing Starlette/httpx warning remains.
 Evidence: `docs/evidence/plat05_review.json`; detailed offline artifacts: `artifacts/plat05-offline`.
-Next action: accept files in `data/plat05-input`, verify their exact source spans, run one bounded
-live review and a zero-call replay, then execute the user-authorized push/merge. Until that live
-check succeeds, the complete task is not claimed finished.
+Latest combined verification after PR #11: 26 focused tests; 259 full-suite tests plus one
+organizer-pack test run separately with its explicit local path (260 unique tests pass).
+All four generated schemas are byte-identical. The internal D001 inventory maps 5 of 15
+units and leaves 10 unresolved; exact replay passes and all copied inputs are unchanged.
+The board conflict preserves current four-lane assignments and the separate PLAT-04 continuation.
+Live verification: rule `r-12c99cf95c4f2cd2242e`, D001; run `98f8619f5cf541e8b84a5179c3be93b3`
+used one model call in 66.042 seconds (5,647 input / 4,809 output tokens). Eight field decisions
+were supported within the supplied original passages; every cited span passed validation.
+Replay `b369e559619b4545ab168f26f8be645d` returned identical decisions with zero calls, with
+provider construction forbidden. Both manifests report success and retain live/replay provenance.
+Inputs remain byte-identical; human_reviewed remains false. This verifies the targeted workflow,
+not legal accuracy, full-corpus completeness or the 10 unmapped source units.
+Detailed live artifacts: `artifacts/plat05-live-check`; curated hashes and manifests are in the
+evidence JSON. Next integration action is the user-authorized push/merge of PR #10; subsequent
+Platform work is PLAT-06 and its separate PLAT-04 reconciliation, as assigned in the board.
 
 ## Original implementation record
 
