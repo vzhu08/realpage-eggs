@@ -84,12 +84,12 @@ def test_explicit_status_context_anchors_dates_without_extracting_or_promoting_s
 
 
 @pytest.mark.parametrize('name,expected_hash', [
-    ('DRAFT_INSTRUCTIONS', '07812271838cab09eaf9dc76d9d16f90d883dc9160c786721c4cd468c6330eca'),
-    ('REVIEW_INSTRUCTIONS', 'd355cda7ff3d6f0b43f18ea9867c1566cda0ce647ec1981f6f0a671bbe5a8905'),
-    ('REPAIR_INSTRUCTIONS', '3fc9a05f79dc9d9335922686e87934f74913b21ebabfb89ba1f1b9ca057f5774'),
+    ('DRAFT_INSTRUCTIONS', '068c5292782d16837a8b20bb54f91af8f6c42539990d495368277cac07d8bed0'),
+    ('REVIEW_INSTRUCTIONS', '98c67a054af2fbe7c4da18660a06c4edbe9bcf231f93855c2447b079427be118'),
+    ('REPAIR_INSTRUCTIONS', 'd9753dfd932dc443348cd90b6c5b6ec4db987afc66b09e1ce591ea97b1fb3862'),
 ])
 def test_request_builder_preserves_prior_transport_bytes_and_matches_generate(monkeypatch, name, expected_hash):
-    # v5 deliberately adds the exact registered-fact contract instructions.
+    # v6 deliberately adds bounded full-primary context and focus instructions.
     # Offline sizing must preserve generate's JSON escaping and current prompts.
     monkeypatch.setenv('OPENAI_API_KEY', 'fictional-test-key')
     monkeypatch.setenv('OPENAI_MODEL', 'fictional-test')

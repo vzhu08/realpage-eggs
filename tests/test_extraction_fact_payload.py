@@ -239,13 +239,13 @@ def test_previous_prompt_cache_remains_untouched(demo, monkeypatch):
     source, bundle = fixture_bundle(demo)
     provider = ScriptedProvider(source, bundle)
     with monkeypatch.context() as previous:
-        previous.setattr(extraction, 'PROMPT_VERSION', 'extract-v4-applicability-and-review-notes')
+        previous.setattr(extraction, 'PROMPT_VERSION', 'extract-v5-registered-facts-and-bounded-contract-repair')
         old_run = extraction.extract(demo, provider=provider)
     prior_files = {p: p.read_bytes() for folder in ('extraction_cache', f'provider_outputs/{old_run.run_id}')
                    for p in (demo.root / folder).glob('*.json')}
     new_run = extraction.extract(demo, provider=provider)
     assert len(provider.requests) == 4
-    assert new_run.config['prompt_version'].startswith('extract-v5-')
+    assert new_run.config['prompt_version'].startswith('extract-v6-')
     assert new_run.config['prompt_version'] != old_run.config['prompt_version']
     assert new_run.counts['cache_hits'] == new_run.counts['draft_replays'] == 0
     assert all(path.read_bytes() == data for path, data in prior_files.items())
