@@ -7,15 +7,17 @@ import type {
   AssistResponse,
   ChangeRequest,
   ChangeResult,
+  ChangeSummary,
   Evaluation,
+  EvidencePackage,
   EvidenceReport,
   FactDefinition,
   AddressPage,
   HealthResponse,
   LookupResponse,
   RuleDetail,
+  SourceComparisonsResponse,
   SourceDocument,
-  SourceSpan,
   SupplementalAnswer,
 } from './generated/contract';
 
@@ -104,38 +106,43 @@ export interface FixtureCaseSummary {
 /** Which recorded dataset a demo payload came from. The three are separate stores and never mixed. */
 export type RecordedStore = 'synthetic' | 'no_extracted_rules' | 'dev_portfolio';
 
+/** What POST /changes/summary adds to Core's result: display labels and overlapping groups. */
+export type ChangeSummaryExtras = Omit<ChangeSummary, 'result'>;
+
 export interface ChangeOutcome {
   request: ChangeRequest;
   result: ChangeResult;
+  /**
+   * Labels and groups from POST /changes/summary. Null when the connected backend has no such
+   * route and the result came from POST /changes; names are then read record by record.
+   */
+  summary: ChangeSummaryExtras | null;
   origin: Origin;
   /** Demo only: which recorded store produced this result. */
+  recordedStore?: RecordedStore;
+  /** Adapter-level notices that must be visible (e.g. a visible fallback to POST /changes). */
+  notices: string[];
+  contractWarnings: string[];
+}
+
+/** GET /source-comparisons, with where it came from. */
+export interface SourceComparisonsOutcome {
+  response: SourceComparisonsResponse;
+  origin: Origin;
+  /** Demo only: the recorded store the annotations belong to. */
   recordedStore?: RecordedStore;
   contractWarnings: string[];
 }
 
-/**
- * PROPOSED shape for a field-level disagreement between two source-backed claims. No contract
- * or endpoint defines this yet (PLAT-06 / CORE-06); it exists only for the labeled development
- * fixture, and is requested in frontend/docs/UI.md. It deliberately has no "preferred" claim.
- */
-export interface ProposedDisagreement {
-  disagreement_id: string;
-  contract_status: string;
-  authored_by: string;
-  /** The rule field the two claims disagree about, e.g. effective_date. */
-  field: string;
-  status: string;
-  affected_rule_ids: string[];
-  claims: Array<{
-    claim_id: string;
-    /** The value as the source states it, with its own precision. */
-    stated_value: string;
-    span: SourceSpan;
-    status_dates: Array<{ status: string; on: string }>;
-  }>;
-  unresolved_reason: string;
-  remedy_kind: string;
-  remedy: string;
+/** POST /lookup/evidence-package: the service-built package for one saved property and request. */
+export interface EvidencePackageDownload {
+  package: EvidencePackage;
+  /** The response body exactly as the service sent it; this is what is saved. */
+  text: string;
+  /** From Content-Disposition when it is a safe name; otherwise evidence-package.json. */
+  filename: string;
+  origin: Origin;
+  contractWarnings: string[];
 }
 
 export interface EvidenceReportOutcome {
@@ -145,12 +152,26 @@ export interface EvidenceReportOutcome {
   origin?: Origin;
 }
 
+/** A one-click walkthrough example. Its description is derived from the recording it opens. */
+export interface DemoExample {
+  id: 'consequential_fact' | 'portfolio_impact' | 'source_comparison';
+  /** What the example shows, named by what a reader gets from it. */
+  title: string;
+  /** One sentence computed from the recorded payload the example opens. */
+  detail: string;
+  /** The property and date, or the two dates, the example uses. */
+  meta: string;
+  target: { view: 'lookup'; address_id: string; as_of: string } | { view: 'changes'; request: ChangeRequest } | { view: 'disagreements' };
+}
+
 export interface DemoCatalog {
   cases: FixtureCaseSummary[];
   /** Recorded as-of dates, per address. */
   lookupDates: Record<string, string[]>;
   changeRequests: Array<{ request: ChangeRequest; store: RecordedStore }>;
   manifest: Record<string, unknown>;
+  /** One-click examples for a walkthrough, each backed by a recording. */
+  examples: DemoExample[];
   /** The UX development fixture: a fictional portfolio evaluated by the backend. */
   development: {
     path: string;
@@ -158,8 +179,6 @@ export interface DemoCatalog {
     properties: AddressItem[];
     /** Recorded lookups in which the evaluator flagged a conflict. */
     conflictLookups: Array<{ address_id: string; as_of: string }>;
-    /** Authored entries in a proposed shape (no contract yet). */
-    proposedDisagreements: ProposedDisagreement[];
   };
 }
 
@@ -177,6 +196,10 @@ export interface DataSource {
   /** Fact meanings and answer forms, keyed by field; null when the source does not publish them. */
   facts(signal?: AbortSignal): Promise<Record<string, FactDefinition> | null>;
   changes(request: ChangeRequest, signal?: AbortSignal): Promise<ChangeOutcome>;
+  /** Claim observations saved with the snapshot, re-checked by the service against its sources. */
+  sourceComparisons(signal?: AbortSignal): Promise<SourceComparisonsOutcome>;
+  /** Live API only: the reproducible evidence package for a saved property and this exact request. */
+  evidencePackage?(query: LookupQuery, signal?: AbortSignal): Promise<EvidencePackageDownload>;
   /** Demo mode only. */
   catalog?(): DemoCatalog;
 }

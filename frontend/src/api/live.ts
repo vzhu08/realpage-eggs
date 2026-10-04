@@ -1,7 +1,8 @@
 /**
- * Live API adapter. Uses the implemented routes from contracts/openapi.json and probes the
- * planned assist/evidence routes from docs/ASSIST_CONTRACT.md. When a planned route is absent
- * it says so and continues with the implemented route — it never substitutes synthetic data.
+ * Live API adapter for the routes in contracts/openapi.json. Newer routes (assist, evidence
+ * reports, change summaries, source comparisons, the evidence package) are probed: when the
+ * connected backend does not have one, the adapter says so and continues with the older
+ * implemented route where one exists. It never substitutes synthetic data.
  */
 import { ApiError, errorFromResponse, isAbort } from './errors';
 import type {
@@ -12,7 +13,10 @@ import type {
   ChangeOutcome,
   ChangeRequest,
   ChangeResult,
+  ChangeSummary,
   DataSource,
+  EvidencePackage,
+  EvidencePackageDownload,
   EvidenceReport,
   EvidenceReportOutcome,
   FactDefinition,
@@ -21,6 +25,8 @@ import type {
   LookupQuery,
   LookupResponse,
   RuleDetail,
+  SourceComparisonsOutcome,
+  SourceComparisonsResponse,
   SourceDocument,
 } from './types';
 import { validate, type SchemaName } from './validate';
@@ -33,9 +39,26 @@ interface RequestOptions {
   schema: SchemaName;
   body?: unknown;
   signal?: AbortSignal;
+  /** Overrides the default wait for routes the service documents as slow. */
+  timeoutMs?: number;
 }
 
 const TIMEOUT_MS = 20_000;
+/**
+ * A portfolio comparison with no prepared result is recalculated across every sample property
+ * (docs/FRONTEND_HANDOFF.md) and can take far longer than a lookup. The view shows the elapsed
+ * time and a cancel control for as long as it waits.
+ */
+export const CHANGES_TIMEOUT_MS = 180_000;
+/** The evidence package assembles every rule and source text behind one request. */
+const PACKAGE_TIMEOUT_MS = 60_000;
+const DEFAULT_PACKAGE_NAME = 'evidence-package.json';
+
+/** A file name from Content-Disposition, accepted only when it is a plain, safe JSON file name. */
+export function safeAttachmentName(header: string | null): string {
+  const match = header ? /filename="?([A-Za-z0-9][A-Za-z0-9._-]{0,120}\.json)"?/i.exec(header) : null;
+  return match?.[1] ?? DEFAULT_PACKAGE_NAME;
+}
 
 export class LiveSource implements DataSource {
   readonly mode = 'live' as const;
@@ -45,6 +68,7 @@ export class LiveSource implements DataSource {
   /** Remembered per session so a missing planned route is probed once, not on every request. */
   private assistRoute: 'untested' | 'present' | 'absent' = 'untested';
   private evidenceRoute: 'untested' | 'present' | 'absent' = 'untested';
+  private summaryRoute: 'untested' | 'present' | 'absent' = 'untested';
   private factDefinitions: Promise<Record<string, FactDefinition> | null> | null = null;
 
   constructor(baseUrl: string, fetchImpl: FetchLike = (input, init) => fetch(input, init)) {
@@ -53,16 +77,17 @@ export class LiveSource implements DataSource {
     this.describe = `Live API at ${this.base}`;
   }
 
-  private async request<T>(options: RequestOptions): Promise<{ data: T; warnings: string[] }> {
+  private async request<T>(options: RequestOptions): Promise<{ data: T; warnings: string[]; text: string; headers: Headers | null }> {
     const endpoint = `${options.method} ${options.path}`;
     const controller = new AbortController();
     const onAbort = () => controller.abort(options.signal?.reason);
     options.signal?.addEventListener('abort', onAbort);
     let timedOut = false;
+    const limit = options.timeoutMs ?? TIMEOUT_MS;
     const timer = setTimeout(() => {
       timedOut = true;
       controller.abort();
-    }, TIMEOUT_MS);
+    }, limit);
     try {
       let response: Response;
       try {
@@ -73,11 +98,19 @@ export class LiveSource implements DataSource {
           signal: controller.signal,
         });
       } catch (error) {
-        if (timedOut) throw new ApiError({ kind: 'timeout', endpoint, message: `No response within ${TIMEOUT_MS / 1000} seconds.` });
+        if (timedOut) throw new ApiError({ kind: 'timeout', endpoint, message: `No response within ${limit / 1000} seconds.` });
         if (isAbort(error)) throw error;
         throw new ApiError({ kind: 'transport', endpoint, message: 'Could not reach the API. Check that the backend is running and reachable from this page.' });
       }
-      const text = await response.text();
+      let text: string;
+      try {
+        text = await response.text();
+      } catch (error) {
+        // The wait covers the whole response, not only its first byte.
+        if (timedOut) throw new ApiError({ kind: 'timeout', endpoint, message: `No complete response within ${limit / 1000} seconds.` });
+        if (isAbort(error)) throw error;
+        throw new ApiError({ kind: 'transport', endpoint, message: 'The connection was lost before the response finished.' });
+      }
       let body: unknown;
       try {
         body = text ? JSON.parse(text) : undefined;
@@ -98,7 +131,7 @@ export class LiveSource implements DataSource {
           details: result.errors,
         });
       }
-      return { data: body as T, warnings: result.warnings };
+      return { data: body as T, warnings: result.warnings, text, headers: response.headers ?? null };
     } finally {
       clearTimeout(timer);
       options.signal?.removeEventListener('abort', onAbort);
@@ -216,9 +249,54 @@ export class LiveSource implements DataSource {
     return this.factDefinitions;
   }
 
+  /**
+   * POST /changes/summary returns Core's result unchanged plus display labels and groups. A
+   * backend without that route is asked through POST /changes instead, and the outcome says so.
+   */
   async changes(request: ChangeRequest, signal?: AbortSignal): Promise<ChangeOutcome> {
-    const { data, warnings } = await this.request<ChangeResult>({ method: 'POST', path: '/changes', schema: 'ChangeResult', body: request, signal });
-    return { request, result: data, origin: { kind: 'live', label: 'Live API', detail: `POST ${this.base}/changes` }, contractWarnings: warnings };
+    if (this.summaryRoute !== 'absent') {
+      try {
+        const { data, warnings } = await this.request<ChangeSummary>({ method: 'POST', path: '/changes/summary', schema: 'ChangeSummary', body: request, signal, timeoutMs: CHANGES_TIMEOUT_MS });
+        this.summaryRoute = 'present';
+        const { result, ...summary } = data;
+        return { request, result, summary, origin: { kind: 'live', label: 'Live API', detail: `POST ${this.base}/changes/summary` }, notices: [], contractWarnings: warnings };
+      } catch (error) {
+        if (!(error instanceof ApiError) || error.kind !== 'not_implemented') throw error;
+        this.summaryRoute = 'absent';
+      }
+    }
+    const { data, warnings } = await this.request<ChangeResult>({ method: 'POST', path: '/changes', schema: 'ChangeResult', body: request, signal, timeoutMs: CHANGES_TIMEOUT_MS });
+    return {
+      request,
+      result: data,
+      summary: null,
+      origin: { kind: 'live', label: 'Live API', detail: `POST ${this.base}/changes` },
+      notices: ['POST /changes/summary is not available on this backend. The comparison comes from POST /changes, and names are read record by record.'],
+      contractWarnings: warnings,
+    };
+  }
+
+  async sourceComparisons(signal?: AbortSignal): Promise<SourceComparisonsOutcome> {
+    const { data, warnings } = await this.request<SourceComparisonsResponse>({ method: 'GET', path: '/source-comparisons', schema: 'SourceComparisonsResponse', signal });
+    return { response: data, origin: { kind: 'live', label: 'Live API', detail: `GET ${this.base}/source-comparisons` }, contractWarnings: warnings };
+  }
+
+  /**
+   * The service-built evidence package for a saved property, the displayed date and every
+   * request-local answer. The response body is kept byte for byte so the saved file is the
+   * one its hashes describe.
+   */
+  async evidencePackage(query: LookupQuery, signal?: AbortSignal): Promise<EvidencePackageDownload> {
+    const body = { address_id: query.address_id, as_of: query.as_of, answers: query.answers.map(wireAnswer) };
+    const { data, warnings, text, headers } = await this.request<EvidencePackage>({ method: 'POST', path: '/lookup/evidence-package', schema: 'EvidencePackage', body, signal, timeoutMs: PACKAGE_TIMEOUT_MS });
+    const endpoint = 'POST /lookup/evidence-package';
+    // Never save a package that describes another request than the one on screen.
+    const sent = JSON.stringify(query.answers.map((answer) => [answer.field, answer.value]).sort());
+    const echoed = JSON.stringify((data.request.answers ?? []).map((answer) => [answer.field, answer.value ?? null]).sort());
+    if (data.request.address_id !== query.address_id || data.request.as_of !== query.as_of || sent !== echoed) {
+      throw new ApiError({ kind: 'contract', endpoint, message: 'The service returned a package for a different property, date or set of answers than the one on screen, so it was not saved.' });
+    }
+    return { package: data, text, filename: safeAttachmentName(headers?.get('content-disposition') ?? null), origin: { kind: 'live', label: 'Live API', detail: `POST ${this.base}/lookup/evidence-package` }, contractWarnings: warnings };
   }
 }
 

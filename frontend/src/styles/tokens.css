@@ -1,61 +1,64 @@
 /*
- * Design tokens. One warm paper ground, one ink, one restrained accent, and a small set of
- * status tones that always appear with a word and a shape, never as color alone.
+ * Design tokens. A cool grey ground with white working surfaces, one ink, one restrained
+ * accent used only for actions, links, focus and selection, and a small set of status tones
+ * that always appear with a word and a shape, never as color alone.
  * Text/background pairs are checked for WCAG AA contrast in tests/unit/contrast.test.ts.
  */
 :root {
   color-scheme: light;
 
-  /* Ground and ink */
-  --paper: #f5f2ea;
-  --paper-deep: #ebe6d9;
-  --surface: #fffdf9;
-  --ink: #17212b;
-  --ink-2: #3a4653;
-  --ink-3: #596573;
-  --line: #dcd6c7;
-  --line-strong: #c3bba8;
+  /* Ground, surfaces and ink */
+  --paper: #f3f4f7;
+  --paper-deep: #e8eaef;
+  --surface: #ffffff;
+  --surface-2: #f8f9fb;
+  --ink: #101828;
+  --ink-2: #344054;
+  --ink-3: #566072;
+  --line: #e1e4ea;
+  --line-strong: #c8cdd6;
 
   /* Accent: used for actions, links, focus and selection only */
-  --accent: #1d3557;
-  --accent-hover: #142741;
-  --accent-wash: #e3e9f2;
+  --accent: #2343b5;
+  --accent-hover: #1a3391;
+  --accent-wash: #e8edfb;
   --on-accent: #ffffff;
 
   /* Status tones (text on wash) */
-  --applies: #1b5e41;
-  --applies-wash: #e0efe6;
+  --applies: #17603f;
+  --applies-wash: #def2e6;
   --unknown: #7a4a00;
-  --unknown-wash: #fbeed3;
-  --future: #40448a;
-  --future-wash: #e8e8f6;
-  --pending: #5a3f8a;
-  --pending-wash: #eee8f6;
-  --muted: #55606c;
-  --muted-wash: #e9e5db;
-  --danger: #962a21;
-  --danger-wash: #f9e3df;
-  --info: #1d4a73;
-  --info-wash: #e2ecf5;
+  --unknown-wash: #fcefd2;
+  --future: #3b3f95;
+  --future-wash: #e9eafa;
+  --pending: #5b3a94;
+  --pending-wash: #f0eafa;
+  --muted: #4c586a;
+  --muted-wash: #eaecf0;
+  --danger: #a3271f;
+  --danger-wash: #fbe6e3;
+  --info: #1c4f7d;
+  --info-wash: #e3eef8;
 
   /* Evidence */
-  --highlight: #fbe7a1;
-  --quote-rule: #c9a227;
+  --highlight: #fde68a;
+  --quote-rule: #d0a021;
 
   /* Synthetic banner */
-  --synthetic-bg: #17212b;
-  --synthetic-ink: #f5f2ea;
-  --synthetic-tag: #f2bd45;
+  --synthetic-bg: #101828;
+  --synthetic-ink: #f3f4f7;
+  --synthetic-tag: #f5c451;
 
-  /* Type */
+  /* Type: one sans family for the interface; the serif is kept for quoted source text. */
   --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: var(--font-sans);
   --font-serif: Charter, 'Bitstream Charter', 'Iowan Old Style', 'Sitka Text', Cambria, Georgia, serif;
   --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
-  --text-xs: 0.75rem;
-  --text-sm: 0.8125rem;
-  --text-base: 0.9375rem;
-  --text-md: 1.0625rem;
-  --text-lg: 1.25rem;
+  --text-xs: 0.78125rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.3125rem;
   --text-xl: 1.625rem;
   --text-2xl: 2rem;
 
@@ -68,11 +71,17 @@
   --s-6: 2rem;
   --s-7: 3rem;
 
-  --radius-sm: 4px;
-  --radius: 8px;
-  --radius-lg: 12px;
-  --shadow-panel: 0 1px 2px rgb(23 33 43 / 6%), 0 12px 32px rgb(23 33 43 / 10%);
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 5%), 0 1px 3px rgb(16 24 40 / 4%);
+  --shadow-raised: 0 2px 4px rgb(16 24 40 / 6%), 0 8px 20px rgb(16 24 40 / 8%);
+  --shadow-panel: 0 4px 8px rgb(16 24 40 / 8%), 0 24px 56px rgb(16 24 40 / 18%);
   --focus: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+
+  /* Page measure: results read as one column; evidence opens over it instead of beside it. */
+  --page: 67.5rem;
+  --control: 2.75rem;
 
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --banner-h: 0px;

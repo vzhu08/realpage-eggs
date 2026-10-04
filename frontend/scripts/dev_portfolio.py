@@ -5,11 +5,12 @@ made-up state ("Zenith", code ZZ) and two made-up cities. They exist so the port
 view has more than one jurisdiction, category, date and source to lay out while the real
 integrated snapshot (PLAT-06) and source comparisons (CORE-06) are pending.
 
-What is authored here: the fictional source texts, the fictional properties, and the
-encodings a provider would return for those texts. What is NOT authored here: any
-result. Rules are created by the backend's own ingest and extraction path (quotes are
+What is authored here: the fictional source texts, the fictional properties, the
+encodings a provider would return for those texts, and the claim annotations a Core review
+would save as source_comparisons.json. What is NOT authored here: any result. Rules are created by the backend's own ingest and extraction path (quotes are
 anchored and validated there), and every evaluation, change set, conflict flag, question
-and evidence check is computed by the backend. Nothing in this file is legal evidence.
+and evidence check is computed by the backend, including the anchor and identity checks on each annotated claim.
+Nothing in this file is legal evidence.
 """
 from __future__ import annotations
 
@@ -18,6 +19,7 @@ from pathlib import Path
 from navigator.extraction import extract
 from navigator.ingest import ingest_document
 from navigator.models import JurisdictionResolution, PropertyFacts, RawAddress
+from navigator.retrieval import span as source_span
 from navigator.store import Store
 
 SOURCES = Path(__file__).resolve().parent / "dev_fixture"
@@ -207,4 +209,54 @@ def build_dev_portfolio(root) -> Store:
     failed = {doc: entry for doc, entry in index.items() if entry.get("status") == "failed"}
     if failed:
         raise RuntimeError(f"Development fixture did not pass the backend's extraction validation: {failed}")
+    write_claim_annotations(store)
     return store
+
+
+def write_claim_annotations(store: Store) -> None:
+    """Save fictional claim annotations in the shape Core saves as source_comparisons.json.
+
+    GET /api/v1/source-comparisons re-checks every span against the stored source and classifies
+    the pair itself; nothing here states a classification, a winner or a remedy. Offsets and
+    hashes are read from the stored fixture texts, never typed by hand. The four rows give the
+    comparison view one of each outcome to lay out: two supported claims that differ (twice),
+    two supported claims that agree, and a claim with no captured support on one side.
+    """
+    sources, rules = store.sources(), store.rules()
+
+    def support(doc_id, quote):
+        text = sources[doc_id].text
+        start = text.find(quote)
+        if start < 0 or text.find(quote, start + 1) >= 0:
+            raise RuntimeError(f"Fixture quote must occur exactly once in {doc_id}")
+        return {"span": source_span(sources[doc_id], start, start + len(quote)).model_dump(mode="json")}
+
+    def rule_ids(citation):
+        return sorted(ident for ident, rule in rules.items() if rule.citation == citation)
+
+    deposit = "Cedar Landing Ordinance DEV-07, section 3"
+    fee = "Larch Point Ordinance DEV-03, section 2"
+    bill = "Larch Point Proposed Ordinance DEV-19, section 1"
+    rows = {
+        "cedar_landing_deposit_effective_date": {
+            "field": "effective_date", "rule_ids": rule_ids(deposit),
+            "before": {"value": "2026-11-01", "support": [support("DEV-CL-ORD-07", "Beginning November 1, 2026, residential rental buildings containing at least five units must limit a security deposit to one month's rent.")]},
+            "after": {"value": "2026-12-01", "support": [support("DEV-CL-NOTICE-07", "The clerk's office advises that section 3 of Ordinance DEV-07, the security deposit limit, takes effect on December 1, 2026.")]},
+        },
+        "larch_point_screening_fee_amount": {
+            "field": "key_value", "rule_ids": rule_ids(fee),
+            "before": {"value": "$35", "support": [support("DEV-LP-ORD-03", "Beginning October 15, 2026, a landlord of a residential rental property may not charge an applicant a screening fee greater than $35.")]},
+            "after": {"value": "$50", "support": [support("DEV-LP-CODE-03", "Beginning October 15, 2026, a landlord of a residential rental property may not charge an applicant a screening fee greater than $50.")]},
+        },
+        "larch_point_screening_fee_enactment": {
+            "field": "enactment_date", "rule_ids": rule_ids(fee),
+            "before": {"value": "2026-09-09", "support": [support("DEV-LP-ORD-03", "Larch Point Ordinance DEV-03, section 2. Enacted September 9, 2026.")]},
+            "after": {"value": "2026-09-09", "support": [support("DEV-LP-CODE-03", "Larch Point Municipal Code, codified text of Larch Point Ordinance DEV-03, section 2. Enacted September 9, 2026.")]},
+        },
+        "larch_point_rent_limit_enactment": {
+            "field": "lifecycle", "rule_ids": rule_ids(bill),
+            "before": {"value": "pending as of 2026-09-22", "support": [support("DEV-LP-BILL-19", "Status as of September 22, 2026: pending before the city council and not enacted.")]},
+            "after": {"value": "enactment not established", "support": []},
+        },
+    }
+    store.write("source_comparisons.json", {"authored_by": "UX lane development fixture (fictional); not Core A output", "applied_to_saved_sources": rows})

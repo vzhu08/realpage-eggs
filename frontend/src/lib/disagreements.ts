@@ -8,11 +8,10 @@
  *    both when it merges extractions: Rule.conflict_flag / conflict_note);
  *  - an interaction a source describes between two rules (Rule.interactions) that the
  *    evaluator could not resolve into a definite priority (Evaluation.conflict_flag).
- * A third kind — two sources disagreeing about one field, such as an effective date, before
- * any rule conflict is flagged — has no contract yet. It is shown only from the labeled
- * development fixture (ProposedDisagreement) and is requested from PLAT-06 / CORE-06.
+ * Field-level claim observations (two sources and one field, whether or not any rule conflict
+ * is flagged) come from GET /source-comparisons and are arranged in ./sourceComparisons.ts.
  */
-import type { Evaluation, Evidence, LookupOutcome, ProposedDisagreement, Rule, SourceDocument, Uncertainty } from '../api/types';
+import type { Evaluation, Evidence, LookupOutcome, Rule, SourceDocument, Uncertainty } from '../api/types';
 import { parseReason } from './labels';
 
 export interface ClaimView {
@@ -34,7 +33,7 @@ export interface ClaimView {
 
 export interface DisagreementView {
   id: string;
-  basis: 'same_provision' | 'interaction' | 'proposed_fixture';
+  basis: 'same_provision' | 'interaction';
   /** Rule fields the two claims differ in. Empty when the dispute is about precedence. */
   fields: string[];
   claims: ClaimView[];
@@ -152,27 +151,4 @@ export function disagreementsFromLookup(outcome: LookupOutcome): DisagreementVie
     views.push({ id: `single:${rule.team_rule_id}`, basis: 'same_provision', fields: [], claims: [claimFromRule(rule, [], sources, evaluations)], affectedRuleIds: [rule.team_rule_id], ...payloadWords([rule.team_rule_id], rules, evaluations, uncertainty), relation: null });
   }
   return views;
-}
-
-/** The labeled development fixture, in the same view. Source records are attached when read. */
-export function disagreementFromProposed(entry: ProposedDisagreement, sources: ReadonlyMap<string, SourceDocument>): DisagreementView {
-  return {
-    id: entry.disagreement_id,
-    basis: 'proposed_fixture',
-    fields: [entry.field],
-    claims: entry.claims.map((claim) => ({
-      key: claim.claim_id,
-      docId: claim.span.doc_id,
-      source: sources.get(claim.span.doc_id) ?? null,
-      rule: null,
-      stated: [{ field: entry.field, value: claim.stated_value }],
-      quote: { text: claim.span.text, start: claim.span.start, end: claim.span.end },
-      statusDates: claim.status_dates,
-      evaluation: null,
-    })),
-    affectedRuleIds: entry.affected_rule_ids,
-    reasons: [entry.unresolved_reason],
-    remedies: [entry.remedy],
-    relation: null,
-  };
 }

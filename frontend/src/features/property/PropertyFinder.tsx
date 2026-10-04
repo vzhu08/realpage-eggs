@@ -1,7 +1,7 @@
 import { useEffect, useId, useState } from 'react';
 import type { AddressItem, FixtureCaseSummary } from '../../api/types';
 import { Icon } from '../../components/Icon';
-import { Empty, Skeleton, Tag } from '../../components/ui';
+import { Disclosure, Empty, Skeleton, Tag } from '../../components/ui';
 import { formatDate } from '../../lib/dates';
 import { MATCH_QUALITY } from '../../lib/labels';
 import { useSource } from '../../state/source';
@@ -20,9 +20,11 @@ interface Props {
   onSelect: (item: AddressItem) => void;
   onSelectCase: (item: AddressItem, fixtureCase: FixtureCaseSummary) => void;
   onSwitchToDemo?: () => void;
+  /** Put the keyboard in the search box when the chooser opens as a dialog. */
+  autoFocus?: boolean;
 }
 
-export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCase, onSwitchToDemo }: Props) {
+export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCase, onSwitchToDemo, autoFocus = false }: Props) {
   const source = useSource();
   const inputId = useId();
   const [text, setText] = useState('');
@@ -60,8 +62,9 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
             type="search"
             value={text}
             onChange={(event) => setText(event.target.value)}
-            placeholder="Search address or ID"
+            placeholder="Search by address or property ID"
             autoComplete="off"
+            data-autofocus={autoFocus ? '' : undefined}
             spellCheck={false}
             maxLength={200}
           />
@@ -110,10 +113,9 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
                 <button type="button" className="finder__item" aria-pressed={selected} onClick={() => onSelect(item)}>
                   <span className="finder__address">{addressLine(item)}</span>
                   <span className="finder__meta">
-                    <span className="mono">{item.property.address_id}</span>
-                    <span aria-hidden="true">·</span>
                     <span>{item.resolution.municipality ?? 'Municipality not established'}</span>
                     {item.resolution.match_quality !== 'resolved' && quality && <Tag tone={quality.tone}>{quality.label}</Tag>}
+                    <span className="mono finder__id">{item.property.address_id}</span>
                     {developmentIds.has(item.property.address_id) && <span className="finder__fixture">Development fixture</span>}
                   </span>
                 </button>
@@ -129,13 +131,12 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
         </button>
       )}
 
-      {catalog && (
-        <section className="finder__cases" aria-labelledby={`${inputId}-cases`}>
-          <h2 id={`${inputId}-cases`} className="label">
-            Contract fixtures
-          </h2>
-          <p className="hint">Five question-flow examples and one evidence-failure example from contracts/. Each opens with its own property and date.</p>
-          <ul className="finder__list">
+      {catalog && catalog.cases.length > 0 && (
+        <Disclosure summary={`Contract examples (${catalog.cases.length})`} className="finder__cases" defaultOpen={!!selectedCase}>
+          <p className="hint" id={`${inputId}-cases`}>
+            Question-flow and evidence-failure examples from contracts/. Each opens with its own property and date.
+          </p>
+          <ul className="finder__list finder__list--cases" aria-labelledby={`${inputId}-cases`}>
             {catalog.cases.map((fixtureCase) => {
               const item = all.data?.items.find((candidate) => candidate.property.address_id === fixtureCase.address_id);
               return (
@@ -144,16 +145,15 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
                     <span className="finder__address">{fixtureCase.title}</span>
                     <span className="finder__purpose">{fixtureCase.purpose}</span>
                     <span className="finder__meta">
-                      <span className="mono">{fixtureCase.address_id}</span>
-                      <span aria-hidden="true">·</span>
                       <span>as of {formatDate(fixtureCase.as_of)}</span>
+                      <span className="mono finder__id">{fixtureCase.address_id}</span>
                     </span>
                   </button>
                 </li>
               );
             })}
           </ul>
-        </section>
+        </Disclosure>
       )}
     </div>
   );

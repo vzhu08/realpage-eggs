@@ -24,6 +24,8 @@ interface Props {
   apiBase: string;
   onApiBase: (base: string) => void;
   catalog: DemoCatalog | undefined;
+  /** Clears the property, answers and results in every view and returns to the start. */
+  onStartOver: () => void;
 }
 
 export function serviceSummary(mode: DataMode, health: HealthState): { label: string; tone: 'ok' | 'warn' | 'bad' | 'idle' } {
@@ -35,7 +37,7 @@ export function serviceSummary(mode: DataMode, health: HealthState): { label: st
   return { label: 'No dataset loaded', tone: 'bad' };
 }
 
-export function Header({ view, hrefFor, mode, onMode, health, apiBase, onApiBase, catalog }: Props) {
+export function Header({ view, hrefFor, mode, onMode, health, apiBase, onApiBase, catalog, onStartOver }: Props) {
   const summary = serviceSummary(mode, health);
   const [open, setOpen] = useState(false);
   const wrapper = useRef<HTMLDivElement | null>(null);
@@ -72,17 +74,21 @@ export function Header({ view, hrefFor, mode, onMode, health, apiBase, onApiBase
 
         <nav className="nav" aria-label="Views">
           <a href={hrefFor('lookup')} aria-current={view === 'lookup' ? 'page' : undefined}>
-            Lookup
+            Property lookup
           </a>
           <a href={hrefFor('changes')} aria-current={view === 'changes' ? 'page' : undefined}>
-            Changes
+            Portfolio changes
           </a>
           <a href={hrefFor('disagreements')} aria-current={view === 'disagreements' ? 'page' : undefined}>
-            Disagreements
+            Compare sources
           </a>
         </nav>
 
         <div className="header__tools">
+          <button type="button" className="button button--small button--quiet header__restart" onClick={onStartOver}>
+            <Icon name="restart" />
+            {mode === 'demo' ? 'Restart demo' : 'Start over'}
+          </button>
           <fieldset className="mode" aria-label="Data source">
             <legend className="sr-only">Data source</legend>
             <label className="mode__option">

@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
 import type { ChangeOutcome } from '../../api/types';
-import { Disclosure, Empty, Facts, Notice, SectionHeading, Spinner, Tag } from '../../components/ui';
+import { Disclosure, Facts, Notice, SectionHeading, Spinner, Tag } from '../../components/ui';
 import { formatDate } from '../../lib/dates';
-import { type Filters, type ImpactKind, NO_FILTERS, buildTimeline, filterRows, impactRows, propertyLabel, summarizeByCategory, summarizeByPlace } from '../../lib/portfolio';
+import { categoryLabel } from '../../lib/labels';
+import { type Filters, type ImpactKind, NO_FILTERS, buildTimeline, filterRows, impactRows, propertyLabel, summarizeByCategory, summarizeByPlace, summarizeGroups } from '../../lib/portfolio';
 import { useSource } from '../../state/source';
 import { type Grouping, PortfolioDrillDown, PropertyName } from './PortfolioDrillDown';
 import { SummaryTable } from './PortfolioSummaries';
@@ -42,12 +43,15 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
   const details = usePortfolioDetails(source, outcome);
   const { lookups } = details;
   const [filters, setFilters] = useState<Filters>(NO_FILTERS);
-  const [grouping, setGrouping] = useState<Grouping>('source');
+  const [grouping, setGrouping] = useState<Grouping>('property');
 
   const { rows, unreadable } = useMemo(() => impactRows(result), [result]);
   const visible = useMemo(() => filterRows(rows, filters, lookups), [rows, filters, lookups]);
-  const places = useMemo(() => summarizeByPlace(rows, lookups), [rows, lookups]);
-  const categories = useMemo(() => summarizeByCategory(rows, lookups), [rows, lookups]);
+  // With a summary the groups are the service's own; otherwise they are regrouped from the records as they load.
+  const { summary } = outcome;
+  const places = useMemo(() => (summary ? [] : summarizeByPlace(rows, lookups)), [summary, rows, lookups]);
+  const jurisdictions = useMemo(() => (summary ? summarizeGroups(summary.by_jurisdiction, (key) => key) : []), [summary]);
+  const categories = useMemo(() => (summary ? summarizeGroups(summary.by_category, categoryLabel) : summarizeByCategory(rows, lookups)), [summary, rows, lookups]);
   const timeline = useMemo(() => buildTimeline(result, [...lookups.rules.values()]), [result, lookups.rules]);
 
   const counts: Record<ImpactKind, string[]> = { definite: result.affected_address_ids, uncertain: result.uncertain_address_ids, conflict: result.conflict_flag_address_ids };
@@ -58,6 +62,7 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
   const activeFilters = [
     filters.impact && { key: 'impact' as const, label: IMPACT.find((item) => item.kind === filters.impact)?.title ?? filters.impact },
     filters.place && { key: 'place' as const, label: places.find((group) => group.key === filters.place)?.label ?? 'Location' },
+    filters.jurisdiction && { key: 'jurisdiction' as const, label: `Rules of ${filters.jurisdiction}` },
     filters.category && { key: 'category' as const, label: categories.find((group) => group.key === filters.category)?.label ?? 'Category' },
   ].filter((item): item is { key: keyof Filters; label: string } => !!item);
   const shownProperties = new Set(visible.map((row) => row.addressId)).size;
@@ -94,19 +99,9 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
         Comparison result
       </h2>
 
-      {development && (
-        <Notice tone="synthetic" title="UX development fixture: fictional sources and properties">
-          <p>
-            The state “ZZ”, its cities, their ordinances and these properties are invented so this view has several jurisdictions, categories and dates to lay out. The rules were created by the backend’s extraction checks and every result below was computed by the backend evaluator. It is not a real snapshot, not Core A’s corpus and not legal evidence.
-          </p>
-        </Notice>
-      )}
-      {outcome.recordedStore === 'no_extracted_rules' && (
-        <Notice tone="synthetic" title="Recorded against a store with no extracted rules">
-          <p>This is the backend’s answer for the published scenario when sample properties exist but no rules have been extracted — the state of the real dataset before a provider is configured. It demonstrates the blocked state; it is not a legal result.</p>
-        </Notice>
-      )}
-
+      {outcome.notices.map((notice) => (
+        <Notice key={notice} tone="info" title={notice} role="status" compact />
+      ))}
       {blocked && (
         <Notice tone="danger" title="Blocked: this comparison could not be established" role="status">
           <p>The counts below are not zero: they could not be computed. Do not read this as a verified empty set.</p>
@@ -114,19 +109,8 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
         </Notice>
       )}
       {hypothetical && (
-        <Notice tone="info" title="Hypothetical: assumes the selected pending rules are enacted">
+        <Notice tone="info" title="Hypothetical: assumes the selected pending rules are enacted" compact>
           <p>Pending rules are treated as enacted and effective on the comparison date for this comparison only. Stored law is unchanged, and nothing here says the rules will be enacted.</p>
-        </Notice>
-      )}
-      {result.status === 'partial' && (
-        <Notice tone="unknown" title="Partial result">
-          <p>{status.gloss} Read the notes before relying on either list.</p>
-          <Notes notes={result.notes} />
-        </Notice>
-      )}
-      {result.status === 'complete' && result.notes.length > 0 && (
-        <Notice tone="neutral" title="Notes from the comparison">
-          <Notes notes={result.notes} />
         </Notice>
       )}
 
@@ -155,15 +139,29 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
             );
           })}
         </div>
-        {!blocked && result.affected_address_ids.some((id) => result.uncertain_address_ids.includes(id)) && (
-          <p className="hint impact__overlap">A property is counted under both “definitely affected” and “uncertain” when one rule’s effect on it is settled and another’s is not.</p>
+        {!blocked && rows.length > 0 && (
+          <p className="hint impact__overlap">
+            The three counts are separate lists and they overlap
+            {result.affected_address_ids.some((id) => result.uncertain_address_ids.includes(id)) ? ': a property is counted under both “definitely affected” and “uncertain” when one rule’s effect on it is settled and another’s is not.' : ': a property can be in more than one, so they do not add up to a total.'}
+          </p>
+        )}
+        {result.status === 'partial' && (
+          <Notice tone="unknown" title="Partial result" compact>
+            <p>{status.gloss} Read the notes before relying on either list.</p>
+            <Notes notes={result.notes} />
+          </Notice>
+        )}
+        {result.status === 'complete' && result.notes.length > 0 && (
+          <Notice tone="neutral" title="Notes from the comparison" compact>
+            <Notes notes={result.notes} />
+          </Notice>
         )}
         {flaggedWithoutChange.length > 0 && (
           <Disclosure summary={`${flaggedWithoutChange.length} flagged ${flaggedWithoutChange.length === 1 ? 'property has' : 'properties have'} no comparison result between these dates`}>
             <ul className="plain-list plain-list--tight">
               {flaggedWithoutChange.map((addressId) => (
                 <li key={addressId} className="flagged">
-                  <PropertyName label={propertyLabel(addressId, lookups.addresses.get(addressId))} />
+                  <PropertyName label={propertyLabel(addressId, lookups.addresses.get(addressId), summary?.property_labels[addressId])} />
                   <a className="link" href={disagreementHref(addressId, result.after)}>
                     Compare the conflicting sources
                   </a>
@@ -174,37 +172,37 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
         )}
       </section>
 
-      <DetailStatus details={details} />
-
-      {!blocked && (
-        <section className="section" aria-labelledby="change-timeline">
-          <SectionHeading id="change-timeline" title="Dates behind this comparison" level={3} />
-          <p className="section__lead">Dated statements on the rule records in this comparison, in order, with the two compared dates marked. Each date is shown as its source states it.</p>
-          <PortfolioTimeline timeline={timeline} rules={lookups.rules} rows={rows} loading={details.rules.status === 'loading'} blocked={blocked} busy={busy} onCompare={onCompare} />
-        </section>
-      )}
-
       {!blocked && rows.length > 0 && (
         <section className="section" aria-labelledby="change-summaries">
-          <SectionHeading id="change-summaries" title="Where and what" level={3} />
-          <p className="section__lead">Properties with definite changes or unresolved possible impacts, grouped two ways. Select a row to filter the detail below.</p>
+          <SectionHeading id="change-summaries" title="Where and what" level={3} aside={<span className="hint">Select a row to filter the detail below</span>} />
           <div className="summaries">
-            <SummaryTable caption="By property location" columnLabel="Legal municipality" groups={places} selected={filters.place} onSelect={(place) => setFilters((current) => ({ ...current, place }))} pending={details.addresses.status === 'loading' ? 'Reading the property list…' : undefined} />
-            <SummaryTable caption="By rule category" columnLabel="Category" groups={categories} selected={filters.category} onSelect={(category) => setFilters((current) => ({ ...current, category }))} pending={details.rules.status === 'loading' ? 'Reading the rule records…' : undefined} />
+            {summary ? (
+              <SummaryTable caption="By rule jurisdiction" columnLabel="Jurisdiction of the rule" groups={jurisdictions} selected={filters.jurisdiction} onSelect={(jurisdiction) => setFilters((current) => ({ ...current, jurisdiction }))} />
+            ) : (
+              <SummaryTable caption="By property location" columnLabel="Legal municipality" groups={places} selected={filters.place} onSelect={(place) => setFilters((current) => ({ ...current, place }))} pending={details.addresses.status === 'loading' ? 'Reading the property list…' : undefined} />
+            )}
+            <SummaryTable caption="By rule category" columnLabel="Category" groups={categories} selected={filters.category} onSelect={(category) => setFilters((current) => ({ ...current, category }))} pending={!summary && details.rules.status === 'loading' ? 'Reading the rule records…' : undefined} />
           </div>
+          <p className="hint">
+            {summary
+              ? 'Groups are the service’s own unions of its per-property results. A property can be in several groups and in more than one column, so the numbers are not additive.'
+              : 'Groups regroup the comparison’s per-property results. A property under two headings is counted in both.'}
+          </p>
         </section>
       )}
 
-      {rows.length > 0 && (
+      {(rows.length > 0 || !blocked) && (
         <section className="section" aria-labelledby="change-diffs">
           <SectionHeading
             id="change-diffs"
-            title="Source, rule and property"
+            title="Property by property, and source by source"
             level={3}
             aside={
-              <span className="hint" aria-live="polite">
-                {shownProperties} {shownProperties === 1 ? 'property' : 'properties'} · {visible.length} comparison {visible.length === 1 ? 'result' : 'results'}
-              </span>
+              rows.length > 0 ? (
+                <span className="hint" aria-live="polite">
+                  {shownProperties} {shownProperties === 1 ? 'property' : 'properties'} · {visible.length} comparison {visible.length === 1 ? 'result' : 'results'}
+                </span>
+              ) : undefined
             }
           />
           {activeFilters.length > 0 && (
@@ -221,7 +219,26 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
               </button>
             </div>
           )}
-          <PortfolioDrillDown result={result} rows={visible} totalRows={rows.length} lookups={lookups} grouping={grouping} onGrouping={setGrouping} lookupHref={lookupHref} disagreementHref={disagreementHref} />
+          <DetailStatus details={details} />
+          <PortfolioDrillDown
+            result={result}
+            rows={visible}
+            totalRows={rows.length}
+            lookups={lookups}
+            grouping={grouping}
+            onGrouping={setGrouping}
+            lookupHref={lookupHref}
+            disagreementHref={disagreementHref}
+            timelineCount={timeline.events.length}
+            timeline={
+              blocked ? null : (
+                <>
+                  <p className="section__lead">Dated statements on the rule records in this comparison, in order, with the two compared dates marked. Each date is shown as its source states it.</p>
+                  <PortfolioTimeline timeline={timeline} rules={lookups.rules} rows={rows} loading={details.rules.status === 'loading'} blocked={blocked} busy={busy} onCompare={onCompare} />
+                </>
+              )
+            }
+          />
           {unreadable.length > 0 && (
             <Disclosure summary={`${unreadable.reduce((total, item) => total + item.entries.length, 0)} entries in an unexpected shape`}>
               <pre className="raw">{JSON.stringify(unreadable, null, 2)}</pre>
@@ -230,10 +247,17 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
         </section>
       )}
 
-      {!blocked && rows.length === 0 && (
-        <Empty title="No differences between these dates" icon="layers">
-          <p>The evaluator returned the same result for every sample property on both dates{result.status === 'partial' ? ', within the limits noted above' : ''}.</p>
-        </Empty>
+      {development && (
+        <Disclosure summary="About this development fixture" className="about">
+          <p>
+            UX development fixture: fictional sources and properties. The state “ZZ”, its cities, their ordinances and these properties are invented so this view has several jurisdictions, categories and dates to lay out. The rules were created by the backend’s extraction checks and every result here was computed by the backend evaluator. It is not a real snapshot, not Core A’s corpus and not legal evidence.
+          </p>
+        </Disclosure>
+      )}
+      {outcome.recordedStore === 'no_extracted_rules' && (
+        <Notice tone="synthetic" title="Recorded against a store with no extracted rules" compact>
+          <p>This is the backend’s answer for the published scenario when sample properties exist but no rules have been extracted — the state of the real dataset before a provider is configured. It demonstrates the blocked state; it is not a legal result.</p>
+        </Notice>
       )}
 
       {mapped.length > 0 && (
@@ -257,7 +281,7 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
                       <ul className="plain-list plain-list--tight">
                         {ids.map((id) => (
                           <li key={id}>
-                            {lookups.rules.get(id)?.title ?? ''} <span className="mono break">{id}</span>
+                            {lookups.rules.get(id)?.title ?? summary?.rule_labels[id] ?? ''} <span className="mono break">{id}</span>
                           </li>
                         ))}
                       </ul>
@@ -279,7 +303,12 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
             { label: 'Source of this result', value: outcome.origin.label, note: outcome.origin.detail },
             { label: 'Request', value: <span className="mono break">{JSON.stringify(outcome.request)}</span> },
             { label: 'Scenario', value: result.scenario },
-            { label: 'Names and labels', value: 'Read from GET /addresses, GET /rules/{id} and GET /sources/{id}', note: 'Groupings and the timeline rearrange values those records and this comparison returned. Nothing is evaluated in the browser.' },
+            {
+              label: 'Names and groups',
+              value: summary ? 'From POST /changes/summary; locations, source text and dates from GET /addresses, GET /rules/{id} and GET /sources/{id}' : 'Read from GET /addresses, GET /rules/{id} and GET /sources/{id}',
+              note: 'Groupings and the timeline rearrange values those records and this comparison returned. Nothing is evaluated in the browser.',
+            },
+            ...(summary?.notes.length ? [{ label: 'Notes on the groups', value: summary.notes.join(' ') }] : []),
           ]}
         />
       </Disclosure>
