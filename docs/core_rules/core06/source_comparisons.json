@@ -1,0 +1,2446 @@
+{
+  "public_contract": "PLAT-06 unreleased; internal only",
+  "applied_to_saved_sources": {
+    "NJ_local": {
+      "field": "interaction",
+      "rule_ids": [],
+      "before": {
+        "value": "Municipal conflicting ordinances prohibited, with express other-law exception",
+        "support": [
+          {
+            "span": {
+              "doc_id": "D069",
+              "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+              "start": 9341,
+              "end": 9570,
+              "text": "b.    A municipality shall be prohibited from enacting\nan ordinance that conflicts with this act.  This subsection shall not be\nconstrued to prohibit the enactment of ordinances explicitly authorized or\nrequired by any other law.",
+              "section": null
+            },
+            "anchor_valid": true,
+            "source": {
+              "doc_id": "D069",
+              "jurisdictions": [
+                "NJ"
+              ],
+              "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+              "retrieved_at": "2026-10-01T22:56Z",
+              "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+              "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+              "capture_status": "supplied",
+              "authority": "official",
+              "source_type": "unclassified",
+              "issues": [
+                "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+              ],
+              "duplicate_of": null,
+              "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+              "identity_valid": true
+            }
+          }
+        ]
+      },
+      "after": {
+        "value": "Local provision/direction/scope unestablished",
+        "support": []
+      },
+      "classification": "missing_support",
+      "status": "unresolved",
+      "semantic_support": "not_checked",
+      "winner": null,
+      "legal_amendment": null,
+      "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+    },
+    "Berkeley_dates": {
+      "field": "effective_date",
+      "rule_ids": [
+        "r-12c99cf95c4f2cd2242e",
+        "r-f372d8d7042cb492998b"
+      ],
+      "before": {
+        "value": "Passed to print 2025-11-18; effective date not established",
+        "support": [
+          {
+            "span": {
+              "doc_id": "D001",
+              "source_hash": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+              "start": 7695,
+              "end": 7875,
+              "text": "At a regular meeting of the Council of the City of Berkeley held on November 18, \n2025, this Ordinance was passed to print and ordered published by posting by the \nfollowing vote:\n",
+              "section": null
+            },
+            "anchor_valid": true,
+            "source": {
+              "doc_id": "D001",
+              "jurisdictions": [
+                "Berkeley, CA"
+              ],
+              "url": "https://berkeleyca.gov/sites/default/files/documents/2025-12-02%20Item%2001%20Ordinance%207992.pdf",
+              "retrieved_at": "2026-10-01T22:44Z",
+              "sha256": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+              "manifest_sha256": "764e0430da30388ff875606eb2f551388fc85e214d549e305d7f502ff550803d",
+              "capture_status": "supplied",
+              "authority": "official",
+              "source_type": "legal_text",
+              "issues": [
+                "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+              ],
+              "duplicate_of": null,
+              "actual_sha256": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+              "identity_valid": true
+            }
+          }
+        ]
+      },
+      "after": {
+        "value": "January1/March1,2026 are unverified investigation claims",
+        "support": []
+      },
+      "classification": "missing_support",
+      "status": "unresolved",
+      "semantic_support": "not_checked",
+      "winner": null,
+      "legal_amendment": null,
+      "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+    },
+    "LA_utility_guidance": {
+      "field": "utility_increase_cutoff",
+      "rule_ids": [],
+      "before": {
+        "value": "2026-02-02",
+        "support": [
+          {
+            "span": {
+              "doc_id": "D041",
+              "source_hash": "4d8837313d514bde68624c37ab37622dd950c542bdc74942702641519eae3ece",
+              "start": 2074,
+              "end": 2185,
+              "text": "Effective February 2, 2026, the landlord can no longer include an additional percentage increase for utilities.",
+              "section": null
+            },
+            "anchor_valid": true,
+            "source": {
+              "doc_id": "D041",
+              "jurisdictions": [
+                "Los Angeles, CA"
+              ],
+              "url": "https://housing.lacity.gov/residents/rso-overview",
+              "retrieved_at": "2026-10-01T22:36Z",
+              "sha256": "4d8837313d514bde68624c37ab37622dd950c542bdc74942702641519eae3ece",
+              "manifest_sha256": "5d2e79094fcb8c09aa51120208725b130b1932bceb848b3641dd82f0a6b3656b",
+              "capture_status": "supplied",
+              "authority": "official",
+              "source_type": "unclassified",
+              "issues": [
+                "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+              ],
+              "duplicate_of": null,
+              "actual_sha256": "4d8837313d514bde68624c37ab37622dd950c542bdc74942702641519eae3ece",
+              "identity_valid": true
+            }
+          }
+        ]
+      },
+      "after": {
+        "value": "2026-02-02",
+        "support": [
+          {
+            "span": {
+              "doc_id": "D042",
+              "source_hash": "21a8e44f111659923f120ad5543bf46611e1b2dd5af0087cc16f98de479cd262",
+              "start": 421,
+              "end": 539,
+              "text": "Beginning February 2, 2026, a landlord can no longer include any additional percentage increase for utilities.\nState l",
+              "section": null
+            },
+            "anchor_valid": true,
+            "source": {
+              "doc_id": "D042",
+              "jurisdictions": [
+                "Los Angeles, CA"
+              ],
+              "url": "https://housing.lacity.gov/rso-rent-increase-calculator",
+              "retrieved_at": "2026-10-01T22:36Z",
+              "sha256": "21a8e44f111659923f120ad5543bf46611e1b2dd5af0087cc16f98de479cd262",
+              "manifest_sha256": "173b8fd5169b465fb8e634598a74881c1247f23df4a8c1f487cd53294b379995",
+              "capture_status": "supplied",
+              "authority": "official",
+              "source_type": "unclassified",
+              "issues": [
+                "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+              ],
+              "duplicate_of": null,
+              "actual_sha256": "21a8e44f111659923f120ad5543bf46611e1b2dd5af0087cc16f98de479cd262",
+              "identity_valid": true
+            }
+          }
+        ]
+      },
+      "classification": "same_claim",
+      "status": "same_observation_not_semantically_verified",
+      "semantic_support": "not_checked",
+      "winner": null,
+      "legal_amendment": null,
+      "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+    },
+    "LA_alleged_date_conflict": {
+      "field": "utility_increase_cutoff",
+      "rule_ids": [],
+      "before": {
+        "value": "2026-02-02",
+        "support": [
+          {
+            "span": {
+              "doc_id": "D041",
+              "source_hash": "4d8837313d514bde68624c37ab37622dd950c542bdc74942702641519eae3ece",
+              "start": 2074,
+              "end": 2185,
+              "text": "Effective February 2, 2026, the landlord can no longer include an additional percentage increase for utilities.",
+              "section": null
+            },
+            "anchor_valid": true,
+            "source": {
+              "doc_id": "D041",
+              "jurisdictions": [
+                "Los Angeles, CA"
+              ],
+              "url": "https://housing.lacity.gov/residents/rso-overview",
+              "retrieved_at": "2026-10-01T22:36Z",
+              "sha256": "4d8837313d514bde68624c37ab37622dd950c542bdc74942702641519eae3ece",
+              "manifest_sha256": "5d2e79094fcb8c09aa51120208725b130b1932bceb848b3641dd82f0a6b3656b",
+              "capture_status": "supplied",
+              "authority": "official",
+              "source_type": "unclassified",
+              "issues": [
+                "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+              ],
+              "duplicate_of": null,
+              "actual_sha256": "4d8837313d514bde68624c37ab37622dd950c542bdc74942702641519eae3ece",
+              "identity_valid": true
+            }
+          },
+          {
+            "span": {
+              "doc_id": "D042",
+              "source_hash": "21a8e44f111659923f120ad5543bf46611e1b2dd5af0087cc16f98de479cd262",
+              "start": 421,
+              "end": 539,
+              "text": "Beginning February 2, 2026, a landlord can no longer include any additional percentage increase for utilities.\nState l",
+              "section": null
+            },
+            "anchor_valid": true,
+            "source": {
+              "doc_id": "D042",
+              "jurisdictions": [
+                "Los Angeles, CA"
+              ],
+              "url": "https://housing.lacity.gov/rso-rent-increase-calculator",
+              "retrieved_at": "2026-10-01T22:36Z",
+              "sha256": "21a8e44f111659923f120ad5543bf46611e1b2dd5af0087cc16f98de479cd262",
+              "manifest_sha256": "173b8fd5169b465fb8e634598a74881c1247f23df4a8c1f487cd53294b379995",
+              "capture_status": "supplied",
+              "authority": "official",
+              "source_type": "unclassified",
+              "issues": [
+                "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+              ],
+              "duplicate_of": null,
+              "actual_sha256": "21a8e44f111659923f120ad5543bf46611e1b2dd5af0087cc16f98de479cd262",
+              "identity_valid": true
+            }
+          }
+        ]
+      },
+      "after": {
+        "value": "2026-01-24 unverified investigation claim",
+        "support": []
+      },
+      "classification": "missing_support",
+      "status": "unresolved",
+      "semantic_support": "not_checked",
+      "winner": null,
+      "legal_amendment": null,
+      "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+    },
+    "Boston_HSNA_existing_candidate": {
+      "interface": "internal-core-comparison-v1-not-public-contract",
+      "rule_ids": [
+        "r-5bda807dd5c203fa95fa",
+        "r-5fb3ae71c1e9a75d9637"
+      ],
+      "claims": {
+        "before": {
+          "jurisdiction": "Boston, MA",
+          "level": "city",
+          "category": "just_cause_eviction",
+          "provision_key": "tenant_rights_notice",
+          "title": "Tenant rights and resources notice when ending a tenancy",
+          "requirement": "A landlord planning to end a tenancy must provide the tenant with a Notice of Tenants’ Rights and Resources. The guidance states that the notice should be delivered at the same time as the notice to quit or notice of lease non-renewal.",
+          "key_value": "Provide a Notice of Tenants’ Rights and Resources; guidance says delivery should accompany the termination notice.",
+          "citation": "City of Boston Ordinances § 10-11.7",
+          "quoted_span": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+          "source_doc_id": "D013",
+          "source_url": "https://www.boston.gov/housing-stability-notification-act",
+          "coverage_conditions": {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "is_landlord",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "planning_to_end_tenancy",
+                "value": true,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          "exemption_conditions": {
+            "op": "unsupported",
+            "args": [],
+            "fact": null,
+            "value": null,
+            "reason": "The supplied guidance identifies no exemption provisions; absence of such provisions does not establish that no exemptions exist."
+          },
+          "exemptions": null,
+          "lifecycle": "enacted",
+          "effective_date": null,
+          "end_date": null,
+          "status_as_of": null,
+          "status_events": [],
+          "evidence": [
+            {
+              "doc_id": "D013",
+              "quote": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "start": 1736,
+              "end": 1903,
+              "supports": [
+                "title",
+                "requirement",
+                "key_value",
+                "coverage_conditions",
+                "provision_key"
+              ]
+            },
+            {
+              "doc_id": "D013",
+              "quote": "The Notice of Tenants’ Rights and Resources should be delivered at the same time as the Notice to quit or Notice of non-renewal of lease.",
+              "start": 1930,
+              "end": 2067,
+              "supports": [
+                "requirement",
+                "key_value"
+              ]
+            },
+            {
+              "doc_id": "D013",
+              "quote": "Unless otherwise provided, a person or entity violating any provisions of this Ordinance shall be punishable by a warning or fine in accordance with the provisions of City of Boston Ordinances and/or Boston City Charter, shown below.\nHousing Stability Notification Act (Sec. 10-11.7)\nEnforcement Entity:\nInspectional Services Department\n1st Offense:\nWarning\n2nd and Subsequent Offenses:\n$300 per day",
+              "start": 4272,
+              "end": 4671,
+              "supports": [
+                "jurisdiction",
+                "level",
+                "citation",
+                "lifecycle",
+                "penalties"
+              ]
+            },
+            {
+              "doc_id": "D013",
+              "quote": "If a landlord violates the act, it\nDOES NOT\nhalt the eviction process.",
+              "start": 4672,
+              "end": 4742,
+              "supports": [
+                "review_issues"
+              ]
+            }
+          ],
+          "interactions": [],
+          "penalties": "Unless otherwise provided, first offense: warning; second and subsequent offenses: $300 per day. Enforcement entity: Inspectional Services Department.",
+          "review_issues": [
+            "All six categories were reviewed. No supported rules or explicit negative findings were identified for rent_increase_limits, security_deposits, application_screening_fees, screening_restrictions, or algorithmic_rent_setting. Their absence from this source does not establish that no such rules exist.",
+            "Missing field-level evidence for exemption_conditions",
+            "No amendment, repeal, or directional supersession or conflict with another identified provision is evidenced in the supplied source.",
+            "No exemption provisions are supplied.",
+            "The eviction-related notification and reporting provisions are classified under just_cause_eviction because the schema has no separate eviction-notice category; none establishes a substantive just-cause requirement.",
+            "The guidance uses 'should' for simultaneous delivery; the linked ordinance text is not included to verify mandatory timing language.",
+            "The retrieval timestamp is not an effective date, status-event date, or supported lifecycle snapshot date.",
+            "The source describes an enforced ordinance but supplies no effective date, end date, dated enactment event, or dated lifecycle snapshot.",
+            "The source is official agency guidance, not the text of the linked ordinance.",
+            "This is an eviction-related notification obligation, not a substantive requirement to establish just cause for eviction.",
+            "Violation does not halt the eviction process, according to the guidance."
+          ],
+          "conflict_flag": false,
+          "conflict_note": null,
+          "team_rule_id": "r-5fb3ae71c1e9a75d9637",
+          "evidence_mode": "live",
+          "extraction_run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+          "semantic_verification": "needs_review"
+        },
+        "after": {
+          "jurisdiction": "Boston, MA",
+          "level": "city",
+          "category": "just_cause_eviction",
+          "provision_key": "tenant_rights_notice",
+          "title": "Notice of Tenants’ Rights and Resources",
+          "requirement": "Landlords ending a tenancy must provide the Notice of Tenants’ Rights and Resources when starting eviction or declining lease renewal. The rights notice must accompany the Notice to Quit or notice of lease non-renewal or expiration. It must also be delivered to occupants asked to leave, including former owners and tenants of properties purchased out of foreclosure or from a bank or mortgage lender.",
+          "key_value": "Rights notice delivered with the termination notice",
+          "citation": "Housing Stability Notification Act (Sec. 10-11.7)",
+          "quoted_span": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement.",
+          "source_doc_id": "D014",
+          "source_url": "https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+          "coverage_conditions": {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "residential",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "landlord_or_foreclosing_owner_intends_to_end_tenancy_or_post_foreclosure_occupancy",
+                "value": true,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          "exemption_conditions": {
+            "op": "any",
+            "args": [
+              {
+                "op": "in",
+                "args": [],
+                "fact": "residence_facility_type",
+                "value": [
+                  "hospital",
+                  "skilled nursing facility",
+                  "health facility"
+                ],
+                "reason": null
+              },
+              {
+                "op": "all",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [],
+                    "fact": "facility_nonprofit",
+                    "value": true,
+                    "reason": null
+                  },
+                  {
+                    "op": "eq",
+                    "args": [],
+                    "fact": "facility_primary_purpose_short_term_substance_abuse_treatment_assistance_or_therapy",
+                    "value": true,
+                    "reason": null
+                  }
+                ],
+                "fact": null,
+                "value": null,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          "exemptions": "Residences in hospitals, skilled nursing facilities or health facilities; residences in nonprofit facilities whose primary purpose is short-term treatment, assistance or therapy for alcohol, drug or other substance abuse.",
+          "lifecycle": "enacted",
+          "effective_date": "2020-11-06",
+          "end_date": null,
+          "status_as_of": null,
+          "status_events": [
+            {
+              "status": "enacted",
+              "on": "2020-10",
+              "evidence": [
+                {
+                  "doc_id": "D014",
+                  "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020",
+                  "start": 288,
+                  "end": 394,
+                  "supports": [
+                    "status_events.status",
+                    "status_events.on"
+                  ]
+                }
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "doc_id": "D014",
+              "quote": "SOURCE: https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+              "start": 0,
+              "end": 124,
+              "supports": [
+                "source_url",
+                "source_doc_id"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020 that requires any landlord planning to end a tenancy\nagreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "start": 288,
+              "end": 527,
+              "supports": [
+                "jurisdiction",
+                "level",
+                "title",
+                "provision_key",
+                "requirement",
+                "lifecycle"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement. The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+              "start": 528,
+              "end": 859,
+              "supports": [
+                "category",
+                "requirement",
+                "key_value",
+                "quoted_span"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "In the event that your landlord serves you with a Notice to Quit or Notice of Lease\nNon-renewal or expiration, you should also receive the Notice of Tenants’ Rights\nand Resources at the same time.",
+              "start": 2339,
+              "end": 2535,
+              "supports": [
+                "requirement",
+                "key_value"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Notice of Tenants’ Rights and Resources must also be delivered to any tenant\nthat is asked to leave a property. For example, if someone is purchasing a property\nout of foreclosure, or from a bank or a mortgage lender, they must provide this\nNotice to the former owners of the property, or any tenants that live in the\nproperty.",
+              "start": 860,
+              "end": 1191,
+              "supports": [
+                "requirement",
+                "coverage_conditions"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Ordinance was passed to ensure that tenants and former homeowners\nunderstand their rights when their tenancy or residential occupancy is being\nterminated, and that they know about agencies that may be able to assist them.",
+              "start": 1614,
+              "end": 1839,
+              "supports": [
+                "coverage_conditions"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+              "start": 3186,
+              "end": 3598,
+              "supports": [
+                "coverage_conditions",
+                "exemption_conditions",
+                "exemptions"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The HSNA becomes effective on November 6, 2020.",
+              "start": 2168,
+              "end": 2215,
+              "supports": [
+                "effective_date"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "Housing Stability Notification Act (Sec. 10-11.7) \nEnforcement Entity: Inspectional Services Department \n1st Offense: Warning \n2nd and Subsequent Offenses: $300 per day \nIf a landlord violates the HSNA, it DOES NOT halt the eviction process.",
+              "start": 5642,
+              "end": 5883,
+              "supports": [
+                "citation",
+                "penalties",
+                "review_issues"
+              ]
+            }
+          ],
+          "interactions": [],
+          "penalties": "Inspectional Services Department enforcement: first offense, warning; second and subsequent offenses, $300 per day. An HSNA violation does not halt eviction.",
+          "review_issues": [
+            "All six categories were reviewed. The source supports eviction-related notice, City-submission and nonwaiver obligations. It supplies no provisions or explicit negative findings for rent increase limits, security deposits, application screening fees, screening restrictions or algorithmic rent setting; silence does not establish that no such rules exist.",
+            "No dated lifecycle snapshot or end date is supplied.",
+            "No directional supersession or conflict with another identified legal provision is evidenced.",
+            "Official tenant guidance, not the ordinance text; Section 10-11.7 is supplied in the enforcement heading.",
+            "The available category just_cause_eviction is used for an eviction-related procedural protection; this source does not establish a substantive just-cause requirement.",
+            "The general coverage statement names landlords and foreclosing owners, while the notice example also names purchasers from foreclosure, banks or mortgage lenders. Whether those purchasers are fully captured by the general coverage description requires verification.",
+            "The numbered exemption categories are compiled as alternatives. The source joins them with 'and'; verify this interpretation against the ordinance.",
+            "The penalty schedule is ordinance-wide and states 'Unless otherwise provided'; the source does not identify any provision-specific alternative penalty.",
+            "The retrieval date and the source URL’s directory date are not supported lifecycle snapshot dates. No repeal, amendment or exclusive end date is established.",
+            "The source is official tenant guidance. Its reported passage in October 2020 supports the enactment event, but it is not the ordinance text or a current status record.",
+            "The statement that an HSNA violation does not halt eviction is a limitation on these protections, not evidence that other eviction protections are absent."
+          ],
+          "conflict_flag": false,
+          "conflict_note": null,
+          "team_rule_id": "r-5bda807dd5c203fa95fa",
+          "evidence_mode": "live",
+          "extraction_run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+          "semantic_verification": "needs_review"
+        }
+      },
+      "rule_hashes": {
+        "before": "666dd3898cf92701def9af5c9140a24fca95e42e995d4d559662041a59c65db8",
+        "after": "ef83c667576c04e0d4703fd3980254f90f1c8c14a8e463d2577c4494aa7f143f"
+      },
+      "observations": [
+        {
+          "field": "requirement",
+          "kind": "requirement",
+          "before": "A landlord planning to end a tenancy must provide the tenant with a Notice of Tenants’ Rights and Resources. The guidance states that the notice should be delivered at the same time as the notice to quit or notice of lease non-renewal.",
+          "after": "Landlords ending a tenancy must provide the Notice of Tenants’ Rights and Resources when starting eviction or declining lease renewal. The rights notice must accompany the Notice to Quit or notice of lease non-renewal or expiration. It must also be delivered to occupants asked to leave, including former owners and tenants of properties purchased out of foreclosure or from a bank or mortgage lender.",
+          "support": {
+            "before": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D013",
+                  "quote": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "start": 1736,
+                  "end": 1903,
+                  "supports": [
+                    "title",
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "provision_key"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D013",
+                  "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+                  "start": 1736,
+                  "end": 1903,
+                  "text": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  1736
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              },
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D013",
+                  "quote": "The Notice of Tenants’ Rights and Resources should be delivered at the same time as the Notice to quit or Notice of non-renewal of lease.",
+                  "start": 1930,
+                  "end": 2067,
+                  "supports": [
+                    "requirement",
+                    "key_value"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D013",
+                  "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+                  "start": 1930,
+                  "end": 2067,
+                  "text": "The Notice of Tenants’ Rights and Resources should be delivered at the same time as the Notice to quit or Notice of non-renewal of lease.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  1930
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ],
+            "after": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020 that requires any landlord planning to end a tenancy\nagreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "start": 288,
+                  "end": 527,
+                  "supports": [
+                    "jurisdiction",
+                    "level",
+                    "title",
+                    "provision_key",
+                    "requirement",
+                    "lifecycle"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 288,
+                  "end": 527,
+                  "text": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020 that requires any landlord planning to end a tenancy\nagreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  288
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              },
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement. The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+                  "start": 528,
+                  "end": 859,
+                  "supports": [
+                    "category",
+                    "requirement",
+                    "key_value",
+                    "quoted_span"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 528,
+                  "end": 859,
+                  "text": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement. The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  528
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              },
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "In the event that your landlord serves you with a Notice to Quit or Notice of Lease\nNon-renewal or expiration, you should also receive the Notice of Tenants’ Rights\nand Resources at the same time.",
+                  "start": 2339,
+                  "end": 2535,
+                  "supports": [
+                    "requirement",
+                    "key_value"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 2339,
+                  "end": 2535,
+                  "text": "In the event that your landlord serves you with a Notice to Quit or Notice of Lease\nNon-renewal or expiration, you should also receive the Notice of Tenants’ Rights\nand Resources at the same time.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  2339
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              },
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The Notice of Tenants’ Rights and Resources must also be delivered to any tenant\nthat is asked to leave a property. For example, if someone is purchasing a property\nout of foreclosure, or from a bank or a mortgage lender, they must provide this\nNotice to the former owners of the property, or any tenants that live in the\nproperty.",
+                  "start": 860,
+                  "end": 1191,
+                  "supports": [
+                    "requirement",
+                    "coverage_conditions"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 860,
+                  "end": 1191,
+                  "text": "The Notice of Tenants’ Rights and Resources must also be delivered to any tenant\nthat is asked to leave a property. For example, if someone is purchasing a property\nout of foreclosure, or from a bank or a mortgage lender, they must provide this\nNotice to the former owners of the property, or any tenants that live in the\nproperty.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  860
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "key_value",
+          "kind": "threshold",
+          "before": "Provide a Notice of Tenants’ Rights and Resources; guidance says delivery should accompany the termination notice.",
+          "after": "Rights notice delivered with the termination notice",
+          "support": {
+            "before": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D013",
+                  "quote": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "start": 1736,
+                  "end": 1903,
+                  "supports": [
+                    "title",
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "provision_key"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D013",
+                  "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+                  "start": 1736,
+                  "end": 1903,
+                  "text": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  1736
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              },
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D013",
+                  "quote": "The Notice of Tenants’ Rights and Resources should be delivered at the same time as the Notice to quit or Notice of non-renewal of lease.",
+                  "start": 1930,
+                  "end": 2067,
+                  "supports": [
+                    "requirement",
+                    "key_value"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D013",
+                  "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+                  "start": 1930,
+                  "end": 2067,
+                  "text": "The Notice of Tenants’ Rights and Resources should be delivered at the same time as the Notice to quit or Notice of non-renewal of lease.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  1930
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ],
+            "after": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement. The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+                  "start": 528,
+                  "end": 859,
+                  "supports": [
+                    "category",
+                    "requirement",
+                    "key_value",
+                    "quoted_span"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 528,
+                  "end": 859,
+                  "text": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement. The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  528
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              },
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "In the event that your landlord serves you with a Notice to Quit or Notice of Lease\nNon-renewal or expiration, you should also receive the Notice of Tenants’ Rights\nand Resources at the same time.",
+                  "start": 2339,
+                  "end": 2535,
+                  "supports": [
+                    "requirement",
+                    "key_value"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 2339,
+                  "end": 2535,
+                  "text": "In the event that your landlord serves you with a Notice to Quit or Notice of Lease\nNon-renewal or expiration, you should also receive the Notice of Tenants’ Rights\nand Resources at the same time.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  2339
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "penalties",
+          "kind": "penalty",
+          "before": "Unless otherwise provided, first offense: warning; second and subsequent offenses: $300 per day. Enforcement entity: Inspectional Services Department.",
+          "after": "Inspectional Services Department enforcement: first offense, warning; second and subsequent offenses, $300 per day. An HSNA violation does not halt eviction.",
+          "support": {
+            "before": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D013",
+                  "quote": "Unless otherwise provided, a person or entity violating any provisions of this Ordinance shall be punishable by a warning or fine in accordance with the provisions of City of Boston Ordinances and/or Boston City Charter, shown below.\nHousing Stability Notification Act (Sec. 10-11.7)\nEnforcement Entity:\nInspectional Services Department\n1st Offense:\nWarning\n2nd and Subsequent Offenses:\n$300 per day",
+                  "start": 4272,
+                  "end": 4671,
+                  "supports": [
+                    "jurisdiction",
+                    "level",
+                    "citation",
+                    "lifecycle",
+                    "penalties"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D013",
+                  "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+                  "start": 4272,
+                  "end": 4671,
+                  "text": "Unless otherwise provided, a person or entity violating any provisions of this Ordinance shall be punishable by a warning or fine in accordance with the provisions of City of Boston Ordinances and/or Boston City Charter, shown below.\nHousing Stability Notification Act (Sec. 10-11.7)\nEnforcement Entity:\nInspectional Services Department\n1st Offense:\nWarning\n2nd and Subsequent Offenses:\n$300 per day",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  4272
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ],
+            "after": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "Housing Stability Notification Act (Sec. 10-11.7) \nEnforcement Entity: Inspectional Services Department \n1st Offense: Warning \n2nd and Subsequent Offenses: $300 per day \nIf a landlord violates the HSNA, it DOES NOT halt the eviction process.",
+                  "start": 5642,
+                  "end": 5883,
+                  "supports": [
+                    "citation",
+                    "penalties",
+                    "review_issues"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 5642,
+                  "end": 5883,
+                  "text": "Housing Stability Notification Act (Sec. 10-11.7) \nEnforcement Entity: Inspectional Services Department \n1st Offense: Warning \n2nd and Subsequent Offenses: $300 per day \nIf a landlord violates the HSNA, it DOES NOT halt the eviction process.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  5642
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "coverage_conditions",
+          "kind": "coverage",
+          "before": {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "is_landlord",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "planning_to_end_tenancy",
+                "value": true,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          "after": {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "residential",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "landlord_or_foreclosing_owner_intends_to_end_tenancy_or_post_foreclosure_occupancy",
+                "value": true,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          "support": {
+            "before": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D013",
+                  "quote": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "start": 1736,
+                  "end": 1903,
+                  "supports": [
+                    "title",
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "provision_key"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D013",
+                  "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+                  "start": 1736,
+                  "end": 1903,
+                  "text": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  1736
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ],
+            "after": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The Notice of Tenants’ Rights and Resources must also be delivered to any tenant\nthat is asked to leave a property. For example, if someone is purchasing a property\nout of foreclosure, or from a bank or a mortgage lender, they must provide this\nNotice to the former owners of the property, or any tenants that live in the\nproperty.",
+                  "start": 860,
+                  "end": 1191,
+                  "supports": [
+                    "requirement",
+                    "coverage_conditions"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 860,
+                  "end": 1191,
+                  "text": "The Notice of Tenants’ Rights and Resources must also be delivered to any tenant\nthat is asked to leave a property. For example, if someone is purchasing a property\nout of foreclosure, or from a bank or a mortgage lender, they must provide this\nNotice to the former owners of the property, or any tenants that live in the\nproperty.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  860
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              },
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The Ordinance was passed to ensure that tenants and former homeowners\nunderstand their rights when their tenancy or residential occupancy is being\nterminated, and that they know about agencies that may be able to assist them.",
+                  "start": 1614,
+                  "end": 1839,
+                  "supports": [
+                    "coverage_conditions"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 1614,
+                  "end": 1839,
+                  "text": "The Ordinance was passed to ensure that tenants and former homeowners\nunderstand their rights when their tenancy or residential occupancy is being\nterminated, and that they know about agencies that may be able to assist them.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  1614
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              },
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+                  "start": 3186,
+                  "end": 3598,
+                  "supports": [
+                    "coverage_conditions",
+                    "exemption_conditions",
+                    "exemptions"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 3186,
+                  "end": 3598,
+                  "text": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  3186
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "exemption_conditions",
+          "kind": "exemption",
+          "before": {
+            "op": "unsupported",
+            "args": [],
+            "fact": null,
+            "value": null,
+            "reason": "The supplied guidance identifies no exemption provisions; absence of such provisions does not establish that no exemptions exist."
+          },
+          "after": {
+            "op": "any",
+            "args": [
+              {
+                "op": "in",
+                "args": [],
+                "fact": "residence_facility_type",
+                "value": [
+                  "hospital",
+                  "skilled nursing facility",
+                  "health facility"
+                ],
+                "reason": null
+              },
+              {
+                "op": "all",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [],
+                    "fact": "facility_nonprofit",
+                    "value": true,
+                    "reason": null
+                  },
+                  {
+                    "op": "eq",
+                    "args": [],
+                    "fact": "facility_primary_purpose_short_term_substance_abuse_treatment_assistance_or_therapy",
+                    "value": true,
+                    "reason": null
+                  }
+                ],
+                "fact": null,
+                "value": null,
+                "reason": null
+              }
+            ],
+            "fact": null,
+            "value": null,
+            "reason": null
+          },
+          "support": {
+            "before": [],
+            "after": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+                  "start": 3186,
+                  "end": 3598,
+                  "supports": [
+                    "coverage_conditions",
+                    "exemption_conditions",
+                    "exemptions"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 3186,
+                  "end": 3598,
+                  "text": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  3186
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "exemptions",
+          "kind": "exemption",
+          "before": null,
+          "after": "Residences in hospitals, skilled nursing facilities or health facilities; residences in nonprofit facilities whose primary purpose is short-term treatment, assistance or therapy for alcohol, drug or other substance abuse.",
+          "support": {
+            "before": [],
+            "after": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+                  "start": 3186,
+                  "end": 3598,
+                  "supports": [
+                    "coverage_conditions",
+                    "exemption_conditions",
+                    "exemptions"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 3186,
+                  "end": 3598,
+                  "text": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  3186
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "effective_date",
+          "kind": "effective_date",
+          "before": null,
+          "after": "2020-11-06",
+          "support": {
+            "before": [],
+            "after": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The HSNA becomes effective on November 6, 2020.",
+                  "start": 2168,
+                  "end": 2215,
+                  "supports": [
+                    "effective_date"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 2168,
+                  "end": 2215,
+                  "text": "The HSNA becomes effective on November 6, 2020.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  2168
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "status_events",
+          "kind": "lifecycle_history",
+          "before": [],
+          "after": [
+            [
+              "enacted",
+              "2020-10"
+            ]
+          ],
+          "support": {
+            "before": [],
+            "after": [
+              {
+                "origin": "status_events/0",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020",
+                  "start": 288,
+                  "end": 394,
+                  "supports": [
+                    "status_events.status",
+                    "status_events.on"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 288,
+                  "end": 394,
+                  "text": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  288
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "citation",
+          "kind": "citation_relocation",
+          "before": "City of Boston Ordinances § 10-11.7",
+          "after": "Housing Stability Notification Act (Sec. 10-11.7)",
+          "support": {
+            "before": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D013",
+                  "quote": "Unless otherwise provided, a person or entity violating any provisions of this Ordinance shall be punishable by a warning or fine in accordance with the provisions of City of Boston Ordinances and/or Boston City Charter, shown below.\nHousing Stability Notification Act (Sec. 10-11.7)\nEnforcement Entity:\nInspectional Services Department\n1st Offense:\nWarning\n2nd and Subsequent Offenses:\n$300 per day",
+                  "start": 4272,
+                  "end": 4671,
+                  "supports": [
+                    "jurisdiction",
+                    "level",
+                    "citation",
+                    "lifecycle",
+                    "penalties"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D013",
+                  "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+                  "start": 4272,
+                  "end": 4671,
+                  "text": "Unless otherwise provided, a person or entity violating any provisions of this Ordinance shall be punishable by a warning or fine in accordance with the provisions of City of Boston Ordinances and/or Boston City Charter, shown below.\nHousing Stability Notification Act (Sec. 10-11.7)\nEnforcement Entity:\nInspectional Services Department\n1st Offense:\nWarning\n2nd and Subsequent Offenses:\n$300 per day",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  4272
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ],
+            "after": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "Housing Stability Notification Act (Sec. 10-11.7) \nEnforcement Entity: Inspectional Services Department \n1st Offense: Warning \n2nd and Subsequent Offenses: $300 per day \nIf a landlord violates the HSNA, it DOES NOT halt the eviction process.",
+                  "start": 5642,
+                  "end": 5883,
+                  "supports": [
+                    "citation",
+                    "penalties",
+                    "review_issues"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 5642,
+                  "end": 5883,
+                  "text": "Housing Stability Notification Act (Sec. 10-11.7) \nEnforcement Entity: Inspectional Services Department \n1st Offense: Warning \n2nd and Subsequent Offenses: $300 per day \nIf a landlord violates the HSNA, it DOES NOT halt the eviction process.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  5642
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "title",
+          "kind": "label",
+          "before": "Tenant rights and resources notice when ending a tenancy",
+          "after": "Notice of Tenants’ Rights and Resources",
+          "support": {
+            "before": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D013",
+                  "quote": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "start": 1736,
+                  "end": 1903,
+                  "supports": [
+                    "title",
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "provision_key"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D013",
+                  "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+                  "start": 1736,
+                  "end": 1903,
+                  "text": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  1736
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ],
+            "after": [
+              {
+                "origin": "evidence",
+                "evidence": {
+                  "doc_id": "D014",
+                  "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020 that requires any landlord planning to end a tenancy\nagreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "start": 288,
+                  "end": 527,
+                  "supports": [
+                    "jurisdiction",
+                    "level",
+                    "title",
+                    "provision_key",
+                    "requirement",
+                    "lifecycle"
+                  ]
+                },
+                "anchor_valid": true,
+                "span": {
+                  "doc_id": "D014",
+                  "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+                  "start": 288,
+                  "end": 527,
+                  "text": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020 that requires any landlord planning to end a tenancy\nagreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+                  "section": null
+                },
+                "exact_quote_positions": [
+                  288
+                ],
+                "source_identity_valid": true,
+                "remedy": null
+              }
+            ]
+          },
+          "semantic_support": "not_checked",
+          "remedy": "Review both encodings against their cited original provisions and effective intervals; do not infer precedence from retrieval dates."
+        },
+        {
+          "field": "evidence",
+          "kind": "quotation_or_offset_change",
+          "before": [
+            {
+              "doc_id": "D013",
+              "quote": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "start": 1736,
+              "end": 1903,
+              "supports": [
+                "title",
+                "requirement",
+                "key_value",
+                "coverage_conditions",
+                "provision_key"
+              ]
+            },
+            {
+              "doc_id": "D013",
+              "quote": "The Notice of Tenants’ Rights and Resources should be delivered at the same time as the Notice to quit or Notice of non-renewal of lease.",
+              "start": 1930,
+              "end": 2067,
+              "supports": [
+                "requirement",
+                "key_value"
+              ]
+            },
+            {
+              "doc_id": "D013",
+              "quote": "Unless otherwise provided, a person or entity violating any provisions of this Ordinance shall be punishable by a warning or fine in accordance with the provisions of City of Boston Ordinances and/or Boston City Charter, shown below.\nHousing Stability Notification Act (Sec. 10-11.7)\nEnforcement Entity:\nInspectional Services Department\n1st Offense:\nWarning\n2nd and Subsequent Offenses:\n$300 per day",
+              "start": 4272,
+              "end": 4671,
+              "supports": [
+                "jurisdiction",
+                "level",
+                "citation",
+                "lifecycle",
+                "penalties"
+              ]
+            },
+            {
+              "doc_id": "D013",
+              "quote": "If a landlord violates the act, it\nDOES NOT\nhalt the eviction process.",
+              "start": 4672,
+              "end": 4742,
+              "supports": [
+                "review_issues"
+              ]
+            }
+          ],
+          "after": [
+            {
+              "doc_id": "D014",
+              "quote": "SOURCE: https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+              "start": 0,
+              "end": 124,
+              "supports": [
+                "source_url",
+                "source_doc_id"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020 that requires any landlord planning to end a tenancy\nagreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "start": 288,
+              "end": 527,
+              "supports": [
+                "jurisdiction",
+                "level",
+                "title",
+                "provision_key",
+                "requirement",
+                "lifecycle"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement. The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+              "start": 528,
+              "end": 859,
+              "supports": [
+                "category",
+                "requirement",
+                "key_value",
+                "quoted_span"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "In the event that your landlord serves you with a Notice to Quit or Notice of Lease\nNon-renewal or expiration, you should also receive the Notice of Tenants’ Rights\nand Resources at the same time.",
+              "start": 2339,
+              "end": 2535,
+              "supports": [
+                "requirement",
+                "key_value"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Notice of Tenants’ Rights and Resources must also be delivered to any tenant\nthat is asked to leave a property. For example, if someone is purchasing a property\nout of foreclosure, or from a bank or a mortgage lender, they must provide this\nNotice to the former owners of the property, or any tenants that live in the\nproperty.",
+              "start": 860,
+              "end": 1191,
+              "supports": [
+                "requirement",
+                "coverage_conditions"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Ordinance was passed to ensure that tenants and former homeowners\nunderstand their rights when their tenancy or residential occupancy is being\nterminated, and that they know about agencies that may be able to assist them.",
+              "start": 1614,
+              "end": 1839,
+              "supports": [
+                "coverage_conditions"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+              "start": 3186,
+              "end": 3598,
+              "supports": [
+                "coverage_conditions",
+                "exemption_conditions",
+                "exemptions"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The HSNA becomes effective on November 6, 2020.",
+              "start": 2168,
+              "end": 2215,
+              "supports": [
+                "effective_date"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "Housing Stability Notification Act (Sec. 10-11.7) \nEnforcement Entity: Inspectional Services Department \n1st Offense: Warning \n2nd and Subsequent Offenses: $300 per day \nIf a landlord violates the HSNA, it DOES NOT halt the eviction process.",
+              "start": 5642,
+              "end": 5883,
+              "supports": [
+                "citation",
+                "penalties",
+                "review_issues"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020",
+              "start": 288,
+              "end": 394,
+              "supports": [
+                "status_events.status",
+                "status_events.on"
+              ]
+            }
+          ],
+          "remedy": "Revalidate each quote against its own unchanged original, separately from substantive interpretation."
+        }
+      ],
+      "sources": {
+        "D013": {
+          "before": {
+            "doc_id": "D013",
+            "jurisdictions": [
+              "Boston, MA"
+            ],
+            "url": "https://www.boston.gov/housing-stability-notification-act",
+            "retrieved_at": "2026-10-01T22:35Z",
+            "sha256": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+            "manifest_sha256": "372ca0bcb1bd441d5a0b966989649674a20910bbdcae3defd99485c372421bd5",
+            "capture_status": "supplied",
+            "authority": "official",
+            "source_type": "agency_guidance",
+            "issues": [
+              "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+            ],
+            "duplicate_of": null,
+            "actual_sha256": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+            "identity_valid": true
+          },
+          "after": {
+            "doc_id": "D013",
+            "jurisdictions": [
+              "Boston, MA"
+            ],
+            "url": "https://www.boston.gov/housing-stability-notification-act",
+            "retrieved_at": "2026-10-01T22:35Z",
+            "sha256": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+            "manifest_sha256": "372ca0bcb1bd441d5a0b966989649674a20910bbdcae3defd99485c372421bd5",
+            "capture_status": "supplied",
+            "authority": "official",
+            "source_type": "agency_guidance",
+            "issues": [
+              "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+            ],
+            "duplicate_of": null,
+            "actual_sha256": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+            "identity_valid": true
+          },
+          "changes": [],
+          "legal_amendment": null,
+          "winner": null,
+          "truncated": false,
+          "classification": "identical_text",
+          "remedy": "Revalidate anchors against each source version; review meaning, scope and lifecycle before asserting a legal amendment."
+        },
+        "D014": {
+          "before": {
+            "doc_id": "D014",
+            "jurisdictions": [
+              "Boston, MA"
+            ],
+            "url": "https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+            "retrieved_at": "2026-10-01T22:35Z",
+            "sha256": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+            "manifest_sha256": "4976368fa1947fe1e993e2fb2f6b9d004e07398fe6fd009b0fcb9b8b862a8c94",
+            "capture_status": "supplied",
+            "authority": "official",
+            "source_type": "agency_guidance",
+            "issues": [
+              "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+            ],
+            "duplicate_of": null,
+            "actual_sha256": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+            "identity_valid": true
+          },
+          "after": {
+            "doc_id": "D014",
+            "jurisdictions": [
+              "Boston, MA"
+            ],
+            "url": "https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+            "retrieved_at": "2026-10-01T22:35Z",
+            "sha256": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+            "manifest_sha256": "4976368fa1947fe1e993e2fb2f6b9d004e07398fe6fd009b0fcb9b8b862a8c94",
+            "capture_status": "supplied",
+            "authority": "official",
+            "source_type": "agency_guidance",
+            "issues": [
+              "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+            ],
+            "duplicate_of": null,
+            "actual_sha256": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+            "identity_valid": true
+          },
+          "changes": [],
+          "legal_amendment": null,
+          "winner": null,
+          "truncated": false,
+          "classification": "identical_text",
+          "remedy": "Revalidate anchors against each source version; review meaning, scope and lifecycle before asserting a legal amendment."
+        }
+      },
+      "evidence_checks": {
+        "before": [
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D013",
+              "quote": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "start": 1736,
+              "end": 1903,
+              "supports": [
+                "title",
+                "requirement",
+                "key_value",
+                "coverage_conditions",
+                "provision_key"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D013",
+              "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+              "start": 1736,
+              "end": 1903,
+              "text": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              1736
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D013",
+              "quote": "The Notice of Tenants’ Rights and Resources should be delivered at the same time as the Notice to quit or Notice of non-renewal of lease.",
+              "start": 1930,
+              "end": 2067,
+              "supports": [
+                "requirement",
+                "key_value"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D013",
+              "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+              "start": 1930,
+              "end": 2067,
+              "text": "The Notice of Tenants’ Rights and Resources should be delivered at the same time as the Notice to quit or Notice of non-renewal of lease.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              1930
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D013",
+              "quote": "Unless otherwise provided, a person or entity violating any provisions of this Ordinance shall be punishable by a warning or fine in accordance with the provisions of City of Boston Ordinances and/or Boston City Charter, shown below.\nHousing Stability Notification Act (Sec. 10-11.7)\nEnforcement Entity:\nInspectional Services Department\n1st Offense:\nWarning\n2nd and Subsequent Offenses:\n$300 per day",
+              "start": 4272,
+              "end": 4671,
+              "supports": [
+                "jurisdiction",
+                "level",
+                "citation",
+                "lifecycle",
+                "penalties"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D013",
+              "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+              "start": 4272,
+              "end": 4671,
+              "text": "Unless otherwise provided, a person or entity violating any provisions of this Ordinance shall be punishable by a warning or fine in accordance with the provisions of City of Boston Ordinances and/or Boston City Charter, shown below.\nHousing Stability Notification Act (Sec. 10-11.7)\nEnforcement Entity:\nInspectional Services Department\n1st Offense:\nWarning\n2nd and Subsequent Offenses:\n$300 per day",
+              "section": null
+            },
+            "exact_quote_positions": [
+              4272
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D013",
+              "quote": "If a landlord violates the act, it\nDOES NOT\nhalt the eviction process.",
+              "start": 4672,
+              "end": 4742,
+              "supports": [
+                "review_issues"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D013",
+              "source_hash": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+              "start": 4672,
+              "end": 4742,
+              "text": "If a landlord violates the act, it\nDOES NOT\nhalt the eviction process.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              4672
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          }
+        ],
+        "after": [
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "SOURCE: https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+              "start": 0,
+              "end": 124,
+              "supports": [
+                "source_url",
+                "source_doc_id"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 0,
+              "end": 124,
+              "text": "SOURCE: https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+              "section": null
+            },
+            "exact_quote_positions": [
+              0
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020 that requires any landlord planning to end a tenancy\nagreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "start": 288,
+              "end": 527,
+              "supports": [
+                "jurisdiction",
+                "level",
+                "title",
+                "provision_key",
+                "requirement",
+                "lifecycle"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 288,
+              "end": 527,
+              "text": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020 that requires any landlord planning to end a tenancy\nagreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              288
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement. The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+              "start": 528,
+              "end": 859,
+              "supports": [
+                "category",
+                "requirement",
+                "key_value",
+                "quoted_span"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 528,
+              "end": 859,
+              "text": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement. The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              528
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "In the event that your landlord serves you with a Notice to Quit or Notice of Lease\nNon-renewal or expiration, you should also receive the Notice of Tenants’ Rights\nand Resources at the same time.",
+              "start": 2339,
+              "end": 2535,
+              "supports": [
+                "requirement",
+                "key_value"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 2339,
+              "end": 2535,
+              "text": "In the event that your landlord serves you with a Notice to Quit or Notice of Lease\nNon-renewal or expiration, you should also receive the Notice of Tenants’ Rights\nand Resources at the same time.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              2339
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "The Notice of Tenants’ Rights and Resources must also be delivered to any tenant\nthat is asked to leave a property. For example, if someone is purchasing a property\nout of foreclosure, or from a bank or a mortgage lender, they must provide this\nNotice to the former owners of the property, or any tenants that live in the\nproperty.",
+              "start": 860,
+              "end": 1191,
+              "supports": [
+                "requirement",
+                "coverage_conditions"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 860,
+              "end": 1191,
+              "text": "The Notice of Tenants’ Rights and Resources must also be delivered to any tenant\nthat is asked to leave a property. For example, if someone is purchasing a property\nout of foreclosure, or from a bank or a mortgage lender, they must provide this\nNotice to the former owners of the property, or any tenants that live in the\nproperty.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              860
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "The Ordinance was passed to ensure that tenants and former homeowners\nunderstand their rights when their tenancy or residential occupancy is being\nterminated, and that they know about agencies that may be able to assist them.",
+              "start": 1614,
+              "end": 1839,
+              "supports": [
+                "coverage_conditions"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 1614,
+              "end": 1839,
+              "text": "The Ordinance was passed to ensure that tenants and former homeowners\nunderstand their rights when their tenancy or residential occupancy is being\nterminated, and that they know about agencies that may be able to assist them.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              1614
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+              "start": 3186,
+              "end": 3598,
+              "supports": [
+                "coverage_conditions",
+                "exemption_conditions",
+                "exemptions"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 3186,
+              "end": 3598,
+              "text": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              3186
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "The HSNA becomes effective on November 6, 2020.",
+              "start": 2168,
+              "end": 2215,
+              "supports": [
+                "effective_date"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 2168,
+              "end": 2215,
+              "text": "The HSNA becomes effective on November 6, 2020.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              2168
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "evidence",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "Housing Stability Notification Act (Sec. 10-11.7) \nEnforcement Entity: Inspectional Services Department \n1st Offense: Warning \n2nd and Subsequent Offenses: $300 per day \nIf a landlord violates the HSNA, it DOES NOT halt the eviction process.",
+              "start": 5642,
+              "end": 5883,
+              "supports": [
+                "citation",
+                "penalties",
+                "review_issues"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 5642,
+              "end": 5883,
+              "text": "Housing Stability Notification Act (Sec. 10-11.7) \nEnforcement Entity: Inspectional Services Department \n1st Offense: Warning \n2nd and Subsequent Offenses: $300 per day \nIf a landlord violates the HSNA, it DOES NOT halt the eviction process.",
+              "section": null
+            },
+            "exact_quote_positions": [
+              5642
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          },
+          {
+            "origin": "status_events/0",
+            "evidence": {
+              "doc_id": "D014",
+              "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020",
+              "start": 288,
+              "end": 394,
+              "supports": [
+                "status_events.status",
+                "status_events.on"
+              ]
+            },
+            "anchor_valid": true,
+            "span": {
+              "doc_id": "D014",
+              "source_hash": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+              "start": 288,
+              "end": 394,
+              "text": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020",
+              "section": null
+            },
+            "exact_quote_positions": [
+              288
+            ],
+            "source_identity_valid": true,
+            "remedy": null
+          }
+        ]
+      },
+      "support_gaps": [
+        "before:missing_field_support:effective_date",
+        "before:missing_field_support:exemption_conditions",
+        "before:missing_field_support:exemptions",
+        "before:missing_field_support:status_events"
+      ],
+      "substantive_encoding_changed": true,
+      "status": "unresolved",
+      "winner": null,
+      "legal_amendment": null,
+      "semantic_support": "not_checked",
+      "remedy": "Resolve source/anchor gaps and independently review incompatible claims, scope, authority and lifecycle before selecting a legal version."
+    },
+    "Boston_HSNA_conditional_impact": {
+      "as_of": "2026-10-01",
+      "address_id": "A0006",
+      "mode": "conditional_encoding_comparison_not_version_precedence",
+      "before": [
+        {
+          "team_rule_id": "r-5fb3ae71c1e9a75d9637",
+          "result": "unknown",
+          "jurisdiction": "unknown",
+          "coverage": {
+            "value": "unknown",
+            "matched": [],
+            "unresolved": [
+              "missing_property_fact: is_landlord",
+              "missing_property_fact: planning_to_end_tenancy",
+              "unsupported_condition: The supplied guidance identifies no exemption provisions; absence of such provisions does not establish that no exemptions exist."
+            ],
+            "missing_facts": [
+              "is_landlord",
+              "planning_to_end_tenancy"
+            ],
+            "supporting_facts": {}
+          },
+          "temporal_status": "unknown",
+          "missing_facts": [
+            "is_landlord",
+            "planning_to_end_tenancy"
+          ],
+          "uncertainty_reasons": [
+            "jurisdiction_uncertainty: legal municipality unresolved",
+            "missing_property_fact: is_landlord",
+            "missing_property_fact: planning_to_end_tenancy",
+            "unsupported_condition: The supplied guidance identifies no exemption provisions; absence of such provisions does not establish that no exemptions exist.",
+            "temporal_uncertainty: date precision or lifecycle history insufficient",
+            "unresolved_extraction: All six categories were reviewed. No supported rules or explicit negative findings were identified for rent_increase_limits, security_deposits, application_screening_fees, screening_restrictions, or algorithmic_rent_setting. Their absence from this source does not establish that no such rules exist.",
+            "unresolved_extraction: Missing field-level evidence for exemption_conditions",
+            "unresolved_extraction: No amendment, repeal, or directional supersession or conflict with another identified provision is evidenced in the supplied source.",
+            "unresolved_extraction: No exemption provisions are supplied.",
+            "unresolved_extraction: The eviction-related notification and reporting provisions are classified under just_cause_eviction because the schema has no separate eviction-notice category; none establishes a substantive just-cause requirement.",
+            "unresolved_extraction: The guidance uses 'should' for simultaneous delivery; the linked ordinance text is not included to verify mandatory timing language.",
+            "unresolved_extraction: The retrieval timestamp is not an effective date, status-event date, or supported lifecycle snapshot date.",
+            "unresolved_extraction: The source describes an enforced ordinance but supplies no effective date, end date, dated enactment event, or dated lifecycle snapshot.",
+            "unresolved_extraction: The source is official agency guidance, not the text of the linked ordinance.",
+            "unresolved_extraction: This is an eviction-related notification obligation, not a substantive requirement to establish just cause for eviction.",
+            "unresolved_extraction: Violation does not halt the eviction process, according to the guidance.",
+            "unresolved_extraction: semantic support needs review"
+          ],
+          "applied_interactions": [],
+          "explanation": "As of 2026-10-01, Tenant rights and resources notice when ending a tenancy needs more information before coverage can be established. Review: jurisdiction_uncertainty: legal municipality unresolved; missing_property_fact: is_landlord; missing_property_fact: planning_to_end_tenancy; unsupported_condition: The supplied guidance identifies no exemption provisions; absence of such provisions does not establish that no exemptions exist.; temporal_uncertainty: date precision or lifecycle history insufficient; unresolved_extraction: All six categories were reviewed. No supported rules or explicit negative findings were identified for rent_increase_limits, security_deposits, application_screening_fees, screening_restrictions, or algorithmic_rent_setting. Their absence from this source does not establish that no such rules exist.; unresolved_extraction: Missing field-level evidence for exemption_conditions; unresolved_extraction: No amendment, repeal, or directional supersession or conflict with another identified provision is evidenced in the supplied source.; unresolved_extraction: No exemption provisions are supplied.; unresolved_extraction: The eviction-related notification and reporting provisions are classified under just_cause_eviction because the schema has no separate eviction-notice category; none establishes a substantive just-cause requirement.; unresolved_extraction: The guidance uses 'should' for simultaneous delivery; the linked ordinance text is not included to verify mandatory timing language.; unresolved_extraction: The retrieval timestamp is not an effective date, status-event date, or supported lifecycle snapshot date.; unresolved_extraction: The source describes an enforced ordinance but supplies no effective date, end date, dated enactment event, or dated lifecycle snapshot.; unresolved_extraction: The source is official agency guidance, not the text of the linked ordinance.; unresolved_extraction: This is an eviction-related notification obligation, not a substantive requirement to establish just cause for eviction.; unresolved_extraction: Violation does not halt the eviction process, according to the guidance.; unresolved_extraction: semantic support needs review. Source: City of Boston Ordinances § 10-11.7 (D013).",
+          "conflict_flag": false,
+          "evidence": [
+            {
+              "doc_id": "D013",
+              "quote": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "start": 1736,
+              "end": 1903,
+              "supports": [
+                "title",
+                "requirement",
+                "key_value",
+                "coverage_conditions",
+                "provision_key"
+              ]
+            },
+            {
+              "doc_id": "D013",
+              "quote": "The Notice of Tenants’ Rights and Resources should be delivered at the same time as the Notice to quit or Notice of non-renewal of lease.",
+              "start": 1930,
+              "end": 2067,
+              "supports": [
+                "requirement",
+                "key_value"
+              ]
+            },
+            {
+              "doc_id": "D013",
+              "quote": "Unless otherwise provided, a person or entity violating any provisions of this Ordinance shall be punishable by a warning or fine in accordance with the provisions of City of Boston Ordinances and/or Boston City Charter, shown below.\nHousing Stability Notification Act (Sec. 10-11.7)\nEnforcement Entity:\nInspectional Services Department\n1st Offense:\nWarning\n2nd and Subsequent Offenses:\n$300 per day",
+              "start": 4272,
+              "end": 4671,
+              "supports": [
+                "jurisdiction",
+                "level",
+                "citation",
+                "lifecycle",
+                "penalties"
+              ]
+            },
+            {
+              "doc_id": "D013",
+              "quote": "If a landlord violates the act, it\nDOES NOT\nhalt the eviction process.",
+              "start": 4672,
+              "end": 4742,
+              "supports": [
+                "review_issues"
+              ]
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "team_rule_id": "r-5bda807dd5c203fa95fa",
+          "result": "unknown",
+          "jurisdiction": "unknown",
+          "coverage": {
+            "value": "unknown",
+            "matched": [
+              "residential eq True: true"
+            ],
+            "unresolved": [
+              "missing_property_fact: facility_nonprofit",
+              "missing_property_fact: facility_primary_purpose_short_term_substance_abuse_treatment_assistance_or_therapy",
+              "missing_property_fact: landlord_or_foreclosing_owner_intends_to_end_tenancy_or_post_foreclosure_occupancy",
+              "missing_property_fact: residence_facility_type"
+            ],
+            "missing_facts": [
+              "facility_nonprofit",
+              "facility_primary_purpose_short_term_substance_abuse_treatment_assistance_or_therapy",
+              "landlord_or_foreclosing_owner_intends_to_end_tenancy_or_post_foreclosure_occupancy",
+              "residence_facility_type"
+            ],
+            "supporting_facts": {
+              "residential": {
+                "value": true,
+                "bound": null,
+                "provenance": "Participant guide: sample of multifamily properties (dataset convention)"
+              }
+            }
+          },
+          "temporal_status": "in_force",
+          "missing_facts": [
+            "facility_nonprofit",
+            "facility_primary_purpose_short_term_substance_abuse_treatment_assistance_or_therapy",
+            "landlord_or_foreclosing_owner_intends_to_end_tenancy_or_post_foreclosure_occupancy",
+            "residence_facility_type"
+          ],
+          "uncertainty_reasons": [
+            "jurisdiction_uncertainty: legal municipality unresolved",
+            "missing_property_fact: facility_nonprofit",
+            "missing_property_fact: facility_primary_purpose_short_term_substance_abuse_treatment_assistance_or_therapy",
+            "missing_property_fact: landlord_or_foreclosing_owner_intends_to_end_tenancy_or_post_foreclosure_occupancy",
+            "missing_property_fact: residence_facility_type",
+            "unresolved_extraction: All six categories were reviewed. The source supports eviction-related notice, City-submission and nonwaiver obligations. It supplies no provisions or explicit negative findings for rent increase limits, security deposits, application screening fees, screening restrictions or algorithmic rent setting; silence does not establish that no such rules exist.",
+            "unresolved_extraction: No dated lifecycle snapshot or end date is supplied.",
+            "unresolved_extraction: No directional supersession or conflict with another identified legal provision is evidenced.",
+            "unresolved_extraction: Official tenant guidance, not the ordinance text; Section 10-11.7 is supplied in the enforcement heading.",
+            "unresolved_extraction: The available category just_cause_eviction is used for an eviction-related procedural protection; this source does not establish a substantive just-cause requirement.",
+            "unresolved_extraction: The general coverage statement names landlords and foreclosing owners, while the notice example also names purchasers from foreclosure, banks or mortgage lenders. Whether those purchasers are fully captured by the general coverage description requires verification.",
+            "unresolved_extraction: The numbered exemption categories are compiled as alternatives. The source joins them with 'and'; verify this interpretation against the ordinance.",
+            "unresolved_extraction: The penalty schedule is ordinance-wide and states 'Unless otherwise provided'; the source does not identify any provision-specific alternative penalty.",
+            "unresolved_extraction: The retrieval date and the source URL’s directory date are not supported lifecycle snapshot dates. No repeal, amendment or exclusive end date is established.",
+            "unresolved_extraction: The source is official tenant guidance. Its reported passage in October 2020 supports the enactment event, but it is not the ordinance text or a current status record.",
+            "unresolved_extraction: The statement that an HSNA violation does not halt eviction is a limitation on these protections, not evidence that other eviction protections are absent.",
+            "unresolved_extraction: semantic support needs review"
+          ],
+          "applied_interactions": [],
+          "explanation": "As of 2026-10-01, Notice of Tenants’ Rights and Resources needs more information before coverage can be established. Facts used: residential: True. Review: jurisdiction_uncertainty: legal municipality unresolved; missing_property_fact: facility_nonprofit; missing_property_fact: facility_primary_purpose_short_term_substance_abuse_treatment_assistance_or_therapy; missing_property_fact: landlord_or_foreclosing_owner_intends_to_end_tenancy_or_post_foreclosure_occupancy; missing_property_fact: residence_facility_type; unresolved_extraction: All six categories were reviewed. The source supports eviction-related notice, City-submission and nonwaiver obligations. It supplies no provisions or explicit negative findings for rent increase limits, security deposits, application screening fees, screening restrictions or algorithmic rent setting; silence does not establish that no such rules exist.; unresolved_extraction: No dated lifecycle snapshot or end date is supplied.; unresolved_extraction: No directional supersession or conflict with another identified legal provision is evidenced.; unresolved_extraction: Official tenant guidance, not the ordinance text; Section 10-11.7 is supplied in the enforcement heading.; unresolved_extraction: The available category just_cause_eviction is used for an eviction-related procedural protection; this source does not establish a substantive just-cause requirement.; unresolved_extraction: The general coverage statement names landlords and foreclosing owners, while the notice example also names purchasers from foreclosure, banks or mortgage lenders. Whether those purchasers are fully captured by the general coverage description requires verification.; unresolved_extraction: The numbered exemption categories are compiled as alternatives. The source joins them with 'and'; verify this interpretation against the ordinance.; unresolved_extraction: The penalty schedule is ordinance-wide and states 'Unless otherwise provided'; the source does not identify any provision-specific alternative penalty.; unresolved_extraction: The retrieval date and the source URL’s directory date are not supported lifecycle snapshot dates. No repeal, amendment or exclusive end date is established.; unresolved_extraction: The source is official tenant guidance. Its reported passage in October 2020 supports the enactment event, but it is not the ordinance text or a current status record.; unresolved_extraction: The statement that an HSNA violation does not halt eviction is a limitation on these protections, not evidence that other eviction protections are absent.; unresolved_extraction: semantic support needs review. Source: Housing Stability Notification Act (Sec. 10-11.7) (D014).",
+          "conflict_flag": false,
+          "evidence": [
+            {
+              "doc_id": "D014",
+              "quote": "SOURCE: https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+              "start": 0,
+              "end": 124,
+              "supports": [
+                "source_url",
+                "source_doc_id"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Housing Stability Notification Act (HSNA) is an Ordinance passed by the City of\nBoston in October 2020 that requires any landlord planning to end a tenancy\nagreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+              "start": 288,
+              "end": 527,
+              "supports": [
+                "jurisdiction",
+                "level",
+                "title",
+                "provision_key",
+                "requirement",
+                "lifecycle"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The HSNA requires that landlords give this Notice of Tenants’ Rights and Resources\nto tenants when the landlord starts the eviction process, or when the landlord\ndecides to not offer the tenant a renewal of their lease agreement. The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+              "start": 528,
+              "end": 859,
+              "supports": [
+                "category",
+                "requirement",
+                "key_value",
+                "quoted_span"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "In the event that your landlord serves you with a Notice to Quit or Notice of Lease\nNon-renewal or expiration, you should also receive the Notice of Tenants’ Rights\nand Resources at the same time.",
+              "start": 2339,
+              "end": 2535,
+              "supports": [
+                "requirement",
+                "key_value"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Notice of Tenants’ Rights and Resources must also be delivered to any tenant\nthat is asked to leave a property. For example, if someone is purchasing a property\nout of foreclosure, or from a bank or a mortgage lender, they must provide this\nNotice to the former owners of the property, or any tenants that live in the\nproperty.",
+              "start": 860,
+              "end": 1191,
+              "supports": [
+                "requirement",
+                "coverage_conditions"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Ordinance was passed to ensure that tenants and former homeowners\nunderstand their rights when their tenancy or residential occupancy is being\nterminated, and that they know about agencies that may be able to assist them.",
+              "start": 1614,
+              "end": 1839,
+              "supports": [
+                "coverage_conditions"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The Ordinance applies to all landlords/foreclosing owners intending to end a\ntenancy or post-foreclosure occupancy of a unit in the City of Boston.\nThe only exempt properties are residences:\n1. in any hospital, skilled nursing facility or health facility;  and\n2. in a non-profit facility whose primary purpose is providing short-term\ntreatment, assistance or therapy for alcohol, drug, or other substance\nabuse.",
+              "start": 3186,
+              "end": 3598,
+              "supports": [
+                "coverage_conditions",
+                "exemption_conditions",
+                "exemptions"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "The HSNA becomes effective on November 6, 2020.",
+              "start": 2168,
+              "end": 2215,
+              "supports": [
+                "effective_date"
+              ]
+            },
+            {
+              "doc_id": "D014",
+              "quote": "Housing Stability Notification Act (Sec. 10-11.7) \nEnforcement Entity: Inspectional Services Department \n1st Offense: Warning \n2nd and Subsequent Offenses: $300 per day \nIf a landlord violates the HSNA, it DOES NOT halt the eviction process.",
+              "start": 5642,
+              "end": 5883,
+              "supports": [
+                "citation",
+                "penalties",
+                "review_issues"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "human_review": "pending",
+  "new_rules_created": 0
+}

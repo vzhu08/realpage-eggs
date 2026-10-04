@@ -1,0 +1,141 @@
+{
+  "T1": {
+    "existing_source_ids": [
+      "D022"
+    ],
+    "existing_links": {
+      "D022": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB325"
+    },
+    "required_evidence": "AB325 operative-date authority and incorporated BPC16702; actual SB763 full text and history, not a guide date.",
+    "owner": "Platform acquisition; Core A interpretation after capture",
+    "status": "not acquired; no external contact performed"
+  },
+  "T2_T3_Hoboken": {
+    "existing_source_ids": [
+      "D032",
+      "D033",
+      "D034"
+    ],
+    "existing_links": {
+      "D032": "https://ecode360.com/15252438",
+      "D033": "https://ecode360.com/15252470",
+      "D034": "https://ecode360.com/46833413"
+    },
+    "required_evidence": "Official adopted algorithm-pricing ordinance, amendments, applicability/exclusions and effective/adoption records. Existing code links are terms_review; respect approved capture path.",
+    "owner": "Platform acquisition; Core A interpretation after capture",
+    "status": "not acquired; no external contact performed"
+  },
+  "T2_T3_JerseyCity": {
+    "existing_source_ids": [
+      "D035",
+      "D036",
+      "D037"
+    ],
+    "existing_links": {
+      "D035": "https://hudsoncountyview.com/jersey-city-council-approves-realpage-ban-and-increasing-benefits-for-laborers/",
+      "D036": "https://www.jerseycitynj.gov/landlordtenant",
+      "D037": "https://www.morganlewis.com/pubs/2026/08/algorithmic-rent-pricing-litigation-expands-under-new-state-and-local-laws"
+    },
+    "required_evidence": "Official final algorithm-pricing ordinance and effective/adoption history; D035/D037 are link-only secondary leads and D036 landlord-office page lacks the target ordinance.",
+    "owner": "Platform acquisition; Core A interpretation after capture",
+    "status": "not acquired; no external contact performed"
+  },
+  "T3_NJ": {
+    "existing_source_ids": [
+      "D069"
+    ],
+    "existing_links": {
+      "D069": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM"
+    },
+    "required_evidence": "Existing full NJ text is available; no re-fetch needed just to extract. Resolve exact local conflict target/scope and other-law exception after local texts arrive.",
+    "owner": "Platform acquisition; Core A interpretation after capture",
+    "status": "not acquired; no external contact performed"
+  },
+  "T4": {
+    "existing_source_ids": [
+      "D045",
+      "D046",
+      "D047"
+    ],
+    "existing_links": {
+      "D045": "https://malegislature.gov/Bills/194/H5222",
+      "D046": "https://malegislature.gov/Bills/194/S2983",
+      "D047": "https://malegislature.gov/Bills/194/S2983/BillHistory"
+    },
+    "required_evidence": "Actual S2983 and H5222 bill text and authoritative dated subsequent status; current captures are landing/history only.",
+    "owner": "Platform acquisition; Core A interpretation after capture",
+    "status": "not acquired; no external contact performed"
+  },
+  "T5": {
+    "existing_source_ids": [
+      "D048"
+    ],
+    "existing_links": {
+      "D048": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40P/Section4"
+    },
+    "required_evidence": "IP25-21 petition identity/text plus authoritative failed disposition/docket and date. D048 is chapter40P section4 and cannot prove a ballot failure; new source ID needed.",
+    "owner": "Platform acquisition; Core A interpretation after capture",
+    "status": "not acquired; no external contact performed"
+  },
+  "Berkeley": {
+    "existing_source_ids": [
+      "D001",
+      "D002"
+    ],
+    "existing_links": {
+      "D001": "https://berkeleyca.gov/sites/default/files/documents/2025-12-02%20Item%2001%20Ordinance%207992.pdf",
+      "D002": "https://morganlewis.com/pubs/2026/08/algorithmic-rent-pricing-litigation-expands-under-new-state-and-local-laws"
+    },
+    "required_evidence": "Final Ordinance7992 adoption, code version and operative-date clause; capture competing date claim with attributed author/version. D001 is passed-to-print text; D002 link-only secondary.",
+    "owner": "Platform acquisition; Core A interpretation after capture",
+    "status": "not acquired; no external contact performed"
+  },
+  "LA": {
+    "existing_source_ids": [
+      "D038",
+      "D041",
+      "D042"
+    ],
+    "existing_links": {
+      "D038": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-322208",
+      "D041": "https://housing.lacity.gov/residents/rso-overview",
+      "D042": "https://housing.lacity.gov/rso-rent-increase-calculator"
+    },
+    "required_evidence": "Underlying adopted RSO amendment and operative clause plus the actual January24 claim and its subject/version. LAHD February2 guidance is about utility/dependent increments; annual3% period endedJune30.",
+    "owner": "Platform acquisition; Core A interpretation after capture",
+    "status": "not acquired; no external contact performed"
+  },
+  "Temporal_other": {
+    "existing_source_ids": [
+      "D003",
+      "D004",
+      "D005",
+      "D006",
+      "D007",
+      "D008",
+      "D009",
+      "D010",
+      "D012",
+      "D013",
+      "D014",
+      "D016"
+    ],
+    "existing_links": {
+      "D003": "https://rentboard.berkeleyca.gov/Fair_Chance",
+      "D004": "https://rentboard.berkeleyca.gov/elected-rent-board/news/2026-adjustments-relocation-assistance-payments",
+      "D005": "https://rentboard.berkeleyca.gov/laws-regulations/city-berkeley-ordinances-affecting-rental-properties/tenant-screening-and",
+      "D006": "https://rentboard.berkeleyca.gov/laws-regulations/measure-bb-changes-berkeleys-rent-ordinance",
+      "D007": "https://rentboard.berkeleyca.gov/rights-responsibilities/security-deposits",
+      "D008": "https://rentboard.berkeleyca.gov/sites/default/files/documents/AGA%20Public%20Notice.pdf",
+      "D009": "https://rentboard.berkeleyca.gov/sites/default/files/documents/Rent%20Ordinance%20Coverage%20by%20Unit%20Type.pdf",
+      "D010": "https://drive.google.com/file/d/1j4U3fDtmnYuwcUWhx5BMUcXc1bnKT8Ku/view?usp=sharing",
+      "D012": "https://www.boston.gov/departments/fair-housing-and-equity/boston-fair-housing-regulations",
+      "D013": "https://www.boston.gov/housing-stability-notification-act",
+      "D014": "https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+      "D016": "https://calcivilrights.ca.gov/housing/"
+    },
+    "required_evidence": "Follow per-rule requests in temporal_triage.json; current sources/quotes remain exact. Boston cross-source date candidate needs provision/version/exemption reconciliation, especially online portal versus mailed submission.",
+    "owner": "Platform acquisition; Core A interpretation after capture",
+    "status": "not acquired; no external contact performed"
+  }
+}
