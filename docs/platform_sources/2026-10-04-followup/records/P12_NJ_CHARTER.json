@@ -1,0 +1,38 @@
+{
+  "doc_id": "P12_NJ_CHARTER",
+  "cases": [
+    "T2",
+    "T3"
+  ],
+  "jurisdictions": [
+    "NJ"
+  ],
+  "url": "https://nj.gov/dca/dlgs/resources/misc_publications/Optional%20Municipal%20Charter%20Law%20-%20Updated%20July%202026.pdf",
+  "title": "NJ DCA Optional Municipal Charter Law, July 2026, section40:69A-181 p49",
+  "user_agent": null,
+  "attempted_at": "2026-10-04T07:23:58.711400+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity"
+  },
+  "http_status": 200,
+  "final_url": "https://nj.gov/dca/dlgs/resources/misc_publications/Optional%20Municipal%20Charter%20Law%20-%20Updated%20July%202026.pdf",
+  "retrieved_at": "2026-10-04T07:23:58.993274+00:00",
+  "headers": {
+    "Content-Type": "application/pdf",
+    "Last-Modified": "Tue, 30 Jun 2026 17:53:08 GMT",
+    "ETag": "\"bb7ce-6a440284\"",
+    "Date": "Sun, 04 Oct 2026 07:23:59 GMT"
+  },
+  "raw_path": "raw/P12_NJ_CHARTER.pdf",
+  "raw_sha256": "3c6fdde0b35e2889d2d08e5c1af355dbda593207981532860100fb31c883e3cb",
+  "raw_bytes": 767950,
+  "text_path": "text/P12_NJ_CHARTER.txt",
+  "text_sha256": "674ac5befcd070b0c21be28195c212cdfa586ecb0c5697ede8d3d1855e11b484",
+  "text_characters": 206858,
+  "derivation": {
+    "method": "pypdf.PdfReader.extract_text",
+    "version": "6.10.0",
+    "pages": 57
+  }
+}

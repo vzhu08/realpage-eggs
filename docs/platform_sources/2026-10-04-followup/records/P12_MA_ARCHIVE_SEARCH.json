@@ -1,0 +1,34 @@
+{
+  "doc_id": "P12_MA_ARCHIVE_SEARCH",
+  "cases": [
+    "T5"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://www.sjcsinglejusticearchive.com/disposition/searchdisposition?DocketNumber=SJ-2026-0063",
+  "title": "Exact archive search; no result is NOT proof of absence",
+  "user_agent": null,
+  "attempted_at": "2026-10-04T07:24:03.667305+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity"
+  },
+  "http_status": 200,
+  "final_url": "https://www.sjcsinglejusticearchive.com/disposition/searchdisposition?DocketNumber=SJ-2026-0063",
+  "retrieved_at": "2026-10-04T07:24:03.757719+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Date": "Sun, 04 Oct 2026 07:24:04 GMT"
+  },
+  "raw_path": "raw/P12_MA_ARCHIVE_SEARCH.html",
+  "raw_sha256": "900bbd7dddf197b354de0bff792295c3650a5157abc7a52d99ab1974623e4cdd",
+  "raw_bytes": 19409,
+  "text_path": "text/P12_MA_ARCHIVE_SEARCH.txt",
+  "text_sha256": "c0301b2b9d964916c1da552902e382ed3d1839ea4331510435fe521ff23c888b",
+  "text_characters": 1017,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

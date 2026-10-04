@@ -1,0 +1,36 @@
+{
+  "doc_id": "P12_MA_ARCHIVE_LINK",
+  "cases": [
+    "T5"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://www.mass.gov/supreme-judicial-court-single-justice-decisions",
+  "title": "Official page linking single-justice archive; not target disposition",
+  "user_agent": null,
+  "attempted_at": "2026-10-04T07:24:03.595521+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity"
+  },
+  "http_status": 200,
+  "final_url": "https://www.mass.gov/supreme-judicial-court-single-justice-decisions",
+  "retrieved_at": "2026-10-04T07:24:03.648767+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8",
+    "Last-Modified": "Fri, 02 Oct 2026 19:02:44 GMT",
+    "ETag": "\"1790967764-gzip\"",
+    "Date": "Sun, 04 Oct 2026 07:24:04 GMT"
+  },
+  "raw_path": "raw/P12_MA_ARCHIVE_LINK.html",
+  "raw_sha256": "4b12fdf8b791dd2efb789de26948a5f47265aa4dad3504a3f2a3e9000a603ba5",
+  "raw_bytes": 189729,
+  "text_path": "text/P12_MA_ARCHIVE_LINK.txt",
+  "text_sha256": "f8960cafe374af620e369c2b6c4a2ca0a094b9895a5c94f763d9bd5089c1a3da",
+  "text_characters": 6798,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}
