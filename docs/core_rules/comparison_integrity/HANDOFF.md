@@ -7,6 +7,34 @@ Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence`.
 Base: `84c2887dee0d56c523d4fca8c0bd47de79546c2e` (main after PR #13).
 Implementation: `8ea65dab22335f79ea926ea372b9dc90985026cd`.
 
+## Latest integration — October 4, 2026
+
+The user explicitly approved retaining this fix, continuing Daniel's tasks in order, and
+creating/merging completed PRs. The user also asked to stop when another developer's input is needed.
+Previously uncommitted reversions of four files were backed up locally and those files restored
+from the intact commits. No committed work was lost; the cause of the reversions is unknown.
+
+Fetched main `1109d4a4bee24cbdcecd252848897e23f00ee299` includes Platform PR #14 and Core B/UX PR #15.
+It merged cleanly into this branch at `ef71e5a82f9bd5f7fb7883f7f7f8837216b27f8f`.
+The combined candidate passed **370 tests**, compilation, contract generation, and exact replay
+of both freshly generated property evidence packages (normal and missing support).
+No schema differences or working-contract changes occurred. The earlier 291-test report below
+remains historical. The saved Core ZIP still matches its recorded SHA-256.
+
+Reproduce with `.venv/bin/python docs/core_rules/comparison_integrity/verify_integration.py`.
+[integration_verification.json](integration_verification.json) records tested commit, source
+hashes, commands and outputs. The runner includes the newer Platform scripts/lockfile and Core B
+benchmark inputs in its disposable copy; it does not update shared contract examples in this checkout.
+Read-only review of the combined code found no actionable issues. This change affects the internal
+`compare_rule_versions` helper; Platform's public `compare_claims` contract and behavior are unchanged.
+
+Platform has now assembled geography (reported 487 resolved / 13 unresolved) and released public
+comparison/change/package APIs. Those earlier transfer/interface prerequisites are resolved.
+After this PR is integrated, the next ordered CORE-06 work stops for Vincent/Platform acquisition:
+first AB325 operative-date authority, BPC16702 and actual SB763 text/history; next official Hoboken
+and Jersey City ordinances. Full requests remain in `../core06/platform_requests.json`.
+No paid extraction, store assembly, teammate message or public deployment is part of this follow-up.
+
 The next available bounded Core A task was comparison correctness after the previous offline
 delivery and snapshot merged. Source comparison could report no substantive encoding change
 with no support gaps when a primary snapshot had an invalid hash, an evidence map pointed to a
@@ -25,8 +53,9 @@ different document, or either rule still carried unresolved review/conflict stat
   Semantic support remains `not_checked`; no winner or legal amendment is asserted.
 
 Only `navigator/source_comparison.py`, `tests/test_source_comparison.py`, the CORE-06 card and
-this notes directory changed. The internal comparison interface is still pending Platform's
-public contract. No models, generated contracts, evaluator, routes, Core B or frontend code changed.
+this notes directory changed relative to main. Rule-version comparison remains internal;
+Platform's public claim-comparison envelope is unchanged. No models, generated contracts,
+evaluator, routes, Core B or frontend code changed in this fix.
 
 ## Verification
 
@@ -53,7 +82,7 @@ store and invoked no extraction or provider service. The 140 unresolved results 
 all saved rules already carry review issues and `needs_review`; matching a rule to itself does
 not resolve its evidence. This is software verification, not independent legal review.
 
-## Next action and limits
+## Earlier local checkpoint and limits
 
 Review this local branch for integration. No push, merge, deployment or teammate message was
 performed in this follow-up. The previously pushed snapshot stays at
@@ -61,7 +90,7 @@ performed in this follow-up. The previously pushed snapshot stays at
 `157581d64b1c19fdfcc0414d08bbd0ffeeeca60e3142bd621a7152fe5c6e44bc`.
 The original stores and paused extraction were not modified; new provider calls: zero.
 
-Full CORE-06 acceptance still needs Platform's acquired source texts, geography assembly and
-comparison contract, plus independent human review. Existing T1 partial / T2–T5 blocked and
+Full CORE-06 acceptance still needs Platform's acquired source texts and independent human review.
+The latest section above supersedes the original geography/contract dependencies. Existing T1 partial / T2–T5 blocked and
 16 exportable / 124 temporal-unknown counts remain the earlier offline evidence, not new export
 results. Any provider resumption requires the existing explicit resume and budget decision.
