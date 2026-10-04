@@ -1,5 +1,5 @@
 {
-  "base_commit_at_verification": "88cd1e57ff3d9b3230594fac684560162deb34d0",
+  "base_commit_at_verification": "38b84b534e5054caf874ceeeedf37d15c209c5f5",
   "source_sha256": {
     "navigator/core_assist.py": "9221c13c00396e415f330ad97e750e58a5e72482a00b4284a9142883d3a44ef3",
     "navigator/source_inventory.py": "306eb6dc9703e7cca39a68fd90c1affd5629215bbc0b2361f7dc935b2bd7cd60",
@@ -38,7 +38,7 @@
     "tests/test_geocode.py": "da613f3db666c84473ffc1cd079e447b7afd0c51b66a895863407aa7b7985473",
     "tests/test_question_planner.py": "ed78823682e34b3ccdbb1cde3e7aa4a4ac9e2f16e726df35be1a5eeae400bf58",
     "tests/test_change_adapters.py": "e7f54e05425999c86b65669d1a6ebc52a9dd076399a7defd71ea39a1ba508fdc",
-    "tests/test_assist_api.py": "a8595d9d21aa5e88575ee2190df5b76c34bbbc6b43d7453b7a139bcf61a5cc19",
+    "tests/test_assist_api.py": "f6e07c26b988aafd08931c1c6431ee50ff092b3874ba692fbbaff59abcad5c62",
     "tests/test_evidence.py": "c29cdb973e0bd1588efcd8efffa26be5f3fc475a2d5f6659adcc88228d432d64",
     "tests/test_research_contracts.py": "1f0ccc176bf2ad11cae83e651f6f8352a4970c194ffca8007f305b4f9954948c",
     "tests/fixtures/change_tests.json": "f22b82ebc8e783d13e690fc39cb52879380da8df91a23ef8677388a767d0d97f"
@@ -64,7 +64,7 @@
     {
       "command": "python -m pytest -q -rs",
       "exit_code": 0,
-      "stdout": ".....s.................................................................. [ 40%]\n........................................................................ [ 81%]\n.................................                                        [100%]\n=============================== warnings summary ===============================\n../../../../../../../Users/oliverchen/Documents/random shi/realpage-eggs-core/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /Users/oliverchen/Documents/random shi/realpage-eggs-core/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nSKIPPED [1] tests/test_api_exports.py:66: Organizer pack not installed\n176 passed, 1 skipped, 1 warning in 1.81s\n",
+      "stdout": ".....s.................................................................. [ 40%]\n........................................................................ [ 80%]\n...................................                                      [100%]\n=============================== warnings summary ===============================\n../../../../../../../Users/oliverchen/Documents/random shi/realpage-eggs-core/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /Users/oliverchen/Documents/random shi/realpage-eggs-core/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nSKIPPED [1] tests/test_api_exports.py:66: Organizer pack not installed\n178 passed, 1 skipped, 1 warning in 2.82s\n",
       "stderr": ""
     },
     {
@@ -76,7 +76,7 @@
     {
       "command": "python -m navigator contracts",
       "exit_code": 0,
-      "stdout": "{\n  \"generated\": \"/private/var/folders/ww/tlvssfds5w9935nn0qbwdb3r0000gn/T/realpage-core-b-validation-tm7c7r43/contracts\",\n  \"examples\": \"synthetic; research examples are proposed Core output, not a live planner\"\n}\n",
+      "stdout": "{\n  \"generated\": \"/private/var/folders/ww/tlvssfds5w9935nn0qbwdb3r0000gn/T/realpage-core-b-validation-x218yi5r/contracts\",\n  \"examples\": \"synthetic; research examples are proposed Core output, not a live planner\"\n}\n",
       "stderr": "/Users/oliverchen/Documents/random shi/realpage-eggs-core/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n  from starlette.testclient import TestClient as TestClient  # noqa\n"
     },
     {
