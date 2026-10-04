@@ -86,7 +86,7 @@ class Artifact:
 
 class AssistCache:
     def __init__(self, root, *, max_entries=16, max_bytes=256 * 1024 * 1024,
-                 max_result_bytes=256 * 1024 * 1024):
+                 max_result_bytes=512 * 1024 * 1024):
         self.root = Path(root)
         self.max_entries, self.max_bytes, self.max_result_bytes = max_entries, max_bytes, max_result_bytes
         if min(max_entries, max_bytes, max_result_bytes) <= 0:

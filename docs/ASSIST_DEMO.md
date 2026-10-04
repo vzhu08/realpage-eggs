@@ -63,7 +63,7 @@ service, serialized once, checksummed, atomically installed, then hash-validated
 miss and recompute. Changed inputs detected during an HTTP analysis produce a retryable 503.
 Injected Core adapters are not cached because they have no portable identity.
 
-Default bounds are 16 entries, 256 MiB total committed artifacts and 256 MiB per decoded result.
+Default bounds are 16 entries, 256 MiB total committed artifacts and 512 MiB per decoded result.
 Both canonical and compact representations count toward disk use. Oldest entries are evicted.
 One temporary entry can coexist during atomic construction; disk-full/read-only failures bypass
 the cache and preserve the actual result. One cold computation is admitted per API process;

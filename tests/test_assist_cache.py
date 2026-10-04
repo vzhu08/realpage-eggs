@@ -124,6 +124,14 @@ def test_simultaneous_users_receive_only_own_answers(demo, tmp_path):
     assert body(cache.resolve(demo, requests[0])) == expected[0]
 
 
+def test_oversized_result_keeps_uncached_semantics(demo, tmp_path):
+    cache = AssistCache(tmp_path / "cache", max_result_bytes=100)
+    expected = assist(demo, request()).model_dump_json()
+    result = cache.resolve(demo, request())
+    assert result.model_dump_json() == expected
+    assert not list(cache.root.glob("*/entry.json"))
+
+
 def test_busy_cold_requests_have_bounded_admission(demo, tmp_path):
     cache = AssistCache(tmp_path / "cache")
     with cache.compute:
