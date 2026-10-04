@@ -71,6 +71,11 @@ produce an unqualified comparison; review-state changes stay separate from subst
 Baseline focused checks: 113 passed. Full checks run in a disposable copy; real stores stay read-only.
 No provider resumption is implied. Platform's public comparison contract remains a dependency.
 
+Follow-up delivered at `8ea65dab22335f79ea926ea372b9dc90985026cd`: source identity and review-state
+repairs, 11 reproduced regression failures fixed, 124 focused and 291 full-suite tests passed.
+The immutable 140-rule snapshot retains all unresolved review state; no provider calls or store edits.
+Local review handoff: [comparison integrity](../core_rules/comparison_integrity/HANDOFF.md).
+
 ## Previous execution claim
 
 Daniel / Codex /root, session 01a103d0-b88b-7090-97aa-f9d5eec55d45; sole writer.
