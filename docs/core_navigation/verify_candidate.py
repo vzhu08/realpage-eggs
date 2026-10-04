@@ -29,9 +29,10 @@ def main():
     runs = []
     with tempfile.TemporaryDirectory(prefix='realpage-core-b-validation-') as temporary:
         copied = Path(temporary)
-        for name in ('navigator', 'tests', 'fixtures', 'config', 'contracts'):
+        for name in ('navigator', 'tests', 'fixtures', 'config', 'contracts', 'scripts'):
             shutil.copytree(ROOT / name, copied / name, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
-        shutil.copy2(ROOT / 'pyproject.toml', copied / 'pyproject.toml')
+        for name in ('pyproject.toml', 'requirements.lock'):
+            shutil.copy2(ROOT / name, copied / name)
         # This original comparison is read-only; retain its fixed cases/denominators.
         (copied / 'docs/core').mkdir(parents=True)
         for name in ('evaluate_planner.py', 'core01_d001_live.json'):
@@ -39,7 +40,7 @@ def main():
         (copied / 'docs/core_navigation').mkdir(parents=True)
         shutil.copy2(ROOT / 'docs/core_navigation/benchmark.py', copied / 'docs/core_navigation/benchmark.py')
         environment['NAVIGATOR_DATA_DIR'] = str(copied / 'data/core-b-session')
-        source_hashes = {f'{name}/{path}': sha for name in ('navigator', 'tests')
+        source_hashes = {f'{name}/{path}': sha for name in ('navigator', 'tests', 'scripts')
                          for path, sha in hashes(copied / name).items()}
         commands = [
             ['-m', 'pytest', '-q', '-rs'],

@@ -48,27 +48,27 @@
       "latency": {
         "planner_ms": {
           "samples": 3,
-          "median_ms": 1.129,
-          "min_ms": 1.07,
-          "max_ms": 1.513
+          "median_ms": 1.241,
+          "min_ms": 1.115,
+          "max_ms": 1.426
         },
         "ask_every_missing_ms": {
           "samples": 3,
-          "median_ms": 0.098,
-          "min_ms": 0.095,
-          "max_ms": 0.107
+          "median_ms": 0.11,
+          "min_ms": 0.103,
+          "max_ms": 0.124
         },
         "generic_unknown_ms": {
           "samples": 3,
           "median_ms": 0.089,
-          "min_ms": 0.085,
-          "max_ms": 0.089
+          "min_ms": 0.087,
+          "max_ms": 0.091
         },
         "assist_http_ms": {
           "samples": 3,
-          "median_ms": 3.838,
-          "min_ms": 3.602,
-          "max_ms": 4.669
+          "median_ms": 3.493,
+          "min_ms": 3.422,
+          "max_ms": 4.395
         }
       },
       "deterministic_repeats": 3,
@@ -107,27 +107,27 @@
       "latency": {
         "planner_ms": {
           "samples": 3,
-          "median_ms": 0.514,
-          "min_ms": 0.493,
-          "max_ms": 0.542
+          "median_ms": 0.498,
+          "min_ms": 0.47,
+          "max_ms": 0.588
         },
         "ask_every_missing_ms": {
           "samples": 3,
-          "median_ms": 0.125,
-          "min_ms": 0.12,
-          "max_ms": 0.128
+          "median_ms": 0.124,
+          "min_ms": 0.121,
+          "max_ms": 0.131
         },
         "generic_unknown_ms": {
           "samples": 3,
-          "median_ms": 0.117,
-          "min_ms": 0.113,
-          "max_ms": 0.206
+          "median_ms": 0.11,
+          "min_ms": 0.11,
+          "max_ms": 0.126
         },
         "assist_http_ms": {
           "samples": 3,
-          "median_ms": 2.752,
-          "min_ms": 2.744,
-          "max_ms": 3.106
+          "median_ms": 2.519,
+          "min_ms": 2.508,
+          "max_ms": 3.345
         }
       },
       "deterministic_repeats": 3,
@@ -173,27 +173,27 @@
       "latency": {
         "planner_ms": {
           "samples": 3,
-          "median_ms": 2.474,
-          "min_ms": 2.441,
-          "max_ms": 2.757
+          "median_ms": 2.384,
+          "min_ms": 2.35,
+          "max_ms": 2.606
         },
         "ask_every_missing_ms": {
           "samples": 3,
-          "median_ms": 0.144,
-          "min_ms": 0.14,
-          "max_ms": 0.15
+          "median_ms": 0.143,
+          "min_ms": 0.135,
+          "max_ms": 0.144
         },
         "generic_unknown_ms": {
           "samples": 3,
-          "median_ms": 0.126,
-          "min_ms": 0.125,
-          "max_ms": 0.127
+          "median_ms": 0.124,
+          "min_ms": 0.123,
+          "max_ms": 0.124
         },
         "assist_http_ms": {
           "samples": 3,
-          "median_ms": 5.228,
-          "min_ms": 4.682,
-          "max_ms": 5.287
+          "median_ms": 5.01,
+          "min_ms": 4.797,
+          "max_ms": 5.157
         }
       },
       "deterministic_repeats": 3,
@@ -234,27 +234,27 @@
       "latency": {
         "planner_ms": {
           "samples": 3,
-          "median_ms": 0.956,
-          "min_ms": 0.858,
-          "max_ms": 1.058
+          "median_ms": 0.815,
+          "min_ms": 0.801,
+          "max_ms": 0.979
         },
         "ask_every_missing_ms": {
           "samples": 3,
-          "median_ms": 0.065,
-          "min_ms": 0.065,
-          "max_ms": 0.099
+          "median_ms": 0.06,
+          "min_ms": 0.059,
+          "max_ms": 0.061
         },
         "generic_unknown_ms": {
           "samples": 3,
-          "median_ms": 0.056,
-          "min_ms": 0.056,
-          "max_ms": 0.059
+          "median_ms": 0.053,
+          "min_ms": 0.053,
+          "max_ms": 0.054
         },
         "assist_http_ms": {
           "samples": 3,
-          "median_ms": 3.003,
-          "min_ms": 2.89,
-          "max_ms": 3.481
+          "median_ms": 3.027,
+          "min_ms": 2.929,
+          "max_ms": 3.133
         }
       },
       "deterministic_repeats": 3,
@@ -297,27 +297,27 @@
       "latency": {
         "planner_ms": {
           "samples": 3,
-          "median_ms": 1.249,
-          "min_ms": 1.158,
-          "max_ms": 1.392
+          "median_ms": 1.309,
+          "min_ms": 1.146,
+          "max_ms": 1.326
         },
         "ask_every_missing_ms": {
           "samples": 3,
-          "median_ms": 0.101,
-          "min_ms": 0.101,
-          "max_ms": 0.106
+          "median_ms": 0.097,
+          "min_ms": 0.095,
+          "max_ms": 0.1
         },
         "generic_unknown_ms": {
           "samples": 3,
-          "median_ms": 0.088,
-          "min_ms": 0.087,
-          "max_ms": 0.091
+          "median_ms": 0.087,
+          "min_ms": 0.084,
+          "max_ms": 0.095
         },
         "assist_http_ms": {
           "samples": 3,
-          "median_ms": 3.521,
-          "min_ms": 3.341,
-          "max_ms": 3.753
+          "median_ms": 3.324,
+          "min_ms": 3.169,
+          "max_ms": 3.529
         }
       },
       "deterministic_repeats": 3,
@@ -360,27 +360,27 @@
       "latency": {
         "planner_ms": {
           "samples": 3,
-          "median_ms": 2.079,
-          "min_ms": 2.06,
-          "max_ms": 2.49
+          "median_ms": 2.388,
+          "min_ms": 2.047,
+          "max_ms": 2.45
         },
         "ask_every_missing_ms": {
           "samples": 3,
-          "median_ms": 0.201,
-          "min_ms": 0.193,
-          "max_ms": 0.21
+          "median_ms": 0.197,
+          "min_ms": 0.182,
+          "max_ms": 0.201
         },
         "generic_unknown_ms": {
           "samples": 3,
-          "median_ms": 0.177,
-          "min_ms": 0.17,
-          "max_ms": 0.183
+          "median_ms": 0.173,
+          "min_ms": 0.171,
+          "max_ms": 0.181
         },
         "assist_http_ms": {
           "samples": 3,
-          "median_ms": 5.393,
+          "median_ms": 5.094,
           "min_ms": 5.034,
-          "max_ms": 5.715
+          "max_ms": 5.718
         }
       },
       "deterministic_repeats": 3,
@@ -426,27 +426,27 @@
       "latency": {
         "planner_ms": {
           "samples": 3,
-          "median_ms": 0.866,
-          "min_ms": 0.797,
-          "max_ms": 0.939
+          "median_ms": 0.857,
+          "min_ms": 0.768,
+          "max_ms": 11.021
         },
         "ask_every_missing_ms": {
           "samples": 3,
-          "median_ms": 0.111,
-          "min_ms": 0.102,
-          "max_ms": 0.119
+          "median_ms": 0.106,
+          "min_ms": 0.101,
+          "max_ms": 0.112
         },
         "generic_unknown_ms": {
           "samples": 3,
-          "median_ms": 0.094,
-          "min_ms": 0.093,
-          "max_ms": 0.115
+          "median_ms": 0.09,
+          "min_ms": 0.089,
+          "max_ms": 0.094
         },
         "assist_http_ms": {
           "samples": 3,
-          "median_ms": 3.346,
-          "min_ms": 2.945,
-          "max_ms": 3.549
+          "median_ms": 2.898,
+          "min_ms": 2.792,
+          "max_ms": 3.128
         }
       },
       "deterministic_repeats": 3,
@@ -505,27 +505,27 @@
       "latency": {
         "planner_ms": {
           "samples": 3,
-          "median_ms": 4.97,
-          "min_ms": 4.72,
-          "max_ms": 5.051
+          "median_ms": 4.726,
+          "min_ms": 4.576,
+          "max_ms": 4.915
         },
         "ask_every_missing_ms": {
           "samples": 3,
-          "median_ms": 2.054,
-          "min_ms": 1.945,
-          "max_ms": 2.184
+          "median_ms": 1.957,
+          "min_ms": 1.884,
+          "max_ms": 2.01
         },
         "generic_unknown_ms": {
           "samples": 3,
-          "median_ms": 1.959,
-          "min_ms": 1.909,
-          "max_ms": 2.15
+          "median_ms": 1.922,
+          "min_ms": 1.847,
+          "max_ms": 1.982
         },
         "assist_http_ms": {
           "samples": 3,
-          "median_ms": 13.825,
-          "min_ms": 13.587,
-          "max_ms": 14.704
+          "median_ms": 13.233,
+          "min_ms": 13.168,
+          "max_ms": 14.048
         }
       },
       "deterministic_repeats": 3,

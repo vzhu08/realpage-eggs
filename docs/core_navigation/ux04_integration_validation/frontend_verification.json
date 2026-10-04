@@ -1,5 +1,4 @@
 {
-  "runtime_commit": "af14cd883ec05d7c233bd423127f386072432a9d",
   "node": "v22.23.2",
   "source_sha256": {
     "frontend/package-lock.json": "21daedfd18db4225a60578cb7628bfb2d5e7d73cf6661a222cf32789dbe3165a",
@@ -8,9 +7,9 @@
     "frontend/src/App.tsx": "4928ab12456502d17ef78cb2ebe8c0af6f98cfcd4137f2186ae481901e3f058c",
     "frontend/src/api/demo.ts": "4113d28446fe64dce1e181d974535085d0eedcdaa9251fdd2a459b0909f0fb15",
     "frontend/src/api/errors.ts": "8ac80444f9afbc5805aaeea7192f1da1e55e45ef135894199f502c644c987bae",
-    "frontend/src/api/generated/contract.ts": "0aa3bf35f46595300eb5fa278b943a4a1e8520aaee11fe1697b4f30cba054a91",
-    "frontend/src/api/generated/meta.ts": "72091790228f0fc936807d6cd1378855bebc9fa5ff7e5ee3a40d281298f7a5a5",
-    "frontend/src/api/generated/schemas.json": "592aa3f9ed4b0c4800f4afe005c1932ad29bd983087eb068df5a75fc8cce1fe7",
+    "frontend/src/api/generated/contract.ts": "45c2506915219d55de3ad31016c59940a5bce60ab1bcd49d2104c73b49979b9e",
+    "frontend/src/api/generated/meta.ts": "3e2f9ea8fe6f2c9815efad89134970a62a87bb38012237a7f298c96d565d7056",
+    "frontend/src/api/generated/schemas.json": "e4af0b175c0e22279fc987db8fb0113198527716bc0d48b505c42e09deeb1d2f",
     "frontend/src/api/live.ts": "df2203e6e0ceb331e82d3d8a75443d3bd85beeeb9ea9aa8d7ed1d02556632f3d",
     "frontend/src/api/types.ts": "6aa491b4d452025768960ca9ff5eeb8a5a28bfb6edffa4f57b4d8b5faabef0fa",
     "frontend/src/api/validate.ts": "65811ec0e2941a43e6eb5cdfdd90e6d2be08d656eb0ad22475ae87cb5f88a7bf",
@@ -20,8 +19,8 @@
     "frontend/src/config.ts": "3f379532fa83bda1751d4857e503c569af951e9bb5a51566eaed47c6fe0a21c1",
     "frontend/src/demo/fixtures.ts": "52dda0197018b1a40ad9b83be1dbcce251f294275f61fce0a2707dd9c5cdb988",
     "frontend/src/demo/pool.ts": "bd860008aa541862c1e01af220786aeb4109aa7229f5e89c2e68d89b3577d0c5",
-    "frontend/src/demo/recorded/portfolio-dev-fixture.json": "c9cf439ec81e7ecc1b67b38ee974de3a1c119be6f85baf87542fa5e6e9150b2a",
-    "frontend/src/demo/recorded/synthetic-replay.json": "8b830588c59eef139b773ac5335c18dc5a8fd2924a0928aa8288458d23787be6",
+    "frontend/src/demo/recorded/portfolio-dev-fixture.json": "6601d0d66a0048e85bf5a43582b42b019ef5ffcc74da51cb1a1ff06ae211f0ce",
+    "frontend/src/demo/recorded/synthetic-replay.json": "44efac85b67bb6a69ac03f0c5b0554d8682d3c8aa589b598fe907d96f764f9a8",
     "frontend/src/demo/replay.ts": "9936f5225c0232125d86810f3843db93ad9f36d98156aea2bceb39de53e4482a",
     "frontend/src/features/changes/ChangeResultView.tsx": "9ba033af5309f1ee8e63b1f33c8f0480da48040cb090588bf302747fcf195040",
     "frontend/src/features/changes/ChangesView.tsx": "c0785a76b2899f738e76f360f098a6ddae6d68b5a9c6be463dd7a01a530c32b3",
@@ -104,7 +103,7 @@
         "failed": 0,
         "skipped": 0
       },
-      "contracts": "8393dfe64420bf16; 39 models",
+      "contracts": "3a71126e3e2733d4; 51 models",
       "typecheck": "pass",
       "vite_build": "pass"
     },
@@ -125,5 +124,6 @@
     "Synthetic recordings and API doubles; not integrated real-snapshot browser acceptance.",
     "Vite warns about bundled demo-data chunk size.",
     "Historical screenshot/backup frames not regenerated."
-  ]
+  ],
+  "base_commit_at_verification": "e5966b204fe71024c7036334158c616b5d17867f"
 }

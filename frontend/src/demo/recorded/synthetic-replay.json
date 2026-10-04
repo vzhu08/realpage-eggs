@@ -4,7 +4,7 @@
   "label": "SYNTHETIC_NOT_ACTUAL_LAW",
   "generated_by": "frontend/scripts/record_demo.py",
   "backend_version": "0.1.0",
-  "backend_commit": "af14cd883ec05d7c233bd423127f386072432a9d",
+  "backend_commit": "e5966b204fe71024c7036334158c616b5d17867f",
   "note": "Verbatim backend output for the fictional Maple Harbor store. Not legal evidence; not a live service.",
   "lookup_dates": [
    "2026-08-31",
@@ -229,7 +229,7 @@
        "conflict_note": null,
        "team_rule_id": "r-694ad9fbae9083966e86",
        "evidence_mode": "synthetic",
-       "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+       "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
        "semantic_verification": "synthetic_fixture"
       }
      ],
@@ -264,7 +264,7 @@
        "synthetic"
       ],
       "extraction_run_ids": [
-       "0adebe213d8441f4ac16c16574a9b04d"
+       "a388771d0c144e3596a5a83c01a5b98c"
       ],
       "partial_data": false,
       "missing_source_ids": [],
@@ -852,7 +852,7 @@
        "conflict_note": null,
        "team_rule_id": "r-694ad9fbae9083966e86",
        "evidence_mode": "synthetic",
-       "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+       "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
        "semantic_verification": "synthetic_fixture"
       }
      ],
@@ -887,7 +887,7 @@
        "synthetic"
       ],
       "extraction_run_ids": [
-       "0adebe213d8441f4ac16c16574a9b04d"
+       "a388771d0c144e3596a5a83c01a5b98c"
       ],
       "partial_data": false,
       "missing_source_ids": [],
@@ -1475,7 +1475,7 @@
        "conflict_note": null,
        "team_rule_id": "r-694ad9fbae9083966e86",
        "evidence_mode": "synthetic",
-       "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+       "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
        "semantic_verification": "synthetic_fixture"
       }
      ],
@@ -1510,7 +1510,7 @@
        "synthetic"
       ],
       "extraction_run_ids": [
-       "0adebe213d8441f4ac16c16574a9b04d"
+       "a388771d0c144e3596a5a83c01a5b98c"
       ],
       "partial_data": false,
       "missing_source_ids": [],
@@ -2098,7 +2098,7 @@
        "conflict_note": null,
        "team_rule_id": "r-694ad9fbae9083966e86",
        "evidence_mode": "synthetic",
-       "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+       "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
        "semantic_verification": "synthetic_fixture"
       }
      ],
@@ -2133,7 +2133,7 @@
        "synthetic"
       ],
       "extraction_run_ids": [
-       "0adebe213d8441f4ac16c16574a9b04d"
+       "a388771d0c144e3596a5a83c01a5b98c"
       ],
       "partial_data": false,
       "missing_source_ids": [],
@@ -4427,7 +4427,7 @@
        "conflict_note": null,
        "team_rule_id": "r-694ad9fbae9083966e86",
        "evidence_mode": "synthetic",
-       "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+       "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
        "semantic_verification": "synthetic_fixture"
       }
      ],
@@ -4462,7 +4462,7 @@
        "synthetic"
       ],
       "extraction_run_ids": [
-       "0adebe213d8441f4ac16c16574a9b04d"
+       "a388771d0c144e3596a5a83c01a5b98c"
       ],
       "partial_data": false,
       "missing_source_ids": [],
@@ -5052,7 +5052,7 @@
        "conflict_note": null,
        "team_rule_id": "r-694ad9fbae9083966e86",
        "evidence_mode": "synthetic",
-       "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+       "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
        "semantic_verification": "synthetic_fixture"
       }
      ],
@@ -5087,7 +5087,7 @@
        "synthetic"
       ],
       "extraction_run_ids": [
-       "0adebe213d8441f4ac16c16574a9b04d"
+       "a388771d0c144e3596a5a83c01a5b98c"
       ],
       "partial_data": false,
       "missing_source_ids": [],
@@ -5677,7 +5677,7 @@
        "conflict_note": null,
        "team_rule_id": "r-694ad9fbae9083966e86",
        "evidence_mode": "synthetic",
-       "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+       "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
        "semantic_verification": "synthetic_fixture"
       }
      ],
@@ -5712,7 +5712,7 @@
        "synthetic"
       ],
       "extraction_run_ids": [
-       "0adebe213d8441f4ac16c16574a9b04d"
+       "a388771d0c144e3596a5a83c01a5b98c"
       ],
       "partial_data": false,
       "missing_source_ids": [],
@@ -6302,7 +6302,7 @@
        "conflict_note": null,
        "team_rule_id": "r-694ad9fbae9083966e86",
        "evidence_mode": "synthetic",
-       "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+       "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
        "semantic_verification": "synthetic_fixture"
       }
      ],
@@ -6337,7 +6337,7 @@
        "synthetic"
       ],
       "extraction_run_ids": [
-       "0adebe213d8441f4ac16c16574a9b04d"
+       "a388771d0c144e3596a5a83c01a5b98c"
       ],
       "partial_data": false,
       "missing_source_ids": [],
@@ -7270,7 +7270,7 @@
     "conflict_note": null,
     "team_rule_id": "r-694ad9fbae9083966e86",
     "evidence_mode": "synthetic",
-    "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+    "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
     "semantic_verification": "synthetic_fixture"
    },
    "versions": [
@@ -7377,7 +7377,7 @@
      "conflict_note": null,
      "team_rule_id": "r-694ad9fbae9083966e86",
      "evidence_mode": "synthetic",
-     "extraction_run_id": "0adebe213d8441f4ac16c16574a9b04d",
+     "extraction_run_id": "a388771d0c144e3596a5a83c01a5b98c",
      "semantic_verification": "synthetic_fixture"
     }
    ],

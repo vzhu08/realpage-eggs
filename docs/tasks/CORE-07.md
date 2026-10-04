@@ -82,3 +82,7 @@ Compatibility fixes are at `af14cd8`; current checks, snapshot availability, and
 acceptance gates are recorded in [the combined handoff](../core_navigation/UX04_INTEGRATION.md).
 This follow-up supersedes earlier toolchain-unavailable statements for the integrated build;
 the original task evidence above remains historical.
+
+PR #15 also includes main `607dce3` (Platform release PR #14) via clean merge `e5966b2`.
+Released additive contracts are available; frontend types are regenerated. New endpoint
+adoption and real-snapshot rehearsal remain follow-up acceptance work.
