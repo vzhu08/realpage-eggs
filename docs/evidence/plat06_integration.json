@@ -1,0 +1,93 @@
+{
+  "task": "PLAT-06 + PLAT-07 integration",
+  "date_local": "2026-10-04",
+  "branch": "codex/platform-release",
+  "pull_request": "https://github.com/vzhu08/realpage-eggs/pull/14",
+  "label": "SOFTWARE_VERIFICATION_NOT_LEGAL_ACCEPTANCE",
+  "backend": {
+    "passed": 351,
+    "warnings": 1,
+    "organizer_pack_configured": true,
+    "log": "artifacts/plat06/parallel-backend.log"
+  },
+  "contracts": {
+    "exit_code": 0,
+    "four_schemas_unchanged_from_reviewed_PLAT06": true,
+    "log": "artifacts/plat06/parallel-contracts.log"
+  },
+  "code": {
+    "pipeline_version": "0.1.0",
+    "python_version": "3.12.14",
+    "dependencies": {
+      "pydantic": "2.13.5",
+      "pydantic_core": "2.46.5",
+      "fastapi": "0.142.2",
+      "starlette": "1.7.0",
+      "httpx": "0.28.1",
+      "jsonschema": "4.26.0",
+      "python-dotenv": "1.2.4"
+    },
+    "files_sha256": {
+      "navigator/__init__.py": "279710f99c5c14d54c4b5bf7336be4848dd252749083477baddd35b10ef95531",
+      "navigator/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "navigator/api.py": "e501e71c44ed871445817c281c01c331cc5c7a9cd4a30a4473ac507adecb57e1",
+      "navigator/assist_service.py": "e5b296acd5debdcf8bc0e081741bc729a898bfe28826e1e330225169e24d78c6",
+      "navigator/changes.py": "2060c6d521001d2bf0721d2bd1b372cce07f0110c4726b435d60cc4eee62b5f7",
+      "navigator/cli.py": "f747386e95c2a6119c2534ac104b85f3a08363b2a9f4593f4840900b844b27c2",
+      "navigator/config.py": "ab3c3b0a8135e2816ad6e46e2a12a4ff999820e414d20073dabf4852d671f7ce",
+      "navigator/contracts.py": "612854b2dfbccbe4d8e93e5f38832eca0935381a416d2039860d69c1f48f1d8e",
+      "navigator/core_assist.py": "9221c13c00396e415f330ad97e750e58a5e72482a00b4284a9142883d3a44ef3",
+      "navigator/demo.py": "db337c9e6c4adb583e9dcba4b6fa39d9bb531b42a9f4711bcdbeeffc9b0a0d47",
+      "navigator/engine.py": "e9e9b01e2d131f66052917b08575b62d6ca05f6a8b47439d0df8d7ff6ff66414",
+      "navigator/evidence.py": "55212cb5afd85d5f189ecdc8381176bcc1e6d9be207f860102ec2e000b8273c9",
+      "navigator/evidence_package.py": "c380327a7c2a3582c4a575e95703adba9c43f8a2f448ecaeff6234d0bf4eef99",
+      "navigator/export.py": "346b8d16029876cacf147ab11c37274cbab793e6dd107450d94b0b83cf4f402f",
+      "navigator/extraction.py": "d45b3284a7cb565c88df095ae125aea95363671054b48ee6761835ab00866e8e",
+      "navigator/fact_inputs.py": "c8366cbd0ea945be5b2d58dee53f20904dca20effd90a048ecb829e3d9910d8e",
+      "navigator/geocode.py": "f5ce5fd996950fe701f8dc556f706c4eac80db396efd39d2c9703517dd9f7d27",
+      "navigator/ingest.py": "dcdabbc16dbf90d2a899f30fca65a3bc0336098b4afd5b30adeeb6b3792e9f2c",
+      "navigator/models.py": "6666d33eb6c248f2edb1bface343979fb4cb4849ddb43b773850f720cb442890",
+      "navigator/predicates.py": "bf00596766fce89bfc07d204a2a759cd2802ea2b0b26cc413aa0b23801edc8f3",
+      "navigator/question_planner.py": "8c38901fcbca732d120e486e5b855fe4466d181fb63c5c86e2af3505ea7a346f",
+      "navigator/research_fixtures.py": "7de7a954f3c22f27f66297335dce19ce5ceb94f6d1e759b494ea35849f12b4fb",
+      "navigator/retrieval.py": "6a7a7940fe94887ca7470b7e4d9ddc999e4a7e262694645256e931e14f745048",
+      "navigator/rule_renderer.py": "c294e328f55d00bceb208672ae9eea9771e05836ed08b8752c0092e2c7a8b9a2",
+      "navigator/semantic_review.py": "2f53998d2c36585846ffae9126b91f6254341e8a47a256ef3e463eff70305da0",
+      "navigator/service.py": "73ce09f1d93f72054313bae1f248e5a1e0d82b3c54091487ba2d98d71400ce31",
+      "navigator/source_comparison.py": "24de2490127e92f658111dafed3ea6b874b9a2d36a9bf4b1c97945e72347066c",
+      "navigator/source_inventory.py": "3f90d627fce96a33a21925f1e3a44237c8f89f6931d5dd9708f4dd92106afae1",
+      "navigator/store.py": "9b800afea3685c29690512d2f266fe6850340c03b70bfb0f4dff90ed002ba31d",
+      "navigator/validation.py": "cbe09ebe67cbe2096eb66b0017368fb388df772994355543b6e4b392448edb09",
+      "requirements.lock": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8"
+    },
+    "fingerprint": "f1b2443f64738b6a6809b8ce6b0b7732a310d9c776559d0902acb728ae1c1c9b"
+  },
+  "package_examples": {
+    "property_package.json": {
+      "status": "reproduced",
+      "package_sha256": "dd38ae4251db506aa930a97894e7300b03db23052ea5fcd38896f5838ad2a5cc",
+      "input_sha256": "eef17ce506e7af9371518302652ea21b79eb14ca0331e7d54b41784e1e56c137",
+      "response_sha256": "3dc4b7909f0d22953a9b8c8ad052b4b05571a3ebcf3d8ecd9b498383b9eb1437",
+      "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+    },
+    "package_missing_support.json": {
+      "status": "reproduced",
+      "package_sha256": "a7e2973cff95724a926bb483614c3f23af5576770573b07630cfbd14720f15fe",
+      "input_sha256": "12b0af544e4c1ce8b377dbf1aa1efd971f29a694787344c97fb04b9faabff198",
+      "response_sha256": "513e2a0448f353e5e829dd307fc41ca83633e80b669047948061ba83a6b330e7",
+      "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+    }
+  },
+  "review_fixes": [
+    "Unreadable optional change caches recompute through Core without store writes.",
+    "Evidence CLI publishes without replacing an output created concurrently.",
+    "Snapshot rules must match reviewed cache behavior after existing Core guards."
+  ],
+  "frozen_release": "The real-002 bundle remains frozen at 5145f1b and retains its original successful real-browser/export/rollback evidence; this later integration does not rewrite it.",
+  "real_integrity_evidence": "docs/evidence/plat07_integrity.json",
+  "limitations": [
+    "Corpus remains partial and no legal acceptance is claimed.",
+    "Public deployment and paid extraction remain out of scope.",
+    "UX owns adoption of the additive API controls."
+  ]
+}

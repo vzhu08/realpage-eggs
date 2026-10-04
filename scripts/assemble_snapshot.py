@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from navigator.evidence import all_evidence
+from navigator.extraction import substantive, validate_bundle
 from navigator.geocode import CensusGeocoder
 from navigator.models import ExtractionBundle, NegativeFinding, RunManifest
 from navigator.store import Store, digest, write_json
@@ -146,6 +147,7 @@ def extraction_provenance(core, sources, rules, hashes):
                 or (rule.evidence_mode in {"live", "replay"} and run.mode == "live"), f"Rule origin mode mismatch: {key}")
 
     cached_origins = set()
+    cached_behaviors = set()
     for name in hashes:
         if name.startswith("extraction_cache/"):
             cached = read(core.path(name))
@@ -162,10 +164,16 @@ def extraction_provenance(core, sources, rules, hashes):
                 for span in negative.evidence:
                     check_span(span, sources)
                     origin(run.run_id, span.doc_id)
+            # Replay Core's existing cache validation on in-memory copies. Older
+            # caches can legitimately acquire explicit unsupported fact guards.
+            for draft in validate_bundle(bundle, sources).rules:
+                cached_behaviors.add((run.run_id, draft.source_doc_id, digest(substantive(draft))))
         elif name.startswith("provider_outputs/"):
             require(len(Path(name).parts) == 3 and Path(name).parts[1] in runs, f"Missing provider-output origin: {name}")
     for rule in rules.values():
         require((rule.extraction_run_id, rule.source_doc_id) in cached_origins, f"Missing reviewed cache provenance: {rule.team_rule_id}")
+        require((rule.extraction_run_id, rule.source_doc_id, digest(substantive(rule))) in cached_behaviors,
+                f"Rule behavior differs from reviewed cache: {rule.team_rule_id}")
     for doc_id, findings in core.read("negative_findings.json", {}).items():
         require(doc_id in index, f"Unindexed negative finding: {doc_id}")
         for value in findings:
