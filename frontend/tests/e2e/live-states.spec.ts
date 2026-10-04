@@ -32,7 +32,8 @@ test.describe('live API: failure, partial and unavailable states', () => {
       'POST /lookup': () => ({ status: 503, json: { detail: { code: 'dataset_unavailable', message: 'No completed extraction; configure provider and run navigator extract' } } }),
     });
     await openLive(page);
-    await expect(page.getByText('Partial dataset').first()).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Partial dataset', exact: true })).toBeVisible();
+    await expect(page.locator('main').getByText('Partial dataset', { exact: true })).toBeVisible();
     await expect(page.getByText(/No rules have been extracted yet, so lookups will report extraction as unavailable/)).toBeVisible();
     await expect(page.getByText(/21 of 500 sample properties have no resolved municipality/)).toBeVisible();
     await expect(page.getByText(/The last extraction run ended as “failed” \(for example, a provider failure\)/)).toBeVisible();

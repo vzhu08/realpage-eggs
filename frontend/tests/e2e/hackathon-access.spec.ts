@@ -61,7 +61,13 @@ test.describe('recorded demo · keyboard only', () => {
     await page.keyboard.press('Enter');
     await expect(page.locator('#main')).toBeFocused();
 
-    // From the content, the first example is the first control.
+    // The two hero actions precede the examples in the content's keyboard order.
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button', { name: 'Find a property', exact: true })).toBeFocused();
+    await expectVisibleFocus(page);
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('link', { name: 'Explore changes', exact: true })).toBeFocused();
+    await expectVisibleFocus(page);
     const presses = await tabTo(page, (element) => element.getAttribute('data-example') === 'consequential_fact', 3);
     expect(presses).toBe(1);
     await expectVisibleFocus(page);

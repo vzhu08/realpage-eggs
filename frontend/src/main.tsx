@@ -6,6 +6,7 @@ import './styles/tokens.css';
 import './styles/base.css';
 import './styles/app.css';
 import './styles/portfolio.css';
+import './styles/tenent.css';
 
 const root = document.getElementById('root');
 if (!root) throw new Error('Missing #root element');

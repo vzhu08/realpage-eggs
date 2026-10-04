@@ -1,3 +1,4 @@
+import { ViewArtwork } from '../shell/TenentVisuals';
 import { useId, useMemo, useState } from 'react';
 import { DEFAULT_AS_OF } from '../../api/generated/meta';
 import type { DataMode, Rule } from '../../api/types';
@@ -74,9 +75,10 @@ export function DisagreementsView({ mode, initial, lookupHref, disagreementHref,
 
   return (
     <div className="disagreements">
-      <header className="changes__intro">
-        <h1 className="page-title">Two sources, side by side.</h1>
-        <p className="page-lead">Where two claims about the law were compared, each is shown with the exact passage it cites, that source’s authority and retrieval date, and what would settle it. No source is given a winner.</p>
+      <header className="changes__intro workspace-intro">
+        <div><p className="eyebrow">A CLOSER LOOK AT THE EVIDENCE</p><h1 className="page-title">Two sources.<br/>The full context.</h1>
+        <p className="page-lead">Compare the original words, their authority, and what remains unresolved. Every claim keeps its context. No source is given a winner.</p></div>
+        <ViewArtwork kind="sources"/>
       </header>
 
       {context && (

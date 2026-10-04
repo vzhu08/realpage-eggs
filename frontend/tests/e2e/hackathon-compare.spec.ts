@@ -20,7 +20,7 @@ test.describe('recorded demo · step 7: compare sources', () => {
   test('every recorded claim observation shows both exact texts, each side\'s authority and retrieval date, its classification and the service\'s remedy — and no preferred source', async ({ page }) => {
     await openDemo(page);
     await example(page, 'source_comparison').click();
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Two sources, side by side');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Two sources\.\s*The full context\./);
     await expect(banner(page)).toBeVisible();
 
     const recorded = dev().source_comparisons;

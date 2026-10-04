@@ -195,7 +195,7 @@ test.describe('portfolio changes: timeline, summaries and drill-down', () => {
     await expectNoHorizontalOverflow(page);
 
     await row.getByRole('link', { name: 'Compare the conflicting sources' }).click();
-    await expect(page.getByRole('heading', { level: 1, name: 'Two sources, side by side.' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /Two sources\.\s*The full context\./ })).toBeVisible();
     const card = page.locator('.disagreement[data-basis]');
     await expect(card).toHaveCount(1);
     await expect(card).toHaveAttribute('data-basis', 'interaction');
