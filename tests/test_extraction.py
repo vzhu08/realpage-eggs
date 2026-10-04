@@ -38,6 +38,85 @@ def test_missing_semantic_support_retained_for_review(demo):
     assert "Missing field-level evidence for key_value" in validated.rules[0].review_issues
 
 
+def test_supported_enactment_snapshot_does_not_become_an_effective_date(demo):
+    from datetime import date
+    from navigator.engine import temporal
+    from navigator.models import Rule
+    source = next(iter(demo.sources().values()))
+    bundle = ExtractionBundle.model_validate(synthetic_bundle(source))
+    draft = bundle.rules[0]
+    draft.effective_date, draft.status_as_of = None, '2026-09-01'
+    draft.evidence.append(draft.status_events[0].evidence[0].model_copy(
+        update={'supports': ['lifecycle', 'status_as_of']}, deep=True))
+    validated = validate_bundle(bundle, demo.sources()).rules[0]
+    rule = Rule(**validated.model_dump(), team_rule_id='synthetic-lifecycle-only',
+                extraction_run_id='synthetic-boundary-test', evidence_mode='synthetic',
+                semantic_verification='synthetic_fixture')
+    assert rule.lifecycle == 'enacted' and rule.effective_date is None
+    assert temporal(rule, date(2026, 11, 15)) == 'unknown'
+
+
+@pytest.mark.parametrize('op,value', [('eq', 'natural_person'), ('ne', 'family_trust'),
+                                     ('in', ['individual', 'limited_liability_company'])])
+def test_fact_contract_mismatch_cannot_decide_coverage(demo, prop, op, value):
+    from datetime import date
+    from navigator.models import Expression
+    from navigator.predicates import evaluate_expression
+    source = next(iter(demo.sources().values()))
+    bundle = ExtractionBundle.model_validate(synthetic_bundle(source))
+    rule = bundle.rules[0]
+    rule.coverage_conditions = Expression(op='all', args=[
+        Expression(op=op, fact='owner_type', value=value),
+        Expression(op='unsupported', reason='Additional ownership qualification is unresolved'),
+    ])
+    prop.facts['owner_type'] = 'individual'
+    validate_bundle(bundle, demo.sources())
+    result = evaluate_expression(rule.coverage_conditions, prop, date(2026, 10, 1))
+    assert result.value == 'unknown'
+    assert rule.coverage_conditions.args[0].op == 'unsupported'
+    assert any('Fact contract mismatch' in issue for issue in rule.review_issues)
+    assert 'owner_type' not in result.missing_facts  # Source interpretation, not another factual question.
+
+
+def test_fact_contract_guard_covers_exemptions_and_interaction_scope(demo):
+    from navigator.models import Expression, Interaction
+    source = next(iter(demo.sources().values()))
+    bundle = ExtractionBundle.model_validate(synthetic_bundle(source))
+    rule = bundle.rules[0]
+    rule.exemption_conditions = Expression(op='not', args=[Expression(op='eq', fact='owner_type', value='family_trust')])
+    rule.interactions = [Interaction(kind='supersedes', target_citation='Synthetic citation',
+                                    target_jurisdiction=rule.jurisdiction, category=rule.category,
+                                    scope=Expression(op='eq', fact='owner_type', value='natural_person'),
+                                    evidence=rule.evidence, note='Synthetic interaction')]
+    validate_bundle(bundle, demo.sources())
+    assert rule.exemption_conditions.args[0].op == 'unsupported'
+    assert rule.interactions[0].scope.op == 'unsupported'
+    assert len([x for x in rule.review_issues if 'Fact contract mismatch' in x]) == 2
+
+
+def test_fact_contract_guard_preserves_valid_values_and_revalidates_cache_without_calls(demo):
+    from navigator.models import Expression
+    source = next(iter(demo.sources().values()))
+    bundle = ExtractionBundle.model_validate(synthetic_bundle(source))
+    valid = Expression(op='all', args=[Expression(op='in', fact='owner_type', value=['individual', 'llc']),
+                                      Expression(op='eq', fact='source_specific_fact', value='explicit source value')])
+    bundle.rules[0].coverage_conditions = valid.model_copy(deep=True)
+    validate_bundle(bundle, demo.sources())
+    assert bundle.rules[0].coverage_conditions == valid
+    cache_path = next((demo.root / 'extraction_cache').glob('*.json'))
+    cached = json.loads(cache_path.read_text())
+    cached['bundle']['rules'][0]['coverage_conditions'] = {'op': 'eq', 'fact': 'owner_type', 'value': 'natural_person'}
+    demo.write(str(cache_path.relative_to(demo.root)), cached)
+    before = cache_path.read_bytes()
+    class NoCalls(SyntheticProvider):
+        def generate(self, *_):
+            pytest.fail('Valid completed extraction must be revalidated without new provider calls')
+    run = extract(demo, provider=NoCalls(source))
+    assert run.outcome == 'success' and run.counts['cache_hits'] == 1
+    assert next(iter(demo.rules().values())).coverage_conditions.op == 'unsupported'
+    assert cache_path.read_bytes() == before  # Keep the original provider/cache evidence.
+
+
 def test_no_key_records_failure_without_fixture_fallback(demo, monkeypatch):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     before = demo.read("rules.json")

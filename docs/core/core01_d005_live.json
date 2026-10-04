@@ -1,0 +1,54 @@
+{
+  "evidence_kind": "real provider extraction; automated original-source review, not human or independent legal review",
+  "run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+  "model": "gpt-6.1-sol",
+  "audit": {
+    "index": {
+      "status": "review",
+      "sha256": "396972b4e199efe65ff763eae53ed8a81d99e17ba900c39f16bfb44c16637bed",
+      "run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+      "mode": "live",
+      "rules": 15,
+      "issues": [
+        "All six categories were reviewed. The page supplies no affirmative negative findings for rent increase limits, just-cause eviction, security deposits, or algorithmic rent setting; silence is not evidence that those rules do not exist.",
+        "Enacted lifecycle labels reflect the agency's presentation of these provisions as operative law. No enactment events, effective dates, repeal dates, or dated lifecycle snapshot are supplied; the retrieval timestamp is not used as status_as_of.",
+        "No legislative amendments, dated status events, monetary penalties, or supported supersedes/conflicts_with interactions are stated.",
+        "State jurisdictions have been normalized from California to CA to satisfy the jurisdiction format validation.",
+        "The general screening-fee summary is attributed by the page to California Civil Code \u00a7 1950.6. Precise subsection attribution, qualifying conditions, and statutory exceptions require primary-text verification.",
+        "The policy alternative's review/selection and no-fee conditions, the two disclosure duties, and the two contractual-applicability consequences are separately captured.",
+        "The source is official agency guidance, not primary statutory or ordinance text and not a dated legislative status record.",
+        "The state-cap cross-reference and contrary-contract language do not establish legal precedence over another cited law.",
+        "Unknown exemption inventories are represented with unsupported expressions, not assertions that no exemptions exist."
+      ]
+    },
+    "rules": 15,
+    "lifecycle": {
+      "enacted": 15
+    },
+    "semantic_verification": {
+      "needs_review": 15
+    },
+    "evidence_instances": 39,
+    "distinct_spans": 20,
+    "invalid_evidence": [],
+    "non_verbatim_primary_quotes": [],
+    "construction_or_occupancy_predicates": [],
+    "unsupported_predicates": 15
+  },
+  "source_integrity": {
+    "original_matches_stored": true,
+    "actual_sha256_matches_stored": true
+  },
+  "review_findings": [
+    "15 final rules from 11 draft obligations. Review separately captured order/selection, unconsidered-applicant fees, cap disclosure and contractual applicability.",
+    "39 evidence instances / 20 distinct spans match original offsets; 15 principal quotes verbatim.",
+    "Structural repair normalized California to CA and explicit false conflict flags; legal content preserved.",
+    "$68.96 is specifically year2026 via fee_year==2026, original [459,510); no invented effective/end dates.",
+    "Credit report seven days from landlord receipt [624,739), with agency should-expect qualification.",
+    "Unselected-applicant refund policy requires all three conditions [1098,1375); unused-fee refund separate [868,914).",
+    "Nonrefundable existing-tenancy fees retain renewal/roommate scope [2647,2961), not every fee.",
+    "Rights disclosure and separate maximum-cap disclosure precede fee receipt; unresolved literal City URL placeholder retained.",
+    "Chapter applicability despite contrary agreement [3022,3169) and violating-term unenforceability [3170,3288) remain separate.",
+    "No dated lifecycle snapshot/event/effectiveness, invented precedence or penalties. All 15 need review; primary statute/exemptions unresolved."
+  ]
+}

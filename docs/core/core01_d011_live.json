@@ -1,0 +1,48 @@
+{
+  "evidence_kind": "real provider extraction; automated source/history review, not human or independent legal review",
+  "provider_origin_run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+  "model": "gpt-6.1-sol",
+  "audit": {
+    "index": {
+      "status": "review",
+      "sha256": "93835654c3483e7b169677f7a3ccdcf021b6edab4ac81ab7ad3091903de71ff2",
+      "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+      "mode": "live",
+      "rules": 0,
+      "issues": [
+        "All six categories were reviewed. No substantive provisions are supplied for rent increase limits, just-cause eviction, security deposits, application screening fees, screening restrictions, or algorithmic rent setting. Absence of those provisions from this segment is not evidence that no rules exist.",
+        "Local approval, concurrence on referral, and concurrence on reporting-date extensions do not establish enactment.",
+        "The latest listed legislative action is September 9, 2024: \"Accompanied a study order, see\nH5035\". This records a procedural disposition, but the supplied material does not expressly establish enactment or failure. No enacted or failed rule is inferred, and the referenced study order is not supplied.",
+        "The retrieval timestamp is not a legislative status event or a supported lifecycle snapshot date. The listed history does not establish the bill's status as of retrieval.",
+        "The supplied source contains the official description and legislative history of Massachusetts Bill H.3744, but not its substantive bill text. Its proposal to authorize Boston rent stabilization and tenant eviction protections does not establish extractable obligations, numeric limits, coverage, exemptions, penalties, interactions, or effective dates."
+      ]
+    },
+    "rules": 0,
+    "lifecycle": {},
+    "semantic_verification": {},
+    "evidence_instances": 0,
+    "distinct_spans": 0,
+    "invalid_evidence": [],
+    "non_verbatim_primary_quotes": [],
+    "construction_or_occupancy_predicates": [],
+    "unsupported_predicates": 0
+  },
+  "source_integrity": {
+    "original_matches_stored": true,
+    "actual_sha256_matches_stored": true
+  },
+  "valid_empty_cache": {
+    "key": "7651bb79c7151dc50eb8f3a6840b211ed863509b8945535887978e9def73b29d",
+    "origin_run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+    "source_kind": "status_record",
+    "rules": [],
+    "negative_findings": []
+  },
+  "review_findings": [
+    "Zero rules and zero negative findings are supported by absent substantive bill text, not by absence of law.",
+    "Local approval [325,622) and September9,2024 study-order disposition [1681,1732) do not establish enactment or failure.",
+    "No substantive obligations, thresholds, effective dates or retrieval-derived lifecycle dates invented.",
+    "H3744 substantive bill text and H5035 remain dependencies; corpus identifier search found those identifiers only in D011. D010 is an unrelated Fair Chance policy.",
+    "Index remains review with five unresolved issues; quote-quality denominators for extracted rules are zero."
+  ]
+}

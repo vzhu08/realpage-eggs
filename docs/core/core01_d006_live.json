@@ -1,0 +1,53 @@
+{
+  "evidence_kind": "real provider extraction; automated original-source review, not human or independent legal review",
+  "run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+  "model": "gpt-6.1-sol",
+  "audit": {
+    "index": {
+      "status": "review",
+      "sha256": "f1960db522de7f63158e64334835b37e52ae1d8fa8b510eeb314658aef4173fa",
+      "run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+      "mode": "live",
+      "rules": 25,
+      "issues": [
+        "Administrative registration, reporting, and tenant-rights notice obligations are included as ancillary Rent Ordinance obligations under rent_increase_limits. They do not establish that partially covered units have rent ceilings.",
+        "All six categories were reviewed. The source supplies no supported provisions or express jurisdiction-wide negative findings for security deposits, application screening fees, screening restrictions, or algorithmic rent setting. Silence does not establish the absence of rules.",
+        "Coverage classifications and exemptions are incomplete. The rent_ordinance_coverage fact must be independently supported, not inferred solely from construction year, ownership, or subsidy status.",
+        "Fine authorization is distinguished from an adopted fine system. The source establishes no adopted fine schedule, penalty amount, or later dated status for that authorization.",
+        "No overall effective date, exclusive end date, or dated lifecycle snapshot is supplied. Retrieval time is not status_as_of. Tenancy-start and utility-charge triggers are not converted into general effective dates or enactment events.",
+        "The overview and detailed sections differ in their description of shared-facilities residence timing, lease-renewal refusal, utility charging, and lease-breach notices. Rule-level review issues preserve these interpretation questions.",
+        "The source also describes tenant association creation, organizing activities, and a duty for landlords and tenant associations to confer in good faith about landlord-tenant relations, rent increases, habitability, and common interests. Those standalone organizing obligations are outside the six-category taxonomy; the rent-decrease remedy is extracted.",
+        "The source identifies federal, state, or administrative prohibitions on rent control without exact legal citations. It therefore cannot support schema-compliant directional supersedes or conflicts_with interactions.",
+        "This is official Rent Board guidance, not ordinance legal text. It reports voter passage and operative changes but supplies no ordinance section numbers; citations identify the ordinance and Measure BB without invented sections."
+      ]
+    },
+    "rules": 25,
+    "lifecycle": {
+      "enacted": 25
+    },
+    "semantic_verification": {
+      "needs_review": 25
+    },
+    "evidence_instances": 90,
+    "distinct_spans": 43,
+    "invalid_evidence": [],
+    "non_verbatim_primary_quotes": [],
+    "construction_or_occupancy_predicates": [],
+    "unsupported_predicates": 8
+  },
+  "source_integrity": {
+    "original_matches_stored": true,
+    "actual_sha256_matches_stored": true
+  },
+  "review_findings": [
+    "25 final rules; all 90 embedded evidence/event spans exact.",
+    "5% limits the annual General Adjustment and preserves banked increases over 5%, original [11884,12265).",
+    "Nonpayment trigger is at least one month regional HUD Fair Market Rent, not contract rent, [6660,7033).",
+    "Tenancy-notice threshold 2024-12-20 [8886,9296) remains separate from utilities-tenancy threshold 2024-02-06 and utility charge date [9758,10071).",
+    "Shared-facility exemption requires landlord residence at tenancy start [3350,3556).",
+    "Subsidy full/partial coverage and flattened-table qualifiers remain unresolved [4029,4234).",
+    "No invented effective/end/status snapshot/events; all 25 need review.",
+    "Many predicates use facts absent from the shared registry. rent_ordinance_coverage is a legal classification dependency, not a renter factual question.",
+    "No demonstrated source contradiction in the selected checks; no complete legal accuracy claim."
+  ]
+}
