@@ -6,9 +6,10 @@ an explicit dependency. Ready means technically ready, not a human claim or perm
 Four human lanes: Platform/API, Core A (Rules & Evaluation), Core B (Questions & Rendering), Frontend/UX.
 Daniel's PR #3 is merged at 3b1ef06; Core A retains evaluator/extraction ownership.
 Core B is a new human assignment and requires the existing writer's path handoff before new edits.
-PLAT-02 PR #6 is merged at `e0cd133`. The current user-assigned Platform session is resolving
-the task-board conflict and checking PLAT-03 PR #7 against that main for its authorized merge.
-PLAT-03's contracts and baseline code are already available; no new Core/UX code is required.
+PLAT-02 PR #6 is merged at `e0cd133`; PLAT-03 PR #7 is merged at `c57107a`.
+The Platform session claims PLAT-05 on `codex/platform-review` from merged main `3b2d201`.
+Offline review work is independent; live verification needs local credentials and Daniel's
+extracted-rule store. PLAT-04's completed continuation remains local at `11afb55`.
 
 | ID | Lane | State | Outcome / dependency |
 | --- | --- | --- | --- |
@@ -22,9 +23,9 @@ PLAT-03's contracts and baseline code are already available; no new Core/UX code
 | COORD-01 | Vincent / Platform | Review P0 | Original shared contract checkpoint 3349851; historical three-lane staffing superseded |
 | COORD-02 | Vincent / Platform | Review P0 | Four-developer playbook, exclusive Core split, candidate-aware cards and starters |
 | COORD-03 | Vincent / Platform | Merged | PR #3 doc conflicts resolved with author history retained; actual Core/API verification and unchanged schemas |
-| PLAT-03 | Vincent / Platform | Queued P0/P1 | PR #7 preserves exact anchors under small budgets; 21 focused / 176 full tests pass; user authorized conflict resolution and merge |
-| PLAT-04 | Vincent / Platform | Review P1 | Actual Core/API integration passes 19 focused tests; synthetic alternatives and answers reproduce through HTTP |
-| PLAT-05 | Vincent / Platform | Review P1 | Inventory/verifier implemented; fixture/replay verified; live mode blocked by key/model |
+| PLAT-03 | Vincent / Platform | Merged P0/P1 | PR #7 at c57107a preserves exact anchors under small budgets; 21 focused / 176 full tests pass |
+| PLAT-04 | Vincent / Platform | Review P1 | Local 11afb55: empty-ID fix and stateless API/export checks; 28 focused / 179 full tests on its recorded base |
+| PLAT-05 | Vincent / Platform | Software Review; live inputs pending | Verifier-cache/replay and inventory repairs pass 26 focused / 226 full tests; waiting for local key/model and extracted-rule files |
 | CORE-03 | Core A / Daniel | Merged | rule_traces and actual occupancy semantics verified in combined suite; future lane handoff remains required |
 | CORE-04 | Core B / new human pending | Merged; future writer handoff required | Daniel's planner works through Platform HTTP; no new writer allocated |
 | CORE-05 | Core B / new human pending | Merged; future writer handoff required | Daniel's renderer works through Platform HTTP; no new writer allocated |

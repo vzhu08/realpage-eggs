@@ -1,0 +1,114 @@
+{
+  "task": "PLAT-05",
+  "branch": "codex/platform-review",
+  "base_commit": "3b2d2011de3d0319f96702bbeddb6ec72323dc27",
+  "status": "software_verified_live_inputs_pending",
+  "checks": {
+    "regressions_before_fix": {
+      "passed": 21,
+      "failed": 4
+    },
+    "focused": {
+      "command": "python -m pytest tests/test_evidence.py tests/test_retrieval.py -q",
+      "passed": 26,
+      "exit_code": 0
+    },
+    "full_suite": {
+      "command": "python -m pytest -q",
+      "passed": 226,
+      "exit_code": 0,
+      "isolated_copy": "artifacts/plat05-review-check",
+      "log_sha256": "571f96e92d01e38aae01975db0f1e0f754176341fd712feb544ac54da3d18083"
+    },
+    "contracts": {
+      "command": "python -m navigator contracts",
+      "exit_code": 0,
+      "unchanged_schemas": [
+        "openapi.json",
+        "domain.schema.json",
+        "research.schema.json",
+        "competition_rule.schema.json"
+      ]
+    },
+    "warning": "Existing Starlette/httpx TestClient deprecation warning"
+  },
+  "targeted_inventory": [
+    {
+      "command": "python -m navigator --data-dir artifacts/plat05-offline/utf8-original-snapshot source-inventory D001",
+      "exit_code": 0,
+      "cache_mode": "fresh",
+      "counts": {
+        "units": 15,
+        "mapped": 0,
+        "unresolved": 15
+      },
+      "source_hash": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+      "human_reviewed": false,
+      "complete_legal_coverage": false
+    },
+    {
+      "command": "python -m navigator --data-dir artifacts/plat05-offline/utf8-original-snapshot source-inventory D001",
+      "exit_code": 0,
+      "cache_mode": "replay",
+      "counts": {
+        "units": 15,
+        "mapped": 0,
+        "unresolved": 15
+      },
+      "source_hash": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+      "human_reviewed": false,
+      "complete_legal_coverage": false
+    }
+  ],
+  "original_source_file_unchanged": true,
+  "semantic_fixture": {
+    "mode": "fixture",
+    "human_reviewed": false,
+    "fixture_outcome": "partial",
+    "replay_outcome": "partial",
+    "replay_mode": "replay",
+    "replay_origin_mode": "fixture",
+    "generate_calls": 1,
+    "dependency_decisions": [
+      {
+        "field": "dependencies",
+        "status": "insufficient",
+        "explanation": "Structural/context gaps remain: cross_reference:Except as provided in section 99.:missing",
+        "spans": []
+      }
+    ],
+    "missing_provider_cli": {
+      "exit_code": 2,
+      "error": "ProviderUnavailable",
+      "fixture_cache_not_used_as_live": true
+    },
+    "offline_report_sha256": "0bc1cc2cc217c5ded7fbdd2ab161464568c41b98f67d6d91380cdf71de91d844"
+  },
+  "live_verification": {
+    "status": "waiting_for_local_inputs",
+    "model_calls": 0,
+    "required_store": "data/plat05-input",
+    "required_files": [
+      "rules.json",
+      "sources.json"
+    ],
+    "recommended_files": [
+      "extraction_index.json",
+      "dataset.json"
+    ],
+    "required_environment": [
+      "OPENAI_API_KEY",
+      "OPENAI_MODEL"
+    ],
+    "secret_values_recorded": false,
+    "recorded_core_store": "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session",
+    "core_reported_rules": 140,
+    "plan": "Copy supplied inputs into an isolated private store, inventory the selected source, review one extracted rule with the configured provider, then replay without another model call."
+  },
+  "limitations": [
+    "Inventory mapping is structural, not complete legal coverage.",
+    "Synthetic fixtures and transport stubs do not establish live model performance.",
+    "No independent legal or human review is claimed.",
+    "PLAT-04 local continuation 11afb55 is preserved separately."
+  ]
+}
