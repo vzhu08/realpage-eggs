@@ -1,9 +1,9 @@
 """UX development fixture: a small fictional portfolio for building the changes UI.
 
 Everything here is fictional and labeled. The source texts in dev_fixture/ describe a
-made-up state ("Zenith", code ZZ) and two made-up cities. They exist so the portfolio
-view has more than one jurisdiction, category, date and source to lay out while the real
-integrated snapshot (PLAT-06) and source comparisons (CORE-06) are pending.
+made-up state ("Zenith", code ZZ) and two made-up cities. They exist so the synthetic
+demo has more than one jurisdiction, category, date and source to lay out without showing
+any real law. The fixture is replayed in demo mode only; the live API never serves it.
 
 What is authored here: the fictional source texts, the fictional properties, the
 encodings a provider would return for those texts, and the claim annotations a Core review

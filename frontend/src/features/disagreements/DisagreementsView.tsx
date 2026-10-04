@@ -6,7 +6,7 @@ import { formatDate, isIsoDay } from '../../lib/dates';
 import { disagreementsFromLookup } from '../../lib/disagreements';
 import { isSynthetic, readMetadata } from '../../lib/metadata';
 import { propertyLabel } from '../../lib/portfolio';
-import { CLASSIFICATION, type Classification, arrangeComparisons, comparisonCounts } from '../../lib/sourceComparisons';
+import { CLASSIFICATION, COUNT_ORDER, arrangeComparisons, comparisonCounts, countPhrase } from '../../lib/sourceComparisons';
 import { useSource } from '../../state/source';
 import { useAsync } from '../../state/useAsync';
 import { PropertyName } from '../changes/PortfolioDrillDown';
@@ -20,13 +20,6 @@ interface Props {
   disagreementHref: (addressId: string, asOf: string) => string;
   onOpen: (addressId: string, asOf: string) => void;
 }
-
-const COUNT_ORDER: Classification[] = ['different_claims', 'missing_support', 'same_claim'];
-const COUNT_WORDS: Record<Classification, (count: number) => string> = {
-  different_claims: (count) => `${count} ${count === 1 ? 'states' : 'state'} different things`,
-  missing_support: (count) => `${count} ${count === 1 ? 'lacks' : 'lack'} support on one side`,
-  same_claim: (count) => `${count} ${count === 1 ? 'states' : 'state'} the same thing`,
-};
 
 /**
  * Two kinds of comparison, kept apart. Claim observations (GET /source-comparisons) set two
@@ -83,7 +76,7 @@ export function DisagreementsView({ mode, initial, lookupHref, disagreementHref,
     <div className="disagreements">
       <header className="changes__intro">
         <h1 className="page-title">Two sources, side by side.</h1>
-        <p className="page-lead">Where two sources were compared, both exact texts are shown with each source’s authority and retrieval date, and what would settle the difference. No source is given a winner.</p>
+        <p className="page-lead">Where two claims about the law were compared, each is shown with the exact passage it cites, that source’s authority and retrieval date, and what would settle it. No source is given a winner.</p>
       </header>
 
       {context && (
@@ -178,8 +171,13 @@ export function DisagreementsView({ mode, initial, lookupHref, disagreementHref,
               )
             }
           >
-            {comparisons.error.kind === 'not_implemented' && <p>This backend has no GET /source-comparisons route, so no claim comparisons can be listed. Conflicts flagged in a lookup are still shown for one property and date.</p>}
-            {comparisons.error.kind === 'unavailable' && <p>The comparisons cannot be read until the dataset is ready. This is a service state, not a finding that the sources agree.</p>}
+            {comparisons.error.kind === 'not_implemented' ? (
+              <p>This backend has no GET /source-comparisons route, so no claim comparisons can be listed. That is a missing capability, not a finding that the sources agree. Conflicts flagged in a lookup are still shown for one property and date.</p>
+            ) : comparisons.error.kind === 'unavailable' ? (
+              <p>The comparisons cannot be read until the dataset is ready. This is a service state, not a finding that the sources agree.</p>
+            ) : (
+              <p>No comparisons are shown. This is a failure to read them, not a finding that the sources agree.</p>
+            )}
           </ErrorNotice>
         )}
         {comparisons.data && comparisons.data.response.status === 'unavailable' && (
@@ -190,12 +188,15 @@ export function DisagreementsView({ mode, initial, lookupHref, disagreementHref,
         )}
         {comparisons.data && comparisons.data.response.status === 'available' && (
           <>
-            <p className="section__lead">
-              Each comparison is a pair of claims about one field, recorded during source review, and re-checked by the service against its stored sources on every request.
-              {fixtureLabel ? ' These are from the development fixture: fictional sources, with the checks and the classification computed by the backend.' : ''}
-            </p>
+            {fixtureLabel && (
+              <Notice tone="synthetic" title="Development fixture · fictional sources" compact>
+                <p>These claims and sources are fictional and were written for layout development. The anchor checks and each classification were computed by the backend. They are shown only in the synthetic demo.</p>
+              </Notice>
+            )}
+            <p className="section__lead">Each comparison is a pair of recorded claims about one field, saved during source review. The service re-checks every cited passage against its stored source on each request. It does not check meaning, and it does not decide which claim is right.</p>
             {views.length === 0 ? (
               <Empty title="The snapshot’s annotations contain no claim comparisons" icon="layers">
+                <p>The annotations were read, and none of them is a claim comparison. That is not a finding that the sources agree.</p>
                 <ServiceNotes notes={comparisons.data.response.notes} />
               </Empty>
             ) : (
@@ -203,7 +204,7 @@ export function DisagreementsView({ mode, initial, lookupHref, disagreementHref,
                 <ul className="comparison-counts" aria-label="Comparisons by outcome">
                   {COUNT_ORDER.filter((kind) => counts[kind] > 0).map((kind) => (
                     <li key={kind} data-kind={kind}>
-                      <Tag tone={CLASSIFICATION[kind].tone}>{COUNT_WORDS[kind](counts[kind])}</Tag>
+                      <Tag tone={CLASSIFICATION[kind].tone}>{countPhrase(kind, counts[kind])}</Tag>
                     </li>
                   ))}
                 </ul>
@@ -212,20 +213,41 @@ export function DisagreementsView({ mode, initial, lookupHref, disagreementHref,
                     <ComparisonCard key={view.id} view={view} fixtureLabel={fixtureLabel} related={view.observation.rule_ids.some((ruleId) => conflictRuleIds.has(ruleId))} ruleTitle={(ruleId) => ruleRecords.data?.get(ruleId)?.title ?? outcome?.lookup.rules.find((rule) => rule.team_rule_id === ruleId)?.title ?? null} />
                   ))}
                 </div>
-                <Disclosure summary="About these comparisons" className="about">
-                  <ServiceNotes notes={comparisons.data.response.notes} />
-                  <Facts
-                    dense
-                    rows={[
-                      { label: 'Source of this list', value: comparisons.data.origin.label, note: comparisons.data.origin.detail },
-                      { label: 'Annotations hash', value: <span className="mono break">{comparisons.data.response.annotation_sha256 ?? 'Not reported'}</span> },
-                      { label: 'Sources re-checked', value: String(Object.keys(comparisons.data.response.source_hashes).length) },
-                    ]}
-                  />
-                  <p className="hint">{comparisons.data.response.disclaimer}</p>
-                </Disclosure>
               </>
             )}
+            <Disclosure summary="About these comparisons" className="about">
+              <ServiceNotes notes={comparisons.data.response.notes} />
+              <Facts
+                dense
+                rows={[
+                  { label: 'Source of this list', value: comparisons.data.origin.label, note: comparisons.data.origin.detail },
+                  { label: 'Annotations hash', value: <span className="mono break">{comparisons.data.response.annotation_sha256 ?? 'Not reported'}</span> },
+                  { label: 'Sources re-checked', value: String(Object.keys(comparisons.data.response.source_hashes).length), note: 'The hash of each stored source text, as the service computed it for this response, is listed below.' },
+                ]}
+              />
+              {Object.keys(comparisons.data.response.source_hashes).length > 0 && (
+                <ul className="plain-list plain-list--tight" aria-label="Hash of each stored source text">
+                  {Object.entries(comparisons.data.response.source_hashes).map(([docId, hash]) => (
+                    <li key={docId}>
+                      <span className="mono break">{docId}</span> <span className="mono break">{hash}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {comparisons.data.contractWarnings.length > 0 && (
+                <>
+                  <p className="hint">The response carried fields that are not in this page’s contract. They are ignored, and listed here:</p>
+                  <ul className="plain-list plain-list--tight" aria-label="Fields not in the contract">
+                    {comparisons.data.contractWarnings.map((warning) => (
+                      <li key={warning} className="mono break">
+                        {warning}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              <p className="hint">{comparisons.data.response.disclaimer}</p>
+            </Disclosure>
           </>
         )}
       </section>

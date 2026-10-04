@@ -32,6 +32,7 @@ import {
 import { replayAssist } from '../demo/replay';
 import { formatDate } from '../lib/dates';
 import { readMetadata } from '../lib/metadata';
+import { COUNT_ORDER, arrangeComparisons, comparisonCounts, countPhrase } from '../lib/sourceComparisons';
 import { consequenceOf } from '../lib/uncertainty';
 import { ApiError } from './errors';
 import type {
@@ -58,11 +59,18 @@ const REPLAY_DELAY_MS = 220;
 
 function pause(signal?: AbortSignal): Promise<void> {
   return new Promise((resolve, reject) => {
-    const timer = setTimeout(resolve, REPLAY_DELAY_MS);
-    signal?.addEventListener('abort', () => {
+    const cancel = () => reject(new DOMException('Aborted', 'AbortError'));
+    // A caller that has already gone away gets a cancellation, not a replayed result.
+    if (signal?.aborted) return cancel();
+    const onAbort = () => {
       clearTimeout(timer);
-      reject(new DOMException('Aborted', 'AbortError'));
-    });
+      cancel();
+    };
+    const timer = setTimeout(() => {
+      signal?.removeEventListener('abort', onAbort);
+      resolve();
+    }, REPLAY_DELAY_MS);
+    signal?.addEventListener('abort', onAbort, { once: true });
   });
 }
 
@@ -309,14 +317,15 @@ export class DemoSource implements DataSource {
       });
     }
 
-    const observations = Object.values(DEV_SOURCE_COMPARISONS.observations);
-    if (observations.length) {
-      const differing = observations.filter((observation) => observation.classification === 'different_claims').length;
+    const views = arrangeComparisons(DEV_SOURCE_COMPARISONS);
+    if (views.length) {
+      const counts = comparisonCounts(views);
+      const kinds = COUNT_ORDER.filter((kind) => counts[kind] > 0).map((kind) => countPhrase(kind, counts[kind]));
       examples.push({
         id: 'source_comparison',
         title: 'Two sources, side by side',
-        detail: `${observations.length} claim comparisons with both exact texts. ${differing} state different things; none is given a winner, and each says what would settle it.`,
-        meta: `${Object.keys(DEV_SOURCE_COMPARISONS.source_hashes).length} sources re-checked`,
+        detail: `${views.length} ${views.length === 1 ? 'pair' : 'pairs'} of recorded claims with the exact passages they cite: ${kinds.join(', ')}. None is given a winner, and each says what would settle it.`,
+        meta: `${Object.keys(DEV_SOURCE_COMPARISONS.source_hashes).length} fictional sources re-checked`,
         target: { view: 'disagreements' },
       });
     }
