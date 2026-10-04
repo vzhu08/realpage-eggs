@@ -35,6 +35,21 @@ def test_hit_is_exact_and_does_not_rebuild_graph(demo, tmp_path, monkeypatch):
     assert unpack(body(cache.resolve(demo, req, "dag"))) == expected
 
 
+def test_supplemental_fact_order_preserves_exact_answer_echo(demo, tmp_path):
+    cache = AssistCache(tmp_path / "cache")
+    left = request(supplemental_facts={"owner_occupied": False, "tenancy_start": "2020-01-01"})
+    right = request(supplemental_facts={"tenancy_start": "2020-01-01", "owner_occupied": False})
+    assert request_key(identity(demo), left) != request_key(identity(demo), right)
+    for req in (left, right):
+        expected = assist(demo, req).model_dump(mode="json")
+        assert body(cache.resolve(demo, req)) == expected
+        hit = cache.resolve(demo, req)
+        assert hit.hit
+        result = body(hit)
+        assert result == expected
+        assert [answer["field"] for answer in result["answers_applied"]] == list(req.supplemental_facts)
+
+
 @pytest.mark.parametrize("name", ["dataset.json", "addresses.json", "resolutions.json", "rules.json", "sources.json", "extraction_index.json", "semantic_reviews/new.json"])
 def test_every_consumed_snapshot_file_invalidates_even_same_mtime(demo, name):
     before = identity(demo)

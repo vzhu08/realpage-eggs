@@ -61,7 +61,9 @@ def identity(store):
 def request_key(stamp, request):
     # Do not sort answer lists or remove null/false/default values: ordering and
     # provenance/note are echoed in the canonical response.
-    return digest({"identity": stamp, "request": request.model_dump(mode="json")})
+    # Supplemental-fact insertion order becomes answers_applied list order. A
+    # sorted dictionary digest would merge requests with different response echoes.
+    return digest({"identity": stamp, "request": request.model_dump_json()})
 
 
 class CacheBusy(RuntimeError):
