@@ -8,22 +8,41 @@ def temporal(rule: Rule, as_of: date, hypothetical=False) -> str:
     if hypothetical and rule.lifecycle == "pending":
         return "in_force"
     lifecycle = rule.lifecycle
-    events = [(event, *date_bounds(event.on)) for event in rule.status_events]
+    history = [(event.status, *date_bounds(event.on)) for event in rule.status_events]
+    events = list(history)
     if events:
-        occurred = [(event, lo, hi) for event, lo, hi in events if hi <= as_of]
-        possible = [(event, lo, hi) for event, lo, hi in events if lo <= as_of]
+        # A dated source snapshot is also lifecycle evidence. Older events must
+        # not silently discard it; neither can it establish earlier history.
+        if rule.status_as_of:
+            events.append((rule.lifecycle, *date_bounds(rule.status_as_of)))
+        occurred = [(status, lo, hi) for status, lo, hi in events if hi <= as_of]
+        possible = [(status, lo, hi) for status, lo, hi in events if lo <= as_of]
         if not possible:
-            return "not_yet_effective" if any(e.status == "enacted" for e, _, _ in events) else "unknown"
+            return "not_yet_effective" if any(e.status == "enacted" for e in rule.status_events) else "unknown"
         if not occurred:
             return "unknown"  # The first partial-date event may still be in the future.
         # An event can be latest unless another definitely occurred strictly after
         # its latest possible date. Overlapping/same-day conflicting events have
         # no established order; input list order is not lifecycle evidence.
-        statuses = {event.status for event, lo, hi in possible
+        statuses = {status for status, lo, hi in possible
                     if not any(other_lo > min(hi, as_of) for _, other_lo, _ in occurred)}
         if len(statuses) != 1:
             return "unknown"
         lifecycle = statuses.pop()
+        if rule.status_as_of and as_of < date_bounds(rule.status_as_of)[1] and lifecycle != rule.lifecycle:
+            # A later snapshot does not date an unrecorded transition. Preserve
+            # earlier history only when events explain that snapshot, or the
+            # query itself is an exact, uncontradicted status observation.
+            snapshot_lo, snapshot_hi = date_bounds(rule.status_as_of)
+            prior = [(status, lo, hi) for status, lo, hi in history if hi <= snapshot_lo]
+            at_snapshot = {status for status, lo, hi in history if lo <= snapshot_lo
+                           and not any(other_lo > min(hi, snapshot_lo) for _, other_lo, _ in prior)} if prior else set()
+            explained = at_snapshot == {rule.lifecycle} and not any(
+                status != rule.lifecycle and lo <= snapshot_hi and hi >= snapshot_lo
+                for status, lo, hi in history)
+            observed_now = any(status == lifecycle and lo == hi == as_of for status, lo, hi in history)
+            if not explained and not observed_now:
+                return "unknown"
     elif rule.status_as_of and as_of < date_bounds(rule.status_as_of)[1]:
         return "unknown"
     elif not rule.status_as_of and lifecycle in {"pending", "failed", "unknown"}:
@@ -36,8 +55,15 @@ def temporal(rule: Rule, as_of: date, hypothetical=False) -> str:
         lo, hi = date_bounds(rule.effective_date)
         if as_of < lo: return "not_yet_effective"
         if as_of < hi: return "unknown"
-    elif not rule.status_as_of:
-        return "unknown"
+    else:
+        if (not rule.status_as_of or rule.lifecycle != "enacted"
+                or as_of < date_bounds(rule.status_as_of)[1]):
+            return "unknown"
+        # An earlier in-force snapshot cannot establish effectiveness of a new
+        # enactment after an intervening repeal or other non-enacted status.
+        if any(status != "enacted" and lo <= as_of and hi >= date_bounds(rule.status_as_of)[0]
+               for status, lo, hi in history):
+            return "unknown"
     if rule.end_date:
         lo, hi = date_bounds(rule.end_date)
         if as_of >= hi: return "inapplicable"
@@ -71,14 +97,15 @@ def evaluate_coverage(rule: Rule, prop: PropertyFacts, as_of: date):
 
 def rule_traces(rule: Rule, prop: PropertyFacts, resolution: JurisdictionResolution, as_of: date):
     """AST paths retain their own truth; exemption negation is applied by coverage."""
-    _, traces = evaluate_coverage(rule, prop, as_of)
-    if jurisdiction_match(rule, resolution) == "false" or temporal(rule, as_of) in {"inapplicable", "failed", "pending", "not_yet_effective"}:
-        for trace in traces:
-            mark_irrelevant(trace)
+    coverage, traces = evaluate_coverage(rule, prop, as_of)
     for i, interaction in enumerate(rule.interactions):
         _, trace = evaluate_with_trace(interaction.scope, prop, as_of, rule.team_rule_id,
                                       f"interactions/{i}/scope", interaction.evidence)
         traces.append(trace)
+    if (coverage.value == "false" or jurisdiction_match(rule, resolution) == "false"
+            or temporal(rule, as_of) in {"inapplicable", "failed", "pending", "not_yet_effective"}):
+        for trace in traces:
+            mark_irrelevant(trace)
     return traces
 
 

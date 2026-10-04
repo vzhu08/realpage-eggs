@@ -171,6 +171,69 @@ def test_undated_failed_snapshot_does_not_establish_history(rule):
     assert temporal(rule, date(1900, 1, 1)) == 'unknown'
 
 
+@pytest.mark.parametrize('snapshot,event_status,event_date,query,expected', [
+    ('failed', 'pending', '2026-01-01', '2026-11-15', 'failed'),
+    ('enacted', 'pending', '2026-01-01', '2026-11-15', 'in_force'),
+    ('pending', 'enacted', '2026-01-01', '2026-11-15', 'pending'),
+    ('failed', 'pending', '2026-01-01', '2026-09-30', 'unknown'),
+    ('enacted', 'failed', '2026-11-01', '2026-11-15', 'failed'),
+    ('enacted', 'failed', '2026-10-01', '2026-11-15', 'unknown'),
+    ('enacted', 'failed', '2026-10', '2026-11-15', 'unknown'),
+])
+def test_dated_snapshot_and_events_share_supported_temporal_order(
+        rule, snapshot, event_status, event_date, query, expected):
+    rule.lifecycle, rule.status_as_of = snapshot, '2026-10-01'
+    rule.effective_date = '2026-06-01'
+    rule.status_events = [StatusEvent(status=event_status, on=event_date, evidence=rule.evidence)]
+    assert temporal(rule, date.fromisoformat(query)) == expected
+
+
+def test_partial_snapshot_does_not_invent_transition_day(rule):
+    rule.lifecycle, rule.status_as_of = 'failed', '2026-10'
+    rule.status_events = [StatusEvent(status='pending', on='2026-01-01', evidence=rule.evidence)]
+    assert temporal(rule, date(2026, 1, 1)) == 'pending'
+    assert temporal(rule, date(2026, 9, 30)) == 'unknown'
+    assert temporal(rule, date(2026, 10, 15)) == 'unknown'
+    assert temporal(rule, date(2026, 10, 31)) == 'failed'
+
+
+@pytest.mark.parametrize('events,query,expected', [
+    ([('failed', '2026-09-01')], '2026-08-01', 'pending'),
+    ([('failed', '2026-09')], '2026-08-01', 'pending'),
+    ([('failed', '2026-09')], '2026-09-15', 'unknown'),
+    ([('failed', '2026-09')], '2026-09-30', 'failed'),
+    ([('failed', '2026-11-01')], '2026-08-01', 'unknown'),
+    ([('failed', '2026-09-01'), ('pending', '2026-09-15')], '2026-08-01', 'unknown'),
+])
+def test_future_snapshot_preserves_history_only_with_explained_transition(rule, events, query, expected):
+    rule.lifecycle, rule.status_as_of = 'failed', '2026-10-01'
+    history = [('pending', '2026-01-01'), *events]
+    rule.status_events = [StatusEvent(status=status, on=on, evidence=rule.evidence) for status, on in history]
+    for ordering in (rule.status_events, list(reversed(rule.status_events))):
+        rule.status_events = ordering
+        assert temporal(rule, date.fromisoformat(query)) == expected
+
+
+@pytest.mark.parametrize('snapshot,snapshot_date', [
+    ('enacted', '2026-12-01'), ('pending', '2026-01-01'),
+])
+def test_snapshot_must_establish_enactment_at_query_without_effective_date(
+        rule, snapshot, snapshot_date):
+    rule.lifecycle, rule.status_as_of = snapshot, snapshot_date
+    rule.effective_date = None
+    rule.status_events = [StatusEvent(status='enacted', on='2026-06-01', evidence=rule.evidence)]
+    assert temporal(rule, date(2026, 11, 15)) == 'unknown'
+
+
+@pytest.mark.parametrize('snapshot,expected', [('2026-01-01', 'unknown'), ('2026-10-01', 'in_force')])
+def test_reenactment_does_not_reuse_pre_repeal_snapshot_as_effective_evidence(rule, snapshot, expected):
+    rule.lifecycle, rule.status_as_of, rule.effective_date = 'enacted', snapshot, None
+    rule.status_events = [StatusEvent(status=status, on=on, evidence=rule.evidence) for status, on in [
+        ('enacted', '2026-01-01'), ('repealed', '2026-03-01'), ('enacted', '2026-06-01'),
+    ]]
+    assert temporal(rule, date(2026, 11, 15)) == expected
+
+
 def test_exclusive_end_and_partial_end_boundaries(rule):
     rule.end_date = '2026-12-01'
     assert temporal(rule, date(2026, 11, 30)) == 'in_force'
