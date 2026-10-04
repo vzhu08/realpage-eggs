@@ -1,23 +1,38 @@
-# Starter: Vincent / Platform/API
+# Starter: Vincent / Platform demo delivery
 
-Assigned next task: [PLAT-06](../tasks/PLAT-06.md). Read that card, AGENTS, OWNERSHIP,
-PLAN, CONTRACTS, ASSIST_CONTRACT and the current playbook before editing.
-Main already includes Core A/B and frontend at `3b2d201`; the old candidate-only setup is historical.
-Use a reviewed base including accepted COORD-04 fixes and relevant later integration work.
+Start here in the new chat. Read AGENTS, OWNERSHIP, TASKS, PLAN, CONTRACTS, ASSIST_CONTRACT,
+the current playbook, [data-source rules](../DATA_SOURCE_RULES.md), and cards
+[PLAT-13](../tasks/PLAT-13.md), [PLAT-14](../tasks/PLAT-14.md),
+[PLAT-15](../tasks/PLAT-15.md), [PLAT-16](../tasks/PLAT-16.md).
 
-Finish the existing PLAT-05 assignment before overlapping Platform work. Review local PLAT-04 continuation 11afb55. Assemble a new verified snapshot from immutable inputs, steward additive contracts, wire source disagreements and evidence export, and verify the complete frontend/API release.
+The user wants the smallest useful code/build work finished within the existing three-hour
+window, leaving time for the demo. Do not reset the clock or recreate completed infrastructure.
+Verify actual checkout, branch, base SHA, active writers and changes; preserve others' work.
+Record the selected card's claim before writing. No task checkout or new chat was created by
+this starter update. Use the `codex/` prefix and separate checkout if another writer is active.
 
-Core A owns evaluation/source-comparison semantics; Core B owns questions/rendering; UX owns frontend.
+1. Begin PLAT-13 by inspecting current PR #22/RENDER-01 status and writer ownership. At this
+   handoff all four checks passed and hosting was not yet provisioned. Reuse its deployment
+   implementation; do not switch or overwrite the existing writer's checkout.
+2. Prepare PLAT-14's permitted input manifest and fresh output paths while Daniel works. The
+   current local release has 140 original rules; the seven paid D069 candidates are a separate
+   bundle. Do not import partial collections as whole Stores or promote manual review Drafts
+   into judged automated-extraction output. Preserve provider lineage and all review flags.
+3. Handle PLAT-15 only for concrete, source-defined Core input requests. Core owns legal
+   expressions/evaluation, Core B owns planning/rendering, and UX owns frontend source.
+4. Finish PLAT-16 against one recorded code/data version. Reuse release/export/handoff tools,
+   check the selected real browser journey and uncertainty path, and keep the local backup.
 
-Verify your actual checkout, current writer, branch, base SHA and existing changes; record them
-in the card. Its suggested branch is not an allocated checkout. Use private mutable data/cache,
-retain original source snapshots, and preserve all author history. One writer per file.
-Daniel's Core B path release is recorded in CORE_A_HANDOFF. No new session has been started or messaged.
+Missing municipal publication and official court records remain PLAT-11/12 dependencies for
+specific claims, not blockers for all coding. Only pursue a concrete new lead in a small timebox.
+No prohibited scraping, non-public data, customer/resident/pricing datasets, fabricated outcomes or document-specific
+legal runtime branches. Use corpus copies where directed; keep the mirror explicitly conditional.
 
-The card defines exact allowed paths, dependencies, acceptance and checks. Start independent work
-against current interfaces while Platform prepares the minimum new contract. Planned fields are
-not implemented endpoints. Use labeled fixtures for development, then separately verify real data.
+The full paid corpus remains paused. Existing push/merge authority persists; verify applicable
+session authority for public deployment, charges, teammate messages and submission. Do all
+independent preparation before any genuinely required final approval. This starter grants none
+of those external actions merely by assigning a card.
 
-Return commit, changed paths, exact commands/results, data/provenance mode, unresolved evidence,
-contract requests and the next action. Do not claim legal accuracy from software tests. Use applicable
-human authority for provider resumption, pushes, merges, deployment, external messages or submission.
+Handoff: task/status, branch/commit, changed paths, actual focused checks, source-use decisions,
+snapshot/code identity, remaining blockers and next action. Preserve historical task evidence.
+After confirmed merge, follow the repository's branch cleanup rules without touching active writers.
