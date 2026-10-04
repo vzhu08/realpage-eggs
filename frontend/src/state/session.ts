@@ -74,7 +74,11 @@ export function sessionReducer(state: SessionState, action: Action): SessionStat
       // A new date is a new question: answers given for another date's plan do not carry over,
       // and a fixture case is pinned to its own recorded date.
       if (action.value === state.asOf) return state;
-      return { ...state, asOf: action.value, fixtureCase: null, answers: [], history: [], previous: null, dirty: true };
+      return {
+        ...state, asOf: action.value, fixtureCase: null, answers: [], history: [], definitions: {},
+        status: state.outcome ? 'ready' : 'idle', error: null, answerError: null,
+        previous: null, dirty: true, reevaluating: false,
+      };
     case 'answers':
       return { ...state, answers: action.answers, history: [...state.history, { ...action.event, seq: state.history.length + 1 }] };
     case 'start':
@@ -129,7 +133,11 @@ export function useSession(source: DataSource, defaultAsOf: string) {
     [source],
   );
 
-  const select = useCallback((item: AddressItem) => dispatch({ type: 'select', item, fixtureCase: null }), []);
+  const select = useCallback((item: AddressItem) => {
+    // Invalidate the old completion even when the transport cannot stop its response.
+    controller.current?.abort();
+    dispatch({ type: 'select', item, fixtureCase: null });
+  }, []);
   const selectCase = useCallback(
     (item: AddressItem, fixtureCase: FixtureCaseSummary) => {
       dispatch({ type: 'select', item, fixtureCase, asOf: fixtureCase.as_of });
@@ -141,7 +149,11 @@ export function useSession(source: DataSource, defaultAsOf: string) {
     controller.current?.abort();
     dispatch({ type: 'clear' });
   }, []);
-  const setAsOf = useCallback((value: string) => dispatch({ type: 'asOf', value }), []);
+  const setAsOf = useCallback((value: string) => {
+    if (value === latest.current.asOf) return;
+    controller.current?.abort();
+    dispatch({ type: 'asOf', value });
+  }, []);
   const run = useCallback(() => void execute({ keepPrevious: false }), [execute]);
 
   /** Record an answer (or an explicit unknown) and re-evaluate with every accumulated answer. */
