@@ -1,0 +1,123 @@
+[
+  {
+    "id": "MA_SJC_13893_DOCKET",
+    "url": "https://www.ma-appellatecourts.org/docket/SJC-13893",
+    "title": "Mass Appellate Courts - Public Case Search",
+    "captured_at": "2026-10-04T08:52:53.363Z",
+    "method": "Browser-rendered DOM snapshot; not original HTTP response bytes",
+    "text": "MA_SJC_13893_DOCKET.txt",
+    "private_html_snapshot": "MA_SJC_13893_DOCKET.rendered.html",
+    "html_omitted_reason": "Original browser HTML remains in the private archive; scripts and session/form tokens are not published. The exact visible-text capture is included."
+  },
+  {
+    "id": "MA_SJ_2026_0063_DOCKET",
+    "url": "https://www.ma-appellatecourts.org/docket/SJ-2026-0063",
+    "title": "Mass Appellate Courts - Public Case Search",
+    "captured_at": "2026-10-04T08:52:53.427Z",
+    "method": "Browser-rendered DOM snapshot; not original HTTP response bytes",
+    "text": "MA_SJ_2026_0063_DOCKET.txt",
+    "private_html_snapshot": "MA_SJ_2026_0063_DOCKET.rendered.html",
+    "html_omitted_reason": "Original browser HTML remains in the private archive; scripts and session/form tokens are not published. The exact visible-text capture is included."
+  },
+  {
+    "id": "JC_25_057_ADOPTION_NOTICE",
+    "url": "https://www.jerseycitynj.gov/common/pages/GetFile.ashx?key=ryk%2bAW7X",
+    "file": "JC_25_057_ADOPTION_NOTICE.pdf",
+    "captured_at": "2026-10-04T08:53:58.400Z",
+    "method": "Browser file download, unchanged PDF bytes",
+    "index_modified_date": "2025-05-27; not a proven newspaper publication date"
+  },
+  {
+    "id": "JC_MAY21_NOTICE_INDEX",
+    "url": "https://www.jerseycitynj.gov/cityhall/clerk",
+    "title": "City Clerk - City of Jersey City",
+    "captured_at": "2026-10-04T08:53:58.513Z",
+    "method": "Browser-rendered DOM snapshot; not original HTTP response bytes",
+    "text": "JC_MAY21_NOTICE_INDEX.txt",
+    "private_html_snapshot": "JC_MAY21_NOTICE_INDEX.rendered.html",
+    "html_omitted_reason": "Original browser HTML remains in the private archive; scripts and session/form tokens are not published. The exact visible-text capture is included."
+  },
+  {
+    "id": "JC_SEP24_NOTICE_INDEX",
+    "url": "https://www.jerseycitynj.gov/cityhall/clerk",
+    "title": "City Clerk - City of Jersey City",
+    "captured_at": "2026-10-04T08:54:46.212Z",
+    "method": "Browser-rendered DOM snapshot; not original HTTP response bytes",
+    "text": "JC_SEP24_NOTICE_INDEX.txt",
+    "private_html_snapshot": "JC_SEP24_NOTICE_INDEX.rendered.html",
+    "html_omitted_reason": "Original browser HTML remains in the private archive; scripts and session/form tokens are not published. The exact visible-text capture is included."
+  },
+  {
+    "id": "JC_25_098_ADOPTION_NOTICE",
+    "url": "https://www.jerseycitynj.gov/common/pages/GetFile.ashx?key=hHxAATuC",
+    "file": "JC_25_098_ADOPTION_NOTICE.pdf",
+    "captured_at": "2026-10-04T08:54:46.924Z",
+    "method": "Browser file download, unchanged PDF bytes",
+    "index_modified_date": "2025-09-26; not a proven newspaper publication date"
+  },
+  {
+    "id": "JC_OCT8_NOTICE_INDEX",
+    "url": "https://www.jerseycitynj.gov/cityhall/clerk",
+    "title": "City Clerk - City of Jersey City",
+    "captured_at": "2026-10-04T08:55:27.248Z",
+    "method": "Browser-rendered DOM snapshot; not original HTTP response bytes",
+    "text": "JC_OCT8_NOTICE_INDEX.txt",
+    "private_html_snapshot": "JC_OCT8_NOTICE_INDEX.rendered.html",
+    "html_omitted_reason": "Original browser HTML remains in the private archive; scripts and session/form tokens are not published. The exact visible-text capture is included."
+  },
+  {
+    "id": "JC_25_105_ADOPTION_NOTICE",
+    "url": "https://www.jerseycitynj.gov/common/pages/GetFile.ashx?key=VdVAAeor",
+    "file": "JC_25_105_ADOPTION_NOTICE.pdf",
+    "captured_at": "2026-10-04T08:55:28.055Z",
+    "method": "Browser file download, unchanged PDF bytes",
+    "index_modified_date": "2025-10-15; not a proven newspaper publication date"
+  },
+  {
+    "id": "HOB_PUBLIC_NOTICES_INDEX",
+    "url": "https://www.hobokennj.gov/public-notices",
+    "title": "Jobs",
+    "captured_at": "2026-10-04T08:56:05.538Z",
+    "method": "Browser-rendered DOM snapshot; not original HTTP response bytes",
+    "text": "HOB_PUBLIC_NOTICES_INDEX.txt",
+    "private_html_snapshot": "HOB_PUBLIC_NOTICES_INDEX.rendered.html",
+    "html_omitted_reason": "Original browser HTML remains in the private archive; scripts and session/form tokens are not published. The exact visible-text capture is included."
+  },
+  {
+    "id": "HOB_IQM2_ALL_NOTICES",
+    "url": "https://hobokennj.iqm2.com/Citizens/LegalNotice.aspx?From=1/1/1900&To=12/31/9999",
+    "title": "Legal Notices - Hoboken, NJ",
+    "captured_at": "2026-10-04T08:56:48.382Z",
+    "method": "Browser-rendered DOM snapshot; not original HTTP response bytes",
+    "text": "HOB_IQM2_ALL_NOTICES.txt",
+    "private_html_snapshot": "HOB_IQM2_ALL_NOTICES.rendered.html",
+    "html_omitted_reason": "Original browser HTML remains in the private archive; scripts and session/form tokens are not published. The exact visible-text capture is included."
+  },
+  {
+    "id": "MA_OFFICIAL_OPINION_PORTAL",
+    "url": "https://www.mass.gov/appellate-opinion-portal",
+    "title": "Appellate Opinion Portal | Mass.gov",
+    "captured_at": "2026-10-04T08:57:22.049Z",
+    "method": "Browser-rendered DOM snapshot; not original HTTP response bytes",
+    "text": "MA_OFFICIAL_OPINION_PORTAL.txt",
+    "private_html_snapshot": "MA_OFFICIAL_OPINION_PORTAL.rendered.html",
+    "html_omitted_reason": "Original browser HTML remains in the private archive; scripts and session/form tokens are not published. The exact visible-text capture is included."
+  },
+  {
+    "id": "HOB_B781_LEGISLATIVE_RECORD",
+    "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+    "title": "Ordinance Amending and Supplementing Chapter 158 (Rent Increases) of the Hoboken City Code by Adding a New Section 158-2, Entitled \u201cProhibition Against Algorithmic Rent-Fixing in the Rental Housing Market\u201d - Hoboken, NJ",
+    "captured_at": "2026-10-04T08:57:30.873Z",
+    "method": "Browser-rendered DOM snapshot; not original HTTP response bytes",
+    "text": "HOB_B781_LEGISLATIVE_RECORD.txt",
+    "private_html_snapshot": "HOB_B781_LEGISLATIVE_RECORD.rendered.html",
+    "html_omitted_reason": "Original browser HTML remains in the private archive; scripts and session/form tokens are not published. The exact visible-text capture is included."
+  },
+  {
+    "id": "HOB_B781_PRINTOUT",
+    "url": "https://hobokennj.iqm2.com/Citizens/FileOpen.aspx?Type=30&ID=69209",
+    "file": "HOB_B781_PRINTOUT.pdf",
+    "captured_at": "2026-10-04T08:58:30.170Z",
+    "method": "Browser file download, unchanged PDF bytes"
+  }
+]
