@@ -30,6 +30,10 @@ Evidence offsets are zero-based Python Unicode character offsets `[start,end)` i
 decoded UTF-8 original, including headers. They are not byte offsets. Lookup includes evidence and
 source metadata; retrieve source detail for full text. Original and declared manifest hashes remain distinct.
 
+Numeric bounds, fact-definition minimum/maximum and expression numeric values must be finite.
+NaN and positive/negative infinity are rejected at model validation; null endpoints remain unbounded.
+Frontend generated-contract digests/checks normalize CRLF to LF; meaningful contract changes still fail.
+
 Facts: unit counts are numeric dwelling units; ages are whole calendar years; dates use ISO strings.
 Explicit textual unit bounds have provenance. Unexplained assessor abbreviations are not decoded.
 Construction year does not establish certificate/occupancy facts; actual supplied dates retain their precision. Supplemental facts are

@@ -81,7 +81,8 @@ def test_fractional_age_is_visibly_unsupported(rule):
 
 @pytest.mark.parametrize('value', [float('inf'), float('nan'), 10000])
 def test_out_of_range_age_is_unresolved_without_crashing(rule, value):
-    rule.coverage_conditions = Expression(op='age_at_least', fact='first_occupancy_date', value=value)
+    # Deliberately bypass ingress validation to retain the renderer's defensive check.
+    rule.coverage_conditions = Expression.model_construct(op='age_at_least', fact='first_occupancy_date', value=value)
     rendered = render_rule(rule)
     assert rendered == render_rule(rule)
     assert 'coverage_conditions' in rendered.unresolved_nodes
