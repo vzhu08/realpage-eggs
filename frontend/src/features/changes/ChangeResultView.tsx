@@ -219,7 +219,7 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
               </button>
             </div>
           )}
-          <DetailStatus details={details} />
+          <DetailStatus details={details} named={!!summary} />
           <PortfolioDrillDown
             result={result}
             rows={visible}
@@ -328,7 +328,7 @@ function Notes({ notes }: { notes: string[] }) {
 }
 
 /** Progress and failures of the label lookups. The comparison itself is already on screen. */
-function DetailStatus({ details }: { details: ReturnType<typeof usePortfolioDetails> }) {
+function DetailStatus({ details, named }: { details: ReturnType<typeof usePortfolioDetails>; named: boolean }) {
   const parts: Array<[string, LoadProgress]> = [
     ['property', details.addresses],
     ['rule', details.rules],
@@ -344,7 +344,7 @@ function DetailStatus({ details }: { details: ReturnType<typeof usePortfolioDeta
         <Notice
           tone="unknown"
           compact
-          title="Some names could not be read"
+          title="Some records could not be read"
           actions={
             <button type="button" className="button button--small" onClick={details.retry}>
               Try again
@@ -352,7 +352,8 @@ function DetailStatus({ details }: { details: ReturnType<typeof usePortfolioDeta
           }
         >
           <p>
-            {failed.map(([name, progress]) => `${progress.failed.length} ${name} ${progress.failed.length === 1 ? 'record' : 'records'}${progress.error ? ` (${progress.error.message})` : ''}`).join('; ')}. Those entries keep their ID as their label. The comparison itself is unaffected.
+            {failed.map(([name, progress]) => `${progress.failed.length} ${name} ${progress.failed.length === 1 ? 'record' : 'records'}${progress.error ? ` (${progress.error.message})` : ''}`).join('; ')}.{' '}
+            {named ? 'Those entries keep the name the comparison gave them' : 'Those entries keep their ID as their label'}; the source text, dates and legal location that come from the records are missing until they load. The comparison itself is unaffected.
           </p>
         </Notice>
       )}

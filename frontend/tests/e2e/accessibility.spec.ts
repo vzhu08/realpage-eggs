@@ -15,10 +15,19 @@ test.describe('keyboard, focus and layout', () => {
   test('the whole journey works from the keyboard', async ({ page, isMobile }) => {
     test.skip(isMobile, 'Hardware keyboard flow is exercised at desktop width');
     await openDemo(page);
+    // The contract examples are a native disclosure: Enter opens it, then the example is a button.
+    const cases = page.locator('details.finder__cases > summary');
+    await cases.focus();
+    await page.keyboard.press('Enter');
     const fixture = page.getByRole('button', { name: /^Decisive question/ });
     await expect(fixture).toBeEnabled();
     await fixture.focus();
     await page.keyboard.press('Enter');
+    // The next step is a button that takes the keyboard to the question.
+    const next = page.getByRole('button', { name: 'Go to the question' });
+    await next.focus();
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('heading', { name: /Useful questions/ })).toBeFocused();
     const input = page.getByRole('textbox', { name: "What is the property's units?" });
     await input.focus();
     await page.keyboard.type('8');
@@ -43,10 +52,13 @@ test.describe('keyboard, focus and layout', () => {
 
   test('focus is visible on interactive controls', async ({ page }) => {
     await openDemo(page);
-    const lookup = page.getByRole('link', { name: 'Lookup', exact: true });
+    const lookup = page.getByRole('link', { name: 'Property lookup', exact: true });
+    await expect(lookup).toHaveAttribute('aria-current', 'page');
     await lookup.focus();
     await page.keyboard.press('Tab');
-    const outline = await page.getByRole('link', { name: 'Changes', exact: true }).evaluate((element) => {
+    const changes = page.getByRole('link', { name: 'Portfolio changes', exact: true });
+    await expect(changes).toBeFocused();
+    const outline = await changes.evaluate((element) => {
       const style = window.getComputedStyle(element);
       return { width: style.outlineWidth, style: style.outlineStyle };
     });
@@ -54,10 +66,11 @@ test.describe('keyboard, focus and layout', () => {
     expect(Number.parseFloat(outline.width)).toBeGreaterThanOrEqual(2);
   });
 
-  test('on a narrow screen, evidence opens as a dialog that holds focus and returns it', async ({ page, isMobile }) => {
-    test.skip(!isMobile, 'The modal presentation is used below 1280px; verified on the mobile project');
+  test('evidence opens only when asked for, as a dialog that holds focus and returns it', async ({ page }) => {
     await openDemo(page);
     await openCase(page, 'Decisive question');
+    // A result never opens evidence by itself, at any width.
+    await expect(page.getByRole('dialog')).toHaveCount(0);
     const opener = page.getByRole('button', { name: /Inspect evidence for/ });
     await opener.click();
     const dialog = page.getByRole('dialog', { name: 'Synthetic Maple Harbor deposit cap' });
@@ -73,6 +86,50 @@ test.describe('keyboard, focus and layout', () => {
     await page.keyboard.press('Escape');
     await expect(dialog).toHaveCount(0);
     await expect(opener).toBeFocused();
+  });
+
+  test('the property chooser opens as a dialog from a selected property, holds focus and returns it', async ({ page }) => {
+    await openDemo(page);
+    await openCase(page, 'Decisive question');
+    const opener = page.getByRole('button', { name: 'Change property' });
+    await opener.click();
+    const dialog = page.getByRole('dialog', { name: 'Choose a property' });
+    await expect(dialog.getByRole('searchbox', { name: 'Sample properties' })).toBeFocused();
+    for (let i = 0; i < 12; i += 1) {
+      await page.keyboard.press('Tab');
+      expect(await dialog.evaluate((element) => element.contains(document.activeElement))).toBe(true);
+    }
+    await expectNoHorizontalOverflow(page);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toHaveCount(0);
+    await expect(opener).toBeFocused();
+    // Choosing another property closes the dialog and leaves the result for the new one to be run.
+    await opener.click();
+    await dialog.getByRole('button', { name: /1 Test Street/ }).click();
+    await expect(dialog).toHaveCount(0);
+    await expect(page.getByRole('heading', { level: 1, name: '1 Test Street, Maple Harbor, CA' })).toBeVisible();
+    await expect(page.locator('.rule')).toHaveCount(0);
+  });
+
+  test('“Restart demo” returns to the start with no property, answer or result carried over', async ({ page }) => {
+    await openDemo(page);
+    await page.locator('[data-example="consequential_fact"]').click();
+    await expect(page.getByRole('group', { name: 'Result context' })).toBeVisible();
+    await page.getByRole('button', { name: 'I don’t know' }).click();
+    await expect(page.getByRole('region', { name: /Your answers/ })).toBeVisible();
+    await page.getByRole('button', { name: 'Restart demo' }).click();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Which rental rules reach a property on a given date, and what is still unknown.');
+    await expect(page.locator('[data-example]')).toHaveCount(3);
+    await expect(page.getByRole('group', { name: 'Result context' })).toHaveCount(0);
+    expect(new URL(page.url()).hash).toBe('#/lookup?mode=demo');
+    // Opening the same example again starts clean.
+    await page.locator('[data-example="consequential_fact"]').click();
+    await expect(page.getByRole('group', { name: 'Result context' })).toBeVisible();
+    await expect(page.getByRole('region', { name: /Your answers/ })).toHaveCount(0);
+    // From another view it also returns to the lookup start.
+    await page.getByRole('link', { name: 'Portfolio changes', exact: true }).click();
+    await page.getByRole('button', { name: 'Restart demo' }).click();
+    await expect(page.locator('[data-example]')).toHaveCount(3);
   });
 
   test('landmarks, one h1, labeled controls and no sideways scroll', async ({ page }) => {

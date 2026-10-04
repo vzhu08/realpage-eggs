@@ -117,7 +117,7 @@ export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping,
                     </div>
                     <ul className="impact-rows">
                       {node.rows.map((row) => (
-                        <ImpactRowView key={row.key} row={row} heading={<RuleName ruleId={row.ruleId} rule={lookups.rules.get(row.ruleId)} fallback={lookups.summary?.rule_labels[row.ruleId]} />} {...links} />
+                        <ImpactRowView key={row.key} row={row} heading={<RuleName ruleId={row.ruleId} rule={lookups.rules.get(row.ruleId)} fallback={lookups.summary?.rule_labels[row.ruleId]} showSource />} {...links} />
                       ))}
                     </ul>
                   </li>

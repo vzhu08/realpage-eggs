@@ -33,8 +33,7 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
     <article className={rank === 1 ? 'question question--lead' : 'question'} aria-labelledby={headingId} data-question={question.question_id}>
       <p className="question__rank">{rank === 1 ? 'Most useful question' : `Question ${rank}`}</p>
       <h3 id={headingId} className="question__prompt">
-        {fact.meaning}
-        {fact.unit ? ` (${fact.unit})` : ''}?
+        {fact.meaning}?
       </h3>
 
       {question.alternatives.length > 0 && (
