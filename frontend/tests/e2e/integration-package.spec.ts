@@ -121,6 +121,7 @@ test.describe('evidence package download (live API, mocked)', () => {
     const card = packageCard(page);
     await expect(card.getByRole('button', { name: 'Building the package…' })).toBeDisabled();
     await expect(card.getByRole('status').filter({ hasText: 'The service is assembling the package' })).toBeVisible();
+    await expect.poll(() => packageCalls(calls).length).toBe(1);
     expect(packageCalls(calls)[0]!.body).toEqual({ address_id: 'SYNTH-003', as_of: '2026-11-15', answers: [] });
 
     // The reader answers a question while the first package is still being built.
