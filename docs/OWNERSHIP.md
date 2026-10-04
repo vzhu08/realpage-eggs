@@ -1,5 +1,15 @@
 # Four-developer ownership
 
+## PLAT-13/14/15 integration claim — October 4
+
+User-assigned session `01a1061b-41fb-7180-9973-b0937d2f95c9` is the sole writer in
+`artifacts/platform-core-integration`, branch `codex/platform-core-integration`, base
+`ebda27644ca9b1434f4a58c65943dccec25502ed` (Core PRs #28 and #29 merged).
+Scope: Platform fact registry, focused input/API tests, contracts, existing assembly/release
+helpers if needed, hosted verification, Platform cards/board/runbooks and new evidence.
+Original stores and other checkouts remain read-only. Core Draft overlays retain separate
+authorship and are not relabeled as automated extraction. User runs paid extraction separately.
+
 ## Active demo preparation — October 4
 
 Session `01a1060f-0c12-7a41-a29e-c2de9377f99f` claims PLAT-13/14 preparation on

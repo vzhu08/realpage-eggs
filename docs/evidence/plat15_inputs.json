@@ -1,0 +1,897 @@
+{
+  "label": "INPUT_DEFINITIONS_NOT_FACTS_OR_LEGAL_ACCEPTANCE",
+  "core_commit": "6547843a4486cd3e87dd75f75b8830967ed67f0d",
+  "unit_of_analysis": "One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+  "definition_count": 35,
+  "new_requested_fields": 20,
+  "definitions": {
+    "collected_information_nonpublic": {
+      "field": "collected_information_nonpublic",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected qualifying information is not available to the public at no cost; a combined dataset containing such information is nonpublic even when it also contains public information. Evaluate the same dataset used by the selected activity.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "collected_information_category": {
+      "field": "collected_information_category",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. A documented category of qualifying information in the selected dataset. Use an enumerated category only with a concrete witness. Other information is unresolved because the statutory examples are nonexhaustive. Missing categorization remains null.",
+      "data_type": "enum",
+      "unit": null,
+      "allowed_values": [
+        "prices",
+        "supply_levels",
+        "security_deposits",
+        "ideal_occupancy_levels",
+        "lease_contract_termination",
+        "renewal_dates",
+        "other_information"
+      ],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "setting_information_nonpublic": {
+      "field": "setting_information_nonpublic",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected qualifying information is not available to the public at no cost; a combined dataset containing such information is nonpublic even when it also contains public information. Evaluate the same dataset used by the selected activity.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "setting_information_category": {
+      "field": "setting_information_category",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. A documented category of qualifying information in the selected dataset. Use an enumerated category only with a concrete witness. Other information is unresolved because the statutory examples are nonexhaustive. Missing categorization remains null.",
+      "data_type": "enum",
+      "unit": null,
+      "allowed_values": [
+        "prices",
+        "supply_levels",
+        "security_deposits",
+        "ideal_occupancy_levels",
+        "lease_contract_termination",
+        "renewal_dates",
+        "other_information"
+      ],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "activity_collects_owner_information": {
+      "field": "activity_collects_owner_information",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected actor/activity collects the selected information from the mapped owners; separate information merely used by an unrelated activity.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "collected_information_owner_count": {
+      "field": "collected_information_owner_count",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Distinct rental property owners represented in the selected collected information, after applying the statutory controlling-interest aggregation. Owners must directly or indirectly own rental residential dwelling units. Incomplete owner/control mapping means unknown. This is not a count of accounts, persons, legal entities, units, properties or recipients.",
+      "data_type": "integer",
+      "unit": "statutory rental property owner groups",
+      "allowed_values": [],
+      "minimum": 0.0,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "collection_for_automated_analysis_or_training": {
+      "field": "collection_for_automated_analysis_or_training",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The collection is for analyzing or processing that same information through an algorithm or other automated process, including training. The statutory purpose is required; completion of processing is not an added prerequisite.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": {
+      "field": "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The algorithm/process identified in the collection-purpose input is used to set or recommend rental prices, material lease terms, or occupancy levels for the selected activity. Rental-price or occupancy output can be determined factually. For lease-terms-only output, materiality must be supported by separate review; if unresolved, answer null. Do not infer materiality merely from software participation.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "activity_sets_rent_terms_or_occupancy": {
+      "field": "activity_sets_rent_terms_or_occupancy",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected activity actually sets rental prices, material lease terms or occupancy levels; a recommendation alone is not this second branch. Rental-price or occupancy output can be determined factually. For lease-terms-only output, materiality must be supported by separate review; if unresolved, answer null. Do not infer materiality merely from software participation.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "setting_uses_automated_analysis_or_training": {
+      "field": "setting_uses_automated_analysis_or_training",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected setting activity is pursuant to an algorithm or other automated process that analyzes/processes the same qualifying information, including training on it.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "setting_dataset_from_other_owner": {
+      "field": "setting_dataset_from_other_owner",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The information analyzed/processed or used for training belongs to a rental property owner other than the owner for whose setting activity it is used. Apply controlling-interest aggregation before comparing owners. The reference owner and other owner must be documented; ambiguous reference, indirect ownership or control mapping yields null. This is not a second account or merely a second person.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "activity_sets_or_recommends_rent_terms_or_occupancy": {
+      "field": "activity_sets_or_recommends_rent_terms_or_occupancy",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected activity sets for or recommends to mapped recipient owners rental prices, material lease terms or occupancy levels. Rental-price or occupancy output can be determined factually. For lease-terms-only output, materiality must be supported by separate review; if unresolved, answer null. Do not infer materiality merely from software participation.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "recipient_rental_owner_count": {
+      "field": "recipient_rental_owner_count",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Distinct rental property owners receiving the selected setting/recommendation, after controlling-interest aggregation. This is a recipient count, separate from collected-information owners, persons, accounts and units. Uncertain mapping yields null.",
+      "data_type": "integer",
+      "unit": "statutory rental property owner groups",
+      "allowed_values": [],
+      "minimum": 0.0,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "recommendations_use_algorithm_or_automated_process": {
+      "field": "recommendations_use_algorithm_or_automated_process",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected setting/recommendation is pursuant to an underlying algorithm or other automated process.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "same_underlying_process_for_recipients": {
+      "field": "same_underlying_process_for_recipients",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Documented identity of the underlying algorithm or automated process across recipients; false means identity is disproven, not that substantial similarity is disproven. Similarity remains a separate unsupported alternative.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "transaction_owner_rental_unit_count": {
+      "field": "transaction_owner_rental_unit_count",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Rental residential dwelling units directly or indirectly owned by the relevant actor or its documented owner principal for this transaction. The selected relationship must identify the relevant owner before counting. This is not owner_total_units or a property unit count. Uncertain principal/ownership mapping yields null.",
+      "data_type": "integer",
+      "unit": "rental residential dwelling units",
+      "allowed_values": [],
+      "minimum": 0.0,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "receives_coordinator_candidate_services": {
+      "field": "receives_coordinator_candidate_services",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected actor does receive the identified service in this transaction. Service-provider qualification as a coordinator remains uncompiled and is not implied by this input. Receipt, subscription and contract are alternatives independent of consideration.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "subscribes_to_coordinator_candidate_services": {
+      "field": "subscribes_to_coordinator_candidate_services",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected actor does subscribe to the identified service in this transaction. Service-provider qualification as a coordinator remains uncompiled and is not implied by this input. Receipt, subscription and contract are alternatives independent of consideration.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "contracts_for_coordinator_candidate_services": {
+      "field": "contracts_for_coordinator_candidate_services",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected actor does contract for the identified service in this transaction. Service-provider qualification as a coordinator remains uncompiled and is not implied by this input. Receipt, subscription and contract are alternatives independent of consideration.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "exchanges_consideration_for_coordinator_candidate_services": {
+      "field": "exchanges_consideration_for_coordinator_candidate_services",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected actor does exchange any form of consideration in return for the use of the identified service in this transaction. Service-provider qualification as a coordinator remains uncompiled and is not implied by this input. Receipt, subscription and contract are alternatives independent of consideration.",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "activity": {
+      "field": "activity",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Which particular activity is being evaluated, with separate activity records for simultaneous service functions",
+      "data_type": "enum",
+      "unit": null,
+      "allowed_values": [
+        "developing_estimated_rent",
+        "using_real_estate_brokerage_database",
+        "other"
+      ]
+    },
+    "actor_role": {
+      "field": "actor_role",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. What documented role does the actor have in this evaluated activity",
+      "data_type": "enum",
+      "unit": null,
+      "allowed_values": [
+        "rental_property_owner",
+        "owner_agent",
+        "owner_representative",
+        "owner_subcontractor",
+        "New_Jersey_Attorney_General",
+        "other"
+      ]
+    },
+    "database_available_on_equal_terms_to_subscribers": {
+      "field": "database_available_on_equal_terms_to_subscribers",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Is the particular brokerage database available on equal terms to subscribers",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": []
+    },
+    "database_collects_competitively_sensitive_information_to_set_or_recommend_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": {
+      "field": "database_collects_competitively_sensitive_information_to_set_or_recommend_rental_prices_material_lease_terms_or_occupancy_rates_or_levels",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Does the particular database collect competitively sensitive information for that price, term or occupancy setting or recommendation",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": []
+    },
+    "database_lists_properties_for_rent_or_sale": {
+      "field": "database_lists_properties_for_rent_or_sale",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Does the particular brokerage database list properties for rent or sale",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": []
+    },
+    "database_sets_or_recommends_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": {
+      "field": "database_sets_or_recommends_rental_prices_material_lease_terms_or_occupancy_rates_or_levels",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Does the particular database set or recommend rental prices, material lease terms or occupancy rates or levels",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": []
+    },
+    "facility_type": {
+      "field": "facility_type",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. What is the documented use of the particular residential or institutional facility",
+      "data_type": "enum",
+      "unit": null,
+      "allowed_values": [
+        "ordinary_residential",
+        "inpatient_medical_care",
+        "licensed_long_term_care",
+        "detention_facility",
+        "correctional_facility",
+        "other"
+      ]
+    },
+    "government_sets_or_limits_residential_prices_through_lawful_affordability_controls": {
+      "field": "government_sets_or_limits_residential_prices_through_lawful_affordability_controls",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Is this evaluated government activity setting or limiting residential prices through lawful documented affordability controls",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": []
+    },
+    "intended_primary_residence": {
+      "field": "intended_primary_residence",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Is the particular unit intended as a primary residence rather than inferred from actual occupancy",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": []
+    },
+    "rent_estimate_public_at_no_cost": {
+      "field": "rent_estimate_public_at_no_cost",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Is the estimated rent from this activity made available to the public at no cost",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": []
+    },
+    "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": {
+      "field": "sensitive_information_used_solely_for_research_statistical_analysis_or_testing",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Is use of the information in this evaluated activity solely for research, statistical analysis or testing",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": []
+    },
+    "sensitive_information_used_to_set_or_recommend_current_or_future_lease_prices_terms_fees_or_occupancy": {
+      "field": "sensitive_information_used_to_set_or_recommend_current_or_future_lease_prices_terms_fees_or_occupancy",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Is information from this evaluated activity used to set or recommend current or future lease prices, terms, fees or occupancy",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": []
+    },
+    "actor_type": {
+      "field": "actor_type",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Documented government-entity status of the actor in this single activity. Other means documented non-government status; missing or disputed status is null. This alone does not establish an affordability-control exclusion.",
+      "data_type": "enum",
+      "unit": null,
+      "allowed_values": [
+        "government_entity",
+        "municipality",
+        "other"
+      ],
+      "minimum": null,
+      "maximum": null,
+      "answer_effort": 1,
+      "allow_partial_date": true
+    },
+    "service_provider_type": {
+      "field": "service_provider_type",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Documented government-entity status of the identified service provider in this single activity. Other means documented non-government status; missing or disputed status is null. This alone does not establish an affordability-control exclusion.",
+      "data_type": "enum",
+      "allowed_values": [
+        "government_entity",
+        "other"
+      ]
+    },
+    "service_provider_sets_or_limits_residential_prices_through_lawful_affordability_controls": {
+      "field": "service_provider_sets_or_limits_residential_prices_through_lawful_affordability_controls",
+      "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. Whether the identified service provider in this single activity sets or limits residential prices through documented lawful affordability controls. Unresolved authority or legal status is null; unrelated activities do not establish this input.",
+      "data_type": "boolean"
+    }
+  },
+  "source_spans": {
+    "collected_information_nonpublic": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 3724,
+        "end": 3995,
+        "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.\n",
+        "section": "3 — competitively sensitive information"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 6547,
+        "end": 6773,
+        "text": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.\n",
+        "section": "3 — nonpublic information"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4026,
+        "end": 4427,
+        "text": "(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n",
+        "section": "3 — coordinating function (1)"
+      }
+    ],
+    "collected_information_category": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 3724,
+        "end": 3995,
+        "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.\n",
+        "section": "3 — competitively sensitive information"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4026,
+        "end": 4427,
+        "text": "(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n",
+        "section": "3 — coordinating function (1)"
+      }
+    ],
+    "setting_information_nonpublic": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 3724,
+        "end": 3995,
+        "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.\n",
+        "section": "3 — competitively sensitive information"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 6547,
+        "end": 6773,
+        "text": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.\n",
+        "section": "3 — nonpublic information"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4427,
+        "end": 4746,
+        "text": "(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n",
+        "section": "3 — coordinating function (2)"
+      }
+    ],
+    "setting_information_category": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 3724,
+        "end": 3995,
+        "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.\n",
+        "section": "3 — competitively sensitive information"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4427,
+        "end": 4746,
+        "text": "(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n",
+        "section": "3 — coordinating function (2)"
+      }
+    ],
+    "activity_collects_owner_information": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4026,
+        "end": 4427,
+        "text": "(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n",
+        "section": "3 — coordinating function (1)"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 8855,
+        "end": 8909,
+        "text": "e.     any person to perform a coordinating function.\n",
+        "section": "4(e)"
+      }
+    ],
+    "collected_information_owner_count": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 7317,
+        "end": 7623,
+        "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n",
+        "section": "3 — rental property owner"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4026,
+        "end": 4427,
+        "text": "(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n",
+        "section": "3 — coordinating function (1)"
+      }
+    ],
+    "collection_for_automated_analysis_or_training": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4026,
+        "end": 4427,
+        "text": "(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n",
+        "section": "3 — coordinating function (1)"
+      }
+    ],
+    "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4026,
+        "end": 4427,
+        "text": "(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n",
+        "section": "3 — coordinating function (1)"
+      }
+    ],
+    "activity_sets_rent_terms_or_occupancy": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4427,
+        "end": 4746,
+        "text": "(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n",
+        "section": "3 — coordinating function (2)"
+      }
+    ],
+    "setting_uses_automated_analysis_or_training": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4427,
+        "end": 4746,
+        "text": "(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n",
+        "section": "3 — coordinating function (2)"
+      }
+    ],
+    "setting_dataset_from_other_owner": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4427,
+        "end": 4746,
+        "text": "(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n",
+        "section": "3 — coordinating function (2)"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 7317,
+        "end": 7623,
+        "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n",
+        "section": "3 — rental property owner"
+      }
+    ],
+    "activity_sets_or_recommends_rent_terms_or_occupancy": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4746,
+        "end": 5021,
+        "text": "(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+        "section": "3 — coordinating function (3)"
+      }
+    ],
+    "recipient_rental_owner_count": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4746,
+        "end": 5021,
+        "text": "(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+        "section": "3 — coordinating function (3)"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 7317,
+        "end": 7623,
+        "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n",
+        "section": "3 — rental property owner"
+      }
+    ],
+    "recommendations_use_algorithm_or_automated_process": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4746,
+        "end": 5021,
+        "text": "(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+        "section": "3 — coordinating function (3)"
+      }
+    ],
+    "same_underlying_process_for_recipients": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 4746,
+        "end": 5021,
+        "text": "(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+        "section": "3 — coordinating function (3)"
+      }
+    ],
+    "transaction_owner_rental_unit_count": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 7317,
+        "end": 7623,
+        "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n",
+        "section": "3 — rental property owner"
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 8188,
+        "end": 8421,
+        "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\n",
+        "section": "4(a)"
+      }
+    ],
+    "receives_coordinator_candidate_services": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 8188,
+        "end": 8421,
+        "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\n",
+        "section": "4(a)"
+      }
+    ],
+    "subscribes_to_coordinator_candidate_services": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 8188,
+        "end": 8421,
+        "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\n",
+        "section": "4(a)"
+      }
+    ],
+    "contracts_for_coordinator_candidate_services": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 8188,
+        "end": 8421,
+        "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\n",
+        "section": "4(a)"
+      }
+    ],
+    "exchanges_consideration_for_coordinator_candidate_services": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 8188,
+        "end": 8421,
+        "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\n",
+        "section": "4(a)"
+      }
+    ],
+    "activity": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ],
+    "actor_role": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 8188,
+        "end": 8420,
+        "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;",
+        "section": null
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 9571,
+        "end": 9984,
+        "text": "7.    The Attorney General shall establish, on the\nofficial website of the Department of Law and Public Safety, a location to\nreceive complaints alleging any violation or suspected violation of this act,\nwhich requirement may be satisfied by establishing or maintaining such a\nlocation for complaints alleging violations or suspected violations of the “New\nJersey Antitrust Act” P.L.1970, c.73 (C.56:9-1 et seq.).",
+        "section": null
+      }
+    ],
+    "database_available_on_equal_terms_to_subscribers": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ],
+    "database_collects_competitively_sensitive_information_to_set_or_recommend_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ],
+    "database_lists_properties_for_rent_or_sale": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ],
+    "database_sets_or_recommends_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ],
+    "facility_type": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 7623,
+        "end": 7901,
+        "text": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.",
+        "section": null
+      }
+    ],
+    "government_sets_or_limits_residential_prices_through_lawful_affordability_controls": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 2577,
+        "end": 3187,
+        "text": "“Affordability controls” means a restriction on rent\nprice established pursuant to a government program, including but not limited\nto: the federal section 8 Housing Choice Voucher Homeownership Program,\nauthorized pursuant to Subpart M of Part 982 of Title 24 of the Code of Federal\nRegulations (24 CFR 982.601 et seq.); P.L.2004, c.140 (C.52:27D-287.1 et seq.);\nthe “Fair Housing Act,” P.L.1985, c.222 (C.52:27D-301 et al.); any program\nadministered by the New Jersey Housing and Mortgage Finance Agency; a rent\ncontrol or rent leveling ordinance; or other local, State, or federal\ngovernment housing program.",
+        "section": null
+      }
+    ],
+    "intended_primary_residence": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 7623,
+        "end": 7901,
+        "text": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.",
+        "section": null
+      }
+    ],
+    "rent_estimate_public_at_no_cost": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ],
+    "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ],
+    "sensitive_information_used_to_set_or_recommend_current_or_future_lease_prices_terms_fees_or_occupancy": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ],
+    "actor_type": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      },
+      {
+        "doc_id": "D069",
+        "quote": "Be It Enacted\nby the Senate and General\nAssembly of the State of New Jersey:",
+        "start": 430,
+        "end": 506,
+        "supports": [
+          "jurisdiction",
+          "level"
+        ]
+      },
+      {
+        "doc_id": "D069",
+        "quote": "b.    A municipality shall be prohibited from enacting\nan ordinance that conflicts with this act.  This subsection shall not be\nconstrued to prohibit the enactment of ordinances explicitly authorized or\nrequired by any other law.",
+        "start": 9341,
+        "end": 9570,
+        "supports": [
+          "provision_key",
+          "title",
+          "requirement",
+          "citation",
+          "quoted_span",
+          "coverage_conditions",
+          "exemption_conditions",
+          "exemptions"
+        ]
+      },
+      {
+        "doc_id": "D069",
+        "quote": "1.    This act shall be known and may be cited as the\n“Forbidding the Algorithmic Inflation of Rent (FAIR) Act.”",
+        "start": 507,
+        "end": 619,
+        "supports": [
+          "category",
+          "requirement"
+        ]
+      },
+      {
+        "doc_id": "D069",
+        "quote": "2026, CHAPTER 43,\napproved July 20, 2026",
+        "start": 213,
+        "end": 253,
+        "supports": [
+          "citation",
+          "lifecycle",
+          "status_as_of",
+          "effective_date"
+        ]
+      },
+      {
+        "doc_id": "D069",
+        "quote": "9.    This act shall take effect on the first day of\nthe twelfth month next following the date of enactment.",
+        "start": 10175,
+        "end": 10283,
+        "supports": [
+          "effective_date"
+        ]
+      }
+    ],
+    "service_provider_type": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ],
+    "service_provider_sets_or_limits_residential_prices_through_lawful_affordability_controls": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6059,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+        "section": null
+      }
+    ]
+  },
+  "deferred_original_fields": [
+    "ordinance_explicitly_authorized_by_other_law",
+    "ordinance_required_by_other_law",
+    "participating_or_facilitating_persons",
+    "pricing_agreement_required_by_affordability_controls",
+    "principal_sets_or_limits_residential_prices_through_lawful_affordability_controls",
+    "principal_type"
+  ]
+}

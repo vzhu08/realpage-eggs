@@ -47,6 +47,45 @@ def test_both_lookup_routes_reject_bad_fact_types(demo, facts):
             assert client.post(f"/api/v1/{endpoint}", json={**REQUEST, "supplemental_facts": facts}).status_code == 422
 
 
+def test_activity_inputs_accept_core_probes_and_keep_request_scope(demo):
+    from navigator.fact_inputs import ACTIVITY_FACT_DEFINITIONS, validate_facts
+
+    cases = read_json(ROOT / "docs/core_rules/d069_predicates/cases.json")["cases"]
+    for case in cases:
+        # Deliberately irrelevant fixture metadata must not become an accepted owner count.
+        validate_facts({k: v for k, v in case["facts"].items() if k != "raw_legal_entity_count"})
+    with pytest.raises(ValueError, match="Unsupported supplemental fact"):
+        validate_facts({"raw_legal_entity_count": 2})
+    original = demo.read("addresses.json")
+    field = "collected_information_owner_count"
+    with TestClient(create_app(demo.root)) as client:
+        definitions = client.get("/api/v1/facts").json()
+        assert set(ACTIVITY_FACT_DEFINITIONS) <= definitions.keys()
+        assert definitions[field]["minimum"] == 0
+        response = client.post("/api/v1/lookup/assist", json={**REQUEST,
+            "answers": [{"field": field, "value": 2}], "scenario_id": "single-activity"})
+        assert response.status_code == 200
+        body = response.json()
+        assert body["lookup"]["address"]["facts"][field] == 2
+        assert "User" in body["lookup"]["address"]["provenance"][field]
+        for answers in ([], [{"field": field, "value": None}]):
+            reset = client.post("/api/v1/lookup/assist", json={**REQUEST, "answers": answers})
+            assert reset.status_code == 200
+            assert reset.json()["lookup"]["address"]["facts"].get(field) is None
+    assert demo.read("addresses.json") == original
+
+
+@pytest.mark.parametrize("facts", [
+    {"collected_information_owner_count": -1}, {"collected_information_owner_count": True},
+    {"collected_information_owner_count": 1.5}, {"collected_information_category": "guessed"},
+    {"activity_collects_owner_information": "false"}, {"actor_type": "government"},
+])
+def test_activity_inputs_reject_ambiguous_types_through_http(demo, facts):
+    with TestClient(create_app(demo.root)) as client:
+        for endpoint in ("lookup", "lookup/assist"):
+            assert client.post(f"/api/v1/{endpoint}", json={**REQUEST, "supplemental_facts": facts}).status_code == 422
+
+
 def test_answer_provenance_null_partial_dates_and_request_isolation(demo):
     original = demo.read("addresses.json")
     with TestClient(create_app(demo.root)) as client:

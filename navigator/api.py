@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import os
@@ -25,6 +26,9 @@ def create_app(root=None, core_services=None, frontend_dist=None):
     store = Store(root or data_dir())
     app = FastAPI(title="Rental Housing Law Navigator", version=VERSION, description=DISCLAIMER, responses={404: {"description": "Unknown ID"}, 422: {"description": "Invalid request"}, 503: {"description": "Dataset or extracted rules unavailable"}})
     app.add_middleware(CORSMiddleware, allow_origins=[x.strip() for x in os.getenv("NAVIGATOR_CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",") if x.strip()], allow_methods=["GET", "POST"], allow_headers=["Content-Type"], expose_headers=["Content-Disposition"])
+    # Repeated evidence in assist responses can be large. Compress transport only;
+    # preserve every result, quote and trace and use a low CPU compression level.
+    app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=1)
 
     def call(fn, *args):
         try: return fn(*args)
@@ -51,7 +55,11 @@ def create_app(root=None, core_services=None, frontend_dist=None):
     def address_lookup(request: LookupRequest): return call(lookup, store, request)
 
     @app.post("/api/v1/lookup/assist", response_model=AssistResponse, responses={502: {"description": "Core output violated the shared contract"}})
-    def assisted_lookup(request: AssistRequest): return call(assist, store, request, core_services)
+    def assisted_lookup(request: AssistRequest):
+        result = call(assist, store, request, core_services)
+        # assist already constructs the canonical validated AssistResponse. Use
+        # its serializer directly to avoid a second giant Python dict/list tree.
+        return Response(content=result.model_dump_json(), media_type="application/json")
 
     @app.post("/api/v1/lookup/evidence-package", response_model=EvidencePackage, responses={502: {"description": "Core output violated the shared contract"}})
     def evidence_package(request: EvidencePackageRequest, response: Response):

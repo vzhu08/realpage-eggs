@@ -1,5 +1,14 @@
 # PLAT-14: assemble the next permitted demo snapshot
 
+## October 4 integration
+
+The sole writer in `codex/platform-core-integration` / `artifacts/platform-core-integration`
+assembled and verified the complete pilot lineage: 500 addresses, 147 rules, 87 sources,
+487 resolved municipalities. All five scenario caches were rebuilt. See the
+[integration handoff](../PLATFORM_CORE_INTEGRATION.md). This is a partial research candidate;
+Core's hand-authored predicate overlays remain separate, and the new extraction job is not
+served. Admission and hosted promotion remain pending. The preparation history follows.
+
 ## Preparation claim — October 4, 2026
 
 Owner: Vincent / Codex session `01a1060f-0c12-7a41-a29e-c2de9377f99f`.

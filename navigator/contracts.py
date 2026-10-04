@@ -16,6 +16,8 @@ from .models import SourceComparisonsResponse, ChangeSummary
 
 def generate():
     root = ROOT / "contracts"
+    from .fact_inputs import FACT_DEFINITIONS
+    write_json(root / "fact_definitions.json", {k: v.model_dump(mode="json") for k, v in FACT_DEFINITIONS.items()})
     write_json(root / "openapi.json", create_app().openapi())
     write_json(root / "domain.schema.json", {m.__name__: m.model_json_schema() for m in (Rule, SourceDocument, PropertyFacts, JurisdictionResolution, Evaluation, RunManifest, ExtractionBundle)})
     write_json(root / "research.schema.json", {m.__name__: m.model_json_schema() for m in (AssistContext, AssistRequest, AssistResponse, QuestionPlan, EvidenceReport, SemanticReview, EvidencePackageRequest, EvidencePackage, EvidenceReplayResult, SourceComparisonsResponse, ChangeSummary)})
