@@ -1,5 +1,18 @@
 # Task board and merge queue
 
+## Active PLAT-13/14 preparation — October 4
+
+Claimed by session `01a1060f-0c12-7a41-a29e-c2de9377f99f` in the isolated
+`artifacts/platform-demo-prep` checkout, branch `codex/platform-demo-prep`, base `e766237`.
+PLAT-13 preparation is verified: PR #22 head `b77ae3a` has four passing checks; its writer's
+completed handoff reports live basic lookup/cached scenarios and assisted lookup at ~59 seconds
+against the UI's 20-second timeout.
+Preserve that writer's files and branch until release. PLAT-14 preparation is verified: exact
+input manifest, baseline assembly replay, full pilot lineage audit, fresh output reservations,
+local fallback HTTP and saved-export handoff checks pass. Reviewed Core admission and a new
+demo snapshot remain gates. See [DEMO_PREPARATION](DEMO_PREPARATION.md). This status supersedes
+the unallocated next-chat language below; no paid run or dataset promotion occurred.
+
 ## Next Platform chat: demo delivery
 
 The user will continue these tasks in a new chat. Start with
@@ -76,8 +89,8 @@ Docker runtime and public deployment are not verified by those checks.
 | [PLAT-10](tasks/PLAT-10.md) | Root Platform | Verified in PR #17 | 405 backend tests (one skip), 118 frontend unit tests, 114 browser tests (22 skips), and full Linux container smoke pass. Windows pack verification also passes with UTF-8. Includes merged Core B/UX PR #15. |
 | [PLAT-11](tasks/PLAT-11.md) | Vincent / Platform | 21 captures verified; residual acquisition gaps open | Original source bodies, separately derived text, additive SourceDocuments and per-case handoff for Daniel. Municipality publication/operative dates and official T5 docket verification remain unverified. No existing store changed. |
 | [PLAT-12](tasks/PLAT-12.md) | Vincent / Platform | Pilot completed; offline handoff ready; external gaps open | Seven D069 candidates and original provider evidence are committed for Core review. Two successful calls; no new calls during handoff. Publication/court gaps remain Platform-owned. |
-| [PLAT-13](tasks/PLAT-13.md) | Vincent / next Platform chat | Ready: deployment review | Continue PR #22/RENDER-01 with its writer; complete hosted setup or preserve local fallback. |
-| [PLAT-14](tasks/PLAT-14.md) | Vincent / next Platform chat | Prep ready; final Core input pending | Assemble selected permitted automated outputs into a new snapshot; preserve evidence and unknowns. |
+| [PLAT-13](tasks/PLAT-13.md) | Vincent / demo-prep session | Preparation verified; Render writer retains deployment ownership | PR #22 has four passing checks; hosted assist takes ~59s per writer handoff. Pinned local fallback passes fresh HTTP smoke. |
+| [PLAT-14](tasks/PLAT-14.md) | Vincent / demo-prep session | Preparation verified; final Core admission pending | Baseline assembly/input hashes, 147-rule pilot lineage and saved-export handoff verify; selected new release awaits Core. |
 | [PLAT-15](tasks/PLAT-15.md) | Vincent / Platform | Conditional: concrete Core request | Small typed-input/API changes with source meaning and focused consumer checks. |
 | [PLAT-16](tasks/PLAT-16.md) | Vincent / next Platform chat | Prep ready; freeze after selected integration | One code/data version, exact exports, fresh-browser demo and local backup. |
 | [CORE-06](tasks/CORE-06.md) | Daniel / Core A | Ready: offline D069 predicate follow-up; acceptance partial | PR #23 source review is merged. Follow CORE_NEXT_STEPS.md to reconcile the paid pilot, compile supported conditions and test unknowns without waiting for Platform records. No additional paid run authorized. |
