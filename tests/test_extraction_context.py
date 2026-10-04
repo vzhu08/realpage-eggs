@@ -84,13 +84,13 @@ def test_explicit_status_context_anchors_dates_without_extracting_or_promoting_s
 
 
 @pytest.mark.parametrize('name,expected_hash', [
-    ('DRAFT_INSTRUCTIONS', '4dd9a10951107e10cefc602bf1bdda5712a3d3ba2303e5d27d1ac48b03c5c241'),
-    ('REVIEW_INSTRUCTIONS', 'a9e51b62ace47c511439660cd9ce1014d617f1c7a7610975a9449ec8f49f2ca0'),
-    ('REPAIR_INSTRUCTIONS', 'bb945630d38be47f6b60dbf0588df9dc02717d68c471bf0193b26f70a175ac75'),
+    ('DRAFT_INSTRUCTIONS', '07812271838cab09eaf9dc76d9d16f90d883dc9160c786721c4cd468c6330eca'),
+    ('REVIEW_INSTRUCTIONS', 'd355cda7ff3d6f0b43f18ea9867c1566cda0ce647ec1981f6f0a671bbe5a8905'),
+    ('REPAIR_INSTRUCTIONS', '3fc9a05f79dc9d9335922686e87934f74913b21ebabfb89ba1f1b9ca057f5774'),
 ])
 def test_request_builder_preserves_prior_transport_bytes_and_matches_generate(monkeypatch, name, expected_hash):
-    # These fingerprints were captured from generate before factoring the
-    # builders; offline sizing must preserve its JSON escaping and prompts.
+    # v5 deliberately adds the exact registered-fact contract instructions.
+    # Offline sizing must preserve generate's JSON escaping and current prompts.
     monkeypatch.setenv('OPENAI_API_KEY', 'fictional-test-key')
     monkeypatch.setenv('OPENAI_MODEL', 'fictional-test')
     payload = {'source_text': 'A “quoted” line.\nSecond \\ line.', 'schema': {'type': 'object'}}

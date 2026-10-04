@@ -8,17 +8,17 @@ import httpx
 from pydantic import ValidationError
 
 from .config import VERSION
-from .fact_inputs import FACT_DEFINITIONS
+from .fact_inputs import ACTIVITY_FACT_DEFINITIONS, FACT_DEFINITIONS
 from .models import Expression, ExtractionBundle, Rule
 from .source_policy import POLICY_VERSION, TEMPORAL_FIELDS, evidence_source_allowed, source_use
 from .store import digest
 
-PROMPT_VERSION = "extract-v4-applicability-and-review-notes"
+PROMPT_VERSION = "extract-v5-registered-facts-and-bounded-contract-repair"
 CONTEXT_VERSION = "explicit-support-v1"
 MAX_SUPPORTING_TEXT_CHARS = 128_000
 REVIEW_INSTRUCTIONS = "\nReview the draft against the source. Check interpretation, numeric values/formulas, all coverage/exemptions, date/status support, directional interactions and omitted provisions across all categories. Distinguish covered property/actor classes from proof of prohibited conduct: preserve the prohibited acts in requirement and retain genuine conditional applicability. Never substitute blanket coverage for an unresolved eligibility condition. Keep rule-specific blockers in review_issues, source-wide blockers in issues, and non-blocking observations in notes. Correct the draft while retaining unresolved legal or evidence problems. Return the complete corrected ExtractionBundle JSON, not a verdict."
 DRAFT_INSTRUCTIONS = "\nExtract the supported rules from this source segment."
-REPAIR_INSTRUCTIONS = "\nRepair the validation errors without inventing evidence. Return complete ExtractionBundle JSON."
+REPAIR_INSTRUCTIONS = "\nRepair the validation errors using exact supplied evidence and fact_contract semantics. Never invent evidence, automatically alias values or erase unresolved legal review issues. Retain rule identities; when a supported correction is unavailable, retain the unresolved issue. Return complete ExtractionBundle JSON."
 CONTEXT_INSTRUCTIONS = """\nThis extraction includes explicitly supplied supporting_sources.
 Extract rules only from the primary doc_id; retain its source_doc_id, source_url and primary quoted_span.
 Evidence may quote the primary document or the explicitly supplied supporting_sources doc_ids.
@@ -51,9 +51,12 @@ blocking per-rule review issue rather than guessing coverage or treating violati
 Use true literal only where the source supports unconditional coverage within the jurisdiction.
 Use unsupported with a reason for uncompiled/unsupported conditions, never assume them true.
 Construction year does not establish actual first occupancy or certificate dates; encode the actual factual trigger.
-Available fact names: residential, units, year_built, certificate_of_occupancy, first_occupancy_date, owner_type,
-owner_occupied, owner_total_units, owner_total_properties, tenancy_start, subsidized,
-condominium, exemption_filed, exempt_notice, tenant_opt_in; other explicit facts may be named.
+The payload.fact_contract table supplies registered fields, types, exact meanings and enum allowed_values.
+Each meaning is meaning_prefixes[meaning_prefix] followed by meaning. Use registered names and enum
+literals exactly only when their semantics match the source. Never automatically alias near-synonyms,
+coerce values or broaden actor classes to fit the registry. Distinct source-defined facts remain allowed
+when no registered field has the same meaning; support them with exact evidence. Missing input values
+remain unknown. Bind every required executable field to evidence, including literal exemption conditions.
 Comparisons are JSON expressions, never code. age_at_least uses full years on query date.
 Capture exemption branches with all/any/not so irrelevant missing facts short-circuit.
 Effective dates preserve YYYY or YYYY-MM precision. end_date is exclusive.
@@ -200,12 +203,27 @@ def supporting_payload(sources):
              "capture_status": source.capture_status, "source_text": source.text} for source in sources]
 
 
+def registered_fact_contract():
+    """Losslessly factor the repeated activity preface; do not shorten meanings."""
+    common = os.path.commonprefix([d.meaning for d in ACTIVITY_FACT_DEFINITIONS.values()])
+    prefix = common[:common.rfind(". ") + 2] if ". " in common else ""
+    return {"columns": ["field", "type", "meaning_prefix", "meaning", "allowed_values"],
+            "meaning_prefixes": ["", prefix],
+            "fields": [[name, definition.data_type,
+                        1 if prefix and definition.meaning.startswith(prefix) else 0,
+                        definition.meaning.removeprefix(prefix), list(definition.allowed_values)]
+                       for name, definition in sorted(FACT_DEFINITIONS.items())]}
+
+
 def source_segment_payload(source, offset, text, supporting_sources=(), *, schema=None):
     """Build a segment payload from already validated source/context records."""
     payload = {"schema": ExtractionBundle.model_json_schema() if schema is None else schema,
                "doc_id": source.doc_id, "source_url": source.url, "retrieved_at": source.retrieved_at,
                "jurisdictions": source.jurisdictions, "source_authority": source.authority,
                "original_offset": offset, "source_text": text}
+    contract = registered_fact_contract()
+    payload["fact_contract"] = contract
+    payload["fact_contract_sha256"] = digest(contract)
     if supporting_sources:
         payload["source_sha256"] = source.sha256
         payload["supporting_sources"] = supporting_payload(supporting_sources)
@@ -298,6 +316,24 @@ def validate_bundle(bundle, sources, allowed_doc_id=None, *, supporting_doc_ids=
     return bundle
 
 
+def added_contract_issues(original, validated):
+    return [{"rule_index": index, "provision_key": after.provision_key, "issues": issues}
+            for index, (before, after) in enumerate(zip(original.rules, validated.rules))
+            if (issues := [issue for issue in after.review_issues if issue not in before.review_issues
+                           and issue.startswith(("Fact contract mismatch at ", "Missing field-level evidence for "))])]
+
+
+def preserve_prior_review(original, repaired):
+    """A mechanical repair cannot erase existing interpretation uncertainty."""
+    key = lambda rule: (rule.source_doc_id, rule.jurisdiction, rule.category, rule.citation, rule.provision_key)
+    if sorted(map(key, original.rules)) != sorted(map(key, repaired.rules)):
+        raise ValueError("Bounded contract repair changed rule identities; reviewed candidates require further review")
+    repaired.issues = sorted(set(repaired.issues + original.issues))
+    for rule in repaired.rules:
+        prior_issues = [issue for prior in original.rules if key(prior) == key(rule) for issue in prior.review_issues]
+        rule.review_issues = sorted(set(rule.review_issues + prior_issues))
+
+
 def stable_id(draft):
     normalized = lambda s: re.sub(r"\s+", " ", s.strip().casefold())
     identity = [normalized(draft.jurisdiction), draft.category, normalized(draft.citation), normalized(draft.provision_key), draft.effective_date, draft.end_date, draft.lifecycle]
@@ -375,6 +411,7 @@ def extract(store, doc_ids=None, provider=None, limit=None, *, supporting_doc_id
         raise ValueError("Primary and supporting document IDs must be distinct and non-overlapping")
     context = supporting_payload(support)
     context_hash = digest([CONTEXT_VERSION, context]) if support else None
+    fact_contract_hash = digest(registered_fact_contract())
     candidates, skipped = [], []
     for ident, source in sorted(sources.items()):
         if doc_ids and ident not in doc_ids:
@@ -407,6 +444,7 @@ def extract(store, doc_ids=None, provider=None, limit=None, *, supporting_doc_id
         raise
     run.config["model"] = provider.model
     run.config["fact_contract_validation"] = "enum-literals-v1"
+    run.config["fact_contract_sha256"] = fact_contract_hash
     run.config["draft_replays"] = []
     if isinstance(provider, OpenAIProvider):
         run.config["read_timeout_seconds"] = provider.client.timeout.read
@@ -424,6 +462,7 @@ def extract(store, doc_ids=None, provider=None, limit=None, *, supporting_doc_id
             try:
                 for offset, text in chunks(source.text):
                     cache_identity = [source.doc_id, source.sha256, source.url, source.retrieved_at, source.authority, provider.model, provider.mode, PROMPT_VERSION, VERSION, schema, offset, text]
+                    cache_identity.append({"fact_contract_sha256": fact_contract_hash})
                     if support:
                         cache_identity.append({"supporting_context_sha256": context_hash})
                     cache_key = digest(cache_identity)
@@ -455,14 +494,24 @@ def extract(store, doc_ids=None, provider=None, limit=None, *, supporting_doc_id
                         # Every segment gets a separate semantic/omission pass, including empty results.
                         reviewed = provider.generate(instruction + REVIEW_INSTRUCTIONS, {**payload, "draft": output})
                         store.write(f"provider_outputs/{run.run_id}/{cache_key}-review.json", reviewed)
+                        prior_review = None
                         for repair in range(2):
                             try:
-                                bundle = validate_bundle(ExtractionBundle.model_validate(reviewed), sources, source.doc_id, supporting_doc_ids=support_ids)
-                                break
+                                candidate = ExtractionBundle.model_validate(reviewed)
+                                original = candidate.model_copy(deep=True)
+                                bundle = validate_bundle(candidate, sources, source.doc_id, supporting_doc_ids=support_ids)
+                                if prior_review is not None:
+                                    preserve_prior_review(prior_review, bundle)
+                                machine_issues = added_contract_issues(original, bundle)
+                                if repair or not machine_issues:
+                                    break
+                                prior_review = original
+                                validation_error = json.dumps({"machine_detected_issues": machine_issues})[:2000]
                             except (ValueError, ValidationError) as exc:
                                 if repair: raise ValueError(f"Extraction validation failed for {source.doc_id}: {str(exc)[:500]}") from None
-                                reviewed = provider.generate(instruction + REPAIR_INSTRUCTIONS, {**payload, "draft": reviewed, "validation_error": str(exc)[:2000]})
-                                store.write(f"provider_outputs/{run.run_id}/{cache_key}-repair.json", reviewed)
+                                validation_error = str(exc)[:2000]
+                            reviewed = provider.generate(instruction + REPAIR_INSTRUCTIONS, {**payload, "draft": reviewed, "validation_error": validation_error})
+                            store.write(f"provider_outputs/{run.run_id}/{cache_key}-repair.json", reviewed)
                         store.write(f"extraction_cache/{cache_key}.json", {"bundle": bundle.model_dump(mode="json"), "origin_run_id": run.run_id, "mode": provider.mode, "model": provider.model, **({"supporting_context_sha256": context_hash} if support else {})})
                     source_kinds.add(bundle.source_kind)
                     source_issues.extend(bundle.issues)
