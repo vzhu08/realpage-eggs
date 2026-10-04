@@ -76,10 +76,25 @@ Fresh baseline checks: 221 backend tests, 79 frontend unit tests, 72 browser tes
 12 browser tests skipped. Browser tests use fixtures/API doubles. Real-data browser/API,
 Docker runtime and public deployment are not verified by those checks.
 
+## P0 demo blocker: assisted lookup latency — October 4
+
+The user explicitly prioritized the hosted timeout after the Render deployment repair.
+[PERF-01](tasks/PERF-01.md) is the first demo-usability gate within deployment integration,
+ahead of optional features and the final browser rehearsal. Platform/Vincent coordinates
+Core A/Daniel, Core B/Oliver and the existing UX lane; this board edit starts no additional writer.
+
+Render is Live on Free at runtime `b77ae3a`, but `POST /api/v1/lookup/assist` took 59.17 seconds
+while the frontend aborts after 20 seconds. Basic lookup and cached change endpoints pass.
+Local profiling identifies repeated planner evaluation and deep trace copying as the main work.
+PERF-01 specifies a cancellable/progressive UX workaround, measured optimization, and an optional
+paid-compute benchmark. Paid hosting is an option the user is willing to consider, not yet a
+selected purchase. Existing snapshot/source and research-uncertainty gates remain unchanged.
+
 ## Active and next work
 
 | ID | Owner | State | Deliverable / dependency |
 | --- | --- | --- | --- |
+| [PERF-01](tasks/PERF-01.md) | Vincent / Platform lead; Daniel / Core A; Oliver / Core B; existing UX lane | **P0: demo blocked; profiling complete; implementation unclaimed** | Make the real assisted browser lookup usable: avoid the fixed 20-second failure, optimize repeated evaluation/copying without changing semantics, and benchmark representative properties plus answer follow-ups on the chosen compute plan. Hosting success alone does not close this gate. |
 | [COORD-04](tasks/COORD-04.md) | Vincent / current readiness session | Verified software; [integration PR #11](https://github.com/vzhu08/realpage-eggs/pull/11) | Fix LF/CRLF contract checks and non-finite model inputs; assign next work. Isolated branch `codex/readiness-fixes-and-plan`, base `3b2d201`. |
 | [PLAT-05](tasks/PLAT-05.md) | Vincent / existing Platform session | Verified software and bounded live review | [PR #10](https://github.com/vzhu08/realpage-eggs/pull/10), tested merge `e81c3f4` includes main `ad0881a`; 260 unique backend tests pass and schemas match. One D001 live review passes, replay makes zero calls; 140-rule inputs unchanged. This is not full-corpus/legal acceptance. |
 | [PLAT-06](tasks/PLAT-06.md) | Vincent / Platform | Merged in PR #14; corpus release partial | Integrated Daniel's saved store and approved Census reconciliation: 500 addresses, 487 resolved, 140 review-needed rules. Shared APIs, evidence replay, immutable local frontend/API release and backup verified on `codex/platform-release`; 342 backend / 90 frontend unit / 80 browser-suite tests pass (14 browser skips). Real browser, seven-file export replay and rollback pass. T1 partial; T2-T5 blocked; Platform acquisition, Core interpretation/review and UX-04 controls remain. See `docs/evidence/plat06_release.json`. |

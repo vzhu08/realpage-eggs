@@ -24,6 +24,9 @@
 !frontend/tests/**/*.ts
 !deploy/
 !deploy/Dockerfile
+!scripts/
+!scripts/platform_ops.py
+!scripts/render_snapshot.py
 **/__pycache__/
 **/*.pyc
 **/.env*
