@@ -80,7 +80,9 @@ def compute_changes(store, request: ChangeRequest):
         notes.append("Unresolved rule evidence: " + ", ".join(unresolved))
     affected, uncertain, conflicts, differences = [], [], [], {}
     by_id = {r.team_rule_id: r for r in rules}
-    for ident, prop in sorted(addresses.items()):
+    # No referenced rule can produce a delta. Retain the blocked result and all
+    # missing-evidence notes without evaluating unrelated law for every property.
+    for ident, prop in (sorted(addresses.items()) if selected else ()):
         resolution = resolutions.get(ident, JurisdictionResolution(address_id=ident, state=prop.raw_address.state))
         left = {e.team_rule_id: e for e in evaluate_rules(rules, prop, resolution, before)}
         right = {e.team_rule_id: e for e in evaluate_rules(rules, prop, resolution, after, selected if scenario == "if_enacted" else [])}

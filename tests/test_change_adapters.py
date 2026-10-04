@@ -173,3 +173,30 @@ def test_missing_municipality_record_keeps_state_and_marks_local_coverage_uncert
         assert delta['after']['jurisdiction'] == 'unknown'
     state_result = compute_changes(scenarios, ChangeRequest(test_id='T1'))
     assert state_result.affected_address_ids == ['ca-home']
+
+
+@pytest.mark.parametrize('test_id', ['T1', 'T2', 'T3', 'T4', 'T5'])
+def test_missing_references_skip_unrelated_property_evaluations(demo, monkeypatch, test_id):
+    definitions = read_json(__import__('pathlib').Path(__file__).parent / 'fixtures/change_tests.json')
+    demo.write('change_tests.json', definitions)
+    definition = next(test for test in definitions if test['test_id'] == test_id)
+    assert demo.rules() and demo.addresses()  # Dataset exists, but the requested legal evidence does not.
+
+    def unexpected_evaluation(*args, **kwargs):
+        pytest.fail('Blocked missing-rule comparisons must not evaluate unrelated rules/properties')
+
+    monkeypatch.setattr('navigator.changes.evaluate_rules', unexpected_evaluation)
+    result = compute_changes(demo, ChangeRequest(test_id=test_id))
+    references = definition['rule_ids'] + definition.get('conflict_with', [])
+    assert result.status == 'blocked'
+    assert result.mapped_rule_ids == {reference: [] for reference in references}
+    assert result.affected_address_ids == result.uncertain_address_ids == result.conflict_flag_address_ids == []
+    assert result.differences == {}
+    expected_notes = [f'Missing extracted legal evidence for {reference}; test cannot be established from its description'
+                      for reference in definition['rule_ids']]
+    expected_notes += [f'Missing local conflict evidence for {reference}' for reference in definition.get('conflict_with', [])]
+    if definition['type'] == 'pending':
+        expected_notes.append('Hypothetical only: selected pending rules are assumed enacted and effective on the comparison date; stored law is unchanged')
+    assert result.notes == expected_notes
+    assert result.before.isoformat() == definition.get('as_of_before', definition.get('as_of'))
+    assert result.after.isoformat() == definition.get('as_of_after', definition.get('as_of'))
