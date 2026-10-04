@@ -5,6 +5,9 @@ import { type OpenItem, groupOpenItems, openItems } from '../../lib/openItems';
 import { ruleDisplayNames } from '../../lib/ruleNames';
 import { TOPIC_HEADING, type UncertaintyTopic } from '../../lib/uncertainty';
 
+/** How many distinct next steps a topic shows before pointing at its statements, where all of them are. */
+const SHOWN_REMEDIES = 2;
+
 interface Props {
   outcome: LookupOutcome;
   answers: Answer[];
@@ -116,11 +119,16 @@ export function RemainingUncertainty({ outcome, answers, onInspect, definitions 
             <span className="uncertainty__key">Holds back</span> {ruleLinks(entry.ruleIds)}
           </p>
         )}
-        {entry.remedies.map((remedy) => (
+        {entry.remedies.slice(0, SHOWN_REMEDIES).map((remedy) => (
           <p key={remedy} className="uncertainty__remedy">
             <span className="uncertainty__key">Next step</span> {remedy}
           </p>
         ))}
+        {entry.remedies.length > SHOWN_REMEDIES && (
+          <p className="uncertainty__remedy uncertainty__remedy--more">
+            {entry.remedies.length - SHOWN_REMEDIES} more next {entry.remedies.length - SHOWN_REMEDIES === 1 ? 'step is' : 'steps are'} given in the statements below.
+          </p>
+        )}
         {entry.kind === 'conflict' && disagreementHref && (
           <p className="uncertainty__action">
             <a className="button button--small" href={disagreementHref}>
