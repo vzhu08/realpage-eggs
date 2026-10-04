@@ -1,5 +1,7 @@
 # RealPage Rental Housing Law Navigator
 
+[Pull requests](https://github.com/vzhu08/realpage-eggs/pulls)
+
 FastAPI backend and CLI for evidence-backed rule extraction, jurisdiction resolution,
 three-valued coverage, date comparisons and competition-format exports. **Not legal advice.**
 Frontend implementation is reserved for the UX / Claude Code owner.
