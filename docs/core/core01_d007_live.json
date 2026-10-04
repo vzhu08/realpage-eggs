@@ -1,0 +1,52 @@
+{
+  "evidence_kind": "real provider extraction; automated original-source review, not human or independent legal review",
+  "provider_origin_run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+  "model": "gpt-6.1-sol",
+  "audit": {
+    "index": {
+      "status": "review",
+      "sha256": "2ba3028382b89ee70810a45e25dd9707297bd65512e2723f4f9bda514af57203",
+      "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+      "mode": "live",
+      "rules": 18,
+      "issues": [
+        "AB 12 and the Berkeley Rent Ordinance are named legal instruments. Where no specific instrument or section is identified, citation fields explicitly describe the cited law and the missing section; no codified citation has been supplied from outside the source.",
+        "All six categories were reviewed. No substantive provision or express negative finding is supplied for rent increase limits, just-cause eviction, application or screening fees, screening restrictions, or algorithmic rent setting. Absence here is not evidence that no such rule exists.",
+        "Executable predicates capture source-supported factual triggers and stated branches. They do not establish complete statutory coverage, resolve unstated exemptions, or automatically determine qualitative standards such as reasonable necessity.",
+        "No directional interaction is compiled: the source describes the AB 12 change but does not identify an exact target legal citation for supersession, and it does not establish state-local conflicts or precedence.",
+        "Null effective dates, end dates, and penalties indicate information not supplied, not findings that dates or penalties do not exist.",
+        "State jurisdictions are normalized to CA to satisfy the required ST or City, ST format; Berkeley, CA is retained for municipal provisions.",
+        "The Rent Board's inability to determine whether a landlord may charge one or two months' rent is an agency limitation, not an exemption or finding that either cap is inapplicable.",
+        "The page describes California state requirements and Berkeley-specific interest requirements. State provisions are attributed to CA rather than treated as municipal enactments.",
+        "The retrieval timestamp is not a supported lifecycle snapshot or enactment-event date. status_as_of remains null and status_events remain empty.",
+        "This is official agency guidance, not underlying legal text or a legislative status record. Enacted lifecycle labels reflect the agency's description of existing law, not independently verified enactment events."
+      ]
+    },
+    "rules": 18,
+    "lifecycle": {
+      "enacted": 18
+    },
+    "semantic_verification": {
+      "needs_review": 18
+    },
+    "evidence_instances": 33,
+    "distinct_spans": 19,
+    "invalid_evidence": [],
+    "non_verbatim_primary_quotes": [],
+    "construction_or_occupancy_predicates": [],
+    "unsupported_predicates": 26
+  },
+  "source_integrity": {
+    "original_matches_stored": true,
+    "actual_sha256_matches_stored": true
+  },
+  "review_findings": [
+    "18 final rules, all33 evidence spans exact; accepted one structural repair normalized state name.",
+    "State deposit amounts, post-July1,2024 regime and ownership ambiguity retained; primary D025 supplies further material qualifications.",
+    "Photographs tenancy-start July1,2025; repair proof January1,2025; post-possession pre-deduction photographs April1,2025; return21days source anchors retained.",
+    "Cleaning comparator preserves strict tenancy-after-January1,2003 threshold.",
+    "Berkeley annual/prorated deposit interest retains unresolved ordinance coverage, no fabricated interest rate.",
+    "Four enum-expression mismatches across two rules found; fixed generically by Core validation and replayed without provider calls; see core01_fact_contract_fix.json.",
+    "All18 need review; canonical owner facts do not settle narrower rental-property/unit/trust/servicemember conditions."
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "before_commit": "eef489e",
+  "after_commit": "9ac58ba0323b3213a1761a31314bf7fbb4e97997",
+  "as_of": "2026-10-01",
+  "mode": "read-only evaluator comparison using actual saved live/replay rules; no extraction or legal endorsement",
+  "changes": [
+    {
+      "rule_id": "r-11095e78b73a3521b99e",
+      "source_doc_id": "D008",
+      "lifecycle": "enacted",
+      "status_as_of": "2025-10-17",
+      "effective_date": null,
+      "before_temporal": "in_force",
+      "after_temporal": "unknown",
+      "snapshot_evidence": [
+        {
+          "doc_id": "D008",
+          "quote": "D\u00e9Seana Williams \nExecutive Director \nOctober 17, 2025",
+          "start": 1786,
+          "end": 1840,
+          "supports": [
+            "status_as_of"
+          ]
+        }
+      ]
+    },
+    {
+      "rule_id": "r-1b6aea5f64fee0e22f0b",
+      "source_doc_id": "D004",
+      "lifecycle": "enacted",
+      "status_as_of": "2025-10-27",
+      "effective_date": null,
+      "before_temporal": "in_force",
+      "after_temporal": "unknown",
+      "snapshot_evidence": [
+        {
+          "doc_id": "D004",
+          "quote": "Last Updated:\nOctober 27, 2025",
+          "start": 489,
+          "end": 519,
+          "supports": [
+            "status_as_of"
+          ]
+        }
+      ]
+    },
+    {
+      "rule_id": "r-57328356379e89d4f338",
+      "source_doc_id": "D022",
+      "lifecycle": "enacted",
+      "status_as_of": "2025-10-06",
+      "effective_date": null,
+      "before_temporal": "in_force",
+      "after_temporal": "unknown",
+      "snapshot_evidence": [
+        {
+          "doc_id": "D022",
+          "quote": "10/06/25 - Chaptered\n09/16/25 - Enrolled",
+          "start": 498,
+          "end": 538,
+          "supports": [
+            "lifecycle",
+            "status_as_of"
+          ]
+        }
+      ]
+    },
+    {
+      "rule_id": "r-912998e64d23de87a92c",
+      "source_doc_id": "D022",
+      "lifecycle": "enacted",
+      "status_as_of": "2025-10-06",
+      "effective_date": null,
+      "before_temporal": "in_force",
+      "after_temporal": "unknown",
+      "snapshot_evidence": [
+        {
+          "doc_id": "D022",
+          "quote": "10/06/25 - Chaptered\n09/16/25 - Enrolled",
+          "start": 498,
+          "end": 538,
+          "supports": [
+            "lifecycle",
+            "status_as_of"
+          ]
+        }
+      ]
+    },
+    {
+      "rule_id": "r-ba2792094796609db031",
+      "source_doc_id": "D004",
+      "lifecycle": "enacted",
+      "status_as_of": "2025-10-27",
+      "effective_date": null,
+      "before_temporal": "in_force",
+      "after_temporal": "unknown",
+      "snapshot_evidence": [
+        {
+          "doc_id": "D004",
+          "quote": "Last Updated:\nOctober 27, 2025",
+          "start": 489,
+          "end": 519,
+          "supports": [
+            "status_as_of"
+          ]
+        }
+      ]
+    },
+    {
+      "rule_id": "r-c0fb590248e1b865c18e",
+      "source_doc_id": "D004",
+      "lifecycle": "enacted",
+      "status_as_of": "2025-10-27",
+      "effective_date": null,
+      "before_temporal": "in_force",
+      "after_temporal": "unknown",
+      "snapshot_evidence": [
+        {
+          "doc_id": "D004",
+          "quote": "Last Updated:\nOctober 27, 2025",
+          "start": 489,
+          "end": 519,
+          "supports": [
+            "status_as_of"
+          ]
+        }
+      ]
+    },
+    {
+      "rule_id": "r-ce3965ab5db4c8858d1c",
+      "source_doc_id": "D004",
+      "lifecycle": "enacted",
+      "status_as_of": "2025-10-27",
+      "effective_date": null,
+      "before_temporal": "in_force",
+      "after_temporal": "unknown",
+      "snapshot_evidence": [
+        {
+          "doc_id": "D004",
+          "quote": "Last Updated:\nOctober 27, 2025",
+          "start": 489,
+          "end": 519,
+          "supports": [
+            "status_as_of"
+          ]
+        }
+      ]
+    }
+  ]
+}

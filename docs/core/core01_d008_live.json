@@ -1,0 +1,44 @@
+{
+  "evidence_kind": "real provider extraction; automated original-source review, not human or independent legal review",
+  "provider_origin_run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+  "model": "gpt-6.1-sol",
+  "audit": {
+    "index": {
+      "status": "review",
+      "sha256": "969848595b70aa2ff7b9e8420f610c36b914521c4ea4dd1d0656be776e90c39f",
+      "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+      "mode": "live",
+      "rules": 2,
+      "issues": [
+        "The Costa-Hawkins reference establishes a stated exclusion, not a supported directional supersession or conflict interaction.",
+        "The retrieval date is not used as a lifecycle snapshot or status-event date.",
+        "The segment supplies no provisions or express negative findings for just-cause eviction, security deposits, application screening fees, screening restrictions, or algorithmic rent setting. This does not establish that those categories lack applicable rules."
+      ]
+    },
+    "rules": 2,
+    "lifecycle": {
+      "enacted": 2
+    },
+    "semantic_verification": {
+      "needs_review": 2
+    },
+    "evidence_instances": 10,
+    "distinct_spans": 6,
+    "invalid_evidence": [],
+    "non_verbatim_primary_quotes": [],
+    "construction_or_occupancy_predicates": [],
+    "unsupported_predicates": 3
+  },
+  "source_integrity": {
+    "original_matches_stored": true,
+    "actual_sha256_matches_stored": true
+  },
+  "review_findings": [
+    "2 final rules; all10 evidence/event spans exact.",
+    "2026AGA remains1.0%, not65% or1.5%; source arithmetic/rounding uncertainty retained.",
+    "Adoption2025-10-16, earliest adjustment2026-01-01, signed snapshot2025-10-17 forAGA version; no invented end date.",
+    "Exemption requires tenancy_start>=2025-01-01 AND Costa-Hawkins-set rents.",
+    "Regulation1148 eligibility/notice requirements unsupported; notice duty does not receive invented independent effective date.",
+    "Both rules need review; no material contradiction found in selected source checks."
+  ]
+}

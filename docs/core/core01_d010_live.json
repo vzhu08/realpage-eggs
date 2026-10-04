@@ -1,0 +1,52 @@
+{
+  "evidence_kind": "real provider extraction; automated original-source review, not human or independent legal review",
+  "provider_origin_run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+  "model": "gpt-6.1-sol",
+  "audit": {
+    "index": {
+      "status": "review",
+      "sha256": "61380f45cb66d87065eb029b6f5ee54dc704a0d059acc6136477337ce5f0cb73",
+      "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+      "mode": "live",
+      "rules": 20,
+      "issues": [
+        "All six categories were reviewed. The source provides screening restrictions, related permissions and recommendations. It does not support affirmative negative findings for rent increase limits, just-cause eviction, security deposits, application screening fees or algorithmic rent setting.",
+        "Coverage includes providers receiving DND funding or land and providers with BPDA Inclusionary Development Policy income-restricted units. The source does not clarify whether every unit of a qualifying provider is covered. OFHE coverage is represented as selection under its Affirmative Marketing Program, not merely affiliation with that office.",
+        "Credit provisions contain no expressly stated exemptions. Omitted exemption_conditions fields do not assert that no exemption exists; criminal-history exceptions are not automatically extended to credit provisions.",
+        "No amendments, repeals, superseding versions or failed measures are evidenced in the supplied source.",
+        "No penalty provision is supplied. This is not evidence that no penalties or other enforcement mechanisms exist.",
+        "The February 2017 page date identifies the document version but does not establish an effective date, end date, dated status event or lifecycle snapshot. The retrieval timestamp is not status evidence. Date fields remain null and no status events are inferred.",
+        "The criminal-history exceptions follow item 1(d). Their application to items 1(a)\u2013(c), introductory obligations and recommendations is unresolved. Unsupported predicates preserve that uncertainty rather than treating these exceptions as established for every provision.",
+        "The document is DND agency policy with provider-agreement language, not legislative enactment evidence. Unknown lifecycle denotes the absence of supported legislative status, not a finding that the policy was never implemented.",
+        "The policy expressly defers to conflicting federal or state criminal-history requirements but provides no exact target citation. No directional supersedes or conflicts_with interaction can be compiled."
+      ]
+    },
+    "rules": 20,
+    "lifecycle": {
+      "unknown": 20
+    },
+    "semantic_verification": {
+      "needs_review": 20
+    },
+    "evidence_instances": 87,
+    "distinct_spans": 31,
+    "invalid_evidence": [],
+    "non_verbatim_primary_quotes": [],
+    "construction_or_occupancy_predicates": [],
+    "unsupported_predicates": 9
+  },
+  "source_integrity": {
+    "original_matches_stored": true,
+    "actual_sha256_matches_stored": true
+  },
+  "review_findings": [
+    "20 final Boston screening-policy rules; all87 evidence references exact.",
+    "DND/BPDA/OFHE program scope retained, not a citywide screening ban.",
+    "Mandatory credit-score ban distinguished from conditional credit-history use.",
+    "DCJIS and same-staff recommendations, and feasible appeals, remain advisory/conditional.",
+    "Strict more-than-five-years narrative not replaced by invented numeric age predicate.",
+    "February2017 remains document version, not invented enactment/effective/end/status date.",
+    "No directional interaction inferred without missing federal/state target citations.",
+    "All20 need review; provider-vs-unit scope and criminal-history exception placement remain unresolved."
+  ]
+}

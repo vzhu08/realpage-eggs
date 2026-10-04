@@ -20,3 +20,26 @@ establish ballot failure or a supported date. Platform owns obtaining missing ev
 D001's separate `D001_SOURCE_PREFLIGHT.md` covers exact quotations, exclusions, strict <90-day
 threshold and passage-to-print limitation. Review the real D001 result before running the remaining
 54-text workflow. Preserve empty results, unsupported predicates and unresolved lifecycle/dependencies.
+
+
+## Additional source-only date checks while corpus extraction runs
+
+These are original-source review targets, not extracted results or fixture answers.
+
+- D066: the citation says P.L.2025, but actual approval is **January 20, 2026** `[4126,4152)`.
+  Pair that date with the “first day of the fourth month next following” clause; the fee limit's
+  expected calendar date from those supplied clauses is **2026-05-01**, while anticipatory agency
+  action has a separate exception. Annual adjustment begins the year following actual enactment,
+  not a year inferred from the session-law title. Preserve the $50 base, positive-only CPI mechanism,
+  one-/two-family dwelling exclusion and licensed-agent exclusion unless the licensee is the landlord.
+  Original fee cap span: `[345,612)`.
+  Original exemptions span: `[1523,1823)`.
+  Original indexing span: `[1823,3200)`.
+  Original effective clause span: `[3817,4126)`.
+
+- D080: current 1.6% announcement `[258,381)` runs March 1, 2026 **through** February 28, 2027;
+  an exclusive encoded end would be March 1, 2027. Prior 1.4% period `[828,924)` similarly ends
+  exclusively March 1, 2026. Do not infer complete rent-control eligibility from this announcement.
+- D081: explicit effectiveness **October 14, 2024** `[478,709)` differs from publication October16.
+  Preserve the nonpublic competitor-data / vacant-unit recommendation definition, and do not invent
+  monetary penalties or an adoption date from publication.
