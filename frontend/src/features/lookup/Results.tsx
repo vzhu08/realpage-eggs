@@ -7,7 +7,7 @@ import { diffOutcomes } from '../../lib/diff';
 import { MATCH_QUALITY, RESULT_ORDER, resultMeta, sentence } from '../../lib/labels';
 import { isSynthetic, readMetadata } from '../../lib/metadata';
 import { groupOpenItems, openItems } from '../../lib/openItems';
-import { consequenceOf } from '../../lib/uncertainty';
+import { movableResults } from '../../lib/uncertainty';
 import type { SessionState } from '../../state/session';
 import { addressLine } from '../property/PropertyFinder';
 import { AnswerHistory } from '../questions/AnswerHistory';
@@ -74,12 +74,12 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
   const answered = new Set(session.answers.map((answer) => answer.field));
   const openQuestions = (outcome.assist?.question_plan.questions ?? []).filter((question) => !answered.has(question.fact.field));
   const lead = openQuestions[0];
-  const movable = lead ? new Set(lead.alternatives.flatMap((alternative) => consequenceOf(lookup.evaluations, alternative.evaluations).changed.map((change) => change.ruleId))).size : 0;
+  const movable = lead ? movableResults(lookup.evaluations, lead).movable : 0;
   const open = useMemo(() => groupOpenItems(openItems(outcome, session.answers), new Set(lookup.rules.map((rule) => rule.team_rule_id))), [outcome, session.answers, lookup.rules]);
   const reviewTopics = open.other.length;
 
   return (
-    <div className={busy && session.reevaluating ? 'results is-busy' : 'results'} aria-busy={busy}>
+    <div id="lookup-results" className={busy && session.reevaluating ? 'results is-busy' : 'results'} aria-busy={busy}>
       <div className="context" role="group" aria-label="Result context">
         <p className="context__asof">
           {session.selection && <span className="context__subject">{addressLine(session.selection)}</span>}
@@ -118,7 +118,7 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
 
       <section className="verdict" aria-labelledby="outcome-heading">
         <div className="verdict__head">
-          <h2 id="outcome-heading" className="verdict__title">
+          <h2 id="outcome-heading" className="verdict__title" tabIndex={-1}>
             Rules for this property on {formatDate(lookup.as_of)}
           </h2>
           <span className="hint">

@@ -97,7 +97,7 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
   };
 
   // The export time is the only clock value in the file, and it is labeled as such there.
-  const buildExport = () => buildWorkingExport({ outcome, answers: session.answers, history: session.history, mode, apiBase, exportedAt: new Date().toISOString() });
+  const buildExport = () => buildWorkingExport({ outcome, answers: outcome.query.answers, history: session.history, mode, apiBase, exportedAt: new Date().toISOString() });
   const exportResult = () => setExported(downloadJson(workingExportFilename(lookup.address.address_id, lookup.as_of), buildExport()) ? 'done' : 'failed');
   const failure = pack.status === 'error' ? packageFailure(pack.error) : null;
 

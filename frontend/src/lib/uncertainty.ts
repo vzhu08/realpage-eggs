@@ -46,6 +46,23 @@ export const NEXT_STEP: Record<string, { label: string; answerable: boolean; ord
 export const nextStep = (kind: string) => NEXT_STEP[kind] ?? { label: 'Review', answerable: false, order: 9 };
 
 /**
+ * How many results at least one recorded answer to a question would move. `listed` is how many
+ * of those are among the results on screen now; an answer can also bring in a rule that is not
+ * listed yet, so the two can differ.
+ */
+export function movableResults(current: Evaluation[], question: { alternatives: Array<{ evaluations: Evaluation[] }> }): { movable: number; listed: number; shown: number } {
+  const ids = new Set(question.alternatives.flatMap((alternative) => consequenceOf(current, alternative.evaluations).changed.map((change) => change.ruleId)));
+  const onScreen = new Set(current.map((evaluation) => evaluation.team_rule_id));
+  return { movable: ids.size, listed: [...ids].filter((id) => onScreen.has(id)).length, shown: current.length };
+}
+
+/** "2 of the 3 results above", "the one result above", or "2 results" when an answer would also bring in a rule not listed yet. */
+export function movableWords(count: { movable: number; listed: number; shown: number }): string {
+  if (count.listed !== count.movable || count.shown === 0) return `${count.movable} ${count.movable === 1 ? 'result' : 'results'}`;
+  return count.shown === 1 ? 'the one result above' : `${count.movable} of the ${count.shown} results above`;
+}
+
+/**
  * One readable topic: every open statement of one kind about one fact (or about no fact).
  * A topic is a way to read the statements together; each statement stays intact inside it,
  * with its own wording, remedy, rule references and source text.

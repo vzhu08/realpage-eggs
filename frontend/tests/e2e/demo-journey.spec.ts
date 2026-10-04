@@ -30,7 +30,7 @@ test.describe('synthetic demo: the complete journey', () => {
     await next.getByRole('button', { name: 'Go to the question' }).click();
     const question = questionCard(page, UNITS);
     await expect(question).toContainText('Most useful question');
-    await expect(question.locator('.question__consequence')).toHaveText('Depending on the answer, 1 of 1 result can change.');
+    await expect(question.locator('.question__consequence')).toHaveText('Depending on the answer, the one result above can change.');
     await expect(question.getByText('Why this matters')).toBeHidden();
     await expect(question).toContainText("What is the property's units?");
     await showHypotheticals(question);

@@ -5,6 +5,7 @@ import { Icon, type IconName } from '../../components/Icon';
 import { ErrorNotice, Skeleton } from '../../components/ui';
 import { usePanelFocus } from '../../components/usePanelFocus';
 import { formatDate, isIsoDay } from '../../lib/dates';
+import { isSynthetic, readMetadata } from '../../lib/metadata';
 import { useSession } from '../../state/session';
 import { useSource } from '../../state/source';
 import { useAsync } from '../../state/useAsync';
@@ -82,6 +83,24 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outcome]);
+
+  // A lookup that was just run puts its answer at the top of the window: the pinned bar (which
+  // names the property and date), the counts and the next step. An answer's re-evaluation is
+  // not handled here; it brings "what changed" into view itself.
+  const shownRuns = useRef(0);
+  useEffect(() => {
+    if (state.runs === shownRuns.current) return;
+    shownRuns.current = state.runs;
+    if (!state.outcome || state.previous) return;
+    const frame = window.requestAnimationFrame(() => {
+      const results = document.getElementById('lookup-results');
+      if (!results) return;
+      const banner = document.querySelector<HTMLElement>('.synthetic')?.offsetHeight ?? 0;
+      window.scrollTo({ top: Math.max(0, results.getBoundingClientRect().top + window.scrollY - banner) });
+      document.getElementById('outcome-heading')?.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [state.runs, state.outcome, state.previous]);
 
   // Move focus to the result without jumping the page; scroll only if it starts off screen.
   const revealMain = () => {
@@ -328,7 +347,7 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
       {inspectedRule && outcome && (
         <>
           <div className="scrim" onClick={() => setInspecting(null)} aria-hidden="true" />
-          <EvidencePanel key={inspectedRule.team_rule_id} rule={inspectedRule} evaluation={inspectedEvaluation} lookup={outcome.lookup} assist={outcome.assist} modal onClose={() => setInspecting(null)} />
+          <EvidencePanel key={inspectedRule.team_rule_id} rule={inspectedRule} evaluation={inspectedEvaluation} lookup={outcome.lookup} assist={outcome.assist} synthetic={outcome.origin.kind !== 'live' || isSynthetic(readMetadata(outcome.lookup))} modal onClose={() => setInspecting(null)} />
         </>
       )}
     </div>
