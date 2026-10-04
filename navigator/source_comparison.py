@@ -17,6 +17,11 @@ def _words(value):
     return " ".join(value.split())
 
 
+def _identity_valid(source, doc_id):
+    return bool(source and source.doc_id == doc_id
+                and source.sha256 == digest(source.text.encode("utf-8")))
+
+
 def _source(source):
     if source is None:
         return None
@@ -116,11 +121,12 @@ def _evidence_checks(rule, sources):
         valid = bool(source and start is not None and end is not None
                      and 0 <= start < end <= len(source.text)
                      and source.text[start:end] == evidence.quote)
+        identity_valid = _identity_valid(source, evidence.doc_id)
         checks.append({"origin": origin, "evidence": evidence.model_dump(mode="json"), "anchor_valid": valid,
                        "span": span(source, start, end).model_dump(mode="json") if valid else None,
                        "exact_quote_positions": positions,
-                       "source_identity_valid": bool(source and source.sha256 == digest(source.text.encode("utf-8"))),
-                       "remedy": None if valid else "Obtain the original supported snapshot or review/re-anchor this exact quote; never normalize the stored source to make it match."})
+                       "source_identity_valid": identity_valid,
+                       "remedy": None if valid and identity_valid else "Obtain the original supported snapshot, verify its document ID and hash, then review/re-anchor this exact quote; never normalize the stored source to make it match."})
     return checks
 
 
@@ -162,18 +168,31 @@ def compare_rule_versions(before: Rule, after: Rule, before_sources, after_sourc
     for side, rule, snapshots in (("before", before, before_sources), ("after", after, after_sources)):
         primary = snapshots.get(rule.source_doc_id)
         if not primary or not primary.text: gaps.append(f"{side}:missing_primary_source")
-        elif primary.url != rule.source_url: gaps.append(f"{side}:primary_source_url_mismatch")
-        elif rule.quoted_span not in primary.text: gaps.append(f"{side}:primary_quote_absent")
+        else:
+            if not _identity_valid(primary, rule.source_doc_id): gaps.append(f"{side}:primary_source_identity_mismatch")
+            if primary.url != rule.source_url: gaps.append(f"{side}:primary_source_url_mismatch")
+            if rule.quoted_span not in primary.text: gaps.append(f"{side}:primary_quote_absent")
         if not checks[side] or any(not c["anchor_valid"] or not c["source_identity_valid"] for c in checks[side]):
             gaps.append(f"{side}:invalid_or_missing_evidence")
+        if rule.review_issues: gaps.append(f"{side}:unresolved_review_issues")
+        if rule.semantic_verification == "needs_review": gaps.append(f"{side}:semantic_support_needs_review")
+        if rule.conflict_flag: gaps.append(f"{side}:unresolved_conflict")
         for observation in observations:
             if not observation["support"][side]: gaps.append(f"{side}:missing_field_support:{observation['field']}")
+    # Review annotations affect readiness and evaluator uncertainty, but do not
+    # assert a changed legal provision or require legal quotes as field support.
+    for field in ("semantic_verification", "review_issues", "conflict_flag", "conflict_note"):
+        left, right = getattr(before, field), getattr(after, field)
+        if left != right:
+            observations.append({"field": field, "kind": "review_state_change", "before": left, "after": right,
+                                 "semantic_support": "not_checked",
+                                 "remedy": "Inspect the recorded review issues and conflict explanations; a changed review annotation does not establish a legal amendment or independently verified support."})
     left_refs = [c["evidence"] for c in checks["before"]]
     right_refs = [c["evidence"] for c in checks["after"]]
     if left_refs != right_refs or before.quoted_span != after.quoted_span:
         observations.append({"field": "evidence", "kind": "quotation_or_offset_change", "before": left_refs,
                              "after": right_refs, "remedy": "Revalidate each quote against its own unchanged original, separately from substantive interpretation."})
-    substantive = any(o["kind"] not in {"formatting", "citation_relocation", "label", "quotation_or_offset_change"} for o in observations)
+    substantive = any(o["kind"] not in {"formatting", "citation_relocation", "label", "quotation_or_offset_change", "review_state_change"} for o in observations)
     return {"interface": "internal-core-comparison-v1-not-public-contract",
             "rule_ids": sorted({before.team_rule_id, after.team_rule_id}),
             "claims": {"before": before.model_dump(mode="json"), "after": after.model_dump(mode="json")},

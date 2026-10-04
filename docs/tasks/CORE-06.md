@@ -1,8 +1,9 @@
 # CORE-06: real change-case evidence and source disagreements
 
 Priority: P0 T1-T5 and lifecycle support; P1 reusable source comparison.
-State: Partial; independent software and saved-evidence review complete. Missing sources,
-Platform geography/contract and independent human review block full acceptance. Live extraction remains paused until the
+State: Partial; independent software and saved-evidence review complete. Missing sources
+and independent human review block full acceptance. Platform's geography assembly and public claim
+comparison contract are now merged. Live extraction remains paused until the
 human explicitly resumes the stopped run with an agreed budget. This card starts no provider job.
 Owner: Daniel / Core A, Rules & Evaluation.
 Reported checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`; verify its state first.
@@ -56,7 +57,35 @@ Handoff: commit, exact source/run evidence, T1-T5 statuses, corrected versus unr
 counts, comparison examples, provenance and remaining input requests. No full-corpus/legal-accuracy
 claim from software tests. Do not edit Core B planner/renderer or UX files.
 
-## Current execution claim
+## Current follow-up execution claim — October 4, 2026
+
+Daniel / Codex /root, session `01a10555-b81d-7281-95f5-c06399af8238`; sole writer.
+The user requested Daniel's next task. The existing offline delivery and snapshot are now
+merged through PR #13. This bounded CORE-06 follow-up checks comparison integrity on that base.
+Branch: `codex/core-a-comparison-integrity`.
+Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence` (prior session idle, clean).
+Base: `84c2887dee0d56c523d4fca8c0bd47de79546c2e` (fetched main, PR #13).
+Claimed writes: `navigator/source_comparison.py`, `tests/test_source_comparison.py`, this card,
+and `docs/core_rules/comparison_integrity/**`; read-only helper review only.
+Acceptance: invalid primary/evidence source identities and unresolved review/conflict state cannot
+produce an unqualified comparison; review-state changes stay separate from substantive legal encoding.
+Baseline focused checks: 113 passed. Full checks run in a disposable copy; real stores stay read-only.
+No provider resumption is implied. Platform's public claim-comparison contract is now available;
+the rule-version helper remains internal and does not change that public envelope.
+
+Follow-up delivered at `8ea65dab22335f79ea926ea372b9dc90985026cd`: source identity and review-state
+repairs, 11 reproduced regression failures fixed, 124 focused and 291 full-suite tests passed.
+The immutable 140-rule snapshot retains all unresolved review state; no provider calls or store edits.
+Local review handoff: [comparison integrity](../core_rules/comparison_integrity/HANDOFF.md).
+
+User subsequently authorized retaining the fix and creating/merging completed PRs, with a stop
+when another developer is needed. Fetched main `5b451f7` (PR #14/#15/#16) is integrated at `cae2e36`.
+Combined verification: **396 passed**, compilation/contracts passed, zero schema changes, and both
+fresh evidence packages reproduced. See the handoff's latest integration section and report.
+After integration, wait for Vincent/Platform's missing T1 source texts, then local ordinances;
+do not bypass source acquisition or the stopped provider run to fill the remaining cases.
+
+## Previous execution claim
 
 Daniel / Codex /root, session 01a103d0-b88b-7090-97aa-f9d5eec55d45; sole writer.
 Branch: `codex/core-a-change-evidence`. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence`.

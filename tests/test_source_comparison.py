@@ -107,6 +107,90 @@ def test_matching_quote_with_wrong_source_hash_fails_identity(demo, rule):
     assert not result['after']['support'][0]['anchor_valid']
 
 
+@pytest.mark.parametrize('corruption', ['hash', 'document_id'])
+def test_primary_identity_is_checked_when_evidence_uses_another_source(demo, rule, corruption):
+    source = demo.sources()[rule.source_doc_id]
+    secondary = source.model_copy(update={'doc_id': 'SECONDARY'}, deep=True)
+    before = rule.model_copy(deep=True)
+    for evidence in before.evidence + [e for event in before.status_events for e in event.evidence]:
+        evidence.doc_id = secondary.doc_id
+    originals = {source.doc_id: source, secondary.doc_id: secondary}
+    changed = {'sha256': '0' * 64} if corruption == 'hash' else {'doc_id': 'UNRELATED'}
+    snapshots = {**originals, source.doc_id: source.model_copy(update=changed, deep=True)}
+
+    result = compare_rule_versions(before, before, originals, snapshots)
+
+    assert result['status'] == 'unresolved'
+    assert 'after:primary_source_identity_mismatch' in result['support_gaps']
+    assert all(c['source_identity_valid'] for c in result['evidence_checks']['after'])
+    assert not result['substantive_encoding_changed']
+
+
+def test_evidence_source_map_cannot_substitute_another_document(demo, rule):
+    source = demo.sources()[rule.source_doc_id]
+    secondary = source.model_copy(update={'doc_id': 'SECONDARY'}, deep=True)
+    updated = rule.model_copy(deep=True)
+    updated.evidence[0].doc_id = secondary.doc_id
+    originals = {source.doc_id: source, secondary.doc_id: secondary}
+    snapshots = {**originals, secondary.doc_id: secondary.model_copy(update={'doc_id': 'UNRELATED'})}
+
+    result = compare_rule_versions(updated, updated, originals, snapshots)
+
+    assert result['status'] == 'unresolved'
+    assert 'after:invalid_or_missing_evidence' in result['support_gaps']
+    check = result['evidence_checks']['after'][0]
+    assert check['anchor_valid']  # Matching bytes do not establish source identity.
+    assert not check['source_identity_valid'] and check['remedy']
+
+
+@pytest.mark.parametrize('field,value,gap', [
+    ('semantic_verification', 'needs_review', 'semantic_support_needs_review'),
+    ('review_issues', ['Synthetic unresolved interpretation'], 'unresolved_review_issues'),
+    ('conflict_flag', True, 'unresolved_conflict'),
+])
+@pytest.mark.parametrize('changed', [False, True])
+def test_review_state_remains_unresolved_without_a_legal_encoding_change(demo, rule, field, value, gap, changed):
+    after = rule.model_copy(update={field: value}, deep=True)
+    before = rule if changed else after.model_copy(deep=True)
+    result = compare_rule_versions(before, after, demo.sources(), demo.sources())
+
+    assert result['status'] == 'unresolved'
+    assert f'after:{gap}' in result['support_gaps']
+    if not changed:
+        assert f'before:{gap}' in result['support_gaps']
+    else:
+        observation = next(o for o in result['observations'] if o['field'] == field)
+        assert observation['kind'] == 'review_state_change'
+        assert observation['before'] != observation['after']
+    assert not result['substantive_encoding_changed']
+    assert not any('missing_field_support' in item for item in result['support_gaps'])
+    assert result['semantic_support'] == 'not_checked'
+    assert result['winner'] is None and result['legal_amendment'] is None
+
+
+def test_resolving_review_state_retains_the_before_gap_and_evaluator_difference(demo, rule, prop, resolution):
+    before = rule.model_copy(update={'semantic_verification': 'needs_review'}, deep=True)
+    result = compare_rule_versions(before, rule, demo.sources(), demo.sources())
+    impacts = compare_impacts([before], [rule], prop, resolution, date(2026, 11, 15))
+
+    assert impacts['before'][0]['result'] == 'unknown'
+    assert impacts['after'][0]['result'] == 'applies'
+    assert 'before:semantic_support_needs_review' in result['support_gaps']
+    assert result['status'] == 'unresolved' and not result['substantive_encoding_changed']
+    assert result['observations'][0]['field'] == 'semantic_verification'
+
+
+def test_conflict_explanation_change_is_preserved_as_review_state(demo, rule):
+    before = rule.model_copy(update={'conflict_flag': True, 'conflict_note': 'Synthetic first conflict'}, deep=True)
+    after = before.model_copy(update={'conflict_note': 'Synthetic revised conflict'}, deep=True)
+    result = compare_rule_versions(before, after, demo.sources(), demo.sources())
+
+    observation = next(o for o in result['observations'] if o['field'] == 'conflict_note')
+    assert observation['kind'] == 'review_state_change'
+    assert observation['before'] == before.conflict_note and observation['after'] == after.conflict_note
+    assert result['status'] == 'unresolved' and not result['substantive_encoding_changed']
+
+
 def test_source_regions_preserve_original_text_and_bound_long_diffs(demo, rule):
     source = demo.sources()[rule.source_doc_id]
     a = changed_source(source, 'first\nshared\nthird\nshared\nfifth\n')

@@ -1,0 +1,24 @@
+{
+  "candidate_commit": "8ea65dab22335f79ea926ea372b9dc90985026cd",
+  "method": "Read sources.json and rules.json directly from the committed ZIP; compare each rule with itself without invoking extraction, store mutation, or provider services.",
+  "archive": "docs/core_rules/snapshots/core-store.zip",
+  "archive_sha256": "157581d64b1c19fdfcc0414d08bbd0ffeeeca60e3142bd621a7152fe5c6e44bc",
+  "archive_unchanged": true,
+  "source_input_sha256": "0337104f1cfc110c1385df4bc4be7116ac94e8b7c42d72ef9f2d5de0285e4e39",
+  "rule_input_sha256": "9b27278b231ef70979604356657958456a281741501c475fb4644cce58f896ed",
+  "sources": 87,
+  "rules": 140,
+  "self_comparison_status_counts": {
+    "unresolved": 140
+  },
+  "support_gap_counts": {
+    "after:semantic_support_needs_review": 140,
+    "after:unresolved_review_issues": 140,
+    "before:semantic_support_needs_review": 140,
+    "before:unresolved_review_issues": 140
+  },
+  "substantive_encoding_changes": 0,
+  "legal_amendments_asserted": 0,
+  "new_provider_calls": 0,
+  "limitations": "Software integrity check only. Real rule support and human legal review remain unresolved; the snapshot and extraction pause are unchanged."
+}
