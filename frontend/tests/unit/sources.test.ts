@@ -45,10 +45,15 @@ const unknownExample = LOOKUP_EXAMPLES.find((example) => example.request.address
 const decisive = RESEARCH_FIXTURES.find((fixture) => fixture.case === 'decisive_question')!;
 
 // ------------------------------------------------------------------ demo
-test('demo: the address list is the three synthetic properties and search filters it', async () => {
+test('demo: the address list is the contract examples plus the development fixture, and search filters it', async () => {
   const demo = new DemoSource();
   const all = await demo.addresses({ q: '', offset: 0, limit: 25 });
-  assert.deepEqual(all.items.map((item) => item.property.address_id), ['SYNTH-001', 'SYNTH-002', 'SYNTH-003']);
+  assert.equal(all.total, 17);
+  assert.deepEqual(all.items.map((item) => item.property.address_id).filter((id) => id.startsWith('SYNTH-')), ['SYNTH-001', 'SYNTH-002', 'SYNTH-003']);
+  assert.equal(all.items.filter((item) => item.property.address_id.startsWith('DEV-P')).length, 14);
+  // Paging works the way GET /addresses does.
+  const page = await demo.addresses({ q: '', offset: 15, limit: 25 });
+  assert.equal(page.items.length, 2);
   const none = await demo.addresses({ q: 'not-present', offset: 0, limit: 25 });
   assert.equal(none.total, 0);
   const one = await demo.addresses({ q: 'synth-002', offset: 0, limit: 25 });
@@ -137,12 +142,33 @@ test('demo: recorded comparisons replay; anything else is refused', async () => 
 });
 
 test('demo: no evidence report is fabricated', async () => {
-  const outcome = await new DemoSource().evidenceReport();
+  const outcome = await new DemoSource().evidenceReport('r-not-recorded');
   assert.equal(outcome.report, null);
   assert.match(outcome.unavailable ?? '', /dependency_unavailable/);
 });
 
 // ------------------------------------------------------------------ live
+test('live: fact definitions are read once and shared, and one caller going away does not cancel them', async () => {
+  const definition = { field: 'units', meaning: 'Number of dwelling units in this building', data_type: 'integer', unit: 'dwelling units', allowed_values: [], minimum: 1, maximum: null, answer_effort: 1, allow_partial_date: true };
+  const signals: Array<AbortSignal | null | undefined> = [];
+  const impl = (async (_input: RequestInfo | URL, init?: RequestInit) => {
+    signals.push(init?.signal);
+    await new Promise((resolve) => setTimeout(resolve, 5));
+    if (init?.signal?.aborted) throw new DOMException('Aborted', 'AbortError');
+    return new Response(JSON.stringify({ units: definition, broken: { field: 'broken' } }), { status: 200 });
+  }) as typeof fetch;
+  const live = new LiveSource('/api/v1', impl);
+  // A view that mounts, unmounts and mounts again (React StrictMode does exactly this).
+  const leaving = new AbortController();
+  const first = (live as { facts: (signal?: AbortSignal) => Promise<unknown> }).facts(leaving.signal);
+  leaving.abort();
+  const second = await live.facts();
+  assert.equal(signals.length, 1, 'one request');
+  assert.equal(signals[0], undefined, 'not tied to a caller');
+  assert.deepEqual(Object.keys(second ?? {}), ['units'], 'a definition that does not match the contract is left out');
+  assert.deepEqual(await first, second);
+});
+
 test('live: with no assist route it says so and uses the implemented /lookup with supplemental facts', async () => {
   const { impl, calls } = fakeFetch({ 'POST /lookup': () => ({ status: 200, body: unknownExample.response }) });
   const live = new LiveSource('/api/v1', impl);

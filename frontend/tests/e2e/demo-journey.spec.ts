@@ -191,7 +191,8 @@ test.describe('synthetic demo: the complete journey', () => {
     await expect(remaining).toContainText('Source gap');
     await expect(remaining).toContainText('Referenced exception source is not supplied');
     await expect(remaining).toContainText('do not ask the renter to decide the law');
-    await expect(remaining.locator('[data-kind="source_gap"]')).toContainText('Not a question for the renter or owner');
+    await expect(remaining.locator('[data-kind="source_gap"]')).toContainText('Needs: a source to be obtained');
+    await expect(remaining.getByText('No answer about the property can close these')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Useful questions 0' })).toBeVisible();
     await expect(page.getByRole('article')).toHaveCount(0);
 
@@ -272,7 +273,8 @@ test.describe('synthetic demo: the complete journey', () => {
 
     // What still is not established after the answer stays on screen, by kind.
     const remaining = page.getByRole('region', { name: /What remains uncertain/ });
-    await expect(remaining.locator('[data-kind="source_gap"]').first()).toContainText('Not a question for the renter or owner');
+    await expect(remaining.locator('[data-kind="source_gap"]').first()).toContainText('Needs: a source to be obtained');
+    await expect(remaining.getByText('No answer about the property can close these')).toBeVisible();
     await expect(remaining).toContainText('Exact quote/retrieval is not semantic verification');
     await expect(remaining.locator('[data-kind="property_fact"]')).toHaveCount(0);
 
@@ -364,7 +366,11 @@ test.describe('synthetic demo: the complete journey', () => {
     await openDemo(page);
     await showFinder(page);
     const search = page.getByRole('searchbox', { name: 'Sample properties' });
-    await expect(page.getByText('3 properties')).toBeVisible();
+    // Three Maple Harbor properties from the contract examples and fourteen from the development fixture.
+    await expect(page.getByText('17 properties')).toBeVisible();
+    const list = page.getByRole('list', { name: 'Sample properties' });
+    await expect(list.getByText('Development fixture')).toHaveCount(14);
+    await expect(list.getByRole('button', { name: /3 Test Street/ })).not.toContainText('Development fixture');
     await search.fill('synth-002');
     await expect(page.getByText('1 property matching “synth-002”')).toBeVisible();
     await search.fill('zzz');

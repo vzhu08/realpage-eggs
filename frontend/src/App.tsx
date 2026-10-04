@@ -3,6 +3,7 @@ import { LiveSource } from './api/live';
 import type { DataMode, DataSource } from './api/types';
 import { initialApiBase, initialMode, saveApiBase, saveMode } from './config';
 import { ChangesView } from './features/changes/ChangesView';
+import { DisagreementsView } from './features/disagreements/DisagreementsView';
 import { LookupView } from './features/lookup/LookupView';
 import { ServiceNotice, SyntheticBanner } from './features/shell/Banners';
 import { Header } from './features/shell/Header';
@@ -57,6 +58,8 @@ export function App() {
 
   const hrefFor = useCallback((view: View) => buildHash(view, { mode }), [mode]);
   const lookupHref = useCallback((addressId: string, asOf: string) => buildHash('lookup', { mode, address: addressId, as_of: asOf }), [mode]);
+  const disagreementHref = useCallback((addressId: string, asOf: string) => buildHash('disagreements', { mode, address: addressId, as_of: asOf }), [mode]);
+  const openDisagreement = useCallback((addressId: string, asOf: string) => go('disagreements', { mode, address: addressId, as_of: asOf }), [go, mode]);
   const onLookupParams = useCallback((params: { address: string | null; as_of: string | null; case: string | null }) => replaceParams({ mode, ...params }), [mode, replaceParams]);
 
   // Deep-link parameters are read by the view once, when it mounts.
@@ -86,9 +89,26 @@ export function App() {
       <main id="main" className="main" tabIndex={-1}>
         <ServiceNotice mode={mode} health={health} onDemo={() => setMode('demo')} />
         {route.view === 'changes' ? (
-          <ChangesView key={`changes:${mode}:${apiBase}`} lookupHref={lookupHref} />
+          <ChangesView key={`changes:${mode}:${apiBase}`} lookupHref={lookupHref} disagreementHref={disagreementHref} />
+        ) : route.view === 'disagreements' ? (
+          <DisagreementsView
+            key={`disagreements:${mode}:${apiBase}:${initial.address ?? ''}:${initial.asOf ?? ''}`}
+            mode={mode}
+            initial={initial}
+            lookupHref={lookupHref}
+            disagreementHref={disagreementHref}
+            onOpen={openDisagreement}
+          />
         ) : (
-          <LookupView key={`lookup:${mode}:${apiBase}`} mode={mode} initial={initial} onParams={onLookupParams} onSwitchToDemo={mode === 'live' ? () => setMode('demo') : undefined} />
+          <LookupView
+            key={`lookup:${mode}:${apiBase}`}
+            mode={mode}
+            initial={initial}
+            onParams={onLookupParams}
+            disagreementHref={disagreementHref}
+            apiBase={apiBase}
+            onSwitchToDemo={mode === 'live' ? () => setMode('demo') : undefined}
+          />
         )}
       </main>
       </div>

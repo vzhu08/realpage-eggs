@@ -5,6 +5,11 @@
  *   Platform-owned directory, so the demo cannot drift from the checked-in contract.
  * - recorded/synthetic-replay.json is verbatim backend output for the fictional Maple Harbor
  *   store, produced by frontend/scripts/record_demo.py.
+ * - recorded/portfolio-dev-fixture.json is a UX DEVELOPMENT FIXTURE: backend output for a
+ *   fictional portfolio whose sources and properties were authored by the UX lane
+ *   (frontend/scripts/dev_portfolio.py) so the changes view has several jurisdictions,
+ *   categories and dates to lay out. Its results are computed by the backend; its
+ *   `proposed_disagreements` are authored and follow a shape no contract defines yet.
  *
  * Everything here is synthetic and is labeled as such wherever it is shown.
  */
@@ -20,7 +25,9 @@ import decisiveQuestion from '../../../contracts/research_examples/decisive_ques
 import irrelevantMissingFact from '../../../contracts/research_examples/irrelevant_missing_fact.json';
 import twoUnresolvedExemptions from '../../../contracts/research_examples/two_unresolved_exemptions.json';
 import unresolvedSourceCoverage from '../../../contracts/research_examples/unresolved_source_coverage.json';
-import type { AssistResponse, ChangeRequest, ChangeResult, EncodedRuleRendering, EvidenceReport, LookupResponse, Rule, RuleDetail, SourceDocument } from '../api/types';
+import type { AddressItem, AssistResponse, ChangeRequest, ChangeResult, EncodedRuleRendering, EvidenceReport, LookupResponse, ProposedDisagreement, Rule, RuleDetail, SourceDocument } from '../api/types';
+import { type Pooled, expandPooled } from './pool';
+import devRecorded from './recorded/portfolio-dev-fixture.json';
 import recorded from './recorded/synthetic-replay.json';
 
 export interface LookupExample {
@@ -44,8 +51,10 @@ export interface RecordedAssist {
   response: AssistResponse;
 }
 
+export type RecordedStore = 'synthetic' | 'no_extracted_rules' | 'dev_portfolio';
+
 export interface RecordedChange {
-  store: 'synthetic' | 'no_extracted_rules';
+  store: RecordedStore;
   request: ChangeRequest;
   response: ChangeResult;
 }
@@ -111,3 +120,26 @@ export const RECORDED_ASSISTS = replay.assists;
 export const RECORDED_RULES = replay.rules;
 export const RECORDED_SOURCES = replay.sources;
 export const RECORDED_CHANGES = replay.changes;
+
+const dev = devRecorded as unknown as Pooled & { manifest: Record<string, unknown> };
+const devData = expandPooled<{
+  addresses: AddressItem[];
+  assists: RecordedAssist[];
+  rules: Record<string, RuleDetail>;
+  sources: Record<string, SourceDocument>;
+  evidence_reports: Record<string, EvidenceReport>;
+  changes: RecordedChange[];
+  proposed_disagreements: ProposedDisagreement[];
+}>(dev);
+
+/** UX development fixture (fictional portfolio). Labeled wherever it is shown. */
+export const DEV_PATH = 'frontend/src/demo/recorded/portfolio-dev-fixture.json';
+export const DEV_MANIFEST = dev.manifest;
+export const DEV_ADDRESSES = devData.addresses;
+export const DEV_ASSISTS = devData.assists;
+export const DEV_RULES = devData.rules;
+export const DEV_SOURCES = devData.sources;
+export const DEV_EVIDENCE_REPORTS = devData.evidence_reports;
+export const DEV_CHANGES = devData.changes;
+/** Authored entries in a proposed shape (no contract yet); never presented as backend output. */
+export const DEV_PROPOSED_DISAGREEMENTS = devData.proposed_disagreements;
