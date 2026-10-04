@@ -53,6 +53,21 @@ export function openItems(outcome: LookupOutcome, answers: Answer[]): OpenItem[]
 
   // Reasons the evaluator attached to rules that the plan (if any) did not already cover.
   const planMessages = new Set(rows.map((row) => row.message));
+  const messagesByRule = new Map<string, string[]>();
+  const fieldRules = new Map<string, Set<string>>();
+  const rowsByKey = new Map(rows.map(row => [row.key, row]));
+  for (const row of rows) {
+    for (const ruleId of row.ruleIds) {
+      const messages = messagesByRule.get(ruleId) ?? [];
+      messages.push(row.message);
+      messagesByRule.set(ruleId, messages);
+    }
+    if (row.field !== null) {
+      const rules = fieldRules.get(row.field) ?? new Set<string>();
+      row.ruleIds.forEach(ruleId => rules.add(ruleId));
+      fieldRules.set(row.field, rules);
+    }
+  }
   // A question that is still open is shown above; one answered "I don't know" belongs here.
   const markedUnknown = new Set(answers.filter((answer) => answer.value === null).map((answer) => answer.field));
   const asked = new Set((plan?.questions ?? []).map((question) => question.fact.field).filter((field) => !markedUnknown.has(field)));
@@ -64,12 +79,15 @@ export function openItems(outcome: LookupOutcome, answers: Answer[]): OpenItem[]
       // contradictory, generic interpretation row from the evaluator prefix.
       if (raw.startsWith('insufficient_fact_precision:')) {
         const field = raw.slice(raw.indexOf(':') + 1).trim().split(/\s+/)[0];
-        if (field && (asked.has(field) || rows.some((row) => row.field === field && row.ruleIds.includes(evaluation.team_rule_id)))) continue;
+        if (field && (asked.has(field) || fieldRules.get(field)?.has(evaluation.team_rule_id))) continue;
       }
       if (reason.kind === 'missing_property_fact') {
         const field = raw.slice(raw.indexOf(':') + 1).trim();
-        if (asked.has(field) || rows.some((row) => row.field === field && row.ruleIds.includes(evaluation.team_rule_id))) continue;
-        const existing = rows.find((row) => row.key === `fact-${field}`);
+        if (asked.has(field) || fieldRules.get(field)?.has(evaluation.team_rule_id)) continue;
+        const rules = fieldRules.get(field) ?? new Set<string>();
+        rules.add(evaluation.team_rule_id);
+        fieldRules.set(field, rules);
+        const existing = rowsByKey.get(`fact-${field}`);
         if (existing) {
           if (!existing.ruleIds.includes(evaluation.team_rule_id)) existing.ruleIds.push(evaluation.team_rule_id);
           continue;
@@ -92,19 +110,21 @@ export function openItems(outcome: LookupOutcome, answers: Answer[]): OpenItem[]
           sourceRefs: [],
           order: 0,
         });
+        rowsByKey.set(`fact-${field}`, rows[rows.length - 1]!);
       } else {
         // The plan restates most evaluator reasons, often inside a longer dated statement about
         // the same rule. A reason is not listed a second time when a plan statement for this
         // rule already carries its words in full.
         if (planMessages.has(reason.message)) continue;
-        if (rows.some((row) => row.key.startsWith('plan-') && row.ruleIds.includes(evaluation.team_rule_id) && row.message.includes(reason.message))) continue;
-        const existing = rows.find((row) => row.key === `reason-${raw}`);
+        if (messagesByRule.get(evaluation.team_rule_id)?.some(message => message.includes(reason.message))) continue;
+        const existing = rowsByKey.get(`reason-${raw}`);
         if (existing) {
           if (!existing.ruleIds.includes(evaluation.team_rule_id)) existing.ruleIds.push(evaluation.team_rule_id);
         } else {
           const kind = REASON_TO_KIND[reason.kind] ?? 'interpretation';
           const step = nextStep(kind);
           rows.push({ key: `reason-${raw}`, kind, label: reason.label, answerable: false, next: step.label, who: reason.remedy, message: reason.message, remedy: '', field: null, ruleIds: [evaluation.team_rule_id], sourceRefs: [], order: step.order, reason: reason.kind });
+          rowsByKey.set(`reason-${raw}`, rows[rows.length - 1]!);
         }
       }
     }
@@ -129,7 +149,8 @@ export interface OpenItemGroups {
  */
 export function groupOpenItems(items: OpenItem[], listedRuleIds: ReadonlySet<string>): OpenItemGroups {
   const outsideItems = items.filter((item) => item.ruleIds.length > 0 && !item.ruleIds.some((ruleId) => listedRuleIds.has(ruleId)));
-  const inside = items.filter((item) => !outsideItems.includes(item));
+  const outsideSet = new Set(outsideItems);
+  const inside = items.filter((item) => !outsideSet.has(item));
   return {
     answerable: topicsOf(inside.filter((item) => item.answerable)),
     other: topicsOf(inside.filter((item) => !item.answerable)),

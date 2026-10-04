@@ -31,7 +31,7 @@ COPY navigator/ navigator/
 COPY config/ config/
 COPY contracts/ contracts/
 COPY fixtures/ fixtures/
-COPY scripts/platform_ops.py scripts/render_snapshot.py scripts/
+COPY scripts/platform_ops.py scripts/render_snapshot.py scripts/prime_assist.py scripts/
 COPY --from=frontend /build/frontend/dist/ public/
 # Render Free has no persistent disk or SSH. Its optional private data file is a
 # BuildKit secret; the validated serving data and current-runtime caches enter
@@ -47,6 +47,16 @@ RUN --mount=type=secret,id=snapshot_b64,target=/run/secrets/snapshot.b64 \
       --sha256 "${NAVIGATOR_SNAPSHOT_SHA256}" \
       --require-snapshot "${NAVIGATOR_REQUIRE_SNAPSHOT}" \
       --data-root /opt/navigator-snapshot
+# Prime with the exact image's Python/code/snapshot identity. Never upload local
+# cache files across runtime versions. No providers or source-store mutations.
+ENV NAVIGATOR_ASSIST_CACHE_DIR=/var/cache/navigator-assist
+RUN mkdir -p /var/cache/navigator-assist \
+    && if [ -f /opt/navigator-snapshot/snapshot-v1/rules.json ]; then \
+      python scripts/prime_assist.py --store /opt/navigator-snapshot/snapshot-v1 \
+        --cache /var/cache/navigator-assist --manifest config/demo_requests.json \
+        --report /var/cache/assist-prime-receipt.json; \
+    fi \
+    && chown -R 10001:10001 /var/cache/navigator-assist
 USER 10001:10001
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"

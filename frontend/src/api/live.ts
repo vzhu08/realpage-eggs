@@ -30,6 +30,8 @@ import type {
   SourceDocument,
 } from './types';
 import { validate, type SchemaName } from './validate';
+import { ASSIST_MEDIA, assistRetainedBytes, decodeAssistWire, metric } from './assistWire';
+import { AssistPreload } from './assistPreload';
 
 type FetchLike = typeof fetch;
 
@@ -108,6 +110,62 @@ export class LiveSource implements DataSource {
   private evidenceRoute: 'untested' | 'present' | 'absent' = 'untested';
   private summaryRoute: 'untested' | 'present' | 'absent' = 'untested';
   private factDefinitions: Promise<Record<string, FactDefinition> | null> | null = null;
+  private readonly assistMemory = new AssistPreload<Answered<AssistResponse>>();
+  private activeLookups = new Set<AbortController>();
+  private listeners = new Set<() => void>();
+  private demoOpenListeners = new Set<(query: LookupQuery) => void>();
+  onDemoOpen(listener: (query: LookupQuery) => void) { this.demoOpenListeners.add(listener); return () => { this.demoOpenListeners.delete(listener); }; }
+  openPrepared(query: LookupQuery) { this.demoOpenListeners.forEach((listener) => listener(query)); }
+  subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
+  pending = () => this.activeLookups.size;
+  private notify() { this.listeners.forEach((listener) => listener()); }
+  cancelLookups = () => { this.activeLookups.forEach((controller) => controller.abort()); };
+
+  async demoManifest(signal?: AbortSignal): Promise<{ label: string; steps: { id: string; request: LookupQuery }[] }> {
+    const response = await this.fetchImpl(`${this.base}/demo-requests`, { signal, cache: 'no-store' });
+    if (!response.ok) throw new Error('Demo preparation is unavailable on this server.');
+    const manifest = await response.json() as { label: string; steps: { id: string; request: Record<string, unknown> }[] };
+    if (!Array.isArray(manifest.steps) || manifest.steps.length < 1 || manifest.steps.length > 8) throw new Error('Invalid demo manifest.');
+    const steps = manifest.steps.map((step) => {
+      const request = step.request;
+      if (validate('AssistRequest', request).errors.length || typeof request.address_id !== 'string' ||
+          request.scenario_id != null || Object.keys((request.supplemental_facts ?? {}) as object).length ||
+          JSON.stringify(request.limits) !== JSON.stringify({ max_questions: 5, max_fields: 8, max_evaluations: 64, max_joint_fields: 3 })) {
+        throw new Error('This manifest uses request options unavailable in the current browser flow.');
+      }
+      return { id: step.id, request: { address_id: request.address_id, as_of: request.as_of as string, answers: request.answers as LookupQuery['answers'] } };
+    });
+    return { label: manifest.label, steps };
+  }
+
+  private async assistAnswer(query: LookupQuery, signal?: AbortSignal) {
+    const body = { address_id: query.address_id, as_of: query.as_of, answers: query.answers.map(wireAnswer) };
+    let identity: string | null = null;
+    // Revalidate the tab cache on every use; a deployment can replace data while
+    // this tab stays open. Failure never serves a possibly stale local entry.
+    if (this.assistMemory.has(JSON.stringify(body))) {
+      try {
+        const bounded = AbortSignal.any([AbortSignal.timeout(3000), ...(signal ? [signal] : [])]);
+        const response = await this.fetchImpl(`${this.base}/assist-cache/identity`, { signal: bounded, cache: 'no-store' });
+        if (response.ok) identity = ((await response.json()) as { identity: string }).identity;
+      } catch { if (signal?.aborted) throw aborted(); }
+    }
+    return this.assistMemory.get(JSON.stringify(body), identity, async (transportSignal) => {
+      const value = await this.request<AssistResponse>({ method: 'POST', path: '/lookup/assist', schema: 'AssistResponse', body, signal: transportSignal, timeoutMs: 120_000,
+        timeoutDetails: ['No completed analysis was received. The server may still be computing; cancellation stops this page waiting.'] });
+      const data = value.data;
+      const echoed = data.answers_applied.map((answer) => [answer.field, answer.value, answer.provenance, answer.note ?? null]);
+      const asked = body.answers.map((answer) => [answer.field, answer.value, answer.provenance, answer.note ?? null]);
+      if (data.lookup.address.address_id !== query.address_id || data.lookup.as_of !== query.as_of || data.scenario_id != null || JSON.stringify(echoed) !== JSON.stringify(asked)) {
+        throw new ApiError({ kind: 'contract', endpoint: 'POST /lookup/assist', message: 'The result describes another property, date or set of answers, so it is not shown.' });
+      }
+      const bytes = assistRetainedBytes(data);
+      value.text = ''; // Assist UI consumes the validated graph; retain no duplicate wire text.
+      return { value, identity: value.headers?.get('x-assist-identity') ?? '', bytes };
+    }, signal);
+  }
+
+  async preload(query: LookupQuery, signal?: AbortSignal): Promise<void> { await this.assistAnswer(query, signal); }
 
   constructor(baseUrl: string, fetchImpl: FetchLike = (input, init) => fetch(input, init)) {
     this.base = baseUrl.replace(/\/+$/, '');
@@ -116,6 +174,7 @@ export class LiveSource implements DataSource {
   }
 
   private async request<T>(options: RequestOptions): Promise<Answered<T>> {
+    const started = performance.now();
     const endpoint = `${options.method} ${options.path}`;
     // A caller that has already gone away sends nothing.
     if (options.signal?.aborted) throw aborted();
@@ -140,7 +199,7 @@ export class LiveSource implements DataSource {
       try {
         response = await this.fetchImpl(`${this.base}${options.path}`, {
           method: options.method,
-          headers: options.body === undefined ? { Accept: 'application/json' } : { Accept: 'application/json', 'Content-Type': 'application/json' },
+          headers: options.body === undefined ? { Accept: 'application/json' } : { Accept: options.schema === 'AssistResponse' ? `${ASSIST_MEDIA}, application/json` : 'application/json', 'Content-Type': 'application/json' },
           body: options.body === undefined ? undefined : JSON.stringify(options.body),
           signal: controller.signal,
         });
@@ -148,6 +207,7 @@ export class LiveSource implements DataSource {
         return failed(error, `No response within ${seconds(limit)}, so this page stopped waiting.`, 'Could not reach the API. Check that the backend is running and reachable from this page.');
       }
       let text: string;
+      const headersAt = performance.now();
       let byteLength: number | null = null;
       try {
         if (options.exact) {
@@ -168,6 +228,8 @@ export class LiveSource implements DataSource {
       }
       // A response that lands after the caller went away is never handed back.
       if (options.signal?.aborted) throw aborted();
+      const receivedAt = performance.now();
+      metric('transfer', headersAt, { endpoint, decodedCharacters: text.length });
       let body: unknown;
       try {
         body = text ? JSON.parse(text.charCodeAt(0) === 0xfeff ? text.slice(1) : text) : undefined;
@@ -178,6 +240,12 @@ export class LiveSource implements DataSource {
       if (body === undefined) {
         throw new ApiError({ kind: 'contract', endpoint, status: response.status, message: 'The API answered without a JSON body.' });
       }
+      if (response.headers?.get('content-type')?.includes(ASSIST_MEDIA)) {
+        try { body = decodeAssistWire(body); }
+        catch { throw new ApiError({ kind: 'contract', endpoint, message: 'Invalid compact assist response.' }); }
+      }
+      metric('parse', receivedAt, { endpoint });
+      const validationStarted = performance.now();
       const result = validate(options.schema, body);
       if (result.errors.length) {
         throw new ApiError({
@@ -188,6 +256,8 @@ export class LiveSource implements DataSource {
           details: result.errors,
         });
       }
+      metric('validate', validationStarted, { endpoint });
+      metric('request', started, { endpoint, cache: response.headers?.get('x-assist-cache'), serverTiming: response.headers?.get('server-timing') });
       return { data: body as T, warnings: result.warnings, text, byteLength, headers: response.headers ?? null };
     } finally {
       clearTimeout(timer);
@@ -205,12 +275,26 @@ export class LiveSource implements DataSource {
   }
 
   async lookup(query: LookupQuery, signal?: AbortSignal): Promise<LookupOutcome> {
+    const controller = new AbortController();
+    const cancel = () => controller.abort();
+    if (signal?.aborted) throw aborted();
+    signal?.addEventListener('abort', cancel, { once: true });
+    this.activeLookups.add(controller);
+    this.notify();
+    try { return await this.performLookup(query, controller.signal); }
+    finally {
+      signal?.removeEventListener('abort', cancel);
+      this.activeLookups.delete(controller);
+      this.notify();
+    }
+  }
+
+  private async performLookup(query: LookupQuery, signal?: AbortSignal): Promise<LookupOutcome> {
     const notices: string[] = [];
     if (this.assistRoute !== 'absent') {
       try {
         // All accumulated answers are resent on every stateless request (docs/ASSIST_CONTRACT.md).
-        const body = { address_id: query.address_id, as_of: query.as_of, answers: query.answers.map(wireAnswer) };
-        const { data, warnings } = await this.request<AssistResponse>({ method: 'POST', path: '/lookup/assist', schema: 'AssistResponse', body, signal });
+        const { value: { data, warnings, headers }, preloaded } = await this.assistAnswer(query, signal);
         this.assistRoute = 'present';
         const applied = new Set(data.answers_applied.map((answer) => answer.field));
         return {
@@ -218,7 +302,7 @@ export class LiveSource implements DataSource {
           lookup: data.lookup,
           assist: data,
           planner: { kind: 'response' },
-          origin: { kind: 'live', label: 'Live API', detail: `POST ${this.base}/lookup/assist` },
+          origin: { kind: 'live', label: preloaded ? 'Preloaded computed result' : headers?.get('x-assist-cache') === 'hit' ? 'Cached computed result' : 'Live API', detail: `POST ${this.base}/lookup/assist` },
           dispositions: query.answers.map((answer) => ({
             field: answer.field,
             status: applied.has(answer.field) ? 'applied' : 'not_evaluated',

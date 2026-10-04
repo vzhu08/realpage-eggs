@@ -44,7 +44,21 @@ const typeOf = (value: unknown): string => {
 
 const MAX_ISSUES = 12;
 
-function check(schema: Schema, value: unknown, path: string, out: ValidationResult): void {
+type Checked = WeakMap<object, Set<Schema>>;
+
+function check(schema: Schema, value: unknown, path: string, out: ValidationResult, checked: Checked): void {
+  const object = value !== null && typeof value === 'object' ? value : null;
+  if (object && checked.get(object)?.has(schema)) return;
+  const errors = out.errors.length, warnings = out.warnings.length;
+  checkValue(schema, value, path, out, checked);
+  if (object && out.errors.length === errors && out.warnings.length === warnings) {
+    const schemas = checked.get(object) ?? new Set<Schema>();
+    schemas.add(schema);
+    checked.set(object, schemas);
+  }
+}
+
+function checkValue(schema: Schema, value: unknown, path: string, out: ValidationResult, checked: Checked): void {
   if (out.errors.length >= MAX_ISSUES) return;
   if (schema.$ref) {
     const target = defs[schema.$ref];
@@ -52,14 +66,14 @@ function check(schema: Schema, value: unknown, path: string, out: ValidationResu
       out.errors.push(`${path}: unknown schema ${schema.$ref}`);
       return;
     }
-    check(target, value, path, out);
+    check(target, value, path, out, checked);
     return;
   }
   if (schema.anyOf) {
     let best: ValidationResult | null = null;
     for (const option of schema.anyOf) {
       const attempt: ValidationResult = { errors: [], warnings: [] };
-      check(option, value, path, attempt);
+      check(option, value, path, attempt, checked);
       if (!attempt.errors.length) {
         out.warnings.push(...attempt.warnings);
         return;
@@ -95,7 +109,7 @@ function check(schema: Schema, value: unknown, path: string, out: ValidationResu
   } else if (Array.isArray(value)) {
     if (schema.minItems !== undefined && value.length < schema.minItems) out.errors.push(`${path}: fewer than ${schema.minItems} items`);
     if (schema.maxItems !== undefined && value.length > schema.maxItems) out.errors.push(`${path}: more than ${schema.maxItems} items`);
-    if (schema.items) value.forEach((item, index) => check(schema.items as Schema, item, `${path}[${index}]`, out));
+    if (schema.items) value.forEach((item, index) => check(schema.items as Schema, item, `${path}[${index}]`, out, checked));
   } else if (value !== null && typeof value === 'object') {
     const record = value as Record<string, unknown>;
     const properties = schema.properties ?? {};
@@ -104,9 +118,9 @@ function check(schema: Schema, value: unknown, path: string, out: ValidationResu
     }
     for (const [name, child] of Object.entries(record)) {
       const propertySchema = properties[name];
-      if (propertySchema) check(propertySchema, child, `${path}.${name}`, out);
+      if (propertySchema) check(propertySchema, child, `${path}.${name}`, out, checked);
       else if (schema.additionalProperties === false) out.warnings.push(`${path}.${name}: field is not in the contract`);
-      else if (schema.additionalProperties && typeof schema.additionalProperties === 'object') check(schema.additionalProperties, child, `${path}.${name}`, out);
+      else if (schema.additionalProperties && typeof schema.additionalProperties === 'object') check(schema.additionalProperties, child, `${path}.${name}`, out, checked);
     }
   }
 }
@@ -115,7 +129,7 @@ export function validate(name: SchemaName, value: unknown): ValidationResult {
   const out: ValidationResult = { errors: [], warnings: [] };
   const schema = defs[name];
   if (!schema) out.errors.push(`Unknown contract model ${String(name)}`);
-  else check(schema, value, name, out);
+  else check(schema, value, name, out, new WeakMap());
   return out;
 }
 

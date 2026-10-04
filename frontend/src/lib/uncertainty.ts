@@ -17,19 +17,23 @@ export interface GroupedUncertainty {
 
 export function groupUncertainty(items: Uncertainty[]): GroupedUncertainty[] {
   const groups = new Map<string, GroupedUncertainty>();
+  const indexes = new Map<string, { rules: Set<string>; sources: Map<string, Set<string>> }>();
   for (const item of items) {
     const key = JSON.stringify([item.kind, item.message, item.remedy, item.field ?? null]);
     const group = groups.get(key) ?? { key, kind: item.kind, message: item.message, remedy: item.remedy, field: item.field ?? null, ruleIds: [], sourceRefs: [] };
     groups.set(key, group);
-    for (const ruleId of item.rule_ids ?? []) if (!group.ruleIds.includes(ruleId)) group.ruleIds.push(ruleId);
+    const index = indexes.get(key) ?? { rules: new Set<string>(), sources: new Map<string, Set<string>>() };
+    indexes.set(key, index);
+    for (const ruleId of item.rule_ids ?? []) {
+      if (!index.rules.has(ruleId)) { index.rules.add(ruleId); group.ruleIds.push(ruleId); }
+    }
     for (const ref of item.source_refs ?? []) {
       // Offsets identify a passage only within one source version. Keep every distinct
       // version, quote and section when identical statements are grouped for reading.
-      if (!group.sourceRefs.some((existing) =>
-        existing.doc_id === ref.doc_id && existing.source_hash === ref.source_hash &&
-        existing.start === ref.start && existing.end === ref.end &&
-        existing.text === ref.text && (existing.section ?? null) === (ref.section ?? null)
-      )) group.sourceRefs.push(ref);
+      const span = JSON.stringify([ref.doc_id, ref.source_hash, ref.start, ref.end, ref.section ?? null]);
+      const texts = index.sources.get(span) ?? new Set<string>();
+      if (!texts.has(ref.text)) { texts.add(ref.text); group.sourceRefs.push(ref); }
+      index.sources.set(span, texts);
     }
   }
   return [...groups.values()];
