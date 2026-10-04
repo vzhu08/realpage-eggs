@@ -76,7 +76,8 @@ test('all-unknown summary offers browsing and scopes review topics to evaluated 
   assert.match(html, /Browse 1 returned rule/);
   assert.match(html, /1 open review topic for returned rules/);
   assert.match(html, /1 additional review topic concerns rules outside this result/);
-  assert.match(html, /not a count of missing property facts/);
+  assert.match(html, /evidence, interpretation or analysis gaps/);
+  assert.match(html, /Some require source review or more analysis rather than another property answer/);
   assert.match(html, /Returned rules and source evidence/);
   assert.doesNotMatch(html, /No rules were returned/);
 });
