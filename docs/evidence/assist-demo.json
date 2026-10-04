@@ -3664,6 +3664,151 @@
         "pacedWithin60Seconds": true,
         "narration": "Timed presenter cues; see docs/ASSIST_DEMO.md for the spoken script. No audio recording was made.",
         "withinClickTarget": true
+      },
+      "cold_opening": {
+        "base": "http://127.0.0.1:8019",
+        "mode": "uncached",
+        "serverState": "cold",
+        "freshBrowser": true,
+        "checkedAt": "2026-10-04T12:11:29.645Z",
+        "targetMs": 2000,
+        "narrationBudgetSeconds": 60,
+        "steps": [
+          {
+            "id": "opening",
+            "automationWallMs": 88172.89309999999,
+            "measures": [
+              {
+                "name": "realpage:click-to-usable",
+                "ms": 87470.70000004768,
+                "detail": {}
+              },
+              {
+                "name": "realpage:request",
+                "ms": 86403.30000001192,
+                "detail": {
+                  "endpoint": "POST /lookup/assist",
+                  "cache": "miss",
+                  "serverTiming": "assist;dur=85929.26"
+                }
+              },
+              {
+                "name": "realpage:transfer",
+                "ms": 124.5,
+                "detail": {
+                  "endpoint": "POST /lookup/assist",
+                  "decodedCharacters": 14850254
+                }
+              },
+              {
+                "name": "realpage:parse",
+                "ms": 158.10000002384186,
+                "detail": {
+                  "endpoint": "POST /lookup/assist"
+                }
+              },
+              {
+                "name": "realpage:validate",
+                "ms": 172.0999999642372,
+                "detail": {
+                  "endpoint": "POST /lookup/assist"
+                }
+              },
+              {
+                "name": "realpage:render",
+                "ms": 1063.3999999761581,
+                "detail": {}
+              }
+            ],
+            "resources": [
+              {
+                "name": "http://127.0.0.1:8019/api/v1/addresses?q=&offset=0&limit=25",
+                "transferSize": 9059,
+                "encodedBodySize": 8759,
+                "decodedBodySize": 42691,
+                "duration": 201.19999998807907
+              },
+              {
+                "name": "http://127.0.0.1:8019/api/v1/facts",
+                "transferSize": 4613,
+                "encodedBodySize": 4313,
+                "decodedBodySize": 25950,
+                "duration": 78.80000001192093
+              },
+              {
+                "name": "http://127.0.0.1:8019/api/v1/addresses?q=A0001&offset=0&limit=100",
+                "transferSize": 1098,
+                "encodedBodySize": 798,
+                "decodedBodySize": 1550,
+                "duration": 243.30000001192093
+              },
+              {
+                "name": "http://127.0.0.1:8019/api/v1/health",
+                "transferSize": 559,
+                "encodedBodySize": 259,
+                "decodedBodySize": 259,
+                "duration": 278.39999997615814
+              },
+              {
+                "name": "http://127.0.0.1:8019/api/v1/lookup/assist",
+                "transferSize": 2285611,
+                "encodedBodySize": 2285311,
+                "decodedBodySize": 14866827,
+                "duration": 85998.39999997616
+              }
+            ],
+            "nodes": 23715,
+            "browserHeapBytes": 53500000,
+            "underTarget": false
+          }
+        ],
+        "requests": [
+          {
+            "status": 200,
+            "x-assist-identity": "c7e1b6e3cea3e71bdc49e34fef49f4aaef0a8b0222535b04102454dc59f3b807",
+            "x-assist-cache": "miss",
+            "cache-control": "no-store",
+            "access-control-expose-headers": "Content-Disposition, X-Assist-Cache, X-Assist-Identity, Server-Timing",
+            "content-encoding": "gzip",
+            "server-timing": "assist;dur=85929.26",
+            "content-length": "2285311",
+            "date": "Sun, 04 Oct 2026 12:11:30 GMT",
+            "content-type": "application/vnd.realpage.assist-dag+json",
+            "vary": "Accept, Accept-Encoding, Origin",
+            "server": "uvicorn",
+            "at": 1791115976717
+          }
+        ],
+        "browserErrors": [],
+        "warnings": [],
+        "completeFlow": false,
+        "success": true,
+        "identity": "c7e1b6e3cea3e71bdc49e34fef49f4aaef0a8b0222535b04102454dc59f3b807",
+        "manifest": {
+          "identity": "c7e1b6e3cea3e71bdc49e34fef49f4aaef0a8b0222535b04102454dc59f3b807",
+          "steps": [
+            {
+              "id": "opening",
+              "request": {
+                "address_id": "A0001",
+                "address": null,
+                "as_of": "2026-10-01",
+                "supplemental_facts": {},
+                "answers": [],
+                "scenario_id": null,
+                "limits": {
+                  "max_questions": 5,
+                  "max_fields": 8,
+                  "max_evaluations": 64,
+                  "max_joint_fields": 3
+                }
+              }
+            }
+          ],
+          "label": "Real computed research snapshot; hypothetical user answers, not verified property facts"
+        },
+        "measuredInteractionMs": 87470.70000004768,
+        "withinClickTarget": false
       }
     },
     "archive": {
@@ -3686,6 +3831,15 @@
       "Server-cache-only follow-up and second-answer clicks exceeded 2 seconds.",
       "Offline priming peak working set about 3 GB; cold serving not proven safe within 2 GB.",
       "Hosted verification pending authorized deployment."
-    ]
+    ],
+    "cold_opening_peak_working_set_bytes": 2899202048,
+    "boundary_experiment_not_adopted": {
+      "seconds": 46.28141140000662,
+      "canonical_bytes": 247818703,
+      "sha256": "41b7629d17540a97dec5f37d5b665c8f3def936bd74b2c598dbdf160fb677770",
+      "expected_sha256": "41b7629d17540a97dec5f37d5b665c8f3def936bd74b2c598dbdf160fb677770",
+      "peak_working_set_bytes": 2750517248,
+      "equivalent": true
+    }
   }
 }

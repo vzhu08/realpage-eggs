@@ -61,7 +61,9 @@ def identity(store):
 def request_key(stamp, request):
     # Do not sort answer lists or remove null/false/default values: ordering and
     # provenance/note are echoed in the canonical response.
-    return digest({"identity": stamp, "request": request.model_dump(mode="json")})
+    # Supplemental-fact insertion order becomes answers_applied list order. A
+    # sorted dictionary digest would merge requests with different response echoes.
+    return digest({"identity": stamp, "request": request.model_dump_json()})
 
 
 class CacheBusy(RuntimeError):
@@ -84,7 +86,7 @@ class Artifact:
 
 class AssistCache:
     def __init__(self, root, *, max_entries=16, max_bytes=256 * 1024 * 1024,
-                 max_result_bytes=256 * 1024 * 1024):
+                 max_result_bytes=512 * 1024 * 1024):
         self.root = Path(root)
         self.max_entries, self.max_bytes, self.max_result_bytes = max_entries, max_bytes, max_result_bytes
         if min(max_entries, max_bytes, max_result_bytes) <= 0:

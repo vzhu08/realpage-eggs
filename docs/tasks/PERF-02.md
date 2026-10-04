@@ -75,3 +75,14 @@ follow-up/second-answer clicks were 2.05/2.13 s and miss target. Offline cold pr
 plus added uncertainty regression, typecheck/build, 32 final affected E2E checks passed.
 User authorized publication/deployment; no additional service purchase. See updated runbook
 and authoritative evidence receipt. Root and all other active checkouts remain untouched.
+
+
+Hosted follow-up: implementation PR34 merged at cb32524ea5e8d0fc3731f94d0478f65e55508039.
+All four CI gates passed, including image-built assist hits under synthetic Free limits.
+Both implementation source branches cleaned up after switching this same checkout to
+codex/assist-demo-hosted-results for docs/evidence only. Snapshots, caches and other worktrees
+are preserved. Deployment uses the existing 1c-2g service; final hosted results pending below.
+
+Follow-up also retains the original navigator/assist_cache.py and tests/test_assist_cache.py
+claim to preserve supplemental-fact insertion order in exact request keys. This order becomes
+answers_applied list order, so sorted request dictionaries must not alias distinct response echoes.
