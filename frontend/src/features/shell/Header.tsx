@@ -77,6 +77,9 @@ export function Header({ view, hrefFor, mode, onMode, health, apiBase, onApiBase
           <a href={hrefFor('changes')} aria-current={view === 'changes' ? 'page' : undefined}>
             Changes
           </a>
+          <a href={hrefFor('disagreements')} aria-current={view === 'disagreements' ? 'page' : undefined}>
+            Disagreements
+          </a>
         </nav>
 
         <div className="header__tools">
@@ -125,6 +128,11 @@ function DemoDetails({ catalog }: { catalog: DemoCatalog | undefined }) {
           { label: 'Recorded output', value: typeof manifest.generated_by === 'string' ? manifest.generated_by : 'frontend/scripts/record_demo.py' },
           { label: 'Backend commit', value: <span className="mono">{commit}</span> },
           { label: 'Question-flow fixtures', value: String(catalog?.cases.length ?? 0) },
+          {
+            label: 'Development portfolio',
+            value: `${catalog?.development.properties.length ?? 0} fictional properties`,
+            note: 'Authored by the UX lane for layout; rules and results come from the backend. See frontend/scripts/dev_portfolio.py.',
+          },
         ]}
       />
       {DEMO_ONLY && <p className="status-panel__text">This hosted preview cannot reach a backend, so the live API mode is turned off here. Run the app locally to use it.</p>}

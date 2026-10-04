@@ -1,8 +1,8 @@
-import { useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { type ApiError, isAbort, toApiError } from '../../api/errors';
 import { DEFAULT_AS_OF } from '../../api/generated/meta';
-import type { ChangeOutcome, ChangeRequest } from '../../api/types';
-import { ErrorNotice, Skeleton } from '../../components/ui';
+import type { ChangeOutcome, ChangeRequest, RecordedStore } from '../../api/types';
+import { Disclosure, ErrorNotice, Skeleton } from '../../components/ui';
 import { formatDate, isIsoDay } from '../../lib/dates';
 import { useSource } from '../../state/source';
 import { ChangeResultView } from './ChangeResultView';
@@ -13,7 +13,20 @@ type State = { status: 'idle' } | { status: 'loading' } | { status: 'ready'; out
 /** Published scenario IDs named in docs/FRONTEND_HANDOFF.md. Their definitions live in the dataset, not here. */
 const DOCUMENTED_SCENARIOS = ['T1', 'T2', 'T3', 'T4', 'T5'];
 
-export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, asOf: string) => string }) {
+/** How each recorded dataset is introduced in the demo. They are separate stores and are never combined. */
+const STORE_COPY: Record<RecordedStore, { title: string; note: string }> = {
+  dev_portfolio: { title: 'Development portfolio', note: '14 fictional properties in a fictional state. Backend-evaluated; authored for layout development.' },
+  synthetic: { title: 'Maple Harbor contract example', note: '3 fictional properties and one fictional ordinance from the backend’s own synthetic store.' },
+  no_extracted_rules: { title: 'Published scenarios with no extracted rules', note: 'The backend’s answer before any rule is extracted: blocked, never an empty result.' },
+};
+const STORE_ORDER: RecordedStore[] = ['dev_portfolio', 'synthetic', 'no_extracted_rules'];
+
+interface Props {
+  lookupHref: (addressId: string, asOf: string) => string;
+  disagreementHref: (addressId: string, asOf: string) => string;
+}
+
+export function ChangesView({ lookupHref, disagreementHref }: Props) {
   const source = useSource();
   const id = useId();
   const catalog = useMemo(() => source.catalog?.(), [source]);
@@ -26,6 +39,20 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
   const [touched, setTouched] = useState(false);
   const [state, setState] = useState<State>({ status: 'idle' });
   const controller = useRef<AbortController | null>(null);
+  const resultRegion = useRef<HTMLDivElement | null>(null);
+  /** Set when a comparison is started from inside a result, so the new result is brought into view. */
+  const reveal = useRef(false);
+
+  // Leaving the view must not let a late response touch it.
+  useEffect(() => () => controller.current?.abort(), []);
+  useEffect(() => {
+    if (state.status !== 'ready' || !reveal.current) return;
+    reveal.current = false;
+    const region = resultRegion.current;
+    if (!region) return;
+    region.focus({ preventScroll: true });
+    region.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }, [state]);
 
   const errors = {
     before: kind === 'dates' && !isIsoDay(before) ? 'Enter the earlier date.' : null,
@@ -48,6 +75,18 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
     }
   };
 
+  /**
+   * Editing the request while a comparison is still running withdraws that comparison: its
+   * response, whenever it arrives, is for a question that is no longer being asked.
+   */
+  const edit = <T,>(setter: (value: T) => void) => (value: T) => {
+    if (state.status === 'loading') {
+      controller.current?.abort();
+      setState({ status: 'idle' });
+    }
+    setter(value);
+  };
+
   const build = (): ChangeRequest => {
     if (kind === 'scenario') return { test_id: testId.trim() };
     const ids = ruleIds.split(/[\s,]+/).filter(Boolean);
@@ -55,8 +94,9 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
   };
 
   const recorded = catalog?.changeRequests ?? [];
-  const recordedDates = recorded.filter((entry) => !entry.request.test_id);
-  const recordedScenarios = recorded.filter((entry) => entry.request.test_id);
+  const recordedGroups = STORE_ORDER.map((store) => ({ store, entries: recorded.filter((entry) => entry.store === store) })).filter((group) => group.entries.length > 0);
+  const pillLabel = (request: ChangeRequest) =>
+    request.test_id ? `Scenario ${request.test_id}` : `${formatDate(request.before)} → ${formatDate(request.after)}${request.scenario === 'if_enacted' ? ' · if enacted' : ''}`;
 
   const apply = (request: ChangeRequest) => {
     if (request.test_id) {
@@ -72,13 +112,19 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
     void submit(request);
   };
 
+  /** From the timeline: compare two days under actual law, keeping the form in step. */
+  const compareDates = (first: string, second: string) => {
+    reveal.current = true;
+    apply({ before: first, after: second, scenario: 'actual' });
+  };
+
   return (
     <div className="changes">
       <header className="changes__intro">
         <p className="eyebrow">Changes</p>
         <h1 className="welcome__title">What changes for the sample properties between two dates.</h1>
         <p className="welcome__lead">
-          Compare the rules on two dates, or run a published scenario. Properties that are definitely affected are kept apart from those where the effect is uncertain. A blocked comparison is reported as blocked, never as “nothing changed”.
+          Compare the rules on two dates, or run a published scenario, then follow each change from its source to the rule to the properties it reaches. Definite and uncertain impacts stay apart, and a blocked comparison is reported as blocked, never as “nothing changed”.
         </p>
       </header>
 
@@ -99,7 +145,7 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
               { value: 'scenario' as const, label: 'Published scenario' },
             ].map((option) => (
               <label key={option.value} className="segmented__option">
-                <input type="radio" name={`${id}-kind`} checked={kind === option.value} onChange={() => setKind(option.value)} />
+                <input type="radio" name={`${id}-kind`} checked={kind === option.value} onChange={() => edit(setKind)(option.value)} />
                 <span>{option.label}</span>
               </label>
             ))}
@@ -112,7 +158,7 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
               <label htmlFor={`${id}-before`} className="label">
                 From date
               </label>
-              <input id={`${id}-before`} type="date" className="input input--date" value={before} onChange={(event) => setBefore(event.target.value)} aria-invalid={touched && errors.before ? true : undefined} aria-describedby={touched && errors.before ? `${id}-before-error` : undefined} />
+              <input id={`${id}-before`} type="date" className="input input--date" value={before} onChange={(event) => edit(setBefore)(event.target.value)} aria-invalid={touched && errors.before ? true : undefined} aria-describedby={touched && errors.before ? `${id}-before-error` : undefined} />
               {touched && errors.before && (
                 <p id={`${id}-before-error`} className="field__error" role="alert">
                   {errors.before}
@@ -123,7 +169,7 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
               <label htmlFor={`${id}-after`} className="label">
                 To date
               </label>
-              <input id={`${id}-after`} type="date" className="input input--date" value={after} onChange={(event) => setAfter(event.target.value)} aria-invalid={touched && errors.after ? true : undefined} aria-describedby={touched && errors.after ? `${id}-after-error` : undefined} />
+              <input id={`${id}-after`} type="date" className="input input--date" value={after} onChange={(event) => edit(setAfter)(event.target.value)} aria-invalid={touched && errors.after ? true : undefined} aria-describedby={touched && errors.after ? `${id}-after-error` : undefined} />
               {touched && errors.after && (
                 <p id={`${id}-after-error`} className="field__error" role="alert">
                   {errors.after}
@@ -134,7 +180,7 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
               <label htmlFor={`${id}-scenario`} className="label">
                 Treat pending rules as
               </label>
-              <select id={`${id}-scenario`} className="input" value={scenario} onChange={(event) => setScenario(event.target.value === 'if_enacted' ? 'if_enacted' : 'actual')}>
+              <select id={`${id}-scenario`} className="input" value={scenario} onChange={(event) => edit(setScenario)(event.target.value === 'if_enacted' ? 'if_enacted' : 'actual')}>
                 <option value="actual">Pending (actual law)</option>
                 <option value="if_enacted">Enacted (hypothetical)</option>
               </select>
@@ -143,7 +189,7 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
               <label htmlFor={`${id}-rules`} className="label">
                 Limit to rule IDs <span className="label__optional">optional</span>
               </label>
-              <input id={`${id}-rules`} type="text" className="input" value={ruleIds} onChange={(event) => setRuleIds(event.target.value)} placeholder="All rules" autoComplete="off" spellCheck={false} aria-describedby={`${id}-rules-hint`} />
+              <input id={`${id}-rules`} type="text" className="input" value={ruleIds} onChange={(event) => edit(setRuleIds)(event.target.value)} placeholder="All rules" autoComplete="off" spellCheck={false} aria-describedby={`${id}-rules-hint`} />
               <p id={`${id}-rules-hint`} className="hint">
                 Separate IDs with commas. The first date starts at the contract default, {formatDate(DEFAULT_AS_OF)}.
               </p>
@@ -155,7 +201,7 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
               <label htmlFor={`${id}-test`} className="label">
                 Scenario ID
               </label>
-              <input id={`${id}-test`} type="text" className="input" list={`${id}-tests`} value={testId} onChange={(event) => setTestId(event.target.value)} placeholder="T1" autoComplete="off" spellCheck={false} aria-invalid={touched && errors.testId ? true : undefined} aria-describedby={`${id}-test-hint`} />
+              <input id={`${id}-test`} type="text" className="input" list={`${id}-tests`} value={testId} onChange={(event) => edit(setTestId)(event.target.value)} placeholder="T1" autoComplete="off" spellCheck={false} aria-invalid={touched && errors.testId ? true : undefined} aria-describedby={`${id}-test-hint`} />
               <datalist id={`${id}-tests`}>
                 {DOCUMENTED_SCENARIOS.map((value) => (
                   <option key={value} value={value} />
@@ -179,27 +225,44 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
           </button>
         </div>
 
-        {recorded.length > 0 && (
+        {recordedGroups.length > 0 && (
           <div className="changes__recorded">
             <p className="label">Recorded in the synthetic demo</p>
-            <div className="changes__pills">
-              {recordedDates.map((entry) => (
-                <button key={`${entry.request.before}-${entry.request.after}-${entry.request.scenario}`} type="button" className="pill" onClick={() => apply(entry.request)}>
-                  {formatDate(entry.request.before)} → {formatDate(entry.request.after)}
-                  {entry.request.scenario === 'if_enacted' ? ' · if enacted' : ''}
-                </button>
-              ))}
-              {recordedScenarios.map((entry) => (
-                <button key={entry.request.test_id ?? 'scenario'} type="button" className="pill" onClick={() => apply(entry.request)}>
-                  Scenario {entry.request.test_id}
-                </button>
-              ))}
-            </div>
+            <p className="hint">The demo replays recorded backend output and cannot compute other comparisons. Each group is a separate fictional dataset.</p>
+            {recordedGroups.map((group) => {
+              // The first few entries are the ones a walkthrough starts from; the rest step across single dates.
+              const lead = group.store === 'dev_portfolio' ? group.entries.slice(0, 3) : group.entries;
+              const rest = group.store === 'dev_portfolio' ? group.entries.slice(3) : [];
+              return (
+                <div key={group.store} className="changes__group" data-store={group.store}>
+                  <p className="changes__group-title">{STORE_COPY[group.store].title}</p>
+                  <p className="hint">{STORE_COPY[group.store].note}</p>
+                  <div className="changes__pills">
+                    {lead.map((entry) => (
+                      <button key={pillLabel(entry.request)} type="button" className="pill" onClick={() => apply(entry.request)}>
+                        {pillLabel(entry.request)}
+                      </button>
+                    ))}
+                  </div>
+                  {rest.length > 0 && (
+                    <Disclosure summary={`Single-date steps (${rest.length})`} className="changes__more">
+                      <div className="changes__pills">
+                        {rest.map((entry) => (
+                          <button key={pillLabel(entry.request)} type="button" className="pill" onClick={() => apply(entry.request)}>
+                            {pillLabel(entry.request)}
+                          </button>
+                        ))}
+                      </div>
+                    </Disclosure>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
       </form>
 
-      <div className="changes__result" aria-live="polite">
+      <div className="changes__result" aria-live="polite" ref={resultRegion} tabIndex={-1}>
         {state.status === 'loading' && <Skeleton lines={5} label="Comparing dates" />}
         {state.status === 'error' && (
           <ErrorNotice
@@ -218,7 +281,9 @@ export function ChangesView({ lookupHref }: { lookupHref: (addressId: string, as
             {state.error.suggestions.length > 0 && <p>Recorded comparisons: {state.error.suggestions.join('; ')}.</p>}
           </ErrorNotice>
         )}
-        {state.status === 'ready' && <ChangeResultView outcome={state.outcome} lookupHref={lookupHref} />}
+        {state.status === 'ready' && (
+          <ChangeResultView key={JSON.stringify(state.outcome.request)} outcome={state.outcome} lookupHref={lookupHref} disagreementHref={disagreementHref} onCompare={compareDates} busy={false} />
+        )}
       </div>
     </div>
   );

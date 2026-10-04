@@ -1,0 +1,2 @@
+scripts/dev_fixture/*.txt text eol=lf
+src/demo/recorded/*.json text eol=lf

@@ -4,7 +4,7 @@
  */
 import { useCallback, useSyncExternalStore } from 'react';
 
-export type View = 'lookup' | 'changes';
+export type View = 'lookup' | 'changes' | 'disagreements';
 
 export interface Route {
   view: View;
@@ -14,7 +14,7 @@ export interface Route {
 export function parseHash(hash: string): Route {
   const cleaned = hash.replace(/^#\/?/, '');
   const [path = '', query = ''] = cleaned.split('?');
-  return { view: path === 'changes' ? 'changes' : 'lookup', params: new URLSearchParams(query) };
+  return { view: path === 'changes' || path === 'disagreements' ? path : 'lookup', params: new URLSearchParams(query) };
 }
 
 export function buildHash(view: View, params: Record<string, string | null | undefined>): string {

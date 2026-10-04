@@ -17,29 +17,35 @@ test.describe('changes view', () => {
     const definite = result.locator('[data-impact="Definitely affected"]');
     const uncertain = result.locator('[data-impact="Uncertain"]');
     const conflict = result.locator('[data-impact="Conflict flagged"]');
-    await expect(definite.locator('.impact__count')).toHaveText('1');
-    await expect(definite.getByRole('link', { name: 'SYNTH-001' })).toBeVisible();
-    await expect(uncertain.locator('.impact__count')).toHaveText('1');
-    await expect(uncertain.getByRole('link', { name: 'SYNTH-003' })).toBeVisible();
-    await expect(definite).not.toContainText('SYNTH-003');
+    await expect(definite).toHaveAttribute('data-count', '1');
+    await expect(uncertain).toHaveAttribute('data-count', '1');
+    await expect(conflict).toHaveAttribute('data-count', '0');
     await expect(conflict.locator('.impact__count')).toHaveText('0');
 
-    const first = result.locator('.diff[data-address="SYNTH-001"]');
-    await expect(first.locator('.delta')).toHaveAttribute('data-certainty', 'definite');
+    // Names replace IDs once the address and rule records have been read.
+    await result.getByRole('tab', { name: 'By property' }).click();
+    const first = result.locator('.property-node[data-address="SYNTH-001"]');
+    await expect(first).toContainText('1 Test Street');
+    await expect(first).toContainText('Maple Harbor, CA');
+    await expect(first.locator('.impact-row')).toHaveAttribute('data-certainty', 'definite');
+    await expect(first.locator('.impact-row')).toContainText('Synthetic Maple Harbor deposit cap');
     await expect(first).toContainText('Not yet effective');
     await expect(first).toContainText('Applies');
+    await first.locator('.impact-row summary').first().click();
     await expect(first).toContainText('Before · Oct 1, 2026');
     await expect(first).toContainText('After · Nov 15, 2026');
     await first.getByText('Evidence (3 quotes)').last().click();
     await expect(first.locator('blockquote').first()).toContainText('Beginning November 15, 2026');
 
-    const second = result.locator('.diff[data-address="SYNTH-003"]');
-    await expect(second.locator('.delta')).toHaveAttribute('data-certainty', 'uncertain');
+    const second = result.locator('.property-node[data-address="SYNTH-003"]');
+    await expect(second.locator('.impact-row')).toHaveAttribute('data-certainty', 'uncertain');
+    await second.locator('.impact-row summary').first().click();
     await expect(second).toContainText('Needs: units');
+    await expect(result.locator('.property-node[data-address="SYNTH-002"]')).toHaveCount(0);
     await expectNoHorizontalOverflow(page);
 
     // From a changed property straight to its lookup on the later date.
-    await second.getByRole('link', { name: 'Open lookup as of Nov 15, 2026' }).click();
+    await second.getByRole('link', { name: 'Open lookup as of Nov 15, 2026' }).first().click();
     await expect(page.getByRole('heading', { level: 1, name: '3 Test Street, Maple Harbor, CA' })).toBeVisible();
     await expect(page.getByLabel('As of date')).toHaveValue('2026-11-15');
   });
@@ -141,9 +147,13 @@ test.describe('changes view', () => {
     const result = page.getByRole('article', { name: 'Comparison result' });
     await expect(result.getByRole('group', { name: 'Comparison context' })).toContainText('Hypothetical · if enacted');
     await expect(result.getByRole('group', { name: 'Comparison context' })).toContainText('Live API');
-    await expect(result.locator('[data-impact="Conflict flagged"] .impact__count')).toHaveText('1');
-    await expect(result.locator('.diff[data-address="SYNTH-001"]')).toContainText('Conflict flagged');
-    await expect(result.locator('.diff[data-address="SYNTH-001"]')).toContainText('Pending');
+    await expect(result.locator('[data-impact="Conflict flagged"]')).toHaveAttribute('data-count', '1');
+    const row = result.locator('.impact-row[data-address="SYNTH-001"]');
+    await expect(row).toContainText('1 Test Street');
+    await expect(row).toContainText('Conflict');
+    await expect(row).toContainText('Pending');
+    await row.locator('summary').first().click();
+    await expect(row.getByRole('link', { name: 'Compare the conflicting sources' })).toHaveAttribute('href', /#\/disagreements\?.*address=SYNTH-001.*as_of=2027-07-02/);
     const post = calls.find((call) => call.method === 'POST' && call.path === '/changes');
     expect(post?.body).toEqual({ before: '2026-10-01', after: '2027-07-02', scenario: 'if_enacted', rule_ids: [evaluation.team_rule_id, 'r-other'] });
 

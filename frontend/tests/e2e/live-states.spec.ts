@@ -164,9 +164,17 @@ test.describe('live API: failure, partial and unavailable states', () => {
     await expect(ruleRow(page, 'r-conflict')).toContainText('Jurisdiction uncertain: legal municipality unresolved');
 
     const remaining = page.getByRole('region', { name: /What remains uncertain/ });
-    await expect(remaining.locator('[data-kind="conflicting_legal_evidence"]')).toContainText('Not a question for the renter or owner');
-    await expect(remaining.locator('[data-kind="unsupported_condition"]')).toContainText('cross-reference to section 9 not encoded');
-    await expect(remaining.locator('[data-kind="property_fact"]')).toContainText('A factual answer can close this');
+    // Each open item names the kind of next step it needs; only a property fact is answerable.
+    const conflict = remaining.locator('[data-reason="conflicting_legal_evidence"]');
+    await expect(conflict).toContainText('Needs: review of conflicting sources');
+    await expect(conflict.getByRole('link', { name: 'Compare the conflicting sources' })).toHaveAttribute('href', /#\/disagreements\?.*address=SYNTH-003.*as_of=2026-11-15/);
+    await expect(remaining.locator('[data-reason="unsupported_condition"]')).toContainText('cross-reference to section 9 not encoded');
+    await expect(remaining.locator('[data-reason="jurisdiction_uncertainty"]')).toContainText('Needs: location evidence');
+    await expect(remaining.locator('[data-kind="property_fact"]')).toContainText('Needs: a factual answer');
+    await expect(remaining.getByText('A fact about the property can close these')).toBeVisible();
+    await expect(remaining.getByText('No answer about the property can close these')).toBeVisible();
+    // The conflict is also announced above the results, with the way to compare the sources.
+    await expect(page.getByRole('note').filter({ hasText: 'Sources conflict for 1 rule here' }).getByRole('link', { name: 'Compare the conflicting sources' })).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
 });
