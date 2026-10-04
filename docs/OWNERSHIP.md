@@ -1,5 +1,16 @@
 # Four-developer ownership
 
+## Active demo preparation — October 4
+
+Session `01a1060f-0c12-7a41-a29e-c2de9377f99f` claims PLAT-13/14 preparation on
+`codex/platform-demo-prep`, base `e7662374d5b8ad7f98401aae9c1fc5192e32a583`, in
+`C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/platform-demo-prep` (clean at claim).
+Root is the sole writer of its PLAT-13/14 cards, TASKS/OWNERSHIP, new DEMO_PREPARATION runbook,
+`docs/evidence/plat13_14_preparation.json` and ignored `artifacts/demo-prep/` outputs.
+RENDER-01 / "Check Required Infrastructure" keeps all its deployment implementation,
+runbook, workflow, test and dashboard claims on `codex/render-setup`; no overlap is assigned.
+Core A/B and UX retain their existing scopes. Full paid extraction stays paused.
+
 ## Current Platform delegation — October 4
 
 The user explicitly authorized parallel Platform agents and pushing/merging completed tasks.

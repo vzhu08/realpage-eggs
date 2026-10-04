@@ -1,7 +1,27 @@
 # PLAT-14: assemble the next permitted demo snapshot
 
-Owner: Vincent / next Platform chat. State: Ready for preparation; final integration waits on
-Core's selected reviewed automated output. Execution unclaimed. Suggested new branch:
+## Preparation claim — October 4, 2026
+
+Owner: Vincent / Codex session `01a1060f-0c12-7a41-a29e-c2de9377f99f`.
+State: Preparation verified; final selected Core admission and new demo freeze pending.
+Branch/checkout/base and exclusive documentation paths are shared with the [PLAT-13 claim](PLAT-13.md):
+`codex/platform-demo-prep`, `C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/platform-demo-prep`,
+`e7662374d5b8ad7f98401aae9c1fc5192e32a583`; clean at claim.
+Private outputs: `artifacts/demo-prep/`. Original full stores, frozen releases, the pilot,
+Core annotations and the active Render checkout are read-only inputs.
+No assembler/runtime change is claimed absent a demonstrated integration defect.
+
+Result: [DEMO_PREPARATION](../DEMO_PREPARATION.md) records the exact manifest, source decisions,
+fresh output destinations and checks. Existing assembler reproduced the 500-address/140-rule
+baseline identity; complete 147-rule pilot lineage passed without admitting its seven candidates.
+All 2,539 files across the audited input trees remained unchanged. The pinned existing release,
+backup and newly packaged saved-export handoff verify. All seven pilot candidates still need
+review; six retain unsupported coverage. No new snapshot identity or demo promotion is claimed.
+
+## Original assignment (status superseded above)
+
+Owner: Vincent / next Platform chat. State at assignment: Ready for preparation; final integration
+waits on Core's selected reviewed automated output. Execution then unclaimed. Suggested new branch:
 `codex/platform-demo-snapshot`; record actual checkout/base/changes first.
 
 Read PLAT-06/07/09, [Core next steps](../CORE_NEXT_STEPS.md),

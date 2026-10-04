@@ -1,0 +1,176 @@
+{
+  "tasks": [
+    "PLAT-13",
+    "PLAT-14"
+  ],
+  "status": "preparation_verified_final_integration_pending",
+  "label": "SOFTWARE_PREPARATION_NOT_LEGAL_OR_RELEASE_ACCEPTANCE",
+  "checked_at": "2026-10-04T08:43:12.247476+00:00",
+  "session": "01a1060f-0c12-7a41-a29e-c2de9377f99f",
+  "branch": "codex/platform-demo-prep",
+  "base_commit": "e7662374d5b8ad7f98401aae9c1fc5192e32a583",
+  "checkout": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-demo-prep",
+  "render": {
+    "pr": "https://github.com/vzhu08/realpage-eggs/pull/22",
+    "inspected_head": "b77ae3a9b7ac63aaf6faf81b50704085617345b2",
+    "state": "OPEN",
+    "draft": true,
+    "checks_passed": [
+      "Backend and contracts",
+      "Frontend compatibility and browser flows",
+      "Complete container smoke",
+      "free-container"
+    ],
+    "writer_retains_claim": true,
+    "independently_verified_hosted": false,
+    "writer_report": "Completed handoff: live Free service verifies 500 properties, basic lookup and five cached scenarios; assisted lookup takes approximately 59 seconds against a 20-second UI timeout.",
+    "writer_thread_status_at_last_check": "idle; ownership not transferred",
+    "local_edits_observed_and_preserved": [
+      "docs/RENDER_FREE_SETUP.md",
+      "docs/tasks/RENDER-01.md"
+    ]
+  },
+  "input_manifest": {
+    "path": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-demo-prep\\artifacts\\demo-prep\\input-manifest.json",
+    "sha256": "2e34c5a7a39285d3fe9acc6ee9ab6fc21fe1bbc493481e84fedd8fb47f12b35b",
+    "tree_file_counts": {
+      "baseline_core": 97,
+      "geography": 707,
+      "original_snapshot": 795,
+      "original_release": 64,
+      "backup_release": 64,
+      "full_pilot": 802,
+      "portable_pilot": 10
+    },
+    "all_inputs_unchanged": true
+  },
+  "baseline_assembly": {
+    "snapshot_id": "8c0a2b50e0eda0839cf881cfb251b2762583840d1bec2f36454f77a63c7ae165",
+    "counts": {
+      "addresses": 500,
+      "rules": 140,
+      "sources": 87,
+      "resolved_municipalities": 487
+    },
+    "matches_prior_snapshot": true,
+    "is_new_demo_release": false,
+    "manifest_sha256": "d15ce4c0d0e9c7b8dd068bae100fb74ff5e7bdd51bfec32b457b52c04cabe4ad"
+  },
+  "pilot": {
+    "full_store_rules": 147,
+    "new_rule_ids": [
+      "r-2a817e247c471c2a583b",
+      "r-92c9813fd2e2b9362ac9",
+      "r-ae6bf8b690dd32748832",
+      "r-b557a89502e37db1bddd",
+      "r-b9212520dd133bdf1584",
+      "r-c243bf954944d60c4643",
+      "r-f1b8f964acfc1c2e3687"
+    ],
+    "prior_140_unchanged": true,
+    "automated_lineage_verified": true,
+    "run_id": "a6f959812096402480a583f7e4310452",
+    "all_seven_need_review": true,
+    "unsupported_coverage_rules": 6,
+    "admitted_to_demo": false
+  },
+  "source_use_decisions": {
+    "baseline_supplied_corpus_assessor_census": "admitted only to offline baseline rehearsal and existing fallback",
+    "D069_full_store": "eligible automated candidate; defer demo admission until selected Core handoff and bounded checks",
+    "D069_partial_bundle": "evidence only, never supply as --core-data",
+    "Core_manual_RuleDrafts": "review annotations only; not automated extraction",
+    "California_supplements": "deferred pending corpus-copy/access-use resolution",
+    "third_party_court_mirror": "conditional review only; official verification/use unresolved"
+  },
+  "reserved_outputs_must_not_exist": {
+    "selected-snapshot": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-demo-prep\\artifacts\\demo-prep\\selected-snapshot",
+    "selected-serving": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-demo-prep\\artifacts\\demo-prep\\selected-serving",
+    "selected-cache": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-demo-prep\\artifacts\\demo-prep\\selected-cache",
+    "selected-release": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-demo-prep\\artifacts\\demo-prep\\selected-release",
+    "selected-verification": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-demo-prep\\artifacts\\demo-prep\\selected-verification",
+    "selected-handoff": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-demo-prep\\artifacts\\demo-prep\\selected-handoff"
+  },
+  "fallback_smoke": {
+    "label": "EXISTING_FALLBACK_SMOKE_NOT_NEW_RELEASE_ACCEPTANCE",
+    "as_of": "2026-10-01",
+    "code_revision": "5145f1b2c421ac2f5e6a12c5a4b0027ee9749855",
+    "release_manifest_sha256": "08e95c386914a570cd159000da4799c616100ffe059a727f5702648517910d5b",
+    "provider_calls": 0,
+    "ready_for_submission": false,
+    "checks": {
+      "health": {
+        "status": "ok",
+        "version": "0.1.0",
+        "dataset_readiness": "partial",
+        "sources": 87,
+        "rules": 140,
+        "addresses": 500,
+        "resolved_municipalities": 487,
+        "last_extraction_outcome": "partial",
+        "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+      },
+      "frontend_and_private_path": "passed",
+      "lookup": {
+        "address_id": "A0001",
+        "status": 200,
+        "evaluations": 52
+      },
+      "evidence_and_exact_source_quote": "passed",
+      "T1": {
+        "status": "partial",
+        "notes": [
+          "Unresolved rule evidence: r-57328356379e89d4f338, r-912998e64d23de87a92c",
+          "Uncertain impacts are separate from definitely affected addresses"
+        ]
+      },
+      "T2": {
+        "status": "blocked",
+        "notes": [
+          "Missing extracted legal evidence for HOB-ALG-01; test cannot be established from its description",
+          "Missing extracted legal evidence for JC-ALG-01; test cannot be established from its description"
+        ]
+      }
+    },
+    "status": "passed",
+    "release_unchanged": true
+  },
+  "saved_export_handoff": {
+    "path": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-demo-prep\\artifacts\\demo-prep\\baseline-handoff",
+    "manifest_sha256": "511d239b2d4131be74b335d12460f4b7d34c817f7ecf5bc36c65960667435c94",
+    "prepare_passed": true,
+    "recipient_verify_passed": true,
+    "payload_files": 7,
+    "new_export_run": false,
+    "change_status": {
+      "T1": "partial",
+      "T2": "blocked",
+      "T3": "blocked",
+      "T4": "blocked",
+      "T5": "blocked"
+    }
+  },
+  "checks": {
+    "d069_portable_verifier": "passed: six payload files, seven rules, 25 distinct spans",
+    "baseline_assembler": "passed: prior identity reproduced",
+    "full_pilot_extraction_provenance": "passed using existing assembler validators",
+    "original_release_and_backup": "passed against prior recorded manifest pin",
+    "fallback_http": "passed: health, static, lookup, source/evidence, T1 partial, T2 blocked",
+    "saved_export_handoff": "prepare and verify passed against recorded report/run pins",
+    "full_software_suite": "not rerun: no runtime or schema change"
+  },
+  "provider_calls": 0,
+  "runtime_or_contract_changes": false,
+  "ready_for_submission": false,
+  "remaining": [
+    "Render writer release and final hosted evidence; assisted-lookup timing unresolved",
+    "Selected Core automated output with reproducible provenance; all seven D069 candidates still review-needed",
+    "New snapshot/release identity and final browser/export checks after admission",
+    "Municipal publication/operative records and official court verification remain specific source gaps"
+  ],
+  "cleanup": {
+    "deleted": [],
+    "deferred": [
+      "codex/render-setup: open draft PR and active writer; preserve branch/worktree"
+    ]
+  }
+}

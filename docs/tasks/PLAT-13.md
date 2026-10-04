@@ -1,6 +1,30 @@
 # PLAT-13: deployment integration for the demo
 
-Owner: Vincent / next Platform chat. State: Ready to review existing work; execution unclaimed.
+## Preparation claim — October 4, 2026
+
+Owner: Vincent / Codex session `01a1060f-0c12-7a41-a29e-c2de9377f99f`.
+State: Preparation verified; final integration pending RENDER-01 review and ownership release.
+Branch: `codex/platform-demo-prep`; base: `e7662374d5b8ad7f98401aae9c1fc5192e32a583`.
+Checkout: `C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/platform-demo-prep`, clean at claim.
+Exclusive writes: this card, PLAT-14 card, shared TASKS/OWNERSHIP, new
+`docs/DEMO_PREPARATION.md`, `docs/evidence/plat13_14_preparation.json`, and private outputs
+under this checkout's `artifacts/demo-prep/`. No deployment implementation paths are claimed.
+
+PR #22 remains a draft on `codex/render-setup`; head `b77ae3a` has four passing checks.
+The existing chat "Check Required Infrastructure" owns the Render repair, including two-part
+snapshot secret transport. Its checkout and cloud configuration remain untouched by this claim.
+Do not merge or clean up that active branch before the writer releases the tested result.
+The stale no-hosting-yet handoff below is historical; hosted success still requires current evidence.
+
+Result: see [DEMO_PREPARATION](../DEMO_PREPARATION.md). The writer reports deployed basic
+lookup/cached scenarios, but assisted lookup takes about 59 seconds against a 20-second UI timeout. This session did not
+independently verify hosted behavior. The pinned local fallback passed fresh HTTP health,
+HTML, A0001 lookup, exact quote/evidence and T1 partial/T2 blocked checks with no input changes.
+No deployment paths, dashboard, other writer's processes or branches were changed.
+
+## Original assignment (status superseded above)
+
+Owner: Vincent / next Platform chat. State at assignment: Ready; execution then unclaimed.
 Start from current main; record actual checkout, branch, base and dirty files before editing.
 Suggested branch for new work: `codex/platform-demo-deployment`. Do not switch another writer.
 
