@@ -149,6 +149,40 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
           </Empty>
         )}
 
+        <div className="next" data-next={lead ? 'question' : open.statements > 0 ? 'review' : 'none'}>
+          <p className="next__label">Next</p>
+          {lead ? (
+            <>
+              <p className="next__text">
+                Answer {openQuestions.length === 1 ? 'one question' : `${openQuestions.length} questions`} about the property.
+                {movable > 0 ? ` The first can change ${movable} ${movable === 1 ? 'result' : 'results'}.` : ''}
+              </p>
+              <button type="button" className="button button--primary" onClick={() => jumpTo('questions-heading')}>
+                Go to the question
+                <Icon name="arrow" />
+              </button>
+            </>
+          ) : open.statements > 0 ? (
+            <>
+              <p className="next__text">No factual question is open. What remains needs a source, an interpretation or more analysis.</p>
+              <button type="button" className="button" onClick={() => jumpTo('uncertainty-heading')}>
+                See what remains
+                <Icon name="arrow" />
+              </button>
+            </>
+          ) : total > 0 ? (
+            <>
+              <p className="next__text">Nothing is open for this property on this date. Each result links to the text it rests on.</p>
+              <button type="button" className="button" onClick={() => jumpTo('rules-heading')}>
+                Read the rules
+                <Icon name="arrow" />
+              </button>
+            </>
+          ) : (
+            <p className="next__text">Try another date, or check the dataset status in the header.</p>
+          )}
+        </div>
+
         {total > 0 && (
           <div className="result-browse">
             <div>
@@ -205,40 +239,6 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
         )}
 
         {open.outside.length > 0 && <p className="hint">{open.outside.length} additional review {open.outside.length === 1 ? 'topic concerns' : 'topics concern'} rules outside this result. Their statements remain in “What remains uncertain” below.</p>}
-
-        <div className="next" data-next={lead ? 'question' : open.statements > 0 ? 'review' : 'none'}>
-          <p className="next__label">Next</p>
-          {lead ? (
-            <>
-              <p className="next__text">
-                Answer {openQuestions.length === 1 ? 'one question' : `${openQuestions.length} questions`} about the property.
-                {movable > 0 ? ` The first can change ${movable} ${movable === 1 ? 'result' : 'results'}.` : ''}
-              </p>
-              <button type="button" className="button button--primary" onClick={() => jumpTo('questions-heading')}>
-                Go to the question
-                <Icon name="arrow" />
-              </button>
-            </>
-          ) : open.statements > 0 ? (
-            <>
-              <p className="next__text">No factual question is open. What remains needs a source, an interpretation or more analysis.</p>
-              <button type="button" className="button" onClick={() => jumpTo('uncertainty-heading')}>
-                See what remains
-                <Icon name="arrow" />
-              </button>
-            </>
-          ) : total > 0 ? (
-            <>
-              <p className="next__text">Nothing is open for this property on this date. Each result links to the text it rests on.</p>
-              <button type="button" className="button" onClick={() => jumpTo('rules-heading')}>
-                Read the rules
-                <Icon name="arrow" />
-              </button>
-            </>
-          ) : (
-            <p className="next__text">Try another date, or check the dataset status in the header.</p>
-          )}
-        </div>
       </section>
 
       {session.previous && session.previous !== outcome && <WhatChanged previous={session.previous} outcome={outcome} />}
