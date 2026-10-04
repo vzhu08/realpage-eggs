@@ -1,5 +1,16 @@
 # PLAT-15: unblock Core's required typed inputs
 
+## October 4 integration
+
+Implemented and verified in `codex/platform-core-integration` by session
+`01a1061b-41fb-7180-9973-b0937d2f95c9`. The 20 requested and 15 inherited consumed
+fields are registered, generated and tested through HTTP. Unknown/reset, validation,
+request isolation and all 25 synthetic probe inputs are covered. See
+[integration handoff](../PLATFORM_CORE_INTEGRATION.md) and
+[field evidence](../evidence/plat15_inputs.json). No Core Draft was promoted to provider output.
+
+The original assignment below is historical.
+
 Owner: Vincent / Platform. State: Ready on a concrete Core request; no speculative field work.
 Execution unclaimed. Suggested branch `codex/platform-core-inputs`; verify checkout/base/writer.
 

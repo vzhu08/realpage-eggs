@@ -36,6 +36,25 @@ def test_missing_dataset_is_service_error(tmp_path):
         assert client.post("/api/v1/lookup", json={"address_id": "X"}).status_code == 503
 
 
+def test_compressed_transport_preserves_complete_json_and_negotiation(demo):
+    from navigator.assist_service import assist
+    from navigator.models import AssistRequest
+
+    with TestClient(create_app(demo.root)) as client:
+        for method, path, payload in (("GET", "/api/v1/facts", None),
+                ("POST", "/api/v1/lookup/assist", {"address_id": "SYNTH-003", "as_of": "2026-11-15"})):
+            plain = client.request(method, path, json=payload, headers={"Accept-Encoding": "identity"})
+            compressed = client.request(method, path, json=payload, headers={"Accept-Encoding": "gzip"})
+            assert plain.status_code == compressed.status_code == 200
+            assert compressed.json() == plain.json()
+            if payload is not None:
+                assert plain.json() == assist(demo, AssistRequest.model_validate(payload)).model_dump(mode="json")
+            assert compressed.headers["content-encoding"] == "gzip"
+            assert "content-encoding" not in plain.headers
+            assert int(compressed.headers["content-length"]) < len(plain.content)
+            assert "Accept-Encoding" in compressed.headers["vary"]
+
+
 def test_supplemental_facts_are_ephemeral_and_labelled(demo):
     with TestClient(create_app(demo.root)) as client:
         body = client.post("/api/v1/lookup", json={"address_id": "SYNTH-003", "as_of": "2026-11-15", "supplemental_facts": {"units": 12}}).json()

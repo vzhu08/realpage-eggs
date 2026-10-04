@@ -1,5 +1,15 @@
 # Task board and merge queue
 
+## Current integration — October 4
+
+Daniel's PRs #28/#29 are merged. PLAT-15 typed inputs are implemented (35 requested/inherited
+definitions); PLAT-14 has a provenance-verified 147-rule partial research candidate and rebuilt
+change caches. PLAT-13 hosted verification fails the performance gate on `ebda276`; a tested
+Platform response-serialization/gzip fix awaits hosted retest. Core Draft admission remains pending.
+The user has now authorized and launched remaining supplied-corpus extraction in a private copy
+with a $20 cap; earlier pause statements are historical. It is not a serving store. See
+[the current handoff](PLATFORM_CORE_INTEGRATION.md), branch `codex/platform-core-integration`.
+
 ## Active PLAT-13/14 preparation — October 4
 
 Claimed by session `01a1060f-0c12-7a41-a29e-c2de9377f99f` in the isolated

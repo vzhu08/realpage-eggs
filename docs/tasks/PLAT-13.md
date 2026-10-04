@@ -1,5 +1,13 @@
 # PLAT-13: deployment integration for the demo
 
+## October 4 integration
+
+`codex/platform-core-integration` independently verified the live `ebda276` deployment with
+140 rules: health/frontend pass, A0001 assisted lookup 32.417 s, A0002 2.631 s, A0005 502.
+PERF-01 remains failed. Platform's complete-response serialization and gzip fix passes parity
+and full backend checks; it awaits hosted retest. See [integration handoff](../PLATFORM_CORE_INTEGRATION.md).
+The preparation history below is superseded for current status.
+
 ## Preparation claim — October 4, 2026
 
 Owner: Vincent / Codex session `01a1060f-0c12-7a41-a29e-c2de9377f99f`.
