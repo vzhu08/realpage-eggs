@@ -61,9 +61,15 @@ builds rather than usage charges. With a payment method, overage charges can app
 dashboard usage settings if one is already attached. Keep only the intended free demo service active.
 
 The automated free-container check uses labeled synthetic inputs, a read-only root, 512 MB RAM,
-0.1 CPU and no swap. It verifies the actual frontend/API image and usable build-time caches. Actual
-Render performance with the full research snapshot remains to be checked once the service exists;
-this is a low-traffic demo configuration, not a production capacity guarantee.
+0.1 CPU and no swap. It verifies the actual frontend/API image and usable build-time caches.
+
+Observed October 4: [the public service](https://realpage-navigator.onrender.com) is Live on Free
+at runtime revision `b77ae3a`. Frontend assets, all 500 addresses, basic lookup, and all five cached
+scenarios passed public HTTP checks; cached scenarios took 2.30–5.38 seconds. However, assisted
+lookup took 59.17 seconds, exceeding the frontend's fixed 20-second timeout. The browser lookup
+therefore still needs application performance work (Core B/Platform, coordinated with UX) before
+a demo rehearsal. Keeping Free does not currently make that flow responsive. The deployment fix
+does not change planner semantics, frontend timeouts, or partial research labels.
 
 References: [Free service limits](https://render.com/docs/free),
 [secret-file size and setup](https://render.com/docs/configure-environment-variables#secret-files),

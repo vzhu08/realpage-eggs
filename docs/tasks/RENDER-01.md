@@ -11,6 +11,22 @@ per-secret limit, despite fitting Render's combined 1 MB allowance. The helper n
 and evaluator are unchanged. Existing path claims cover this repair; no additional writers.
 The earlier account/dashboard and no-deployment restrictions below describe the historical setup.
 
+Outcome: Render deployment `b77ae3a` succeeded and is Live at
+https://realpage-navigator.onrender.com on Free. All four CI jobs passed for that runtime revision;
+38 focused local tests passed. Public HTTP verifies frontend assets, all 500 addresses, a basic
+lookup (52 evaluations), private-path 404s, and all five cached scenarios (2.30–5.38 seconds).
+The real build prepared the five caches in 343.6 seconds and became Live in 6m35s.
+The setup checkout is still `codex/render-setup`; draft PR #22 contains the fix, not merged.
+
+Remaining application issue discovered during browser verification: `POST /api/v1/lookup/assist`
+returns HTTP 200 with a partial plan and 64 evaluations, but took 59.17 seconds on this Free instance.
+The frontend's fixed 20-second timeout makes the browser lookup fail. This is not a remaining
+Render build failure. Route planner performance to Oliver/Core B, cache/orchestration options to
+Vincent/Platform, and timeout UX to the existing UX owner; no cross-lane runtime edits were made.
+Next action: optimize the assisted path and retest browser lookup on Free before a demo rehearsal.
+Research limitations remain T1 partial and T2–T5 blocked. No paid upgrade or provider calls.
+Private verification reports and dashboard screenshot are under `artifacts/render/`.
+
 ## Free-hosting follow-up (October 4)
 
 The user asked to deploy on a free platform. This session now replaces the default paid Blueprint
