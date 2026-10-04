@@ -29,6 +29,11 @@ All seven pilot rules remain review-needed; six have unsupported coverage. This 
 research snapshot, not a legal validation or submission-ready release. Newly captured supplemental
 records and Core Drafts are excluded. Published change caches retain T1/T3 partial and T2/T4/T5 blocked.
 
+The frozen local release uses source revision `f81f120cdf28f6c363bf3047dd81d9d970f9366f`;
+release manifest SHA-256 `f100e8310000c65cc7196ae9b5c765bc59ace7eed37c2b91f6fa849f155986ce`.
+The verified Render transport ZIP is 636,482 bytes, SHA-256
+`cb3e4773283b070ae601142b08dee80444d6afa34702164ea25c6862b09e18b4`.
+It splits into two 424,322-byte secret-file parts. It has not been uploaded or activated.
 Private prepared outputs and exact code/file manifests are under `artifacts/integration/`.
 The earlier 140-rule hosted release remains the rollback source; the mutable extraction output
 is never a serving directory. Final publication must retain all research limitations.
@@ -47,6 +52,13 @@ low-CPU gzip. This removes an intermediate Python object tree and reduces transf
 retaining complete JSON, quotes and traces. HTTP parity tests cover identity and gzip transport.
 No planner limits, evaluator semantics, frontend timeouts or evidence were removed.
 The new transport still needs hosted validation before claiming the latency gate passes.
+The frozen local 147-rule release passed real HTTP health/frontend/basic lookup/T3, A0001/A0002/A0005
+assist, answer/reset/date changes and two concurrent users. A0001 took 4.916 s and compressed
+28,957,297 bytes to 3,456,049 bytes; A0005 took 15.708 s and compressed 120,502,306 bytes to
+13,953,977 bytes. These are local timings, not a forecast for Render Free. A0005's decoded
+response is still large; Core B owns any planner representation changes. The verification
+harness initially compared defaulted answer metadata too strictly; comparing field/value and
+checking provenance separately passes. Private report: `artifacts/integration/local-verification.json`.
 
 ## Remaining supplied-corpus extraction
 
