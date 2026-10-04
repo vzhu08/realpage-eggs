@@ -1,0 +1,36 @@
+[
+  {
+    "response_id": "resp_0e1bce51fb8d546f016ac207793db887d29ef9e7f8cc9cc635",
+    "usage": {
+      "input_tokens": 4865,
+      "input_tokens_details": {
+        "cache_write_tokens": 4862,
+        "cached_tokens": 0
+      },
+      "output_tokens": 13248,
+      "output_tokens_details": {
+        "reasoning_tokens": 1319
+      },
+      "total_tokens": 18113
+    },
+    "model": "gpt-6.1-sol",
+    "status": "completed"
+  },
+  {
+    "response_id": "resp_08b47e8cf5ac81ab016ac208297c3887d2874cf86f8c0cfb3e",
+    "usage": {
+      "input_tokens": 15178,
+      "input_tokens_details": {
+        "cache_write_tokens": 15175,
+        "cached_tokens": 0
+      },
+      "output_tokens": 14031,
+      "output_tokens_details": {
+        "reasoning_tokens": 516
+      },
+      "total_tokens": 29209
+    },
+    "model": "gpt-6.1-sol",
+    "status": "completed"
+  }
+]

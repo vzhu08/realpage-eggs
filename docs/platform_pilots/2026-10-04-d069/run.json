@@ -1,0 +1,44 @@
+{
+  "run_id": "a6f959812096402480a583f7e4310452",
+  "operation": "extract",
+  "mode": "live",
+  "started_at": "2026-10-04T07:59:51.213148+00:00",
+  "finished_at": "2026-10-04T08:05:41.321681+00:00",
+  "elapsed_seconds": 350.109,
+  "outcome": "success",
+  "input_hashes": {
+    "D069": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6"
+  },
+  "config": {
+    "prompt_version": "extract-v3-core-json-input",
+    "chunk_chars": 18000,
+    "overlap_chars": 1500,
+    "concurrency": 1,
+    "transport_attempts": 1,
+    "repair_attempts": 1,
+    "model": "gpt-6.1-sol",
+    "fact_contract_validation": "enum-literals-v1",
+    "draft_replays": [],
+    "read_timeout_seconds": 600,
+    "max_output_tokens": 32000,
+    "pilot_max_requests": 3,
+    "pilot_budget_usd": "5",
+    "pilot_ledger": "pilot_budget.json"
+  },
+  "versions": {
+    "pipeline": "0.1.0",
+    "evaluator": "0.1.0"
+  },
+  "counts": {
+    "processed": 1,
+    "rules": 147,
+    "cache_hits": 0,
+    "draft_replays": 0
+  },
+  "errors": [],
+  "artifacts": [
+    "rules.json",
+    "extraction_index.json",
+    "provider_outputs/a6f959812096402480a583f7e4310452/usage.json"
+  ]
+}

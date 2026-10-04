@@ -1,0 +1,27 @@
+{
+  "model": "gpt-6.1-sol",
+  "budget_usd": "5",
+  "reservation_per_request_usd": "1.50",
+  "reservation_is_not_actual_billing": true,
+  "requests": [
+    {
+      "number": 1,
+      "started_at": "2026-10-04T07:59:51.253673+00:00",
+      "status": "response_received",
+      "request_sha256": "47147777b9006777c2e596cc7db747dddc7facb4b75bc74b5ef4e6c74c7e3603",
+      "request_bytes": 21460,
+      "http_status": 200,
+      "finished_at": "2026-10-04T08:02:48.374942+00:00"
+    },
+    {
+      "number": 2,
+      "started_at": "2026-10-04T08:02:48.386960+00:00",
+      "status": "response_received",
+      "request_sha256": "63f98edcbe964ce5c99069741e2de9f0fc6dd028f2175da756014518e8dea20a",
+      "request_bytes": 66308,
+      "http_status": 200,
+      "finished_at": "2026-10-04T08:05:41.223214+00:00"
+    }
+  ],
+  "reserved_usd": "3.00"
+}

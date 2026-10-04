@@ -1,9 +1,13 @@
 # Task board and merge queue
 
-PLAT-12 follow-up: new NJ general effective-date authority captured, but ordinance-specific
-publication evidence and official court verification remain unavailable. The court county-number
-lead is unverified. Exact manual retrieval steps and a $5 one-document extraction pilot are ready;
-no paid run started. See `docs/EXTRACTION_PILOT.md` and the PLAT-12 card.
+October 4 pilot handoff: the user completed the $5 D069 pilot successfully (seven new
+rules, two API requests, no errors). [Daniel's next steps](CORE_NEXT_STEPS.md) and a committed
+D069-only evidence bundle unblock offline predicate work after merged Core source-review
+PR #23. Six rules still have uncompiled coverage; all seven need review. Missing municipal
+publication/operative records and official court verification remain Platform dependencies
+for specific conclusions. The full paid corpus remains paused; the live store is unchanged.
+Current priority: finish the smallest useful code/build increments within the user's three-hour
+demo-preparation window, use focused checks, and retain explicit unknowns for unavailable records.
 
 October 4 source-acquisition correction: Platform's software completion did not fulfill Daniel's
 T1-T5 acquisition request. [PLAT-11](tasks/PLAT-11.md) now delivers 21 captured documents and a
@@ -44,8 +48,8 @@ Docker runtime and public deployment are not verified by those checks.
 | [PLAT-09](tasks/PLAT-09.md) | Platform handoff agent / root integration | Merged in PR #16 | Hash-verified private export handoff and method note; stale assembly identity rejected. 25 focused tests pass, one Windows symlink test skips; two real 14-file bundles match exactly. |
 | [PLAT-10](tasks/PLAT-10.md) | Root Platform | Verified in PR #17 | 405 backend tests (one skip), 118 frontend unit tests, 114 browser tests (22 skips), and full Linux container smoke pass. Windows pack verification also passes with UTF-8. Includes merged Core B/UX PR #15. |
 | [PLAT-11](tasks/PLAT-11.md) | Vincent / Platform | 21 captures verified; residual acquisition gaps open | Original source bodies, separately derived text, additive SourceDocuments and per-case handoff for Daniel. Municipality publication/operative dates and official T5 docket verification remain unverified. No existing store changed. |
-| [PLAT-12](tasks/PLAT-12.md) | Vincent / Platform | Manual pilot verified; external evidence gaps open | New NJ authority and recorded access failures; exact clerk/docket instructions. User-selected $5 D069 pilot is dry-run by default and stops on transport/HTTP errors; no paid execution. |
-| [CORE-06](tasks/CORE-06.md) | Daniel / Core A | Software/review integrated; real evidence acceptance partial | PLAT-11 supplies new T1-T5 texts for Core review; Platform residual acquisition gaps remain explicit. Corpus provider run remains paused pending explicit human resumption. |
+| [PLAT-12](tasks/PLAT-12.md) | Vincent / Platform | Pilot completed; offline handoff ready; external gaps open | Seven D069 candidates and original provider evidence are committed for Core review. Two successful calls; no new calls during handoff. Publication/court gaps remain Platform-owned. |
+| [CORE-06](tasks/CORE-06.md) | Daniel / Core A | Ready: offline D069 predicate follow-up; acceptance partial | PR #23 source review is merged. Follow CORE_NEXT_STEPS.md to reconcile the paid pilot, compile supported conditions and test unknowns without waiting for Platform records. No additional paid run authorized. |
 | [CORE-07](tasks/CORE-07.md) | Oliver / Core B | Software merged in PR #15; real/human review pending | Actionable uncertainty, faithful change/conflict explanations and reviewed real-case planner benchmark. Real acceptance needs CORE-06/PLAT-06. |
 | [UX-04](tasks/UX-04.md) | Frontend/UX / Claude | Software merged in PR #15; additive API/real acceptance pending | Portfolio timeline/drill-down, disagreement view, evidence download and real-data judge demo. New payloads depend on PLAT-06. |
 

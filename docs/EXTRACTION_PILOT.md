@@ -1,5 +1,11 @@
 # Manual $5 extraction pilot
 
+**Completed on October 4, 2026. Do not rerun D069.** The user executed the commands below;
+run `a6f959812096402480a583f7e4310452` succeeded with two requests and seven new review-needed
+rules. Read [Daniel's next steps](CORE_NEXT_STEPS.md) and the
+[portable output](platform_pilots/2026-10-04-d069/README.md). The instructions below document
+the completed procedure; they do not authorize another pilot or full-corpus run.
+
 Run this from an ordinary PowerShell window, so no Codex session needs to wait for completion.
 No paid call was made while preparing these instructions. The user selected a $5, one-document
 pilot. This is readiness for a bounded test, not a claim that extraction can never improve.

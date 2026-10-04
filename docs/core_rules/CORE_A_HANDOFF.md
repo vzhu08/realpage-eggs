@@ -1,5 +1,15 @@
 # Daniel — Core A Rules & Evaluation
 
+## Current continuation: D069 pilot completed — October 4, 2026
+
+Read [Daniel's next steps](../CORE_NEXT_STEPS.md) and the
+[portable candidate bundle](../platform_pilots/2026-10-04-d069/README.md).
+The user completed the authorized $5 pilot: seven new D069 rules, two successful requests,
+zero errors. Core's source-review PR #23 is merged. Continue the offline predicate/evidence
+work described there while Platform retains the publication/court dependencies. Keep all
+review flags and do not resume the full paid corpus. The older delivery/status sections
+below are historical; this continuation and the current CORE-06 card take precedence.
+
 ## Current CORE-06 delivery
 
 CORE-06 offline implementation/review is complete on `codex/core-a-change-evidence`, based on
