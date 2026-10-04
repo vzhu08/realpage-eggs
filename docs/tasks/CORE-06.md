@@ -57,7 +57,31 @@ Handoff: commit, exact source/run evidence, T1-T5 statuses, corrected versus unr
 counts, comparison examples, provenance and remaining input requests. No full-corpus/legal-accuracy
 claim from software tests. Do not edit Core B planner/renderer or UX files.
 
-## Current follow-up execution claim — October 4, 2026
+## Current readiness follow-up — October 4, 2026
+
+User request: continue Daniel's tasks after the other developers finish, using parallel agents;
+existing authority covers task PRs and merges. Paid extraction remains paused.
+Base: `6b577104572ce28f4e539db45112d31ff060cae6` (main after Platform PR #17 and Core A PR #18).
+Root branch: `codex/core-a-readiness-followup`, checkout
+`/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence`.
+Root owns this card and `docs/core_rules/comparison_integrity/PR17_FOLLOWUP.md`.
+The verification agent owns only `verify_integration.py` and the new `pr17_verification.json`
+in that notes directory, on `codex/core-a-verifier-update` in its separate
+`/Users/danny/Documents/ChatGPT/RealPage/core-a-verifier-update` checkout.
+The source-readiness agent is read-only. No Platform, Core B, UX or shared schema paths are claimed.
+
+Immediate integration task: include newly merged deployment code in the disposable verification
+copy, retain all deployment tests, and preserve historical reports via an explicit report path.
+Source-readiness audit: the original store, Core working store, committed ZIP and Platform handoff
+all identify the same 87-source / 54-text catalog. No new T1-T5 source evidence was delivered.
+The user has been asked whether Core A should take over missing-source acquisition; until answered,
+the earlier instruction to wait on another developer's dependency still applies to that work.
+
+Verifier repair delivered at `85f9afd`, evidence at `7fe3380`: 417 tests passed, compilation,
+contracts and both fresh package replays passed, with historical reports/contracts preserved.
+Root integration and source audit: [PR #17 follow-up](../core_rules/comparison_integrity/PR17_FOLLOWUP.md).
+
+## Previous comparison follow-up execution claim — October 4, 2026
 
 Daniel / Codex /root, session `01a10555-b81d-7281-95f5-c06399af8238`; sole writer.
 The user requested Daniel's next task. The existing offline delivery and snapshot are now
