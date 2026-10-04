@@ -56,14 +56,9 @@ def temporal(rule: Rule, as_of: date, hypothetical=False) -> str:
         if as_of < lo: return "not_yet_effective"
         if as_of < hi: return "unknown"
     else:
-        if (not rule.status_as_of or rule.lifecycle != "enacted"
-                or as_of < date_bounds(rule.status_as_of)[1]):
-            return "unknown"
-        # An earlier in-force snapshot cannot establish effectiveness of a new
-        # enactment after an intervening repeal or other non-enacted status.
-        if any(status != "enacted" and lo <= as_of and hi >= date_bounds(rule.status_as_of)[0]
-               for status, lo, hi in history):
-            return "unknown"
+        # Enactment and an operative date are distinct facts. status_as_of
+        # establishes lifecycle, not when an enacted requirement took effect.
+        return "unknown"
     if rule.end_date:
         lo, hi = date_bounds(rule.end_date)
         if as_of >= hi: return "inapplicable"

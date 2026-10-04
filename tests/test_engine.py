@@ -225,13 +225,22 @@ def test_snapshot_must_establish_enactment_at_query_without_effective_date(
     assert temporal(rule, date(2026, 11, 15)) == 'unknown'
 
 
-@pytest.mark.parametrize('snapshot,expected', [('2026-01-01', 'unknown'), ('2026-10-01', 'in_force')])
-def test_reenactment_does_not_reuse_pre_repeal_snapshot_as_effective_evidence(rule, snapshot, expected):
+@pytest.mark.parametrize('snapshot', ['2026-01-01', '2026-10-01'])
+def test_reenactment_does_not_reuse_snapshot_as_effective_evidence(rule, snapshot):
     rule.lifecycle, rule.status_as_of, rule.effective_date = 'enacted', snapshot, None
     rule.status_events = [StatusEvent(status=status, on=on, evidence=rule.evidence) for status, on in [
         ('enacted', '2026-01-01'), ('repealed', '2026-03-01'), ('enacted', '2026-06-01'),
     ]]
-    assert temporal(rule, date(2026, 11, 15)) == expected
+    assert temporal(rule, date(2026, 11, 15)) == 'unknown'
+
+
+@pytest.mark.parametrize('with_event', [False, True])
+def test_enacted_snapshot_does_not_supply_missing_effective_date(rule, prop, resolution, with_event):
+    rule.lifecycle, rule.status_as_of, rule.effective_date = 'enacted', '2026-09-01', None
+    rule.status_events = [StatusEvent(status='enacted', on='2026-09-01', evidence=rule.evidence)] if with_event else []
+    result = evaluate_rule(rule, prop, resolution, DAY)
+    assert result.temporal_status == 'unknown' and result.result == 'unknown'
+    assert any('temporal_uncertainty' in reason for reason in result.uncertainty_reasons)
 
 
 def test_exclusive_end_and_partial_end_boundaries(rule):

@@ -38,6 +38,24 @@ def test_missing_semantic_support_retained_for_review(demo):
     assert "Missing field-level evidence for key_value" in validated.rules[0].review_issues
 
 
+def test_supported_enactment_snapshot_does_not_become_an_effective_date(demo):
+    from datetime import date
+    from navigator.engine import temporal
+    from navigator.models import Rule
+    source = next(iter(demo.sources().values()))
+    bundle = ExtractionBundle.model_validate(synthetic_bundle(source))
+    draft = bundle.rules[0]
+    draft.effective_date, draft.status_as_of = None, '2026-09-01'
+    draft.evidence.append(draft.status_events[0].evidence[0].model_copy(
+        update={'supports': ['lifecycle', 'status_as_of']}, deep=True))
+    validated = validate_bundle(bundle, demo.sources()).rules[0]
+    rule = Rule(**validated.model_dump(), team_rule_id='synthetic-lifecycle-only',
+                extraction_run_id='synthetic-boundary-test', evidence_mode='synthetic',
+                semantic_verification='synthetic_fixture')
+    assert rule.lifecycle == 'enacted' and rule.effective_date is None
+    assert temporal(rule, date(2026, 11, 15)) == 'unknown'
+
+
 @pytest.mark.parametrize('op,value', [('eq', 'natural_person'), ('ne', 'family_trust'),
                                      ('in', ['individual', 'limited_liability_company'])])
 def test_fact_contract_mismatch_cannot_decide_coverage(demo, prop, op, value):
