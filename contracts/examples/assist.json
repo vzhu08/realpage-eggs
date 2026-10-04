@@ -217,7 +217,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "5a2fd7ffe00d4a8bafc661e9621e1ecf",
+          "extraction_run_id": "d0d99fbaee7a40ebb8c397cde3fb7778",
           "semantic_verification": "synthetic_fixture"
         }
       ],
@@ -252,7 +252,7 @@
           "synthetic"
         ],
         "extraction_run_ids": [
-          "5a2fd7ffe00d4a8bafc661e9621e1ecf"
+          "d0d99fbaee7a40ebb8c397cde3fb7778"
         ],
         "partial_data": false,
         "missing_source_ids": [],

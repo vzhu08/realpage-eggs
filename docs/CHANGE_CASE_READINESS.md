@@ -29,6 +29,8 @@ substitute expected address sets from the scenario descriptions.
   municipal coverage uncertain instead of crashing all comparisons.
 - Conflict prerequisites must connect the mapped state/local records, in either
   direction. An unrelated interaction does not establish the requested relationship.
+- A case with no mapped rules returns its blocked diagnosis without evaluating
+  unrelated rules against every property.
 - New extraction instructions distinguish governing property/actor coverage from
   proving prohibited conduct. Informational extraction notes have a separate field;
   genuine unresolved review issues continue to block unsupported conclusions.

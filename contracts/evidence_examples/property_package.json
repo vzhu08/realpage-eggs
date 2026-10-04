@@ -176,7 +176,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "5a2fd7ffe00d4a8bafc661e9621e1ecf",
+          "extraction_run_id": "d0d99fbaee7a40ebb8c397cde3fb7778",
           "semantic_verification": "synthetic_fixture"
         }
       },
@@ -202,7 +202,7 @@
         "SYNTHETIC-42": {
           "status": "complete",
           "sha256": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
-          "run_id": "5a2fd7ffe00d4a8bafc661e9621e1ecf",
+          "run_id": "d0d99fbaee7a40ebb8c397cde3fb7778",
           "mode": "synthetic",
           "rules": 1,
           "issues": [],
@@ -425,7 +425,7 @@
             "conflict_note": null,
             "team_rule_id": "r-694ad9fbae9083966e86",
             "evidence_mode": "synthetic",
-            "extraction_run_id": "5a2fd7ffe00d4a8bafc661e9621e1ecf",
+            "extraction_run_id": "d0d99fbaee7a40ebb8c397cde3fb7778",
             "semantic_verification": "synthetic_fixture"
           }
         ],
@@ -460,7 +460,7 @@
             "synthetic"
           ],
           "extraction_run_ids": [
-            "5a2fd7ffe00d4a8bafc661e9621e1ecf"
+            "d0d99fbaee7a40ebb8c397cde3fb7778"
           ],
           "partial_data": false,
           "missing_source_ids": [],
@@ -874,7 +874,7 @@
         "navigator/assist_cache.py": "217ba51b583bc3c183f48ed16474b6855ea3a84d603adacd2594c7c7c12befed",
         "navigator/assist_service.py": "f01800c14d24a4592c5ac6ca21435d058e85c23e2f702c78c21f8e492a0056d4",
         "navigator/assist_wire.py": "534601f1c62b8b6c5e81ee0889ed1d666e0c737057740bcf1055f865ec614a4a",
-        "navigator/changes.py": "efc101120004ee99ad756e6388c61e1099946772ec6c033b86564e80d7a01a12",
+        "navigator/changes.py": "a423aa473407d0620d5c57da421d0df7e251ee72acdfb9ebe1746cc80b91c9ec",
         "navigator/cli.py": "f747386e95c2a6119c2534ac104b85f3a08363b2a9f4593f4840900b844b27c2",
         "navigator/config.py": "ab3c3b0a8135e2816ad6e46e2a12a4ff999820e414d20073dabf4852d671f7ce",
         "navigator/contracts.py": "24bca26db980819d2945e96bee523c8ebfed9db3b3aea13ba248c162ec0d163f",
@@ -903,11 +903,11 @@
         "navigator/validation.py": "3210f6145fd4a9398ed1cea132b63226c5fecc78912f37f2c8a6cbfb47c8b90a",
         "requirements.lock": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8"
       },
-      "fingerprint": "22579c8f020c174a482a917aa029fdac0ce8605e5216ce8c99120b14be9c2815"
+      "fingerprint": "0a307c577061965e3a2dc6870e92325c9fb756fded17659546dd6bd98135dceb"
     },
-    "input_sha256": "0f24b898ca2b5c994a2114053804be210cdb1572f7d64bea0d150f29850e9d11",
-    "response_sha256": "10e8fdf99b7ac23f5361e05d6ce827cdd8448ca98f0ebb5fb8f6a71b5103c235",
-    "package_sha256": "2e4b40b0ec23a35b0fe299dae0ffd06ce87959cefe5014e3cc26b7fe304711cb",
+    "input_sha256": "543cf4f35da12265fec2ce06d0d2b8572ea3b83b057f25035bf73f40fcce19a8",
+    "response_sha256": "3021b3cc0788f691489671b7b572111f7171ca96a365781f674160f31cba4141",
+    "package_sha256": "a968e0ea59351f49ccc974075701443dd451e9f694b7d8e4030c149d59601c39",
     "limitations": [
       "Reproduction verifies software output, not legal accuracy or complete source coverage.",
       "Original facts and submitted answers are separate; answers remain unverified and request-local.",
