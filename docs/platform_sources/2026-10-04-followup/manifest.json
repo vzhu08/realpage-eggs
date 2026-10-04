@@ -1,0 +1,235 @@
+{
+  "label": "PARTIAL_SOURCE_FOLLOWUP_NOT_CLOSED",
+  "records": [
+    {
+      "doc_id": "P12_HOB_NOTICE_INDEX",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "Hoboken, NJ"
+      ],
+      "url": "https://hobokennj.iqm2.com/Citizens/LegalNotice.aspx?From=1/1/1900&To=12/31/9999",
+      "title": "City notice-index access; empty/current filter does not establish historical absence",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:24:04.027718+00:00",
+      "status": "captured_pending_content_review",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "http_status": 200,
+      "final_url": "https://hobokennj.iqm2.com/Citizens/LegalNotice.aspx?From=1/1/1900&To=12/31/9999",
+      "retrieved_at": "2026-10-04T07:24:04.530742+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Sun, 04 Oct 2026 07:24:04 GMT"
+      },
+      "raw_path": "raw/P12_HOB_NOTICE_INDEX.html",
+      "raw_sha256": "74d2cf06a0a89986a9b199ceddf00781a9aa69a020e1e117c272608a10fc91e0",
+      "raw_bytes": 16758,
+      "text_path": "text/P12_HOB_NOTICE_INDEX.txt",
+      "text_sha256": "ab7f83d42b40e08d08d7808fe0cd17d297cd3e8bacc2d24b17d90169d80b0003",
+      "text_characters": 299,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "role": "access/provenance record, not target legal evidence"
+    },
+    {
+      "doc_id": "P12_MA_ARCHIVE_LINK",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.mass.gov/supreme-judicial-court-single-justice-decisions",
+      "title": "Official page linking single-justice archive; not target disposition",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:24:03.595521+00:00",
+      "status": "captured_pending_content_review",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "http_status": 200,
+      "final_url": "https://www.mass.gov/supreme-judicial-court-single-justice-decisions",
+      "retrieved_at": "2026-10-04T07:24:03.648767+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Last-Modified": "Fri, 02 Oct 2026 19:02:44 GMT",
+        "ETag": "\"1790967764-gzip\"",
+        "Date": "Sun, 04 Oct 2026 07:24:04 GMT"
+      },
+      "raw_path": "raw/P12_MA_ARCHIVE_LINK.html",
+      "raw_sha256": "4b12fdf8b791dd2efb789de26948a5f47265aa4dad3504a3f2a3e9000a603ba5",
+      "raw_bytes": 189729,
+      "text_path": "text/P12_MA_ARCHIVE_LINK.txt",
+      "text_sha256": "f8960cafe374af620e369c2b6c4a2ca0a094b9895a5c94f763d9bd5089c1a3da",
+      "text_characters": 6798,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "role": "access/provenance record, not target legal evidence"
+    },
+    {
+      "doc_id": "P12_MA_ARCHIVE_SEARCH",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.sjcsinglejusticearchive.com/disposition/searchdisposition?DocketNumber=SJ-2026-0063",
+      "title": "Exact archive search; no result is NOT proof of absence",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:24:03.667305+00:00",
+      "status": "captured_pending_content_review",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "http_status": 200,
+      "final_url": "https://www.sjcsinglejusticearchive.com/disposition/searchdisposition?DocketNumber=SJ-2026-0063",
+      "retrieved_at": "2026-10-04T07:24:03.757719+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Sun, 04 Oct 2026 07:24:04 GMT"
+      },
+      "raw_path": "raw/P12_MA_ARCHIVE_SEARCH.html",
+      "raw_sha256": "900bbd7dddf197b354de0bff792295c3650a5157abc7a52d99ab1974623e4cdd",
+      "raw_bytes": 19409,
+      "text_path": "text/P12_MA_ARCHIVE_SEARCH.txt",
+      "text_sha256": "c0301b2b9d964916c1da552902e382ed3d1839ea4331510435fe521ff23c888b",
+      "text_characters": 1017,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "role": "access/provenance record, not target legal evidence"
+    },
+    {
+      "doc_id": "P12_MA_COUNTY_DOCKET",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.ma-appellatecourts.org/docket/SJ-2026-0063",
+      "title": "Official county-court docket access attempt",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:24:03.871180+00:00",
+      "status": "failed",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "doc_id": "P12_MA_FULL_DOCKET",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.ma-appellatecourts.org/docket/SJC-13893",
+      "title": "Official full-court docket access attempt",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:24:03.775202+00:00",
+      "status": "failed",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "doc_id": "P12_MA_MANUAL_ACCESS",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.mass.gov/search-court-dockets-calendars-and-case-information",
+      "title": "Official manual court-access route",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:24:03.930181+00:00",
+      "status": "captured_pending_content_review",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "http_status": 200,
+      "final_url": "https://www.mass.gov/search-court-dockets-calendars-and-case-information",
+      "retrieved_at": "2026-10-04T07:24:04.005701+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Last-Modified": "Fri, 02 Oct 2026 18:50:41 GMT",
+        "ETag": "\"1790967041-gzip\"",
+        "Date": "Sun, 04 Oct 2026 07:24:04 GMT"
+      },
+      "raw_path": "raw/P12_MA_MANUAL_ACCESS.html",
+      "raw_sha256": "11cb0feb1913f1fe717590d75aaab4bcf8b7a072fcd6c350417614deb9c79b5a",
+      "raw_bytes": 211841,
+      "text_path": "text/P12_MA_MANUAL_ACCESS.txt",
+      "text_sha256": "5cc5d8c641f17004c344e7f736bfd9ff80f77182f56059ac8d856537cd2007c0",
+      "text_characters": 7666,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "role": "access/provenance record, not target legal evidence"
+    },
+    {
+      "doc_id": "P12_NJ_CHARTER",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "NJ"
+      ],
+      "url": "https://nj.gov/dca/dlgs/resources/misc_publications/Optional%20Municipal%20Charter%20Law%20-%20Updated%20July%202026.pdf",
+      "title": "NJ DCA Optional Municipal Charter Law, July 2026, section40:69A-181 p49",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:23:58.711400+00:00",
+      "status": "captured_pending_content_review",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "http_status": 200,
+      "final_url": "https://nj.gov/dca/dlgs/resources/misc_publications/Optional%20Municipal%20Charter%20Law%20-%20Updated%20July%202026.pdf",
+      "retrieved_at": "2026-10-04T07:23:58.993274+00:00",
+      "headers": {
+        "Content-Type": "application/pdf",
+        "Last-Modified": "Tue, 30 Jun 2026 17:53:08 GMT",
+        "ETag": "\"bb7ce-6a440284\"",
+        "Date": "Sun, 04 Oct 2026 07:23:59 GMT"
+      },
+      "raw_path": "raw/P12_NJ_CHARTER.pdf",
+      "raw_sha256": "3c6fdde0b35e2889d2d08e5c1af355dbda593207981532860100fb31c883e3cb",
+      "raw_bytes": 767950,
+      "text_path": "text/P12_NJ_CHARTER.txt",
+      "text_sha256": "674ac5befcd070b0c21be28195c212cdfa586ecb0c5697ede8d3d1855e11b484",
+      "text_characters": 206858,
+      "derivation": {
+        "method": "pypdf.PdfReader.extract_text",
+        "version": "6.10.0",
+        "pages": 57
+      },
+      "role": "substantive statutory authority"
+    }
+  ],
+  "captured_responses": 5,
+  "failed_docket_attempts": 2,
+  "substantive_new_source_documents": 1,
+  "original_sources_changed": false,
+  "county_docket_candidate": "SJ-2026-0063 came only from search-index text; unverified. Confirm originating case via SJC-13893.",
+  "limits": [
+    "Empty archive search is not proof of no judgment.",
+    "Hoboken notice filter still displayed 2026; does not cover 2025.",
+    "Actual municipal publication/effectiveness proof and official docket verification remain open."
+  ]
+}
