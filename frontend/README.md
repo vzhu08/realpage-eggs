@@ -55,7 +55,7 @@ Backend regression (repository root, project interpreter): `python -m pytest -q`
 
 | Mode | What it talks to | Labeling |
 | --- | --- | --- |
-| **Live API** (default) | The Navigator backend. Uses the implemented routes; probes the planned assist/evidence routes and says so when they are absent. | Dataset mode, rule evidence modes and partial-data flags come from response metadata. |
+| **Live API** (default) | The Navigator backend, through its implemented routes. A capability the backend reports as unavailable (planner, renderer, evidence) is stated as unavailable. | Dataset mode, rule evidence modes and partial-data flags come from response metadata. |
 | **Synthetic demo** | Nothing. Replays checked-in contract examples and recorded backend output. | Permanent banner, a synthetic tag on every result, and the source file of each payload. |
 
 The mode is always a visible, explicit choice (header switch, `?mode=` in the URL, or
@@ -64,18 +64,23 @@ synthetic data.
 
 ### What the demo replays
 
-- `contracts/examples/*.json` — normal, empty, unknown lookups and error bodies (imported
-  directly from the Platform-owned directory).
+- `contracts/examples/*.json` — the API's own assisted-lookup example (`assist.json`: ranked
+  question, interval alternatives, evidence reports, rendering, traces), the normal, empty and
+  unknown lookups, and the error bodies (imported directly from the Platform-owned directory).
 - `contracts/research_examples/*.json` — the five assist fixtures, each explorable from the
   property list: decisive question, irrelevant missing fact, two unresolved exemptions,
   unresolved source coverage, bounded partial analysis.
+- `contracts/evidence_examples/*.json` — the missing-source-support case (a result held at
+  unknown because its source text is not in the dataset) and the source comparison record.
 - `src/demo/recorded/synthetic-replay.json` — verbatim backend output for the fictional Maple
-  Harbor store: lookups on four dates, rule detail, source text, date comparisons, and the
-  published scenarios T1–T5 against a store with no extracted rules (blocked). Regenerate
-  from the repository root with `.venv/bin/python frontend/scripts/record_demo.py`.
+  Harbor store: `assist()` responses (the function behind `POST /lookup/assist`) on four
+  dates, rule detail, source text, date comparisons, and the published scenarios T1–T5
+  against a store with no extracted rules (blocked). Regenerate from the repository root with
+  `.venv/bin/python frontend/scripts/record_demo.py`.
 
-The demo evaluates nothing. An answer changes a result only when the fixture already holds
-the evaluator's recorded output for exactly that value; anything else is labeled "not
+The demo evaluates nothing. An answer changes a result only when the payload already holds
+the evaluator's recorded output for that value: an exact recorded probe, or a number inside
+an interval the planner itself declared for an alternative. Anything else is labeled "not
 evaluated". A date or comparison with no recording is refused with the recorded options.
 
 ## How it is put together
@@ -105,9 +110,17 @@ implemented routes.
 
 ## Endpoints
 
-| Route | Status at this contract | Use |
-| --- | --- | --- |
-| `GET /health`, `GET /addresses`, `POST /lookup`, `GET /rules/{id}`, `GET /sources/{id}`, `POST /changes` | Implemented | Used directly. |
-| `POST /lookup/assist` | Planned (`docs/ASSIST_CONTRACT.md`) | Tried first; on a missing route the app says the planner is unavailable and uses `POST /lookup` with request-local `supplemental_facts`. |
-| `GET /rules/{id}/evidence` | Planned | Tried; when missing, the six evidence checks show "not checked by the service". |
-| `GET /sources/{id}/context`, `GET /facts` | Planned, request/response shape not yet specified | Not called. Context is shown from `GET /sources/{id}`. |
+| Route | Use |
+| --- | --- |
+| `GET /health` | Service state, dataset mode, capabilities, last extraction outcome. |
+| `GET /addresses` | Property search and selection. |
+| `POST /lookup/assist` | The lookup. Every accumulated answer is resent; returns the lookup, question plan, evidence reports, renderings, traces and remaining uncertainty. `capabilities` in the response decides what the UI offers. |
+| `POST /lookup` | Used only when a backend has no assist route, and said so on screen; answers go as `supplemental_facts`. |
+| `GET /facts` | Fact definitions (type, unit, allowed values) for supplying a fact when no question was planned. |
+| `GET /rules/{id}`, `GET /rules/{id}/evidence` | Rule versions and status events; the evidence report when the lookup did not carry one. |
+| `GET /sources/{id}` | Source record and text for quotes, offsets and surrounding context. |
+| `POST /changes` | Date comparison and published scenarios. |
+| `GET /sources/{id}/context` | Implemented by the backend; not called yet (context is cut from `GET /sources/{id}`). See `docs/UI.md`. |
+
+Errors handled by code: 404 `unknown_id`, 422, 503 `dataset_unavailable`, 503 `core_unavailable`,
+502 `core_contract_error`, plus transport, timeout and contract mismatch.

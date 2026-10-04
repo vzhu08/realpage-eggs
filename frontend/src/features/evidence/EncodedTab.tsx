@@ -1,4 +1,4 @@
-import type { EncodedRuleRendering, Evaluation, Evidence, Rule } from '../../api/types';
+import type { EncodedRuleRendering, Evaluation, Evidence, PredicateTrace, Rule } from '../../api/types';
 import { Facts, Notice, Tag } from '../../components/ui';
 import { formatDate } from '../../lib/dates';
 import { type ExpressionNode, describeExpression, isLiteralFalse } from '../../lib/expression';
@@ -10,6 +10,8 @@ interface Props {
   evaluation: Evaluation | null;
   rendering: EncodedRuleRendering | null;
   rendererState: string | null;
+  /** Predicate traces for this rule from the assist response, when the service supplied them. */
+  traces: PredicateTrace[];
   asOf: string;
 }
 
@@ -18,7 +20,7 @@ interface Props {
  * against what the source says. The rule-level encoding is kept apart from the
  * property-specific evaluation: the first is the same for every property.
  */
-export function EncodedTab({ rule, evaluation, rendering, rendererState, asOf }: Props) {
+export function EncodedTab({ rule, evaluation, rendering, rendererState, traces, asOf }: Props) {
   const primary: Evidence | undefined = rule.evidence.find((item) => item.quote === rule.quoted_span) ?? rule.evidence[0];
   return (
     <div className="evidence-tab">
@@ -102,7 +104,49 @@ export function EncodedTab({ rule, evaluation, rendering, rendererState, asOf }:
           <SupportingFacts facts={evaluation.coverage.supporting_facts ?? {}} />
         </section>
       )}
+
+      {traces.length > 0 && (
+        <section className="record" aria-labelledby="compare-trace">
+          <h4 id="compare-trace" className="record__title">
+            Evaluation trace
+          </h4>
+          <p className="hint">Each encoded condition with the evaluator’s result for this property. A condition marked “not decisive” could not change the outcome, so its facts are not asked for.</p>
+          <ul className="trace">
+            {traces.map((trace) => (
+              <TraceNode key={trace.predicate_id} trace={trace} root />
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
+  );
+}
+
+const TRACE_ROOTS: Record<string, string> = { coverage_conditions: 'Coverage conditions', exemption_conditions: 'Exemption conditions (as written; an exempt property is excluded)' };
+const TRUTH_TONE = { true: 'applies', false: 'muted', unknown: 'unknown' } as const;
+
+function TraceNode({ trace, root = false }: { trace: PredicateTrace; root?: boolean }) {
+  const node = describeExpression(trace.expression, trace.path);
+  const children = trace.children ?? [];
+  const label = root ? (TRACE_ROOTS[trace.path] ?? (trace.path.startsWith('interactions/') ? 'Interaction scope' : trace.path)) : null;
+  return (
+    <li className={trace.relevant === false ? 'trace__node is-irrelevant' : 'trace__node'} data-predicate={trace.predicate_id} data-result={trace.result}>
+      {label && <p className="trace__root">{label}</p>}
+      <p className="trace__line">
+        <Tag tone={TRUTH_TONE[trace.result]} icon={false}>
+          {TRUTH_LABELS[trace.result] ?? trace.result}
+        </Tag>
+        <span className={node.kind === 'group' ? 'trace__op' : 'trace__text'}>{node.text}</span>
+        {trace.relevant === false && <span className="trace__note">not decisive</span>}
+      </p>
+      {children.length > 0 && (
+        <ul className="trace trace--nested">
+          {children.map((child) => (
+            <TraceNode key={child.predicate_id} trace={child} />
+          ))}
+        </ul>
+      )}
+    </li>
   );
 }
 

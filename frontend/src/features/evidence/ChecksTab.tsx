@@ -71,24 +71,36 @@ export function ChecksTab({ rule, report, reportState, reportLoading, loaded }: 
                 <h4 className="check__title">{definition.title}</h4>
                 {results.length > 0 ? (
                   <span className="check__tags">
-                    {results.map((result, index) => (
-                      <Tag key={index} tone={STATUS[result.status]?.tone ?? 'neutral'}>
-                        {STATUS[result.status]?.label ?? sentence(result.status)}
-                        {result.field ? ` · ${humanize(result.field)}` : ''}
+                    {summarize(results).map((entry) => (
+                      <Tag key={entry.status} tone={STATUS[entry.status]?.tone ?? 'neutral'}>
+                        {STATUS[entry.status]?.label ?? sentence(entry.status)}
+                        {entry.count > 1 ? ` × ${entry.count}` : ''}
                       </Tag>
                     ))}
                   </span>
                 ) : (
-                  <Tag tone="muted">{reportLoading ? 'Checking…' : 'Not checked by the service'}</Tag>
+                  <Tag tone="muted">{reportLoading ? 'Checking…' : report ? 'No result in the report' : 'Not checked by the service'}</Tag>
                 )}
               </div>
               <p className="check__asks">{definition.asks}</p>
-              {results.map((result, index) => (
-                <div key={index} className="check__result">
-                  <p>{result.message}</p>
-                  <Spans spans={result.spans ?? []} />
-                </div>
-              ))}
+              {results.length > 0 && (
+                <ul className="check__results">
+                  {results.map((result, index) => (
+                    <li key={index} className="check__result" data-status={result.status}>
+                      <p>
+                        <span className={`check__status check__status--${STATUS[result.status]?.tone ?? 'neutral'}`}>{STATUS[result.status]?.label ?? sentence(result.status)}</span>
+                        {result.field && <span className="check__field"> · {result.field.split(',').map((field) => humanize(field.trim())).join(', ')}</span>}
+                        <span className="check__message"> — {result.message}</span>
+                      </p>
+                      {(result.spans ?? []).length > 0 && (
+                        <Disclosure summary={`Matched source text (${(result.spans ?? []).length})`}>
+                          <Spans spans={result.spans ?? []} />
+                        </Disclosure>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
               {results.length === 0 && (
                 <div className="check__observed">
                   <p className="check__observed-label">What the lookup data shows</p>
@@ -162,6 +174,14 @@ export function ChecksTab({ rule, report, reportState, reportLoading, loaded }: 
       )}
     </div>
   );
+}
+
+/** Distinct statuses within one kind of check, most severe first, with how many results carry each. */
+function summarize(results: EvidenceCheck[]): Array<{ status: EvidenceCheck['status']; count: number }> {
+  const order: EvidenceCheck['status'][] = ['fail', 'contradicted', 'missing', 'stale', 'insufficient', 'ambiguous', 'not_checked', 'pass', 'supported'];
+  const counts = new Map<EvidenceCheck['status'], number>();
+  for (const result of results) counts.set(result.status, (counts.get(result.status) ?? 0) + 1);
+  return [...counts.entries()].sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0])).map(([status, count]) => ({ status, count }));
 }
 
 function Spans({ spans }: { spans: SourceSpan[] }) {

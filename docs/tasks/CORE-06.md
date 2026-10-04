@@ -1,7 +1,8 @@
 # CORE-06: real change-case evidence and source disagreements
 
 Priority: P0 T1-T5 and lifecycle support; P1 reusable source comparison.
-State: Assigned; saved-evidence review Ready. Live extraction remains paused until the
+State: Partial; independent software and saved-evidence review complete. Missing sources,
+Platform geography/contract and independent human review block full acceptance. Live extraction remains paused until the
 human explicitly resumes the stopped run with an agreed budget. This card starts no provider job.
 Owner: Daniel / Core A, Rules & Evaluation.
 Reported checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`; verify its state first.
@@ -54,3 +55,26 @@ Have a human independently inspect consequential real cases before labeling them
 Handoff: commit, exact source/run evidence, T1-T5 statuses, corrected versus unresolved temporal
 counts, comparison examples, provenance and remaining input requests. No full-corpus/legal-accuracy
 claim from software tests. Do not edit Core B planner/renderer or UX files.
+
+## Current execution claim
+
+Daniel / Codex /root, session 01a103d0-b88b-7090-97aa-f9d5eec55d45; sole writer.
+Branch: `codex/core-a-change-evidence`. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence`.
+Base: `ad0881a15d3828a7ecc3bedb83167d6416912371` (current fetched main, accepted COORD-04).
+Immutable input: `/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session`.
+Private working copy: `/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/data/core06-working`.
+Claims: assigned Core A runtime/tests as needed, source_comparison.py/test_source_comparison.py, docs/core_rules/** and this card. Core B, Platform, frontend and board paths stay reserved.
+The latest direct user message authorizes pushing completed code commits, superseding the attachment’s manual-push restriction. It does not authorize provider work, uploads of the saved store, merges, deployments or teammate contact.
+PLAT-06 comparison contract is not released at this base; implement an internal comparison proposal on canonical types, with no new public schema or endpoint.
+
+## Offline delivery
+
+Implementation commit `b33af14dbd46bbad0ffafd795916bb503795a89b`; evidence and final handoff follow on this branch. See [CORE-06 handoff](../core_rules/core06/HANDOFF.md) for commands, file manifest, hashes, runs and dependencies.
+
+- Internal source/rule comparisons implemented; public contract remains Platform-owned. Change-reporting defects repaired with focused regressions.
+- 113 focused tests; disposable runner 275 full-suite tests; compile/contracts/diff passed. Shared generated artifacts and docs/core historical reports preserved.
+- Guarded offline validation/evaluation/export/lookup and actual-data assist HTTP 200 completed; zero provider/network attempts. All 500 IDs and exported references verified.
+- Reproduced140 review-needed rules,16 exportable,124 unresolved temporal results,0 corrections,0 resolved municipalities. T1 partial (250 uncertain,0 definite); T2–T5 blocked. Export explicitly partial.
+- D022 agent source review finished; D069/MA histories/D048 reviewed; all 124 temporal cases triaged. No independent human review claimed.
+- Original 182-file store unchanged;94-file precise transfer manifest stays local. Platform destination/assembly and missing legal sources remain dependencies.
+- Paid queue proposed, not executed; explicit resume and budget required. User authorized branch push only; no store upload/merge/deploy/teammate contact.

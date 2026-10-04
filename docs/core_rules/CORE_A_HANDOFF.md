@@ -1,5 +1,21 @@
 # Daniel — Core A Rules & Evaluation
 
+## Current CORE-06 delivery
+
+CORE-06 offline implementation/review is complete on `codex/core-a-change-evidence`, based on
+`ad0881a`, in `/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence`. Runtime commit:
+`b33af14dbd46bbad0ffafd795916bb503795a89b`. See [current handoff](core06/HANDOFF.md) and its JSON evidence.
+113 focused and 275 full-suite tests pass. The private saved-data run preserved 500 IDs and all original
+inputs, with zero provider/network attempts. Comparison logic is internal pending PLAT-06.
+T1 is now partial; T2–T5 remain blocked.140 review-needed rules / 16 exportable / 124 temporal unknown remain.
+D022's separate agent source review is now finished; human review remains pending. A 94-file local
+transfer manifest, exact-span case reports, source requests and paused budget proposal are ready.
+The latest user instruction authorizes pushing this new branch; extraction/store upload/merge/deploy
+and teammate contact remain unauthorized. Prior checkout/history is untouched.
+
+The sections below preserve the earlier CORE-01/02/03 closeout. Their unfinished-D022 and old
+T1-complete statements are historical and are superseded by CORE-06's evidence above.
+
 Current session: Codex /root, 01a103d0-b88b-7090-97aa-f9d5eec55d45.
 Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`. Branch: `codex/core-backend`.
 The user assigned continued Core A work and local conflict resolution on October 3, 2026.

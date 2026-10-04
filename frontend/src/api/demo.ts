@@ -3,17 +3,21 @@
  * It evaluates nothing: a request it holds no recording for fails with `not_recorded`.
  */
 import {
+  ASSIST_EXAMPLE,
+  EVIDENCE_FIXTURES,
   FIXTURE_COPY,
   LOOKUP_EXAMPLES,
+  RECORDED_ASSISTS,
   RECORDED_CHANGES,
-  RECORDED_LOOKUPS,
   RECORDED_MANIFEST,
   RECORDED_PATH,
   RECORDED_RULES,
   RECORDED_SOURCES,
   RESEARCH_FIXTURES,
+  type ResearchFixture,
 } from '../demo/fixtures';
-import { replayFixture } from '../demo/replay';
+import { replayAssist } from '../demo/replay';
+import { readMetadata } from '../lib/metadata';
 import { ApiError } from './errors';
 import type {
   AddressItem,
@@ -23,6 +27,7 @@ import type {
   DataSource,
   DemoCatalog,
   EvidenceReportOutcome,
+  FactDefinition,
   LookupOutcome,
   LookupQuery,
   LookupResponse,
@@ -60,9 +65,14 @@ const normalizeChange = (request: ChangeRequest) =>
 const describeChange = (request: ChangeRequest) =>
   request.test_id ? `Scenario ${request.test_id}` : `${request.before} → ${request.after}${request.scenario === 'if_enacted' ? ' (if enacted)' : ''}`;
 
+/** Fixture cases the property list offers: the five question-flow fixtures, then the evidence-failure example. */
+const CASES: ResearchFixture[] = [...RESEARCH_FIXTURES, ...EVIDENCE_FIXTURES];
+
 export class DemoSource implements DataSource {
   readonly mode = 'demo' as const;
   readonly describe = 'Synthetic demo: replays checked-in examples and recorded backend output';
+  /** The lookup response last served, so follow-up requests stay consistent with it. */
+  private current: LookupResponse | null = null;
 
   async health(): Promise<null> {
     // There is no service in demo mode, so there is no health to report.
@@ -91,19 +101,33 @@ export class DemoSource implements DataSource {
     return checked('AddressPage', page, 'demo addresses').data;
   }
 
+  /** Fact definitions seen in any checked-in or recorded question, keyed by field. Nothing is authored here. */
+  async facts(): Promise<Record<string, FactDefinition> | null> {
+    const definitions: Record<string, FactDefinition> = {};
+    for (const response of [ASSIST_EXAMPLE.response, ...CASES.map((fixture) => fixture.response), ...RECORDED_ASSISTS.map((entry) => entry.response)]) {
+      for (const question of response.question_plan.questions) definitions[question.fact.field] = question.fact;
+    }
+    return definitions;
+  }
+
   async lookup(query: LookupQuery, signal?: AbortSignal): Promise<LookupOutcome> {
     await pause(signal);
-    if (query.fixtureCase) return this.fixtureLookup(query);
+    const outcome = query.fixtureCase ? this.fixtureLookup(query) : this.plainLookup(query);
+    this.current = outcome.lookup;
+    return outcome;
+  }
 
+  private plainLookup(query: LookupQuery): LookupOutcome {
     const known = this.items().some((item) => item.property.address_id === query.address_id);
     if (!known) {
       throw new ApiError({ kind: 'not_found', endpoint: 'demo lookup', code: 'unknown_id', message: `Unknown address ID ${query.address_id}` });
     }
     const sameRequest = (request: { address_id: string; as_of: string }) => request.address_id === query.address_id && request.as_of === query.as_of;
-    const example = LOOKUP_EXAMPLES.find((candidate) => sameRequest(candidate.request));
-    const replay = example ? undefined : RECORDED_LOOKUPS.find((candidate) => sameRequest(candidate.request));
-    const response: LookupResponse | undefined = example?.response ?? replay?.response;
-    if (!response) {
+    // The API's own checked-in response wins; other property/date pairs come from recorded backend output.
+    const example = sameRequest(ASSIST_EXAMPLE.request) ? ASSIST_EXAMPLE : undefined;
+    const recorded = example ? undefined : RECORDED_ASSISTS.find((candidate) => sameRequest(candidate.request));
+    const base = example?.response ?? recorded?.response;
+    if (!base) {
       const dates = this.catalog().lookupDates[query.address_id] ?? [];
       throw new ApiError({
         kind: 'not_recorded',
@@ -113,35 +137,27 @@ export class DemoSource implements DataSource {
         suggestions: dates,
       });
     }
-    const { warnings } = checked('LookupResponse', response, 'demo lookup');
-    const cases = RESEARCH_FIXTURES.filter((fixture) => sameRequest(fixture.request));
+    const replay = replayAssist(base, query.answers);
+    const { warnings } = checked('AssistResponse', replay.assist, 'demo lookup');
     return {
       query,
-      lookup: response,
-      assist: null,
-      planner: {
-        kind: 'no_fixture',
-        detail: cases.length
-          ? 'This recorded lookup carries no question plan. The question-flow fixtures for this property and date are listed below.'
-          : 'No question-flow fixture exists for this property and date.',
-      },
+      lookup: replay.assist.lookup,
+      assist: replay.assist,
+      planner: { kind: 'response' },
       origin: example
-        ? { kind: 'checked_in_example', label: 'Checked-in example', detail: example.path }
+        ? { kind: replay.replayed ? 'fixture_replay' : 'checked_in_example', label: 'Checked-in API example', detail: example.path }
         : { kind: 'recorded_replay', label: 'Recorded backend output', detail: RECORDED_PATH },
-      dispositions: query.answers.map((answer) => ({
-        field: answer.field,
-        status: 'not_evaluated' as const,
-        note: 'Plain demo lookups cannot apply answers. Open a question-flow fixture or switch to the live API.',
-      })),
-      notices: [],
+      dispositions: replay.dispositions,
+      replayed: replay.replayed,
+      notices: replay.notices,
       contractWarnings: warnings,
     };
   }
 
   private fixtureLookup(query: LookupQuery): LookupOutcome {
-    const fixture = RESEARCH_FIXTURES.find((candidate) => candidate.case === query.fixtureCase);
+    const fixture = CASES.find((candidate) => candidate.case === query.fixtureCase);
     if (!fixture) {
-      throw new ApiError({ kind: 'not_recorded', endpoint: 'demo lookup', message: `Unknown fixture case “${query.fixtureCase}”.`, suggestions: RESEARCH_FIXTURES.map((item) => item.case) });
+      throw new ApiError({ kind: 'not_recorded', endpoint: 'demo lookup', message: `Unknown fixture case “${query.fixtureCase}”.`, suggestions: CASES.map((item) => item.case) });
     }
     if (fixture.request.address_id !== query.address_id || fixture.request.as_of !== query.as_of) {
       throw new ApiError({
@@ -151,7 +167,7 @@ export class DemoSource implements DataSource {
         suggestions: [fixture.request.as_of],
       });
     }
-    const replay = replayFixture(fixture, query.answers);
+    const replay = replayAssist(fixture.response, query.answers);
     const { warnings } = checked('AssistResponse', replay.assist, `fixture ${fixture.case}`);
     return {
       query,
@@ -176,15 +192,22 @@ export class DemoSource implements DataSource {
 
   async source(docId: string, signal?: AbortSignal): Promise<SourceDocument> {
     await pause(signal);
+    // A fixture that reports this source's text as missing must not be contradicted by the recorded text.
+    const shown = this.current;
+    if (shown && readMetadata(shown).missingSourceIds.includes(docId)) {
+      const record = shown.sources.find((source) => source.doc_id === docId);
+      if (record) return checked('SourceDocument', { ...record, text: '' }, 'demo source').data;
+    }
     const source = RECORDED_SOURCES[docId];
     if (!source) throw new ApiError({ kind: 'not_recorded', endpoint: 'demo source', message: `No recorded source text for ${docId}.` });
     return checked('SourceDocument', source, 'demo source').data;
   }
 
   async evidenceReport(): Promise<EvidenceReportOutcome> {
+    // Reports travel inside assist responses. The authored question-flow fixtures carry none.
     return {
       report: null,
-      unavailable: 'No evidence report is checked in yet. The research fixtures carry an empty evidence_reports list and mark evidence_checks as dependency_unavailable.',
+      unavailable: 'This fixture carries no evidence report (its evidence_reports list is empty and it marks evidence as dependency_unavailable).',
     };
   }
 
@@ -211,11 +234,11 @@ export class DemoSource implements DataSource {
       const dates = (lookupDates[request.address_id] ??= []);
       if (!dates.includes(request.as_of)) dates.push(request.as_of);
     };
-    LOOKUP_EXAMPLES.forEach((example) => add(example.request));
-    RECORDED_LOOKUPS.forEach((entry) => add(entry.request));
+    add(ASSIST_EXAMPLE.request);
+    RECORDED_ASSISTS.forEach((entry) => add(entry.request));
     Object.values(lookupDates).forEach((dates) => dates.sort());
     return {
-      cases: RESEARCH_FIXTURES.map((fixture) => ({
+      cases: CASES.map((fixture) => ({
         id: fixture.case,
         title: FIXTURE_COPY[fixture.case]?.title ?? fixture.case,
         purpose: FIXTURE_COPY[fixture.case]?.purpose ?? 'Research contract fixture.',

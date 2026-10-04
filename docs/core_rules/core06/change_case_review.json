@@ -1,0 +1,612 @@
+{
+  "T1": {
+    "engine_status": "partial",
+    "evidence_readiness": "unestablished",
+    "scenario": "actual",
+    "before": "2025-12-31",
+    "after": "2026-01-02",
+    "mapped_rule_ids": {
+      "CA-ALG-01": [
+        "r-57328356379e89d4f338",
+        "r-912998e64d23de87a92c"
+      ]
+    },
+    "support": [
+      {
+        "rule_id": "r-57328356379e89d4f338",
+        "spans": [
+          {
+            "supports": [
+              "citation",
+              "provision_key"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 3708,
+              "end": 3777,
+              "text": "Section 16729 is added to the Business and Professions Code, to read:",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "jurisdiction",
+              "level"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 3638,
+              "end": 3696,
+              "text": "The people of the State of California do enact as follows:",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "title",
+              "category",
+              "requirement",
+              "key_value",
+              "quoted_span",
+              "coverage_conditions"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 3785,
+              "end": 4003,
+              "text": "(a) It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of this chapter.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "citation",
+              "requirement"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 4306,
+              "end": 4515,
+              "text": "(c) Nothing in this section shall impair or limit the applicability of antitrust laws.\n(d) For purposes of this section, the following definitions apply:\n(1) “Antitrust laws” means the provisions of this part.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 4516,
+              "end": 4742,
+              "text": "(2) “Commercial term” includes, without limitation, any of the following:\n(A) Level of service.\n(B) Availability.\n(C) Output, including quantities of products produced or distributed or the amount or level of service provided.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "coverage_conditions",
+              "requirement"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 4743,
+              "end": 4992,
+              "text": "(3) “Common pricing algorithm” means any\nmethodology, including a computer, software, or other technology, used by two or more persons, that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial\nterm.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "coverage_conditions",
+              "requirement"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 4993,
+              "end": 5197,
+              "text": "(4) “Distribute,” “distribution,” and “distributing” include selling, licensing, providing access to, or otherwise making available by any means, including through a subscription or the sale of a service.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions",
+              "exemptions"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 5198,
+              "end": 5322,
+              "text": "(5) “Person” has the same meaning as defined in Section 16702 and does not include the end consumer of a product or service.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "coverage_conditions",
+              "requirement"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 5323,
+              "end": 5570,
+              "text": "(6) “Price” means the amount of money or other thing of value, whether tangible or not, expected, required, or given in payment for any product or service, including compensation paid to an employee or independent contractor for services provided.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "lifecycle",
+              "status_as_of"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 498,
+              "end": 538,
+              "text": "10/06/25 - Chaptered\n09/16/25 - Enrolled",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "penalties"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 3048,
+              "end": 3238,
+              "text": "Because the bill would expand the scope of activities prohibited by the Cartwright Act, the violation of which is punishable as a crime, the bill would impose a state-mandated local program.",
+              "section": null
+            }
+          }
+        ]
+      },
+      {
+        "rule_id": "r-912998e64d23de87a92c",
+        "spans": [
+          {
+            "supports": [
+              "citation",
+              "provision_key"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 3708,
+              "end": 3777,
+              "text": "Section 16729 is added to the Business and Professions Code, to read:",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "jurisdiction",
+              "level"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 3638,
+              "end": 3696,
+              "text": "The people of the State of California do enact as follows:",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "jurisdiction",
+              "category",
+              "title",
+              "requirement",
+              "key_value",
+              "quoted_span",
+              "coverage_conditions"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 4004,
+              "end": 4305,
+              "text": "(b) It shall be unlawful for a person to use or distribute a common pricing algorithm if the person coerces another person to set or adopt a recommended price or commercial term recommended by the common pricing algorithm for the same or similar products or services in the jurisdiction of this state.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "citation",
+              "requirement"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 4306,
+              "end": 4515,
+              "text": "(c) Nothing in this section shall impair or limit the applicability of antitrust laws.\n(d) For purposes of this section, the following definitions apply:\n(1) “Antitrust laws” means the provisions of this part.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 4516,
+              "end": 4742,
+              "text": "(2) “Commercial term” includes, without limitation, any of the following:\n(A) Level of service.\n(B) Availability.\n(C) Output, including quantities of products produced or distributed or the amount or level of service provided.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "coverage_conditions",
+              "requirement"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 4743,
+              "end": 4992,
+              "text": "(3) “Common pricing algorithm” means any\nmethodology, including a computer, software, or other technology, used by two or more persons, that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial\nterm.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "coverage_conditions",
+              "requirement"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 4993,
+              "end": 5197,
+              "text": "(4) “Distribute,” “distribution,” and “distributing” include selling, licensing, providing access to, or otherwise making available by any means, including through a subscription or the sale of a service.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions",
+              "exemptions"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 5198,
+              "end": 5322,
+              "text": "(5) “Person” has the same meaning as defined in Section 16702 and does not include the end consumer of a product or service.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "coverage_conditions",
+              "requirement"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 5323,
+              "end": 5570,
+              "text": "(6) “Price” means the amount of money or other thing of value, whether tangible or not, expected, required, or given in payment for any product or service, including compensation paid to an employee or independent contractor for services provided.",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "lifecycle",
+              "status_as_of"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 498,
+              "end": 538,
+              "text": "10/06/25 - Chaptered\n09/16/25 - Enrolled",
+              "section": null
+            }
+          },
+          {
+            "supports": [
+              "penalties"
+            ],
+            "span": {
+              "doc_id": "D022",
+              "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+              "start": 3048,
+              "end": 3238,
+              "text": "Because the bill would expand the scope of activities prohibited by the Cartwright Act, the violation of which is punishable as a crime, the bill would impose a state-mandated local program.",
+              "section": null
+            }
+          }
+        ]
+      }
+    ],
+    "additional_saved_source_spans": {
+      "D022": [
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 1183,
+          "end": 1275,
+          "text": "[\nApproved  by\nGovernor\nOctober 06, 2025.\nFiled with\nSecretary of State\nOctober 06, 2025.\n]\n",
+          "section": null
+        },
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 3785,
+          "end": 4003,
+          "text": "(a) It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of this chapter.",
+          "section": null
+        },
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 4004,
+          "end": 4305,
+          "text": "(b) It shall be unlawful for a person to use or distribute a common pricing algorithm if the person coerces another person to set or adopt a recommended price or commercial term recommended by the common pricing algorithm for the same or similar products or services in the jurisdiction of this state.",
+          "section": null
+        },
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 4306,
+          "end": 4515,
+          "text": "(c) Nothing in this section shall impair or limit the applicability of antitrust laws.\n(d) For purposes of this section, the following definitions apply:\n(1) “Antitrust laws” means the provisions of this part.",
+          "section": null
+        },
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 4516,
+          "end": 4742,
+          "text": "(2) “Commercial term” includes, without limitation, any of the following:\n(A) Level of service.\n(B) Availability.\n(C) Output, including quantities of products produced or distributed or the amount or level of service provided.",
+          "section": null
+        },
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 4743,
+          "end": 4992,
+          "text": "(3) “Common pricing algorithm” means any\nmethodology, including a computer, software, or other technology, used by two or more persons, that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial\nterm.",
+          "section": null
+        },
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 4993,
+          "end": 5197,
+          "text": "(4) “Distribute,” “distribution,” and “distributing” include selling, licensing, providing access to, or otherwise making available by any means, including through a subscription or the sale of a service.",
+          "section": null
+        },
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 5198,
+          "end": 5322,
+          "text": "(5) “Person” has the same meaning as defined in Section 16702 and does not include the end consumer of a product or service.",
+          "section": null
+        },
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 5323,
+          "end": 5570,
+          "text": "(6) “Price” means the amount of money or other thing of value, whether tangible or not, expected, required, or given in payment for any product or service, including compensation paid to an employee or independent contractor for services provided.",
+          "section": null
+        },
+        {
+          "doc_id": "D022",
+          "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+          "start": 3048,
+          "end": 3238,
+          "text": "Because the bill would expand the scope of activities prohibited by the Cartwright Act, the violation of which is punishable as a crime, the bill would impose a state-mandated local program.",
+          "section": null
+        }
+      ]
+    },
+    "missing_dependencies": "AB325 operative-date authority and BPC16702; actual SB763 text/history missing; some property conditions unsupported.",
+    "definitely_affected_count": 0,
+    "uncertain_count": 250,
+    "notes": [
+      "Unresolved rule evidence: r-57328356379e89d4f338, r-912998e64d23de87a92c",
+      "Uncertain impacts are separate from definitely affected addresses"
+    ],
+    "address_set_method": "existing evaluator with actual saved facts; no organizer expected sets used",
+    "human_review": "pending"
+  },
+  "T2": {
+    "engine_status": "blocked",
+    "evidence_readiness": "unestablished",
+    "scenario": "actual",
+    "before": "2026-10-01",
+    "after": "2026-10-01",
+    "mapped_rule_ids": {
+      "HOB-ALG-01": [],
+      "JC-ALG-01": []
+    },
+    "support": [],
+    "additional_saved_source_spans": {},
+    "missing_dependencies": "Hoboken/Jersey City ordinance full text, adoption/effectiveness and exclusions; Platform legal municipality resolution. D036 landlord office page does not supply algorithm ordinance.",
+    "definitely_affected_count": 0,
+    "uncertain_count": 0,
+    "notes": [
+      "Missing extracted legal evidence for HOB-ALG-01; test cannot be established from its description",
+      "Missing extracted legal evidence for JC-ALG-01; test cannot be established from its description"
+    ],
+    "address_set_method": "existing evaluator with actual saved facts; no organizer expected sets used",
+    "human_review": "pending"
+  },
+  "T3": {
+    "engine_status": "blocked",
+    "evidence_readiness": "unestablished",
+    "scenario": "actual",
+    "before": "2026-10-01",
+    "after": "2027-07-02",
+    "mapped_rule_ids": {
+      "NJ-ALG-01": [],
+      "JC-ALG-01": [],
+      "HOB-ALG-01": []
+    },
+    "support": [],
+    "additional_saved_source_spans": {
+      "D069": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 208,
+          "end": 253,
+          "text": "P.L.\n2026, CHAPTER 43,\napproved July 20, 2026",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 10175,
+          "end": 10283,
+          "text": "9.    This act shall take effect on the first day of\nthe twelfth month next following the date of enactment.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 9341,
+          "end": 9570,
+          "text": "b.    A municipality shall be prohibited from enacting\nan ordinance that conflicts with this act.  This subsection shall not be\nconstrued to prohibit the enactment of ordinances explicitly authorized or\nrequired by any other law.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 2550,
+          "end": 8071,
+          "text": "3.    As used in this act:\n“Affordability controls” means a restriction on rent\nprice established pursuant to a government program, including but not limited\nto: the federal section 8 Housing Choice Voucher Homeownership Program,\nauthorized pursuant to Subpart M of Part 982 of Title 24 of the Code of Federal\nRegulations (24 CFR 982.601 et seq.); P.L.2004, c.140 (C.52:27D-287.1 et seq.);\nthe “Fair Housing Act,” P.L.1985, c.222 (C.52:27D-301 et al.); any program\nadministered by the New Jersey Housing and Mortgage Finance Agency; a rent\ncontrol or rent leveling ordinance; or other local, State, or federal\ngovernment housing program.\n1\n“\nAlgorithmic\ndevice” means a device that uses one or more algorithms to process or otherwise\nperform calculations of data, including, but not limited to, data concerning\nrental prices, material lease terms, or occupancy levels.  An algorithmic\ndevice does not include: (1) a spreadsheet that (a) operates without artificial\nintelligence and (b) requires human analysis to process or otherwise perform\ncalculations of data; or (2) a database that only uses an algorithm to query\nunprocessed data stored on or within that database\n.\n1\n“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.\n“Coordinating function” means:\n(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.\n“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.\n“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.\n“Person” means, unless the context requires otherwise,\nany natural person or persons, or any corporation, partnership, company, trust,\nor association of persons.\n“Parallel pricing coordination” means a tacit or\nexpress agreement between two or more rental property owners to raise, change,\nmaintain, or manipulate pricing for the leasing of reasonably interchangeable\nresidential dwelling units, unless required to do so in accordance with\naffordability controls.  This includes agreements between a coordinator and\nmultiple property owners.\n1\n“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.\n“Tacit agreement” means mutual consent demonstrated\nwithout verbal or written communication.  Mutual consent may, but need not, be\ndemonstrated by a pattern of conduct.\n",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8071,
+          "end": 8909,
+          "text": "4.    It\nshall be unlawful and a violation of the “New Jersey Antitrust Act,” P.L.1970,\nc.73 (C.56:9-1 et seq.) for:\na.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\nb.    a coordinator to facilitate a tacit or express\nagreement among rental property owners that restricts competition with respect\nto residential dwelling units, including by performing a coordinating\nfunction;\nc.     two or more persons to engage in\n1\nor\notherwise facilitate\n1\nparallel pricing coordination;\nd.    any agent or representative of a coordinator or\nsubcontractor thereof to engage in parallel pricing coordination; or\ne.     any person to perform a coordinating function.\n",
+          "section": null
+        }
+      ]
+    },
+    "missing_dependencies": "NJ extraction paused; local ordinance texts, exact target/direction/scope and conflict analysis absent; qualified clause alone proves no particular supersession.",
+    "definitely_affected_count": 0,
+    "uncertain_count": 0,
+    "notes": [
+      "Missing extracted legal evidence for NJ-ALG-01; test cannot be established from its description",
+      "Missing local conflict evidence for JC-ALG-01",
+      "Missing local conflict evidence for HOB-ALG-01",
+      "No evidence-backed state/local interaction extracted; expected conflict cannot be presumed from test text"
+    ],
+    "address_set_method": "existing evaluator with actual saved facts; no organizer expected sets used",
+    "human_review": "pending"
+  },
+  "T4": {
+    "engine_status": "blocked",
+    "evidence_readiness": "unestablished",
+    "scenario": "if_enacted",
+    "before": "2026-10-01",
+    "after": "2026-10-01",
+    "mapped_rule_ids": {
+      "MA-ALG-P1": [],
+      "MA-ALG-P2": []
+    },
+    "support": [],
+    "additional_saved_source_spans": {
+      "D045": [
+        {
+          "doc_id": "D045",
+          "source_hash": "8bc537dfe4d0e00b829147ae82ba11d40bef8a2b0696f487c417ca517673bba7",
+          "start": 192,
+          "end": 774,
+          "text": "An Act relative to preventing algorithmic rent fixing in the rental housing market\nView Text\nPrint Preview\nDownload PDF\nBill Information\nBill Information\nSponsor:\nJoint Committee on Housing\nStatus:\nReferred to\nHouse Committee on Ways and Means\nTabs\nBill History\nCosponsors\nCommittee Vote\nSimilar Bills\nBill History\nDisplaying  3 actions for Bill H.5222\nBill History\nDate\nBranch\nAction\n3/12/2026\nHouse\nReported from the committee on\nHousing\n3/12/2026\nHouse\nNew draft of\nH1564\n3/12/2026\nHouse\nBill reported favorably by committee and referred to the committee on\nHouse Ways and Means\n",
+          "section": null
+        }
+      ],
+      "D046": [
+        {
+          "doc_id": "D046",
+          "source_hash": "6ea5313d0a656ab73b683e72b594cf143ee61bd6923ee1d9f3df46682248004d",
+          "start": 192,
+          "end": 1223,
+          "text": "An Act prohibiting algorithmic rent setting\nSenate, March 12, 2026 -- The committee on Housing, to whom was referred the petitions (accompanied by bill, Senate, No. 994) of Cindy F. Friedman and Julian Cyr for legislation to prohibit algorithmic rent setting; and (accompanied by bill, Senate, No. 1016) of Michael O. Moore, Patricia D. Jehlen and James B. Eldridge for legislation to establish the Preventing Algorithmic Rent Fixing in the Rental Housing Market Act., report the accompanying bill (Senate, No. 2983).\nView Text\nPrint Preview\nDownload PDF\nBill Information\nBill Information\nSponsor:\nJoint Committee on Housing\nStatus:\nReferred to\nSenate Committee on Ways and Means\nTabs\nBill History\nCosponsors\nCommittee Vote\nSimilar Bills\nBill History\nDisplaying  3 actions for Bill S.2983\nBill History\nDate\nBranch\nAction\n3/12/2026\nSenate\nReported from the committee on\nHousing\n3/12/2026\nSenate\nNew draft of\nS994\nand\nS1016\n3/12/2026\nSenate\nBill reported favorably by committee and referred to the committee on\nSenate Ways and Means\n",
+          "section": null
+        }
+      ],
+      "D047": [
+        {
+          "doc_id": "D047",
+          "source_hash": "9af3e5eba834b37a5115fef298f5e2a1c1fc0b93c1d69500aea9d6bc7ee24b93",
+          "start": 204,
+          "end": 1235,
+          "text": "An Act prohibiting algorithmic rent setting\nSenate, March 12, 2026 -- The committee on Housing, to whom was referred the petitions (accompanied by bill, Senate, No. 994) of Cindy F. Friedman and Julian Cyr for legislation to prohibit algorithmic rent setting; and (accompanied by bill, Senate, No. 1016) of Michael O. Moore, Patricia D. Jehlen and James B. Eldridge for legislation to establish the Preventing Algorithmic Rent Fixing in the Rental Housing Market Act., report the accompanying bill (Senate, No. 2983).\nView Text\nPrint Preview\nDownload PDF\nBill Information\nBill Information\nSponsor:\nJoint Committee on Housing\nStatus:\nReferred to\nSenate Committee on Ways and Means\nTabs\nBill History\nCosponsors\nCommittee Vote\nSimilar Bills\nBill History\nDisplaying  3 actions for Bill S.2983\nBill History\nDate\nBranch\nAction\n3/12/2026\nSenate\nReported from the committee on\nHousing\n3/12/2026\nSenate\nNew draft of\nS994\nand\nS1016\n3/12/2026\nSenate\nBill reported favorably by committee and referred to the committee on\nSenate Ways and Means\n",
+          "section": null
+        }
+      ]
+    },
+    "missing_dependencies": "Substantive MA bills unavailable. Procedure-only history cannot supply proposed requirements. Hypothetical is not actual enactment.",
+    "definitely_affected_count": 0,
+    "uncertain_count": 0,
+    "notes": [
+      "Missing extracted legal evidence for MA-ALG-P1; test cannot be established from its description",
+      "Missing extracted legal evidence for MA-ALG-P2; test cannot be established from its description",
+      "Hypothetical only: selected pending rules are assumed enacted and effective on the comparison date; stored law is unchanged"
+    ],
+    "address_set_method": "existing evaluator with actual saved facts; no organizer expected sets used",
+    "human_review": "pending"
+  },
+  "T5": {
+    "engine_status": "blocked",
+    "evidence_readiness": "unestablished",
+    "scenario": "actual",
+    "before": "2026-10-01",
+    "after": "2026-10-01",
+    "mapped_rule_ids": {
+      "MA-RENT-P1": []
+    },
+    "support": [],
+    "additional_saved_source_spans": {
+      "D048": [
+        {
+          "doc_id": "D048",
+          "source_hash": "090647f489ec5f03c114df23b74c28a107a7e0b855e382969c27dbf58a55837d",
+          "start": 414,
+          "end": 1878,
+          "text": "Section 4. No city or town may enact, maintain or enforce rent control of any kind, except that any city or town that accepts this chapter may adopt rent control regulation that provides:\n(a) after six months from the date of the initial adoption of rent control regulation by a particular city or town, compliance on the part of property owners as to the rent control regulation or any subsequently adopted rent control regulation shall be entirely voluntary and uncoerced, and the property of a person or entity declining to have his or its property subjected to such regulation shall be wholly unaffected by any aspect of the rent control regulation or any subsequently adopted rent control regulation;\n(b) such regulation may not include the regulation of occupancy, services, evictions, condominium conversion or the removal of properties from such regulation, nor may such regulation apply to any rental unit that is owned by a person or entity owning less than ten rental units or that has a fair market rent exceeding $400; and\n(c) a municipality adopting such regulation shall compensate owners of rent controlled units for each unit in the amount of the difference between the unit's fair market rent and the unit's below market, rent controlled rent, with such compensation coming from the municipality's general funds, so that the cost of any rent control shall be borne by all taxpayers of a municipality and not by the owners of regulated units only.",
+          "section": null
+        }
+      ]
+    },
+    "missing_dependencies": "Actual IP25-21 petition and authoritative failed disposition absent; D048 is a different statute, not failed-proposal evidence.",
+    "definitely_affected_count": 0,
+    "uncertain_count": 0,
+    "notes": [
+      "Missing extracted legal evidence for MA-RENT-P1; test cannot be established from its description"
+    ],
+    "address_set_method": "existing evaluator with actual saved facts; no organizer expected sets used",
+    "human_review": "pending"
+  }
+}

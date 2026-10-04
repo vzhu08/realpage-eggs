@@ -7,7 +7,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { validate } from '../../src/api/validate';
-import { ERROR_EXAMPLES, LOOKUP_EXAMPLES, RECORDED_CHANGES, RECORDED_LOOKUPS, RECORDED_RULES, RECORDED_SOURCES, RESEARCH_FIXTURES } from '../../src/demo/fixtures';
+import { ASSIST_EXAMPLE, ERROR_EXAMPLES, EVIDENCE_FIXTURES, LOOKUP_EXAMPLES, RECORDED_ASSISTS, RECORDED_CHANGES, RECORDED_RULES, RECORDED_SOURCES, RESEARCH_FIXTURES, SOURCE_COMPARISON } from '../../src/demo/fixtures';
 
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
 
@@ -39,9 +39,29 @@ test('all five research fixtures match AssistResponse and are labeled as propose
   }
 });
 
+test('the implemented-API examples match their models: assist response, evidence failure, source comparison', () => {
+  assert.deepEqual(validate('AssistResponse', ASSIST_EXAMPLE.response), { errors: [], warnings: [] });
+  assert.equal(ASSIST_EXAMPLE.contract_status, 'implemented_platform_api');
+  assert.deepEqual(ASSIST_EXAMPLE.request, { address_id: 'SYNTH-003', as_of: '2026-11-15' });
+  assert.equal(EVIDENCE_FIXTURES.length, 1);
+  for (const fixture of EVIDENCE_FIXTURES) {
+    assert.deepEqual(validate('AssistResponse', fixture.response), { errors: [], warnings: [] }, fixture.path);
+    assert.equal(fixture.fixture_mode, 'synthetic');
+  }
+  assert.deepEqual(validate('Rule', SOURCE_COMPARISON.rule).errors, []);
+  assert.deepEqual(validate('EvidenceReport', SOURCE_COMPARISON.evidence).errors, []);
+  assert.deepEqual(validate('EncodedRuleRendering', SOURCE_COMPARISON.encoded_rule).errors, []);
+  // The evidence report keeps its checks separate: several kinds, never one score.
+  const kinds = new Set(SOURCE_COMPARISON.evidence.checks.map((check) => check.kind));
+  assert.deepEqual([...kinds].sort(), ['citation_anchor', 'dependencies', 'quote_presence', 'semantic_support', 'source_availability', 'source_identity']);
+});
+
 test('every recorded replay payload matches its contract model', () => {
-  assert.ok(RECORDED_LOOKUPS.length >= 12);
-  for (const entry of RECORDED_LOOKUPS) assert.deepEqual(validate('LookupResponse', entry.response).errors, [], JSON.stringify(entry.request));
+  assert.ok(RECORDED_ASSISTS.length >= 12);
+  for (const entry of RECORDED_ASSISTS) {
+    assert.deepEqual(validate('AssistResponse', entry.response), { errors: [], warnings: [] }, JSON.stringify(entry.request));
+    assert.equal(entry.response.mode, 'synthetic');
+  }
   for (const [id, detail] of Object.entries(RECORDED_RULES)) assert.deepEqual(validate('RuleDetail', detail).errors, [], id);
   for (const [id, source] of Object.entries(RECORDED_SOURCES)) assert.deepEqual(validate('SourceDocument', source).errors, [], id);
   for (const entry of RECORDED_CHANGES) {

@@ -1,0 +1,138 @@
+{
+  "cases": [
+    {
+      "case_id": "AB325_missing_effectiveness",
+      "doc_ids": [
+        "D022"
+      ],
+      "stored_rule_ids": [
+        "r-57328356379e89d4f338",
+        "r-912998e64d23de87a92c"
+      ],
+      "purpose": "Do not ask property facts as a remedy for missing operative-date authority; distinguish restraint-of-trade and coercion predicates.",
+      "as_of": "2026-10-01",
+      "author": "Core A agent",
+      "named_human_reviewer": null,
+      "human_review": "pending",
+      "expected_legal_result": "Not established; this is a review candidate, not a scored legal answer",
+      "evidence_reports": [
+        "priority_source_review.json",
+        "temporal_triage.json",
+        "source_comparisons.json"
+      ],
+      "runnable_scope": "existing saved rule through evaluate_rules/assist"
+    },
+    {
+      "case_id": "Berkeley_pending",
+      "doc_ids": [
+        "D001"
+      ],
+      "stored_rule_ids": [
+        "r-12c99cf95c4f2cd2242e",
+        "r-f372d8d7042cb492998b"
+      ],
+      "purpose": "Explain passed-to-print history and missing final adoption; hypothetical remains separate from actual law.",
+      "as_of": "2026-10-01",
+      "author": "Core A agent",
+      "named_human_reviewer": null,
+      "human_review": "pending",
+      "expected_legal_result": "Not established; this is a review candidate, not a scored legal answer",
+      "evidence_reports": [
+        "priority_source_review.json",
+        "temporal_triage.json",
+        "source_comparisons.json"
+      ],
+      "runnable_scope": "existing saved rule through evaluate_rules/assist"
+    },
+    {
+      "case_id": "Berkeley_occupancy",
+      "doc_ids": [
+        "D009"
+      ],
+      "stored_rule_ids": [
+        "r-4bf8e008d56950bba8de",
+        "r-a88b2bed36531241f07b",
+        "r-ccfd2679096aaefff0c4"
+      ],
+      "purpose": "Construction year does not establish certificate/first occupancy. Distinguish unsupported lifecycle/geography from an answerable occupancy fact.",
+      "as_of": "2026-10-01",
+      "author": "Core A agent",
+      "named_human_reviewer": null,
+      "human_review": "pending",
+      "expected_legal_result": "Not established; this is a review candidate, not a scored legal answer",
+      "evidence_reports": [
+        "priority_source_review.json",
+        "temporal_triage.json",
+        "source_comparisons.json"
+      ],
+      "runnable_scope": "existing saved rule through evaluate_rules/assist"
+    },
+    {
+      "case_id": "Boston_version_scope",
+      "doc_ids": [
+        "D013",
+        "D014"
+      ],
+      "stored_rule_ids": [
+        "r-1feefbedd03b403ab84f",
+        "r-5bda807dd5c203fa95fa",
+        "r-5fb3ae71c1e9a75d9637",
+        "r-b1ced07296d43b431bd9",
+        "r-c9aa60788ea081e0239c",
+        "r-d00f84a026235d3c80e6"
+      ],
+      "purpose": "Compare rights notice and City submission separately; do not silently apply a 2020 FAQ date to newer online-portal procedures.",
+      "as_of": "2026-10-01",
+      "author": "Core A agent",
+      "named_human_reviewer": null,
+      "human_review": "pending",
+      "expected_legal_result": "Not established; this is a review candidate, not a scored legal answer",
+      "evidence_reports": [
+        "priority_source_review.json",
+        "temporal_triage.json",
+        "source_comparisons.json"
+      ],
+      "runnable_scope": "existing saved rule through evaluate_rules/assist"
+    },
+    {
+      "case_id": "NJ_conflict_gap",
+      "doc_ids": [
+        "D069"
+      ],
+      "stored_rule_ids": [],
+      "purpose": "Explain qualified municipal-conflict clause without declaring specific local ordinance superseded.",
+      "as_of": "2026-10-01",
+      "author": "Core A agent",
+      "named_human_reviewer": null,
+      "human_review": "pending",
+      "expected_legal_result": "Not established; this is a review candidate, not a scored legal answer",
+      "evidence_reports": [
+        "priority_source_review.json",
+        "temporal_triage.json",
+        "source_comparisons.json"
+      ],
+      "runnable_scope": "source-level remedy only; no extracted Rule yet"
+    },
+    {
+      "case_id": "MA_failed_gap",
+      "doc_ids": [
+        "D048"
+      ],
+      "stored_rule_ids": [],
+      "purpose": "Explain missing ballot-failure evidence rather than an unsupported empty affected set.",
+      "as_of": "2026-10-01",
+      "author": "Core A agent",
+      "named_human_reviewer": null,
+      "human_review": "pending",
+      "expected_legal_result": "Not established; this is a review candidate, not a scored legal answer",
+      "evidence_reports": [
+        "priority_source_review.json",
+        "temporal_triage.json",
+        "source_comparisons.json"
+      ],
+      "runnable_scope": "source-level remedy only; no extracted Rule yet"
+    }
+  ],
+  "actual_http_evidence": "offline_results.json -> assist_integration",
+  "metrics": "No new planner benchmark metrics claimed; Core B owns benchmark implementation and human-reviewed expected answers."
+}

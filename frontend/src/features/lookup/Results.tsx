@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { Answer, AnswerValue, FixtureCaseSummary, LookupOutcome } from '../../api/types';
+import type { Answer, AnswerValue, FactDefinition, FixtureCaseSummary, LookupOutcome } from '../../api/types';
 import { Disclosure, Empty, ErrorNotice, Facts, Notice, SectionHeading, Tag } from '../../components/ui';
 import { formatDate } from '../../lib/dates';
 import { diffOutcomes } from '../../lib/diff';
@@ -17,6 +17,8 @@ interface Props {
   outcome: LookupOutcome;
   selectedRuleId: string | null;
   relatedCases: FixtureCaseSummary[];
+  /** Fact definitions published by the data source (GET /facts), keyed by field. */
+  factDefinitions: Record<string, FactDefinition>;
   onOpenCase: (fixtureCase: FixtureCaseSummary) => void;
   onInspect: (ruleId: string) => void;
   onAnswer: (field: string, value: AnswerValue, provenance: Answer['provenance']) => void;
@@ -24,7 +26,7 @@ interface Props {
   onRun: () => void;
 }
 
-export function Results({ session, outcome, selectedRuleId, relatedCases, onOpenCase, onInspect, onAnswer, onRemoveAnswer, onRun }: Props) {
+export function Results({ session, outcome, selectedRuleId, relatedCases, factDefinitions, onOpenCase, onInspect, onAnswer, onRemoveAnswer, onRun }: Props) {
   const { lookup } = outcome;
   const metadata = readMetadata(lookup);
   const synthetic = isSynthetic(metadata) || outcome.origin.kind !== 'live';
@@ -34,6 +36,8 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, onOpen
   const changes = useMemo(() => (session.previous && session.previous !== outcome ? diffOutcomes(session.previous, outcome) : []), [session.previous, outcome]);
   const changedIds = useMemo(() => new Set(changes.filter((change) => change.kind === 'changed').map((change) => change.ruleId)), [changes]);
 
+  const definitions = useMemo(() => ({ ...factDefinitions, ...session.definitions }), [factDefinitions, session.definitions]);
+
   const counts = RESULT_ORDER.map((result) => ({ result, count: lookup.evaluations.filter((evaluation) => evaluation.result === result).length })).filter((entry) => entry.count > 0);
   const total = lookup.evaluations.length;
   const quality = lookup.jurisdiction.match_quality ?? 'unresolved';
@@ -41,7 +45,9 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, onOpen
   // The synthetic label has its own banner; every other warning is listed verbatim.
   const warnings = lookup.warnings.filter((warning) => !/^SYNTHETIC DEMONSTRATION/i.test(warning) && !/^CONTRACT FIXTURE/i.test(warning));
   const fixtureWarning = lookup.warnings.find((warning) => /^CONTRACT FIXTURE/i.test(warning));
-  const fixtureText = fixtureWarning?.replace(/^CONTRACT FIXTURE:\s*/i, '') ?? 'An authored contract example, not output from a live service';
+  const fixtureText =
+    fixtureWarning?.replace(/^CONTRACT FIXTURE:\s*/i, '') ??
+    (outcome.fixture?.contractStatus === 'implemented_platform_api' ? 'A response of the implemented API on synthetic data, checked in as a contract example' : 'An authored contract example, not output from a live service');
   const fixtureNote = `${fixtureText.charAt(0).toUpperCase()}${fixtureText.slice(1)}${/[.!?]$/.test(fixtureText) ? '' : '.'}`;
 
   return (
@@ -141,9 +147,9 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, onOpen
         )}
       </section>
 
-      <QuestionsPanel outcome={outcome} answers={session.answers} busy={busy} synthetic={synthetic} relatedCases={relatedCases} onOpenCase={onOpenCase} onAnswer={onAnswer} onInspect={onInspect} />
+      <QuestionsPanel outcome={outcome} answers={session.answers} definitions={definitions} busy={busy} synthetic={synthetic} relatedCases={relatedCases} onOpenCase={onOpenCase} onAnswer={onAnswer} onInspect={onInspect} />
 
-      <AnswerHistory answers={session.answers} history={session.history} outcome={outcome} definitions={session.definitions} busy={busy} onAnswer={onAnswer} onRemove={onRemoveAnswer} />
+      <AnswerHistory answers={session.answers} history={session.history} outcome={outcome} definitions={definitions} busy={busy} onAnswer={onAnswer} onRemove={onRemoveAnswer} />
 
       {total > 0 && (
         <section className="section" aria-labelledby="rules-heading">

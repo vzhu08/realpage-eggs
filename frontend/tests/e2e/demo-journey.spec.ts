@@ -179,7 +179,7 @@ test.describe('synthetic demo: the complete journey', () => {
   test('all five research fixtures are explorable and say what kind of gap remains', async ({ page }) => {
     await openDemo(page);
     await showFinder(page);
-    await expect(page.getByRole('region', { name: 'Question-flow fixtures' }).getByRole('button')).toHaveCount(5);
+    await expect(page.getByRole('region', { name: 'Contract fixtures' }).getByRole('button')).toHaveCount(6);
 
     await openCase(page, 'Irrelevant missing fact');
     await expect(page.getByText('No rules were returned for this property on this date')).toBeVisible();
@@ -228,7 +228,6 @@ test.describe('synthetic demo: the complete journey', () => {
     await expect(page.getByText('These results are for Oct 1, 2026')).toBeVisible();
     await page.getByRole('button', { name: 'Run lookup for Nov 15, 2026' }).click();
     await expect(ruleRow(page)).toHaveAttribute('data-result', 'applies');
-    await expect(page.getByRole('group', { name: 'Result context' })).toContainText('Checked-in example');
     await expect(page.getByText('Applicability is not a finding of compliance or violation.')).toBeVisible();
 
     await selectProperty(page, '2 Test Street');
@@ -240,10 +239,106 @@ test.describe('synthetic demo: the complete journey', () => {
     await page.getByRole('button', { name: 'Run lookup' }).click();
     await expect(ruleRow(page)).toHaveAttribute('data-result', 'unknown');
     await expect(ruleRow(page)).toContainText('Needs: units');
-    await expect(page.getByText('No plan in this recording')).toBeVisible();
-    // The question-flow fixtures recorded for this property and date are one click away.
+    await expect(page.getByRole('group', { name: 'Result context' })).toContainText('Checked-in API example');
+    // The contract fixtures recorded for this property and date are one click away.
     await page.locator('.case-link', { hasText: 'Decisive question' }).click();
     await expect(page.getByText('Contract fixture: Decisive question')).toBeVisible();
+  });
+
+  test('the implemented API\'s own example: ranked question, interval alternatives, real evidence checks, rendering and trace', async ({ page }) => {
+    await openDemo(page);
+    await selectProperty(page, '3 Test Street');
+    await page.getByRole('button', { name: 'Nov 15, 2026', exact: true }).click();
+    await page.getByRole('button', { name: 'Run lookup' }).click();
+    await expect(ruleRow(page)).toHaveAttribute('data-result', 'unknown');
+    await expect(page.getByText('This plan is an authored contract fixture')).toHaveCount(0);
+
+    const question = page.getByRole('article', { name: /Number of dwelling units in this building\?/ });
+    await expect(question).toContainText('Feasible evaluator probes show this fact can change a result');
+    await expect(question.locator('.alternative')).toHaveCount(3);
+    await expect(question).toContainText('If units is in [1, 7]');
+    await expect(question).toContainText('Covers 1 to 7 dwelling units. Evaluated at the probe value 1, which stands in for the whole range.');
+    await expect(question).toContainText('Covers 9 dwelling units or more.');
+    await expect(page.getByText('Partial analysis', { exact: true })).toBeVisible();
+
+    // An answer the planner's interval covers is replayed and labeled as such.
+    await question.getByRole('textbox').fill('12');
+    await question.getByRole('button', { name: 'Apply answer' }).click();
+    await expect(ruleRow(page)).toHaveAttribute('data-result', 'applies');
+    const answers = page.getByRole('region', { name: /Your answers/ });
+    await expect(answers).toContainText('Applied');
+    await expect(answers).toContainText('the planner’s interval that contains this answer');
+    await expect(answers).toContainText('recorded for its probe value 9');
+
+    // What still is not established after the answer stays on screen, by kind.
+    const remaining = page.getByRole('region', { name: /What remains uncertain/ });
+    await expect(remaining.locator('[data-kind="source_gap"]').first()).toContainText('Not a question for the renter or owner');
+    await expect(remaining).toContainText('Exact quote/retrieval is not semantic verification');
+    await expect(remaining.locator('[data-kind="property_fact"]')).toHaveCount(0);
+
+    const panel = await openEvidence(page);
+    await panel.getByRole('tab', { name: /Checks/ }).click();
+    const status = (kind: string) => panel.locator(`.check[data-check="${kind}"] .check__tags`);
+    await expect(status('source_availability')).toHaveText('Pass');
+    await expect(status('source_identity')).toHaveText('Pass');
+    await expect(status('quote_presence')).toHaveText('Pass × 5');
+    await expect(status('citation_anchor')).toHaveText('Not checked');
+    await expect(status('semantic_support')).toHaveText('Not checked');
+    await expect(status('dependencies')).toHaveText('Pass');
+    await expect(panel.locator('.check[data-check="citation_anchor"]')).toContainText('no unique structured section anchor in this snapshot');
+    await expect(panel.locator('.check[data-check="quote_presence"]')).toContainText('requirement, key value, coverage conditions, effective date');
+    await expect(panel.getByText('Not checked by the service')).toHaveCount(0);
+
+    await panel.getByRole('tab', { name: 'Encoded rule' }).click();
+    await expect(panel.locator('.compare__rendering')).toContainText('Coverage: (residential == true AND units [dwelling units] >= 8).');
+    await expect(panel.locator('.compare__rendering')).toContainText('Effective boundary (inclusive): 2026-11-15');
+    await expect(panel).toContainText('Deterministic rendering · renderer encoded-rule-v1');
+    await expectNoHorizontalOverflow(page);
+  });
+
+  test('the evaluation trace shows each encoded condition with its result before any answer', async ({ page }) => {
+    await openDemo(page);
+    await selectProperty(page, '3 Test Street');
+    await page.getByRole('button', { name: 'Nov 15, 2026', exact: true }).click();
+    await page.getByRole('button', { name: 'Run lookup' }).click();
+    const panel = await openEvidence(page);
+    await panel.getByRole('tab', { name: 'Encoded rule' }).click();
+    const trace = panel.getByRole('region', { name: 'Evaluation trace' });
+    await expect(trace.locator('.trace__node[data-predicate$=":coverage_conditions"]')).toHaveAttribute('data-result', 'unknown');
+    await expect(trace.locator('.trace__node[data-predicate$=":coverage_conditions/args/0"]')).toContainText('residential = Yes');
+    await expect(trace.locator('.trace__node[data-predicate$=":coverage_conditions/args/0"]')).toHaveAttribute('data-result', 'true');
+    await expect(trace.locator('.trace__node[data-predicate$=":coverage_conditions/args/1"]')).toContainText('units ≥ 8');
+    await expect(trace.locator('.trace__node[data-predicate$=":coverage_conditions/args/1"]')).toHaveAttribute('data-result', 'unknown');
+  });
+
+  test('evidence failure: a missing source keeps the result unknown and each check says why', async ({ page }) => {
+    await openDemo(page);
+    await openCase(page, 'Missing source support');
+    await expect(ruleRow(page)).toHaveAttribute('data-result', 'unknown');
+    await expect(page.getByRole('group', { name: 'Result context' })).toContainText('Partial data');
+    await expect(page.getByText('Missing source material: 1 documents; no-rule conclusions are not established')).toBeVisible();
+    await expect(page.getByText('Nothing to ask: the plan found no missing property fact that could change a result.')).toBeVisible();
+
+    const panel = await openEvidence(page);
+    // The exact quote recorded with the rule is still shown; only its surrounding text is unavailable.
+    await expect(panel.locator('.quote__text').first()).toContainText('Beginning November 15, 2026');
+    await panel.getByRole('button', { name: 'Show surrounding text' }).first().click();
+    await expect(panel).toContainText('That is a coverage gap, not evidence about the law.');
+
+    await panel.getByRole('tab', { name: /Checks/ }).click();
+    const status = (kind: string) => panel.locator(`.check[data-check="${kind}"] .check__tags`);
+    await expect(status('source_availability')).toHaveText('Missing');
+    await expect(status('source_identity')).toHaveText('Stale');
+    await expect(status('dependencies')).toHaveText('Insufficient');
+    await expect(status('semantic_support')).toHaveText('Not checked');
+    // The report has no quote check when there is no text to check against; the row says so.
+    await expect(panel.locator('.check[data-check="quote_presence"] .check__head')).toContainText('No result in the report');
+    await expect(panel.getByText('Blocking issues reported')).toBeVisible();
+    await expect(panel).toContainText('missing_source:SYNTHETIC-42');
+    await expect(panel).toContainText('this is a coverage gap, not a fabrication verdict');
+
+    await panel.getByRole('tab', { name: 'Encoded rule' }).click();
+    await expect(panel.getByText('Parts of the rule could not be rendered')).toBeVisible();
   });
 
   test('a date with no recording is refused with the recorded dates, and invalid dates are caught', async ({ page }) => {
