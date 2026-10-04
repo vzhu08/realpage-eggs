@@ -81,7 +81,7 @@ test.describe('recorded demo · step 6: portfolio changes', () => {
   // totals start about 1,316px down at 1440x900 and 1512x744 (about 2,000px on a Pixel 7), below the
   // form and the list of recorded comparisons, and the page does not scroll to them. The judge sees a
   // form, not "totals first".
-  defect('DEFECT: the one-click portfolio example shows its totals in the first window (repro: click example 2; the totals start ≈1,316px down at 1440x900 and 1512x744, below the form and the recorded-comparison pills)', async ({ page }) => {
+  test('regression: the one-click portfolio example shows its totals in the first window (repro: click example 2; the totals start ≈1,316px down at 1440x900 and 1512x744, below the form and the recorded-comparison pills)', async ({ page }) => {
     await openPortfolioExample(page);
     expect(await topInViewport(comparisonResult(page).locator('[data-impact]').first())).toBe(true);
   });

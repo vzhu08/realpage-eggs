@@ -147,7 +147,7 @@ test.describe('recorded demo · keyboard only', () => {
   // to live API", …). Cause: the trap takes the LAST match of its focusable selector as the end of
   // the cycle, and that match is a button inside the closed "Contract examples" disclosure, which
   // cannot take focus; the real last stop is the disclosure's summary, so Tab is never wrapped.
-  defect('DEFECT: Tab stays inside the modal property chooser (repro: example 1 → Change property → Tab ×19 → focus is on the page behind the dialog)', async ({ page }) => {
+  test('regression: Tab stays inside the modal property chooser (repro: example 1 → Change property → Tab ×19 → focus is on the page behind the dialog)', async ({ page }) => {
     await openDemo(page);
     await example(page, 'consequential_fact').click();
     await expect(resultContext(page)).toBeVisible();

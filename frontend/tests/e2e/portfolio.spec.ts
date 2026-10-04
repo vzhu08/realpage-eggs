@@ -156,7 +156,7 @@ test.describe('portfolio changes: timeline, summaries and drill-down', () => {
     const sources = result.locator('.source-node');
     await expect(sources).toHaveCount(5);
     const ordinance = result.locator('.source-node[data-source="DEV-CL-ORD-07"]');
-    await expect(ordinance.locator('.source-node__title')).toHaveText('Official legal textDEV-CL-ORD-07');
+    await expect(ordinance.locator('.source-node__title')).toHaveText('Official legal text · Cedar Landing, ZZDEV-CL-ORD-07');
     await expect(ordinance).toContainText('2 compared rules · 7 properties');
     await expect(ordinance).toContainText('retrieved Oct 3, 2026, 00:00 UTC');
     await expect(ordinance).toContainText('synthetic source, not actual law');

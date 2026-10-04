@@ -358,10 +358,16 @@ export function contractHandlers(): Record<string, Handler> {
   };
 }
 
-/** The evidence-package example, with its request echo carrying the answers this request sent. */
+/**
+ * The evidence-package example, made to describe the request that was sent, as the service's
+ * own package does: the request echo and the response's applied answers both carry exactly the
+ * answers this request sent. (The app refuses a package whose echo or applied answers differ.)
+ */
 export function packageFor(body: any) {
   const pack = clone(contract.propertyPackage.response);
-  pack.request = { ...pack.request, address_id: body.address_id, as_of: body.as_of, answers: (body.answers ?? []).map((answer: any) => ({ note: null, ...answer })) };
+  const answers = (body.answers ?? []).map((answer: any) => ({ note: null, ...answer }));
+  pack.request = { ...pack.request, address_id: body.address_id, as_of: body.as_of, answers };
+  pack.response.answers_applied = clone(answers);
   return pack;
 }
 

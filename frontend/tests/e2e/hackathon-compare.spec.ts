@@ -9,9 +9,9 @@ import { type Claim, banner, dev, example, fullText, openDemo, recordedAssist, s
 
 /** The interface's heading for each classification the service can return. */
 const CLASSIFICATION_HEADING = {
-  different_claims: 'The two texts state different things',
-  missing_support: 'Support is missing on one side',
-  same_claim: 'Both texts state the same thing',
+  different_claims: 'The two claims differ',
+  missing_support: 'Support is missing or does not check out',
+  same_claim: 'The two claims are the same',
 } as const;
 
 const isDate = (value: unknown): value is string => typeof value === 'string' && /^\d{4}(-\d{2}){0,2}$/.test(value);
@@ -46,7 +46,7 @@ test.describe('recorded demo · step 7: compare sources', () => {
       await expect(card).toContainText('No source is preferred');
       await expect(card).toContainText('Meaning not checked');
       // The remedy is the service's own sentence.
-      await expect(card.getByRole('region', { name: 'What would resolve it' })).toContainText(observation.remedy);
+      await expect(card.getByRole('region', { name: 'Next action' })).toContainText(observation.remedy);
       // An unresolved observation is labeled unresolved; a matching one is not called verified.
       await expect(card).toContainText(observation.status === 'unresolved' ? 'Unresolved' : 'meaning not verified');
 

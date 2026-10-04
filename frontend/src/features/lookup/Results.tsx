@@ -71,11 +71,14 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
   const fixtureNote = `${fixtureText.charAt(0).toUpperCase()}${fixtureText.slice(1)}${/[.!?]$/.test(fixtureText) ? '' : '.'}`;
 
   // What to do next, read from the plan and the open statements. Nothing here predicts an outcome.
-  const answered = new Set(session.answers.map((answer) => answer.field));
+  // While the date control has been changed but not run, the result on screen is still the one
+  // computed with the earlier answers. Those are the answers shown with it, read-only.
+  const shownAnswers = stale ? outcome.query.answers : session.answers;
+  const answered = new Set(shownAnswers.map((answer) => answer.field));
   const openQuestions = (outcome.assist?.question_plan.questions ?? []).filter((question) => !answered.has(question.fact.field));
   const lead = openQuestions[0];
   const movable = lead ? movableResults(lookup.evaluations, lead).movable : 0;
-  const open = useMemo(() => groupOpenItems(openItems(outcome, session.answers), new Set(lookup.rules.map((rule) => rule.team_rule_id))), [outcome, session.answers, lookup.rules]);
+  const open = useMemo(() => groupOpenItems(openItems(outcome, shownAnswers), new Set(lookup.rules.map((rule) => rule.team_rule_id))), [outcome, shownAnswers, lookup.rules]);
   const reviewTopics = open.other.length;
 
   return (
@@ -250,9 +253,9 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
         </Notice>
       )}
 
-      <QuestionsPanel outcome={outcome} answers={session.answers} definitions={definitions} busy={busy} synthetic={synthetic} relatedCases={relatedCases} onOpenCase={onOpenCase} onAnswer={onAnswer} onInspect={onInspect} />
+      <QuestionsPanel outcome={outcome} answers={shownAnswers} definitions={definitions} busy={busy} synthetic={synthetic} relatedCases={relatedCases} onOpenCase={onOpenCase} onAnswer={onAnswer} onInspect={onInspect} />
 
-      <AnswerHistory answers={session.answers} history={session.history} outcome={outcome} definitions={definitions} busy={busy} onAnswer={onAnswer} onRemove={onRemoveAnswer} />
+      <AnswerHistory answers={shownAnswers} history={session.history} outcome={outcome} definitions={definitions} busy={busy} readOnly={stale} onAnswer={onAnswer} onRemove={onRemoveAnswer} />
 
       {total > 0 && (
         <section className="section" aria-labelledby="rules-heading">
@@ -266,7 +269,7 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
         </section>
       )}
 
-      <RemainingUncertainty outcome={outcome} answers={session.answers} onInspect={onInspect} definitions={definitions} disagreementHref={conflicted.length > 0 ? conflictHref : undefined} />
+      <RemainingUncertainty outcome={outcome} answers={shownAnswers} onInspect={onInspect} definitions={definitions} disagreementHref={conflicted.length > 0 ? conflictHref : undefined} />
 
       <KeepResult session={session} outcome={outcome} mode={mode} apiBase={apiBase} busy={busy} />
 

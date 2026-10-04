@@ -93,8 +93,11 @@ export function openItems(outcome: LookupOutcome, answers: Answer[]): OpenItem[]
           order: 0,
         });
       } else {
-        // The plan restates most evaluator reasons in its own words; do not show both.
+        // The plan restates most evaluator reasons, often inside a longer dated statement about
+        // the same rule. A reason is not listed a second time when a plan statement for this
+        // rule already carries its words in full.
         if (planMessages.has(reason.message)) continue;
+        if (rows.some((row) => row.key.startsWith('plan-') && row.ruleIds.includes(evaluation.team_rule_id) && row.message.includes(reason.message))) continue;
         const existing = rows.find((row) => row.key === `reason-${raw}`);
         if (existing) {
           if (!existing.ruleIds.includes(evaluation.team_rule_id)) existing.ruleIds.push(evaluation.team_rule_id);

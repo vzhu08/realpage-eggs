@@ -81,7 +81,7 @@ test.describe('mocked live API (fixture check) · step 8: the evidence package',
     // The section states exactly which request the package will be for.
     await expect(keep(page)).toContainText(REQUEST.address_id);
     await expect(keep(page)).toContainText(`as of ${shownDate(REQUEST.as_of)}`);
-    await expect(keep(page)).toContainText('1 request-local answer');
+    await expect(keep(page)).toContainText('1 answer of yours');
     await expect(resultContext(page)).toContainText(`As of ${shownDate(REQUEST.as_of)}`);
 
     const [download] = await Promise.all([page.waitForEvent('download'), packageCard(page).getByRole('button', { name: 'Download evidence package' }).click()]);
@@ -149,7 +149,7 @@ test.describe('mocked live API (fixture check) · step 8: the evidence package',
   // without running the lookup, then "Download working export (JSON)". The session's answers were
   // cleared by the date change, so the file has request_answers.answers = [] and lists units = 8 under
   // stored_facts.facts: an unverified request-local answer exported as a stored property fact.
-  defect('DEFECT: mocked live API (fixture check): a working export never lists a request-local answer as a stored fact (repro: live, answer units = 8 → change date, no rerun → export has stored_facts.facts.units = 8 and no request answers)', async ({ page }, testInfo) => {
+  test('regression: mocked live API (fixture check): a working export never lists a request-local answer as a stored fact (repro: live, answer units = 8 → change date, no rerun → export has stored_facts.facts.units = 8 and no request answers)', async ({ page }, testInfo) => {
     await mockLive(page, contractHandlers());
     await openLive(page);
     await runLiveLookup(page, STREET, REQUEST.as_of);
@@ -253,7 +253,8 @@ test.describe('mocked live API (fixture check) · step 8: the evidence package',
     await packageCard(page).getByRole('button', { name: 'Download evidence package' }).click();
     const alert = packageCard(page).getByRole('alert');
     await expect(alert).toContainText('different property, date or set of answers');
-    await expect(alert).toContainText('Nothing was saved.');
+    await expect(alert).toContainText('so it was not saved');
+    await expect(alert).toContainText('The response was not saved.');
     expect(downloads).toBe(0);
   });
 
@@ -273,7 +274,8 @@ test.describe('mocked live API (fixture check) · step 8: the evidence package',
     const unavailable = packageCard(page).getByRole('alert');
     await expect(unavailable).toContainText('The dataset is not ready');
     await expect(unavailable).toContainText('Test double: dataset unavailable');
-    await expect(unavailable).toContainText('Nothing was saved. The result on screen is unaffected.');
+    await expect(unavailable).toContainText('No package was built');
+    await expect(unavailable).toContainText('The result on screen is unaffected.');
     await expect(unavailable.getByRole('button', { name: 'Try again' })).toBeVisible();
 
     mode = '404';
@@ -475,7 +477,7 @@ test.describe('mocked live API (fixture check) · step 7: GET /source-comparison
       await expect(card).toHaveAttribute('data-classification', observation.classification);
       await expect(card).toContainText('No source is preferred');
       await expect(card).toContainText('Meaning not checked');
-      await expect(card.getByRole('region', { name: 'What would resolve it' })).toContainText(observation.remedy);
+      await expect(card.getByRole('region', { name: 'Next action' })).toContainText(observation.remedy);
       for (const key of ['before', 'after'] as const) {
         const side = card.locator(`[data-side="${key}"]`);
         if (observation[key].support.length === 0) await expect(side).toContainText('No captured passage supports this claim');

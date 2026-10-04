@@ -56,9 +56,9 @@ test.describe('recorded demo · step 1: the start page', () => {
     // Card 3 counts the recorded claim observations.
     const observations = Object.values(dev().source_comparisons.observations);
     const compare = example(page, 'source_comparison');
-    await expect(compare).toContainText(`${observations.length} claim comparisons`);
-    await expect(compare).toContainText(`${observations.filter((observation) => observation.classification === 'different_claims').length} state different things`);
-    await expect(compare).toContainText(/none is given a winner/);
+    await expect(compare).toContainText(`${observations.length} pairs of recorded claims`);
+    await expect(compare).toContainText(`${observations.filter((observation) => observation.classification === 'different_claims').length} differ`);
+    await expect(compare).toContainText(/none is given a winner/i);
 
     // The property chooser sits below the examples and lists the recorded properties.
     await expect(page.getByRole('heading', { name: 'Or choose a property' })).toBeVisible();
@@ -132,7 +132,7 @@ test.describe('recorded demo · step 2: the result of example 1', () => {
   // start at y≈737 and the "Go to the question" action at y≈934 (below the fold); at 1512x744 the
   // verdict card starts at y≈670 and its counts and action are below the fold; on a Pixel 7 the card
   // starts at y≈1161 of 839. The result does not lead: a judge must scroll to see any of it.
-  defect('DEFECT: after the one-click example the counts by status and the "Go to the question" action are inside the first window (repro: click example 1; scrollY stays 0 and the action starts at y≈934 in a 900px window)', async ({ page }) => {
+  test('regression: after the one-click example the counts by status and the "Go to the question" action are inside the first window (repro: click example 1; scrollY stays 0 and the action starts at y≈934 in a 900px window)', async ({ page }) => {
     await openExampleOne(page);
     await expect(page.getByRole('list', { name: 'Results by status' })).toBeVisible();
     expect(await topInViewport(page.getByRole('list', { name: 'Results by status' }))).toBe(true);
@@ -233,7 +233,7 @@ test.describe('recorded demo · step 3: the most useful question', () => {
     if (value !== probe) await expect(entry).toContainText(`recorded for its probe value ${probe}`);
     await expect(answers).toContainText('none changes the stored property record');
     await expect(page.getByRole('status').filter({ hasText: 'The demo does not evaluate rules itself.' })).toBeVisible();
-    await expect(page.getByRole('region', { name: 'Keep this result' })).toContainText('1 request-local answer');
+    await expect(page.getByRole('region', { name: 'Keep this result' })).toContainText('1 answer of yours');
 
     // Edit offers the same typed control with the current value; Remove restores the recorded baseline.
     await entry.getByRole('button', { name: /^Edit/ }).click();
@@ -250,17 +250,17 @@ test.describe('recorded demo · step 3: the most useful question', () => {
   // while the result above it says "3 rules returned" and the start card said "2 of its 3 results".
   // The denominator counts every evaluation inside the alternatives, including rules that are not
   // part of this result (recorded as "inapplicable" for every probe).
-  defect('DEFECT: the question\'s "N of M results can change" uses the number of results on screen (repro: example 1 shows "2 of 6" under "3 rules returned")', async ({ page }) => {
+  test('regression: the question\'s "N of M results can change" uses the number of results on screen (repro: example 1 shows "2 of 6" under "3 rules returned")', async ({ page }) => {
     const { assist } = await openExampleOne(page);
     const question = assist.question_plan.questions[0]!;
     const movable = new Set(question.alternatives.flatMap((alternative) => movedBy(assist.lookup.evaluations, alternative.evaluations))).size;
     const card = page.locator(`[data-question="${question.question_id}"]`);
-    await expect(card.locator('[data-consequence]')).toContainText(`${movable} of ${assist.lookup.evaluations.length} `);
+    await expect(card.locator('[data-consequence]')).toContainText(`${movable} of the ${assist.lookup.evaluations.length} results above`);
   });
 
   // DEFECT (minor, integrator: features/questions/QuestionCard.tsx heading).
   // Reproduction: example 1 → heading reads "Number of dwelling units in this building (dwelling units)?".
-  defect('DEFECT: the question heading does not repeat the unit the meaning already states (repro: example 1 heading "… dwelling units in this building (dwelling units)?")', async ({ page }) => {
+  test('regression: the question heading does not repeat the unit the meaning already states (repro: example 1 heading "… dwelling units in this building (dwelling units)?")', async ({ page }) => {
     const { assist } = await openExampleOne(page);
     const question = assist.question_plan.questions[0]!;
     const heading = (await page.locator(`[data-question="${question.question_id}"]`).getByRole('heading').textContent()) ?? '';
@@ -273,7 +273,7 @@ test.describe('recorded demo · step 3: the most useful question', () => {
   // "Nothing to ask: the plan found no missing property fact that could change a result." directly under
   // "Re-evaluated with your answers", as if the fact just supplied had never mattered. The same wording
   // appears in live mode, because the service's plan after an answer has no questions either.
-  defect('DEFECT: after the only question is answered, "Useful questions" says it has been answered, not "Nothing to ask: the plan found no missing property fact…" (repro: example 1 → answer the question)', async ({ page }) => {
+  test('regression: after the only question is answered, "Useful questions" says it has been answered, not "Nothing to ask: the plan found no missing property fact…" (repro: example 1 → answer the question)', async ({ page }) => {
     const { assist } = await openExampleOne(page);
     const question = assist.question_plan.questions[0]!;
     const card = page.locator(`[data-question="${question.question_id}"]`);
@@ -293,14 +293,14 @@ test.describe('recorded demo · step 3: the most useful question', () => {
   // "Download working export (JSON)". The file's evaluator_results are the ANSWERED results and its
   // query is the earlier date, but request_answers.answers is [] — the answer the results rest on is
   // missing from the file. "Keep this result" itself still says "1 request-local answer".
-  defect('DEFECT: a working export of a result that depends on an answer lists that answer, also after the date control was changed (repro: example 1 → answer → change date, no rerun → export has request_answers.answers = [])', async ({ page }, testInfo) => {
+  test('regression: a working export of a result that depends on an answer lists that answer, also after the date control was changed (repro: example 1 → answer → change date, no rerun → export has request_answers.answers = [])', async ({ page }, testInfo) => {
     const { addressId, asOf, assist } = await openExampleOne(page);
     const question = assist.question_plan.questions[0]!;
     const value = question.alternatives[0]!.probe_facts[question.fact.field];
     const card = page.locator(`[data-question="${question.question_id}"]`);
     await card.getByRole('textbox').fill(String(value));
     await card.getByRole('button', { name: 'Apply answer' }).click();
-    await expect(page.getByRole('region', { name: 'Keep this result' })).toContainText('1 request-local answer');
+    await expect(page.getByRole('region', { name: 'Keep this result' })).toContainText('1 answer of yours');
     const other = dev().assists.find((candidate) => candidate.request.address_id === addressId && candidate.request.as_of !== asOf)!;
     await page.getByLabel('As of date').fill(other.request.as_of);
     await expect(page.getByRole('note').filter({ hasText: 'These results are for' })).toBeVisible();
@@ -325,7 +325,12 @@ test.describe('recorded demo · step 3: the most useful question', () => {
     const other = dev().assists.find((candidate) => candidate.request.address_id === addressId && candidate.request.as_of !== asOf)!;
     await page.getByLabel('As of date').fill(other.request.as_of);
 
-    await expect(page.getByRole('region', { name: /^Your answers/ })).toHaveCount(0);
+    // The result on screen was computed with the answer, so the answer stays beside it, read-only,
+    // with a line saying it will not be carried to the new date.
+    const kept = page.getByRole('region', { name: /^Your answers/ });
+    await expect(kept.locator('[data-field]')).toHaveCount(1);
+    await expect(kept.locator('[data-answers-readonly]')).toContainText('answers are not carried to another date');
+    await expect(kept.getByRole('button', { name: /^(Edit|Remove)/ })).toHaveCount(0);
     const stale = page.getByRole('note').filter({ hasText: `These results are for ${shownDate(asOf)}` });
     await expect(stale).toBeVisible();
     await expect(resultContext(page)).toContainText(`As of ${shownDate(asOf)}`);
@@ -437,7 +442,7 @@ test.describe('recorded demo · step 8: keep this result', () => {
 
     const working = keep.getByRole('article', { name: 'Working export' });
     await expect(working).toContainText('It is not the evidence package.');
-    await expect(working).toContainText(/no source texts and no hashes/);
+    await expect(working).toContainText(/no source texts and no input, response or code hashes/);
     await expect(keep).toContainText('No independent human review is recorded in either file.');
 
     const [download] = await Promise.all([page.waitForEvent('download'), working.getByRole('button', { name: 'Download working export (JSON)' }).click()]);
@@ -514,7 +519,7 @@ test.describe('recorded demo · the labels that must stay on screen', () => {
   // sheet covers the whole window, including the synthetic banner, and shows the quoted "law" with no
   // synthetic label in view: the only one inside the sheet is in the collapsed "Rule record" disclosure
   // ("Synthetic fixture, not actual law"). At 1512px the drawer leaves the banner's tag visible.
-  defect('DEFECT: with the evidence sheet open on a phone a synthetic label is still in the window (repro: Pixel 7 → example 1 → Evidence; the sheet covers the banner and shows no synthetic label)', async ({ page, isMobile }) => {
+  test('regression: with the evidence sheet open on a phone a synthetic label is still in the window (repro: Pixel 7 → example 1 → Evidence; the sheet covers the banner and shows no synthetic label)', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'The full-window evidence sheet is the phone layout; on a desktop window the banner tag stays visible beside the drawer.');
     await openExampleOne(page);
     await page.locator('[aria-label^="Inspect evidence for"]').first().click();
