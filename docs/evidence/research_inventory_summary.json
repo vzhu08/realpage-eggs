@@ -1,0 +1,22 @@
+{
+  "source_id": "D001",
+  "source_hash": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+  "version": "source-units-v1",
+  "mode": "deterministic_structural_inventory",
+  "counts": {
+    "units": 15,
+    "mapped": 0,
+    "unresolved": 15
+  },
+  "source_characters": 8000,
+  "inventoried_characters": 8000,
+  "human_reviewed": false,
+  "complete_legal_coverage": false,
+  "semantic_verification": false,
+  "retrieval_method": "local_tfidf_cosine_independently_implemented",
+  "retrieved_offsets": [],
+  "limitations": [
+    "Section/definition/exception/date detection is heuristic; relevance and legal completeness are not certified",
+    "Predicate-level evidence mapping requires Core trace support; field mappings are retained"
+  ]
+}

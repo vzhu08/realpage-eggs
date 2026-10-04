@@ -1,3 +1,31 @@
+# Current plan — four developers
+
+The user's October 3 staffing update supersedes the historical three-lane plan below. Read the current
+playbook, OWNERSHIP and four starter prompts. The Git fix/pull is complete: current branch tracks
+origin/main, merge 1f12f5b preserves Platform a034e2b. Existing Core candidate c92ad8f is separate.
+
+| Lane | First independent work | Next dependency / acceptance |
+| --- | --- | --- |
+| Platform / Vincent | Coordinate Core B path release and review the existing Core candidate; keep APIs/exports stable | After authorized integration, actual Core HTTP answers/rendering and official exports pass; refresh shared fixtures |
+| Core A / existing author Daniel | Review existing extraction/date/trace repairs; prepare real D001 extraction | Key/model for live run; stable rule_traces/evaluate_rules for Core B; no invented occupancy or lifecycle |
+| Core B / new human pending | Read/review delivered planner/renderer and comparison; write after handoff | Isolated checkout + path release; planner uses Core A traces and one evaluator; bounded correlated alternatives reproduce |
+| Frontend / Claude | Entire UI with working calls and labeled fixtures | Consume actual integrated planner/renderer; verify unknown -> question -> answer plus still-unknown case |
+
+Existing Core features must be reviewed and continued, not implemented a second time. Remote candidate
+reports 96 tests; local Platform's last software suite has 74. Neither number is a combined integration
+result. Current checkout still lacks the Core module until coordinated integration. Model credentials,
+missing source material and independent legal review remain separate blockers.
+
+Order: P0 real extraction/source/schema/export correctness and candidate integration; P1 handoff/complete
+question-renderer-frontend integration; P2 independently reviewed boundaries and broader source/reference
+coverage. Core A owns legal/evaluator cases; Core B owns the planner comparison and rendering fidelity;
+Platform stewards the candidate manifest/shared reports. Keep richer ranking/translations/features later.
+Names and actual checkouts beyond the evidenced existing author are not invented; Vincent records them.
+
+## Historical planning snapshots
+
+The material below records earlier assumptions and checkpoints; the current four-lane plan above controls.
+
 # Plan from actual clock
 
 ## Follow-up at October 3, 17:32 ET
@@ -60,3 +88,19 @@ Cut until required pipeline is credible: graph visualization, Spanish, extra jur
 authentication, broad scraping, database/queue infrastructure expansions. Do not cut citation,
 uncertainty, date behavior or partial/failure labeling. Public deployment still needs access controls
 appropriate to its surface; no billable ingestion endpoint exists in this baseline.
+
+## Follow-up implementation checkpoint
+
+Planning and minimal contract release complete locally (3349851); Platform implementation complete
+for review, with 74 passing tests. PLAT-03/04/05 are Review, not merged/deployed. Live semantic review
+remains unverified because credentials/model and real rules are absent. Core/UX have no claimed run.
+
+Ready next: Core CORE-03 + CORE-05, UX UX-03 entire frontend from fixtures/working Platform calls.
+CORE-04 follows trace work. Full question/renderer integration is blocked on those implementations.
+Core CORE-01 remains P0: configure OpenAI locally, extract/review D001, then selectively expand.
+Keep submission/export failures ahead of richer ranking, acquisition, translations or product extras.
+
+Follow-up acceptance owners: Core-02/04 + human reviewer complete the 12-case ordinary/boundary candidate
+manifest into an independently reviewed benchmark and measure planner versus both simple baselines;
+UX verifies complete question/evidence/change flows; Platform reruns combined API/official projection
+checks after Core lands. Remaining geocode recovery PLAT-01 and packaging PLAT-02 stay ready but unclaimed.

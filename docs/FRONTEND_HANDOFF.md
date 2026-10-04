@@ -40,3 +40,55 @@ Synthetic date 2026-11-15: SYNTH-001 applies, SYNTH-002 empty, SYNTH-003 unknown
 Before 2026-11-15 the covered rule is not yet effective. Restore NAVIGATOR_DATA_DIR to `data`
 before running the real backend. New-address live geocoding, production auth and deployed URL are
 not available. UI should not offer capabilities absent from this contract.
+
+## Follow-up ready for the entire frontend
+
+Start with docs/starters/FRONTEND_CLAUDE.md and UX-03. Branch codex/research-platform contains the
+Platform implementation; initial shared contract checkpoint is 3349851. Use a separate checkout.
+
+Implemented calls (prefix /api/v1):
+
+| Call | Purpose / expected state |
+| --- | --- |
+| GET /facts | Fact meaning, unit, JSON type and acceptable answers |
+| POST /lookup/assist | Lookup + evidence + answers + Core capability state |
+| GET /rules/{id}/evidence | Separate identity, anchor, quote, semantic and dependency statuses |
+| GET /sources/{id}/context?start=0&max_depth=2 | Bounded original source context and explicit references |
+
+First synthetic request: {"address_id":"SYNTH-003","as_of":"2026-11-15"}.
+Then resend with "answers":[{"field":"units","value":8,"provenance":"demo"}] and an optional
+"scenario_id":"browser-scenario-1". Unknown changes to applies through the production evaluator.
+No server scenario state exists; keep answer history in the UI and resend all accumulated answers.
+Null means unknown. Show remaining uncertainty, never imply one answered question settles every rule.
+Use source character offsets (Python Unicode code points, not JavaScript UTF-16 indices) or returned
+span text; convert code points before slicing source strings containing supplementary characters.
+
+Core is currently absent: question_plan.status=unavailable, no questions, empty encoded_rules,
+and capability dependency_unavailable. This is a successful partial capability response, not a
+network failure. Missing Core function is distinct from a crashing Core service (503) or malformed
+Core output (502). The actual service never supplies authored fixture plans as a fallback.
+
+| Fixtures | Status |
+| --- | --- |
+| contracts/examples/assist.json | Actual synthetic Platform response, Core unavailable |
+| contracts/research_examples/decisive_question.json | Authored Core question expectation; alternatives reproduce via evaluator |
+| contracts/research_examples/two_unresolved_exemptions.json | Occupancy answer still unknown; algorithmic modified rule, not legal evidence |
+| contracts/research_examples/irrelevant_missing_fact.json | No useful question expected |
+| contracts/research_examples/unresolved_source_coverage.json | Source remedy, not a renter legal question |
+| contracts/research_examples/bounded_partial_analysis.json | Partial plan / explicit exploration budget |
+| contracts/evidence_examples/missing_support.json | Actual synthetic missing-source evidence failure and unknown result |
+| contracts/evidence_examples/source_comparison.json | Actual evidence report plus authored expected rendering; Core renderer pending |
+
+Integration verified: input validation, stateless answer/re-evaluation, evidence/context routes,
+and injected fixture question -> real answer. Full Core question/trace/rendering and browser UI
+integration are not verified. Keep fixture mode visibly labeled while developing those UI states.
+
+## Four-developer ownership update
+
+Use docs/Hackathon_Development_Playbook.txt and OWNERSHIP. Frontend remains one developer's entire lane.
+Core A (existing author Daniel) owns extraction/evaluator/traces; Core B (new human pending) owns planner,
+renderer and core_assist.py. Platform remains the API/schema/generated-fixture steward. Route question/UI
+behavior issues to Core B, truth/source issues to Core A and contract requests to Platform.
+Existing Core candidate c92ad8f contains both services but is not in this local API checkout. The unavailable
+states documented above remain correct here until the combined candidate is integrated and checked.
+Do not ask either Core developer to rebuild features already present on that branch.

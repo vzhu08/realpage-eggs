@@ -1024,6 +1024,7 @@
           "live",
           "replay",
           "synthetic",
+          "fixture",
           "local"
         ],
         "title": "Mode",

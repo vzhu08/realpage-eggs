@@ -133,6 +133,217 @@
         }
       }
     },
+    "/api/v1/lookup/assist": {
+      "post": {
+        "summary": "Assisted Lookup",
+        "operationId": "assisted_lookup_api_v1_lookup_assist_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          },
+          "502": {
+            "description": "Core output violated the shared contract"
+          }
+        }
+      }
+    },
+    "/api/v1/facts": {
+      "get": {
+        "summary": "Fact Definitions",
+        "operationId": "fact_definitions_api_v1_facts_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/FactDefinition"
+                  },
+                  "type": "object",
+                  "title": "Response Fact Definitions Api V1 Facts Get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/rules/{rule_id}/evidence": {
+      "get": {
+        "summary": "Rule Evidence",
+        "operationId": "rule_evidence_api_v1_rules__rule_id__evidence_get",
+        "parameters": [
+          {
+            "name": "rule_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Rule Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvidenceReport"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/sources/{doc_id}/context": {
+      "get": {
+        "summary": "Source Context",
+        "operationId": "source_context_api_v1_sources__doc_id__context_get",
+        "parameters": [
+          {
+            "name": "doc_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Doc Id"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Start"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End"
+            }
+          },
+          {
+            "name": "max_depth",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 4,
+              "minimum": 0,
+              "default": 2,
+              "title": "Max Depth"
+            }
+          },
+          {
+            "name": "max_chars",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 48000,
+              "minimum": 100,
+              "default": 24000,
+              "title": "Max Chars"
+            }
+          },
+          {
+            "name": "max_spans",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 24,
+              "minimum": 1,
+              "default": 12,
+              "title": "Max Spans"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceContext"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    },
     "/api/v1/rules/{rule_id}": {
       "get": {
         "summary": "Rule Detail",
@@ -302,6 +513,236 @@
           "disclaimer"
         ],
         "title": "AddressPage"
+      },
+      "AlternativeOutcome": {
+        "properties": {
+          "alternative_id": {
+            "type": "string",
+            "title": "Alternative Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "probe_facts": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Probe Facts"
+          },
+          "interval": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interval"
+          },
+          "evaluations": {
+            "items": {
+              "$ref": "#/components/schemas/Evaluation"
+            },
+            "type": "array",
+            "title": "Evaluations"
+          },
+          "remaining_uncertainty": {
+            "items": {
+              "$ref": "#/components/schemas/Uncertainty"
+            },
+            "type": "array",
+            "title": "Remaining Uncertainty"
+          },
+          "hypothetical": {
+            "type": "boolean",
+            "const": true,
+            "title": "Hypothetical",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "alternative_id",
+          "label",
+          "probe_facts",
+          "evaluations",
+          "remaining_uncertainty"
+        ],
+        "title": "AlternativeOutcome"
+      },
+      "AnalysisLimits": {
+        "properties": {
+          "max_questions": {
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "title": "Max Questions",
+            "default": 5
+          },
+          "max_fields": {
+            "type": "integer",
+            "maximum": 12.0,
+            "minimum": 1.0,
+            "title": "Max Fields",
+            "default": 8
+          },
+          "max_evaluations": {
+            "type": "integer",
+            "maximum": 256.0,
+            "minimum": 1.0,
+            "title": "Max Evaluations",
+            "default": 64
+          },
+          "max_joint_fields": {
+            "type": "integer",
+            "maximum": 4.0,
+            "minimum": 1.0,
+            "title": "Max Joint Fields",
+            "default": 3
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "AnalysisLimits"
+      },
+      "AssistRequest": {
+        "properties": {
+          "address_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address Id"
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RawAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date",
+            "title": "As Of",
+            "default": "2026-10-01"
+          },
+          "supplemental_facts": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Supplemental Facts"
+          },
+          "answers": {
+            "items": {
+              "$ref": "#/components/schemas/SupplementalAnswer"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Answers"
+          },
+          "scenario_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scenario Id"
+          },
+          "limits": {
+            "$ref": "#/components/schemas/AnalysisLimits"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "AssistRequest"
+      },
+      "AssistResponse": {
+        "properties": {
+          "lookup": {
+            "$ref": "#/components/schemas/LookupResponse"
+          },
+          "question_plan": {
+            "$ref": "#/components/schemas/QuestionPlan"
+          },
+          "evidence_reports": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceReport"
+            },
+            "type": "array",
+            "title": "Evidence Reports"
+          },
+          "encoded_rules": {
+            "items": {
+              "$ref": "#/components/schemas/EncodedRuleRendering"
+            },
+            "type": "array",
+            "title": "Encoded Rules"
+          },
+          "answers_applied": {
+            "items": {
+              "$ref": "#/components/schemas/SupplementalAnswer"
+            },
+            "type": "array",
+            "title": "Answers Applied"
+          },
+          "scenario_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scenario Id"
+          },
+          "capabilities": {
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "implemented",
+                "dependency_unavailable"
+              ]
+            },
+            "type": "object",
+            "title": "Capabilities"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "dataset",
+              "synthetic",
+              "contract_fixture"
+            ],
+            "title": "Mode"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "lookup",
+          "question_plan",
+          "evidence_reports",
+          "encoded_rules",
+          "answers_applied",
+          "capabilities",
+          "mode"
+        ],
+        "title": "AssistResponse"
       },
       "Bound": {
         "properties": {
@@ -497,6 +938,48 @@
         ],
         "title": "ChangeResult"
       },
+      "EncodedRuleRendering": {
+        "properties": {
+          "rule_id": {
+            "type": "string",
+            "title": "Rule Id"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "expression_hash": {
+            "type": "string",
+            "title": "Expression Hash"
+          },
+          "renderer_version": {
+            "type": "string",
+            "title": "Renderer Version"
+          },
+          "unresolved_nodes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unresolved Nodes"
+          },
+          "kind": {
+            "type": "string",
+            "const": "encoded_rule_not_legal_validation",
+            "title": "Kind",
+            "default": "encoded_rule_not_legal_validation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rule_id",
+          "text",
+          "expression_hash",
+          "renderer_version"
+        ],
+        "title": "EncodedRuleRendering"
+      },
       "Evaluation": {
         "properties": {
           "team_rule_id": {
@@ -636,6 +1119,121 @@
         ],
         "title": "Evidence"
       },
+      "EvidenceCheck": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "source_availability",
+              "source_identity",
+              "citation_anchor",
+              "quote_presence",
+              "semantic_support",
+              "dependencies"
+            ],
+            "title": "Kind"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "missing",
+              "ambiguous",
+              "not_checked",
+              "supported",
+              "contradicted",
+              "insufficient",
+              "stale"
+            ],
+            "title": "Status"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field"
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/SourceSpan"
+            },
+            "type": "array",
+            "title": "Spans"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "status",
+          "message"
+        ],
+        "title": "EvidenceCheck"
+      },
+      "EvidenceReport": {
+        "properties": {
+          "rule_id": {
+            "type": "string",
+            "title": "Rule Id"
+          },
+          "rule_hash": {
+            "type": "string",
+            "title": "Rule Hash"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceCheck"
+            },
+            "type": "array",
+            "title": "Checks"
+          },
+          "context": {
+            "$ref": "#/components/schemas/SourceContext"
+          },
+          "semantic_review": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SemanticReview"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "blocking_issues": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Blocking Issues"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rule_id",
+          "rule_hash",
+          "checks",
+          "context",
+          "blocking_issues",
+          "disclaimer"
+        ],
+        "title": "EvidenceReport"
+      },
       "Expression": {
         "properties": {
           "op": {
@@ -698,6 +1296,160 @@
           "op"
         ],
         "title": "Expression"
+      },
+      "FactDefinition": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "meaning": {
+            "type": "string",
+            "title": "Meaning"
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "boolean",
+              "integer",
+              "number",
+              "date",
+              "enum",
+              "string"
+            ],
+            "title": "Data Type"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit"
+          },
+          "allowed_values": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowed Values"
+          },
+          "minimum": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Minimum"
+          },
+          "maximum": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maximum"
+          },
+          "answer_effort": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Answer Effort",
+            "default": 1
+          },
+          "allow_partial_date": {
+            "type": "boolean",
+            "title": "Allow Partial Date",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "field",
+          "meaning",
+          "data_type"
+        ],
+        "title": "FactDefinition"
+      },
+      "FactQuestion": {
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "title": "Question Id"
+          },
+          "fact": {
+            "$ref": "#/components/schemas/FactDefinition"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt"
+          },
+          "why": {
+            "type": "string",
+            "title": "Why"
+          },
+          "rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rule Ids"
+          },
+          "predicate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Predicate Ids"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "title": "Evidence"
+          },
+          "alternatives": {
+            "items": {
+              "$ref": "#/components/schemas/AlternativeOutcome"
+            },
+            "type": "array",
+            "title": "Alternatives"
+          },
+          "rank_score": {
+            "type": "number",
+            "title": "Rank Score"
+          },
+          "ranking_rationale": {
+            "type": "string",
+            "title": "Ranking Rationale"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "question_id",
+          "fact",
+          "prompt",
+          "why",
+          "rule_ids",
+          "predicate_ids",
+          "evidence",
+          "alternatives",
+          "rank_score",
+          "ranking_rationale"
+        ],
+        "title": "FactQuestion"
       },
       "HealthResponse": {
         "properties": {
@@ -1104,6 +1856,84 @@
         ],
         "title": "PredicateResult"
       },
+      "PredicateTrace": {
+        "properties": {
+          "predicate_id": {
+            "type": "string",
+            "title": "Predicate Id"
+          },
+          "rule_id": {
+            "type": "string",
+            "title": "Rule Id"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path"
+          },
+          "expression": {
+            "$ref": "#/components/schemas/Expression"
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "true",
+              "false",
+              "unknown"
+            ],
+            "title": "Result"
+          },
+          "field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field"
+          },
+          "relevant": {
+            "type": "boolean",
+            "title": "Relevant",
+            "default": true
+          },
+          "residual": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Expression"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_refs": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "title": "Source Refs"
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/PredicateTrace"
+            },
+            "type": "array",
+            "title": "Children"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "predicate_id",
+          "rule_id",
+          "path",
+          "expression",
+          "result"
+        ],
+        "title": "PredicateTrace"
+      },
       "PropertyFacts": {
         "properties": {
           "address_id": {
@@ -1152,6 +1982,75 @@
           "normalized_address"
         ],
         "title": "PropertyFacts"
+      },
+      "QuestionPlan": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "partial",
+              "unavailable"
+            ],
+            "title": "Status"
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/FactQuestion"
+            },
+            "type": "array",
+            "title": "Questions"
+          },
+          "remaining_uncertainty": {
+            "items": {
+              "$ref": "#/components/schemas/Uncertainty"
+            },
+            "type": "array",
+            "title": "Remaining Uncertainty"
+          },
+          "traces": {
+            "items": {
+              "$ref": "#/components/schemas/PredicateTrace"
+            },
+            "type": "array",
+            "title": "Traces"
+          },
+          "limits": {
+            "$ref": "#/components/schemas/AnalysisLimits"
+          },
+          "evaluations_used": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Evaluations Used",
+            "default": 0
+          },
+          "limits_hit": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limits Hit"
+          },
+          "algorithm_version": {
+            "type": "string",
+            "title": "Algorithm Version"
+          },
+          "exhaustive": {
+            "type": "boolean",
+            "title": "Exhaustive",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "questions",
+          "remaining_uncertainty",
+          "limits",
+          "algorithm_version"
+        ],
+        "title": "QuestionPlan"
       },
       "RawAddress": {
         "properties": {
@@ -1448,6 +2347,238 @@
         ],
         "title": "RuleDetail"
       },
+      "SemanticDecision": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "supported",
+              "contradicted",
+              "insufficient"
+            ],
+            "title": "Status"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/SourceSpan"
+            },
+            "type": "array",
+            "title": "Spans"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "field",
+          "status",
+          "explanation"
+        ],
+        "title": "SemanticDecision"
+      },
+      "SemanticReview": {
+        "properties": {
+          "rule_id": {
+            "type": "string",
+            "title": "Rule Id"
+          },
+          "rule_hash": {
+            "type": "string",
+            "title": "Rule Hash"
+          },
+          "source_hashes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Source Hashes"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "live",
+              "fixture",
+              "replay"
+            ],
+            "title": "Mode"
+          },
+          "verifier_version": {
+            "type": "string",
+            "title": "Verifier Version"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "decisions": {
+            "items": {
+              "$ref": "#/components/schemas/SemanticDecision"
+            },
+            "type": "array",
+            "title": "Decisions"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "human_reviewed": {
+            "type": "boolean",
+            "const": false,
+            "title": "Human Reviewed",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rule_id",
+          "rule_hash",
+          "source_hashes",
+          "mode",
+          "verifier_version",
+          "model",
+          "decisions",
+          "limitations"
+        ],
+        "title": "SemanticReview"
+      },
+      "SourceContext": {
+        "properties": {
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/SourceSpan"
+            },
+            "type": "array",
+            "title": "Spans"
+          },
+          "dependencies": {
+            "items": {
+              "$ref": "#/components/schemas/SourceDependency"
+            },
+            "type": "array",
+            "title": "Dependencies"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "available",
+              "partial",
+              "missing"
+            ],
+            "title": "Status"
+          },
+          "limits": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Limits"
+          },
+          "limits_hit": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limits Hit"
+          },
+          "retrieval_method": {
+            "type": "string",
+            "title": "Retrieval Method",
+            "default": "exact_anchors_and_bounded_lexical_retrieval"
+          },
+          "semantic_verification": {
+            "type": "boolean",
+            "const": false,
+            "title": "Semantic Verification",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "spans",
+          "dependencies",
+          "status",
+          "limits",
+          "limits_hit"
+        ],
+        "title": "SourceContext"
+      },
+      "SourceDependency": {
+        "properties": {
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/SourceSpan"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "resolved",
+              "missing",
+              "ambiguous",
+              "cycle",
+              "depth_limit",
+              "budget_limit"
+            ],
+            "title": "Status"
+          },
+          "target_doc_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Doc Id"
+          },
+          "target_section": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Section"
+          },
+          "spans": {
+            "items": {
+              "$ref": "#/components/schemas/SourceSpan"
+            },
+            "type": "array",
+            "title": "Spans"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reference",
+          "origin",
+          "status",
+          "explanation"
+        ],
+        "title": "SourceDependency"
+      },
       "SourceDocument": {
         "properties": {
           "doc_id": {
@@ -1550,6 +2681,53 @@
         ],
         "title": "SourceDocument"
       },
+      "SourceSpan": {
+        "properties": {
+          "doc_id": {
+            "type": "string",
+            "title": "Doc Id"
+          },
+          "source_hash": {
+            "type": "string",
+            "title": "Source Hash"
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Start"
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "End"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "section": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Section"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "doc_id",
+          "source_hash",
+          "start",
+          "end",
+          "text"
+        ],
+        "title": "SourceSpan"
+      },
       "StatusEvent": {
         "properties": {
           "status": {
@@ -1583,6 +2761,111 @@
           "evidence"
         ],
         "title": "StatusEvent"
+      },
+      "SupplementalAnswer": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "value": {
+            "title": "Value"
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "user_provided",
+              "demo"
+            ],
+            "title": "Provenance",
+            "default": "user_provided"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "field",
+          "value"
+        ],
+        "title": "SupplementalAnswer"
+      },
+      "Uncertainty": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "property_fact",
+              "jurisdiction",
+              "source_gap",
+              "cross_reference",
+              "interpretation",
+              "conflict",
+              "analysis_limit",
+              "service_dependency"
+            ],
+            "title": "Kind"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "remedy": {
+            "type": "string",
+            "title": "Remedy"
+          },
+          "rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rule Ids"
+          },
+          "predicate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Predicate Ids"
+          },
+          "field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field"
+          },
+          "source_refs": {
+            "items": {
+              "$ref": "#/components/schemas/SourceSpan"
+            },
+            "type": "array",
+            "title": "Source Refs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "message",
+          "remedy"
+        ],
+        "title": "Uncertainty"
       }
     }
   }

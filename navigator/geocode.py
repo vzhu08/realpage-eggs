@@ -12,6 +12,36 @@ ENDPOINT = "https://geocoding.geo.census.gov/geocoder/geographies/address"
 STATE_FIPS = {"06": "CA", "25": "MA", "34": "NJ"}
 
 
+def street_variants(street):
+    """Remove padding only from street ordinals, never from house numbers."""
+    normalized = re.sub(r"(?<=\s)0+([1-9]\d*(?:ST|ND|RD|TH))\b", r"\1", street, flags=re.I)
+    return list(dict.fromkeys([street, normalized]))
+
+
+def address_parts(street):
+    number = r"\d+(?:\.\d+| \d+/\d+)?"
+    address_range = re.fullmatch(rf"({number})-({number})\s+(.+)", street)
+    if address_range:
+        return "range_endpoints", [f"{n} {address_range[3]}" for n in address_range.groups()[:2]]
+    # Require two explicit numbered streets; a fraction is not a compound address.
+    compound = re.fullmatch(r"(\d+[A-Za-z]?\s+[A-Za-z][^/]+)/\s*(\d+[A-Za-z]?\s+[A-Za-z][^/]+)", street)
+    if compound:
+        return "compound_addresses", [s.strip() for s in compound.groups()]
+    return None, []
+
+
+def house_number(street):
+    match = re.match(r"^(\d+(?:\.\d+|\s+\d+/\d+)?[A-Za-z]?)(?=\s)", street.strip())
+    return re.sub(r"\s+", " ", match[1]).upper() if match else None
+
+
+def municipalities_agree(results):
+    return bool(results) and all(r.match_quality == "resolved" for r in results) and len({
+        (r.state, r.identifiers.get("municipality_geoid"), r.identifiers.get("geography_type"))
+        for r in results
+    }) == 1
+
+
 class CensusGeocoder:
     def __init__(self, store: Store, client=None):
         self.store = store
@@ -34,12 +64,29 @@ class CensusGeocoder:
         self.store.write(f"geocode_cache/{key}.json", {"params": params, "retrieved_at": timestamp, "response": body})
         return body, timestamp, key
 
-    def parse(self, prop, body, timestamp, key):
+    def parse(self, prop, body, timestamp, key, street=None):
         matches = body["result"]["addressMatches"]
         base = dict(address_id=prop.address_id, state=prop.raw_address.state, benchmark=self.benchmark, vintage=self.vintage, retrieved_at=timestamp, response_hash=digest(body), method="census_geographies")
-        if len(matches) != 1:
-            return JurisdictionResolution(**base, match_quality="ambiguous" if len(matches) > 1 else "unresolved", unresolved=["Multiple Census matches" if matches else "No Census address match"])
-        match = matches[0]
+        if not matches:
+            return JurisdictionResolution(**base, unresolved=["No Census address match"])
+        # Census can silently read a fractional/range address as another house number.
+        if street is not None and (house_number(street) is None or any(
+            house_number(m.get("matchedAddress", "")) != house_number(street) for m in matches
+        )):
+            return JurisdictionResolution(**base, match_quality="ambiguous", unresolved=["Census matched house number does not preserve the requested address"])
+        candidates = [self.parse_match(prop, match, base, key) for match in matches]
+        if len(candidates) == 1:
+            return candidates[0]
+        if not municipalities_agree(candidates):
+            return JurisdictionResolution(**base, match_quality="ambiguous", unresolved=["Multiple Census matches do not all establish the same active legal municipality"])
+        result = candidates[0]
+        result.method = "census_multiple_matches_agree"
+        result.identifiers["candidate_count"] = str(len(matches))
+        if len({c.county for c in candidates}) != 1:
+            result.county = None
+        return result
+
+    def parse_match(self, prop, match, base, key):
         geos = match.get("geographies", {})
         states = geos.get("States", [])
         resolved_state = states[0].get("STUSAB") or STATE_FIPS.get(states[0].get("STATE")) if len(states) == 1 else None
@@ -53,47 +100,53 @@ class CensusGeocoder:
         if len(places) != 1:
             return JurisdictionResolution(**base, county=counties[0].get("NAME") if len(counties) == 1 else None, unresolved=["No unique active legal municipality in returned Census boundaries"])
         place = places[0]
-        municipality = place.get("BASENAME") or re.sub(r" (city|town|township|borough)$", "", place["NAME"], flags=re.I)
+        municipality = place.get("BASENAME") or re.sub(r" (city|town|township|borough)$", "", place.get("NAME", ""), flags=re.I)
+        if not municipality or not place.get("GEOID"):
+            return JurisdictionResolution(**base, unresolved=["Census municipality lacks a name or geographic identifier"])
         return JurisdictionResolution(**base, county=counties[0].get("NAME") if len(counties) == 1 else None, municipality=municipality, identifiers={"municipality_geoid": str(place["GEOID"]), "geography_type": place["MTFCC"], "response_cache_key": key}, match_quality="resolved", unresolved=[])
 
     def resolve(self, prop):
         raw = prop.raw_address
-        variants = [(raw.street_address, raw.zip)]
-        if raw.zip: variants.append((raw.street_address, ""))
         attempts = []
-        last = JurisdictionResolution(address_id=prop.address_id, state=raw.state)
-        for street, zip_code in variants:
-            try:
-                body, timestamp, key = self.request(raw, street, zip_code)
-                last = self.parse(prop, body, timestamp, key)
-                attempts.append({"street": street, "zip": zip_code, "cache_key": key, "quality": last.match_quality})
-                if last.match_quality == "resolved":
-                    last.attempts = attempts
-                    return last
-            except (httpx.HTTPError, ValueError, KeyError) as exc:
-                attempts.append({"street": street, "zip": zip_code, "error": type(exc).__name__})
-                last.match_quality = "failed"
-                last.unresolved = ["Census request failed; cached/state-level facts remain available"]
-                break
-        address_range = re.match(r"^(\d+)-(\d+)\s+(.+)$", raw.street_address)
-        if address_range and last.match_quality != "failed":
-            candidates = []
-            for number in address_range.groups()[:2]:
-                street = f"{number} {address_range[3]}"
-                try:
-                    body, timestamp, key = self.request(raw, street, "")
-                    result = self.parse(prop, body, timestamp, key)
-                    candidates.append(result)
-                    attempts.append({"street": street, "zip": "", "cache_key": key, "quality": result.match_quality})
-                except (httpx.HTTPError, ValueError, KeyError) as exc:
-                    attempts.append({"street": street, "error": type(exc).__name__})
-            if len(candidates) == 2 and all(c.match_quality == "resolved" for c in candidates) and candidates[0].identifiers["municipality_geoid"] == candidates[1].identifiers["municipality_geoid"]:
-                last = candidates[0]
-                last.method = "census_range_endpoints_agree"
+
+        def lookup(street_address, purpose):
+            last = JurisdictionResolution(address_id=prop.address_id, state=raw.state)
+            for street in street_variants(street_address):
+                for zip_code in dict.fromkeys([raw.zip, ""]):
+                    try:
+                        body, timestamp, key = self.request(raw, street, zip_code)
+                        last = self.parse(prop, body, timestamp, key, street)
+                        attempts.append({"street": street, "zip": zip_code, "purpose": purpose,
+                                         "cache_key": key, "quality": last.match_quality,
+                                         "response_hash": last.response_hash, "retrieved_at": timestamp,
+                                         "method": last.method, "unresolved": last.unresolved,
+                                         "candidate_count": len(body["result"]["addressMatches"])})
+                        if last.match_quality == "resolved":
+                            return last
+                    except (httpx.HTTPError, ValueError, KeyError) as exc:
+                        attempts.append({"street": street, "zip": zip_code, "purpose": purpose, "error": type(exc).__name__})
+                        return JurisdictionResolution(address_id=prop.address_id, state=raw.state,
+                                                      match_quality="failed", unresolved=["Census request failed; cached/state-level facts remain available"])
+            return last
+
+        last = lookup(raw.street_address, "original_address")
+        kind, parts = address_parts(raw.street_address)
+        if parts and last.match_quality != "failed":
+            # Even a successful raw range/compound match may cover only its last number.
+            candidates = [lookup(street, kind) for street in parts]
+            if municipalities_agree(candidates):
+                last = candidates[0].model_copy(deep=True)
+                last.method = f"census_{kind}_agree"
                 last.response_hash = digest([c.response_hash for c in candidates])
+                last.retrieved_at = max(c.retrieved_at for c in candidates)
+                last.identifiers = {k: v for k, v in last.identifiers.items() if k in {"municipality_geoid", "geography_type"}}
+                if len({c.county for c in candidates}) != 1:
+                    last.county = None
             else:
-                last.match_quality = "ambiguous"
-                last.unresolved = ["Address range endpoints do not establish one legal municipality"]
+                last = JurisdictionResolution(address_id=prop.address_id, state=raw.state,
+                                              benchmark=self.benchmark, vintage=self.vintage,
+                                              match_quality="failed" if any(c.match_quality == "failed" for c in candidates) else "ambiguous",
+                                              unresolved=["Address components do not all establish one legal municipality"])
         last.attempts = attempts
         return last
 
@@ -110,6 +163,9 @@ def resolve_addresses(store, limit=None, workers=4, retry_unresolved=False):
     try:
         with ThreadPoolExecutor(max_workers=max(1, min(workers, 8))) as pool:
             for result in pool.map(geocoder.resolve, selected):
+                previous = existing.get(result.address_id)
+                if previous:
+                    result.attempts = previous.attempts + [a for a in result.attempts if a not in previous.attempts]
                 existing[result.address_id] = result
                 store.save_collection("resolutions", existing)
         failed = sum(r.match_quality == "failed" for r in existing.values())

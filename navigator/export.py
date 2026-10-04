@@ -3,12 +3,15 @@ from pathlib import Path
 
 from .changes import compute_changes
 from .engine import evaluate_rules
+from .evidence import prepare_rules, EvidenceStoreView
 from .models import ChangeRequest
 from .store import digest, write_json
 from .validation import export_rule, inventory, validate
 
 
 def export_all(store, output: Path, as_of=date(2026, 10, 1), allow_partial=False, synthetic=False):
+    prepared, evidence_reports = prepare_rules(store)
+    store = EvidenceStoreView(store, prepared)
     report = validate(store, as_of)
     if report["counts"]["synthetic_rules"] and not synthetic:
         raise ValueError("Synthetic data requires --synthetic and a separate output directory")
@@ -37,6 +40,7 @@ def export_all(store, output: Path, as_of=date(2026, 10, 1), allow_partial=False
     report["all_lookup_references_resolve"] = all(row["team_rule_id"] in exported_ids for rows in lookups.values() for row in rows)
     report["artifact_label"] = "SYNTHETIC_NOT_FOR_SUBMISSION" if synthetic else "COMPLETE_INTERNAL_VALIDATION" if report["ready_for_submission"] else "PARTIAL_NOT_JUDGE_READY"
     artifacts = {"rules.json": exported_rules, "lookups.json": {"as_of": str(as_of), "lookups": lookups}, "changes.json": changes, "validation.json": report, "change_details.json": details, "evidence_inventory.json": inventory(store)}
+    artifacts["evidence_checks.json"] = {k: v.model_dump(mode="json") for k,v in evidence_reports.items()}
     for name, value in artifacts.items(): write_json(output / name, value)
     run.artifacts = [str((output / name).resolve()) for name in artifacts]
     store.finish(run, "success" if report["ready_for_submission"] else "partial", rules=len(exported_rules), addresses=len(lookups))
