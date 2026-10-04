@@ -9,9 +9,46 @@ Checkout: `C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/assist-demo-ca
 Exact input/code/runtime hashes, request keys, response hashes and measurements are in
 [the evidence receipt](evidence/assist-demo.json). Original sources and other checkouts remain unchanged.
 The user authorized this branch's push, merge and deployment to the existing Render service.
-The final-snapshot release verification below supersedes the initial 140-rule rehearsal.
+The current integrated release below supersedes the initial 140-rule rehearsal.
 
-## Snapshot and hosting decision
+## Current integrated release
+
+Implementation PR34 and compatibility PR36 are merged. The exact deployment revision is
+`ed1ae11dd7e3ca52bcde89b85219dae8dc99b7ca`, integrating the newer main source-eligibility checks.
+The final image is live on the existing 1 CPU / 2 GB service. The prepared flow meets the
+measured acceptance target; uncached serving still fails. This section supersedes historical measurements below. Final local receipt: `artifacts/prime-authoritative-v5.json`.
+All five responses independently byte-match uncached computation. The opening is 304,589,879
+canonical bytes, 17,872,359 compact JSON bytes and 2,530,089 compact gzip bytes. No evidence is omitted.
+The decoded-result ceiling is 512 MiB; compressed disk retention remains 256 MiB.
+
+Health reports 666 rule candidates, including 412 primary-source rules and 254 requiring source
+review, from 43 rule-producing documents in an 83-source inventory. Nine sources are context only.
+All five plans remain partial and hit the 64-evaluation bound. These counts are provenance and
+software states, not findings of legal validity or completeness.
+
+| Final local step | Server cached (ms) | Preloaded paced (ms) |
+| --- | ---: | ---: |
+| Opening | 1,362 | 1,088 |
+| Owner occupied false | 2,579 | 1,546 |
+| Accumulated tenancy date | 2,462 | 1,666 |
+| Reset to unknown | 2,224 | 1,590 |
+| Date change | 1,769 | 1,324 |
+
+The final local preloaded flow reached the source quote in 55.61 seconds, after 3.36 seconds of
+preparation before the presentation clock. All planned preloaded clicks met the target; three
+server-cache-only clicks missed it. A fresh empty-cache opening took 97.04 seconds, including
+95.63 seconds server time, with 3,563,945,984 bytes peak working set. This cannot establish safe
+cold serving within the hosted 2 GB instance. A separate local run hit a Windows sandbox/user
+ACL mismatch and bypassed the cache; its receipt is retained as a failed setup, not a hit result.
+Run priming and the local API under the same OS user. Docker explicitly assigns cache ownership
+to its serving user after priming.
+
+Final CI: 583 backend tests passed / 1 skipped; 260 browser checks passed / 22 intentional skips;
+frontend verification, contracts and both container checks passed. Focused cache/wire: 22 passed.
+Rehearsal receipts now include preload preparation, transfer/parse/validation costs, failed
+requests and total wall time, in addition to planned click and render measurements.
+
+## Historical initial snapshot and hosting decision
 
 Local rehearsals use the frozen, previously hosted 140-rule `real-002` snapshot copied from
 `artifacts/render-setup/artifacts/render/local-data/snapshot-v1` into this checkout's
@@ -30,7 +67,7 @@ The 506-rule intermediate store is not the selected serving snapshot.
 Render's dashboard was inspected before any proposed hosted rehearsal: service
 `srv-db10ntfavr4c739nf3f0` showed **1 CPU / 2 GB, $25/month**, one instance, autoscaling off,
 and live commit `4e994b0`. No purchase was made. The target is
-https://realpage-navigator.onrender.com. This task's new behavior has **not** been tested there.
+https://realpage-navigator.onrender.com. At this historical cutoff, the new behavior had not yet been tested there.
 The existing blueprint still describes Free: deploy the existing upgraded service; do not apply
 an unrelated blueprint plan change.
 
@@ -114,7 +151,7 @@ Run in the isolated checkout. The repository's existing environment supplies dep
 $TaskPython = 'C:/Users/vzhu0/PycharmProjects/realpage-eggs/.venv/Scripts/python.exe'
 $env:PYTHONUTF8 = '1'
 $env:PYTHON_DOTENV_DISABLED = '1'
-& $TaskPython scripts/prime_assist.py --store artifacts/snapshot-authoritative --cache artifacts/cache-authoritative-v2 --manifest config/demo_requests.json --report artifacts/prime-authoritative-v2.json --verify
+& $TaskPython scripts/prime_assist.py --store artifacts/snapshot-authoritative --cache artifacts/cache-final --manifest config/demo_requests.json --report artifacts/prime-final.json --verify
 ```
 
 `--verify` independently computes each whole response and compares exact canonical bytes. The
@@ -132,7 +169,7 @@ npm ci
 npm run verify
 Set-Location ..
 $env:NAVIGATOR_DATA_DIR = (Resolve-Path artifacts/snapshot-authoritative).Path
-$env:NAVIGATOR_ASSIST_CACHE_DIR = (Resolve-Path artifacts/cache-authoritative-v2).Path
+$env:NAVIGATOR_ASSIST_CACHE_DIR = (Resolve-Path artifacts/cache-final).Path
 $env:NAVIGATOR_FRONTEND_DIST = (Resolve-Path frontend/dist).Path
 & $TaskPython -m uvicorn navigator.api:app --host 127.0.0.1 --port 8017 --workers 1
 ```
@@ -225,7 +262,7 @@ No broad p95, multi-jurisdiction load, 2 GB hosted memory, or general performanc
 is made. Passing software tests does not establish legal accuracy.
 
 
-## Final 666-rule snapshot release
+## Snapshot selection and intermediate 666-rule measurements
 
 The extraction owner's `authoritative-30-v2` run completed at 2026-10-04T11:33:04Z.
 The admitted `demo-authoritative-final-v1` snapshot has 666 rules, 83 sources and 500 properties.
@@ -286,3 +323,106 @@ missed it. Opening canonical size is 247,818,703 bytes; compact gzip is 2,285,31
 All five cache results independently match uncached canonical output. Cold offline preparation
 for the steps took 67.64, 77.04, 46.84, 43.76 and 64.58 seconds. These are offline compute/cache
 timings, not browser cold timings. Preserve that distinction in any performance claim.
+
+## Final hosted rehearsal
+
+Existing service: `srv-db10ntfavr4c739nf3f0`; final image `ed1ae11`; restored deployment
+`dep-db15bi8u01pc73ctmp3g`. The 26m31s build computed its own artifacts. All five image-generated
+canonical SHA-256 values match the independently verified local responses. The exact runtime
+identity is `4d68462b594ffdd755a6aaf2717b63d5fa811a6fc338578f118812216b448836`.
+
+| Step | First deployment, preprimed (ms) | Warm server cache (ms) | Preloaded paced (ms) |
+| --- | ---: | ---: | ---: |
+| opening | 1,448 | 1,425 | 978 |
+| follow-up | 2,505 | 2,141 | 1,581 |
+| second-answer | 2,518 | 2,021 | 1,469 |
+| unknown | 2,568 | 1,974 | 1,582 |
+| date-change | 1,969 | 1,639 | 1,412 |
+
+**Prepared flow: 55.58 seconds**, including the actual evidence quote at 55 seconds.
+All five planned clicks were 0.98–1.58 seconds; the evidence click was 561 ms. Preparation
+took 3.04 seconds **before** starting the presentation clock. The prepared browser heap
+was about 209 MB; this is distinct from the server memory limit. The first process measurement
+used image-primed artifacts and must not be described as an uncached cold request.
+
+Warm cached request breakdown (milliseconds; detailed ResourceTiming bytes are in the receipt):
+
+| Step | Server | Transfer | JSON/graph parse | Validation | Render |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| opening | 63 | 189 | 143 | 155 | 834 |
+| follow-up | 44 | 186 | 132 | 139 | 1222 |
+| second-answer | 76 | 178 | 139 | 124 | 1151 |
+| unknown | 44 | 164 | 143 | 110 | 1051 |
+| date-change | 49 | 167 | 113 | 135 | 1138 |
+
+The controlled cold opening used the **same** image, snapshot and request with a new empty
+cache directory. Render recorded an out-of-memory restart above 2 GB, and the browser received
+HTTP 502 after 39.78 seconds. No usable result appeared; the harness stopped waiting at 120
+seconds. The UI showed the backend failure. This is a remaining runtime failure, not a
+successful slow result. Only the opening was attempted in this cold diagnostic.
+
+The environment was restored to `/var/cache/navigator-assist` using the existing image,
+and a fresh-browser opening verified a working cache hit under two seconds. No resources
+were purchased. All five prepared requests are available again in the handoff browser tab.
+
+Repeat authorized hosted measurements from `frontend`:
+
+```powershell
+node scripts/rehearse-assist.mjs --base https://realpage-navigator.onrender.com --mode cached --hosted-authorized --output ../artifacts/rehearsal-hosted-cached.json
+node scripts/rehearse-assist.mjs --base https://realpage-navigator.onrender.com --mode preloaded --paced --hosted-authorized --output ../artifacts/rehearsal-hosted-paced.json
+```
+
+To repeat the disruptive cold diagnostic, schedule it within authorized hosted testing: set
+`NAVIGATOR_ASSIST_CACHE_DIR` to a new `/tmp/assist-rehearsal-<unique>` directory and use Render
+**Save and deploy** to reuse the existing image. Run `--mode uncached --opening-only
+--server-state cold --hosted-authorized`, retain the failure receipt/events, then immediately
+restore `/var/cache/navigator-assist` with **Save and deploy** and verify a hit. Do not delete
+snapshot stores or image artifacts. Render documents the existing-build behavior in
+[Environment Variables and Secrets](https://render.com/docs/configure-environment-variables).
+
+No general latency, uncached reliability, legal accuracy or complete-corpus claim follows from
+the successful prepared path. The scripted pacing is accompanied by the narration above;
+no human audio recording was made.
+
+## Changed paths and branch handoff
+
+Implementation branches `codex/assist-demo-cache` and `codex/assist-demo-hosted-results` were
+merged through PR34/PR36, then deleted locally/remotely after switching this same checkout.
+Evidence/rehearsal branch: `codex/assist-demo-rehearsal-evidence`. Root edits, other active
+checkouts and ignored snapshots/caches remain preserved. The product deployment remains
+pinned to `ed1ae11`; the subsequent measurement-only commit does not change its runtime.
+
+The exact claimed implementation paths (plus this final rehearsal-script update) are:
+
+- `.github/workflows/render-free.yml`
+- `config/demo_requests.json`
+- `deploy/Dockerfile`
+- `docs/ASSIST_DEMO.md`
+- `docs/evidence/assist-demo.json`
+- `docs/tasks/PERF-02.md`
+- `frontend/scripts/rehearse-assist.mjs`
+- `frontend/src/api/assistPreload.ts`
+- `frontend/src/api/assistWire.ts`
+- `frontend/src/api/live.ts`
+- `frontend/src/api/validate.ts`
+- `frontend/src/components/ui.tsx`
+- `frontend/src/features/demo/DemoPreloader.tsx`
+- `frontend/src/features/questions/QuestionCard.tsx`
+- `frontend/src/features/questions/RemainingUncertainty.tsx`
+- `frontend/src/lib/openItems.ts`
+- `frontend/src/lib/uncertainty.ts`
+- `frontend/src/state/session.ts`
+- `frontend/src/state/source.tsx`
+- `frontend/tests/e2e/assist-preload.spec.ts`
+- `frontend/tests/e2e/live-states.spec.ts`
+- `frontend/tests/unit/assist-cache.test.ts`
+- `frontend/tests/unit/uncertainty-rendering.test.ts`
+- `navigator/api.py`
+- `navigator/assist_cache.py`
+- `navigator/assist_service.py`
+- `navigator/assist_wire.py`
+- `scripts/prime_assist.py`
+- `scripts/render_snapshot.py`
+- `tests/test_assist_cache.py`
+- `tests/test_assist_wire.py`
+- `tests/test_render_snapshot.py`

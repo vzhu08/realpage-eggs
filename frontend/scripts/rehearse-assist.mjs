@@ -16,19 +16,39 @@ const mode = args.mode ?? 'preloaded';
 if (!['preloaded', 'cached', 'uncached'].includes(mode)) throw new Error('Unknown mode');
 const output = path.resolve(String(args.output ?? `../artifacts/rehearsal-${mode}.json`));
 await mkdir(path.dirname(output), { recursive: true });
-const browser = await chromium.launch({ headless: !args.headed });
+const browser = await chromium.launch({ headless: !args.headed, args: ['--enable-precise-memory-info'] });
 const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
 const page = await context.newPage();
+// The client clears old per-request measures to bound telemetry. Keep a small
+// harness-only observation buffer so preparation includes all five requests.
+await page.addInitScript(() => {
+  window.__realpageRehearsalMeasures = [];
+  new PerformanceObserver(list => {
+    for (const e of list.getEntries()) {
+      if (e.name.startsWith('realpage:')) window.__realpageRehearsalMeasures.push({ name: e.name, ms: e.duration, detail: e.detail });
+    }
+    window.__realpageRehearsalMeasures = window.__realpageRehearsalMeasures.slice(-200);
+  }).observe({ entryTypes: ['measure'] });
+});
 page.setDefaultTimeout(120_000);
 const requests = [];
+const failedRequests = [];
 const browserErrors = [];
+const runStarted = performance.now();
+const requestStarts = new WeakMap();
+page.on('request', request => requestStarts.set(request, performance.now()));
+page.on('requestfailed', request => {
+  if (request.url().includes('/api/')) failedRequests.push({ url: request.url(), error: request.failure(),
+    elapsedMs: performance.now() - (requestStarts.get(request) ?? runStarted) });
+});
 page.on('pageerror', error => browserErrors.push(String(error)));
 page.on('response', response => {
-  if (response.url().includes('/lookup/assist')) requests.push({ status: response.status(), ...response.headers(), at: Date.now() });
+  if (response.url().includes('/lookup/assist')) requests.push({ status: response.status(), ...response.headers(), at: Date.now(),
+    responseHeadersMs: performance.now() - (requestStarts.get(response.request()) ?? runStarted) });
 });
 const report = { base, mode, serverState: args['server-state'] ?? 'warm-or-uncontrolled', freshBrowser: true,
   checkedAt: new Date().toISOString(), targetMs: 2000, narrationBudgetSeconds: 60,
-  steps: [], requests, browserErrors, warnings: [], completeFlow: !args['opening-only'], success: false };
+  steps: [], requests, failedRequests, browserErrors, warnings: [], completeFlow: !args['opening-only'], success: false };
 try {
   const manifestResponse = await context.request.get(`${base}/api/v1/demo-requests`);
   if (!manifestResponse.ok()) throw new Error('No configurable demo manifest on selected host');
@@ -38,8 +58,15 @@ try {
   if (args['opening-only']) manifest.steps = manifest.steps.slice(0, 1);
   const opening = manifest.steps[0].request;
   const url = `${base}/${mode === 'preloaded' ? '?preload=1' : ''}#/lookup?mode=live&address=${opening.address_id}&as_of=${opening.as_of}`;
+  const preparationStarted = performance.now();
   await page.goto(url);
   if (mode === 'preloaded') await page.getByRole('button', { name: 'Open prepared property', exact: true }).waitFor();
+  report.preparationMs = performance.now() - preparationStarted;
+  report.preparation = await page.evaluate(() => ({
+    measures: window.__realpageRehearsalMeasures,
+    resources: performance.getEntriesByType('resource').filter(e => e.name.includes('/api/')).map(e => ({ name: e.name, transferSize: e.transferSize, encodedBodySize: e.encodedBodySize, decodedBodySize: e.decodedBodySize, duration: e.duration })),
+    browserHeapBytes: performance.memory?.usedJSHeapSize ?? null,
+  }));
   const rehearsalStarted = performance.now();
   const cueTimes = [0, 12, 25, 38, 48];
   const pace = async (index) => {
@@ -120,6 +147,10 @@ try {
   } catch { report.warnings.push('Browser state could not be captured after failure.'); }
   process.exitCode = 1;
 } finally {
+  report.totalWallMs = performance.now() - runStarted;
+  try {
+    report.finalMeasures = await page.evaluate(() => performance.getEntriesByType('measure').map(e => ({ name: e.name, ms: e.duration, detail: e.detail })));
+  } catch { /* A crashed browser already has its failure recorded above. */ }
   await writeFile(output, JSON.stringify(report, null, 2));
   await browser.close();
 }

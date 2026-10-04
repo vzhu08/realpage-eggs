@@ -1,9 +1,9 @@
 # PERF-02 — canonical assist caching and 60-second rehearsal
 
 Owner: Vincent / session 01a1067b-43a7-7cf1-813d-b0d807b6171f, sole writer.
-Branch: codex/assist-demo-cache. Base: 5475b69cafd7dac4ca324099ee3b60a9a1d280e8.
+Implementation branch: codex/assist-demo-cache. Original base: 5475b69cafd7dac4ca324099ee3b60a9a1d280e8.
 Checkout: C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/assist-demo-cache.
-Status: final-snapshot local verification complete; authorized publication and hosted rehearsal in progress.
+Status: implemented and verified locally/hosted; prepared target met, uncached 2 GB OOM remains documented.
 
 User explicitly authorizes Platform caching and narrowly necessary frontend preloading.
 Exclusive claim: navigator/assist_cache.py, assist_wire.py, api.py, assist_service.py;
@@ -86,3 +86,19 @@ are preserved. Deployment uses the existing 1c-2g service; final hosted results 
 Follow-up also retains the original navigator/assist_cache.py and tests/test_assist_cache.py
 claim to preserve supplemental-fact insertion order in exact request keys. This order becomes
 answers_applied list order, so sorted request dictionaries must not alias distinct response echoes.
+
+
+Final integrated release: PR36 merged at ed1ae11dd7e3ca52bcde89b85219dae8dc99b7ca after four
+passing CI gates. PR34 and PR36 remote/local source branches were deleted after confirmed merges
+and switching this same checkout. Current evidence-only branch: codex/assist-demo-rehearsal-evidence.
+The existing rehearsal-script claim remains active for preparation/failure timing receipts;
+no frontend product or Core semantics changes are planned. All five final-code canonical
+comparisons passed. Hosted final image dep-db14rlgu01pc73crflpg succeeded; final measurements follow. Root changes,
+extraction sources, other checkouts and task-owned ignored artifacts remain preserved.
+
+Final hosted outcome: all prepared clicks 0.98–1.58 s; source quote at 55.58 s, after 3.04 s
+preparation. Warm cache-only clicks reached 2.14 s. Controlled same-request cold opening
+returned HTTP 502 after 39.78 s and Render confirmed memory above 2 GB. Prepared cache
+restored; fresh-browser cache hit verified. All five Linux image canonical hashes match
+independently computed local results, and all five decoded compact artifacts match exact
+canonical bytes. Final runbook/evidence identify limitations, commands and changed paths.
