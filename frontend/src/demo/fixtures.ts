@@ -8,8 +8,9 @@
  * - recorded/portfolio-dev-fixture.json is a UX DEVELOPMENT FIXTURE: backend output for a
  *   fictional portfolio whose sources and properties were authored by the UX lane
  *   (frontend/scripts/dev_portfolio.py) so the changes view has several jurisdictions,
- *   categories and dates to lay out. Its results are computed by the backend; its
- *   `proposed_disagreements` are authored and follow a shape no contract defines yet.
+ *   categories and dates to lay out. Its results are computed by the backend, including the
+ *   re-check and classification of the fixture's authored claim annotations
+ *   (`source_comparisons`, the GET /source-comparisons response for that store).
  *
  * Everything here is synthetic and is labeled as such wherever it is shown.
  */
@@ -25,7 +26,7 @@ import decisiveQuestion from '../../../contracts/research_examples/decisive_ques
 import irrelevantMissingFact from '../../../contracts/research_examples/irrelevant_missing_fact.json';
 import twoUnresolvedExemptions from '../../../contracts/research_examples/two_unresolved_exemptions.json';
 import unresolvedSourceCoverage from '../../../contracts/research_examples/unresolved_source_coverage.json';
-import type { AddressItem, AssistResponse, ChangeRequest, ChangeResult, EncodedRuleRendering, EvidenceReport, LookupResponse, ProposedDisagreement, Rule, RuleDetail, SourceDocument } from '../api/types';
+import type { AddressItem, AssistResponse, ChangeRequest, ChangeResult, ChangeSummaryExtras, EncodedRuleRendering, EvidenceReport, LookupResponse, Rule, RuleDetail, SourceComparisonsResponse, SourceDocument } from '../api/types';
 import { type Pooled, expandPooled } from './pool';
 import devRecorded from './recorded/portfolio-dev-fixture.json';
 import recorded from './recorded/synthetic-replay.json';
@@ -56,7 +57,10 @@ export type RecordedStore = 'synthetic' | 'no_extracted_rules' | 'dev_portfolio'
 export interface RecordedChange {
   store: RecordedStore;
   request: ChangeRequest;
+  /** What POST /changes returns. */
   response: ChangeResult;
+  /** What POST /changes/summary adds to it. */
+  summary: ChangeSummaryExtras;
 }
 
 const example = (name: string, data: unknown): LookupExample => ({ ...(data as Omit<LookupExample, 'path'>), path: `contracts/examples/${name}.json` });
@@ -129,7 +133,7 @@ const devData = expandPooled<{
   sources: Record<string, SourceDocument>;
   evidence_reports: Record<string, EvidenceReport>;
   changes: RecordedChange[];
-  proposed_disagreements: ProposedDisagreement[];
+  source_comparisons: SourceComparisonsResponse;
 }>(dev);
 
 /** UX development fixture (fictional portfolio). Labeled wherever it is shown. */
@@ -141,5 +145,14 @@ export const DEV_RULES = devData.rules;
 export const DEV_SOURCES = devData.sources;
 export const DEV_EVIDENCE_REPORTS = devData.evidence_reports;
 export const DEV_CHANGES = devData.changes;
-/** Authored entries in a proposed shape (no contract yet); never presented as backend output. */
-export const DEV_PROPOSED_DISAGREEMENTS = devData.proposed_disagreements;
+/** The backend's GET /source-comparisons response for the development fixture's authored annotations. */
+export const DEV_SOURCE_COMPARISONS = devData.source_comparisons;
+
+/**
+ * Which recordings the one-click walkthrough examples open. These choose a recording; what
+ * each example says about itself is computed from that recording (src/api/demo.ts).
+ */
+export const WALKTHROUGH = {
+  lookup: { address_id: 'DEV-P04', as_of: '2026-12-15' },
+  changes: { before: '2026-10-01', after: '2027-01-15', scenario: 'actual' as const },
+};

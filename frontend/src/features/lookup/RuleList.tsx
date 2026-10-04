@@ -1,6 +1,6 @@
 import type { Evaluation, Rule } from '../../api/types';
 import { Icon } from '../../components/Icon';
-import { Tag } from '../../components/ui';
+import { Disclosure, Tag } from '../../components/ui';
 import { formatDate } from '../../lib/dates';
 import { RESULT_ORDER, categoryLabel, humanize, parseReason, resultMeta } from '../../lib/labels';
 
@@ -27,7 +27,7 @@ export function RuleList({ evaluations, rules, selectedRuleId, onInspect, change
         return (
           <section key={group.result} className="rules__group" aria-label={`${meta.group}: ${group.items.length}`}>
             <div className="rules__group-head">
-              <h3>
+              <h3 id={`rules-${group.result}`}>
                 {meta.group} <span className="count">{group.items.length}</span>
               </h3>
               <p>{meta.gloss}</p>
@@ -54,6 +54,9 @@ export function RuleList({ evaluations, rules, selectedRuleId, onInspect, change
 function RuleRow({ evaluation, rule, selected, changed, onInspect }: { evaluation: Evaluation; rule: Rule | undefined; selected: boolean; changed: boolean; onInspect: () => void }) {
   const meta = resultMeta(evaluation.result);
   const reasons = (evaluation.uncertainty_reasons ?? []).map(parseReason);
+  const others = reasons.filter((reason) => reason.kind !== 'missing_property_fact');
+  // One short label per kind of open reason; the reasons themselves are in the detail below.
+  const kinds = [...new Set(others.map((reason) => reason.label))];
   const missing = evaluation.missing_facts ?? [];
   const title = rule?.title ?? evaluation.team_rule_id;
   return (
@@ -66,21 +69,6 @@ function RuleRow({ evaluation, rule, selected, changed, onInspect }: { evaluatio
         </div>
         <h4 className="rule__title">{title}</h4>
         {rule && (
-          <p className="rule__meta">
-            <span>{rule.jurisdiction}</span>
-            <span aria-hidden="true">·</span>
-            <span>{rule.citation}</span>
-            <span aria-hidden="true">·</span>
-            <span className="mono">{rule.source_doc_id}</span>
-            {rule.effective_date && (
-              <>
-                <span aria-hidden="true">·</span>
-                <span>effective {formatDate(rule.effective_date)}</span>
-              </>
-            )}
-          </p>
-        )}
-        {rule && (
           <p className="rule__requirement">
             {rule.requirement}
             {rule.key_value && (
@@ -91,23 +79,48 @@ function RuleRow({ evaluation, rule, selected, changed, onInspect }: { evaluatio
             )}
           </p>
         )}
-        {missing.length > 0 && (
-          <p className="rule__needs">
-            <span className="rule__needs-label">Needs:</span> {missing.map(humanize).join(', ')}
+        {rule && (
+          <p className="rule__meta">
+            <span>{rule.jurisdiction}</span>
+            <span aria-hidden="true">·</span>
+            <span>{rule.citation}</span>
+            {rule.effective_date && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>effective {formatDate(rule.effective_date)}</span>
+              </>
+            )}
           </p>
         )}
-        {reasons.filter((reason) => reason.kind !== 'missing_property_fact').length > 0 && (
-          <ul className="rule__reasons">
-            {reasons
-              .filter((reason) => reason.kind !== 'missing_property_fact')
-              .map((reason) => (
+        {(missing.length > 0 || kinds.length > 0) && (
+          <p className="rule__needs">
+            {missing.length > 0 && (
+              <span>
+                <span className="rule__needs-label">Needs:</span> {missing.map(humanize).join(', ')}
+              </span>
+            )}
+            {kinds.map((kind) => (
+              <span key={kind} className="rule__open">
+                {kind}
+              </span>
+            ))}
+          </p>
+        )}
+        <Disclosure summary="How this result was reached" className="rule__why">
+          <p className="rule__explanation">{evaluation.explanation}</p>
+          {others.length > 0 && (
+            <ul className="rule__reasons">
+              {others.map((reason) => (
                 <li key={reason.raw}>
                   <span className="rule__reason-kind">{reason.label}:</span> {reason.message}
                 </li>
               ))}
-          </ul>
-        )}
-        <p className="rule__explanation">{evaluation.explanation}</p>
+            </ul>
+          )}
+          <p className="rule__ids">
+            Source <span className="mono">{rule?.source_doc_id ?? 'not loaded'}</span> · rule <span className="mono break">{evaluation.team_rule_id}</span>
+          </p>
+        </Disclosure>
       </div>
       <button type="button" className="button button--small rule__inspect" onClick={onInspect} aria-pressed={selected} aria-label={`Inspect evidence for ${title}`}>
         <Icon name="quote" />

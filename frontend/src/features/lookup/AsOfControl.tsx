@@ -54,7 +54,7 @@ export function AsOfControl({ value, onChange, onRun, busy, recordedDates, fixtu
           </>
         ) : (
           <>
-            Starts at the contract default, {formatDate(DEFAULT_AS_OF)}
+            The date is always explicit. It starts at the contract default, {formatDate(DEFAULT_AS_OF)}
             {value !== DEFAULT_AS_OF && (
               <>
                 {' '}
@@ -63,7 +63,7 @@ export function AsOfControl({ value, onChange, onRun, busy, recordedDates, fixtu
                 </button>
               </>
             )}
-            . It is never taken from today’s date.
+            , never today’s date.
           </>
         )}
       </p>

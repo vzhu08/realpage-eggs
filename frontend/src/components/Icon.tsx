@@ -70,6 +70,41 @@ const PATHS = {
     </>
   ),
   list: <path d="M7 6h9M7 10h9M7 14h9M4 6h.1M4 10h.1M4 14h.1" />,
+  download: (
+    <>
+      <path d="M10 3.5v9M6.5 9.5 10 13l3.5-3.5" />
+      <path d="M4 15.5h12" />
+    </>
+  ),
+  restart: (
+    <>
+      <path d="M4.5 10a5.5 5.5 0 1 0 1.7-4" />
+      <path d="M4 3.5v3h3" />
+    </>
+  ),
+  building: (
+    <>
+      <path d="M5 16.5v-12h7v12M12 8.5h3.5v8M3.5 16.5h13.5" />
+      <path d="M7.5 7.5h2M7.5 10.5h2M7.5 13.5h2" />
+    </>
+  ),
+  compare: (
+    <>
+      <path d="M4 5.5h5v9H4zM11 5.5h5v9h-5z" />
+      <path d="M5.8 8.5h1.4M12.8 8.5h1.4M5.8 11h1.4M12.8 11h1.4" />
+    </>
+  ),
+  calendar: (
+    <>
+      <path d="M4.5 5.5h11v10h-11zM4.5 8.5h11M7.5 3.5v3M12.5 3.5v3" />
+    </>
+  ),
+  question: (
+    <>
+      <circle cx="10" cy="10" r="6.5" />
+      <path d="M8.2 8.2a1.9 1.9 0 1 1 2.8 1.7c-.6.3-1 .8-1 1.4M10 13.6v.1" />
+    </>
+  ),
 } as const;
 
 export type IconName = keyof typeof PATHS;

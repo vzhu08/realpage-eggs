@@ -145,7 +145,7 @@ export function QuestionsPanel({ outcome, answers, definitions, busy, synthetic,
         </div>
       )}
 
-      <Disclosure summary="Plan details">
+      <Disclosure summary="Plan details" className="questions__plan">
         <dl className="facts facts--dense">
           <div className="facts__row">
             <dt>Status</dt>

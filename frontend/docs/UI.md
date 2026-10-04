@@ -1,4 +1,4 @@
-# UI notes (UX-03, UX-04)
+# UI notes (UX-03, UX-04, hackathon polish)
 
 Design and behavior decisions for the frontend, the states it covers, and what it needs from
 the other lanes. Screenshots are in `docs/screenshots/` (regenerate with
@@ -6,80 +6,99 @@ the other lanes. Screenshots are in `docs/screenshots/` (regenerate with
 
 ## Principles
 
-1. **The situation first.** A result opens with its date, what applies, and what is not yet
-   determinable. Technical detail (IDs, hashes, plan limits, raw reasons) sits behind
-   disclosures.
-2. **Unknown is a result, not an error.** Unknown, pending, not-yet-effective and superseded
+1. **The answer first.** A result opens with the property and date, the counts by status, what
+   is unresolved and the next useful step. Everything else is below it or one disclosure away.
+2. **Detail is kept, not shown by default.** Raw IDs, 64-character hashes, field names, method
+   codes, plan limits and the service's verbatim statements live in disclosures next to the
+   thing they describe. Nothing is deleted or reworded to make a page shorter.
+3. **Unknown is a result, not an error.** Unknown, pending, not-yet-effective and superseded
    are separate groups with their own words and shapes. A failure to get a result is never
    shown as "no rules".
-3. **Applicability is not a verdict.** Nothing is phrased as compliance or violation; the
-   disclaimer stays in the header and in the sticky result bar.
-4. **Evidence is one step away** and its checks are never collapsed into a score.
-5. **The UI adds no law.** It renders evaluator output, source text and contract defaults. It
-   does not evaluate, rank questions or infer outcomes.
+4. **Applicability is not a verdict.** Nothing is phrased as compliance or violation; the
+   disclaimer stays under the header and in the pinned result bar.
+5. **Evidence is one step away**, opens only when asked for, and its checks are never
+   collapsed into a score.
+6. **The UI adds no law.** It renders evaluator output, source text and contract defaults. It
+   does not evaluate, rank questions, infer outcomes or prefer a source.
 
 ## Design system
 
 Tokens live in `src/styles/tokens.css`; text/background pairs are tested for WCAG AA
 (4.5:1) in `tests/unit/contrast.test.ts`.
 
-- **Ground:** warm paper `--paper`, white-ish `--surface` for the things you act on (the
-  date form, questions, the evidence pane). Hairline rules instead of nested cards.
-- **Type:** a serif (Charter and system equivalents) for titles, rule names, dates and quoted
-  law; Inter for interface text; a monospace only for identifiers, offsets and encoded
-  expressions. Sizes `--text-xs`…`--text-2xl`; body 15px/1.55.
-- **Accent:** one deep navy, used only for actions, links, focus and selection.
+- **Ground and surfaces:** a cool grey page (`--paper`) with white working surfaces
+  (`--surface`) for the things you read and act on: the verdict, a question, a rule, a claim.
+  Cards carry a hairline border and a light shadow; nesting is avoided.
+- **Type:** Inter for all interface text, with weight and size doing the hierarchy. The serif
+  (Charter and system equivalents) is kept for quoted source text only, so law always looks
+  like law. A monospace is used only for identifiers, offsets, hashes and encoded expressions.
+  Body 16px/1.55; sizes `--text-xs`…`--text-2xl`.
+- **Accent:** one cobalt, used only for actions, links, focus, selection and the one question
+  worth answering. The current view in the header is a filled pill.
 - **Status tones:** applies (green), unknown (amber), not yet effective (indigo), pending
   (violet, outlined), superseded/does not cover (grey), conflict/failure (red). Every tag
   carries a word and an icon shape, so color is never the only signal.
 - **Quotes:** source text is set in serif on a pale highlighter ground with a gold rule; the
-  encoded rule is set on the accent wash. The two never share a treatment.
-- **Synthetic data:** a dark hatched banner that cannot be dismissed, a hatched notice for
-  contract fixtures, and a "Synthetic data · not actual law" tag on every result.
-- **Motion:** 120–220ms ease for the evidence pane, popover and re-evaluation; a brief
+  encoded rule is set on the accent wash. The two never share a treatment. The two sides of a
+  source comparison are styled identically; nothing ranks one over the other.
+- **Synthetic data:** a dark banner that cannot be dismissed, a "Synthetic data · not actual
+  law" tag in every pinned result bar, and a labeled notice for contract fixtures and the
+  development fixture.
+- **Motion:** 120–220ms ease for the evidence drawer, dialogs and re-evaluation; a brief
   highlight on a rule whose result changed. All motion is disabled under
   `prefers-reduced-motion`.
-- **Spacing:** 4px scale (`--s-1`…`--s-7`); controls are 38px tall, 44px on touch widths.
+- **Spacing and controls:** 4px scale (`--s-1`…`--s-7`); controls are 40px tall and 44px on
+  touch widths, with a 2px focus ring.
 
 ## Layout
 
-- ≥1280px with a rule selected: property list · results · evidence pane (sticky, own scroll).
-  A new result opens the first rule's evidence so the source is on screen immediately.
-- 861–1279px: property list · results; evidence opens as a right-hand sheet.
-- ≤860px: one column. The property list collapses behind "Change property"; evidence opens
-  as a full-height modal sheet with focus trap, Escape to close and focus return.
-- The result bar (query date, synthetic/partial/jurisdiction tags, disclaimer) is sticky, so
-  the date a result was computed for is always visible while scrolling.
-- Changes and Disagreements are single-column pages. A comparison reads top to bottom: the
-  three counts, the timeline, the two summaries, then the drill-down. Each drill-down level is
-  a native `<details>`: source → rule → property → before/after. The first source and its
-  first rule start open so the structure is visible without a click.
-- ≤860px: the timeline rail moves to the left edge with dates above each entry; summary
-  tables become one block per group with its four counts labeled; the two claims of a
-  disagreement stack.
+- One reading column (`--page`, 67.5rem) on every view. Nothing sits beside the result.
+- **Lookup start:** a one-sentence purpose, three one-click examples in the synthetic demo
+  (or links to the other two views on the live API), then the property chooser.
+- **Lookup result, top to bottom:** the address with its legal location and stored facts on
+  one line (the provenance and resolution record are a disclosure; an unresolved municipality
+  stays on the page as a notice) → the explicit as-of date → the pinned result bar → the
+  verdict card (counts by status, "What is unresolved", "Next") → what an answer changed →
+  the most useful question → your answers → rule by rule → what remains uncertain → keep this
+  result → about this result.
+- **Evidence** opens as a right-hand drawer over the page (a full-height sheet on a phone),
+  only when a rule's "Evidence" button is used. It holds focus, closes on Escape and returns
+  focus to the button that opened it.
+- **Property chooser:** inline on the start page; once a property is on screen it opens from
+  "Change property" as a dialog (a full sheet on a phone) with the search field focused.
+- **Portfolio changes, top to bottom:** the form → the pinned comparison bar → the three
+  totals → the two group tables → one tabbed detail: *By property* (default), *By source and
+  rule*, *Timeline*. Each level of the detail is a native `<details>`.
+- **Compare sources:** conflicts for one property and date (when arriving from a lookup), then
+  every claim comparison in the snapshot, then the form for another property and date. The two
+  claims sit side by side on desktop and stack on a phone.
+- The pinned bar (property, query date, synthetic/partial/jurisdiction tags, disclaimer) is
+  sticky, so the date a result was computed for is always visible while scrolling.
 
 ## Journey → components
 
 | Step | Where |
 | --- | --- |
-| Search/select a sample property; facts and jurisdiction quality shown separately | `features/property` |
+| Start page: one-click examples whose sentences are computed from the recordings they open; “Restart demo” / “Start over” in the header | `features/lookup/LookupView`, `api/demo.ts` (`examples`), `App.tsx` |
+| Search/select a sample property; legal location and stored facts on one line, provenance and resolution record behind a disclosure | `features/property` |
 | Explicit as-of date, starting at the contract default; nothing runs until asked | `features/lookup/AsOfControl` |
-| Results grouped by evaluator result; missing facts, reasons, partial-data and warnings | `features/lookup/Results`, `RuleList` |
-| Useful questions: prompt, meaning, why, typed input, "I don't know", hypothetical outcomes, ranking rationale, plan limits | `features/questions/QuestionsPanel`, `QuestionCard`, `AnswerInput` |
+| Verdict: counts by status, what is unresolved, the next step | `features/lookup/Results` |
+| Rules grouped by evaluator result; requirement first, “How this result was reached” (explanation, reasons, IDs) on request | `features/lookup/RuleList` |
+| The most useful question: the fact definition in plain words, what an answer can change, a typed input, "I don't know"; hypothetical outcomes and the planner's own wording, ranking and limits behind disclosures | `features/questions/QuestionsPanel`, `QuestionCard`, `AnswerInput` |
 | Answers in play with provenance and disposition; edit, remove, change history | `features/questions/AnswerHistory` |
-| What moved after re-evaluation, including "result unchanged, still needs…" | `features/questions/WhatChanged` |
-| What remains uncertain, by kind and by who can resolve it | `features/questions/RemainingUncertainty` |
+| What an answer actually moved: before → after per rule, the answers it was evaluated with and their provenance, "result unchanged, still needs…" | `features/questions/WhatChanged` |
+| What remains uncertain: statements grouped by typed kind and fact, each topic expanding to every original statement, remedy, rule ID, hash and quote | `features/questions/RemainingUncertainty`, `lib/openItems`, `lib/uncertainty` |
 | Evidence: exact quotes, offsets, surrounding text, source record, retrieval time | `features/evidence/SourceTab` |
 | Source text beside the encoded rule; rule-level encoding apart from this property's evaluation | `features/evidence/EncodedTab` |
 | Six separate checks (availability, identity, anchor, quote, semantic, dependencies) | `features/evidence/ChecksTab` |
 | Temporal versions and status events | `features/evidence/VersionsTab` |
 | Date comparison and published scenarios; definite / uncertain / conflict; blocked; if-enacted | `features/changes/ChangesView`, `ChangeResultView` |
-| Portfolio timeline of the dates the rule records state, with the two compared dates marked | `features/changes/PortfolioTimeline`, `lib/portfolio` |
-| Summaries by legal municipality and by rule category; filters | `features/changes/PortfolioSummaries` |
-| Source → changed rule → impacted property, with names instead of IDs and before/after evidence | `features/changes/PortfolioDrillDown`, `usePortfolioDetails` |
-| Source disagreements: two claims side by side, authority, dates, why unresolved, next step | `features/disagreements`, `lib/disagreements` |
-| What an answer would move; grouped remaining uncertainty with the kind of next step | `features/questions`, `lib/uncertainty` |
-| Working export of one result | `lib/exportPackage`, `features/lookup/Results` |
+| Totals, then the service's own groups by rule jurisdiction and category (`POST /changes/summary`); regrouped from records when the backend has no summary route | `features/changes/ChangeResultView`, `PortfolioSummaries`, `lib/portfolio` |
+| Property by property (default), source → rule → property, and the timeline as a third view; names from the summary at once, source text, dates and locations as records load | `features/changes/PortfolioDrillDown`, `PortfolioTimeline`, `usePortfolioDetails` |
+| Truthful waiting for a slow comparison: elapsed seconds, what the service is doing, Cancel | `features/changes/ChangesView` |
+| Claim comparisons from `GET /source-comparisons`: both exact texts, authority, retrieval date, anchor and identity checks, the service's remedy, no winner | `features/disagreements/ComparisonCard`, `lib/sourceComparisons` |
+| Evaluator conflicts for one property and date: two rule records side by side | `features/disagreements/DisagreementCard`, `lib/disagreements` |
+| Evidence package (`POST /lookup/evidence-package`) for the request on screen; working export kept apart | `features/lookup/KeepResult`, `lib/exportPackage` |
 
 ## State inventory
 
@@ -108,15 +127,23 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
 | Blocked comparison | "Blocked", counts shown as "—", never as zero. |
 | If-enacted | "Hypothetical · if enacted" tag and notice. |
 | Demo: not recorded | Refused, with the recorded dates/comparisons offered. |
-| Names still loading | The comparison is shown at once with IDs; names replace them as `/addresses`, `/rules/{id}` and `/sources/{id}` answer. |
-| A name could not be read | “Some names could not be read”, the affected entries keep their ID, and a retry is offered. The comparison is unaffected. |
+| Records still loading | The comparison is shown at once. With a change summary every property and rule is already named; legal locations, source text and dates fill in as `/addresses`, `/rules/{id}` and `/sources/{id}` answer. Without one, IDs stand in until then. |
+| A record could not be read | “Some records could not be read”; the affected entries keep the summary's name (or their ID), and a retry is offered. The comparison is unaffected. |
+| Slow comparison | “Comparing… N s” with what the service is doing and a Cancel button. The wait is 180 seconds; a timeout is reported as a timeout and nothing is substituted. No progress bar is drawn, because none is known. |
+| No summary route | The comparison comes from `POST /changes` and a status line says so. |
 | Request edited while comparing | The pending comparison is withdrawn; a late response is discarded. |
 | Month- or year-only date | Shown as stated (“Dec 2026 · month only”) with the span it can mean; never placed on a day. |
 | Municipality unresolved | Its own summary row and label; the postal city is never used in its place. |
-| Conflict flagged | Red notice on the lookup, a tag on each changed row, and a link to both sources side by side. |
+| Conflict flagged | A red cue in the verdict card, a tag on the rule and on each comparison row, and a link to both records side by side. |
+| Claims differ | “The two texts state different things”: both passages, both sources, the service's remedy, “No source is preferred”, “Meaning not checked”. Not called a legal conflict. |
+| Support missing or stale | “Support is missing on one side”: the side with no passage, or whose passage or source no longer matches its recorded hash, says so. |
+| Same observation | “Both texts state the same thing”, labeled as not semantically verified. |
+| No claim comparisons | “No claim comparisons are saved with this snapshot” with the service's notes: an absence of comparisons, not agreement. |
+| Evidence package | Loading with Cancel; a receipt with the artifact label in words and raw, the disclaimer, and the hashes and limitations in a disclosure; errors with retry. A new result withdraws a request in flight. Not offered in the synthetic demo or for a contract fixture, and the card says why. |
 | No conflict flagged | “No conflict is flagged…”, with the note that this is not a finding that every source agrees. |
 | Rules outside this result | Uncertainty the service reports for rules that do not reach the property is collapsed, not mixed in. |
-| Development fixture | Hatched notice and tag wherever it is shown: fictional sources, backend-computed results. |
+| Development fixture | A tag in the pinned bar wherever it is shown and a short paragraph one disclosure down: fictional sources, backend-computed results. |
+| Start over | “Restart demo” / “Start over” rebuilds every view: no property, answer, result or comparison carries over. |
 | Demo: value not recorded | Answer kept and labeled "Not evaluated"; baseline unchanged. |
 
 ## Decisions worth knowing
@@ -150,9 +177,27 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
 - **Fonts.** Inter is bundled (`@fontsource-variable/inter`); the serif and monospace use
   system faces, so the app has no runtime font requests.
 - **Portfolio view regroups, it does not compute.** Counts in the three tiles are the
-  comparison’s own lists. Summaries, the timeline and the drill-down rearrange
-  `ChangeResult.differences` using records read from `GET /addresses`, `GET /rules/{id}` and
-  `GET /sources/{id}`. A property under two headings is counted in both, and the page says so.
+  comparison’s own lists. The two group tables are the service’s own groups from
+  `POST /changes/summary` (by the *rule’s* jurisdiction and by category); the page says the
+  groups overlap and are not additive. A backend without that route is asked through
+  `POST /changes`, a status line says so, and the tables regroup `differences` from the address
+  and rule records instead (by the *property’s* legal municipality and by category). The
+  timeline and the source → rule → property view always use the rule and source records.
+- **One-click examples describe themselves from data.** Which recording an example opens is
+  configuration (`WALKTHROUGH` in `src/demo/fixtures.ts`); every number in its sentence is
+  counted from that recording when the page loads. They exist only in the synthetic demo.
+- **Open statements are grouped by type, never by text.** A topic is one `Uncertainty.kind`
+  and one `field`. Its heading is the interface’s name for that kind of gap; the next steps
+  are the service’s remedies, verbatim; the statements, with their rule IDs, encoding hashes
+  and source quotes, are in the topic’s disclosure, word for word. A unit test checks that
+  every recorded statement, remedy, rule reference and quote survives grouping.
+- **A question is asked in the fact’s own words.** The heading is `FactDefinition.meaning`;
+  the planner’s prompt, its “why”, the ranking rationale and the predicate IDs are in “Why
+  this is asked, in the planner’s words”. Hypothetical outcomes stay closed until asked for.
+- **Evidence package and working export are different things** and are shown as two cards.
+  The package is requested for exactly the request that produced the result on screen
+  (property, date, every request-local answer including explicit unknowns), saved byte for
+  byte as the service sent it, and refused if it echoes a different request.
 - **Timeline dates are the rule records’ own.** Status events, effective and end dates are
   shown with the precision the record carries. “Compare across this date” offers the day
   before against that day; for a month or year it offers the first and the last possible day
@@ -162,8 +207,11 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
 - **Names.** A property is named by its street address and its *legal* municipality when that
   is resolved; otherwise “Municipality unresolved”. Two records of one provision share a title,
   so a repeated title is followed by its source document.
-- **Disagreements never have a winner.** The view has no field for a preferred source, an
-  order of authority or a score. The two claims appear in the order the response gives them.
+- **Comparisons never have a winner.** The view has no field for a preferred source, an
+  order of authority or a score. The two claims appear in the order the response gives them,
+  labeled “First claim” and “Second claim” (the contract calls them `before`/`after`; that is
+  the order of the annotation, not a statement about time). A difference between two texts is
+  called a difference; only the evaluator’s own conflict flag is called a conflict.
 - **Next step for each uncertainty** comes from `Uncertainty.kind` and `Uncertainty.remedy`.
   Only `property_fact` is presented as answerable. Identical statements are shown once with
   every rule they hold back. Core B’s dated, version-specific statements stay separate when
@@ -171,7 +219,7 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
 - **What an answer would move** compares the evaluator’s recorded output for a probe with the
   evaluator’s current output. Both sides are service output; the UI only lists differences.
 - **Working export** is assembled in the browser from the payloads on screen and says in its
-  first field that it is not the reproducible evidence package.
+  first field that it is not the evidence package the service builds.
 - **Not built:** free-form address entry (the handoff says new-address geocoding is not
   available), dark mode, and the optional English/Spanish explanations.
 
@@ -181,7 +229,7 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
 | --- | --- | --- |
 | Maple Harbor (3 properties, 1 rule) | `contracts/examples`, `contracts/research_examples`, `contracts/evidence_examples`, and the backend’s own synthetic store recorded by `scripts/record_demo.py` | “Synthetic data · not actual law”, “Contract fixture”, “Recorded backend output” |
 | Development portfolio (14 properties, 6 sources, 6 rules, fictional state ZZ) | Sources and properties authored in `scripts/dev_portfolio.py` and `scripts/dev_fixture/*.txt`; rules created by the backend’s `ingest_document` + `extract` validation; every lookup, comparison, conflict flag, question and evidence report computed by the backend | “UX development fixture”, “Development fixture · fictional law” |
-| Field-level disagreement (1 entry) | Authored by the UX lane in a proposed shape; offsets and hashes read from the fixture sources | “Development fixture · proposed shape” |
+| Claim comparisons (4 observations) | Annotations authored in `scripts/dev_portfolio.py` (`write_claim_annotations`) in the shape Core saves as `source_comparisons.json`, with spans computed from the fixture texts; the recorded `GET /source-comparisons` response, including every anchor check and classification, is the backend’s | “Development fixture · fictional sources” |
 
 The development portfolio exists because the backend’s own synthetic store has one rule and
 three properties, which cannot exercise a timeline, two groupings or a drill-down. It is not a
@@ -191,63 +239,47 @@ substitute for the integrated snapshot and is not used in live mode.
 
 For the Platform steward (models, routes, fixtures) and Core. None of these blocks the UI.
 
-Resolved by `origin/main` at `3b1ef06` (PR #3–#5) and adopted here: evidence and rendering
-examples (`contracts/examples/assist.json`, `contracts/evidence_examples/`); the `GET /facts`
-shape (a map of `FactDefinition`); `GET /sources/{id}/context` parameters and `SourceContext`;
-the `AlternativeOutcome.interval` shape; and `null` supplemental facts on `/lookup`, which now
-keep the fact in `missing_facts`.
+Resolved and adopted: evidence and rendering examples; the `GET /facts` shape;
+`GET /sources/{id}/context` parameters; the `AlternativeOutcome.interval` shape; `null`
+supplemental facts on `/lookup`; **claim comparisons** (`GET /source-comparisons`); the
+**evidence package** (`POST /lookup/evidence-package`); and **labels and groups for a
+comparison** (`POST /changes/summary`).
 
-Still open — existing contract:
+Still open:
 
 1. **Change scenarios list.** A route (or a field on `/health`) listing available `test_id`s
    with titles. The UI offers T1–T5 because the handoff names them.
-2. **Labels in `ChangeResult`.** `differences` carries rule IDs, evaluations and address IDs
-   only. The UI reads one `GET /rules/{id}` per changed rule, one `GET /sources/{id}` per
-   source (which returns the full text when only the record is needed) and pages through
-   `GET /addresses`. A summary block on the result — rule title, citation, category,
-   jurisdiction, `source_doc_id`; property address and resolution — or a `fields=` option on
-   those routes would remove the extra requests on a 500-property comparison.
+2. **More of the rule in the change summary.** `rule_labels` is the title only. Citation,
+   category, jurisdiction and `source_doc_id` per rule (and each property’s resolution) would
+   let the source → rule → property view and the timeline open without one `GET /rules/{id}`
+   per rule, one `GET /sources/{id}` per source (which returns the full text when only the
+   record is needed) and paging through `GET /addresses`.
 3. **`two_unresolved_exemptions` fixture.** `response.lookup.address.facts.units` is 12 while
    `missing_facts` still lists `units` and `provenance` has no entry for it.
 4. **`ChangeResult.differences` and `LookupResponse.metadata`** are open objects in the
    schema. Typed models would let the UI validate them instead of reading defensively.
 5. **`GET /sources/{id}/context`** needs an example payload in `contracts/` before the
-   evidence pane shows cross-referenced sections.
+   evidence drawer shows cross-referenced sections.
 6. **Which interaction or version a conflict flag refers to.** Today the UI pairs conflicting
    records by matching `Interaction.target_citation` / `target_jurisdiction` / `category` and
    by the provision identity used for `RuleDetail.versions`. A list of the rule IDs in each
    conflict on the evaluation would make that pairing the service’s statement.
-
-Needed from PLAT-06 / CORE-06 / CORE-07 for UX-04 (nothing below exists in `contracts/` yet;
-the UI shows it only from the labeled development fixture or not at all):
-
-7. **Source disagreement (PLAT-06 contract, CORE-06 comparisons).** One object per
-   disagreement, with no preferred claim. The development fixture uses this proposed shape
-   (`ProposedDisagreement` in `src/api/types.ts`); any equivalent is fine:
-
-       disagreement_id, field, status ("unresolved" | …), affected_rule_ids[],
-       claims[2..]: { claim_id, stated_value (as the source states it, with its precision),
-                      span: SourceSpan, status_dates[]: { status, on } },
-       unresolved_reason, remedy_kind (an Uncertainty.kind), remedy
-
-   Plus how it is reached: on `AssistResponse` / `LookupResponse` for a property and date, and
-   on `ChangeResult` for the affected addresses. The source record for each span’s `doc_id`
-   (authority, type, URL, retrieval time) is already available.
-   A disagreement should also appear in `remaining_uncertainty` for the rules it holds open,
-   so a result is never shown as settled beside an open disagreement about its date.
-8. **Classification of a source difference (CORE-06).** Whether two versions differ in
-   requirement, exemption, coverage or lifecycle, or only in formatting or citation. The UI
-   lists literally different fields today and cannot tell a moved quote from a changed rule.
-9. **Evidence package (PLAT-06).** A route returning the reproducible package for a property
-   and date, or its manifest: snapshot and code hashes, original facts, request-local answers
-   with provenance, evaluations, exact quotes, URLs, retrieval dates, remaining uncertainty,
-   and a field for independent human review. The UI’s working export has the same sections
-   minus the hashes and will hand over to that route when it exists.
-10. **Portfolio grouping (PLAT-06).** If the API groups changes by jurisdiction and category
-    itself, the UI will show those groups instead of regrouping `differences`.
-11. **Action type on an uncertainty (CORE-07).** The UI derives “needs a factual answer /
+7. **A display title on a claim comparison.** Observations are keyed by an internal name
+   (`Berkeley_dates`). The UI titles a card with the field and the classification and keeps
+   the key in the small print; a short human title per observation would read better.
+8. **Claim comparisons for one property.** `rule_ids` ties an observation to rules, and many
+   real observations name none. A way to ask which observations bear on a property and date
+   would let a lookup link to exactly those.
+9. **Classification of a rule-version difference (CORE-06).** Whether two versions of a rule
+   differ in requirement, exemption, coverage or lifecycle, or only in formatting or citation.
+   The internal rule-version records are listed in the response notes and not yet exposed.
+10. **Action type on an uncertainty (CORE-07).** The UI derives “needs a factual answer /
     location evidence / a source / interpretation review / more analysis” from
     `Uncertainty.kind`. If CORE-07 adds an explicit action field, the UI will read it.
-12. **Why a changed result changed (CORE-07).** `differences` gives before and after
+11. **Why a changed result changed (CORE-07).** `differences` gives before and after
     evaluations. A short, source-cited explanation of the change per rule would replace the
-    two raw explanation strings in the drill-down.
+    two raw explanation strings in the detail.
+12. **A shorter statement beside the full one.** Planner statements carry the rule ID, the
+    encoding hash, the citation and the source URL inline. The UI keeps them verbatim in a
+    disclosure and writes its own heading per kind. A `summary` field on `Uncertainty` (and on
+    `FactQuestion.why`) would let the reading path use the service’s words too.

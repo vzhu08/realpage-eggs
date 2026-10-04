@@ -69,24 +69,28 @@ synthetic data.
 - `contracts/examples/*.json` — the API's own assisted-lookup example (`assist.json`: ranked
   question, interval alternatives, evidence reports, rendering, traces), the normal, empty and
   unknown lookups, and the error bodies (imported directly from the Platform-owned directory).
-- `contracts/research_examples/*.json` — the five assist fixtures, each explorable from the
-  property list: decisive question, irrelevant missing fact, two unresolved exemptions,
-  unresolved source coverage, bounded partial analysis.
+- `contracts/research_examples/*.json` — the five assist fixtures, each explorable from
+  “Contract examples” in the property chooser: decisive question, irrelevant missing fact, two
+  unresolved exemptions, unresolved source coverage, bounded partial analysis.
 - `contracts/evidence_examples/*.json` — the missing-source-support case (a result held at
   unknown because its source text is not in the dataset) and the source comparison record.
 - `src/demo/recorded/synthetic-replay.json` — verbatim backend output for the fictional Maple
   Harbor store: `assist()` responses (the function behind `POST /lookup/assist`) on four
-  dates, rule detail, source text, date comparisons, and the published scenarios T1–T5
-  against a store with no extracted rules (blocked).
+  dates, rule detail, source text, date comparisons as `POST /changes/summary` returns them,
+  and the published scenarios T1–T5 against a store with no extracted rules (blocked).
 - `src/demo/recorded/portfolio-dev-fixture.json` — a **UX development fixture**: backend
   output for a fictional portfolio (14 properties, 6 source documents, a made-up state “ZZ”).
   The sources and properties are authored in `scripts/dev_portfolio.py` and
   `scripts/dev_fixture/` so the changes view has several jurisdictions, categories and dates
   to lay out; the rules are created by the backend’s own ingest and extraction validation, and
-  every lookup, comparison, conflict flag and evidence report is computed by the backend. One
-  entry, `proposed_disagreements`, is authored in a shape no contract defines yet and is
-  labeled as such wherever it appears. Repeated subtrees are stored once and expanded by
-  `src/demo/pool.ts`.
+  every lookup, comparison, change summary, conflict flag and evidence report is computed by
+  the backend. Its four claim annotations are authored too (in the shape Core saves as
+  `source_comparisons.json`, spans computed from the fixture texts); the recorded
+  `GET /source-comparisons` response, with each anchor check and classification, is the
+  backend’s. Repeated subtrees are stored once and expanded by `src/demo/pool.ts`.
+
+The three one-click examples on the start page each open one of these recordings; the
+sentence on each card is counted from the recording when the page loads.
 
 Regenerate both recordings from the repository root with
 `.venv/bin/python frontend/scripts/record_demo.py`.
@@ -106,7 +110,7 @@ src/api/         generated contract types · runtime payload validation · error
 src/demo/        fixture imports and the replay rules (no evaluator)
 src/state/       lookup session (answers are request-local and resent in full), hash routing
 src/lib/         dates, labels, expression display, answer parsing, diffs, the portfolio model,
-                 disagreements, uncertainty grouping, working export — pure functions
+                 conflicts and claim comparisons, open-statement grouping, working export — pure functions
 src/features/    shell · property · lookup · questions · evidence · changes · disagreements
 src/styles/      tokens.css (design tokens), base.css, app.css
 tests/unit/      node:test       tests/e2e/   Playwright
@@ -134,13 +138,16 @@ implemented routes.
 | `GET /facts` | Fact definitions (type, unit, allowed values) for supplying a fact when no question was planned. |
 | `GET /rules/{id}`, `GET /rules/{id}/evidence` | Rule versions and status events; the evidence report when the lookup did not carry one. |
 | `GET /sources/{id}` | Source record and text for quotes, offsets and surrounding context. |
-| `POST /changes` | Date comparison and published scenarios. Its per-property differences are regrouped into the timeline, summaries and drill-down; names come from `GET /addresses` (paged once), `GET /rules/{id}` and `GET /sources/{id}`. |
+| `POST /changes/summary` | Date comparison and published scenarios: Core’s result plus property and rule labels and overlapping groups by rule jurisdiction and category. Waits up to 180 seconds, with elapsed time and Cancel on screen. Legal locations, source text and dates come from `GET /addresses` (paged once), `GET /rules/{id}` and `GET /sources/{id}`. |
+| `POST /changes` | Used only when a backend has no summary route, and said so on screen; groups are then regrouped from the records. |
+| `GET /source-comparisons` | Claim observations saved with the snapshot, re-checked by the service: both exact texts, source identity, anchor validity, classification and remedy. |
+| `POST /lookup/evidence-package` | The service-built evidence package for a saved property, the displayed date and every request-local answer; saved exactly as sent. |
 | `GET /sources/{id}/context` | Implemented by the backend; not called yet (context is cut from `GET /sources/{id}`). See `docs/UI.md`. |
 
-Views: **Lookup**, **Changes** (portfolio impact between two dates) and **Disagreements**
-(the conflicts the evaluator flagged for a property and date, each as two source-backed claims).
-No route lists disagreements across the dataset or returns an evidence package yet; see
-“Contract requests” in `docs/UI.md`.
+Views: **Property lookup**, **Portfolio changes** (impact between two dates) and **Compare
+sources** (claim comparisons across the snapshot, and the conflicts the evaluator flagged for
+one property and date; neither names a winner). Open requests are under “Contract requests”
+in `docs/UI.md`.
 
 Errors handled by code: 404 `unknown_id`, 422, 503 `dataset_unavailable`, 503 `core_unavailable`,
 502 `core_contract_error`, plus transport, timeout and contract mismatch.

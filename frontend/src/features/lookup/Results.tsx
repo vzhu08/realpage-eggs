@@ -1,17 +1,20 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import type { Answer, AnswerValue, DataMode, FactDefinition, FixtureCaseSummary, LookupOutcome } from '../../api/types';
-import { Disclosure, Empty, ErrorNotice, Facts, Notice, SectionHeading, Tag } from '../../components/ui';
-import { DEMO_ONLY } from '../../config';
+import { Icon } from '../../components/Icon';
+import { Disclosure, Empty, ErrorNotice, Facts, Notice, Tag } from '../../components/ui';
 import { formatDate } from '../../lib/dates';
 import { diffOutcomes } from '../../lib/diff';
-import { buildWorkingExport, downloadJson, workingExportFilename } from '../../lib/exportPackage';
 import { MATCH_QUALITY, RESULT_ORDER, resultMeta, sentence } from '../../lib/labels';
 import { isSynthetic, readMetadata } from '../../lib/metadata';
+import { groupOpenItems, openItems } from '../../lib/openItems';
+import { consequenceOf } from '../../lib/uncertainty';
 import type { SessionState } from '../../state/session';
+import { addressLine } from '../property/PropertyFinder';
 import { AnswerHistory } from '../questions/AnswerHistory';
 import { QuestionsPanel } from '../questions/QuestionsPanel';
 import { RemainingUncertainty } from '../questions/RemainingUncertainty';
 import { WhatChanged } from '../questions/WhatChanged';
+import { KeepResult } from './KeepResult';
 import { RuleList } from './RuleList';
 
 interface Props {
@@ -30,6 +33,15 @@ interface Props {
   apiBase?: string;
   /** Where the conflicting sources for a property and date are compared. */
   disagreementHref: (addressId: string, asOf: string) => string;
+}
+
+/** Scrolls to a section of the result and puts the keyboard there. */
+function jumpTo(id: string) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+  target.focus({ preventScroll: true });
 }
 
 export function Results({ session, outcome, selectedRuleId, relatedCases, factDefinitions, onOpenCase, onInspect, onAnswer, onRemoveAnswer, onRun, mode, apiBase, disagreementHref }: Props) {
@@ -56,17 +68,21 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
     (outcome.fixture?.contractStatus === 'implemented_platform_api' ? 'A response of the implemented API on synthetic data, checked in as a contract example' : 'An authored contract example, not output from a live service');
   const conflicted = lookup.evaluations.filter((evaluation) => evaluation.conflict_flag);
   const conflictHref = disagreementHref(lookup.address.address_id, lookup.as_of);
-  const [exported, setExported] = useState<'idle' | 'done' | 'failed'>('idle');
-  const [shownExport, setShownExport] = useState<string | null>(null);
-  // The export time is the only clock value in the file, and it is labeled as such there.
-  const buildExport = () => buildWorkingExport({ outcome, answers: session.answers, history: session.history, mode, apiBase, exportedAt: new Date().toISOString() });
-  const exportResult = () => setExported(downloadJson(workingExportFilename(lookup.address.address_id, lookup.as_of), buildExport()) ? 'done' : 'failed');
   const fixtureNote = `${fixtureText.charAt(0).toUpperCase()}${fixtureText.slice(1)}${/[.!?]$/.test(fixtureText) ? '' : '.'}`;
+
+  // What to do next, read from the plan and the open statements. Nothing here predicts an outcome.
+  const answered = new Set(session.answers.map((answer) => answer.field));
+  const openQuestions = (outcome.assist?.question_plan.questions ?? []).filter((question) => !answered.has(question.fact.field));
+  const lead = openQuestions[0];
+  const movable = lead ? new Set(lead.alternatives.flatMap((alternative) => consequenceOf(lookup.evaluations, alternative.evaluations).changed.map((change) => change.ruleId))).size : 0;
+  const open = useMemo(() => groupOpenItems(openItems(outcome, session.answers), new Set(lookup.rules.map((rule) => rule.team_rule_id))), [outcome, session.answers, lookup.rules]);
+  const reviewTopics = open.other.length;
 
   return (
     <div className={busy && session.reevaluating ? 'results is-busy' : 'results'} aria-busy={busy}>
       <div className="context" role="group" aria-label="Result context">
         <p className="context__asof">
+          {session.selection && <span className="context__subject">{addressLine(session.selection)}</span>}
           <span className="context__label">As of</span> <strong>{formatDate(lookup.as_of)}</strong>
         </p>
         <div className="context__tags">
@@ -79,8 +95,6 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
         </div>
         <p className="context__disclaimer">{lookup.disclaimer}</p>
       </div>
-
-      {session.previous && session.previous !== outcome && <WhatChanged previous={session.previous} outcome={outcome} />}
 
       {stale && (
         <Notice
@@ -102,64 +116,23 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
         </ErrorNotice>
       )}
 
-      {outcome.fixture && (
-        <Notice tone="synthetic" title={`Contract fixture: ${sentence(outcome.fixture.case)}`}>
-          <p>{fixtureNote}</p>
-          <p className="hint">
-            Contract status: <span className="mono">{outcome.fixture.contractStatus}</span>
-          </p>
-        </Notice>
-      )}
-
-      {outcome.notices.map((notice) => (
-        <Notice key={notice} tone="info" title={notice} role="status" compact />
-      ))}
-
-      {(metadata.partialData || warnings.length > 0) && (
-        <Notice tone="unknown" title={metadata.partialData ? 'Partial data: this result can be incomplete' : 'Notes on this result'}>
-          <ul className="plain-list plain-list--tight">
-            {warnings.map((warning) => (
-              <li key={warning}>{warning}</li>
-            ))}
-            {metadata.partialData && metadata.missingSourceIds.length > 0 && <li>{metadata.missingSourceIds.length} source documents have no captured text.</li>}
-            {metadata.partialData && metadata.unprocessedSourceIds.length > 0 && <li>{metadata.unprocessedSourceIds.length} source documents have not completed extraction.</li>}
-          </ul>
-          {metadata.partialData && <p>A rule that is not listed here has not been ruled out. Missing sources are a coverage gap, not evidence that no law applies.</p>}
-        </Notice>
-      )}
-
-      {conflicted.length > 0 && (
-        <Notice
-          tone="danger"
-          title={`Sources conflict for ${conflicted.length} ${conflicted.length === 1 ? 'rule' : 'rules'} here`}
-          actions={
-            <a className="button button--small" href={conflictHref}>
-              Compare the conflicting sources
-            </a>
-          }
-        >
-          <p>The evaluator flagged a conflict it cannot settle, so {conflicted.length === 1 ? 'that result stays' : 'those results stay'} open. No answer about the property resolves a disagreement between sources.</p>
-        </Notice>
-      )}
-
-      <section className="section section--first" aria-labelledby="outcome-heading">
-        <SectionHeading
-          id="outcome-heading"
-          title={`Rules for this property on ${formatDate(lookup.as_of)}`}
-          aside={
-            <span className="hint">
-              {total} {total === 1 ? 'rule' : 'rules'} returned
-            </span>
-          }
-        />
+      <section className="verdict" aria-labelledby="outcome-heading">
+        <div className="verdict__head">
+          <h2 id="outcome-heading" className="verdict__title">
+            Rules for this property on {formatDate(lookup.as_of)}
+          </h2>
+          <span className="hint">
+            {total} {total === 1 ? 'rule' : 'rules'} returned
+          </span>
+        </div>
         {total > 0 ? (
           <ul className="tally" aria-label="Results by status">
             {counts.map((entry) => {
               const meta = resultMeta(entry.result);
               return (
-                <li key={entry.result}>
-                  <Tag tone={meta.tone}>{meta.label}</Tag>
+                <li key={entry.result} className={`tally__item tally__item--${meta.tone}`}>
                   <span className="tally__count">{entry.count}</span>
+                  <Tag tone={meta.tone}>{meta.label}</Tag>
                 </li>
               );
             })}
@@ -172,7 +145,110 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
             </p>
           </Empty>
         )}
+
+        {(conflicted.length > 0 || jurisdictionOpen || reviewTopics > 0) && (
+          <ul className="cues" aria-label="What is unresolved">
+            {conflicted.length > 0 && (
+              <li className="cue cue--danger" data-cue="conflict">
+                <Icon name="danger" size={18} className="cue__icon" />
+                <div className="cue__body">
+                  <p className="cue__title">
+                    Sources conflict for {conflicted.length} {conflicted.length === 1 ? 'rule' : 'rules'} here
+                  </p>
+                  <p className="cue__text">The evaluator flagged a conflict it cannot settle, so {conflicted.length === 1 ? 'that result stays' : 'those results stay'} open. No answer about the property resolves a disagreement between sources.</p>
+                </div>
+                <a className="button button--small cue__action" href={conflictHref}>
+                  Compare the conflicting sources
+                </a>
+              </li>
+            )}
+            {jurisdictionOpen && (
+              <li className="cue cue--unknown" data-cue="jurisdiction">
+                <Icon name="unknown" size={18} className="cue__icon" />
+                <div className="cue__body">
+                  <p className="cue__title">Legal municipality {MATCH_QUALITY[quality]?.label.toLowerCase() ?? quality}</p>
+                  <p className="cue__text">Local rules for this property stay uncertain until its legal municipality is established.</p>
+                </div>
+              </li>
+            )}
+            {reviewTopics > 0 && (
+              <li className="cue cue--muted" data-cue="review">
+                <Icon name="info" size={18} className="cue__icon" />
+                <div className="cue__body">
+                  <p className="cue__title">
+                    {reviewTopics} open {reviewTopics === 1 ? 'item needs' : 'items need'} evidence or review, not an answer
+                  </p>
+                </div>
+                <button type="button" className="button button--small button--quiet cue__action" onClick={() => jumpTo('uncertainty-heading')}>
+                  See what remains
+                </button>
+              </li>
+            )}
+          </ul>
+        )}
+
+        <div className="next" data-next={lead ? 'question' : open.statements > 0 ? 'review' : 'none'}>
+          <p className="next__label">Next</p>
+          {lead ? (
+            <>
+              <p className="next__text">
+                Answer {openQuestions.length === 1 ? 'one question' : `${openQuestions.length} questions`} about the property.
+                {movable > 0 ? ` The first can change ${movable} ${movable === 1 ? 'result' : 'results'}.` : ''}
+              </p>
+              <button type="button" className="button button--primary" onClick={() => jumpTo('questions-heading')}>
+                Go to the question
+                <Icon name="arrow" />
+              </button>
+            </>
+          ) : open.statements > 0 ? (
+            <>
+              <p className="next__text">No factual question is open. What remains needs a source, an interpretation or more analysis.</p>
+              <button type="button" className="button" onClick={() => jumpTo('uncertainty-heading')}>
+                See what remains
+                <Icon name="arrow" />
+              </button>
+            </>
+          ) : total > 0 ? (
+            <>
+              <p className="next__text">Nothing is open for this property on this date. Each result links to the text it rests on.</p>
+              <button type="button" className="button" onClick={() => jumpTo('rules-heading')}>
+                Read the rules
+                <Icon name="arrow" />
+              </button>
+            </>
+          ) : (
+            <p className="next__text">Try another date, or check the dataset status in the header.</p>
+          )}
+        </div>
       </section>
+
+      {session.previous && session.previous !== outcome && <WhatChanged previous={session.previous} outcome={outcome} />}
+
+      {outcome.fixture && (
+        <Notice tone="synthetic" title={`Contract fixture: ${sentence(outcome.fixture.case)}`} compact>
+          <p>{fixtureNote}</p>
+          <p className="hint">
+            Contract status: <span className="mono">{outcome.fixture.contractStatus}</span>
+          </p>
+        </Notice>
+      )}
+
+      {outcome.notices.map((notice) => (
+        <Notice key={notice} tone="info" title={notice} role="status" compact />
+      ))}
+
+      {(metadata.partialData || warnings.length > 0) && (
+        <Notice tone="unknown" title={metadata.partialData ? 'Partial data: this result can be incomplete' : 'Notes on this result'} compact>
+          <ul className="plain-list plain-list--tight">
+            {warnings.map((warning) => (
+              <li key={warning}>{warning}</li>
+            ))}
+            {metadata.partialData && metadata.missingSourceIds.length > 0 && <li>{metadata.missingSourceIds.length} source documents have no captured text.</li>}
+            {metadata.partialData && metadata.unprocessedSourceIds.length > 0 && <li>{metadata.unprocessedSourceIds.length} source documents have not completed extraction.</li>}
+          </ul>
+          {metadata.partialData && <p>A rule that is not listed here has not been ruled out. Missing sources are a coverage gap, not evidence that no law applies.</p>}
+        </Notice>
+      )}
 
       <QuestionsPanel outcome={outcome} answers={session.answers} definitions={definitions} busy={busy} synthetic={synthetic} relatedCases={relatedCases} onOpenCase={onOpenCase} onAnswer={onAnswer} onInspect={onInspect} />
 
@@ -180,47 +256,19 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
 
       {total > 0 && (
         <section className="section" aria-labelledby="rules-heading">
-          <SectionHeading id="rules-heading" title="Rule by rule" aside={<span className="hint">Applicability is not a finding of compliance or violation.</span>} />
+          <div className="section-heading">
+            <h2 id="rules-heading">Rule by rule</h2>
+            <div className="section-heading__aside">
+              <span className="hint">Applicability is not a finding of compliance or violation.</span>
+            </div>
+          </div>
           <RuleList evaluations={lookup.evaluations} rules={lookup.rules} selectedRuleId={selectedRuleId} onInspect={onInspect} changed={changedIds} />
         </section>
       )}
 
-      <RemainingUncertainty outcome={outcome} answers={session.answers} onInspect={onInspect} disagreementHref={conflicted.length > 0 ? conflictHref : undefined} />
+      <RemainingUncertainty outcome={outcome} answers={session.answers} onInspect={onInspect} definitions={definitions} disagreementHref={conflicted.length > 0 ? conflictHref : undefined} />
 
-      <section className="section export" aria-labelledby="export-heading">
-        <SectionHeading id="export-heading" title="Keep this result" />
-        <p className="section__lead">
-          Download what is on screen as one file: the stored facts, your request-local answers and their history, the evaluator’s results, the exact quotes and source records, each evidence check, and what remains uncertain. Each kind is kept apart.
-        </p>
-        {DEMO_ONLY ? (
-          // A hosted preview cannot hand the viewer a file, so the same content is shown on the page.
-          <>
-            <div className="export__actions">
-              <button type="button" className="button" aria-expanded={shownExport !== null} onClick={() => setShownExport((current) => (current === null ? JSON.stringify(buildExport(), null, 2) : null))} disabled={busy}>
-                {shownExport === null ? 'Show working export (JSON)' : 'Hide working export'}
-              </button>
-              <span className="hint">This hosted preview cannot save files. Run the app locally to download the same file.</span>
-            </div>
-            {shownExport !== null && (
-              <pre className="raw export__preview" tabIndex={0} aria-label="Working export">
-                {shownExport}
-              </pre>
-            )}
-          </>
-        ) : (
-          <div className="export__actions">
-            <button type="button" className="button" onClick={exportResult} disabled={busy}>
-              Download working export (JSON)
-            </button>
-            <span className="hint" role="status">
-              {exported === 'done' ? 'Download started.' : exported === 'failed' ? 'This browser did not allow the download.' : ''}
-            </span>
-          </div>
-        )}
-        <p className="hint">
-          This is a working export assembled in the browser. It is not the reproducible evidence package: that needs snapshot and code hashes from the service, which the API does not provide yet. Model review is reported as the service records it; no independent human review is recorded.
-        </p>
-      </section>
+      <KeepResult session={session} outcome={outcome} mode={mode} apiBase={apiBase} busy={busy} />
 
       <Disclosure summary="About this result" className="about">
         <Facts

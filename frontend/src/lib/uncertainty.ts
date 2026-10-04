@@ -45,6 +45,59 @@ export const NEXT_STEP: Record<string, { label: string; answerable: boolean; ord
 };
 export const nextStep = (kind: string) => NEXT_STEP[kind] ?? { label: 'Review', answerable: false, order: 9 };
 
+/**
+ * One readable topic: every open statement of one kind about one fact (or about no fact).
+ * A topic is a way to read the statements together; each statement stays intact inside it,
+ * with its own wording, remedy, rule references and source text.
+ */
+export interface UncertaintyTopic<T extends TopicStatement> {
+  key: string;
+  kind: string;
+  field: string | null;
+  statements: T[];
+  /** Every rule any statement in the topic refers to, in first-seen order. */
+  ruleIds: string[];
+  /** The distinct next steps the statements give, in first-seen order. */
+  remedies: string[];
+}
+
+export interface TopicStatement {
+  kind: string;
+  field?: string | null;
+  remedy: string;
+  ruleIds: string[];
+}
+
+/** Groups by the typed kind and field only. Message text is never read to decide a group. */
+export function topicsOf<T extends TopicStatement>(statements: T[]): UncertaintyTopic<T>[] {
+  const topics = new Map<string, UncertaintyTopic<T>>();
+  for (const statement of statements) {
+    const field = statement.field ?? null;
+    const key = `${statement.kind}|${field ?? ''}`;
+    const topic = topics.get(key) ?? { key, kind: statement.kind, field, statements: [], ruleIds: [], remedies: [] };
+    topics.set(key, topic);
+    topic.statements.push(statement);
+    for (const ruleId of statement.ruleIds) if (!topic.ruleIds.includes(ruleId)) topic.ruleIds.push(ruleId);
+    if (statement.remedy && !topic.remedies.includes(statement.remedy)) topic.remedies.push(statement.remedy);
+  }
+  return [...topics.values()];
+}
+
+/**
+ * A plain heading for each kind of open item. It names the kind of gap, in the interface's own
+ * words; the service's statements, shown beneath it, say what the gap is.
+ */
+export const TOPIC_HEADING: Record<string, string> = {
+  property_fact: 'A fact about the property is not on record',
+  jurisdiction: 'The legal municipality is not established',
+  source_gap: 'Source support is incomplete',
+  cross_reference: 'A cited provision has not been retrieved',
+  conflict: 'Sources conflict and no precedence is established',
+  interpretation: 'Encoded rules need interpretation review',
+  analysis_limit: 'The analysis did not cover every case',
+  service_dependency: 'A backend service was not available',
+};
+
 /** Lookup lists omit rules that do not cover the property; an alternative records them explicitly. */
 const UNLISTED = new Set(['inapplicable', 'failed']);
 

@@ -9,17 +9,18 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { DemoSource } from '../../src/api/demo';
-import type { AddressItem, ChangeResult, Rule, SourceDocument, Uncertainty } from '../../src/api/types';
+import type { AddressItem, ChangeResult, Rule, Uncertainty } from '../../src/api/types';
 import { validate } from '../../src/api/validate';
-import { DEV_ADDRESSES, DEV_ASSISTS, DEV_CHANGES, DEV_EVIDENCE_REPORTS, DEV_MANIFEST, DEV_PROPOSED_DISAGREEMENTS, DEV_RULES, DEV_SOURCES, RECORDED_CHANGES } from '../../src/demo/fixtures';
+import { DEV_ADDRESSES, DEV_ASSISTS, DEV_CHANGES, DEV_EVIDENCE_REPORTS, DEV_MANIFEST, DEV_RULES, DEV_SOURCES, RECORDED_CHANGES } from '../../src/demo/fixtures';
 import { expandPooled } from '../../src/demo/pool';
 import { dateBounds, shiftDay } from '../../src/lib/dates';
-import { disagreementFromProposed, disagreementsFromLookup } from '../../src/lib/disagreements';
+import { disagreementsFromLookup } from '../../src/lib/disagreements';
+import { groupOpenItems, openItems } from '../../src/lib/openItems';
 import { WORKING_EXPORT_KIND, buildWorkingExport, workingExportFilename } from '../../src/lib/exportPackage';
-import { NO_FILTERS, buildTimeline, comparisonsAcross, filterRows, impactRows, propertyLabel, propertyTree, referencedAddressIds, referencedRuleIds, sourceTree, summarizeByCategory, summarizeByPlace, type Lookups } from '../../src/lib/portfolio';
+import { NO_FILTERS, buildTimeline, comparisonsAcross, filterRows, impactRows, propertyLabel, propertyTree, referencedAddressIds, referencedRuleIds, sourceTree, summarizeByCategory, summarizeByPlace, summarizeGroups, type Lookups } from '../../src/lib/portfolio';
 import { ruleDisplayNames } from '../../src/lib/ruleNames';
 import { codePointSlice } from '../../src/lib/text';
-import { consequenceOf, groupUncertainty, nextStep } from '../../src/lib/uncertainty';
+import { TOPIC_HEADING, consequenceOf, groupUncertainty, nextStep, topicsOf } from '../../src/lib/uncertainty';
 
 const lookups: Lookups = {
   addresses: new Map(DEV_ADDRESSES.map((item) => [item.property.address_id, item])),
@@ -206,7 +207,7 @@ test('filters narrow the rows without changing them', () => {
   const { rows } = impactRows(headline);
   assert.equal(filterRows(rows, NO_FILTERS, lookups).length, rows.length);
   const larch = propertyLabel('DEV-P07', lookups.addresses.get('DEV-P07')).placeKey;
-  const filtered = filterRows(rows, { impact: 'conflict', place: larch, category: 'application_screening_fees' }, lookups);
+  const filtered = filterRows(rows, { ...NO_FILTERS, impact: 'conflict', place: larch, category: 'application_screening_fees' }, lookups);
   assert.ok(filtered.length > 0);
   for (const row of filtered) {
     assert.equal(row.conflict, true);
@@ -214,7 +215,7 @@ test('filters narrow the rows without changing them', () => {
     assert.equal(lookups.rules.get(row.ruleId)?.category, 'application_screening_fees');
     assert.ok(rows.includes(row));
   }
-  assert.deepEqual(filterRows(rows, { impact: 'definite', place: null, category: 'application_screening_fees' }, lookups), []);
+  assert.deepEqual(filterRows(rows, { ...NO_FILTERS, impact: 'definite', category: 'application_screening_fees' }, lookups), []);
 });
 
 test('the timeline orders the dated statements on the rule records and never sharpens a stated month', () => {
@@ -325,23 +326,40 @@ test('a lookup’s conflicts are shown as two source-backed claims, with no pref
   assert.deepEqual(disagreementsFromLookup(await demo.lookup({ address_id: 'DEV-P06', as_of: '2027-01-15', answers: [] })), []);
 });
 
-test('the proposed field-level disagreement is authored, labeled, anchored in its sources and names no winner', () => {
-  assert.equal(DEV_PROPOSED_DISAGREEMENTS.length, 1);
-  const entry = DEV_PROPOSED_DISAGREEMENTS[0]!;
-  assert.equal(entry.contract_status, 'ux_proposed_shape_awaiting_PLAT-06');
-  assert.match(entry.authored_by, /not backend output/);
-  assert.equal(entry.status, 'unresolved');
-  assert.doesNotMatch(JSON.stringify(entry), /preferred|winner|confidence|score/i);
-  for (const claim of entry.claims) {
-    const source = DEV_SOURCES[claim.span.doc_id] as SourceDocument;
-    assert.equal(claim.span.source_hash, source.sha256);
-    assert.equal(codePointSlice(source.text ?? '', claim.span.start, claim.span.end), claim.span.text);
+test('with a change summary, groups and labels are the service’s own and are never added up', () => {
+  const entry = DEV_CHANGES.find((candidate) => candidate.request.before === '2026-10-01' && candidate.request.after === '2027-01-15' && candidate.request.scenario === 'actual')!;
+  const { summary } = entry;
+  assert.equal(validate('ChangeSummary', { result: entry.response, ...summary }).errors.length, 0);
+  const withSummary: Lookups = { ...lookups, summary };
+  const { rows } = impactRows(entry.response);
+
+  const categories = summarizeGroups(summary.by_category, (key) => key);
+  for (const group of categories) {
+    const source = summary.by_category[group.key]!;
+    assert.deepEqual([group.definite, group.uncertain, group.conflict], [source.affected_address_ids.length, source.uncertain_address_ids.length, source.conflict_flag_address_ids.length]);
+    assert.equal(group.properties, new Set([...source.affected_address_ids, ...source.uncertain_address_ids, ...source.conflict_flag_address_ids]).size);
+    // A filter on a group keeps exactly the rows of the rules the service put in it.
+    const filtered = filterRows(rows, { ...NO_FILTERS, category: group.key }, withSummary);
+    assert.deepEqual([...new Set(filtered.map((row) => row.ruleId))].sort(), [...source.rule_ids].filter((id) => rows.some((row) => row.ruleId === id)).sort());
   }
-  assert.ok(lookups.rules.has(entry.affected_rule_ids[0]!));
-  const view = disagreementFromProposed(entry, lookups.sources);
-  assert.equal(view.basis, 'proposed_fixture');
-  assert.deepEqual(view.claims.map((claim) => [claim.source?.authority, claim.stated[0]?.value]), [['official', '2026-11-01'], ['secondary', '2026-12-01']]);
-  assert.deepEqual(disagreementFromProposed(entry, new Map()).claims.map((claim) => claim.source), [null, null]);
+  // Groups overlap: a property under two jurisdictions' rules is in both, so the columns exceed the totals.
+  const jurisdictions = summarizeGroups(summary.by_jurisdiction, (key) => key);
+  assert.ok(jurisdictions.reduce((total, group) => total + group.properties, 0) > new Set(rows.map((row) => row.addressId)).size);
+  const state = filterRows(rows, { ...NO_FILTERS, jurisdiction: 'ZZ' }, withSummary);
+  assert.ok(state.length > 0 && state.every((row) => summary.by_jurisdiction.ZZ!.rule_ids.includes(row.ruleId)));
+  assert.deepEqual(filterRows(rows, { ...NO_FILTERS, jurisdiction: 'Nowhere' }, withSummary), []);
+  // Without a summary the jurisdiction filter has nothing to read and matches nothing rather than everything.
+  assert.deepEqual(filterRows(rows, { ...NO_FILTERS, jurisdiction: 'ZZ' }, lookups), []);
+
+  // The summary names a property before its record is read, but says nothing about where it legally is.
+  const named = propertyLabel('DEV-P13', undefined, summary.property_labels['DEV-P13']);
+  assert.equal(named.street, '33 HARBOR VIEW, CEDAR LANDING, ZZ');
+  assert.deepEqual([named.resolved, named.place, named.placeKey], [false, 'Location not loaded', 'unloaded']);
+  assert.equal(propertyTree(rows, { ...withSummary, addresses: new Map() })[0]!.label.street, summary.property_labels[rows.map((row) => row.addressId).sort()[0]!]!.replace(/[\s,]+$/, ''));
+  // The blocked recordings keep their status and notes with empty groups.
+  const blocked = RECORDED_CHANGES.find((candidate) => candidate.response.status === 'blocked')!;
+  assert.deepEqual([Object.keys(blocked.summary.by_category), Object.keys(blocked.summary.by_jurisdiction)], [[], []]);
+  assert.ok(blocked.response.notes.length > 0 && blocked.summary.notes.length > 0);
 });
 
 // ------------------------------------------------------------------ questions and uncertainty
@@ -355,6 +373,51 @@ test('identical uncertainty statements are shown once, with every rule they hold
   assert.deepEqual(new Set(versioned.flatMap((item) => item.ruleIds)), new Set(plan.remaining_uncertainty.flatMap((item) => item.rule_ids ?? [])), 'Grouping preserves every version-specific rule reference');
   assert.deepEqual(['property_fact', 'jurisdiction', 'source_gap', 'conflict', 'interpretation', 'analysis_limit'].map((kind) => nextStep(kind).answerable), [true, false, false, false, false, false]);
   assert.deepEqual(nextStep('something_new'), { label: 'Review', answerable: false, order: 9 });
+});
+
+test('grouping open statements by kind and fact keeps every statement, remedy, rule and source quote', async () => {
+  const demo = new DemoSource();
+  for (const request of DEV_ASSISTS.map((entry) => entry.request)) {
+    const outcome = await demo.lookup({ ...request, answers: [] });
+    const plan = outcome.assist!.question_plan;
+    const items = openItems(outcome, []);
+    const groups = groupOpenItems(items, new Set(outcome.lookup.rules.map((rule) => rule.team_rule_id)));
+    const topics = [...groups.answerable, ...groups.other, ...groups.outside];
+    const statements = topics.flatMap((topic) => topic.statements);
+    const context = `${request.address_id} ${request.as_of}`;
+
+    // Nothing is dropped or duplicated by grouping.
+    assert.equal(statements.length, items.length, context);
+    assert.equal(new Set(statements).size, items.length, context);
+    assert.equal(groups.statements, groups.answerable.concat(groups.other).reduce((total, topic) => total + topic.statements.length, 0), context);
+    // Every statement of the plan is present word for word, with its remedy, its rules and its quotes.
+    for (const original of plan.remaining_uncertainty) {
+      const shown = statements.find((statement) => statement.message === original.message && statement.kind === original.kind && statement.remedy === original.remedy && (statement.field ?? null) === (original.field ?? null));
+      assert.ok(shown, `${context}: ${original.message.slice(0, 60)}`);
+      for (const ruleId of original.rule_ids ?? []) assert.ok(shown.ruleIds.includes(ruleId), context);
+      for (const ref of original.source_refs ?? []) assert.ok(shown.sourceRefs.some((candidate) => candidate.doc_id === ref.doc_id && candidate.start === ref.start && candidate.end === ref.end && candidate.text === ref.text && candidate.source_hash === ref.source_hash), context);
+    }
+    for (const topic of topics) {
+      // A topic is one typed kind and one fact; message text never decides the group.
+      assert.ok(topic.statements.every((statement) => statement.kind === topic.kind && (statement.field ?? null) === topic.field), context);
+      assert.deepEqual(new Set(topic.ruleIds), new Set(topic.statements.flatMap((statement) => statement.ruleIds)), context);
+      assert.deepEqual(new Set(topic.remedies), new Set(topic.statements.map((statement) => statement.remedy).filter(Boolean)), context);
+    }
+    // Only a property fact is offered as answerable.
+    assert.ok(groups.answerable.every((topic) => topic.kind === 'property_fact'), context);
+    assert.ok(groups.other.every((topic) => topic.kind !== 'property_fact'), context);
+  }
+  // The headline example: sixteen statements read as a handful of topics.
+  const example = await demo.lookup({ address_id: 'DEV-P08', as_of: '2027-01-15', answers: [] });
+  const grouped = groupOpenItems(openItems(example, []), new Set(example.lookup.rules.map((rule) => rule.team_rule_id)));
+  assert.equal(example.assist!.question_plan.remaining_uncertainty.length, 16);
+  assert.ok(grouped.answerable.length + grouped.other.length <= 5);
+  assert.deepEqual(topicsOf([{ kind: 'conflict', remedy: 'a', ruleIds: ['r-1'] }, { kind: 'conflict', remedy: 'b', ruleIds: ['r-2'] }, { kind: 'property_fact', field: 'units', remedy: 'a', ruleIds: [] }]).map((topic) => [topic.key, topic.statements.length, topic.remedies, topic.ruleIds]), [
+    ['conflict|', 2, ['a', 'b'], ['r-1', 'r-2']],
+    ['property_fact|units', 1, ['a'], []],
+  ]);
+  // Topic headings name a kind of gap; none states a legal outcome.
+  assert.doesNotMatch(Object.values(TOPIC_HEADING).join(' '), /violat|complian|illegal|must|winner|prefer/i);
 });
 
 test('a hypothetical answer’s consequence is read from evaluator output on both sides', () => {
@@ -379,7 +442,7 @@ test('the working export keeps stored facts, request answers, results and review
   const history = [{ seq: 1, field: 'owner_occupied', action: 'answered' as const, value: true, provenance: 'demo' as const }];
   const data = buildWorkingExport({ outcome, answers, history, mode: 'demo', exportedAt: '2031-05-05T12:00:00.000Z' });
   assert.equal(data.export_kind, WORKING_EXPORT_KIND);
-  assert.match(data.notice, /not the reproducible evidence package \(PLAT-06\)/);
+  assert.match(data.notice, /not the evidence package the service builds \(POST \/lookup\/evidence-package\)/);
   assert.equal(data.query.as_of, '2027-01-15', 'the query date comes from the response, not the export clock');
   assert.equal(data.exported_at, '2031-05-05T12:00:00.000Z');
   assert.equal(data.data_origin.synthetic, true);

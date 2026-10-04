@@ -103,21 +103,47 @@ export async function openLive(page: Page, hash = '#/lookup?mode=live') {
   await expect(page.getByRole('radio', { name: 'Live API' })).toBeChecked();
 }
 
-/** Open a question-flow fixture from the property list (expanding the list on narrow screens). */
+/** Open a contract example from the property chooser. */
 export async function openCase(page: Page, title: string) {
   await showFinder(page);
-  await page.getByRole('button', { name: new RegExp(`^${title}`) }).click();
+  const cases = page.locator('details.finder__cases');
+  if ((await cases.getAttribute('open')) === null) await cases.locator('summary').click();
+  await cases.getByRole('button', { name: new RegExp(`^${title}`) }).click();
   await expect(page.getByRole('group', { name: 'Result context' })).toBeVisible();
 }
 
+/**
+ * Make the property chooser available. On the start page it is already on the page; once a
+ * property is selected it opens as a dialog from "Change property".
+ */
 export async function showFinder(page: Page) {
-  const toggle = page.locator('.finder-toggle');
-  if ((await toggle.isVisible()) && (await toggle.getAttribute('aria-expanded')) === 'false') await toggle.click();
+  const list = page.getByRole('searchbox', { name: 'Sample properties' });
+  if (await list.isVisible()) return;
+  await page.getByRole('button', { name: 'Change property' }).click();
+  await expect(page.getByRole('dialog', { name: 'Choose a property' })).toBeVisible();
 }
 
 export async function selectProperty(page: Page, address: string) {
   await showFinder(page);
   await page.getByRole('list', { name: 'Sample properties' }).getByRole('button', { name: new RegExp(address) }).click();
+}
+
+/** A question card, found by the plain-language meaning of the fact it asks for. */
+export const questionCard = (page: Page, meaning: string | RegExp) => page.locator('article.question').filter({ has: page.getByRole('heading', { name: meaning }) });
+
+/** Hypothetical outcomes are shown only when asked for. Opens them and returns the list. */
+export async function showHypotheticals(question: import('@playwright/test').Locator) {
+  const alternatives = question.locator('.alternative');
+  await expect(alternatives.first()).toBeHidden();
+  await question.getByText(/^What each answer would mean/).click();
+  await expect(alternatives.first()).toBeVisible();
+  return alternatives;
+}
+
+/** Stored-fact provenance and the jurisdiction record sit behind one disclosure under the address. */
+export async function openPropertyRecord(page: Page) {
+  const record = page.locator('details.subject__record');
+  if ((await record.getAttribute('open')) === null) await record.locator('summary').click();
 }
 
 export const ruleRow = (page: Page, ruleId = RULE_ID) => page.locator(`.rule[data-rule-id="${ruleId}"]`);
@@ -142,7 +168,8 @@ interface DevFixture {
   assists: Array<{ request: { address_id: string; as_of: string }; response: any }>;
   rules: Record<string, unknown>;
   sources: Record<string, unknown>;
-  changes: Array<{ request: { before: string; after: string; scenario?: string }; response: any }>;
+  changes: Array<{ request: { before: string; after: string; scenario?: string }; response: any; summary: Record<string, unknown> }>;
+  source_comparisons: any;
 }
 
 /** The recorded development fixture, expanded the same way the app expands it. */
@@ -152,10 +179,13 @@ export function devFixture(): DevFixture {
 
 /**
  * A live-API double that answers from the recorded development fixture: paged addresses, rule
- * and source records, lookups and comparisons. Requests it holds no recording for get a 422.
+ * and source records, lookups, comparisons (through POST /changes/summary, as the released
+ * backend does, and POST /changes) and claim comparisons. Requests it holds no recording for
+ * get a 422. A test of the older-backend fallback deletes the 'POST /changes/summary' handler.
  */
 export function devHandlers(fixture = devFixture()): Record<string, Handler> {
   const tail = (url: URL) => decodeURIComponent(url.pathname.split('/').pop() ?? '');
+  const recordedChange = (body: any) => fixture.changes.find((candidate) => candidate.request.before === body.before && candidate.request.after === body.after && (candidate.request.scenario ?? 'actual') === (body.scenario ?? 'actual'));
   return {
     'GET /health': () => ({ json: health({ addresses: fixture.addresses.length, rules: Object.keys(fixture.rules).length, sources: Object.keys(fixture.sources).length, resolved_municipalities: 12, dataset_readiness: 'partial' }) }),
     'GET /addresses': ({ url }) => {
@@ -180,10 +210,22 @@ export function devHandlers(fixture = devFixture()): Record<string, Handler> {
       return entry ? { json: entry.response } : { status: 422, json: { detail: { code: 'invalid_input', message: 'No recorded response for this request in the test double' } } };
     },
     'POST /changes': ({ body }) => {
-      const entry = fixture.changes.find((candidate) => candidate.request.before === body.before && candidate.request.after === body.after && (candidate.request.scenario ?? 'actual') === (body.scenario ?? 'actual'));
+      const entry = recordedChange(body);
       return entry ? { json: entry.response } : { status: 422, json: { detail: { code: 'invalid_input', message: 'No recorded response for this request in the test double' } } };
     },
+    'POST /changes/summary': ({ body }) => {
+      const entry = recordedChange(body);
+      return entry ? { json: { result: entry.response, ...entry.summary } } : { status: 422, json: { detail: { code: 'invalid_input', message: 'No recorded response for this request in the test double' } } };
+    },
+    'GET /source-comparisons': () => ({ json: fixture.source_comparisons }),
   };
+}
+
+/** The three readings of a comparison: property by property (the default), source → rule → property, and the timeline. */
+export async function showView(result: import('@playwright/test').Locator, name: 'By property' | 'By source and rule' | 'Timeline') {
+  const tab = result.getByRole('tab', { name: new RegExp(`^${name}`) });
+  await tab.click();
+  await expect(tab).toHaveAttribute('aria-selected', 'true');
 }
 
 export const comparisonResult = (page: Page) => page.getByRole('article', { name: 'Comparison result' });

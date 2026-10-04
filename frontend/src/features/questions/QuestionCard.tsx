@@ -27,41 +27,35 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
   // Results at least one recorded answer would move — the reason this question is worth asking.
   const movable = new Set(question.alternatives.flatMap((alternative) => consequenceOf(current, alternative.evaluations).changed.map((change) => change.ruleId)));
   const considered = new Set(question.alternatives.flatMap((alternative) => alternative.evaluations.map((evaluation) => evaluation.team_rule_id)));
+  // Rules this question is about, by name. Two records of one provision are named once each.
+  const affected = question.rule_ids;
   return (
-    <article className="question" aria-labelledby={headingId} data-question={question.question_id}>
-      <p className="question__rank">Question {rank}</p>
+    <article className={rank === 1 ? 'question question--lead' : 'question'} aria-labelledby={headingId} data-question={question.question_id}>
+      <p className="question__rank">{rank === 1 ? 'Most useful question' : `Question ${rank}`}</p>
       <h3 id={headingId} className="question__prompt">
-        {question.prompt}
+        {fact.meaning}?
       </h3>
-      <p className="question__meaning">
-        <span className="question__meaning-label">Asks for:</span> {fact.meaning}
-        {fact.unit ? ` (${fact.unit})` : ''}
-      </p>
 
-      <div className="question__why">
-        <p className="question__why-label">Why this matters</p>
-        <p>{question.why}</p>
-        {question.alternatives.length > 0 && (
-          <p className="question__consequence" data-consequence={movable.size}>
-            {movable.size > 0
-              ? `Depending on the answer, ${movable.size} of ${considered.size} ${considered.size === 1 ? 'result' : 'results'} can change.`
-              : 'No recorded answer changes a result on its own. Other open items below still hold the result.'}
-          </p>
-        )}
-        {question.rule_ids.length > 0 && (
-          <p className="question__affects">
-            Affects{' '}
-            {question.rule_ids.map((ruleId, index) => (
-              <span key={ruleId}>
-                {index > 0 && ', '}
-                <button type="button" className="link" onClick={() => onInspect(ruleId)}>
-                  {names.get(ruleId) ?? ruleId}
-                </button>
-              </span>
-            ))}
-          </p>
-        )}
-      </div>
+      {question.alternatives.length > 0 && (
+        <p className="question__consequence" data-consequence={movable.size}>
+          {movable.size > 0
+            ? `Depending on the answer, ${movable.size} of ${considered.size} ${considered.size === 1 ? 'result' : 'results'} can change.`
+            : 'No recorded answer changes a result on its own. Other open items below still hold the result.'}
+        </p>
+      )}
+      {affected.length > 0 && (
+        <p className="question__affects">
+          Affects{' '}
+          {affected.map((ruleId, index) => (
+            <span key={ruleId}>
+              {index > 0 && ', '}
+              <button type="button" className="link" onClick={() => onInspect(ruleId)}>
+                {names.get(ruleId) ?? ruleId}
+              </button>
+            </span>
+          ))}
+        </p>
+      )}
 
       <AnswerInput
         form={form}
@@ -72,34 +66,60 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
         onSubmit={(value) => onAnswer(fact.field, value, 'user_provided')}
         onUnknown={() => onAnswer(fact.field, null, 'user_provided')}
       />
+      <p className="question__scope">Your answer is unverified, applies to this request only and is never stored.</p>
 
-      {question.alternatives.length > 0 && (
-        <Disclosure summary={`What each answer would mean (${question.alternatives.length} hypothetical${question.alternatives.length === 1 ? '' : 's'})`} defaultOpen>
-          <p className="hint">Each line is the evaluator’s output for a probe value. Probe values are hypothetical; they are not facts about this property.</p>
-          <ul className="alternatives">
-            {question.alternatives.map((alternative) => (
-              <Alternative key={alternative.alternative_id} alternative={alternative} field={fact.field} names={names} ruleIds={question.rule_ids} current={current} busy={busy} allowDemoAnswers={allowDemoAnswers} onAnswer={onAnswer} />
-            ))}
-          </ul>
-        </Disclosure>
-      )}
-
-      <Disclosure summary="Why this question is ranked here">
-        <p>{question.ranking_rationale}</p>
-        <p className="hint">
-          Rank score {Number(question.rank_score.toFixed(3))}. A heuristic for ordering questions; it is not a probability. Answer effort weight for this fact: {fact.answer_effort ?? 1} of 5.
-        </p>
-        {question.predicate_ids.length > 0 && (
-          <p className="hint">
-            Conditions affected:{' '}
-            {question.predicate_ids.map((predicate) => (
-              <code key={predicate} className="code">
-                {predicate}
-              </code>
-            ))}
-          </p>
+      <div className="question__more">
+        {question.alternatives.length > 0 && (
+          <Disclosure summary={`What each answer would mean (${question.alternatives.length} hypothetical${question.alternatives.length === 1 ? '' : 's'})`}>
+            <p className="hint">Each line is the evaluator’s output for a probe value. Probe values are hypothetical; they are not facts about this property.</p>
+            <ul className="alternatives">
+              {question.alternatives.map((alternative) => (
+                <Alternative key={alternative.alternative_id} alternative={alternative} field={fact.field} names={names} ruleIds={question.rule_ids} current={current} busy={busy} allowDemoAnswers={allowDemoAnswers} onAnswer={onAnswer} />
+              ))}
+            </ul>
+          </Disclosure>
         )}
-      </Disclosure>
+
+        <Disclosure summary="Why this is asked, in the planner’s words">
+          <dl className="facts facts--dense">
+            <div className="facts__row">
+              <dt>Question as planned</dt>
+              <dd>{question.prompt}</dd>
+            </div>
+            <div className="facts__row">
+              <dt>Why this matters</dt>
+              <dd>{question.why}</dd>
+            </div>
+            <div className="facts__row">
+              <dt>Ranking</dt>
+              <dd>
+                {question.ranking_rationale}
+                <span className="facts__note">
+                  Rank score {Number(question.rank_score.toFixed(3))}. A heuristic for ordering questions; it is not a probability. Answer effort weight for this fact: {fact.answer_effort ?? 1} of 5.
+                </span>
+              </dd>
+            </div>
+            <div className="facts__row">
+              <dt>Fact</dt>
+              <dd>
+                <span className="mono">{fact.field}</span> · {humanize(fact.data_type)}
+              </dd>
+            </div>
+            {question.predicate_ids.length > 0 && (
+              <div className="facts__row">
+                <dt>Conditions affected</dt>
+                <dd className="code-list">
+                  {question.predicate_ids.map((predicate) => (
+                    <code key={predicate} className="code">
+                      {predicate}
+                    </code>
+                  ))}
+                </dd>
+              </div>
+            )}
+          </dl>
+        </Disclosure>
+      </div>
     </article>
   );
 }
