@@ -1,0 +1,51 @@
+{
+  "label": "CHANGE_CASE_DIAGNOSIS_NOT_AN_OFFICIAL_SCORE",
+  "input_zip_sha256": "92a75287d2475ea3be68e5c5245786eba3179536c2edbbd1b7ffa324a9f66420",
+  "producing_revision": "baa4471f3132d96202e64b60b8cf48862b91b3d8",
+  "source_freeze_sha256": "61e5fc03d2dad7f31e8a4479f551c027879be25208d753b85556cd35ea65b9ec",
+  "input_rules": 174,
+  "input_addresses": 500,
+  "lookup_outcomes": {
+    "not_yet_effective": 1120,
+    "pending": 84,
+    "unknown": 26961
+  },
+  "scenarios": {
+    "T1": {
+      "reported_status": "partial",
+      "definite_affected_count": 0,
+      "conflict_flag_count": 0,
+      "original_notes": "partial; actual. Unresolved rule evidence: r-57328356379e89d4f338, r-912998e64d23de87a92c Uncertain impacts are separate from definitely affected addresses Uncertain set (250 addresses) retained in change_details.json; definite-only export pending organizer guidance."
+    },
+    "T2": {
+      "reported_status": "blocked",
+      "definite_affected_count": 0,
+      "conflict_flag_count": 0,
+      "original_notes": "blocked; actual. Missing extracted legal evidence for HOB-ALG-01; test cannot be established from its description Missing extracted legal evidence for JC-ALG-01; test cannot be established from its description Uncertain set (0 addresses) retained in change_details.json; definite-only export pending organizer guidance."
+    },
+    "T3": {
+      "reported_status": "partial",
+      "definite_affected_count": 0,
+      "conflict_flag_count": 0,
+      "original_notes": "partial; actual. Missing local conflict evidence for JC-ALG-01 Missing local conflict evidence for HOB-ALG-01 No evidence-backed state/local interaction extracted; expected conflict cannot be presumed from test text Unresolved rule evidence: r-2a817e247c471c2a583b, r-92c9813fd2e2b9362ac9, r-ae6bf8b690dd32748832, r-b557a89502e37db1bddd, r-b9212520dd133bdf1584, r-c243bf954944d60c4643, r-f1b8f964acfc1c2e3687 Uncertain impacts are separate from definitely affected addresses Uncertain set (140 addresses) retained in change_details.json; definite-only export pending organizer guidance."
+    },
+    "T4": {
+      "reported_status": "blocked",
+      "definite_affected_count": 0,
+      "conflict_flag_count": 0,
+      "original_notes": "blocked; if_enacted. Missing extracted legal evidence for MA-ALG-P1; test cannot be established from its description Missing extracted legal evidence for MA-ALG-P2; test cannot be established from its description Hypothetical only: selected pending rules are assumed enacted and effective on the comparison date; stored law is unchanged Uncertain set (0 addresses) retained in change_details.json; definite-only export pending organizer guidance."
+    },
+    "T5": {
+      "reported_status": "blocked",
+      "definite_affected_count": 0,
+      "conflict_flag_count": 0,
+      "original_notes": "blocked; actual. Missing extracted legal evidence for MA-RENT-P1; test cannot be established from its description Uncertain set (0 addresses) retained in change_details.json; definite-only export pending organizer guidance."
+    }
+  },
+  "limits": [
+    "This reports the published archive, not an official grading result.",
+    "The full newer producing Store is not present in this checkout.",
+    "Software fixes and new extraction instructions do not rewrite existing provider outputs.",
+    "Supplemental primary evidence must retain its source admission and extraction lineage."
+  ]
+}

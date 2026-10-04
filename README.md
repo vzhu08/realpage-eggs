@@ -24,6 +24,9 @@ T1/T3 are partial and T2/T4/T5 are blocked; empty affected sets do not establish
 Supplemental link-only citations are excluded. See the [submission notes](submission/README.md)
 and [validation report](submission/submission_report.json) for omissions, uncertainty and hashes.
 
+Passing software CI does not establish T1–T5 readiness. See the
+[case diagnosis and data-readiness gate](docs/CHANGE_CASE_READINESS.md) before replacing these files.
+
 ## Historical bootstrap baseline
 
 The original bootstrap ingested 87 manifest rows, 54 text files and 500 properties.

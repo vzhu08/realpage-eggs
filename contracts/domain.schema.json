@@ -1622,6 +1622,14 @@
         },
         "title": "Issues",
         "type": "array"
+      },
+      "notes": {
+        "description": "Non-blocking extraction observations; do not use for unresolved legal meaning or incomplete rule support.",
+        "items": {
+          "type": "string"
+        },
+        "title": "Notes",
+        "type": "array"
       }
     },
     "required": [

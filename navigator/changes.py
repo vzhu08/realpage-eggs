@@ -3,7 +3,7 @@ from datetime import date
 
 from .config import DISCLAIMER, ROOT
 from .engine import evaluate_rules, temporal
-from .models import ChangeRequest, ChangeResult
+from .models import ChangeRequest, ChangeResult, JurisdictionResolution
 from .store import read_json
 
 
@@ -20,6 +20,24 @@ def map_references(rules, references):
 def signature(evaluation, rule):
     if evaluation.result in {"inapplicable", "failed"}: return None
     return (evaluation.result, rule.requirement, rule.key_value, evaluation.conflict_flag, tuple(sorted(evaluation.applied_interactions)))
+
+
+def has_mapped_interaction(rules, selected, related):
+    """Require an explicit edge between the mapped records, in either direction.
+
+    This checks only whether the scenario dependency has been encoded. Core still
+    decides the interaction's scope, temporal effect and uncertainty per property.
+    """
+    for origin in rules:
+        targets = related if origin.team_rule_id in selected else selected if origin.team_rule_id in related else set()
+        for interaction in origin.interactions:
+            if any(target.team_rule_id in targets
+                   and target.team_rule_id != origin.team_rule_id
+                   and target.citation.casefold() == interaction.target_citation.casefold()
+                   and target.jurisdiction.casefold() == interaction.target_jurisdiction.casefold()
+                   and target.category == interaction.category for target in rules):
+                return True
+    return False
 
 
 def compute_changes(store, request: ChangeRequest):
@@ -45,8 +63,8 @@ def compute_changes(store, request: ChangeRequest):
             mapping.update(conflicts)
             for ref, ids in conflicts.items():
                 if not ids: notes.append(f"Missing local conflict evidence for {ref}")
-            if not any(r.interactions for r in rules if r.team_rule_id in selected):
-                notes.append("No evidence-backed state/local interaction extracted; expected conflict cannot be presumed from test text")
+                elif selected and not has_mapped_interaction(rules, selected, set(ids)):
+                    notes.append(f"No evidence-backed state/local interaction extracted for {ref}; expected conflict cannot be presumed from test text")
     else:
         selected = set(request.rule_ids) if request.rule_ids else {r.team_rule_id for r in rules}
         unknown = selected - {r.team_rule_id for r in rules}
@@ -62,8 +80,10 @@ def compute_changes(store, request: ChangeRequest):
         notes.append("Unresolved rule evidence: " + ", ".join(unresolved))
     affected, uncertain, conflicts, differences = [], [], [], {}
     by_id = {r.team_rule_id: r for r in rules}
-    for ident, prop in sorted(addresses.items()):
-        resolution = resolutions[ident]
+    # No referenced rule can produce a delta. Retain the blocked result and all
+    # missing-evidence notes without evaluating unrelated law for every property.
+    for ident, prop in (sorted(addresses.items()) if selected else ()):
+        resolution = resolutions.get(ident, JurisdictionResolution(address_id=ident, state=prop.raw_address.state))
         left = {e.team_rule_id: e for e in evaluate_rules(rules, prop, resolution, before)}
         right = {e.team_rule_id: e for e in evaluate_rules(rules, prop, resolution, after, selected if scenario == "if_enacted" else [])}
         deltas = []
