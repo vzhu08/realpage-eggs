@@ -8,6 +8,7 @@ import type {
   ChangeResult,
   Evaluation,
   EvidenceReport,
+  FactDefinition,
   AddressPage,
   HealthResponse,
   LookupResponse,
@@ -40,7 +41,7 @@ export interface Origin {
 export type PlannerState =
   | { kind: 'response' } // an AssistResponse is present; read its own capabilities/status
   | { kind: 'endpoint_unavailable'; detail: string } // live backend has no POST /lookup/assist
-  | { kind: 'no_fixture'; detail: string }; // demo: no question-plan fixture for this property/date
+  | { kind: 'no_fixture'; detail: string }; // reserved: a replay source with no plan for this property/date
 
 /** How each accumulated answer was treated by the request that produced this result. */
 export interface AnswerDisposition {
@@ -133,6 +134,8 @@ export interface DataSource {
   ruleDetail(ruleId: string, signal?: AbortSignal): Promise<RuleDetail>;
   source(docId: string, signal?: AbortSignal): Promise<SourceDocument>;
   evidenceReport(ruleId: string, signal?: AbortSignal): Promise<EvidenceReportOutcome>;
+  /** Fact meanings and answer forms, keyed by field; null when the source does not publish them. */
+  facts(signal?: AbortSignal): Promise<Record<string, FactDefinition> | null>;
   changes(request: ChangeRequest, signal?: AbortSignal): Promise<ChangeOutcome>;
   /** Demo mode only. */
   catalog?(): DemoCatalog;

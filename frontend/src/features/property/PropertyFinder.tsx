@@ -130,9 +130,9 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
       {catalog && (
         <section className="finder__cases" aria-labelledby={`${inputId}-cases`}>
           <h2 id={`${inputId}-cases`} className="label">
-            Question-flow fixtures
+            Contract fixtures
           </h2>
-          <p className="hint">Five contract examples for the planned assist service. Each opens with its own property and date.</p>
+          <p className="hint">Five question-flow examples and one evidence-failure example from contracts/. Each opens with its own property and date.</p>
           <ul className="finder__list">
             {catalog.cases.map((fixtureCase) => {
               const item = all.data?.items.find((candidate) => candidate.property.address_id === fixtureCase.address_id);

@@ -13,7 +13,7 @@ const settle = async (page: Page) => {
 };
 
 /** Mobile keeps the views whose layout differs most from desktop, so the set stays small. */
-const MOBILE_SET = new Set(['02-lookup-unknown', '03-useful-question', '04-reevaluated', '05-evidence-source', '08-stays-unknown', '10-changes-comparison', '11-changes-blocked']);
+const MOBILE_SET = new Set(['02-lookup-unknown', '03-useful-question', '04-reevaluated', '05-evidence-source', '08-stays-unknown', '10-changes-comparison', '11-changes-blocked', '14-evidence-failure']);
 
 const shot = async (page: Page, name: string, isMobile: boolean) => {
   if (isMobile && !MOBILE_SET.has(name)) return;
@@ -25,13 +25,16 @@ const shot = async (page: Page, name: string, isMobile: boolean) => {
 test('lookup, question, re-evaluation and evidence', async ({ page, isMobile }) => {
   await openDemo(page);
   await shot(page, '01-start', isMobile);
-  await openCase(page, 'Decisive question');
+  // The implemented API's own example: SYNTH-003 on 2026-11-15.
+  await selectProperty(page, '3 Test Street');
+  await page.getByRole('button', { name: 'Nov 15, 2026', exact: true }).click();
+  await page.getByRole('button', { name: 'Run lookup' }).click();
+  await expect(page.getByRole('group', { name: 'Result context' })).toBeVisible();
   await shot(page, '02-lookup-unknown', isMobile);
-  await page.getByRole('article', { name: "What is the property's units?" }).scrollIntoViewIfNeeded();
   await page.getByRole('heading', { name: /Useful questions/ }).evaluate((element) => element.scrollIntoView({ block: 'start' }));
   await page.mouse.wheel(0, -90);
   await shot(page, '03-useful-question', isMobile);
-  await page.getByRole('textbox', { name: "What is the property's units?" }).fill('8');
+  await page.getByRole('article').getByRole('textbox').fill('12');
   await page.getByRole('button', { name: 'Apply answer' }).click();
   await expect(page.getByRole('region', { name: 'Re-evaluated with your answers' })).toBeVisible();
   await page.waitForTimeout(700);
@@ -69,6 +72,14 @@ test('changes: comparison and blocked scenario', async ({ page, isMobile }) => {
   await page.getByRole('group', { name: 'Comparison context' }).evaluate((element) => element.scrollIntoView({ block: 'start' }));
   await page.mouse.wheel(0, -70);
   await shot(page, '11-changes-blocked', isMobile);
+});
+
+test('evidence failure: missing source support', async ({ page, isMobile }) => {
+  await openDemo(page);
+  await openCase(page, 'Missing source support');
+  const panel = await openEvidence(page);
+  await panel.getByRole('tab', { name: /Checks/ }).click();
+  await shot(page, '14-evidence-failure', isMobile);
 });
 
 test('live API with no backend, and extraction unavailable', async ({ page, isMobile }) => {

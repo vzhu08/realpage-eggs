@@ -1,5 +1,6 @@
-import type { Answer, AnswerValue, FixtureCaseSummary, LookupOutcome, Rule } from '../../api/types';
+import type { Answer, AnswerValue, FactDefinition, FixtureCaseSummary, LookupOutcome, Rule } from '../../api/types';
 import { Disclosure, Notice, SectionHeading, Tag } from '../../components/ui';
+import { formFromDefinition } from '../../lib/answers';
 import { inferAnswerForm } from '../../lib/expression';
 import { humanize, sentence } from '../../lib/labels';
 import { AnswerInput } from './AnswerInput';
@@ -8,6 +9,8 @@ import { QuestionCard } from './QuestionCard';
 interface Props {
   outcome: LookupOutcome;
   answers: Answer[];
+  /** Fact definitions from the data source and from earlier plans, keyed by field. */
+  definitions: Record<string, FactDefinition>;
   busy: boolean;
   synthetic: boolean;
   /** Demo mode: fixture cases recorded for the same property and date. */
@@ -27,7 +30,7 @@ const PLAN_STATUS = {
  * Factual questions come only from the service's question plan. When no plan is available the
  * panel says so; it never ranks or invents questions itself.
  */
-export function QuestionsPanel({ outcome, answers, busy, synthetic, relatedCases, onOpenCase, onAnswer, onInspect }: Props) {
+export function QuestionsPanel({ outcome, answers, definitions, busy, synthetic, relatedCases, onOpenCase, onAnswer, onInspect }: Props) {
   const rules = new Map<string, Rule>(outcome.lookup.rules.map((rule) => [rule.team_rule_id, rule]));
   const answered = new Set(answers.map((answer) => answer.field));
   const missing = [...new Set(outcome.lookup.evaluations.flatMap((evaluation) => evaluation.missing_facts ?? []))];
@@ -63,22 +66,7 @@ export function QuestionsPanel({ outcome, answers, busy, synthetic, relatedCases
         <Notice tone="neutral" title="Question planning is not available on this backend" compact>
           <p>{outcome.planner.kind === 'endpoint_unavailable' ? outcome.planner.detail : ''} No questions are ranked and no alternatives are shown.</p>
         </Notice>
-        {open.length > 0 && (
-          <>
-            <p className="section__lead">
-              The evaluator reported these facts as missing. You can supply one as a request-local, unverified fact. Whether it would change a result is not known until it is evaluated.
-            </p>
-            <ul className="supply">
-              {open.map((field) => (
-                <li key={field} className="question question--plain" data-field={field}>
-                  <h3 className="question__prompt">{sentence(field)}</h3>
-                  <p className="hint">Input type chosen from how the encoded rule compares this fact. No fact definition is published by this backend.</p>
-                  <AnswerInput form={inferAnswerForm(field, outcome.lookup.rules)} legend={sentence(field)} busy={busy} submitLabel="Evaluate with this fact" onSubmit={(value) => onAnswer(field, value, 'user_provided')} onUnknown={() => onAnswer(field, null, 'user_provided')} />
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+        <SupplyFacts fields={open} outcome={outcome} definitions={definitions} busy={busy} onAnswer={onAnswer} />
       </section>
     );
   }
@@ -108,9 +96,12 @@ export function QuestionsPanel({ outcome, answers, busy, synthetic, relatedCases
       )}
 
       {plan.status === 'unavailable' && (
-        <Notice tone="neutral" title="The question planner is not available" compact>
-          <p>The service answered without a plan. Lookup results and evidence are unaffected.</p>
-        </Notice>
+        <>
+          <Notice tone="neutral" title="The question planner is not available" compact>
+            <p>The service answered without a plan, so no questions are ranked and no alternatives are shown. Lookup results and evidence are unaffected.</p>
+          </Notice>
+          <SupplyFacts fields={unasked} outcome={outcome} definitions={definitions} busy={busy} onAnswer={onAnswer} />
+        </>
       )}
 
       {limitsHit.length > 0 && (
@@ -136,6 +127,22 @@ export function QuestionsPanel({ outcome, answers, busy, synthetic, relatedCases
           <QuestionCard key={question.question_id} question={question} rank={index + 1} rules={rules} busy={busy} allowDemoAnswers={synthetic} onAnswer={onAnswer} onInspect={onInspect} />
         ))}
       </div>
+
+      {relatedCases.length > 0 && (
+        <div className="related-cases">
+          <p className="label">Contract fixtures for this property and date</p>
+          <ul className="case-links">
+            {relatedCases.map((fixtureCase) => (
+              <li key={fixtureCase.id}>
+                <button type="button" className="case-link" onClick={() => onOpenCase(fixtureCase)}>
+                  <span className="case-link__title">{fixtureCase.title}</span>
+                  <span className="case-link__purpose">{fixtureCase.purpose}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <Disclosure summary="Plan details">
         <dl className="facts facts--dense">
@@ -171,5 +178,48 @@ export function QuestionsPanel({ outcome, answers, busy, synthetic, relatedCases
         </dl>
       </Disclosure>
     </section>
+  );
+}
+
+/**
+ * Plain supply-a-fact forms for facts the evaluator reports missing when no plan ranks them.
+ * Each is sent as a request-local, unverified answer; nothing here predicts its effect.
+ */
+function SupplyFacts({ fields, outcome, definitions, busy, onAnswer }: { fields: string[]; outcome: LookupOutcome; definitions: Record<string, FactDefinition>; busy: boolean; onAnswer: Props['onAnswer'] }) {
+  if (!fields.length) return null;
+  return (
+    <>
+      <p className="section__lead">
+        The evaluator reported these facts as missing. You can supply one as a request-local, unverified fact. Whether it would change a result is not known until it is evaluated.
+      </p>
+      <ul className="supply">
+        {fields.map((field) => {
+          const definition = definitions[field];
+          return (
+            <li key={field} className="question question--plain" data-field={field}>
+              <h3 className="question__prompt">{sentence(field)}</h3>
+              {definition ? (
+                <p className="question__meaning">
+                  <span className="question__meaning-label">Asks for:</span> {definition.meaning}
+                  {definition.unit ? ` (${definition.unit})` : ''}
+                </p>
+              ) : (
+                <p className="hint">Input type chosen from how the encoded rule compares this fact. No fact definition is published by this backend.</p>
+              )}
+              <AnswerInput
+                form={definition ? formFromDefinition(definition) : inferAnswerForm(field, outcome.lookup.rules)}
+                legend={sentence(field)}
+                unit={definition?.unit}
+                limits={definition ? { minimum: definition.minimum, maximum: definition.maximum } : undefined}
+                busy={busy}
+                submitLabel="Evaluate with this fact"
+                onSubmit={(value) => onAnswer(field, value, 'user_provided')}
+                onUnknown={() => onAnswer(field, null, 'user_provided')}
+              />
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import type { AlternativeOutcome, Answer, AnswerValue, FactQuestion, Rule } from '../../api/types';
 import { Disclosure, Tag } from '../../components/ui';
 import { formFromDefinition } from '../../lib/answers';
+import { type NumericInterval, readInterval } from '../../demo/replay';
 import { UNCERTAINTY_KINDS, formatValue, humanize, resultMeta, sentence } from '../../lib/labels';
 import { AnswerInput } from './AnswerInput';
 
@@ -89,9 +90,22 @@ export function QuestionCard({ question, rank, rules, busy, allowDemoAnswers, on
   );
 }
 
+/** "1 to 7 dwelling units", "exactly 8 dwelling units", "9 dwelling units or more" — the planner's own bounds, in words. */
+function describeInterval(interval: NumericInterval): string {
+  const unit = interval.unit ? ` ${interval.unit}` : '';
+  const { lower, upper } = interval;
+  if (lower !== null && upper !== null) {
+    if (lower === upper) return `exactly ${lower}${unit}`;
+    return `${interval.lowerInclusive ? '' : 'more than '}${lower} to ${interval.upperInclusive ? '' : 'less than '}${upper}${unit}`;
+  }
+  if (lower !== null) return `${interval.lowerInclusive ? '' : 'more than '}${lower}${unit}${interval.lowerInclusive ? ' or more' : ''}`;
+  return `${interval.upperInclusive ? 'up to' : 'less than'} ${upper}${unit}`;
+}
+
 function Alternative({ alternative, field, rules, busy, allowDemoAnswers, onAnswer }: { alternative: AlternativeOutcome; field: string; rules: Map<string, Rule>; busy: boolean; allowDemoAnswers: boolean; onAnswer: Props['onAnswer'] }) {
   const probeKeys = Object.keys(alternative.probe_facts);
   const probe = alternative.probe_facts[field];
+  const interval = readInterval(alternative);
   const singleProbe = probeKeys.length === 1 && probeKeys[0] === field && (typeof probe === 'string' || typeof probe === 'number' || typeof probe === 'boolean');
   return (
     <li className="alternative">
@@ -101,13 +115,19 @@ function Alternative({ alternative, field, rules, busy, allowDemoAnswers, onAnsw
           Hypothetical
         </Tag>
       </div>
-      {alternative.interval && (
+      {interval ? (
         <p className="hint">
-          Covers:{' '}
-          {Object.entries(alternative.interval)
-            .map(([key, value]) => `${humanize(key)} ${formatValue(value)}`)
-            .join(', ')}
+          Covers {describeInterval(interval)}. Evaluated at the probe value {formatValue(probe)}, which stands in for the whole range.
         </p>
+      ) : (
+        alternative.interval && (
+          <p className="hint">
+            Covers:{' '}
+            {Object.entries(alternative.interval)
+              .map(([key, value]) => `${humanize(key)} ${formatValue(value)}`)
+              .join(', ')}
+          </p>
+        )
       )}
       <ul className="alternative__results">
         {alternative.evaluations.map((evaluation) => {

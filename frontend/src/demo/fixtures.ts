@@ -8,6 +8,9 @@
  *
  * Everything here is synthetic and is labeled as such wherever it is shown.
  */
+import missingSupport from '../../../contracts/evidence_examples/missing_support.json';
+import sourceComparison from '../../../contracts/evidence_examples/source_comparison.json';
+import assistExample from '../../../contracts/examples/assist.json';
 import emptyExample from '../../../contracts/examples/empty.json';
 import errorsExample from '../../../contracts/examples/errors.json';
 import normalExample from '../../../contracts/examples/normal.json';
@@ -17,7 +20,7 @@ import decisiveQuestion from '../../../contracts/research_examples/decisive_ques
 import irrelevantMissingFact from '../../../contracts/research_examples/irrelevant_missing_fact.json';
 import twoUnresolvedExemptions from '../../../contracts/research_examples/two_unresolved_exemptions.json';
 import unresolvedSourceCoverage from '../../../contracts/research_examples/unresolved_source_coverage.json';
-import type { AssistResponse, ChangeRequest, ChangeResult, LookupResponse, RuleDetail, SourceDocument } from '../api/types';
+import type { AssistResponse, ChangeRequest, ChangeResult, EncodedRuleRendering, EvidenceReport, LookupResponse, Rule, RuleDetail, SourceDocument } from '../api/types';
 import recorded from './recorded/synthetic-replay.json';
 
 export interface LookupExample {
@@ -36,9 +39,9 @@ export interface ResearchFixture {
   response: AssistResponse;
 }
 
-export interface RecordedLookup {
+export interface RecordedAssist {
   request: { address_id: string; as_of: string };
-  response: LookupResponse;
+  response: AssistResponse;
 }
 
 export interface RecordedChange {
@@ -52,6 +55,7 @@ const research = (data: unknown): ResearchFixture => {
   const fixture = data as Omit<ResearchFixture, 'path'>;
   return { ...fixture, path: `contracts/research_examples/${fixture.case}.json` };
 };
+const named = (name: string, path: string, data: unknown): ResearchFixture => ({ ...(data as Omit<ResearchFixture, 'path' | 'case'>), case: name, path });
 
 /** Ordinary lookup examples: normal, empty and unknown. */
 export const LOOKUP_EXAMPLES: LookupExample[] = [example('normal', normalExample), example('empty', emptyExample), example('unknown', unknownExample)];
@@ -71,6 +75,18 @@ export const RESEARCH_FIXTURES: ResearchFixture[] = [
   research(boundedPartial),
 ];
 
+/**
+ * The implemented API's own response for the first synthetic request (Platform + Core),
+ * checked in by Platform. The demo's default question flow starts here.
+ */
+export const ASSIST_EXAMPLE: ResearchFixture = named('assist', 'contracts/examples/assist.json', assistExample);
+
+/** An actual synthetic evidence failure: the source text is missing, so the result stays unknown. */
+export const EVIDENCE_FIXTURES: ResearchFixture[] = [named('missing_support', 'contracts/evidence_examples/missing_support.json', missingSupport)];
+
+/** Rule, evidence report and an authored renderer expectation. Used by tests; it carries no lookup. */
+export const SOURCE_COMPARISON = sourceComparison as unknown as { fixture_mode: string; contract_status: string; rule: Rule; evidence: EvidenceReport; encoded_rule: EncodedRuleRendering };
+
 /** What each fixture is designed to exercise. UI copy describing the fixture, not a legal statement. */
 export const FIXTURE_COPY: Record<string, { title: string; purpose: string }> = {
   decisive_question: { title: 'Decisive question', purpose: 'One missing fact decides coverage. Each recorded answer settles the result.' },
@@ -78,11 +94,12 @@ export const FIXTURE_COPY: Record<string, { title: string; purpose: string }> = 
   two_unresolved_exemptions: { title: 'Two unresolved exemptions', purpose: 'One answer narrows the result but it stays unknown until two exemption facts are known.' },
   unresolved_source_coverage: { title: 'Unresolved source coverage', purpose: 'The open gap is a missing source, not a property fact. No question can close it.' },
   bounded_partial_analysis: { title: 'Bounded partial analysis', purpose: 'The evaluation budget ran out, so the question analysis is explicitly partial.' },
+  missing_support: { title: 'Missing source support', purpose: 'The source text is unavailable, so evidence checks fail and the result stays unknown.' },
 };
 
 const replay = recorded as unknown as {
   manifest: Record<string, unknown>;
-  lookups: RecordedLookup[];
+  assists: RecordedAssist[];
   rules: Record<string, RuleDetail>;
   sources: Record<string, SourceDocument>;
   changes: RecordedChange[];
@@ -90,7 +107,7 @@ const replay = recorded as unknown as {
 
 export const RECORDED_PATH = 'frontend/src/demo/recorded/synthetic-replay.json';
 export const RECORDED_MANIFEST = replay.manifest;
-export const RECORDED_LOOKUPS = replay.lookups;
+export const RECORDED_ASSISTS = replay.assists;
 export const RECORDED_RULES = replay.rules;
 export const RECORDED_SOURCES = replay.sources;
 export const RECORDED_CHANGES = replay.changes;
