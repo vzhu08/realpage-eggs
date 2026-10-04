@@ -1,0 +1,149 @@
+{
+  "candidate_commit": "9ff4396de5b6bdc5d8daed159a0778f993dd49cc",
+  "origin_main_at_verification": "9ff4396de5b6bdc5d8daed159a0778f993dd49cc",
+  "python": "3.13.15",
+  "python_executable": "/Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/bin/python",
+  "requirements_sha256": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8",
+  "source_sha256": {
+    "navigator/core_assist.py": "79128ba6cdb95cb5afc104d9b993105cd12928ba65c568b702fcb5c490d68e61",
+    "navigator/source_comparison.py": "21913cf58bc6703f7f882e343c53e31f95de93452a8b25aca538ee9823ed1140",
+    "navigator/source_inventory.py": "3f90d627fce96a33a21925f1e3a44237c8f89f6931d5dd9708f4dd92106afae1",
+    "navigator/fact_inputs.py": "c8366cbd0ea945be5b2d58dee53f20904dca20effd90a048ecb829e3d9910d8e",
+    "navigator/store.py": "9b800afea3685c29690512d2f266fe6850340c03b70bfb0f4dff90ed002ba31d",
+    "navigator/service.py": "73ce09f1d93f72054313bae1f248e5a1e0d82b3c54091487ba2d98d71400ce31",
+    "navigator/changes.py": "2060c6d521001d2bf0721d2bd1b372cce07f0110c4726b435d60cc4eee62b5f7",
+    "navigator/ingest.py": "dcdabbc16dbf90d2a899f30fca65a3bc0336098b4afd5b30adeeb6b3792e9f2c",
+    "navigator/predicates.py": "bf00596766fce89bfc07d204a2a759cd2802ea2b0b26cc413aa0b23801edc8f3",
+    "navigator/rule_renderer.py": "794f9ca6a2aadd76b0928dd1838ea0380379b746fbd09f9d25a53f5f163bf8b6",
+    "navigator/config.py": "ab3c3b0a8135e2816ad6e46e2a12a4ff999820e414d20073dabf4852d671f7ce",
+    "navigator/models.py": "6666d33eb6c248f2edb1bface343979fb4cb4849ddb43b773850f720cb442890",
+    "navigator/semantic_review.py": "2f53998d2c36585846ffae9126b91f6254341e8a47a256ef3e463eff70305da0",
+    "navigator/question_planner.py": "8429b1bfe8e1daafdcc7bbde36d3d895c1455c7e041da7f74b44eddfe32ae9d6",
+    "navigator/geocode.py": "f5ce5fd996950fe701f8dc556f706c4eac80db396efd39d2c9703517dd9f7d27",
+    "navigator/__init__.py": "279710f99c5c14d54c4b5bf7336be4848dd252749083477baddd35b10ef95531",
+    "navigator/export.py": "346b8d16029876cacf147ab11c37274cbab793e6dd107450d94b0b83cf4f402f",
+    "navigator/api.py": "e501e71c44ed871445817c281c01c331cc5c7a9cd4a30a4473ac507adecb57e1",
+    "navigator/engine.py": "e9e9b01e2d131f66052917b08575b62d6ca05f6a8b47439d0df8d7ff6ff66414",
+    "navigator/cli.py": "f747386e95c2a6119c2534ac104b85f3a08363b2a9f4593f4840900b844b27c2",
+    "navigator/extraction.py": "d45b3284a7cb565c88df095ae125aea95363671054b48ee6761835ab00866e8e",
+    "navigator/retrieval.py": "6a7a7940fe94887ca7470b7e4d9ddc999e4a7e262694645256e931e14f745048",
+    "navigator/contracts.py": "612854b2dfbccbe4d8e93e5f38832eca0935381a416d2039860d69c1f48f1d8e",
+    "navigator/research_fixtures.py": "7de7a954f3c22f27f66297335dce19ce5ceb94f6d1e759b494ea35849f12b4fb",
+    "navigator/demo.py": "db337c9e6c4adb583e9dcba4b6fa39d9bb531b42a9f4711bcdbeeffc9b0a0d47",
+    "navigator/evidence.py": "55212cb5afd85d5f189ecdc8381176bcc1e6d9be207f860102ec2e000b8273c9",
+    "navigator/assist_service.py": "e5b296acd5debdcf8bc0e081741bc729a898bfe28826e1e330225169e24d78c6",
+    "navigator/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "navigator/evidence_package.py": "c380327a7c2a3582c4a575e95703adba9c43f8a2f448ecaeff6234d0bf4eef99",
+    "navigator/validation.py": "cbe09ebe67cbe2096eb66b0017368fb388df772994355543b6e4b392448edb09",
+    "tests/test_rule_renderer.py": "82fd8d0aca89759377ae5e0617f2672591b52f627b6bf3288870c114eba7fec3",
+    "tests/test_engine.py": "54517d2bd347006142cf36b6f54a66671d5892d6424dc7d3e99bad90b397dbbf",
+    "tests/conftest.py": "d0ec16cacd55298c30f0da9dbf5ec86efe0d52fe9fad5c316e4e37019f099483",
+    "tests/test_retrieval.py": "5fe2bd688057ba636b661bae4e1f3cb1e1b6f6a4f3fc1acff7e5a139216fc04d",
+    "tests/test_evidence_package.py": "d32c4c80ec6e9f22e042c770035bfeb4616fd7f4cdbfdb7dca6648afc1c8f52f",
+    "tests/test_numeric_contracts.py": "e7eb61f65d3edfc2efb689cccfb4216a518a710f59c77662bee056255a21c012",
+    "tests/test_api_exports.py": "f4ab210d24a29795d74e66fdb84bd9957304b5fa87f7417157d5b157d28e66de",
+    "tests/test_extraction.py": "05fac6d993f64924b7e6a3bc485044c5fbea793bb0b3244f50d348db3d34e4af",
+    "tests/test_traces.py": "c834341b47480e50c02f37cfd35d83b126c58f81d830b499f3433068e2187329",
+    "tests/test_handoff.py": "8e9f5655fd60fa13994eb96b3159c1d54f6f08caced1fd3c4a2611610e105779",
+    "tests/test_geocode.py": "da613f3db666c84473ffc1cd079e447b7afd0c51b66a895863407aa7b7985473",
+    "tests/test_question_planner.py": "6fcb1114b76e44aafc482d8c8a6da0aedeb5508710eb54bb454ae392c419c873",
+    "tests/test_source_comparison.py": "164c013eb5311e27a4e99cdb7220ca0ef1a7d4d8a7a05cad5c3a4780c7a09a14",
+    "tests/test_change_adapters.py": "24a6df90b26515a21d9d2976dd368fc29ff91b74e1a44471bc53fe66b294833c",
+    "tests/test_assist_api.py": "ee46443e30bf5e8afd0dda302150f5ceba78fd0e736f20bbff4fa54415887b5f",
+    "tests/test_snapshot_assembly.py": "a5253d5bcb3d6406c52417daec356b3a09b4677c6602badef769dc03dbe4680d",
+    "tests/test_evidence.py": "858ab4faae55e928262db233ef11a99e11fd7d49a12aac7e9bfe3523f16572a2",
+    "tests/test_deployment.py": "8599aca98dae9af02c7574f3214ea5c4aa40e71a016b856251e6836de1522c47",
+    "tests/test_research_contracts.py": "1f0ccc176bf2ad11cae83e651f6f8352a4970c194ffca8007f305b4f9954948c",
+    "tests/fixtures/change_tests.json": "f22b82ebc8e783d13e690fc39cb52879380da8df91a23ef8677388a767d0d97f",
+    "tests/fixtures/core_navigation/benchmark_cases.json": "abab16fa991cedd8c9322e0807a94ab2c7908cbbdfccbdb82c4a6406e5927de7",
+    "scripts/platform_ops.py": "1ff47923efd6953466d68278d529d3a69c9ba205e123fb1287973a15116a47b7",
+    "scripts/assemble_snapshot.py": "f31f14d8a425c6ffa61044a95418374952463ffb2bff122ee167e060d307dd46",
+    "scripts/prepare_handoff.py": "b088b7a99ec1bdd48eec4f480ab34cd9ac5572d4a8da01e2f98cdb36eb7dd173",
+    "docs/METHOD.md": "eb782a42baabca937fd66285689e6939b95b0ae0e4a70c143cbe49c59479b38e",
+    "docs/core_navigation/benchmark.py": "dc32e67c7729b5a5172649f313a965ec65561a5a3defb62dbe43a3001ff2f8f7",
+    "docs/core/core01_d001_live.json": "f22193b88ae470b73214eec9bf7c4802a2594d718fc9f0d006e3b9abeea04546",
+    "deploy/verify_release.py": "5bbcc04352243f53905bf729f6feafb4f9cb96801174028b5e2d135afeceaa0c",
+    "deploy/Dockerfile": "be89ff5814d5c36b6417183d1ddfe6d18369dfe417027420ddc819f350980f86",
+    "deploy/compose.yaml": "ab09876105ffa3582d874b94d116d400dd2998eb85e8d4a66eb62959160e125d",
+    "deploy/verify_container.py": "e7157ea637c1e8b21cf7421e5a702239c1e13124fc3498e4d2e5cab9428b2f66"
+  },
+  "pack": "/Users/danny/Downloads/participant-final-no-hour16",
+  "disposable_copy": true,
+  "working_contracts_unchanged": true,
+  "generated_contract_differences": [
+    "evidence_examples/change_summary.json",
+    "evidence_examples/claim_comparison.json",
+    "evidence_examples/missing_support.json",
+    "evidence_examples/package_missing_support.json",
+    "evidence_examples/property_package.json",
+    "evidence_examples/source_comparison.json",
+    "examples/assist.json",
+    "examples/normal.json",
+    "examples/unknown.json",
+    "research_examples/bounded_partial_analysis.json",
+    "research_examples/decisive_question.json",
+    "research_examples/irrelevant_missing_fact.json",
+    "research_examples/two_unresolved_exemptions.json",
+    "research_examples/unresolved_source_coverage.json"
+  ],
+  "schema_differences": [],
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "-rs"
+      ],
+      "exit_code": 0,
+      "stdout": "........................................................................ [ 17%]\n........................................................................ [ 34%]\n........................................................................ [ 51%]\n........................................................................ [ 69%]\n........................................................................ [ 86%]\n.........................................................                [100%]\n=============================== warnings summary ===============================\n../../../../../../../Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1\n  /Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n417 passed, 1 warning in 7.27s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "navigator",
+        "tests",
+        "deploy"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "navigator",
+        "contracts"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"generated\": \"/private/var/folders/85/xxlv99754cl3rlts52tsmhn40000gn/T/realpage-core-a-integration-j7u6nrhb/contracts\",\n  \"examples\": \"synthetic; research examples are proposed Core output, not a live planner\"\n}\n",
+      "stderr": "/Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n  from starlette.testclient import TestClient as TestClient  # noqa\n"
+    },
+    {
+      "command": [
+        "python",
+        "-c",
+        "import json; from pathlib import Path; from navigator.evidence_package import replay_evidence_package; names = ['property_package', 'package_missing_support']; results = {name: replay_evidence_package(json.loads(Path(f'contracts/evidence_examples/{name}.json').read_text(encoding='utf-8'))['response']).status for name in names}; assert set(results.values()) == {'reproduced'}; print(json.dumps(results, sort_keys=True))"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"package_missing_support\": \"reproduced\", \"property_package\": \"reproduced\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}
