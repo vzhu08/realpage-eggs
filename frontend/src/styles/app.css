@@ -1109,6 +1109,11 @@ select.input {
   margin-top: 0.1rem;
 }
 
+/* A one-line notice is a sentence, not a heading over a body. */
+.notice__title:only-child {
+  font-weight: 550;
+}
+
 .notice--unknown,
 .notice--synthetic {
   background: var(--unknown-wash);
@@ -1905,6 +1910,10 @@ select.input {
   overflow-y: auto;
   padding: 0 var(--s-5) var(--s-5);
   overscroll-behavior: contain;
+}
+
+.picker .finder__list:not(.finder__list--cases) {
+  grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
 }
 
 /* The search field leads and stays in reach while the list scrolls under it. */
@@ -4017,7 +4026,8 @@ select.input {
   }
 
   .finder__list,
-  .finder__list--cases {
+  .finder__list--cases,
+  .picker .finder__list:not(.finder__list--cases) {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -4080,6 +4090,13 @@ select.input {
 
   .context__tags {
     justify-content: flex-start;
+    gap: 0.2rem 0.375rem;
+  }
+
+  .context:not(.context--static) .tag {
+    padding-top: 0.05rem;
+    padding-bottom: 0.05rem;
+    line-height: 1.4;
   }
 
   .context__disclaimer {
@@ -4296,8 +4313,50 @@ select.input {
     left: 0.25rem;
   }
 
-  .evidence > .tabs {
-    justify-content: space-between;
+  .tabs__badge {
+    min-width: 1.15rem;
+    padding: 0 0.25rem;
+    line-height: 1.15rem;
   }
 
+  /* Four evidence views fit one row on a phone; the first still starts on the content edge. */
+  .evidence > .tabs {
+    justify-content: space-between;
+    padding: 0 var(--s-3);
+  }
+
+  .evidence > .tabs .tabs__tab {
+    padding: 0 0.25rem;
+    font-size: var(--text-xs);
+  }
+
+  .evidence > .tabs .tabs__tab[aria-selected='true']::after {
+    left: 0.25rem;
+    right: 0.25rem;
+  }
+
+}
+
+@media (max-width: 380px) {
+  .evidence > .tabs {
+    padding: 0 0.6rem;
+  }
+
+  .evidence > .tabs .tabs__tab {
+    gap: 0.2rem;
+    padding: 0 0.15rem;
+  }
+
+  .evidence > .tabs .tabs__tab:first-child {
+    padding-left: 0.4rem;
+  }
+
+  .evidence > .tabs .tabs__tab[aria-selected='true']::after {
+    left: 0.15rem;
+    right: 0.15rem;
+  }
+
+  .evidence > .tabs .tabs__tab:first-child[aria-selected='true']::after {
+    left: 0.4rem;
+  }
 }
