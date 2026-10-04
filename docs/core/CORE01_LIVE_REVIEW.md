@@ -265,7 +265,7 @@ one cache hit, 84 total rules, **zero provider calls/usage**. The same hypotheti
 D008 produced **two rules / ten exact evidence instances**. The rate remains **1.0%**, distinct from
 65% of CPI / 1.5% CPI; rounding uncertainty is retained. Adoption **2025-10-16**, earliest adjustment
 **2026-01-01**, signed snapshot **2025-10-17** apply to the AGA version, with no invented end date.
-Exemption requires **tenancy_start >= 2025-01-01 AND Costa-Hawkins-set rents**. Missing Regulation1148
+Exemption requires **tenancy_start >= 2025-01-01 AND Costa-Hawkins-set rents**. Missing Regulation 1148
 eligibility and notice details stay unsupported. Evidence: `core01_d008_live.json`.
 
 The corpus was interrupted after D008 to install the demonstrated repair. Run
@@ -290,3 +290,44 @@ stay unsupported. Lifecycle is **unknown**, all dates null; no rate or penalty w
 A conservative redundant before-1996/or-not-before-1996 partition in two rules can retain uncertainty
 when tenancy_start is absent despite identical coverage on both sides. No unsupported legal
 simplification or planner rebuild was made. Evidence: `core01_d009_live.json`.
+
+## D010 automated source comparison
+
+The resumed run saved **20 Boston screening-policy rules / 87 exact evidence references**. DND/BPDA/
+OFHE program scope is retained, not a citywide prohibition. The credit-score ban remains separate
+from conditional credit-history use; DCJIS/same-staff recommendations and feasible appeals remain
+advisory/conditional. Strict “more than five years” narrative is not replaced with an invented numeric
+age predicate. February 2017 remains a document version, not an invented legal lifecycle date. No
+federal/state directional interaction was inferred without target-citation support. Provider-versus-
+unit coverage and criminal-history exception placement remain unresolved. All 20 need review;
+`core01_d010_live.json` records this automated comparison, not independent/human legal review.
+
+## D011 legitimate empty result; D012 bounded general rule
+
+D011 returned **zero rules / zero negative findings**, `source_kind=status_record`, five unresolved
+issues and a valid completed cache. Original history supports local approval (`[325,622)`) and a
+**September 9, 2024 study-order disposition** (`[1681,1732)`), not enactment or failure. Substantive H3744
+text and referenced H5035 are absent; corpus identifier search found those names only in D011. D010
+is an unrelated Fair Chance policy. No obligations, numerical limits or lifecycle dates were invented;
+empty output is not absence of law, and its rule quote-check denominator is zero. Index remains review.
+Actual empty cache metadata and source checks: `core01_d011_live.json`.
+
+D012 produced **one general nondiscrimination rule / five exact evidence spans**. Lifecycle/citation
+and exemption gaps remain unresolved; discriminatory-fee examples did not become a fee cap.
+`core01_d012_live.json` records the automated comparison, not human/independent legal review.
+
+## D013/D014 Boston notice review
+
+D013 produced **three rules / ten exact evidence instances**; D014 **three rules / 27 exact instances**.
+D013 preserves the agency's “should” timing, online City submission/content duties and absent exact
+City deadline. D014 supplies effective **2020-11-06**, month-precision enactment **2020-10**, tenant
+notice timing, City notice copy plus Certificate of Compliance/Service, nonwaivability and property-
+class exceptions. Both retain warning/$300-per-day penalties and no automatic eviction halt. Tenant
+simultaneous-delivery timing was not imported into City reporting, and advice did not become duties.
+
+D014 flags possible undercoverage of foreclosure/bank purchasers, a potentially over-narrow intent-
+to-end-occupancy condition on nonwaivability, and interpretation of the numbered exception list.
+These remain unresolved, not settled legal conclusions. The web page's online channel and FAQ's
+address channel do not establish an amendment or automatic supersession. D014 supplies some details
+absent from D013, so those are per-source gaps rather than wholly missing corpus evidence. All six
+rules need review; `core01_boston_notice_review.json` records the automated comparisons.

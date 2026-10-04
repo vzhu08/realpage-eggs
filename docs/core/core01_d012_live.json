@@ -1,0 +1,43 @@
+{
+  "evidence_kind": "real provider extraction; automated original-source review, not human or independent legal review",
+  "provider_origin_run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+  "model": "gpt-6.1-sol",
+  "audit": {
+    "index": {
+      "status": "review",
+      "sha256": "aaed5c3d1e3aacb57a1f9a8fa9e855ecaa857bdbedc3d7b99a1992e7fc0aed0f",
+      "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+      "mode": "live",
+      "rules": 1,
+      "issues": [
+        "All six categories were reviewed. The segment supplies no provisions establishing rent increase limits, just-cause eviction requirements, security-deposit requirements, application or screening fee limits, or algorithmic rent-setting restrictions. This absence does not establish that no such rules exist.",
+        "No supported amendment, directional supersession, conflict, penalty, or dated status event is identified in this segment.",
+        "The example of discriminatory differences in fees supports the nondiscrimination obligation; it does not establish an application-fee cap or a security-deposit rule.",
+        "The retrieval timestamp is not an effective date, enactment event, or supported lifecycle snapshot date."
+      ]
+    },
+    "rules": 1,
+    "lifecycle": {
+      "unknown": 1
+    },
+    "semantic_verification": {
+      "needs_review": 1
+    },
+    "evidence_instances": 5,
+    "distinct_spans": 5,
+    "invalid_evidence": [],
+    "non_verbatim_primary_quotes": [],
+    "construction_or_occupancy_predicates": [],
+    "unsupported_predicates": 1
+  },
+  "source_integrity": {
+    "original_matches_stored": true,
+    "actual_sha256_matches_stored": true
+  },
+  "review_findings": [
+    "One general nondiscrimination rule; five evidence spans exact.",
+    "Unknown lifecycle and missing legal citation remain explicit.",
+    "Exemption conditions unsupported; no discriminatory-fee example converted into a general fee cap.",
+    "Examples remain within discrimination context; no demonstrated defect in selected comparison."
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "evidence_kind": "real provider extraction; automated original-source review, not human or independent legal review",
+  "provider_origin_run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+  "model": "gpt-6.1-sol",
+  "documents": {
+    "D013": {
+      "audit": {
+        "index": {
+          "status": "review",
+          "sha256": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+          "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+          "mode": "live",
+          "rules": 3,
+          "issues": [
+            "All six categories were reviewed. No supported rules or explicit negative findings were identified for rent_increase_limits, security_deposits, application_screening_fees, screening_restrictions, or algorithmic_rent_setting. Their absence from this source does not establish that no such rules exist.",
+            "No amendment, repeal, or directional supersession or conflict with another identified provision is evidenced in the supplied source.",
+            "The eviction-related notification and reporting provisions are classified under just_cause_eviction because the schema has no separate eviction-notice category; none establishes a substantive just-cause requirement.",
+            "The retrieval timestamp is not an effective date, status-event date, or supported lifecycle snapshot date.",
+            "The source is official agency guidance, not the text of the linked ordinance."
+          ]
+        },
+        "rules": 3,
+        "lifecycle": {
+          "enacted": 3
+        },
+        "semantic_verification": {
+          "needs_review": 3
+        },
+        "evidence_instances": 10,
+        "distinct_spans": 7,
+        "invalid_evidence": [],
+        "non_verbatim_primary_quotes": [],
+        "construction_or_occupancy_predicates": [],
+        "unsupported_predicates": 5
+      },
+      "source_integrity": {
+        "original_matches_stored": true,
+        "actual_sha256_matches_stored": true
+      },
+      "review_findings": [
+        "3 final rules; 10 evidence instances / 7 distinct spans exact.",
+        "Tenant notice timing retains should wording and uncertainty. City portal submission and content duties separate; precise trigger/deadline unsupported.",
+        "Warning for first offense, $300 per day for subsequent offenses and no automatic eviction halt retained; no invented lifecycle dates."
+      ]
+    },
+    "D014": {
+      "audit": {
+        "index": {
+          "status": "review",
+          "sha256": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+          "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+          "mode": "live",
+          "rules": 3,
+          "issues": [
+            "All six categories were reviewed. The source supports eviction-related notice, City-submission and nonwaiver obligations. It supplies no provisions or explicit negative findings for rent increase limits, security deposits, application screening fees, screening restrictions or algorithmic rent setting; silence does not establish that no such rules exist.",
+            "No directional supersession or conflict with another identified legal provision is evidenced.",
+            "The penalty schedule is ordinance-wide and states 'Unless otherwise provided'; the source does not identify any provision-specific alternative penalty.",
+            "The retrieval date and the source URL\u2019s directory date are not supported lifecycle snapshot dates. No repeal, amendment or exclusive end date is established.",
+            "The source is official tenant guidance. Its reported passage in October 2020 supports the enactment event, but it is not the ordinance text or a current status record.",
+            "The statement that an HSNA violation does not halt eviction is a limitation on these protections, not evidence that other eviction protections are absent."
+          ]
+        },
+        "rules": 3,
+        "lifecycle": {
+          "enacted": 3
+        },
+        "semantic_verification": {
+          "needs_review": 3
+        },
+        "evidence_instances": 27,
+        "distinct_spans": 14,
+        "invalid_evidence": [],
+        "non_verbatim_primary_quotes": [],
+        "construction_or_occupancy_predicates": [],
+        "unsupported_predicates": 0
+      },
+      "source_integrity": {
+        "original_matches_stored": true,
+        "actual_sha256_matches_stored": true
+      },
+      "review_findings": [
+        "3 final rules; 27 evidence instances / 14 distinct spans exact.",
+        "Effective November6,2020 and enactment month October2020 preserved; no invented day, end or retrieval snapshot.",
+        "Tenant notice timing, city notice-copy plus Certificate of Compliance/Service, nonwaivability and property-class exceptions retained.",
+        "City reporting deadline unknown; tenant simultaneous-delivery timing not imported into city reporting.",
+        "Warning/$300-per-day schedule and no automatic eviction halt retained; complaint advice not converted into landlord duty.",
+        "Potential undercoverage remains explicit: actor label may omit foreclosure/bank purchasers, nonwaiver may be broader than intent-to-end-occupancy condition, numbered exception list conjunction remains an interpretation question."
+      ]
+    }
+  },
+  "cross_source_limitations": [
+    "D014 supplies some timing/exemption information absent from D013; these are per-source gaps, not wholly unavailable corpus evidence.",
+    "D013 current webpage specifies online submission; D014 FAQ describes delivery to an address. No evidenced amendment/supersession was invented.",
+    "No additional generic pipeline defect was demonstrated; encoded predicates do not fully settle the retained interpretation questions."
+  ]
+}

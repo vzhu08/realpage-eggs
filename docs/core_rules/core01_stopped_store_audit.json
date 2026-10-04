@@ -1,0 +1,2374 @@
+{
+  "evidence_kind": "automated structural/original-text audit; not semantic or human legal review",
+  "store": "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session",
+  "original_text_dir": "/Users/danny/Downloads/participant-final-no-hour16/corpus/text",
+  "counts": {
+    "sources": 87,
+    "captured_texts": 54,
+    "rules": 140,
+    "addresses": 500,
+    "resolutions": 500,
+    "index_statuses": {
+      "review": 15
+    },
+    "lifecycle": {
+      "enacted": 114,
+      "pending": 2,
+      "unknown": 24
+    },
+    "evidence_modes": {
+      "replay": 84,
+      "live": 56
+    }
+  },
+  "all_original_texts_and_hashes_match": true,
+  "source_checks": {
+    "D001": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D003": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D004": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D005": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D006": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D007": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D008": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D009": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D010": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D011": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D012": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D013": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D014": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D016": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D022": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D023": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D024": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D025": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D026": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D027": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D029": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D031": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D036": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D039": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D040": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D041": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D042": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D043": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D045": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D046": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D047": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D048": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D049": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D050": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D051": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D052": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D053": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D057": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D058": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D065": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D066": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D067": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D068": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D069": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D073": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D076": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D078": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D079": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D080": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D081": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D082": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D083": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D084": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    },
+    "D085": {
+      "original_matches_stored": true,
+      "actual_sha256_matches_stored": true
+    }
+  },
+  "missing_text_ids": [
+    "D002",
+    "D015",
+    "D017",
+    "D018",
+    "D019",
+    "D020",
+    "D021",
+    "D028",
+    "D030",
+    "D032",
+    "D033",
+    "D034",
+    "D035",
+    "D037",
+    "D038",
+    "D044",
+    "D054",
+    "D055",
+    "D056",
+    "D059",
+    "D060",
+    "D061",
+    "D062",
+    "D063",
+    "D064",
+    "D070",
+    "D071",
+    "D072",
+    "D074",
+    "D075",
+    "D077",
+    "D086",
+    "D087"
+  ],
+  "unattempted_text_ids": [
+    "D023",
+    "D024",
+    "D025",
+    "D026",
+    "D027",
+    "D029",
+    "D031",
+    "D036",
+    "D039",
+    "D040",
+    "D041",
+    "D042",
+    "D043",
+    "D045",
+    "D046",
+    "D047",
+    "D048",
+    "D049",
+    "D050",
+    "D051",
+    "D052",
+    "D053",
+    "D057",
+    "D058",
+    "D065",
+    "D066",
+    "D067",
+    "D068",
+    "D069",
+    "D073",
+    "D076",
+    "D078",
+    "D079",
+    "D080",
+    "D081",
+    "D082",
+    "D083",
+    "D084",
+    "D085"
+  ],
+  "resolution_statuses": {
+    "unresolved": 500
+  },
+  "negative_findings": {
+    "D001": [
+      {
+        "jurisdiction": "Berkeley, CA",
+        "category": "rent_increase_limits",
+        "statement": "The proposed Chapter 13.63 expressly does not regulate the amount of rent a landlord may charge. This is a limitation of this chapter, not a finding that Berkeley has no rent-increase limits.",
+        "evidence": [
+          {
+            "doc_id": "D001",
+            "quote": "Nor does this \nChapter regulate the amount of rent that a landlord may charge. This Chapter solely \nregulates the use and sale of the coordinated pricing algorithms, to prevent the harms \ndescribed above.",
+            "start": 2446,
+            "end": 2650,
+            "supports": [
+              "category",
+              "statement"
+            ]
+          },
+          {
+            "doc_id": "D001",
+            "quote": "BE IT ORDAINED by the Council of the City of Berkeley as follows:",
+            "start": 327,
+            "end": 392,
+            "supports": [
+              "jurisdiction"
+            ]
+          }
+        ]
+      }
+    ],
+    "D004": [],
+    "D003": [],
+    "D005": [],
+    "D006": [],
+    "D007": [],
+    "D008": [],
+    "D009": [
+      {
+        "jurisdiction": "Berkeley, CA",
+        "category": "rent_increase_limits",
+        "statement": "The guide marks new-construction units built and receiving a certificate of occupancy after June 1980, single-family homes with tenancies beginning on or after January 1, 1996, most condominiums, Section 202 and Section 811 units, and the specified HUD-mortgage-linked subsidized units as not covered by this ordinance's rent control. Overlapping unit categories are not resolved. This is not a finding that other rent-increase rules are absent.",
+        "evidence": [
+          {
+            "doc_id": "D009",
+            "quote": "Unit/ Tenancy Type Coverage Registration Rent Control Just Cause for \nEviction \nSecurity Deposit \nInterest",
+            "start": 554,
+            "end": 660,
+            "supports": [
+              "category",
+              "statement"
+            ]
+          },
+          {
+            "doc_id": "D009",
+            "quote": "New construction: units that were built and received a Certificate of \nOccupancy after June 1980** \nPartially Covered Yes No Yes Yes \nSingle-family home with a tenancy that began on or after January 1, \n1996** \nPartially Covered Yes No Yes Yes \nMost condominiums** Partially Covered Yes No Yes Yes \nUnits with the following government subsidies regardless of unit type: \nSection 202 Supportive Housing for the Elderly, Section 811 \nSupportive Housing for Persons with Disabilities \nPartially Covered Yes No Yes Yes \nRegardless of unit type, units with Rental Supplement Program, \nSection 8 Loan Management Set Aside, Project-based Section 8 \nsubsidies AND in a project with a mortgage insured or held by HUD. \nPartially Covered Yes No Yes Yes",
+            "start": 988,
+            "end": 1730,
+            "supports": [
+              "statement"
+            ]
+          }
+        ]
+      }
+    ],
+    "D010": [],
+    "D011": [],
+    "D012": [],
+    "D013": [],
+    "D014": [],
+    "D016": [],
+    "D022": []
+  },
+  "negative_evidence_instances": 4,
+  "invalid_negative_evidence": [],
+  "provider_usage": {
+    "complete_billing_total": false,
+    "limitation": "Only returned response usage is observable; historical timed-out/interrupted requests may also have been billed.",
+    "deduplicated_response_count": 35,
+    "response_statuses": {
+      "completed": 34,
+      "incomplete": 1
+    },
+    "observed_token_totals": {
+      "input_tokens": 243550,
+      "output_tokens": 277296,
+      "total_tokens": 520846
+    },
+    "runs": [
+      {
+        "run_id": "2634e1c36d41409cb511644884c6090f",
+        "started_at": "2026-10-03T22:12:46.031521+00:00",
+        "finished_at": "2026-10-03T22:12:46.067601+00:00",
+        "elapsed_seconds": 0.036,
+        "outcome": "failed",
+        "config": {
+          "prompt_version": "extract-v1",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1
+        },
+        "counts": {
+          "processed": 0,
+          "rules": 0
+        },
+        "errors": [
+          "Set OPENAI_API_KEY and OPENAI_MODEL locally in .env; no live extraction was performed"
+        ],
+        "observed_responses": [],
+        "usage_file_present": false
+      },
+      {
+        "run_id": "fff936be69f04f6296a4e7efe0f32ba7",
+        "started_at": "2026-10-03T22:42:49.238668+00:00",
+        "finished_at": "2026-10-03T22:42:49.278667+00:00",
+        "elapsed_seconds": 0.04,
+        "outcome": "failed",
+        "config": {
+          "prompt_version": "extract-v2-core-dates",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1
+        },
+        "counts": {
+          "processed": 0,
+          "rules": 0
+        },
+        "errors": [
+          "Set OPENAI_API_KEY and OPENAI_MODEL locally in .env; no live extraction was performed"
+        ],
+        "observed_responses": [],
+        "usage_file_present": false
+      },
+      {
+        "run_id": "4edb554e813f40ff943a641fff17d0f7",
+        "started_at": "2026-10-03T22:54:23.305607+00:00",
+        "finished_at": "2026-10-03T22:54:24.339381+00:00",
+        "elapsed_seconds": 1.034,
+        "outcome": "failed",
+        "config": {
+          "prompt_version": "extract-v2-core-dates",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "OPENAI_MODEL=gpt-6.1-sol"
+        },
+        "counts": {
+          "processed": 0,
+          "rules": 0,
+          "cache_hits": 0
+        },
+        "errors": [
+          "D001: OpenAI HTTP 404; no fallback rules generated"
+        ],
+        "observed_responses": [],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "7a402a6829d942a59c705954bce8db44",
+        "started_at": "2026-10-03T22:55:12.856227+00:00",
+        "finished_at": "2026-10-03T22:55:13.258507+00:00",
+        "elapsed_seconds": 0.402,
+        "outcome": "failed",
+        "config": {
+          "prompt_version": "extract-v2-core-dates",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol"
+        },
+        "counts": {
+          "processed": 0,
+          "rules": 0,
+          "cache_hits": 0
+        },
+        "errors": [
+          "D001: OpenAI HTTP 400; no fallback rules generated"
+        ],
+        "observed_responses": [],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "94936c30ecf64f8b81ce8225f49c8944",
+        "started_at": "2026-10-03T22:58:42.629044+00:00",
+        "finished_at": "2026-10-03T22:58:43.092875+00:00",
+        "elapsed_seconds": 0.464,
+        "outcome": "failed",
+        "config": {
+          "prompt_version": "extract-v2-core-dates",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol"
+        },
+        "counts": {
+          "processed": 0,
+          "rules": 0,
+          "cache_hits": 0
+        },
+        "errors": [
+          "D001: OpenAI HTTP 400; no fallback rules generated"
+        ],
+        "observed_responses": [],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "e7d2438cb4e745c09293536e472c92ca",
+        "started_at": "2026-10-03T22:59:05.015985+00:00",
+        "finished_at": "2026-10-03T22:59:05.372527+00:00",
+        "elapsed_seconds": 0.357,
+        "outcome": "failed",
+        "config": {
+          "prompt_version": "extract-v2-core-dates",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol"
+        },
+        "counts": {
+          "processed": 0,
+          "rules": 0,
+          "cache_hits": 0
+        },
+        "errors": [
+          "D001: OpenAI HTTP 400; no fallback rules generated"
+        ],
+        "observed_responses": [],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "2c214d19d3b944a29f98847f16db16ca",
+        "started_at": "2026-10-03T22:59:40.464545+00:00",
+        "finished_at": "2026-10-03T23:02:13.052294+00:00",
+        "elapsed_seconds": 152.588,
+        "outcome": "success",
+        "config": {
+          "prompt_version": "extract-v3-core-json-input",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol"
+        },
+        "counts": {
+          "processed": 1,
+          "rules": 2,
+          "cache_hits": 0
+        },
+        "errors": [],
+        "observed_responses": [
+          {
+            "response_id": "resp_0940a48925a2463b016ac188dcac1487d1aa49d455cba0880e",
+            "usage": {
+              "input_tokens": 4425,
+              "input_tokens_details": {
+                "cache_write_tokens": 4422,
+                "cached_tokens": 0
+              },
+              "output_tokens": 5814,
+              "output_tokens_details": {
+                "reasoning_tokens": 191
+              },
+              "total_tokens": 10239
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0c1f0e5a318c0a19016ac18921895087d1931937ad50f60138",
+            "usage": {
+              "input_tokens": 9356,
+              "input_tokens_details": {
+                "cache_write_tokens": 9353,
+                "cached_tokens": 0
+              },
+              "output_tokens": 6634,
+              "output_tokens_details": {
+                "reasoning_tokens": 351
+              },
+              "total_tokens": 15990
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          }
+        ],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "a2c106ffc11b44258bc0e207a2970777",
+        "started_at": "2026-10-03T23:02:51.895676+00:00",
+        "finished_at": "2026-10-03T23:12:58.215574+00:00",
+        "elapsed_seconds": 606.32,
+        "outcome": "partial",
+        "config": {
+          "prompt_version": "extract-v3-core-json-input",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol",
+          "interruption_recovery": {
+            "process_exit_code": 130,
+            "usage_artifact_written_at": "2026-10-03T23:10:32.805174+00:00",
+            "elapsed_includes_manual_manifest_finalization": true
+          }
+        },
+        "counts": {
+          "processed": 1,
+          "rules": 2,
+          "cache_hits": 1
+        },
+        "errors": [
+          "D003: OpenAI transport failure: ReadTimeout",
+          "Operator interrupted during D004 to repair demonstrated response read timeouts; D004 draft retained for reviewed resumption. Manifest finalized after process exit 130."
+        ],
+        "observed_responses": [
+          {
+            "response_id": "resp_06f9213dea571667016ac18b081b2487d1a4d9a3981f79cf0f",
+            "usage": {
+              "input_tokens": 3011,
+              "input_tokens_details": {
+                "cache_write_tokens": 3008,
+                "cached_tokens": 0
+              },
+              "output_tokens": 4014,
+              "output_tokens_details": {
+                "reasoning_tokens": 170
+              },
+              "total_tokens": 7025
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          }
+        ],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "b0f3490db6d54a2e97f6c7be92334240",
+        "started_at": "2026-10-03T23:13:02.163481+00:00",
+        "finished_at": "2026-10-03T23:17:51.466013+00:00",
+        "elapsed_seconds": 289.303,
+        "outcome": "partial",
+        "config": {
+          "prompt_version": "extract-v3-core-json-input",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol",
+          "draft_replays": [
+            {
+              "doc_id": "D004",
+              "offset": 0,
+              "origin_run_id": "a2c106ffc11b44258bc0e207a2970777"
+            }
+          ],
+          "read_timeout_seconds": 300
+        },
+        "counts": {
+          "processed": 2,
+          "rules": 10,
+          "cache_hits": 1,
+          "draft_replays": 1
+        },
+        "errors": [
+          "D003: OpenAI response incomplete; output not accepted",
+          "Interrupted; completed documents and saved drafts/caches preserved; remaining documents are resumable"
+        ],
+        "observed_responses": [
+          {
+            "response_id": "resp_0cbecfe3c44e17c2016ac18bfe76cc87d1944032f3673557ed",
+            "usage": {
+              "input_tokens": 3703,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 3700
+              },
+              "output_tokens": 16000,
+              "output_tokens_details": {
+                "reasoning_tokens": 760
+              },
+              "total_tokens": 19703
+            },
+            "model": "gpt-6.1-sol",
+            "status": "incomplete"
+          },
+          {
+            "response_id": "resp_0e80546f5dadaa3b016ac18cae49a087d1926d13c72ecd079d",
+            "usage": {
+              "input_tokens": 6428,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 6425
+              },
+              "output_tokens": 7243,
+              "output_tokens_details": {
+                "reasoning_tokens": 236
+              },
+              "total_tokens": 13671
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          }
+        ],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "6a01da26bbd44b0ca364b8f4988dcacd",
+        "started_at": "2026-10-03T23:18:21.187362+00:00",
+        "finished_at": "2026-10-03T23:24:15.653165+00:00",
+        "elapsed_seconds": 354.466,
+        "outcome": "success",
+        "config": {
+          "prompt_version": "extract-v3-core-json-input",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol",
+          "draft_replays": [],
+          "read_timeout_seconds": 600,
+          "max_output_tokens": 32000
+        },
+        "counts": {
+          "processed": 1,
+          "rules": 24,
+          "cache_hits": 0,
+          "draft_replays": 0
+        },
+        "errors": [],
+        "observed_responses": [
+          {
+            "response_id": "resp_00c11c6f3821b281016ac18d3d8f8c87d1a4b9806d36dffe3e",
+            "usage": {
+              "input_tokens": 3703,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 3700
+              },
+              "output_tokens": 15144,
+              "output_tokens_details": {
+                "reasoning_tokens": 700
+              },
+              "total_tokens": 18847
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0f03ccb15a114aff016ac18de77a9087d1bb29d0f57572a949",
+            "usage": {
+              "input_tokens": 16844,
+              "input_tokens_details": {
+                "cache_write_tokens": 16841,
+                "cached_tokens": 0
+              },
+              "output_tokens": 16754,
+              "output_tokens_details": {
+                "reasoning_tokens": 364
+              },
+              "total_tokens": 33598
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          }
+        ],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+        "started_at": "2026-10-03T23:26:06.833401+00:00",
+        "finished_at": "2026-10-03T23:46:14.118787+00:00",
+        "elapsed_seconds": 1207.285,
+        "outcome": "partial",
+        "config": {
+          "prompt_version": "extract-v3-core-json-input",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol",
+          "draft_replays": [],
+          "read_timeout_seconds": 600,
+          "max_output_tokens": 32000
+        },
+        "counts": {
+          "processed": 7,
+          "rules": 84,
+          "cache_hits": 3,
+          "draft_replays": 0
+        },
+        "errors": [
+          "Interrupted; completed documents and saved drafts/caches preserved; remaining documents are resumable"
+        ],
+        "observed_responses": [
+          {
+            "response_id": "resp_0327ef0b64b45add016ac18f0f2f7887d1a440b78592d52f6f",
+            "usage": {
+              "input_tokens": 3292,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 3289
+              },
+              "output_tokens": 7771,
+              "output_tokens_details": {
+                "reasoning_tokens": 379
+              },
+              "total_tokens": 11063
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_025db1adbf2ef0fc016ac18f6b008087d1a4efa7c058bc4635",
+            "usage": {
+              "input_tokens": 9609,
+              "input_tokens_details": {
+                "cache_write_tokens": 9606,
+                "cached_tokens": 0
+              },
+              "output_tokens": 10108,
+              "output_tokens_details": {
+                "reasoning_tokens": 255
+              },
+              "total_tokens": 19717
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0ee012d5221607df016ac18fe1df3c87d19cccf2e2502b1e5c",
+            "usage": {
+              "input_tokens": 12637,
+              "input_tokens_details": {
+                "cache_write_tokens": 12634,
+                "cached_tokens": 0
+              },
+              "output_tokens": 10290,
+              "output_tokens_details": {
+                "reasoning_tokens": 73
+              },
+              "total_tokens": 22927
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_05bf9289ed7431fb016ac1904f6f9487d19d444828c8a0a504",
+            "usage": {
+              "input_tokens": 5436,
+              "input_tokens_details": {
+                "cache_write_tokens": 5433,
+                "cached_tokens": 0
+              },
+              "output_tokens": 15724,
+              "output_tokens_details": {
+                "reasoning_tokens": 1034
+              },
+              "total_tokens": 21160
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0c0550adb3126263016ac1910add0087d1833ce5e03c0853c4",
+            "usage": {
+              "input_tokens": 18716,
+              "input_tokens_details": {
+                "cache_write_tokens": 18713,
+                "cached_tokens": 0
+              },
+              "output_tokens": 18992,
+              "output_tokens_details": {
+                "reasoning_tokens": 803
+              },
+              "total_tokens": 37708
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0762bbf785011b32016ac191e678dc87d1849a8cc379d6f289",
+            "usage": {
+              "input_tokens": 3487,
+              "input_tokens_details": {
+                "cache_write_tokens": 3484,
+                "cached_tokens": 0
+              },
+              "output_tokens": 10133,
+              "output_tokens_details": {
+                "reasoning_tokens": 291
+              },
+              "total_tokens": 13620
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_05ec8a25fc31ef76016ac19259803087d1a48e4de2609f2edc",
+            "usage": {
+              "input_tokens": 12018,
+              "input_tokens_details": {
+                "cache_write_tokens": 12015,
+                "cached_tokens": 0
+              },
+              "output_tokens": 11661,
+              "output_tokens_details": {
+                "reasoning_tokens": 239
+              },
+              "total_tokens": 23679
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_05055eb57ec23ca2016ac192dcfa5487d1bd2b236443b390a0",
+            "usage": {
+              "input_tokens": 13884,
+              "input_tokens_details": {
+                "cache_write_tokens": 13881,
+                "cached_tokens": 0
+              },
+              "output_tokens": 11223,
+              "output_tokens_details": {
+                "reasoning_tokens": 97
+              },
+              "total_tokens": 25107
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_036eca1f0a310b70016ac193545ed087d18491bc33be941e60",
+            "usage": {
+              "input_tokens": 3026,
+              "input_tokens_details": {
+                "cache_write_tokens": 3023,
+                "cached_tokens": 0
+              },
+              "output_tokens": 2442,
+              "output_tokens_details": {
+                "reasoning_tokens": 262
+              },
+              "total_tokens": 5468
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_05f895adcdf1ab2e016ac19375e3b087d1bc7facf7b67ae993",
+            "usage": {
+              "input_tokens": 4947,
+              "input_tokens_details": {
+                "cache_write_tokens": 4944,
+                "cached_tokens": 0
+              },
+              "output_tokens": 2693,
+              "output_tokens_details": {
+                "reasoning_tokens": 209
+              },
+              "total_tokens": 7640
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          }
+        ],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "eb389c18dd4b4af28c6b3acdfc2fc2c9",
+        "started_at": "2026-10-03T23:47:44.678295+00:00",
+        "finished_at": "2026-10-03T23:47:44.723967+00:00",
+        "elapsed_seconds": 0.046,
+        "outcome": "success",
+        "config": {
+          "prompt_version": "extract-v3-core-json-input",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol",
+          "fact_contract_validation": "enum-literals-v1",
+          "draft_replays": [],
+          "read_timeout_seconds": 600,
+          "max_output_tokens": 32000
+        },
+        "counts": {
+          "processed": 1,
+          "rules": 84,
+          "cache_hits": 1,
+          "draft_replays": 0
+        },
+        "errors": [],
+        "observed_responses": [],
+        "usage_file_present": true
+      },
+      {
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "started_at": "2026-10-03T23:48:10.085749+00:00",
+        "finished_at": "2026-10-04T00:09:47.066896+00:00",
+        "elapsed_seconds": 1296.981,
+        "outcome": "partial",
+        "config": {
+          "prompt_version": "extract-v3-core-json-input",
+          "chunk_chars": 18000,
+          "overlap_chars": 1500,
+          "concurrency": 1,
+          "transport_attempts": 3,
+          "repair_attempts": 1,
+          "model": "gpt-6.1-sol",
+          "fact_contract_validation": "enum-literals-v1",
+          "draft_replays": [],
+          "read_timeout_seconds": 600,
+          "max_output_tokens": 32000
+        },
+        "counts": {
+          "processed": 15,
+          "rules": 140,
+          "cache_hits": 7,
+          "draft_replays": 0
+        },
+        "errors": [
+          "Interrupted; completed documents and saved drafts/caches preserved; remaining documents are resumable"
+        ],
+        "observed_responses": [
+          {
+            "response_id": "resp_0b23b335f6a0c35d016ac1943cbd2087d1b40879e49e61ad7a",
+            "usage": {
+              "input_tokens": 3158,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 3155
+              },
+              "output_tokens": 7410,
+              "output_tokens_details": {
+                "reasoning_tokens": 483
+              },
+              "total_tokens": 10568
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0b4fe11f5a106780016ac19498cdbc87d181f442efd872987a",
+            "usage": {
+              "input_tokens": 8979,
+              "input_tokens_details": {
+                "cache_write_tokens": 8976,
+                "cached_tokens": 0
+              },
+              "output_tokens": 8415,
+              "output_tokens_details": {
+                "reasoning_tokens": 100
+              },
+              "total_tokens": 17394
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0480194c9a347f52016ac194f9d64887d1a4f07aea821ffe1d",
+            "usage": {
+              "input_tokens": 3944,
+              "input_tokens_details": {
+                "cache_write_tokens": 3941,
+                "cached_tokens": 0
+              },
+              "output_tokens": 10910,
+              "output_tokens_details": {
+                "reasoning_tokens": 414
+              },
+              "total_tokens": 14854
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_024bfa5019aa47ac016ac1957a84fc87d195f4f4bc5d206741",
+            "usage": {
+              "input_tokens": 13506,
+              "input_tokens_details": {
+                "cache_write_tokens": 13503,
+                "cached_tokens": 0
+              },
+              "output_tokens": 16966,
+              "output_tokens_details": {
+                "reasoning_tokens": 455
+              },
+              "total_tokens": 30472
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0351d2fec63123c9016ac196387d5487d1a8ce1858ab224a11",
+            "usage": {
+              "input_tokens": 3424,
+              "input_tokens_details": {
+                "cache_write_tokens": 3421,
+                "cached_tokens": 0
+              },
+              "output_tokens": 265,
+              "output_tokens_details": {
+                "reasoning_tokens": 47
+              },
+              "total_tokens": 3689
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0ce971d4f24c312a016ac1963e47cc87d1a75da9ec5b781182",
+            "usage": {
+              "input_tokens": 3668,
+              "input_tokens_details": {
+                "cache_write_tokens": 3665,
+                "cached_tokens": 0
+              },
+              "output_tokens": 272,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 3940
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0f43fe5ec5a2dddb016ac196441dbc87d1973b5d02dfce765d",
+            "usage": {
+              "input_tokens": 3353,
+              "input_tokens_details": {
+                "cache_write_tokens": 3350,
+                "cached_tokens": 0
+              },
+              "output_tokens": 1241,
+              "output_tokens_details": {
+                "reasoning_tokens": 257
+              },
+              "total_tokens": 4594
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_01ce79807ed99332016ac19657bfd487d1b4fdee660edc3514",
+            "usage": {
+              "input_tokens": 4255,
+              "input_tokens_details": {
+                "cache_write_tokens": 4252,
+                "cached_tokens": 0
+              },
+              "output_tokens": 1439,
+              "output_tokens_details": {
+                "reasoning_tokens": 135
+              },
+              "total_tokens": 5694
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_070b5a0bf56f6807016ac1966d6cb887d1bd6301fe5dd14c69",
+            "usage": {
+              "input_tokens": 4142,
+              "input_tokens_details": {
+                "cache_write_tokens": 4139,
+                "cached_tokens": 0
+              },
+              "output_tokens": 2294,
+              "output_tokens_details": {
+                "reasoning_tokens": 183
+              },
+              "total_tokens": 6436
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_01dea2a1e736121b016ac1968adf1887d1a7a78a24b8ddf94a",
+            "usage": {
+              "input_tokens": 6032,
+              "input_tokens_details": {
+                "cache_write_tokens": 6029,
+                "cached_tokens": 0
+              },
+              "output_tokens": 3091,
+              "output_tokens_details": {
+                "reasoning_tokens": 142
+              },
+              "total_tokens": 9123
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_06e8a1948ce33efe016ac196af2e1487d19dd76135b9683052",
+            "usage": {
+              "input_tokens": 3859,
+              "input_tokens_details": {
+                "cache_write_tokens": 3856,
+                "cached_tokens": 0
+              },
+              "output_tokens": 5013,
+              "output_tokens_details": {
+                "reasoning_tokens": 320
+              },
+              "total_tokens": 8872
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0e821ef2eb4b6728016ac196ea514087d1aa74f486221b82ce",
+            "usage": {
+              "input_tokens": 7931,
+              "input_tokens_details": {
+                "cache_write_tokens": 7928,
+                "cached_tokens": 0
+              },
+              "output_tokens": 5516,
+              "output_tokens_details": {
+                "reasoning_tokens": 115
+              },
+              "total_tokens": 13447
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0a56b06afa16ffdc016ac1972a337c87d1b26cec3222b4e3d8",
+            "usage": {
+              "input_tokens": 5840,
+              "input_tokens_details": {
+                "cache_write_tokens": 5837,
+                "cached_tokens": 0
+              },
+              "output_tokens": 8741,
+              "output_tokens_details": {
+                "reasoning_tokens": 413
+              },
+              "total_tokens": 14581
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_05d9978f1907c1d3016ac1979425e487d1b8513088243fb373",
+            "usage": {
+              "input_tokens": 13187,
+              "input_tokens_details": {
+                "cache_write_tokens": 13184,
+                "cached_tokens": 0
+              },
+              "output_tokens": 14602,
+              "output_tokens_details": {
+                "reasoning_tokens": 516
+              },
+              "total_tokens": 27789
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0de8138318746e95016ac19846075087d197245957baf40a9a",
+            "usage": {
+              "input_tokens": 4400,
+              "input_tokens_details": {
+                "cache_write_tokens": 4397,
+                "cached_tokens": 0
+              },
+              "output_tokens": 4870,
+              "output_tokens_details": {
+                "reasoning_tokens": 212
+              },
+              "total_tokens": 9270
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_08c297b0a76ebc91016ac19883082887d1a362c26642ee1a7c",
+            "usage": {
+              "input_tokens": 8507,
+              "input_tokens_details": {
+                "cache_write_tokens": 8504,
+                "cached_tokens": 0
+              },
+              "output_tokens": 5468,
+              "output_tokens_details": {
+                "reasoning_tokens": 314
+              },
+              "total_tokens": 13975
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0293a17f705a9303016ac198ca6dd487d191bcf35421a99555",
+            "usage": {
+              "input_tokens": 4015,
+              "input_tokens_details": {
+                "cache_write_tokens": 4012,
+                "cached_tokens": 0
+              },
+              "output_tokens": 3457,
+              "output_tokens_details": {
+                "reasoning_tokens": 213
+              },
+              "total_tokens": 7472
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          },
+          {
+            "response_id": "resp_0c09958b0aef1fcf016ac198f72bc487d19c34aa01453583ae",
+            "usage": {
+              "input_tokens": 6828,
+              "input_tokens_details": {
+                "cache_write_tokens": 6825,
+                "cached_tokens": 0
+              },
+              "output_tokens": 4686,
+              "output_tokens_details": {
+                "reasoning_tokens": 330
+              },
+              "total_tokens": 11514
+            },
+            "model": "gpt-6.1-sol",
+            "status": "completed"
+          }
+        ],
+        "usage_file_present": true
+      }
+    ]
+  },
+  "documents": {
+    "D001": {
+      "index": {
+        "status": "review",
+        "sha256": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 2,
+        "issues": [
+          "All six categories were reviewed. No provisions concerning just-cause eviction, security deposits, application or screening fees, or screening restrictions were identified in this source; this does not establish that such rules do not exist.",
+          "The chapter's general-welfare undertaking and severability provisions do not create additional housing obligations within the six extraction categories. Enforcement remedies, mandatory prevailing-party fee awards, and the restriction on tenant fee-waiver provisions are retained internally under penalties.",
+          "The ordinance amends Chapter 13.63, but the source does not supply prior versions, their dates, or sufficient evidence for a directional supersedes or conflicts_with interaction with another identified legal rule.",
+          "The source is proposed amending ordinance text with a dated passage-to-print record. It does not establish final adoption; the URL's date and retrieval date are not enactment evidence."
+        ]
+      },
+      "rules": 2,
+      "lifecycle": {
+        "pending": 2
+      },
+      "semantic_verification": {
+        "needs_review": 2
+      },
+      "evidence_instances": 18,
+      "distinct_spans": 10,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D003": {
+      "index": {
+        "status": "review",
+        "sha256": "a008c846fc4edd842994d8c5ea0367546e55319670e9687c5d1c7ccfdfa1ce40",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 14,
+        "issues": [
+          "All six categories were reviewed. The source supplies no application-screening-fee or algorithmic-rent-setting provision and no express negative finding for either category; silence is not evidence that no rule exists.",
+          "City Council passage on April 14, 2020 supports the dated enactment event. No separately dated lifecycle snapshot is supplied; status_as_of is null. The retrieval timestamp is not a legal status date.",
+          "Complaint filing and answering are described as available procedures, not mandatory housing-provider obligations.",
+          "No effective date, exclusive end date, amendment, repeal, directional supersession, or conflict event is supported by this source.",
+          "Ordinance-wide penalties are captured in the criminal_history_inquiries rule for storage; that placement does not limit them to inquiries. The overview does not explain how actual damages and three times one month's rent are selected or combined, so no further damages formula is inferred.",
+          "Potential exemption branches retain unsupported conditions for omitted specific requirements and obligation-specific scope. Public-housing/Section 8 status is not equated with every form of subsidized housing.",
+          "The general prohibition on using criminal history or criminal background checks was added because it is stated in the opening summary and is not exhausted by the separately listed inquiries and adverse decisions.",
+          "The lifetime-sex-offender exemption's precise definition, whose status controls, and permissible actions are not supplied.",
+          "The owner-return reference to BMC 13.76.130 A.9 is an exemption cross-reference, not evidence of supersession or conflict.",
+          "The source is official agency guidance summarizing BMC 13.106, not the municipal code text. Linked ordinance, notice, FAQs, forms, and administrative regulation texts were not supplied."
+        ]
+      },
+      "rules": 14,
+      "lifecycle": {
+        "enacted": 14
+      },
+      "semantic_verification": {
+        "needs_review": 14
+      },
+      "evidence_instances": 70,
+      "distinct_spans": 15,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 58
+    },
+    "D004": {
+      "index": {
+        "status": "review",
+        "sha256": "bb1b00d69bd3ead225e5bd758bf642256df1cb89dfa4275a5699266b78df30e1",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 8,
+        "issues": [
+          "All six categories were reviewed. This segment supports eviction-related relocation payment, inflation-indexing, and publication obligations. It supplies no substantive provisions or explicit negative findings for rent increase limits, security deposits, application screening fees, screening restrictions, or algorithmic rent setting. That silence does not establish the absence of rules.",
+          "No prior payment version, exclusive end date, directional supersession, or conflict with an exactly identified target provision is established by this segment.",
+          "The lifecycle snapshot uses the source's October 27, 2025 update date, not the retrieval date. Dated adjustment approval events are retained separately from that snapshot.",
+          "The reported 1.5% increase adjusts relocation assistance payments, not rents. Prior payment amounts are not stated and have not been reverse-calculated.",
+          "The source establishes approval of the 2026 adjustment on October 16, 2025 and effectiveness on January 1, 2026, but not the original enactment dates of the ordinances or their continuing administrative duties.",
+          "The source is an official agency announcement, not the underlying legal text. Legal citations are limited to the ordinance names supplied.",
+          "Unknown exemptions and end dates are not affirmative findings that none exist; no source passage establishes them."
+        ]
+      },
+      "rules": 8,
+      "lifecycle": {
+        "enacted": 8
+      },
+      "semantic_verification": {
+        "needs_review": 8
+      },
+      "evidence_instances": 38,
+      "distinct_spans": 10,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 10
+    },
+    "D005": {
+      "index": {
+        "status": "review",
+        "sha256": "396972b4e199efe65ff763eae53ed8a81d99e17ba900c39f16bfb44c16637bed",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 15,
+        "issues": [
+          "All six categories were reviewed. The page supplies no affirmative negative findings for rent increase limits, just-cause eviction, security deposits, or algorithmic rent setting; silence is not evidence that those rules do not exist.",
+          "Enacted lifecycle labels reflect the agency's presentation of these provisions as operative law. No enactment events, effective dates, repeal dates, or dated lifecycle snapshot are supplied; the retrieval timestamp is not used as status_as_of.",
+          "No legislative amendments, dated status events, monetary penalties, or supported supersedes/conflicts_with interactions are stated.",
+          "State jurisdictions have been normalized from California to CA to satisfy the jurisdiction format validation.",
+          "The general screening-fee summary is attributed by the page to California Civil Code \u00a7 1950.6. Precise subsection attribution, qualifying conditions, and statutory exceptions require primary-text verification.",
+          "The policy alternative's review/selection and no-fee conditions, the two disclosure duties, and the two contractual-applicability consequences are separately captured.",
+          "The source is official agency guidance, not primary statutory or ordinance text and not a dated legislative status record.",
+          "The state-cap cross-reference and contrary-contract language do not establish legal precedence over another cited law.",
+          "Unknown exemption inventories are represented with unsupported expressions, not assertions that no exemptions exist."
+        ]
+      },
+      "rules": 15,
+      "lifecycle": {
+        "enacted": 15
+      },
+      "semantic_verification": {
+        "needs_review": 15
+      },
+      "evidence_instances": 39,
+      "distinct_spans": 20,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 15
+    },
+    "D006": {
+      "index": {
+        "status": "review",
+        "sha256": "f1960db522de7f63158e64334835b37e52ae1d8fa8b510eeb314658aef4173fa",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 25,
+        "issues": [
+          "Administrative registration, reporting, and tenant-rights notice obligations are included as ancillary Rent Ordinance obligations under rent_increase_limits. They do not establish that partially covered units have rent ceilings.",
+          "All six categories were reviewed. The source supplies no supported provisions or express jurisdiction-wide negative findings for security deposits, application screening fees, screening restrictions, or algorithmic rent setting. Silence does not establish the absence of rules.",
+          "Coverage classifications and exemptions are incomplete. The rent_ordinance_coverage fact must be independently supported, not inferred solely from construction year, ownership, or subsidy status.",
+          "Fine authorization is distinguished from an adopted fine system. The source establishes no adopted fine schedule, penalty amount, or later dated status for that authorization.",
+          "No overall effective date, exclusive end date, or dated lifecycle snapshot is supplied. Retrieval time is not status_as_of. Tenancy-start and utility-charge triggers are not converted into general effective dates or enactment events.",
+          "The overview and detailed sections differ in their description of shared-facilities residence timing, lease-renewal refusal, utility charging, and lease-breach notices. Rule-level review issues preserve these interpretation questions.",
+          "The source also describes tenant association creation, organizing activities, and a duty for landlords and tenant associations to confer in good faith about landlord-tenant relations, rent increases, habitability, and common interests. Those standalone organizing obligations are outside the six-category taxonomy; the rent-decrease remedy is extracted.",
+          "The source identifies federal, state, or administrative prohibitions on rent control without exact legal citations. It therefore cannot support schema-compliant directional supersedes or conflicts_with interactions.",
+          "This is official Rent Board guidance, not ordinance legal text. It reports voter passage and operative changes but supplies no ordinance section numbers; citations identify the ordinance and Measure BB without invented sections."
+        ]
+      },
+      "rules": 25,
+      "lifecycle": {
+        "enacted": 25
+      },
+      "semantic_verification": {
+        "needs_review": 25
+      },
+      "evidence_instances": 90,
+      "distinct_spans": 43,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 8
+    },
+    "D007": {
+      "index": {
+        "status": "review",
+        "sha256": "2ba3028382b89ee70810a45e25dd9707297bd65512e2723f4f9bda514af57203",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 18,
+        "issues": [
+          "AB 12 and the Berkeley Rent Ordinance are named legal instruments. Where no specific instrument or section is identified, citation fields explicitly describe the cited law and the missing section; no codified citation has been supplied from outside the source.",
+          "All six categories were reviewed. No substantive provision or express negative finding is supplied for rent increase limits, just-cause eviction, application or screening fees, screening restrictions, or algorithmic rent setting. Absence here is not evidence that no such rule exists.",
+          "Executable predicates capture source-supported factual triggers and stated branches. They do not establish complete statutory coverage, resolve unstated exemptions, or automatically determine qualitative standards such as reasonable necessity.",
+          "No directional interaction is compiled: the source describes the AB 12 change but does not identify an exact target legal citation for supersession, and it does not establish state-local conflicts or precedence.",
+          "Null effective dates, end dates, and penalties indicate information not supplied, not findings that dates or penalties do not exist.",
+          "State jurisdictions are normalized to CA to satisfy the required ST or City, ST format; Berkeley, CA is retained for municipal provisions.",
+          "The Rent Board's inability to determine whether a landlord may charge one or two months' rent is an agency limitation, not an exemption or finding that either cap is inapplicable.",
+          "The page describes California state requirements and Berkeley-specific interest requirements. State provisions are attributed to CA rather than treated as municipal enactments.",
+          "The retrieval timestamp is not a supported lifecycle snapshot or enactment-event date. status_as_of remains null and status_events remain empty.",
+          "This is official agency guidance, not underlying legal text or a legislative status record. Enacted lifecycle labels reflect the agency's description of existing law, not independently verified enactment events."
+        ]
+      },
+      "rules": 18,
+      "lifecycle": {
+        "enacted": 18
+      },
+      "semantic_verification": {
+        "needs_review": 18
+      },
+      "evidence_instances": 33,
+      "distinct_spans": 19,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 26
+    },
+    "D008": {
+      "index": {
+        "status": "review",
+        "sha256": "969848595b70aa2ff7b9e8420f610c36b914521c4ea4dd1d0656be776e90c39f",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 2,
+        "issues": [
+          "The Costa-Hawkins reference establishes a stated exclusion, not a supported directional supersession or conflict interaction.",
+          "The retrieval date is not used as a lifecycle snapshot or status-event date.",
+          "The segment supplies no provisions or express negative findings for just-cause eviction, security deposits, application screening fees, screening restrictions, or algorithmic rent setting. This does not establish that those categories lack applicable rules."
+        ]
+      },
+      "rules": 2,
+      "lifecycle": {
+        "enacted": 2
+      },
+      "semantic_verification": {
+        "needs_review": 2
+      },
+      "evidence_instances": 10,
+      "distinct_spans": 6,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 3
+    },
+    "D009": {
+      "index": {
+        "status": "review",
+        "sha256": "bddd7d3ab24d2717a0393cf879bad9a849af3aa10dd2e426bc9da34dcd19c5e3",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 3,
+        "issues": [
+          "All six requested categories were reviewed. No provisions concerning application or screening fees, screening restrictions, or algorithmic rent setting are supplied. Source silence does not establish that no such rules exist.",
+          "Coverage exclusions concern this ordinance's listed protections only and do not establish exemptions from other laws.",
+          "Registration is a distinct table column but falls outside the six supplied categories.",
+          "The 1979 owner-occupancy date, 1980 construction and certificate threshold, 1996 tenancy threshold and 2018 ADU tenancy threshold are factual coverage triggers, not evidenced enactment events or effective dates.",
+          "The guide cautions that individual circumstances may differ. Its 'Most' qualifiers and overlapping rent-control categories require additional legal text before complete executable applicability can be established.",
+          "The guide supplies no amendments, directional supersession or conflict provisions, dated status events, or penalties.",
+          "The source is official agency guidance, not ordinance text or a dated status record. The retrieval timestamp does not establish lifecycle, effective dates or status_as_of."
+        ]
+      },
+      "rules": 3,
+      "lifecycle": {
+        "unknown": 3
+      },
+      "semantic_verification": {
+        "needs_review": 3
+      },
+      "evidence_instances": 13,
+      "distinct_spans": 6,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [
+        {
+          "rule_id": "r-4bf8e008d56950bba8de",
+          "predicate": {
+            "op": "lt",
+            "args": [],
+            "fact": "year_built",
+            "value": 1980,
+            "reason": null
+          }
+        },
+        {
+          "rule_id": "r-4bf8e008d56950bba8de",
+          "predicate": {
+            "op": "date_before",
+            "args": [],
+            "fact": "certificate_of_occupancy",
+            "value": "1980-07-01",
+            "reason": null
+          }
+        },
+        {
+          "rule_id": "r-a88b2bed36531241f07b",
+          "predicate": {
+            "op": "lt",
+            "args": [],
+            "fact": "year_built",
+            "value": 1980,
+            "reason": null
+          }
+        },
+        {
+          "rule_id": "r-a88b2bed36531241f07b",
+          "predicate": {
+            "op": "date_before",
+            "args": [],
+            "fact": "certificate_of_occupancy",
+            "value": "1980-07-01",
+            "reason": null
+          }
+        },
+        {
+          "rule_id": "r-ccfd2679096aaefff0c4",
+          "predicate": {
+            "op": "lt",
+            "args": [],
+            "fact": "year_built",
+            "value": 1980,
+            "reason": null
+          }
+        },
+        {
+          "rule_id": "r-ccfd2679096aaefff0c4",
+          "predicate": {
+            "op": "date_before",
+            "args": [],
+            "fact": "certificate_of_occupancy",
+            "value": "1980-07-01",
+            "reason": null
+          }
+        }
+      ],
+      "unsupported_predicates": 8
+    },
+    "D010": {
+      "index": {
+        "status": "review",
+        "sha256": "61380f45cb66d87065eb029b6f5ee54dc704a0d059acc6136477337ce5f0cb73",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 20,
+        "issues": [
+          "All six categories were reviewed. The source provides screening restrictions, related permissions and recommendations. It does not support affirmative negative findings for rent increase limits, just-cause eviction, security deposits, application screening fees or algorithmic rent setting.",
+          "Coverage includes providers receiving DND funding or land and providers with BPDA Inclusionary Development Policy income-restricted units. The source does not clarify whether every unit of a qualifying provider is covered. OFHE coverage is represented as selection under its Affirmative Marketing Program, not merely affiliation with that office.",
+          "Credit provisions contain no expressly stated exemptions. Omitted exemption_conditions fields do not assert that no exemption exists; criminal-history exceptions are not automatically extended to credit provisions.",
+          "No amendments, repeals, superseding versions or failed measures are evidenced in the supplied source.",
+          "No penalty provision is supplied. This is not evidence that no penalties or other enforcement mechanisms exist.",
+          "The February 2017 page date identifies the document version but does not establish an effective date, end date, dated status event or lifecycle snapshot. The retrieval timestamp is not status evidence. Date fields remain null and no status events are inferred.",
+          "The criminal-history exceptions follow item 1(d). Their application to items 1(a)\u2013(c), introductory obligations and recommendations is unresolved. Unsupported predicates preserve that uncertainty rather than treating these exceptions as established for every provision.",
+          "The document is DND agency policy with provider-agreement language, not legislative enactment evidence. Unknown lifecycle denotes the absence of supported legislative status, not a finding that the policy was never implemented.",
+          "The policy expressly defers to conflicting federal or state criminal-history requirements but provides no exact target citation. No directional supersedes or conflicts_with interaction can be compiled."
+        ]
+      },
+      "rules": 20,
+      "lifecycle": {
+        "unknown": 20
+      },
+      "semantic_verification": {
+        "needs_review": 20
+      },
+      "evidence_instances": 87,
+      "distinct_spans": 31,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 9
+    },
+    "D011": {
+      "index": {
+        "status": "review",
+        "sha256": "93835654c3483e7b169677f7a3ccdcf021b6edab4ac81ab7ad3091903de71ff2",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 0,
+        "issues": [
+          "All six categories were reviewed. No substantive provisions are supplied for rent increase limits, just-cause eviction, security deposits, application screening fees, screening restrictions, or algorithmic rent setting. Absence of those provisions from this segment is not evidence that no rules exist.",
+          "Local approval, concurrence on referral, and concurrence on reporting-date extensions do not establish enactment.",
+          "The latest listed legislative action is September 9, 2024: \"Accompanied a study order, see\nH5035\". This records a procedural disposition, but the supplied material does not expressly establish enactment or failure. No enacted or failed rule is inferred, and the referenced study order is not supplied.",
+          "The retrieval timestamp is not a legislative status event or a supported lifecycle snapshot date. The listed history does not establish the bill's status as of retrieval.",
+          "The supplied source contains the official description and legislative history of Massachusetts Bill H.3744, but not its substantive bill text. Its proposal to authorize Boston rent stabilization and tenant eviction protections does not establish extractable obligations, numeric limits, coverage, exemptions, penalties, interactions, or effective dates."
+        ]
+      },
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D012": {
+      "index": {
+        "status": "review",
+        "sha256": "aaed5c3d1e3aacb57a1f9a8fa9e855ecaa857bdbedc3d7b99a1992e7fc0aed0f",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 1,
+        "issues": [
+          "All six categories were reviewed. The segment supplies no provisions establishing rent increase limits, just-cause eviction requirements, security-deposit requirements, application or screening fee limits, or algorithmic rent-setting restrictions. This absence does not establish that no such rules exist.",
+          "No supported amendment, directional supersession, conflict, penalty, or dated status event is identified in this segment.",
+          "The example of discriminatory differences in fees supports the nondiscrimination obligation; it does not establish an application-fee cap or a security-deposit rule.",
+          "The retrieval timestamp is not an effective date, enactment event, or supported lifecycle snapshot date."
+        ]
+      },
+      "rules": 1,
+      "lifecycle": {
+        "unknown": 1
+      },
+      "semantic_verification": {
+        "needs_review": 1
+      },
+      "evidence_instances": 5,
+      "distinct_spans": 5,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 1
+    },
+    "D013": {
+      "index": {
+        "status": "review",
+        "sha256": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 3,
+        "issues": [
+          "All six categories were reviewed. No supported rules or explicit negative findings were identified for rent_increase_limits, security_deposits, application_screening_fees, screening_restrictions, or algorithmic_rent_setting. Their absence from this source does not establish that no such rules exist.",
+          "No amendment, repeal, or directional supersession or conflict with another identified provision is evidenced in the supplied source.",
+          "The eviction-related notification and reporting provisions are classified under just_cause_eviction because the schema has no separate eviction-notice category; none establishes a substantive just-cause requirement.",
+          "The retrieval timestamp is not an effective date, status-event date, or supported lifecycle snapshot date.",
+          "The source is official agency guidance, not the text of the linked ordinance."
+        ]
+      },
+      "rules": 3,
+      "lifecycle": {
+        "enacted": 3
+      },
+      "semantic_verification": {
+        "needs_review": 3
+      },
+      "evidence_instances": 10,
+      "distinct_spans": 7,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 5
+    },
+    "D014": {
+      "index": {
+        "status": "review",
+        "sha256": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 3,
+        "issues": [
+          "All six categories were reviewed. The source supports eviction-related notice, City-submission and nonwaiver obligations. It supplies no provisions or explicit negative findings for rent increase limits, security deposits, application screening fees, screening restrictions or algorithmic rent setting; silence does not establish that no such rules exist.",
+          "No directional supersession or conflict with another identified legal provision is evidenced.",
+          "The penalty schedule is ordinance-wide and states 'Unless otherwise provided'; the source does not identify any provision-specific alternative penalty.",
+          "The retrieval date and the source URL\u2019s directory date are not supported lifecycle snapshot dates. No repeal, amendment or exclusive end date is established.",
+          "The source is official tenant guidance. Its reported passage in October 2020 supports the enactment event, but it is not the ordinance text or a current status record.",
+          "The statement that an HSNA violation does not halt eviction is a limitation on these protections, not evidence that other eviction protections are absent."
+        ]
+      },
+      "rules": 3,
+      "lifecycle": {
+        "enacted": 3
+      },
+      "semantic_verification": {
+        "needs_review": 3
+      },
+      "evidence_instances": 27,
+      "distinct_spans": 14,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D016": {
+      "index": {
+        "status": "review",
+        "sha256": "21d92128daede668d6f1a824528ead345982ddf043a32e4fb5d80dd8adbcdce9",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 24,
+        "issues": [
+          "All six categories were reviewed. The excerpt supplies no extractable rent-increase limit, just-cause eviction obligation, application or screening fee obligation, or algorithmic-rent-setting obligation. This omission is not evidence that such rules do not exist.",
+          "All six categories were reviewed. The source supports screening restrictions and discriminatory security-deposit restrictions. It does not supply a general rent-increase limit, just-cause eviction framework, application-screening fee rule, or algorithmic rent-setting rule. This omission is not evidence that no such rules exist.",
+          "CRD's lack of jurisdiction over landlord-tenant disputes unrelated to discrimination is an agency-jurisdiction limitation, not a negative finding about the existence of rent-control, eviction, or security-deposit rules.",
+          "Disability accommodations and modifications, general discriminatory tenancy amenities, harassment, immigration protections for complainants, complaint deadlines, and complaint procedures are outside the six supplied categories.",
+          "General harassment, retaliation, discriminatory zoning, common-area rules, and other non-screening housing obligations fall outside the six supplied categories except where a specific applicant-screening or deposit obligation is extracted.",
+          "General housing-discrimination remedies are supported and recorded on the protected-characteristic screening rule. The guidance does not assign provision-specific penalty amounts.",
+          "No directional interaction is compiled. The general statement about FEHA invalidating discriminatory state laws does not identify a sufficiently precise target citation and executable conflict scope.",
+          "No penalties for the extracted obligations are stated in this excerpt.",
+          "No source-supported directional interaction with an exactly identified target citation is supplied.",
+          "Specific statutory and regulatory citations are absent. Citation fields transparently identify the described legal subject rather than inventing section numbers; verification against legal text remains necessary.",
+          "The excerpt does not enumerate statutory exemptions. Unsupported exemption predicates preserve that uncertainty rather than treating residential coverage as unconditional.",
+          "The final sentence is truncated after 'Therefore, housing providers must '. No obligation is inferred from that unfinished sentence.",
+          "The guidance separately states that tenants cannot be charged pet rent for service animals or emotional-support animals. This is a supported rent-charge prohibition, but it does not fit the supplied categories of rent-increase limits or security deposits; it is not silently converted into either.",
+          "The retrieval timestamp is not used as status_as_of or as a status-event date. Present-tense descriptions of existing law support enacted lifecycle classification, but no dated FEHA enactment event is supplied.",
+          "The source describes senior-housing alternatives, including specified programs, senior-oriented design, and mobile-home parks. For the 55-plus mobile-home-park alternative it states that at least 80% of occupied units must be intended for occupancy by at least one person aged 55 or older, alongside intent policies and HUD occupancy-verification requirements. Those partial standards are not treated as a complete or universal exemption test.",
+          "The source reports that AB 468 was enacted in 2021 and expressly did not restrict or change housing accommodation rights. That year is not treated as FEHA's enactment date.",
+          "The source states that AB 468 was enacted in 2021 but expressly did not change existing housing accommodation rights. Its described sales and practitioner-documentation requirements fall outside the six categories. No in-scope amendment, supersession, or conflict is established.",
+          "This is official agency guidance, not statutory text or a legislative status record. Existing-law descriptions support enacted lifecycle labels, but no dated status snapshot or dated enactment event is supplied for the extracted rules. Retrieval time is not used as status_as_of.",
+          "This is official agency guidance, not statutory text. FEHA is named but section-specific citations, effective dates, end dates, and dated lifecycle snapshots are not supplied. Null dates indicate missing support, not an affirmative finding that no dates exist."
+        ]
+      },
+      "rules": 24,
+      "lifecycle": {
+        "enacted": 24
+      },
+      "semantic_verification": {
+        "needs_review": 24
+      },
+      "evidence_instances": 77,
+      "distinct_spans": 47,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 41
+    },
+    "D022": {
+      "index": {
+        "status": "review",
+        "sha256": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+        "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+        "mode": "live",
+        "rules": 2,
+        "issues": [
+          "All six categories were reviewed. The supplied text supports two distinct algorithmic-pricing prohibitions but supplies no rules or express negative findings for rent increase limits, just-cause eviction, security deposits, application screening fees, or screening restrictions. Silence does not establish that no such rules exist.",
+          "Earlier bill versions are listed, but their substantive text is not supplied. No earlier substantive requirements, repeal events, or supersession dates are reconstructed.",
+          "Section 16729(c) preserves antitrust-law applicability. No exact target citation and directional supersession or conflict are established, so no structured interaction is inferred.",
+          "Section 16756.1 establishes a general Cartwright Act pleading standard: factual allegations demonstrating a plausible contract, combination, or conspiracy to restrain trade or commerce suffice, and allegations tending to exclude independent action are not required. This procedural provision is not a separate rental-housing obligation within the six requested categories, but may apply to litigation involving the extracted prohibitions.",
+          "Section 3 addresses reimbursement of local agencies and school districts, not a rental-housing obligation within the requested categories.",
+          "The dated chaptering entry establishes enactment independently of the operative bill language. The lifecycle snapshot is tied to that entry, not to retrieval, and does not establish the effective date."
+        ]
+      },
+      "rules": 2,
+      "lifecycle": {
+        "enacted": 2
+      },
+      "semantic_verification": {
+        "needs_review": 2
+      },
+      "evidence_instances": 24,
+      "distinct_spans": 12,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 2
+    },
+    "D023": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D024": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D025": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D026": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D027": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D029": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D031": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D036": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D039": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D040": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D041": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D042": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D043": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D045": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D046": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D047": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D048": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D049": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D050": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D051": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D052": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D053": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D057": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D058": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D065": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D066": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D067": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D068": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D069": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D073": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D076": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D078": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D079": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D080": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D081": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D082": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D083": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D084": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    },
+    "D085": {
+      "index": null,
+      "rules": 0,
+      "lifecycle": {},
+      "semantic_verification": {},
+      "evidence_instances": 0,
+      "distinct_spans": 0,
+      "invalid_evidence": [],
+      "non_verbatim_primary_quotes": [],
+      "construction_or_occupancy_predicates": [],
+      "unsupported_predicates": 0
+    }
+  }
+}
