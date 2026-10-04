@@ -113,8 +113,8 @@
                 {
                   "doc_id": "SYNTHETIC-42",
                   "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
-                  "start": 78,
-                  "end": 147,
+                  "start": 77,
+                  "end": 146,
                   "supports": [
                     "lifecycle"
                   ]
@@ -126,8 +126,8 @@
             {
               "doc_id": "SYNTHETIC-42",
               "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
-              "start": 149,
-              "end": 289,
+              "start": 147,
+              "end": 287,
               "supports": [
                 "requirement",
                 "key_value",
@@ -138,8 +138,8 @@
             {
               "doc_id": "SYNTHETIC-42",
               "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
-              "start": 291,
-              "end": 392,
+              "start": 288,
+              "end": 389,
               "supports": [
                 "exemptions",
                 "exemption_conditions"
@@ -148,8 +148,8 @@
             {
               "doc_id": "SYNTHETIC-42",
               "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
-              "start": 78,
-              "end": 147,
+              "start": 77,
+              "end": 146,
               "supports": [
                 "lifecycle"
               ]
@@ -162,7 +162,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "acd3363df67749d8b57952477d764dee",
+          "extraction_run_id": "d8f4ee590122441ba95a7c6e553033c5",
           "semantic_verification": "synthetic_fixture"
         }
       },
@@ -187,8 +187,8 @@
       "extraction_index": {
         "SYNTHETIC-42": {
           "status": "complete",
-          "sha256": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064",
-          "run_id": "acd3363df67749d8b57952477d764dee",
+          "sha256": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+          "run_id": "d8f4ee590122441ba95a7c6e553033c5",
           "mode": "synthetic",
           "rules": 1,
           "issues": []
@@ -270,17 +270,26 @@
             "uncertainty_reasons": [
               "unresolved_extraction: evidence_check:extraction_source_version_stale",
               "unresolved_extraction: evidence_check:missing_source:SYNTHETIC-42",
+              "unresolved_extraction: evidence_check:source_eligibility:coverage_conditions: no eligible authority among cited sources (SYNTHETIC-42)",
+              "unresolved_extraction: evidence_check:source_eligibility:effective_date: no eligible authority among cited sources (SYNTHETIC-42)",
+              "unresolved_extraction: evidence_check:source_eligibility:exemption_conditions: no eligible authority among cited sources (SYNTHETIC-42)",
+              "unresolved_extraction: evidence_check:source_eligibility:exemptions: no eligible authority among cited sources (SYNTHETIC-42)",
+              "unresolved_extraction: evidence_check:source_eligibility:key_value: no eligible authority among cited sources (SYNTHETIC-42)",
+              "unresolved_extraction: evidence_check:source_eligibility:lifecycle: no eligible authority among cited sources (SYNTHETIC-42)",
+              "unresolved_extraction: evidence_check:source_eligibility:primary:SYNTHETIC-42:access_blocked: No permitted captured source text is available",
+              "unresolved_extraction: evidence_check:source_eligibility:requirement: no eligible authority among cited sources (SYNTHETIC-42)",
+              "unresolved_extraction: evidence_check:source_eligibility:status_events/0: no eligible authority among cited sources (SYNTHETIC-42)",
               "unresolved_extraction: semantic support needs review"
             ],
             "applied_interactions": [],
-            "explanation": "As of 2026-11-15, Synthetic Maple Harbor deposit cap needs more information before coverage can be established. Facts used: residential: True; units: 12. Review: unresolved_extraction: evidence_check:extraction_source_version_stale; unresolved_extraction: evidence_check:missing_source:SYNTHETIC-42; unresolved_extraction: semantic support needs review. Source: Maple Harbor Ordinance TEST-42, section 2 (SYNTHETIC-42).",
+            "explanation": "As of 2026-11-15, Synthetic Maple Harbor deposit cap needs more information before coverage can be established. Facts used: residential: True; units: 12. Review: unresolved_extraction: evidence_check:extraction_source_version_stale; unresolved_extraction: evidence_check:missing_source:SYNTHETIC-42; unresolved_extraction: evidence_check:source_eligibility:coverage_conditions: no eligible authority among cited sources (SYNTHETIC-42); unresolved_extraction: evidence_check:source_eligibility:effective_date: no eligible authority among cited sources (SYNTHETIC-42); unresolved_extraction: evidence_check:source_eligibility:exemption_conditions: no eligible authority among cited sources (SYNTHETIC-42); unresolved_extraction: evidence_check:source_eligibility:exemptions: no eligible authority among cited sources (SYNTHETIC-42); unresolved_extraction: evidence_check:source_eligibility:key_value: no eligible authority among cited sources (SYNTHETIC-42); unresolved_extraction: evidence_check:source_eligibility:lifecycle: no eligible authority among cited sources (SYNTHETIC-42); unresolved_extraction: evidence_check:source_eligibility:primary:SYNTHETIC-42:access_blocked: No permitted captured source text is available; unresolved_extraction: evidence_check:source_eligibility:requirement: no eligible authority among cited sources (SYNTHETIC-42); unresolved_extraction: evidence_check:source_eligibility:status_events/0: no eligible authority among cited sources (SYNTHETIC-42); unresolved_extraction: semantic support needs review. Source: Maple Harbor Ordinance TEST-42, section 2 (SYNTHETIC-42).",
             "conflict_flag": false,
             "evidence": [
               {
                 "doc_id": "SYNTHETIC-42",
                 "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
-                "start": 149,
-                "end": 289,
+                "start": 147,
+                "end": 287,
                 "supports": [
                   "requirement",
                   "key_value",
@@ -291,8 +300,8 @@
               {
                 "doc_id": "SYNTHETIC-42",
                 "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
-                "start": 291,
-                "end": 392,
+                "start": 288,
+                "end": 389,
                 "supports": [
                   "exemptions",
                   "exemption_conditions"
@@ -301,8 +310,8 @@
               {
                 "doc_id": "SYNTHETIC-42",
                 "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
-                "start": 78,
-                "end": 147,
+                "start": 77,
+                "end": 146,
                 "supports": [
                   "lifecycle"
                 ]
@@ -365,8 +374,8 @@
                   {
                     "doc_id": "SYNTHETIC-42",
                     "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
-                    "start": 78,
-                    "end": 147,
+                    "start": 77,
+                    "end": 146,
                     "supports": [
                       "lifecycle"
                     ]
@@ -378,8 +387,8 @@
               {
                 "doc_id": "SYNTHETIC-42",
                 "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
-                "start": 149,
-                "end": 289,
+                "start": 147,
+                "end": 287,
                 "supports": [
                   "requirement",
                   "key_value",
@@ -390,8 +399,8 @@
               {
                 "doc_id": "SYNTHETIC-42",
                 "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
-                "start": 291,
-                "end": 392,
+                "start": 288,
+                "end": 389,
                 "supports": [
                   "exemptions",
                   "exemption_conditions"
@@ -400,8 +409,8 @@
               {
                 "doc_id": "SYNTHETIC-42",
                 "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
-                "start": 78,
-                "end": 147,
+                "start": 77,
+                "end": 146,
                 "supports": [
                   "lifecycle"
                 ]
@@ -411,13 +420,22 @@
             "penalties": null,
             "review_issues": [
               "evidence_check:extraction_source_version_stale",
-              "evidence_check:missing_source:SYNTHETIC-42"
+              "evidence_check:missing_source:SYNTHETIC-42",
+              "evidence_check:source_eligibility:coverage_conditions: no eligible authority among cited sources (SYNTHETIC-42)",
+              "evidence_check:source_eligibility:effective_date: no eligible authority among cited sources (SYNTHETIC-42)",
+              "evidence_check:source_eligibility:exemption_conditions: no eligible authority among cited sources (SYNTHETIC-42)",
+              "evidence_check:source_eligibility:exemptions: no eligible authority among cited sources (SYNTHETIC-42)",
+              "evidence_check:source_eligibility:key_value: no eligible authority among cited sources (SYNTHETIC-42)",
+              "evidence_check:source_eligibility:lifecycle: no eligible authority among cited sources (SYNTHETIC-42)",
+              "evidence_check:source_eligibility:primary:SYNTHETIC-42:access_blocked: No permitted captured source text is available",
+              "evidence_check:source_eligibility:requirement: no eligible authority among cited sources (SYNTHETIC-42)",
+              "evidence_check:source_eligibility:status_events/0: no eligible authority among cited sources (SYNTHETIC-42)"
             ],
             "conflict_flag": false,
             "conflict_note": null,
             "team_rule_id": "r-694ad9fbae9083966e86",
             "evidence_mode": "synthetic",
-            "extraction_run_id": "acd3363df67749d8b57952477d764dee",
+            "extraction_run_id": "d8f4ee590122441ba95a7c6e553033c5",
             "semantic_verification": "needs_review"
           }
         ],
@@ -441,7 +459,8 @@
         ],
         "warnings": [
           "Current evidence checks have unresolved failures; inspect rule evidence reports",
-          "Missing source material: 1 documents; no-rule conclusions are not established",
+          "Missing primary-source material: 1 documents; no-rule conclusions are not established",
+          "Primary-source review required: 1 rule candidates lack eligible legal-text support; retained as uncertain research candidates",
           "SYNTHETIC DEMONSTRATION: not actual housing law"
         ],
         "metadata": {
@@ -454,13 +473,24 @@
             "synthetic"
           ],
           "extraction_run_ids": [
-            "acd3363df67749d8b57952477d764dee"
+            "d8f4ee590122441ba95a7c6e553033c5"
           ],
           "partial_data": true,
           "missing_source_ids": [
             "SYNTHETIC-42"
           ],
-          "unprocessed_source_ids": []
+          "unprocessed_source_ids": [],
+          "context_only_source_ids": [],
+          "source_review_rule_ids": [
+            "r-694ad9fbae9083966e86"
+          ],
+          "source_eligibility": {
+            "SYNTHETIC-42": {
+              "status": "access_blocked",
+              "operative_allowed": false,
+              "reason": "No permitted captured source text is available"
+            }
+          }
         },
         "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
       },
@@ -503,8 +533,217 @@
           },
           {
             "kind": "interpretation",
+            "message": "As of 2026-11-15: unresolved_extraction: evidence_check:source_eligibility:coverage_conditions: no eligible authority among cited sources (SYNTHETIC-42); Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: unresolved_extraction: evidence_check:source_eligibility:effective_date: no eligible authority among cited sources (SYNTHETIC-42); Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: unresolved_extraction: evidence_check:source_eligibility:exemption_conditions: no eligible authority among cited sources (SYNTHETIC-42); Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: unresolved_extraction: evidence_check:source_eligibility:exemptions: no eligible authority among cited sources (SYNTHETIC-42); Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: unresolved_extraction: evidence_check:source_eligibility:key_value: no eligible authority among cited sources (SYNTHETIC-42); Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: unresolved_extraction: evidence_check:source_eligibility:lifecycle: no eligible authority among cited sources (SYNTHETIC-42); Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: unresolved_extraction: evidence_check:source_eligibility:primary:SYNTHETIC-42:access_blocked: No permitted captured source text is available; Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: unresolved_extraction: evidence_check:source_eligibility:requirement: no eligible authority among cited sources (SYNTHETIC-42); Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: unresolved_extraction: evidence_check:source_eligibility:status_events/0: no eligible authority among cited sources (SYNTHETIC-42); Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
             "message": "As of 2026-11-15: unresolved_extraction: semantic support needs review; Core retains an unresolved result. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
             "remedy": "Interpretation review: resolve this Core reason against the encoded conditions and cited authority",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): SYNTHETIC-42: No permitted captured source text is available; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": "source_doc_id",
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): source_eligibility:primary:SYNTHETIC-42:access_blocked: No permitted captured source text is available; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): source_eligibility:coverage_conditions: no eligible authority among cited sources (SYNTHETIC-42); support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): source_eligibility:effective_date: no eligible authority among cited sources (SYNTHETIC-42); support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): source_eligibility:exemption_conditions: no eligible authority among cited sources (SYNTHETIC-42); support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): source_eligibility:exemptions: no eligible authority among cited sources (SYNTHETIC-42); support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): source_eligibility:key_value: no eligible authority among cited sources (SYNTHETIC-42); support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): source_eligibility:lifecycle: no eligible authority among cited sources (SYNTHETIC-42); support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): source_eligibility:requirement: no eligible authority among cited sources (SYNTHETIC-42); support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility (insufficient): source_eligibility:status_events/0: no eligible authority among cited sources (SYNTHETIC-42); support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
             "rule_ids": [
               "r-694ad9fbae9083966e86"
             ],
@@ -590,6 +829,105 @@
             "source_refs": []
           },
           {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility:coverage_conditions: no eligible authority among cited sources (SYNTHETIC-42); evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this evidence issue before relying on the encoding",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility:effective_date: no eligible authority among cited sources (SYNTHETIC-42); evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this evidence issue before relying on the encoding",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility:exemption_conditions: no eligible authority among cited sources (SYNTHETIC-42); evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this evidence issue before relying on the encoding",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility:exemptions: no eligible authority among cited sources (SYNTHETIC-42); evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this evidence issue before relying on the encoding",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility:key_value: no eligible authority among cited sources (SYNTHETIC-42); evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this evidence issue before relying on the encoding",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility:lifecycle: no eligible authority among cited sources (SYNTHETIC-42); evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this evidence issue before relying on the encoding",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility:primary:SYNTHETIC-42:access_blocked: No permitted captured source text is available; evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this evidence issue before relying on the encoding",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility:requirement: no eligible authority among cited sources (SYNTHETIC-42); evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this evidence issue before relying on the encoding",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
+            "kind": "interpretation",
+            "message": "As of 2026-11-15: source_eligibility:status_events/0: no eligible authority among cited sources (SYNTHETIC-42); evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: resolve this evidence issue before relying on the encoding",
+            "rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "predicate_ids": [],
+            "field": null,
+            "source_refs": []
+          },
+          {
             "kind": "source_gap",
             "message": "As of 2026-11-15: extraction_source_version_stale; evidence support for this result remains unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
             "remedy": "Source acquisition: restore or reconcile the exact supporting source version and anchors",
@@ -654,8 +992,8 @@
               {
                 "doc_id": "SYNTHETIC-42",
                 "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
-                "start": 149,
-                "end": 289,
+                "start": 147,
+                "end": 287,
                 "supports": [
                   "requirement",
                   "key_value",
@@ -684,8 +1022,8 @@
                   {
                     "doc_id": "SYNTHETIC-42",
                     "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
-                    "start": 149,
-                    "end": 289,
+                    "start": 147,
+                    "end": 287,
                     "supports": [
                       "requirement",
                       "key_value",
@@ -715,8 +1053,8 @@
                   {
                     "doc_id": "SYNTHETIC-42",
                     "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
-                    "start": 149,
-                    "end": 289,
+                    "start": 147,
+                    "end": 287,
                     "supports": [
                       "requirement",
                       "key_value",
@@ -748,8 +1086,8 @@
               {
                 "doc_id": "SYNTHETIC-42",
                 "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
-                "start": 291,
-                "end": 392,
+                "start": 288,
+                "end": 389,
                 "supports": [
                   "exemptions",
                   "exemption_conditions"
@@ -773,8 +1111,78 @@
       "evidence_reports": [
         {
           "rule_id": "r-694ad9fbae9083966e86",
-          "rule_hash": "2c6c0f3a39527c64a61f808764f20735dc77e29e0b0ff3a4c2e4e6555fb759af",
+          "rule_hash": "e19ef4386412cf60cad54a32a52a29d4387f0c0a565773a9042d9c86c8cc3186",
           "checks": [
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "SYNTHETIC-42: No permitted captured source text is available",
+              "field": "source_doc_id",
+              "spans": []
+            },
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "source_eligibility:primary:SYNTHETIC-42:access_blocked: No permitted captured source text is available",
+              "field": null,
+              "spans": []
+            },
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "source_eligibility:coverage_conditions: no eligible authority among cited sources (SYNTHETIC-42)",
+              "field": null,
+              "spans": []
+            },
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "source_eligibility:effective_date: no eligible authority among cited sources (SYNTHETIC-42)",
+              "field": null,
+              "spans": []
+            },
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "source_eligibility:exemption_conditions: no eligible authority among cited sources (SYNTHETIC-42)",
+              "field": null,
+              "spans": []
+            },
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "source_eligibility:exemptions: no eligible authority among cited sources (SYNTHETIC-42)",
+              "field": null,
+              "spans": []
+            },
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "source_eligibility:key_value: no eligible authority among cited sources (SYNTHETIC-42)",
+              "field": null,
+              "spans": []
+            },
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "source_eligibility:lifecycle: no eligible authority among cited sources (SYNTHETIC-42)",
+              "field": null,
+              "spans": []
+            },
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "source_eligibility:requirement: no eligible authority among cited sources (SYNTHETIC-42)",
+              "field": null,
+              "spans": []
+            },
+            {
+              "kind": "source_eligibility",
+              "status": "insufficient",
+              "message": "source_eligibility:status_events/0: no eligible authority among cited sources (SYNTHETIC-42)",
+              "field": null,
+              "spans": []
+            },
             {
               "kind": "source_availability",
               "status": "missing",
@@ -827,6 +1235,15 @@
           "semantic_review": null,
           "blocking_issues": [
             "missing_source:SYNTHETIC-42",
+            "source_eligibility:coverage_conditions: no eligible authority among cited sources (SYNTHETIC-42)",
+            "source_eligibility:effective_date: no eligible authority among cited sources (SYNTHETIC-42)",
+            "source_eligibility:exemption_conditions: no eligible authority among cited sources (SYNTHETIC-42)",
+            "source_eligibility:exemptions: no eligible authority among cited sources (SYNTHETIC-42)",
+            "source_eligibility:key_value: no eligible authority among cited sources (SYNTHETIC-42)",
+            "source_eligibility:lifecycle: no eligible authority among cited sources (SYNTHETIC-42)",
+            "source_eligibility:primary:SYNTHETIC-42:access_blocked: No permitted captured source text is available",
+            "source_eligibility:requirement: no eligible authority among cited sources (SYNTHETIC-42)",
+            "source_eligibility:status_events/0: no eligible authority among cited sources (SYNTHETIC-42)",
             "extraction_source_version_stale"
           ],
           "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
@@ -835,12 +1252,21 @@
       "encoded_rules": [
         {
           "rule_id": "r-694ad9fbae9083966e86",
-          "text": "Encoded rule: Synthetic Maple Harbor deposit cap\nRule reference: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42\nJurisdiction: Maple Harbor, CA (city); category: security_deposits.\nRequirement: Covered buildings must limit security deposits to one month's rent.\nKey value: one month's rent.\nCoverage: (residential == true AND units [dwelling units] >= 8).\nExemption: FALSE.\nCombined property condition: ((residential == true AND units [dwelling units] >= 8)) AND NOT (FALSE).\nRecorded exemption description: None\nRecorded lifecycle: enacted; snapshot: unspecified (unresolved).\nEffective boundary (inclusive): 2026-11-15 (day precision; 2026-11-15 through 2026-11-15).\nEnd boundary (exclusive): none encoded.\nRule evidence: SYNTHETIC-42 [149, 289); recorded support: requirement, key_value, coverage_conditions, effective_date. Exact recorded quote: Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.\nRule evidence: SYNTHETIC-42 [291, 392); recorded support: exemptions, exemption_conditions. Exact recorded quote: There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.\nRule evidence: SYNTHETIC-42 [78, 147); recorded support: lifecycle. Exact recorded quote: Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nStatus event 1: enacted on 2026-09-01 (day precision; 2026-09-01 through 2026-09-01).\nStatus event 1 evidence: SYNTHETIC-42 [78, 147); recorded support: lifecycle. Exact recorded quote: Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nUnresolved review issue: evidence_check:extraction_source_version_stale\nUnresolved review issue: evidence_check:missing_source:SYNTHETIC-42\nNext action — interpretation review: check unresolved conditions and lifecycle against the cited source spans before relying on this encoding.\nThis displays the encoded rule, not legal validation or a property-specific evaluation. Pending measures do not automatically enact; partial dates may leave uncertainty.",
+          "text": "Encoded rule: Synthetic Maple Harbor deposit cap\nRule reference: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42\nJurisdiction: Maple Harbor, CA (city); category: security_deposits.\nRequirement: Covered buildings must limit security deposits to one month's rent.\nKey value: one month's rent.\nCoverage: (residential == true AND units [dwelling units] >= 8).\nExemption: FALSE.\nCombined property condition: ((residential == true AND units [dwelling units] >= 8)) AND NOT (FALSE).\nRecorded exemption description: None\nRecorded lifecycle: enacted; snapshot: unspecified (unresolved).\nEffective boundary (inclusive): 2026-11-15 (day precision; 2026-11-15 through 2026-11-15).\nEnd boundary (exclusive): none encoded.\nRule evidence: SYNTHETIC-42 [147, 287); recorded support: requirement, key_value, coverage_conditions, effective_date. Exact recorded quote: Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.\nRule evidence: SYNTHETIC-42 [288, 389); recorded support: exemptions, exemption_conditions. Exact recorded quote: There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.\nRule evidence: SYNTHETIC-42 [77, 146); recorded support: lifecycle. Exact recorded quote: Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nStatus event 1: enacted on 2026-09-01 (day precision; 2026-09-01 through 2026-09-01).\nStatus event 1 evidence: SYNTHETIC-42 [77, 146); recorded support: lifecycle. Exact recorded quote: Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nUnresolved review issue: evidence_check:extraction_source_version_stale\nUnresolved review issue: evidence_check:missing_source:SYNTHETIC-42\nUnresolved review issue: evidence_check:source_eligibility:coverage_conditions: no eligible authority among cited sources (SYNTHETIC-42)\nUnresolved review issue: evidence_check:source_eligibility:effective_date: no eligible authority among cited sources (SYNTHETIC-42)\nUnresolved review issue: evidence_check:source_eligibility:exemption_conditions: no eligible authority among cited sources (SYNTHETIC-42)\nUnresolved review issue: evidence_check:source_eligibility:exemptions: no eligible authority among cited sources (SYNTHETIC-42)\nUnresolved review issue: evidence_check:source_eligibility:key_value: no eligible authority among cited sources (SYNTHETIC-42)\nUnresolved review issue: evidence_check:source_eligibility:lifecycle: no eligible authority among cited sources (SYNTHETIC-42)\nUnresolved review issue: evidence_check:source_eligibility:primary:SYNTHETIC-42:access_blocked: No permitted captured source text is available\nUnresolved review issue: evidence_check:source_eligibility:requirement: no eligible authority among cited sources (SYNTHETIC-42)\nUnresolved review issue: evidence_check:source_eligibility:status_events/0: no eligible authority among cited sources (SYNTHETIC-42)\nNext action — interpretation review: check unresolved conditions and lifecycle against the cited source spans before relying on this encoding.\nThis displays the encoded rule, not legal validation or a property-specific evaluation. Pending measures do not automatically enact; partial dates may leave uncertainty.",
           "expression_hash": "77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504",
           "renderer_version": "encoded-rule-v3",
           "unresolved_nodes": [
             "review_issues/0",
-            "review_issues/1"
+            "review_issues/1",
+            "review_issues/2",
+            "review_issues/3",
+            "review_issues/4",
+            "review_issues/5",
+            "review_issues/6",
+            "review_issues/7",
+            "review_issues/8",
+            "review_issues/9",
+            "review_issues/10"
           ],
           "kind": "encoded_rule_not_legal_validation"
         }
@@ -870,41 +1296,44 @@
       "files_sha256": {
         "navigator/__init__.py": "279710f99c5c14d54c4b5bf7336be4848dd252749083477baddd35b10ef95531",
         "navigator/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
-        "navigator/api.py": "e501e71c44ed871445817c281c01c331cc5c7a9cd4a30a4473ac507adecb57e1",
-        "navigator/assist_service.py": "e5b296acd5debdcf8bc0e081741bc729a898bfe28826e1e330225169e24d78c6",
+        "navigator/api.py": "3b593aaa7ba99905355619c4ca06df81395e0bdc2ff497f6d9cc3d268896ac0b",
+        "navigator/assist_cache.py": "0fa776db1236602f213c861958bf5535e114adc546ee193db9d8c469ca368f79",
+        "navigator/assist_service.py": "f01800c14d24a4592c5ac6ca21435d058e85c23e2f702c78c21f8e492a0056d4",
+        "navigator/assist_wire.py": "534601f1c62b8b6c5e81ee0889ed1d666e0c737057740bcf1055f865ec614a4a",
         "navigator/changes.py": "2060c6d521001d2bf0721d2bd1b372cce07f0110c4726b435d60cc4eee62b5f7",
         "navigator/cli.py": "f747386e95c2a6119c2534ac104b85f3a08363b2a9f4593f4840900b844b27c2",
         "navigator/config.py": "ab3c3b0a8135e2816ad6e46e2a12a4ff999820e414d20073dabf4852d671f7ce",
-        "navigator/contracts.py": "612854b2dfbccbe4d8e93e5f38832eca0935381a416d2039860d69c1f48f1d8e",
+        "navigator/contracts.py": "24bca26db980819d2945e96bee523c8ebfed9db3b3aea13ba248c162ec0d163f",
         "navigator/core_assist.py": "79128ba6cdb95cb5afc104d9b993105cd12928ba65c568b702fcb5c490d68e61",
         "navigator/demo.py": "db337c9e6c4adb583e9dcba4b6fa39d9bb531b42a9f4711bcdbeeffc9b0a0d47",
-        "navigator/engine.py": "e9e9b01e2d131f66052917b08575b62d6ca05f6a8b47439d0df8d7ff6ff66414",
-        "navigator/evidence.py": "55212cb5afd85d5f189ecdc8381176bcc1e6d9be207f860102ec2e000b8273c9",
+        "navigator/engine.py": "adef99bc3d59abb1a4cc8e30bd24b7dd37f84fbebeab8fd8bda753d1344d474b",
+        "navigator/evidence.py": "845c81cdd8687917f6a8d81331e1c9270894d68115da7eccd7d2f5da60424d81",
         "navigator/evidence_package.py": "c380327a7c2a3582c4a575e95703adba9c43f8a2f448ecaeff6234d0bf4eef99",
-        "navigator/export.py": "346b8d16029876cacf147ab11c37274cbab793e6dd107450d94b0b83cf4f402f",
-        "navigator/extraction.py": "d45b3284a7cb565c88df095ae125aea95363671054b48ee6761835ab00866e8e",
-        "navigator/fact_inputs.py": "c8366cbd0ea945be5b2d58dee53f20904dca20effd90a048ecb829e3d9910d8e",
+        "navigator/export.py": "3c4f2b6d13c93bd1be916321d30040e10b9039dcc7ae0ab65f3a81e9ebee7fdc",
+        "navigator/extraction.py": "5e2fe65e4ed6a383330fc9f4b57280d5ed2bea691ea70d07d59f00948676ac76",
+        "navigator/fact_inputs.py": "c9c503e1e1d36a61c417bb85c9b705d7ec42294f65e28079a7b5d14e5f26e054",
         "navigator/geocode.py": "f5ce5fd996950fe701f8dc556f706c4eac80db396efd39d2c9703517dd9f7d27",
-        "navigator/ingest.py": "dcdabbc16dbf90d2a899f30fca65a3bc0336098b4afd5b30adeeb6b3792e9f2c",
-        "navigator/models.py": "6666d33eb6c248f2edb1bface343979fb4cb4849ddb43b773850f720cb442890",
-        "navigator/predicates.py": "bf00596766fce89bfc07d204a2a759cd2802ea2b0b26cc413aa0b23801edc8f3",
+        "navigator/ingest.py": "3c72d47b0adea5c4559cc3fa6da4e9e5d5296b2f88bdc7486eb8370602915dd8",
+        "navigator/models.py": "959de001c57c2a4daabe8e4ee9fe10f0115432748563fd6647e6d10fe1747144",
+        "navigator/predicates.py": "36e6cd612f6847405088b06c0695b25f3c184c8336211791bf513a0a63770cf8",
         "navigator/question_planner.py": "8429b1bfe8e1daafdcc7bbde36d3d895c1455c7e041da7f74b44eddfe32ae9d6",
         "navigator/research_fixtures.py": "7de7a954f3c22f27f66297335dce19ce5ceb94f6d1e759b494ea35849f12b4fb",
         "navigator/retrieval.py": "6a7a7940fe94887ca7470b7e4d9ddc999e4a7e262694645256e931e14f745048",
         "navigator/rule_renderer.py": "794f9ca6a2aadd76b0928dd1838ea0380379b746fbd09f9d25a53f5f163bf8b6",
         "navigator/semantic_review.py": "2f53998d2c36585846ffae9126b91f6254341e8a47a256ef3e463eff70305da0",
-        "navigator/service.py": "73ce09f1d93f72054313bae1f248e5a1e0d82b3c54091487ba2d98d71400ce31",
-        "navigator/source_comparison.py": "24de2490127e92f658111dafed3ea6b874b9a2d36a9bf4b1c97945e72347066c",
+        "navigator/service.py": "b76a80f1c2c75af2fecc9ca4a895a4aa65df34fe2eec3a4844c9f627f063a8c4",
+        "navigator/source_comparison.py": "21913cf58bc6703f7f882e343c53e31f95de93452a8b25aca538ee9823ed1140",
         "navigator/source_inventory.py": "3f90d627fce96a33a21925f1e3a44237c8f89f6931d5dd9708f4dd92106afae1",
+        "navigator/source_policy.py": "4eb1e87783c140810858241e108aadb6a7979dd7b98da624515e3840556ef75c",
         "navigator/store.py": "9b800afea3685c29690512d2f266fe6850340c03b70bfb0f4dff90ed002ba31d",
-        "navigator/validation.py": "cbe09ebe67cbe2096eb66b0017368fb388df772994355543b6e4b392448edb09",
+        "navigator/validation.py": "3210f6145fd4a9398ed1cea132b63226c5fecc78912f37f2c8a6cbfb47c8b90a",
         "requirements.lock": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8"
       },
-      "fingerprint": "4431e5aef259bf4f06c7e99f396d324b8bf6392698045bc5266f3d125c44c60d"
+      "fingerprint": "07a489464c531f363988a130cb16bc5585c8788f4f0346d5263c65b8b4c9c4b0"
     },
-    "input_sha256": "9b4821d282244f8e26cfb62963d7a6d07195e8447342bbee93c9fcefeff24019",
-    "response_sha256": "be3fdf2933f81a2a2cce570a6833ac5cb4e32699cece1bf7c82471a43a3e4385",
-    "package_sha256": "09587719bdf82dea7decbeab80400861c1d169c318a3ac9b3f1c8246f6e9d86d",
+    "input_sha256": "05f619ed5fc59e29399abcee0fd5a3ee54eddffc31bee7c5526af0d704c038bf",
+    "response_sha256": "61ad3f171a9af71ee829592e9c0133e33ae09cf8d821338d2398c0cc122ee7d3",
+    "package_sha256": "3399075fba1868b5c7f57e76e28a2178abcb13d8dae7b0eee40a0baf7d41b94e",
     "limitations": [
       "Reproduction verifies software output, not legal accuracy or complete source coverage.",
       "Original facts and submitted answers are separate; answers remain unverified and request-local.",

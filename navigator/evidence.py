@@ -5,6 +5,7 @@ from .config import DISCLAIMER
 from .models import EvidenceCheck, EvidenceReport, SemanticReview, SourceContext
 from .retrieval import ContextRetriever, section_key, span
 from .store import digest
+from .source_policy import rule_source_issues, source_use
 
 
 def rule_hash(rule):
@@ -24,6 +25,13 @@ def check_rule(rule, sources, retriever=None, semantic=None):
     retriever = retriever or ContextRetriever(sources)
     checks, anchors, blocking = [], [], []
     primary = sources.get(rule.source_doc_id)
+    if primary:
+        use = source_use(primary)
+        checks.append(EvidenceCheck(kind="source_eligibility", status="pass" if use.operative_allowed else "insufficient",
+                                    message=f"{primary.doc_id}: {use.reason}", field="source_doc_id"))
+    for issue in rule_source_issues(rule, sources):
+        blocking.append(issue)
+        checks.append(EvidenceCheck(kind="source_eligibility", status="insufficient", message=issue))
     evidence = all_evidence(rule)
     source_ids = sorted({rule.source_doc_id} | {e.doc_id for e in evidence})
     for ident in source_ids:

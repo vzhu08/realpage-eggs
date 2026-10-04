@@ -603,13 +603,17 @@ test.describe('live mode with no backend (the test server answers /api with an e
 
   test('a healthy but partial dataset is announced above every view', async ({ page }) => {
     // Test-double counts; the sentence on screen must be computed from them.
-    const counts = { rules: 140, sources: 87, addresses: 500, resolved_municipalities: 487 };
+    const counts = { rules: 140, sources: 87, addresses: 500, resolved_municipalities: 487, rule_sources: 14, source_review_rules: 136, context_only_sources: 24 };
     await mockLive(page, { ...contractHandlers(), 'GET /health': () => ({ json: health({ dataset_readiness: 'partial', last_extraction_outcome: 'partial', ...counts }) }) });
     for (const hash of ['#/lookup?mode=live', '#/changes?mode=live', '#/disagreements?mode=live']) {
       await openLive(page, hash);
       const notice = page.getByRole('note').filter({ hasText: 'Partial dataset' });
       await expect(notice).toContainText('Coverage is incomplete, so an unlisted rule has not been ruled out.');
-      await expect(notice).toContainText(`${counts.rules} rules are extracted from ${counts.sources} sources`);
+      await expect(notice).toContainText(`${counts.rules} extracted rule candidates`);
+      await expect(notice).toContainText(`${counts.sources} sources listed in the dataset`);
+      await expect(notice).toContainText(`from ${counts.rule_sources} documents`);
+      await expect(notice).toContainText(`${counts.source_review_rules} candidates still need primary-source review`);
+      await expect(notice).toContainText(`${counts.context_only_sources} sources are context only`);
       await expect(notice).toContainText(`${counts.addresses - counts.resolved_municipalities} of ${counts.addresses} sample properties have no resolved municipality`);
     }
   });

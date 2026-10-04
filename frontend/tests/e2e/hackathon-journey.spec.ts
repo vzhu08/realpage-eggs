@@ -368,7 +368,7 @@ test.describe('recorded demo · step 4: evidence on request', () => {
     // The checks are separate checks; each kind the recorded report holds shows its own status.
     await dialog.getByRole('tab', { name: /^Checks/ }).click();
     const checks = dialog.locator('[data-check]');
-    await expect(checks).toHaveCount(6);
+    await expect(checks).toHaveCount(7);
     const report = assist.evidence_reports.find((candidate) => candidate.rule_id === rule.team_rule_id)!;
     for (const kind of new Set(report.checks.map((check) => check.kind))) {
       const recorded = report.checks.filter((check) => check.kind === kind);

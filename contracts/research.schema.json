@@ -222,6 +222,7 @@
             "enum": [
               "source_availability",
               "source_identity",
+              "source_eligibility",
               "citation_anchor",
               "quote_presence",
               "semantic_support",
@@ -1927,6 +1928,7 @@
             "enum": [
               "source_availability",
               "source_identity",
+              "source_eligibility",
               "citation_anchor",
               "quote_presence",
               "semantic_support",
@@ -4421,6 +4423,7 @@
             "enum": [
               "source_availability",
               "source_identity",
+              "source_eligibility",
               "citation_anchor",
               "quote_presence",
               "semantic_support",
@@ -5541,6 +5544,7 @@
             "enum": [
               "source_availability",
               "source_identity",
+              "source_eligibility",
               "citation_anchor",
               "quote_presence",
               "semantic_support",

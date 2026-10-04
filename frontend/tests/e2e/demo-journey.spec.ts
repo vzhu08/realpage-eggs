@@ -1,8 +1,10 @@
 import { expect, test } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 import { RULE_TITLE, expectNoHorizontalOverflow, openCase, openDemo, openEvidence, openPropertyRecord, questionCard, ruleRow, selectProperty, showFinder, showHypotheticals } from './helpers';
 
 const UNITS = 'Number of dwelling units in this building?';
 const CERTIFICATE = /certificate of occupancy, not the year built\?/;
+const API_RENDERER_VERSION = JSON.parse(readFileSync(new URL('../../../contracts/examples/assist.json', import.meta.url), 'utf8')).response.encoded_rules[0].renderer_version;
 
 test.describe('synthetic demo: the complete journey', () => {
   test('lookup → useful question → labeled answer → reevaluation → supporting evidence', async ({ page }) => {
@@ -79,12 +81,12 @@ test.describe('synthetic demo: the complete journey', () => {
     await expect(panel).toContainText('rule_renderer: dependency unavailable');
     await expect(panel).toContainText('For this property on Nov 15, 2026');
 
-    // Six separate checks; none is presented as verified.
+    // Separate checks; none is presented as verified.
     await panel.getByRole('tab', { name: /Checks/ }).click();
     const checks = panel.locator('.check');
-    await expect(checks).toHaveCount(6);
-    await expect(checks.locator('.check__title')).toHaveText(['Source availability', 'Source identity and version', 'Citation anchor', 'Exact quote', 'Semantic support', 'Dependencies']);
-    await expect(panel.getByText('Not checked by the service')).toHaveCount(6);
+    await expect(checks).toHaveCount(7);
+    await expect(checks.locator('.check__title')).toHaveText(['Source availability', 'Source identity and version', 'Primary-source eligibility', 'Citation anchor', 'Exact quote', 'Semantic support', 'Dependencies']);
+    await expect(panel.getByText('Not checked by the service')).toHaveCount(7);
     await expect(panel).toContainText('3 of 3 quotes equal the source text at their recorded offsets');
     await expect(panel).toContainText('it does not show they support the rule');
 
@@ -326,7 +328,7 @@ test.describe('synthetic demo: the complete journey', () => {
     await panel.getByRole('tab', { name: 'Encoded rule' }).click();
     await expect(panel.locator('.compare__rendering')).toContainText('Coverage: (residential == true AND units [dwelling units] >= 8).');
     await expect(panel.locator('.compare__rendering')).toContainText('Effective boundary (inclusive): 2026-11-15');
-    await expect(panel).toContainText('Deterministic rendering · renderer encoded-rule-v1');
+    await expect(panel).toContainText(`Deterministic rendering · renderer ${API_RENDERER_VERSION}`);
     await expectNoHorizontalOverflow(page);
   });
 
@@ -350,7 +352,7 @@ test.describe('synthetic demo: the complete journey', () => {
     await openCase(page, 'Missing source support');
     await expect(ruleRow(page)).toHaveAttribute('data-result', 'unknown');
     await expect(page.getByRole('group', { name: 'Result context' })).toContainText('Partial data');
-    await expect(page.getByText('Missing source material: 1 documents; no-rule conclusions are not established')).toBeVisible();
+    await expect(page.getByText('Missing primary-source material: 1 documents; no-rule conclusions are not established')).toBeVisible();
     await expect(page.getByText('Nothing to ask: the plan found no missing property fact that could change a result.')).toBeVisible();
 
     const panel = await openEvidence(page);

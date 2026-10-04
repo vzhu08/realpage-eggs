@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import httpx
 from dotenv import dotenv_values
 from navigator.extraction import OpenAIProvider, ProviderFailure, chunks, extract
+from navigator.source_policy import POLICY_VERSION, source_use
 from navigator.store import Store, digest, now, write_json
 
 MODEL = "gpt-6.1-sol"
@@ -90,11 +91,15 @@ def plan(source_dir, output, doc_id):
         raise ValueError("Select one captured, non-synthetic source")
     if digest(source.text.encode("utf-8")) != source.sha256:
         raise ValueError("Selected source text/hash mismatch")
+    use = source_use(source)
+    if not use.extraction_allowed:
+        raise ValueError(f"Selected source is not eligible for extraction ({use.status}): {use.reason}")
     count = sum(1 for _ in chunks(source.text))
     if count != 1:
         raise ValueError("This pilot accepts exactly one chunk (at most 18000 characters)")
     return {"source_dir": str(source_dir), "output": str(output), "doc_id": doc_id,
             "source_sha256": source.sha256, "characters": len(source.text), "chunks": count,
+            "source_policy_version": POLICY_VERSION, "source_use": use.status,
             "model": MODEL, "max_actual_requests": MAX_REQUESTS,
             "max_output_tokens_per_request": MAX_OUTPUT_TOKENS,
             "max_request_json_bytes": MAX_REQUEST_BYTES,

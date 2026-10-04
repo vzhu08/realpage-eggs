@@ -18,6 +18,7 @@ type Kind = EvidenceCheck['kind'];
 const CHECKS: Array<{ kind: Kind; title: string; asks: string }> = [
   { kind: 'source_availability', title: 'Source availability', asks: 'Is the source text captured and retrievable?' },
   { kind: 'source_identity', title: 'Source identity and version', asks: 'Is this the document and version it is recorded as?' },
+  { kind: 'source_eligibility', title: 'Primary-source eligibility', asks: 'Is this primary legal text, or contextual material that still needs authority review?' },
   { kind: 'citation_anchor', title: 'Citation anchor', asks: 'Does the cited section or offset exist in that source?' },
   { kind: 'quote_presence', title: 'Exact quote', asks: 'Do the quoted characters occur in the source snapshot?' },
   { kind: 'semantic_support', title: 'Semantic support', asks: 'Does the cited text support the encoded condition, threshold, exception and dates?' },
@@ -37,7 +38,7 @@ const STATUS: Record<EvidenceCheck['status'], { label: string; tone: Tone }> = {
 };
 
 /**
- * Six separate checks, never rolled into one score. Each row shows the service's verdict when
+ * Separate checks, never rolled into one score. Each row shows the service's verdict when
  * an evidence report exists; otherwise it says the check has not been run and lists only what
  * the lookup data itself shows.
  */
@@ -258,6 +259,7 @@ function observe(rule: Rule, loaded: Record<string, LoadedSource>): Record<Kind,
   return {
     source_availability: availability.length ? availability : ['No source document is referenced.'],
     source_identity: identity.length ? identity : ['Source metadata has not been loaded.'],
+    source_eligibility: ['Primary-source eligibility has not been checked by the service. A matching quote or official publisher alone does not establish operative authority.'],
     citation_anchor: anchor,
     quote_presence: quote,
     semantic_support: semantic,

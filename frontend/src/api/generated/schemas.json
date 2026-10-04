@@ -1,5 +1,5 @@
 {
- "digest": "3a71126e3e2733d4",
+ "digest": "781213730391a798",
  "defs": {
   "AddressItem": {
    "properties": {
@@ -911,6 +911,7 @@
      "enum": [
       "source_availability",
       "source_identity",
+      "source_eligibility",
       "citation_anchor",
       "quote_presence",
       "semantic_support",
@@ -1445,6 +1446,61 @@
     },
     "rules": {
      "type": "integer"
+    },
+    "captured_sources": {
+     "anyOf": [
+      {
+       "type": "integer",
+       "minimum": 0
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "rule_sources": {
+     "anyOf": [
+      {
+       "type": "integer",
+       "minimum": 0
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "primary_source_rules": {
+     "anyOf": [
+      {
+       "type": "integer",
+       "minimum": 0
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "context_only_sources": {
+     "anyOf": [
+      {
+       "type": "integer",
+       "minimum": 0
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "source_review_rules": {
+     "anyOf": [
+      {
+       "type": "integer",
+       "minimum": 0
+      },
+      {
+       "type": "null"
+      }
+     ]
     },
     "addresses": {
      "type": "integer"

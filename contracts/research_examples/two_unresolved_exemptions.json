@@ -241,7 +241,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "7306809d45f6489399c28055965c0014",
+          "extraction_run_id": "a1c13556915e40989d1e91cbfccbc138",
           "semantic_verification": "synthetic_fixture"
         }
       ],
@@ -277,11 +277,20 @@
           "synthetic"
         ],
         "extraction_run_ids": [
-          "7306809d45f6489399c28055965c0014"
+          "a1c13556915e40989d1e91cbfccbc138"
         ],
         "partial_data": false,
         "missing_source_ids": [],
         "unprocessed_source_ids": [],
+        "context_only_source_ids": [],
+        "source_review_rule_ids": [],
+        "source_eligibility": {
+          "SYNTHETIC-42": {
+            "status": "synthetic",
+            "operative_allowed": true,
+            "reason": "Fictional fixture only; not actual legal authority"
+          }
+        },
         "fixture_case": "two_unresolved_exemptions"
       },
       "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
