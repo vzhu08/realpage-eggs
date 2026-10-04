@@ -36,7 +36,7 @@ disposition. It contains no property records or full copied source bodies.
 - All 140 candidates still need review. The four primary-text candidates are **not four
   accepted laws**: D001 lacks final-adoption support and D022 has its recorded date/scope
   issues. The evaluator's existing review guard retains unknown coverage where applicable.
-- Under `source-use-v1`, 24 inventory entries are context-only: the 23 secondary links plus
+- Under `source-use-v2`, 24 inventory entries are context-only: the 23 secondary links plus
   D011. Ten are access-blocked: nine publisher links requiring terms review and D056's failed
   capture. Two are primary-text candidates; 51 need document-role review.
 
@@ -140,9 +140,16 @@ validation, evidence preparation and partial rule export. Contextual candidates 
 visible with review blockers and original citations; they cannot become accepted operative
 records through a matching quote alone. Context-only negative findings are excluded from
 supported coverage, and partial exports cannot leave override IDs pointing to excluded rules.
+Legacy records are also checked field by field: naming a primary document cannot mask
+news-only support for a requirement or threshold. Official captured status records may
+support lifecycle/dates; primary text must support substantive claims. Secondary corroboration
+and background remain available when the operative claim has eligible support.
 `check-terms` survives ingestion even when a local text file is present. Batch and pilot
 preflight reject blocked material before provider initialization. Original captures and
 provider output caches are preserved.
+Bounded extraction queues prioritize recorded legal text, then unclassified material,
+then guidance, with stable document-ID ordering. This uses recorded roles rather than
+guessing authority from a URL or hard-coding a jurisdiction's laws.
 
 The API exposes separate inventory, captured-text, rule-producing-source and primary-review
 counts; the interface calls the 140 records candidates from 14 documents. This changes
@@ -159,3 +166,17 @@ Implementation was split among three agents in isolated checkouts: extraction gu
 API/export enforcement, and reproducible audit. The integration owner handled the shared
 policy/contracts, ingestion restriction and frontend labels. Paid extraction was not started
 or resumed; the outstanding primary-text queue requires its existing extraction/review owner.
+
+PR #34 merged while this correction was in progress. Its assist-cache API was integrated,
+and a regression confirms changing a source role invalidates a warmed answer and preserves
+the corrected unknown result on replay. PR #34 also documents a later 666-candidate,
+83-source snapshot owned by the extraction/release session. Its private source store is not
+in this checkout; the report above remains explicitly about the 140-candidate checkpoint.
+A subsequent hosted health check still reported 140/87 at the time of this integration.
+Do not apply these checkpoint counts to that newer snapshot without rerunning the audit.
+
+After integration with PR #34, local validation passed 581 backend tests (one organizer-pack
+test skipped because that pack is absent), 242 frontend unit tests, generated-type checks,
+TypeScript and the production build. The real-snapshot local preview displayed the corrected
+140/14/87 inventory and 136 primary-review count. These are software and provenance checks,
+not acceptance of the candidate laws.

@@ -1,6 +1,6 @@
 {
   "format_version": "source-data-audit-v1",
-  "policy_version": "source-use-v1",
+  "policy_version": "source-use-v2",
   "input": {
     "kind": "archive",
     "name": "core-store.zip",
