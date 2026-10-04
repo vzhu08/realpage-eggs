@@ -23,6 +23,7 @@ from navigator.models import (
 from navigator.source_comparison import compare_claims, compare_rule_versions
 
 BUNDLE = ROOT / "docs/platform_sources/2026-10-04"
+FOLLOWUP = ROOT / "docs/platform_sources/2026-10-04-followup"
 SNAPSHOT = ROOT / "docs/core_rules/snapshots/core-store.zip"
 SNAPSHOT_HASH = "157581d64b1c19fdfcc0414d08bbd0ffeeeca60e3142bd621a7152fe5c6e44bc"
 
@@ -70,27 +71,36 @@ def main(check=False):
         addresses = json.loads(archive.read("addresses.json"))
         resolutions = json.loads(archive.read("resolutions.json"))
     delivered = read(BUNDLE / "sources.json")
+    followup_sources = read(FOLLOWUP / "sources.json")
+    assert not delivered.keys() & followup_sources.keys()
+    delivered |= followup_sources
     assert not saved_sources.keys() & delivered.keys()
     sources = {key: SourceDocument.model_validate(value)
                for key, value in (saved_sources | delivered).items()}
     for key, source in sources.items():
         if source.text:
             assert source.doc_id == key and digest(source.text.encode("utf-8")) == source.sha256
-    manifest = read(BUNDLE / "manifest.json")
     inputs = {"docs/core_rules/snapshots/core-store.zip": SNAPSHOT_HASH}
-    for path in (BUNDLE / "manifest.json", BUNDLE / "sources.json", Path(__file__),
+    for path in (BUNDLE / "manifest.json", BUNDLE / "sources.json",
+                 FOLLOWUP / "manifest.json", FOLLOWUP / "sources.json", Path(__file__),
                  ROOT / "navigator/models.py", ROOT / "navigator/engine.py",
                  ROOT / "navigator/predicates.py", ROOT / "navigator/source_comparison.py"):
         inputs[path.relative_to(ROOT).as_posix()] = digest(path.read_bytes())
-    for record in manifest["records"]:
-        if record["status"] == "failed":
-            continue
-        for kind in ("raw", "text"):
-            path = BUNDLE / record[f"{kind}_path"]
-            assert path.resolve().is_relative_to(BUNDLE)
-            inputs[path.relative_to(ROOT).as_posix()] = digest(path.read_bytes())
-            assert inputs[path.relative_to(ROOT).as_posix()] == record[f"{kind}_sha256"]
-        assert (BUNDLE / record["text_path"]).read_bytes().decode("utf-8") == sources[record["doc_id"]].text
+    raw_text_pairs = 0
+    for bundle in (BUNDLE, FOLLOWUP):
+        for record in read(bundle / "manifest.json")["records"]:
+            if record["status"] == "failed":
+                continue
+            for kind in ("raw", "text"):
+                path = bundle / record[f"{kind}_path"]
+                assert path.resolve().is_relative_to(bundle)
+                inputs[path.relative_to(ROOT).as_posix()] = digest(path.read_bytes())
+                assert inputs[path.relative_to(ROOT).as_posix()] == record[f"{kind}_sha256"]
+            raw_text_pairs += 1
+            if record["doc_id"] in sources:
+                assert (bundle / record["text_path"]).read_bytes().decode("utf-8") == sources[record["doc_id"]].text
+            else:
+                assert record["role"] == "access/provenance record, not target legal evidence"
     reviews = {}
     anchors = set()
     drafts = []
@@ -106,7 +116,7 @@ def main(check=False):
                 assert draft.source_url == sources[draft.source_doc_id].url
                 assert draft.quoted_span in sources[draft.source_doc_id].text
                 drafts.append((path.stem, location, draft))
-    assert set(reviews) == {"california", "new_jersey", "massachusetts"}
+    assert set(reviews) == {"california", "new_jersey", "massachusetts", "new_jersey_followup"}
 
     # Recompute authored claim comparisons; saved anchor-valid flags are not
     # trusted. Semantic support and precedence remain explicitly unresolved.
@@ -223,8 +233,10 @@ def main(check=False):
     report = {
         "label": "AGENT_SOURCE_REVIEW_NOT_ACCEPTED_RULES",
         "base_commit": "9ff4396de5b6bdc5d8daed159a0778f993dd49cc",
+        "integrated_main": "3809c8a",
         "new_provider_calls": 0, "stored_rules_modified": 0, "human_review": "pending",
         "delivered_documents": len(delivered), "merged_in_memory_sources": len(sources),
+        "raw_text_pairs_verified": raw_text_pairs,
         "original_rules": len(old_rules), "original_temporal_counts": dict(sorted(before_counts.items())),
         "unique_exact_anchors_checked": len(anchors), "canonical_new_draft_count": len(drafts),
         "conditional_variant_count": sum(row["conditional_variant"] for row in draft_probes),

@@ -1,12 +1,13 @@
 # CORE-06 review of the PLAT-11 source delivery
 
-The 21 documents delivered in PR #20 now have a Core A interpretation handoff:
+The 21 documents delivered in PR #20, plus the NJ authority added in PR #21, now have a Core A interpretation handoff:
 **two amendments to existing AB325 rule candidates, ten new RuleDraft candidates,
 and two separate conditional failed-lifecycle variants**. This closes the earlier
 absence of substantive source text for the required cases. It does not close the
 remaining publication, historical-version, court-verification or human-review gaps.
 
 Base: `9ff4396de5b6bdc5d8daed159a0778f993dd49cc`; branch `codex/core-a-source-review`.
+Integrated main: `3809c8a` (PR #21).
 Daniel / root integrates; three agents reviewed California, New Jersey and Massachusetts
 in parallel. Root is the only repository writer. The captured source bundle and original
 140-rule snapshot remain unchanged. No provider extraction was resumed.
@@ -28,6 +29,11 @@ has **124 unresolved temporal projections and zero applied corrections**. In can
 probes, December31 is not yet effective and January1 is in force; overall coverage on saved
 California facts remains unknown because review and conduct facts are unresolved.
 
+The PLAT-12 charter compilation supplies a conditional minimum waiting period, not proof
+that a particular ordinance automatically becomes effective on day20. It does not justify
+replacing any unknown local date or assuming that an ordinary adoption vote was an emergency
+resolution. Its source/version and ordinance-specific conditions require further evidence.
+
 ## Review artifacts
 
 - `annotations/california.json`: 56 exact spans, source/version findings, two bounded patches,
@@ -36,12 +42,17 @@ California facts remains unknown because review and conduct facts are unresolved
   comparisons, fifteen synthetic-property/date probes and acquisition requests.
 - `annotations/massachusetts.json`: five primary Drafts, two separately labeled conditional
   variants, exact petition/bill/status/opinion spans and visual PDF-review notes.
+- `annotations/new_jersey_followup.json`: general adoption/publication/effectiveness authority
+  from PLAT-12, with applicability and ordinance-specific proof still unresolved.
 - `t1_amendments.json`: reproducible amendments serialized as **RuleDraft**, with existing
   rule IDs and original-rule hash references outside the Draft. They are not provider output.
 - `t1_version_comparisons.json`: observations from the existing Core comparison helper,
   retaining uncertainty. Full transient Rule envelopes and borrowed extraction provenance
   are deliberately omitted from this review artifact.
 - `verification.json`: input/code hashes, anchor/model checks and reproduced probe results.
+- `pr21_integration_verification.json`: 431 tests passed, compilation/contracts passed with no
+  schema drift, both evidence-package replays reproduced and working contracts preserved.
+  The earlier 417-test report remains historical evidence from before PR #21 integration.
 - `remaining_work.json`: ordered next actions, exact owners and the unchanged provider pause.
 
 Offsets are zero-based Unicode character positions in unchanged captured derivative text.
@@ -59,9 +70,10 @@ python docs/core_rules/source_review_2026_10_04/build_review.py --check
 ```
 
 Omit `--check` to reproduce only the three generated files in this directory after reviewing
-any annotation change. The runner reads the committed immutable ZIP and additive source bundle
+any annotation change. The runner reads the committed immutable ZIP and both additive source bundles
 directly; it does not require the author's private store, load credentials, use a provider,
-write a Store or refresh captured sources. It checks all21 raw/text pairs and155 unique anchors,
+write a Store or refresh captured sources. It checks all26 raw/text pairs (including four access
+records excluded from legal sources) and161 unique review anchors,
 validates12 new Draft objects (including2 conditional variants), recomputes5 claim comparisons,
 reproduces15 NJ synthetic-property probes and7 MA temporal probe groups, and checks the two
 AB325 candidates against saved facts with the single `evaluate_rules` implementation.

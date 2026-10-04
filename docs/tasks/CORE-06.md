@@ -1,8 +1,9 @@
 # CORE-06: real change-case evidence and source disagreements
 
 Priority: P0 T1-T5 and lifecycle support; P1 reusable source comparison.
-State: Partial; independent software and saved-evidence review complete. Missing sources
-and independent human review block full acceptance. Platform's geography assembly and public claim
+State: Partial; software and agent source review complete, including PLAT-11/12 delivery.
+Missing publication/court/version records and independent human review block full acceptance.
+Platform's geography assembly and public claim
 comparison contract are now merged. Live extraction remains paused until the
 human explicitly resumes the stopped run with an agreed budget. This card starts no provider job.
 Owner: Daniel / Core A, Rules & Evaluation.
@@ -72,6 +73,15 @@ source captures, historical reports, and stopped provider run. Agent annotations
 candidates; they are not a new live extraction, independent human review or a served-store update.
 Municipal publication/operative dates and official verification of the T5 court mirror remain
 Platform dependencies. Complete the independent source review before waiting on those gaps.
+
+Delivery: [source review handoff](../core_rules/source_review_2026_10_04/README.md). Two existing
+AB325 Draft amendments now have exact January1,2026 and person-definition support; ten new
+Drafts cover NJ/local and MA provisions, with two additional mirror-conditioned failure variants.
+The generator checks source identity/anchors, canonical models, claim comparisons and the single
+evaluator. All candidates retain review uncertainty. Actual stored corrections remain zero.
+PR #21 (`3809c8a`) was integrated during review; its general NJ authority does not establish
+ordinance-specific publication or close the court-access gap. The manual pilot launcher is
+available but was not executed. Remaining requests and owners are in `remaining_work.json`.
 
 ## Previous readiness follow-up — October 4, 2026
 
