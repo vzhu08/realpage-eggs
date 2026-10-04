@@ -216,6 +216,35 @@ def test_cached_changes_match_core_and_never_write_from_http(demo, monkeypatch):
     assert snapshot_hashes(demo.root) == before
 
 
+@pytest.mark.parametrize("contents", [b"{", b"[]", b'"invalid"', b"\xff"])
+def test_unreadable_optional_cache_recomputes_without_mutating_store(demo, monkeypatch, contents):
+    from navigator import changes
+    from navigator.evidence import prepare_rules, EvidenceStoreView
+    from navigator.store import save_change_cache
+    from scripts.platform_ops import snapshot_hashes
+
+    request = ChangeRequest(before=date(2026, 11, 14), after=date(2026, 11, 15))
+    prepared, _ = prepare_rules(demo)
+    view = EvidenceStoreView(demo, prepared)
+    result = compute_changes(view, request)
+    key = save_change_cache(demo.root / "change_cache", view, request, result)
+    (demo.root / "change_cache" / f"{key}.json").write_bytes(contents)
+    before = snapshot_hashes(demo.root)
+    calls = []
+
+    def recompute(store, actual):
+        calls.append(actual)
+        return result
+
+    monkeypatch.setattr(changes, "compute_changes", recompute)
+    with TestClient(create_app(demo.root)) as client:
+        response = client.post("/api/v1/changes", json=request.model_dump(mode="json"))
+        assert response.status_code == 200
+        assert response.json() == result.model_dump(mode="json")
+    assert calls == [request]
+    assert snapshot_hashes(demo.root) == before
+
+
 @pytest.mark.parametrize("damage", ["facts", "geography", "rules", "request", "payload", "code"])
 def test_changed_inputs_or_cache_content_require_core_recalculation(demo, monkeypatch, damage):
     from navigator.evidence import prepare_rules, EvidenceStoreView
