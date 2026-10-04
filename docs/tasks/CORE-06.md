@@ -56,7 +56,22 @@ Handoff: commit, exact source/run evidence, T1-T5 statuses, corrected versus unr
 counts, comparison examples, provenance and remaining input requests. No full-corpus/legal-accuracy
 claim from software tests. Do not edit Core B planner/renderer or UX files.
 
-## Current execution claim
+## Current follow-up execution claim — October 4, 2026
+
+Daniel / Codex /root, session `01a10555-b81d-7281-95f5-c06399af8238`; sole writer.
+The user requested Daniel's next task. The existing offline delivery and snapshot are now
+merged through PR #13. This bounded CORE-06 follow-up checks comparison integrity on that base.
+Branch: `codex/core-a-comparison-integrity`.
+Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence` (prior session idle, clean).
+Base: `84c2887dee0d56c523d4fca8c0bd47de79546c2e` (fetched main, PR #13).
+Claimed writes: `navigator/source_comparison.py`, `tests/test_source_comparison.py`, this card,
+and `docs/core_rules/comparison_integrity/**`; read-only helper review only.
+Acceptance: invalid primary/evidence source identities and unresolved review/conflict state cannot
+produce an unqualified comparison; review-state changes stay separate from substantive legal encoding.
+Baseline focused checks: 113 passed. Full checks run in a disposable copy; real stores stay read-only.
+No provider resumption is implied. Platform's public comparison contract remains a dependency.
+
+## Previous execution claim
 
 Daniel / Codex /root, session 01a103d0-b88b-7090-97aa-f9d5eec55d45; sole writer.
 Branch: `codex/core-a-change-evidence`. Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence`.
