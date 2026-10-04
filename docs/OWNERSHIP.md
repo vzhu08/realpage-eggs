@@ -1,5 +1,23 @@
 # Four-developer ownership
 
+## Current Platform delegation — October 4
+
+The user explicitly authorized parallel Platform agents and pushing/merging completed tasks.
+This bounded exception supersedes the earlier no-extra-writers instruction for the Platform lane.
+Core A, Core B and UX ownership remain unchanged. Root owns integration, shared docs and the board.
+
+| Platform work | Writer | Isolated branch / checkout suffix | Exclusive scope |
+| --- | --- | --- | --- |
+| PLAT-06 integration | Root | `codex/platform-release` / `artifacts/platform-release` | Existing Platform API/cache, contracts and shared coordination docs |
+| PLAT-07 integrity | Evidence agent | `codex/platform-evidence-integrity` / `artifacts/platform-evidence-integrity` | Evidence package, assembler and their tests; PLAT-07 card/evidence |
+| PLAT-08 container | Deployment agent | `codex/platform-container` / `artifacts/platform-container` | Dockerfile, Compose, dockerignore, container verifier/test/runbook; PLAT-08 card/evidence |
+| PLAT-09 handoff | Handoff agent | `codex/platform-handoff` / `artifacts/platform-handoff` | Handoff packager/test/method/runbook; PLAT-09 card/evidence |
+| PLAT-10 CI | Root | `codex/platform-ci` / `artifacts/platform-ci` | `.github/workflows/platform.yml`; PLAT-10 card/evidence |
+
+Full claimed paths and base commits are in each task card. Agents commit locally; root reviews and
+publishes. Shared files remain single-writer. This exception does not resume paid extraction or
+authorize public deployment, submission or teammate messages. Earlier assignments below are historical.
+
 Current assignments: October 3, 2026 readiness follow-up, authorized by the user.
 These four existing lanes continue; no additional writing agents or remote sessions were started.
 The user grants the current COORD-04 session a bounded cross-lane exception for the two audit
