@@ -55,7 +55,10 @@
       "extraction_run_ids": [],
       "partial_data": false,
       "missing_source_ids": [],
-      "unprocessed_source_ids": []
+      "unprocessed_source_ids": [],
+      "context_only_source_ids": [],
+      "source_review_rule_ids": [],
+      "source_eligibility": {}
     },
     "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
   }

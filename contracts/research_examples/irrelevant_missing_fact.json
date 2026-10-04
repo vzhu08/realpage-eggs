@@ -149,7 +149,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "7306809d45f6489399c28055965c0014",
+          "extraction_run_id": "17aa73901197498c8bad54afaf2fd1c9",
           "semantic_verification": "synthetic_fixture"
         }
       ],
@@ -168,6 +168,9 @@
         "partial_data": false,
         "missing_source_ids": [],
         "unprocessed_source_ids": [],
+        "context_only_source_ids": [],
+        "source_review_rule_ids": [],
+        "source_eligibility": {},
         "fixture_case": "irrelevant_missing_fact"
       },
       "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."

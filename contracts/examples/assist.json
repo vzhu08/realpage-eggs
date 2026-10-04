@@ -217,7 +217,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "561a346fa8564db094ffa22d1e821f5e",
+          "extraction_run_id": "3b33b2061bf64e3784dec69e7a046e92",
           "semantic_verification": "synthetic_fixture"
         }
       ],
@@ -252,11 +252,20 @@
           "synthetic"
         ],
         "extraction_run_ids": [
-          "561a346fa8564db094ffa22d1e821f5e"
+          "3b33b2061bf64e3784dec69e7a046e92"
         ],
         "partial_data": false,
         "missing_source_ids": [],
-        "unprocessed_source_ids": []
+        "unprocessed_source_ids": [],
+        "context_only_source_ids": [],
+        "source_review_rule_ids": [],
+        "source_eligibility": {
+          "SYNTHETIC-42": {
+            "status": "synthetic",
+            "operative_allowed": true,
+            "reason": "Fictional fixture only; not actual legal authority"
+          }
+        }
       },
       "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
     },
@@ -277,7 +286,7 @@
             "allow_partial_date": true
           },
           "prompt": "Number of dwelling units in this building? Answer a integer in dwelling units.",
-          "why": "Feasible evaluator probes show this fact can change a result or unresolved coverage. Other exemptions, geography or evidence gaps may remain after answering.",
+          "why": "Feasible evaluator probes show this fact can change a result or unresolved coverage. As of 2026-11-15; affects Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42. Other exemptions, geography or evidence gaps may remain after answering. Alternatives are hypothetical, not verified property facts.",
           "rule_ids": [
             "r-694ad9fbae9083966e86"
           ],
@@ -377,8 +386,8 @@
               "remaining_uncertainty": [
                 {
                   "kind": "source_gap",
-                  "message": "Citation section 2: no unique structured section anchor in this snapshot",
-                  "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+                  "message": "As of 2026-11-15: citation_anchor (not_checked): Citation section 2: no unique structured section anchor in this snapshot; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+                  "remedy": "Source acquisition: retrieve or reconcile the original source version, URL and exact quotation anchors with Platform; property answers cannot repair source support",
                   "rule_ids": [
                     "r-694ad9fbae9083966e86"
                   ],
@@ -388,8 +397,8 @@
                 },
                 {
                   "kind": "interpretation",
-                  "message": "Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.",
-                  "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+                  "message": "As of 2026-11-15: semantic_support (not_checked): Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+                  "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
                   "rule_ids": [
                     "r-694ad9fbae9083966e86"
                   ],
@@ -399,8 +408,17 @@
                 },
                 {
                   "kind": "source_gap",
-                  "message": "Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered",
-                  "remedy": "Platform must verify the separate source inventory, including missing rules and references",
+                  "message": "As of 2026-11-15: Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered, so omitted law may change the result.",
+                  "remedy": "Source acquisition/inventory review: Platform must verify the separate source inventory, including missing rules and references",
+                  "rule_ids": [],
+                  "predicate_ids": [],
+                  "field": null,
+                  "source_refs": []
+                },
+                {
+                  "kind": "analysis_limit",
+                  "message": "As of 2026-11-15: unsupported analysis prevents exhaustive coverage; unexamined values may change the result",
+                  "remedy": "More analysis/interpretation review: resolve the unsupported domain or expression",
                   "rule_ids": [],
                   "predicate_ids": [],
                   "field": null,
@@ -494,8 +512,8 @@
               "remaining_uncertainty": [
                 {
                   "kind": "source_gap",
-                  "message": "Citation section 2: no unique structured section anchor in this snapshot",
-                  "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+                  "message": "As of 2026-11-15: citation_anchor (not_checked): Citation section 2: no unique structured section anchor in this snapshot; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+                  "remedy": "Source acquisition: retrieve or reconcile the original source version, URL and exact quotation anchors with Platform; property answers cannot repair source support",
                   "rule_ids": [
                     "r-694ad9fbae9083966e86"
                   ],
@@ -505,8 +523,8 @@
                 },
                 {
                   "kind": "interpretation",
-                  "message": "Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.",
-                  "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+                  "message": "As of 2026-11-15: semantic_support (not_checked): Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+                  "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
                   "rule_ids": [
                     "r-694ad9fbae9083966e86"
                   ],
@@ -516,8 +534,17 @@
                 },
                 {
                   "kind": "source_gap",
-                  "message": "Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered",
-                  "remedy": "Platform must verify the separate source inventory, including missing rules and references",
+                  "message": "As of 2026-11-15: Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered, so omitted law may change the result.",
+                  "remedy": "Source acquisition/inventory review: Platform must verify the separate source inventory, including missing rules and references",
+                  "rule_ids": [],
+                  "predicate_ids": [],
+                  "field": null,
+                  "source_refs": []
+                },
+                {
+                  "kind": "analysis_limit",
+                  "message": "As of 2026-11-15: unsupported analysis prevents exhaustive coverage; unexamined values may change the result",
+                  "remedy": "More analysis/interpretation review: resolve the unsupported domain or expression",
                   "rule_ids": [],
                   "predicate_ids": [],
                   "field": null,
@@ -611,8 +638,8 @@
               "remaining_uncertainty": [
                 {
                   "kind": "source_gap",
-                  "message": "Citation section 2: no unique structured section anchor in this snapshot",
-                  "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+                  "message": "As of 2026-11-15: citation_anchor (not_checked): Citation section 2: no unique structured section anchor in this snapshot; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+                  "remedy": "Source acquisition: retrieve or reconcile the original source version, URL and exact quotation anchors with Platform; property answers cannot repair source support",
                   "rule_ids": [
                     "r-694ad9fbae9083966e86"
                   ],
@@ -622,8 +649,8 @@
                 },
                 {
                   "kind": "interpretation",
-                  "message": "Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.",
-                  "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+                  "message": "As of 2026-11-15: semantic_support (not_checked): Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+                  "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
                   "rule_ids": [
                     "r-694ad9fbae9083966e86"
                   ],
@@ -633,8 +660,17 @@
                 },
                 {
                   "kind": "source_gap",
-                  "message": "Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered",
-                  "remedy": "Platform must verify the separate source inventory, including missing rules and references",
+                  "message": "As of 2026-11-15: Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered, so omitted law may change the result.",
+                  "remedy": "Source acquisition/inventory review: Platform must verify the separate source inventory, including missing rules and references",
+                  "rule_ids": [],
+                  "predicate_ids": [],
+                  "field": null,
+                  "source_refs": []
+                },
+                {
+                  "kind": "analysis_limit",
+                  "message": "As of 2026-11-15: unsupported analysis prevents exhaustive coverage; unexamined values may change the result",
+                  "remedy": "More analysis/interpretation review: resolve the unsupported domain or expression",
                   "rule_ids": [],
                   "predicate_ids": [],
                   "field": null,
@@ -651,8 +687,8 @@
       "remaining_uncertainty": [
         {
           "kind": "property_fact",
-          "message": "The factual value or precision of units remains unresolved",
-          "remedy": "Supply the documented property fact; partial dates can remain uncertain",
+          "message": "As of 2026-11-15: Missing fact or precision: Number of dwelling units in this building. The coverage condition remains unresolved, so this branch cannot yet establish applicability. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+          "remedy": "Factual answer: supply documented Number of dwelling units in this building (units). Answers apply to this request; other exemptions and source issues may remain",
           "rule_ids": [
             "r-694ad9fbae9083966e86"
           ],
@@ -660,12 +696,21 @@
             "r-694ad9fbae9083966e86:coverage_conditions/args/1"
           ],
           "field": "units",
-          "source_refs": []
+          "source_refs": [
+            {
+              "doc_id": "SYNTHETIC-42",
+              "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
+              "start": 147,
+              "end": 287,
+              "text": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+              "section": null
+            }
+          ]
         },
         {
           "kind": "source_gap",
-          "message": "Citation section 2: no unique structured section anchor in this snapshot",
-          "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+          "message": "As of 2026-11-15: citation_anchor (not_checked): Citation section 2: no unique structured section anchor in this snapshot; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+          "remedy": "Source acquisition: retrieve or reconcile the original source version, URL and exact quotation anchors with Platform; property answers cannot repair source support",
           "rule_ids": [
             "r-694ad9fbae9083966e86"
           ],
@@ -675,8 +720,8 @@
         },
         {
           "kind": "interpretation",
-          "message": "Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.",
-          "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+          "message": "As of 2026-11-15: semantic_support (not_checked): Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+          "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
           "rule_ids": [
             "r-694ad9fbae9083966e86"
           ],
@@ -686,8 +731,8 @@
         },
         {
           "kind": "source_gap",
-          "message": "Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered",
-          "remedy": "Platform must verify the separate source inventory, including missing rules and references",
+          "message": "As of 2026-11-15: Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered, so omitted law may change the result.",
+          "remedy": "Source acquisition/inventory review: Platform must verify the separate source inventory, including missing rules and references",
           "rule_ids": [],
           "predicate_ids": [],
           "field": null,
@@ -695,8 +740,8 @@
         },
         {
           "kind": "analysis_limit",
-          "message": "Unsupported analysis prevents exhaustive coverage",
-          "remedy": "Review the unsupported domain or expression",
+          "message": "As of 2026-11-15: unsupported analysis prevents exhaustive coverage; unexamined values may change the result",
+          "remedy": "More analysis/interpretation review: resolve the unsupported domain or expression",
           "rule_ids": [],
           "predicate_ids": [],
           "field": null,
@@ -871,7 +916,7 @@
       },
       "evaluations_used": 4,
       "limits_hit": [],
-      "algorithm_version": "correlated-partitions-v1",
+      "algorithm_version": "correlated-partitions-v3",
       "exhaustive": false
     },
     "evidence_reports": [
@@ -879,6 +924,13 @@
         "rule_id": "r-694ad9fbae9083966e86",
         "rule_hash": "e19ef4386412cf60cad54a32a52a29d4387f0c0a565773a9042d9c86c8cc3186",
         "checks": [
+          {
+            "kind": "source_eligibility",
+            "status": "pass",
+            "message": "SYNTHETIC-42: Fictional fixture only; not actual legal authority",
+            "field": "source_doc_id",
+            "spans": []
+          },
           {
             "kind": "source_availability",
             "status": "pass",
@@ -1025,9 +1077,9 @@
     "encoded_rules": [
       {
         "rule_id": "r-694ad9fbae9083966e86",
-        "text": "Encoded rule: Synthetic Maple Harbor deposit cap\nJurisdiction: Maple Harbor, CA (city); category: security_deposits.\nRequirement: Covered buildings must limit security deposits to one month's rent.\nKey value: one month's rent.\nCoverage: (residential == true AND units [dwelling units] >= 8).\nExemption: FALSE.\nCombined property condition: ((residential == true AND units [dwelling units] >= 8)) AND NOT (FALSE).\nRecorded exemption description: None\nRecorded lifecycle: enacted; snapshot: unspecified (unresolved).\nEffective boundary (inclusive): 2026-11-15 (day precision; 2026-11-15 through 2026-11-15).\nEnd boundary (exclusive): none encoded.\nStatus event 1: enacted on 2026-09-01 (day precision; 2026-09-01 through 2026-09-01).\nThis displays the encoded rule, not legal validation or a property-specific evaluation. Pending measures do not automatically enact; partial dates may leave uncertainty.",
+        "text": "Encoded rule: Synthetic Maple Harbor deposit cap\nRule reference: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42\nJurisdiction: Maple Harbor, CA (city); category: security_deposits.\nRequirement: Covered buildings must limit security deposits to one month's rent.\nKey value: one month's rent.\nCoverage: (residential == true AND units [dwelling units] >= 8).\nExemption: FALSE.\nCombined property condition: ((residential == true AND units [dwelling units] >= 8)) AND NOT (FALSE).\nRecorded exemption description: None\nRecorded lifecycle: enacted; snapshot: unspecified (unresolved).\nEffective boundary (inclusive): 2026-11-15 (day precision; 2026-11-15 through 2026-11-15).\nEnd boundary (exclusive): none encoded.\nRule evidence: SYNTHETIC-42 [147, 287); recorded support: requirement, key_value, coverage_conditions, effective_date. Exact recorded quote: Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.\nRule evidence: SYNTHETIC-42 [288, 389); recorded support: exemptions, exemption_conditions. Exact recorded quote: There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.\nRule evidence: SYNTHETIC-42 [77, 146); recorded support: lifecycle. Exact recorded quote: Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nStatus event 1: enacted on 2026-09-01 (day precision; 2026-09-01 through 2026-09-01).\nStatus event 1 evidence: SYNTHETIC-42 [77, 146); recorded support: lifecycle. Exact recorded quote: Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nThis displays the encoded rule, not legal validation or a property-specific evaluation. Pending measures do not automatically enact; partial dates may leave uncertainty.",
         "expression_hash": "77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504",
-        "renderer_version": "encoded-rule-v1",
+        "renderer_version": "encoded-rule-v3",
         "unresolved_nodes": [],
         "kind": "encoded_rule_not_legal_validation"
       }

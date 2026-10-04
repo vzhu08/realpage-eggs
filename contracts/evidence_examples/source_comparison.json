@@ -104,13 +104,20 @@
     "conflict_note": null,
     "team_rule_id": "r-694ad9fbae9083966e86",
     "evidence_mode": "synthetic",
-    "extraction_run_id": "ed6932efce95444f930ca4c44c39db71",
+    "extraction_run_id": "3b33b2061bf64e3784dec69e7a046e92",
     "semantic_verification": "synthetic_fixture"
   },
   "evidence": {
     "rule_id": "r-694ad9fbae9083966e86",
     "rule_hash": "e19ef4386412cf60cad54a32a52a29d4387f0c0a565773a9042d9c86c8cc3186",
     "checks": [
+      {
+        "kind": "source_eligibility",
+        "status": "pass",
+        "message": "SYNTHETIC-42: Fictional fixture only; not actual legal authority",
+        "field": "source_doc_id",
+        "spans": []
+      },
       {
         "kind": "source_availability",
         "status": "pass",

@@ -132,3 +132,30 @@ Focused tests cover the saved counts, Store/archive equivalence, input immutabil
 progress metadata, altered source hashes and output protection. Passing them establishes
 software behavior, not complete legal coverage or submission eligibility. The separately
 paused extraction job and currently served release are untouched by this audit.
+
+## Integrated correction and hosted cross-check
+
+The October 4 source-data fix adds a shared source-use gate at extraction, cached-output
+validation, evidence preparation and partial rule export. Contextual candidates remain
+visible with review blockers and original citations; they cannot become accepted operative
+records through a matching quote alone. Context-only negative findings are excluded from
+supported coverage, and partial exports cannot leave override IDs pointing to excluded rules.
+`check-terms` survives ingestion even when a local text file is present. Batch and pilot
+preflight reject blocked material before provider initialization. Original captures and
+provider output caches are preserved.
+
+The API exposes separate inventory, captured-text, rule-producing-source and primary-review
+counts; the interface calls the 140 records candidates from 14 documents. This changes
+classification and safeguards, not the substance of any law or the 500 property facts.
+
+A separate read-only check on October 4, completed before 12:18 UTC, compared all 87
+`/api/v1/sources/{id}` responses from `https://realpage-navigator.onrender.com` with the
+audited archive. Every `sha256`, `authority`, `source_type` and `capture_status` matched.
+The hosted health response reported 140 rules and 500 properties. This connects the source
+audit to the hosted source metadata; it does not independently validate every hosted rule,
+its geography, or its legal interpretation. No hosted dataset or deployment was changed.
+
+Implementation was split among three agents in isolated checkouts: extraction guards,
+API/export enforcement, and reproducible audit. The integration owner handled the shared
+policy/contracts, ingestion restriction and frontend labels. Paid extraction was not started
+or resumed; the outstanding primary-text queue requires its existing extraction/review owner.
