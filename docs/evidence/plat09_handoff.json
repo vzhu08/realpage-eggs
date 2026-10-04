@@ -1,0 +1,61 @@
+{
+  "artifact_label": "PARTIAL_NOT_JUDGE_READY",
+  "base_revision": "b3358579256706a4c1c6f4af30c1273feb5e0933",
+  "branch": "codex/platform-handoff",
+  "bundle_manifest_sha256": "1044a73180048c6bd21b9304eb2c1035d65563e95a9e81c6512fa204bbec7ce1",
+  "change_status": {
+    "T1": "partial",
+    "T2": "blocked",
+    "T3": "blocked",
+    "T4": "blocked",
+    "T5": "blocked"
+  },
+  "checks": {
+    "all_bundle_files_byte_reproducible": true,
+    "both_original_run_manifests_preserved": true,
+    "focused_pytest": "23 passed, 1 skipped (Windows symlink privilege unavailable)",
+    "legal_evaluations": 0,
+    "original_release_tree_unchanged": true,
+    "original_verification_tree_unchanged": true,
+    "prepare_twice": "passed",
+    "provider_calls": 0,
+    "recipient_verify_both": "passed",
+    "seven_original_payloads_preserved": true
+  },
+  "first_manifest_sha256": "1a7b1e03bf35a6fdbc72fd7b2cde451ff4e36151ae84b673e9167e69d16a9f11",
+  "limitations": [
+    "Partial corpus remains unaccepted for submission; software checks are not legal review.",
+    "13 municipality resolutions remain unresolved; 140 rules require review and 124 rule projections have errors.",
+    "T1 partial and T2-T5 blocked statuses are retained; no new source evidence or legal repair.",
+    "Full frozen runtime/source stores remain separate artifacts; handoff verification is integrity-only.",
+    "No public deployment, submission or private bundle publication. Root owns code push/merge."
+  ],
+  "packager_sha256": "cf69d5efd7d01fa9aa6c5420a60bc983d62965164b36c87407113b593f88f160",
+  "private_bundle": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-handoff\\artifacts\\plat09\\verified-handoff",
+  "private_replay_bundle": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-handoff\\artifacts\\plat09\\verified-handoff-replay",
+  "ready_for_submission": false,
+  "release_manifest_sha256": "08e95c386914a570cd159000da4799c616100ffe059a727f5702648517910d5b",
+  "replay_manifest_sha256": "7204364a575d0e9f0605707957e058d1b857c1d55349991d48e2fc9d51ced104",
+  "report_sha256": "7cb0f32c01fa1184f53beefc840d5d4cff86873461f46dd23947d88ab8124578",
+  "run_ids": [
+    "27ab611fd5304bfd9bca16b8d8bc0eae",
+    "5d243464ec06443a96790ac37051cfbd"
+  ],
+  "runtime_code_revision": "5145f1b2c421ac2f5e6a12c5a4b0027ee9749855",
+  "snapshot_id": "8c0a2b50e0eda0839cf881cfb251b2762583840d1bec2f36454f77a63c7ae165",
+  "source_catalog_sha256": "0337104f1cfc110c1385df4bc4be7116ac94e8b7c42d72ef9f2d5de0285e4e39",
+  "status": "software_verified_private_partial_handoff",
+  "task": "PLAT-09",
+  "validation_counts": {
+    "addresses": 500,
+    "exportable_rules": 16,
+    "quote_failures": 0,
+    "resolved_municipalities": 487,
+    "review_rules": 140,
+    "rules": 140,
+    "schema_failures": 124,
+    "source_texts": 54,
+    "sources": 87,
+    "synthetic_rules": 0
+  }
+}
