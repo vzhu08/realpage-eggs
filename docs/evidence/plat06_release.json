@@ -1,0 +1,335 @@
+{
+  "task": "PLAT-06",
+  "date_local": "2026-10-04",
+  "branch": "codex/platform-release",
+  "status": "PLATFORM_SOFTWARE_COMPLETE_LOCAL_REVIEW_READY",
+  "label": "SOFTWARE_VERIFICATION_NOT_LEGAL_OR_SUBMISSION_ACCEPTANCE",
+  "runtime_commit": "5145f1b2c421ac2f5e6a12c5a4b0027ee9749855",
+  "integrated_main": "84c2887",
+  "ready_for_submission": false,
+  "snapshot": {
+    "path": "data/plat06/integrated-release",
+    "id": "8c0a2b50e0eda0839cf881cfb251b2762583840d1bec2f36454f77a63c7ae165",
+    "artifact_label": "PARTIAL_NOT_JUDGE_READY",
+    "counts": {
+      "addresses": 500,
+      "rules": 140,
+      "sources": 87,
+      "resolved_municipalities": 487
+    },
+    "unresolved_address_ids": [
+      "A0009",
+      "A0071",
+      "A0098",
+      "A0128",
+      "A0242",
+      "A0295",
+      "A0311",
+      "A0344",
+      "A0346",
+      "A0352",
+      "A0376",
+      "A0380",
+      "A0384"
+    ],
+    "core_archive_sha256": "157581d64b1c19fdfcc0414d08bbd0ffeeeca60e3142bd621a7152fe5c6e44bc",
+    "core_archive_verified_files": 96
+  },
+  "geography": {
+    "user_authorization": "Approve Census lookups",
+    "sent_flagged_addresses": 59,
+    "recovered": 55,
+    "newly_ambiguous": [
+      "A0071",
+      "A0242",
+      "A0311",
+      "A0344"
+    ],
+    "counts": {
+      "resolved": 487,
+      "ambiguous": 6,
+      "unresolved": 7
+    },
+    "original_unchanged": true,
+    "original_nine_unresolved_preserved": true,
+    "report": "artifacts/plat06/geography-reconciliation.json",
+    "report_sha256": "6cb159f1bf9f16665366ad626798d98f71d1689cd0f6790860a9cf515e23049d"
+  },
+  "release": {
+    "path": "artifacts/plat06/releases/real-002",
+    "backup": "artifacts/plat06/releases/known-good-backup",
+    "manifest_sha256": "08e95c386914a570cd159000da4799c616100ffe059a727f5702648517910d5b",
+    "url": "http://127.0.0.1:8016",
+    "launch": "python scripts/platform_ops.py serve-release --release artifacts/plat06/releases/real-002 --port 8016",
+    "private_artifacts_tracked_in_git": false
+  },
+  "checks": {
+    "backend": {
+      "passed": 342,
+      "warnings": 1,
+      "organizer_pack_configured": true,
+      "log": "artifacts/plat06/release-backend-final.log"
+    },
+    "contracts": {
+      "exit_code": 0,
+      "log": "artifacts/plat06/release-contracts-final.log"
+    },
+    "frontend": {
+      "generated_check": "passed",
+      "typecheck": "passed",
+      "unit_tests_passed": 90,
+      "production_build": "passed",
+      "copy": "artifacts/plat06/release-verification/frontend",
+      "log": "artifacts/plat06/release-frontend.log"
+    },
+    "browser_fixture_suite": {
+      "passed": 80,
+      "skipped": 14,
+      "log": "artifacts/plat06/release-browser-suite.log"
+    },
+    "real_http": {
+      "health": {
+        "status": "ok",
+        "version": "0.1.0",
+        "dataset_readiness": "partial",
+        "sources": 87,
+        "rules": 140,
+        "addresses": 500,
+        "resolved_municipalities": 487,
+        "last_extraction_outcome": "partial",
+        "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+      },
+      "address_count": 500,
+      "comparisons": {
+        "NJ_local": "missing_support",
+        "Berkeley_dates": "missing_support",
+        "LA_utility_guidance": "same_claim",
+        "LA_alleged_date_conflict": "missing_support"
+      },
+      "property_journey": {
+        "address_id": "A0001",
+        "as_of": "2026-10-01",
+        "field": "owner_occupied",
+        "probe_is_unverified": true,
+        "answer_reset_reproduced": true,
+        "before_results": {
+          "unknown": 52
+        },
+        "after_results": {
+          "unknown": 51
+        }
+      },
+      "scenarios": {
+        "T1": {
+          "status": "partial",
+          "affected": 0,
+          "uncertain": 250,
+          "conflicts": 0,
+          "notes": [
+            "Unresolved rule evidence: r-57328356379e89d4f338, r-912998e64d23de87a92c",
+            "Uncertain impacts are separate from definitely affected addresses"
+          ]
+        },
+        "T2": {
+          "status": "blocked",
+          "affected": 0,
+          "uncertain": 0,
+          "conflicts": 0,
+          "notes": [
+            "Missing extracted legal evidence for HOB-ALG-01; test cannot be established from its description",
+            "Missing extracted legal evidence for JC-ALG-01; test cannot be established from its description"
+          ]
+        },
+        "T3": {
+          "status": "blocked",
+          "affected": 0,
+          "uncertain": 0,
+          "conflicts": 0,
+          "notes": [
+            "Missing extracted legal evidence for NJ-ALG-01; test cannot be established from its description",
+            "Missing local conflict evidence for JC-ALG-01",
+            "Missing local conflict evidence for HOB-ALG-01",
+            "No evidence-backed state/local interaction extracted; expected conflict cannot be presumed from test text"
+          ]
+        },
+        "T4": {
+          "status": "blocked",
+          "affected": 0,
+          "uncertain": 0,
+          "conflicts": 0,
+          "notes": [
+            "Missing extracted legal evidence for MA-ALG-P1; test cannot be established from its description",
+            "Missing extracted legal evidence for MA-ALG-P2; test cannot be established from its description",
+            "Hypothetical only: selected pending rules are assumed enacted and effective on the comparison date; stored law is unchanged"
+          ]
+        },
+        "T5": {
+          "status": "blocked",
+          "affected": 0,
+          "uncertain": 0,
+          "conflicts": 0,
+          "notes": [
+            "Missing extracted legal evidence for MA-RENT-P1; test cannot be established from its description"
+          ]
+        }
+      },
+      "cli_exits": [
+        {
+          "command": "replay-evidence-package",
+          "exit_code": 0
+        },
+        {
+          "command": "export",
+          "exit_code": 1
+        },
+        {
+          "command": "export",
+          "exit_code": 1
+        }
+      ],
+      "evidence_replay": {
+        "status": "reproduced",
+        "package_sha256": "0d2b25f9f1af420bf86887d6fbb1982e4dc7564d5ef3e68e0268a46054835a8b",
+        "input_sha256": "b2476852093a979ac00c4ed7809e7f815aa0917743b8359b059aa39226eab245",
+        "response_sha256": "1daba51770666df1169a7f60becbfe6f4e2128d2b77f0bad3b0821ab6766bb2b",
+        "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+      },
+      "release_unchanged": true
+    },
+    "real_browser": {
+      "fresh_browser": true,
+      "address_id": "A0001",
+      "as_of": "2026-10-01",
+      "answer": "owner_occupied=false, user_provided/unverified software probe",
+      "question_answer_reset": "passed",
+      "source_rule_id": "r-0acbc640e07f4810a3f2",
+      "source_id": "D016",
+      "source_and_separate_checks": "passed",
+      "viewports": [
+        [
+          1440,
+          900
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "horizontal_overflow": false,
+      "T1_drilldown": "A0001 at 2026-01-02",
+      "screenshots": [
+        "artifacts/plat06/real-evidence-browser.jpg",
+        "artifacts/plat06/real-desktop-checks.jpg",
+        "artifacts/plat06/real-mobile-checks.jpg",
+        "artifacts/plat06/real-changes-browser.jpg"
+      ]
+    },
+    "exports": {
+      "payloads_byte_identical": 7,
+      "payload_sha256": {
+        "change_details.json": "250695a19ca389cd537e6f442327a301e7ccad097e2ebd1bd4017bbbed19f8fc",
+        "changes.json": "c513c0cb5f6d831a2f744dd2456c19206d594c282c49c5f3bb40ae0a8c9da935",
+        "evidence_checks.json": "8b7d7e0472e21149b219c27eab01caeef5f38d2734df8361fdda6fe6c01b8f46",
+        "evidence_inventory.json": "fe86aa41204f7c3c46faf8b030dd58a301eb137301326c15ce7fb6058e675529",
+        "lookups.json": "5e9340c3fa2f99db41c97e9ab0f39e2c9367b94e3756d12d5ee5b6fcc633554d",
+        "rules.json": "e6d6d8af4595a8b7cf6ed447bd4a9e09e0e36aa3f7b694105c64692b55b753e2",
+        "validation.json": "93ad15929e7fe4247c14419dc116a7226ed32db8d089eac3bdbbb4e9f9c31ea6"
+      },
+      "run_ids": [
+        "27ab611fd5304bfd9bca16b8d8bc0eae",
+        "5d243464ec06443a96790ac37051cfbd"
+      ],
+      "distinct_runs": true,
+      "input_hashes_equal": true,
+      "all_input_addresses_represented": true,
+      "all_lookup_references_resolve": true,
+      "validation_counts": {
+        "sources": 87,
+        "source_texts": 54,
+        "addresses": 500,
+        "rules": 140,
+        "exportable_rules": 16,
+        "quote_failures": 0,
+        "schema_failures": 124,
+        "resolved_municipalities": 487,
+        "synthetic_rules": 0,
+        "review_rules": 140
+      },
+      "cli_exit_codes": [
+        1,
+        1
+      ],
+      "artifact_label": "PARTIAL_NOT_JUDGE_READY",
+      "ready_for_submission": false
+    },
+    "published_scenario_timings": {
+      "T1": {
+        "seconds": 1.062,
+        "status": "partial",
+        "bytes": 12262023,
+        "prior_uncached_output_equal": true
+      },
+      "T2": {
+        "seconds": 0.641,
+        "status": "blocked",
+        "bytes": 546,
+        "prior_uncached_output_equal": true
+      },
+      "T3": {
+        "seconds": 0.593,
+        "status": "blocked",
+        "bytes": 667,
+        "prior_uncached_output_equal": true
+      },
+      "T4": {
+        "seconds": 0.625,
+        "status": "blocked",
+        "bytes": 674,
+        "prior_uncached_output_equal": true
+      },
+      "T5": {
+        "seconds": 0.641,
+        "status": "blocked",
+        "bytes": 433,
+        "prior_uncached_output_equal": false
+      }
+    },
+    "rollback": {
+      "backup_byte_identical": true,
+      "checks": {
+        "health": {
+          "equal": true,
+          "response_sha256": "b16bd2a23f5c58b12a73ea23c5d525d788ace80c92602a7a3420a0faafb09e57"
+        },
+        "lookup": {
+          "equal": true,
+          "response_sha256": "f271e45a796a396a904efb0e58b52a26e6ab6c8f500571269de2a93b40b030e5"
+        },
+        "scenario": {
+          "equal": true,
+          "response_sha256": "44cafc81e16cab6efdd4f1d81c7dd477193322af001961a2479baf8681cdc9f2"
+        },
+        "frontend_entry_equal": true
+      }
+    },
+    "detailed_report": "artifacts/plat06/real-acceptance-verified/report.json",
+    "detailed_report_sha256": "7cb0f32c01fa1184f53beefc840d5d4cff86873461f46dd23947d88ab8124578"
+  },
+  "decisions": [
+    "Use unchanged Core evaluator and claim comparison; preserve all source bytes and uncertainty.",
+    "Precompute published scenarios offline; validate complete inputs/code/runtime and payload hashes before using cached outputs.",
+    "Serve a hash-verified native frontend/API bundle on loopback with a byte-identical backup.",
+    "Partial exports legitimately return CLI exit 1; verification records it and requires the partial label."
+  ],
+  "limitations": [
+    "140 rules remain review-needed; 124 cannot project unresolved temporal status into the official rule schema.",
+    "T1 is partial with 250 uncertain and zero definitely affected properties; T2-T5 are blocked, not evidence of no impact.",
+    "13 municipality resolutions remain unresolved, including four newly downgraded ambiguous matches.",
+    "UX-04 still owns adoption of summary/comparison APIs and the evidence-download control.",
+    "Uncached ad hoc portfolio requests may be slow; only published T1-T5 are precomputed.",
+    "Public hosting and Docker runtime unverified; no paid provider call or extraction resumption.",
+    "No remote push, deployment, teammate message or event submission performed.",
+    "real-001 was superseded after a performance failure; only real-002 has complete acceptance evidence."
+  ],
+  "next_action": "Review/integrate Platform branch; Core A resolves evidence/lifecycle/review gates and UX-04 adopts additive APIs before full release acceptance."
+}

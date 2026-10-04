@@ -1,11 +1,10 @@
 from datetime import date
 from pathlib import Path
 
-from .changes import compute_changes
 from .engine import evaluate_rules
 from .evidence import prepare_rules, EvidenceStoreView
 from .models import ChangeRequest
-from .store import digest, write_json
+from .store import digest, write_json, cached_changes
 from .validation import export_rule, inventory, validate
 
 
@@ -27,7 +26,7 @@ def export_all(store, output: Path, as_of=date(2026, 10, 1), allow_partial=False
         lookups[ident] = [{"team_rule_id": e.team_rule_id, "result": e.result, "explanation": e.explanation, "conflict_flag": e.conflict_flag} for e in evaluated if e.team_rule_id in exported_ids and e.result not in {"inapplicable", "failed"}]
     changes, details = {}, {}
     for test in store.read("change_tests.json", []):
-        result = compute_changes(store, ChangeRequest(test_id=test["test_id"]))
+        result = cached_changes(store, ChangeRequest(test_id=test["test_id"]))
         details[test["test_id"]] = result.model_dump(mode="json")
         changes[test["test_id"]] = {"affected_address_ids": result.affected_address_ids, "conflict_flag_address_ids": result.conflict_flag_address_ids, "notes": f"{result.status}; {result.scenario}. " + " ".join(result.notes) + f" Uncertain set ({len(result.uncertain_address_ids)} addresses) retained in change_details.json; definite-only export pending organizer guidance."}
     report["change_status"] = {k: v["status"] for k, v in details.items()}
