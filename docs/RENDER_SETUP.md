@@ -25,6 +25,22 @@ Its private counterpart stays on this laptop, with user-only permissions and no 
 Add a passphrase with `ssh-keygen -p -f "$env:USERPROFILE/.ssh/id_ed25519_render_realpage"`
 if you want an interactive unlock on each connection. Only upload the `.pub` file's contents.
 
+## Run locally
+
+The latest frontend is built in the isolated `artifacts/render/local-build/frontend` copy. The
+verified dataset and freshly prepared scenario caches are in `artifacts/render/local-data/snapshot-v1`.
+The setup session starts this app at [http://127.0.0.1:8030](http://127.0.0.1:8030).
+After closing it or rebooting, run this private launcher in PowerShell and leave that terminal open:
+
+```powershell
+& 'C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/render-setup/artifacts/render/start-local.ps1'
+```
+
+The launcher serves the built frontend and API together without Docker or model calls. The setup
+session's background process ID is saved in `artifacts/render/local-server.pid`. To stop only that
+process, first verify its command is the Uvicorn server on port 8030, then stop that PID. Other
+development servers/checkouts are independent.
+
 ## Website steps
 
 1. Create/sign in to [Render](https://dashboard.render.com/), connect your GitHub account and

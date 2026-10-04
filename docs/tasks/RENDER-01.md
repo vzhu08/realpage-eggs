@@ -32,8 +32,18 @@ Original release manifest SHA-256:
 `08e95c386914a570cd159000da4799c616100ffe059a727f5702648517910d5b`.
 Dedicated Ed25519 SSH key created in Vincent's `.ssh`; only the public key is to be registered.
 
-Remaining verification: real snapshot installation/cache preparation is running locally. The local
-Docker engine is unavailable; Linux container execution will be checked by the existing PR CI.
+Final verification: real snapshot installation completed. Native HTTP on port 8030 serves the
+current frontend, all 500 addresses, a property lookup and evidence download; private-file routes
+remain unavailable. All five cached scenarios return in 0.45-0.98 seconds on this laptop, retaining
+T1 partial and T2-T5 blocked. Original release and installed serving inputs are unchanged. The
+private `artifacts/render/local-http-verification.json` and installed `render_install.json` retain
+the results. No performance claim is made for the hosted service.
+
+The user explicitly approved publishing the branch and opening draft [PR #22](https://github.com/vzhu08/realpage-eggs/pull/22).
+Runtime implementation commit: `effa4ed`. [CI run 37186288607](https://github.com/vzhu08/realpage-eggs/actions/runs/37186288607)
+passed backend/contracts, frontend/browser flows and full Linux container build/runtime. The local
+Docker engine remains stopped. Only documentation is updated after those checks.
+
 No Render resource exists yet, so actual Render disk permissions, SSH and public HTTP remain
 unverified. Next user action: Render account/billing/GitHub connection, public SSH key registration
 and Blueprint creation as described in `docs/RENDER_SETUP.md`. Then provide the SSH destination
