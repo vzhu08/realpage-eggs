@@ -19,7 +19,7 @@ def lookup(store, request, answer_provenance=None):
     extraction_index = store.read("extraction_index.json", {})
     if not rules and not any(v.get("status") in {"complete", "review"} for v in extraction_index.values()):
         raise DatasetUnavailable("No completed extraction; configure provider and run navigator extract")
-    if request.address_id:
+    if request.address_id is not None:
         if request.address_id not in addresses: raise KeyError(f"Unknown address ID {request.address_id}")
         prop = addresses[request.address_id].model_copy(deep=True)
     else:

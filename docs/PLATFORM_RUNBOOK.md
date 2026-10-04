@@ -1,5 +1,36 @@
 # Platform launch and export runbook
 
+## Independent property evidence download and offline replay
+
+PLAT-06 adds a property evidence package that works with any existing lookup-ready store,
+including the labeled synthetic demo. It does not require the pending combined Core/geography
+snapshot to verify its software behavior. Real-data acceptance remains a separate release gate.
+API consumers POST the same answers/date/limits as assist, using a saved property ID, to
+`/api/v1/lookup/evidence-package` and save the JSON attachment. See CONTRACTS for the exact boundary.
+
+For a CLI check, save a request such as this in a separate artifact directory:
+
+```json
+{"address_id":"SYNTH-003","as_of":"2026-11-15","answers":[{"field":"units","value":8,"provenance":"demo"}]}
+```
+
+```powershell
+.\.venv\Scripts\python.exe -m navigator --data-dir data/synthetic evidence-package --request artifacts/package-request.json --output artifacts/property-evidence.json
+.\.venv\Scripts\python.exe -m navigator replay-evidence-package artifacts/property-evidence.json
+```
+
+Choose a new output file outside the input store; existing output files are preserved. Replay needs
+no original store or network access, but it does need the recorded code file hashes, Python version
+and dependency versions. Use the existing locked environment, and restart the API after code edits.
+Exit 0 with `status=reproduced` means the complete assist response matched. Changed content, a
+different runtime, or an output that cannot be reproduced returns exit 2. A package carries source
+material and the selected property's facts/answers, so share it only with its intended recipient.
+The package contains data only; replay never executes bundled/provider-generated code.
+
+Synthetic inputs stay labeled. Missing source support, unavailable services, unverified answers
+and bounded analysis remain visible even when replay succeeds. This is not an official competition
+export or independent legal review. No provider job is resumed by either command.
+
 PLAT-02 provides a repeatable local API and export check. It does not deploy the application.
 All commands below run from the repository root. Use Python 3.12 and an explicit data directory.
 The checked-in lock is the installation source; no editable/package install is needed.

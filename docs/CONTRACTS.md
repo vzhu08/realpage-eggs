@@ -83,3 +83,30 @@ certificate/occupancy answer from construction year; it asks for the actual defi
 Ownership is now four lanes: Platform stewards canonical schemas and routes; Core A produces rule_traces
 and evaluate_rules; Core B owns plan_questions/render_rule and the adapter; UX owns the frontend.
 ASSIST_CONTRACT defines the existing candidate boundary. This staffing change does not change schemas.
+
+## Property evidence package (PLAT-06 independent increment)
+
+`POST /api/v1/lookup/evidence-package` accepts `EvidencePackageRequest`: a saved `address_id`,
+explicit/default as-of date and the same request-local answers, supplemental facts, scenario ID
+and limits as assist. Structured custom addresses are not supported by this endpoint. It returns
+`EvidencePackage` as JSON with an attachment filename and `Cache-Control: no-store`.
+It follows lookup's 404/422/503 and Core's 502/503 errors. No model or geocoder call is made.
+
+The package contains one original property, its geography, the normalized request, the actual
+assist response, all stored rules/source texts needed for deterministic retrieval/planning, extraction
+index and consumed semantic-review records. Other properties, environment files, local pack paths
+and provider credentials are excluded. Exact text, offsets, URLs, retrieval dates, partial dates,
+answer provenance and remaining uncertainty are retained. Original source/fact stores are unchanged.
+
+`input_sha256` identifies these replay inputs, not the entire 500-address release snapshot.
+`response_sha256` and `package_sha256` bind the returned content. Code identity records normalized
+LF file hashes, Python and runtime dependency versions; hashes are not authenticity signatures.
+Replay requires the matching application version and lock/environment, calls the existing assist
+service and evaluator, and compares the complete response. It never executes code from the package.
+Missing Core capabilities stay explicitly unavailable during replay. A hash match alone does not
+count as reproduced output. Source gaps/stale evidence remain in the replayed result.
+
+Labels are `SYNTHETIC_NOT_FOR_SUBMISSION` or `RESEARCH_EVIDENCE_NOT_LEGAL_VALIDATION`.
+Successful replay does not establish legal accuracy, corpus completeness or submission readiness.
+Competition rules/lookups/changes formats are unchanged. Generated schemas and synthetic examples
+are under `contracts/`; UX-04 must regenerate its derived types before using the new endpoint.

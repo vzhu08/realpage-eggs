@@ -1,3 +1,4 @@
+from datetime import date
 from types import SimpleNamespace
 
 import pytest
@@ -5,6 +6,7 @@ from fastapi.testclient import TestClient
 
 from navigator.api import create_app
 from navigator.config import ROOT
+from navigator.export import export_all
 from navigator.models import QuestionPlan, Rule
 from navigator.rule_renderer import RENDERER_VERSION
 from navigator.store import read_json
@@ -115,6 +117,52 @@ def test_absent_dataset_and_unknown_selection_remain_distinct(tmp_path, demo):
         assert client.post("/api/v1/lookup/assist", json=REQUEST).status_code == 503
     with TestClient(create_app(demo.root)) as client:
         assert client.post("/api/v1/lookup/assist", json={**REQUEST, "address_id": "absent"}).status_code == 404
+
+
+@pytest.mark.parametrize("endpoint", ["lookup", "lookup/assist"])
+def test_empty_id_uses_id_selection_without_falling_back_to_address(demo, endpoint):
+    address = demo.addresses()["SYNTH-003"].raw_address.model_dump(mode="json")
+    with TestClient(create_app(demo.root), raise_server_exceptions=False) as client:
+        response = client.post(f"/api/v1/{endpoint}", json={**REQUEST, "address_id": ""})
+        assert response.status_code == 404
+        assert response.json()["detail"]["code"] == "unknown_id"
+        # The mutually exclusive selector contract still rejects both/neither.
+        for selection in ({}, {"address_id": None}, {"address_id": "", "address": address}):
+            assert client.post(f"/api/v1/{endpoint}", json=selection).status_code == 422
+        structured = client.post(f"/api/v1/{endpoint}", json={"address": address, "as_of": REQUEST["as_of"]})
+        assert structured.status_code == 200
+        lookup = structured.json()["lookup"] if endpoint.endswith("assist") else structured.json()
+        assert lookup["address"]["address_id"] == "SYNTH-003"
+
+
+def test_scenario_answers_are_request_local_and_leave_export_payloads_unchanged(demo, tmp_path):
+    before, after = tmp_path / "before", tmp_path / "after"
+    export_all(demo, before, date(2026, 11, 15), allow_partial=True, synthetic=True)
+    snapshot = {path.relative_to(demo.root): path.read_bytes() for path in demo.root.rglob("*.json")}
+    request = {**REQUEST, "scenario_id": "synthetic-ui-history"}
+    answer = {"field": "units", "value": 8, "provenance": "demo", "note": "Synthetic user answer"}
+    with TestClient(create_app(demo.root)) as client:
+        answered = client.post("/api/v1/lookup/assist", json={**request, "answers": [answer]})
+        assert answered.status_code == 200
+        body = answered.json()
+        assert body["lookup"]["evaluations"][0]["result"] == "applies"
+        assert body["answers_applied"] == [answer] and body["scenario_id"] == request["scenario_id"]
+        assert body["question_plan"]["questions"] == []
+        # Reusing the scenario ID alone cannot silently replay a prior answer.
+        omitted = client.post("/api/v1/lookup/assist", json=request).json()
+        assert omitted["lookup"]["evaluations"][0]["result"] == "unknown"
+        assert omitted["answers_applied"] == []
+        assert [q["fact"]["field"] for q in omitted["question_plan"]["questions"]] == ["units"]
+        invalid = client.post("/api/v1/lookup/assist", json={**request, "answers": [{**answer, "value": True}]})
+        assert invalid.status_code == 422
+        plain = client.post("/api/v1/lookup", json=REQUEST).json()
+        assert plain["evaluations"][0]["result"] == "unknown"
+    assert {path.relative_to(demo.root): path.read_bytes() for path in demo.root.rglob("*.json")} == snapshot
+    export_all(demo, after, date(2026, 11, 15), allow_partial=True, synthetic=True)
+    payloads = [path for path in before.glob("*.json") if path.name != "run_manifest.json"]
+    assert payloads
+    for path in payloads:
+        assert path.read_bytes() == (after / path.name).read_bytes(), path.name
 
 
 def test_real_core_questions_reproduce_through_http_without_persisting_probes(demo):

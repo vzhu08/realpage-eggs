@@ -1,8 +1,87 @@
 # PLAT-06: integrated snapshot, evidence package and runnable release
 
 Priority: P0 data/release, then P1 evidence package.
-State: Assigned; preparation Ready, execution follows PLAT-05 in Vincent's lane.
-Owner: Vincent / Platform/API. No new session has been started or messaged.
+State: Evidence-package increment verified and ready for review; real snapshot remains blocked on the Core store.
+Owner: Vincent / Platform/API; current Codex session `01a104f0-cfea-7820-ac83-0bb1fb8349c5`.
+Claimed checkout: `C:\Users\vzhu0\PycharmProjects\realpage-eggs\artifacts\platform-release`.
+Branch: `codex/platform-release`; starting SHA: `a7f9447815b53860c0f4a644dc0e00ca776139a1`
+(PR #10 merged, including PLAT-05 and accepted COORD-04). Original PLAT-05 checkout stays unchanged.
+Private data/cache: this checkout's ignored `data/plat06/`; verification artifacts: `artifacts/plat06/`.
+The current user requested beginning the next Platform task. No additional agents are assigned.
+Initial input gap: the transferred `data/plat05-internal-input` contains rules/sources only;
+the full Core store (facts, extraction index, run manifests and caches) is required before real assembly.
+
+## Independent work authorized October 4
+
+The user requested useful Platform work that does not depend on the missing Core transfer.
+This same writer/check-out now claims `navigator/evidence_package.py`,
+`tests/test_evidence_package.py`, additive models/API/CLI/contracts and shared handoff docs.
+Deliver a property/date evidence download and deterministic offline replay using existing
+assist/evaluator services. Verify with labeled synthetic fixtures; real corpus acceptance stays blocked.
+No Core implementation, frontend file, input store, provider job or deployment is part of this increment.
+
+### Independent increment result
+
+Implemented `POST /api/v1/lookup/evidence-package`, `navigator evidence-package` and
+`navigator replay-evidence-package`. A saved property/date/answer state produces a self-contained
+JSON download with original facts, request-local answers, complete assist output, exact source text,
+evidence/uncertainty, code/runtime hashes and input/output/package hashes. Offline replay uses the
+existing Core services, rejects changed content/code or non-reproducing output, and needs no original
+store. Hashes provide integrity checks, not authenticity or legal acceptance. No competition format changed.
+
+Current checks: 303 full backend tests pass (including the organizer-pack check); 16 focused package
+tests pass; contract generation succeeds and the two new synthetic package examples replay exactly.
+Actual Uvicorn HTTP shows unknown -> answered applies -> reset unknown; downloaded JSON replays
+in a fresh process with a nonexistent data directory. The input store remains byte-identical.
+One existing Starlette/httpx deprecation warning remains.
+
+In a disposable frontend copy, generated types/schema checks, typecheck, 80 unit tests and build pass.
+The unmodified frontend's generated files are intentionally stale until UX runs `npm run generate`.
+Windows regeneration also changed older fixtures' source offsets relative to UX's recorded LF text;
+the published source/offset pairs were retained, with only additive schemas/new examples copied back.
+The sandbox initially blocked esbuild parent-directory reads; the same build passed with approved
+escalation. No authored or generated `frontend/**` file in the task checkout was changed.
+
+Changed paths for this increment: `navigator/{api,cli,contracts,models,evidence_package}.py`,
+`tests/test_evidence_package.py`, `contracts/{openapi,research.schema}.json`, the two new package
+examples under `contracts/evidence_examples/`, shared contract/runbook/frontend-handoff/board docs,
+this card and `docs/evidence/plat06_evidence_package.json`. Earlier snapshot/PLAT-04 changes remain
+in the same local branch. Result checkpoint: the local commit on `codex/platform-release` containing
+this handoff. No push or remote integration occurred.
+
+Next action: review the Platform increment; UX-04 regenerates its derived types and adds the download
+control using the documented endpoint. The pending Core transfer, geography reconciliation,
+Core-produced source comparisons and real browser/release acceptance remain separate dependencies.
+Detailed commands, hashes, limitations and results: `docs/evidence/plat06_evidence_package.json`.
+
+## Earlier paused checkpoint
+
+The user confirmed the remaining Core files are not available and requested waiting.
+Changes are saved locally in this isolated checkout; no push, merge, extraction or deployment occurred.
+PLAT-04's `11afb55` service fix, regressions, card, evidence and frontend handoff are reconciled;
+its stale task-board text was not imported. Snapshot assembly and geography-only audit tooling
+are in `scripts/assemble_snapshot.py`, with synthetic checks in `tests/test_snapshot_assembly.py`.
+No shared API schema or frontend file changed.
+
+Verification before pause: focused API/export checks 27 passed / 1 skipped (pack path absent in
+that invocation); isolated full suite with the explicit organizer-pack path 286 passed; contracts
+generation exit 0. The final snapshot tests, including the subsequently added legacy-range/audit
+regression, passed 24 tests. The full suite preceded the final audit helper; it was not rerun after
+the pause request. One existing Starlette/httpx deprecation warning remains.
+
+Real input audit: assembly rejects the incomplete Core transfer before creating output.
+Geography-only audit finds 432 of the 491 recorded resolved addresses reproduce exactly under
+current cached Census checks. Another 59 need reconciliation: 58 encounter house-number mismatches
+and missing retry caches; one resolves with different method/response provenance. The nine originally
+unresolved addresses remain unchanged. These are structural software checks, not legal verification.
+Both input stores remain unchanged; no external geocoder or model requests were made.
+Reports are preserved in `artifacts/plat06/input-audit.json` and
+`artifacts/plat06/geography-audit/geography_audit.json`; isolated checks are in
+`artifacts/plat06/verification`. No combined real snapshot or release readiness is claimed.
+
+Resume only when the user is ready: obtain the complete Core store, reconcile the saved geography
+in a new private candidate, then assemble/verify the common snapshot. Additive contracts,
+evidence packages and the real browser/release journey remain subsequent PLAT-06 work.
 Starting base: current reviewed main containing `3b2d201`, plus accepted COORD-04 fixes
 and the eventual PLAT-05 result. Review local PLAT-04 continuation `11afb55` for inclusion.
 Suggested branch: `codex/platform-release`; record actual checkout, session, starting SHA

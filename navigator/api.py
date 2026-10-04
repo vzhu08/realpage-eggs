@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
@@ -12,12 +12,14 @@ from .evidence import prepare_rules, EvidenceStoreView
 from .fact_inputs import FACT_DEFINITIONS
 from .models import AssistRequest, AssistResponse, EvidenceReport, FactDefinition, SourceContext
 from .retrieval import ContextRetriever, span
+from .models import EvidencePackageRequest, EvidencePackage
+from .evidence_package import build_evidence_package
 
 
 def create_app(root=None, core_services=None):
     store = Store(root or data_dir())
     app = FastAPI(title="Rental Housing Law Navigator", version=VERSION, description=DISCLAIMER, responses={404: {"description": "Unknown ID"}, 422: {"description": "Invalid request"}, 503: {"description": "Dataset or extracted rules unavailable"}})
-    app.add_middleware(CORSMiddleware, allow_origins=[x.strip() for x in os.getenv("NAVIGATOR_CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",") if x.strip()], allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
+    app.add_middleware(CORSMiddleware, allow_origins=[x.strip() for x in os.getenv("NAVIGATOR_CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",") if x.strip()], allow_methods=["GET", "POST"], allow_headers=["Content-Type"], expose_headers=["Content-Disposition"])
 
     def call(fn, *args):
         try: return fn(*args)
@@ -45,6 +47,13 @@ def create_app(root=None, core_services=None):
 
     @app.post("/api/v1/lookup/assist", response_model=AssistResponse, responses={502: {"description": "Core output violated the shared contract"}})
     def assisted_lookup(request: AssistRequest): return call(assist, store, request, core_services)
+
+    @app.post("/api/v1/lookup/evidence-package", response_model=EvidencePackage, responses={502: {"description": "Core output violated the shared contract"}})
+    def evidence_package(request: EvidencePackageRequest, response: Response):
+        package = call(build_evidence_package, store, request, core_services)
+        response.headers["Content-Disposition"] = f'attachment; filename="evidence-package-{package.package_sha256[:12]}.json"'
+        response.headers["Cache-Control"] = "no-store"
+        return package
 
     @app.get("/api/v1/facts", response_model=dict[str, FactDefinition])
     def fact_definitions(): return FACT_DEFINITIONS

@@ -173,6 +173,46 @@
         }
       }
     },
+    "/api/v1/lookup/evidence-package": {
+      "post": {
+        "summary": "Evidence Package",
+        "operationId": "evidence_package_api_v1_lookup_evidence_package_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvidencePackageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvidencePackage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          },
+          "502": {
+            "description": "Core output violated the shared contract"
+          }
+        }
+      }
+    },
     "/api/v1/facts": {
       "get": {
         "summary": "Fact Definitions",
@@ -1179,6 +1219,229 @@
           "message"
         ],
         "title": "EvidenceCheck"
+      },
+      "EvidenceCodeVersion": {
+        "properties": {
+          "pipeline_version": {
+            "type": "string",
+            "title": "Pipeline Version"
+          },
+          "python_version": {
+            "type": "string",
+            "title": "Python Version"
+          },
+          "dependencies": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Dependencies"
+          },
+          "files_sha256": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Files Sha256"
+          },
+          "fingerprint": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Fingerprint"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "pipeline_version",
+          "python_version",
+          "dependencies",
+          "files_sha256",
+          "fingerprint"
+        ],
+        "title": "EvidenceCodeVersion"
+      },
+      "EvidencePackage": {
+        "properties": {
+          "format_version": {
+            "type": "string",
+            "const": "evidence-package-v1",
+            "title": "Format Version",
+            "default": "evidence-package-v1"
+          },
+          "artifact_label": {
+            "type": "string",
+            "enum": [
+              "SYNTHETIC_NOT_FOR_SUBMISSION",
+              "RESEARCH_EVIDENCE_NOT_LEGAL_VALIDATION"
+            ],
+            "title": "Artifact Label"
+          },
+          "request": {
+            "$ref": "#/components/schemas/EvidencePackageRequest"
+          },
+          "inputs": {
+            "$ref": "#/components/schemas/EvidencePackageInputs"
+          },
+          "response": {
+            "$ref": "#/components/schemas/AssistResponse"
+          },
+          "code": {
+            "$ref": "#/components/schemas/EvidenceCodeVersion"
+          },
+          "input_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Input Sha256"
+          },
+          "response_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Response Sha256"
+          },
+          "package_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Package Sha256"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "artifact_label",
+          "request",
+          "inputs",
+          "response",
+          "code",
+          "input_sha256",
+          "response_sha256",
+          "package_sha256",
+          "limitations",
+          "disclaimer"
+        ],
+        "title": "EvidencePackage"
+      },
+      "EvidencePackageInputs": {
+        "properties": {
+          "original_property": {
+            "$ref": "#/components/schemas/PropertyFacts"
+          },
+          "jurisdiction": {
+            "$ref": "#/components/schemas/JurisdictionResolution"
+          },
+          "rules": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Rule"
+            },
+            "type": "object",
+            "title": "Rules"
+          },
+          "sources": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SourceDocument"
+            },
+            "type": "object",
+            "title": "Sources"
+          },
+          "extraction_index": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Extraction Index"
+          },
+          "dataset": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Dataset"
+          },
+          "semantic_reviews": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SemanticReview"
+            },
+            "type": "object",
+            "title": "Semantic Reviews"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "original_property",
+          "jurisdiction",
+          "rules",
+          "sources",
+          "extraction_index",
+          "dataset"
+        ],
+        "title": "EvidencePackageInputs"
+      },
+      "EvidencePackageRequest": {
+        "properties": {
+          "address_id": {
+            "type": "string",
+            "title": "Address Id",
+            "description": "Saved property ID required for an evidence package"
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RawAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date",
+            "title": "As Of",
+            "default": "2026-10-01"
+          },
+          "supplemental_facts": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Supplemental Facts"
+          },
+          "answers": {
+            "items": {
+              "$ref": "#/components/schemas/SupplementalAnswer"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Answers"
+          },
+          "scenario_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scenario Id"
+          },
+          "limits": {
+            "$ref": "#/components/schemas/AnalysisLimits"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "address_id"
+        ],
+        "title": "EvidencePackageRequest"
       },
       "EvidenceReport": {
         "properties": {
