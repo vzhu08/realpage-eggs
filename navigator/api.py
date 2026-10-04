@@ -20,6 +20,7 @@ from .models import EvidencePackageRequest, EvidencePackage
 from .evidence_package import build_evidence_package
 from .models import SourceComparisonsResponse, ChangeSummary
 from .service import source_comparisons, change_summary
+from .source_policy import source_counts, source_use
 
 
 def create_app(root=None, core_services=None, frontend_dist=None):
@@ -42,7 +43,15 @@ def create_app(root=None, core_services=None, frontend_dist=None):
     def health():
         sources, rules, addresses = store.sources(), store.rules(), store.addresses()
         resolved = sum(r.match_quality == "resolved" for r in store.resolutions().values())
-        return {"status": "ok", "version": VERSION, "dataset_readiness": "absent" if not addresses else "partial" if not rules or resolved < len(addresses) or any(not s.text for s in sources.values()) else "available", "sources": len(sources), "rules": len(rules), "addresses": len(addresses), "resolved_municipalities": resolved, "last_extraction_outcome": store.read("latest_extract.json", {}).get("outcome"), "disclaimer": DISCLAIMER}
+        counts = source_counts(sources, rules)
+        outcome = store.read("latest_extract.json", {}).get("outcome")
+        review_needed = counts["source_review_rules"] > 0 or any(r.review_issues or r.semantic_verification == "needs_review" for r in rules.values())
+        extraction_index = store.read("extraction_index.json", {})
+        primary_sources = [s for s in sources.values() if source_use(s).status != "context_only"]
+        source_gap = any(not source_use(s).operative_allowed or extraction_index.get(s.doc_id, {}).get("status") != "complete"
+                         or extraction_index.get(s.doc_id, {}).get("sha256") != s.sha256 for s in primary_sources)
+        partial = not rules or resolved < len(addresses) or source_gap or review_needed or outcome != "success"
+        return {"status": "ok", "version": VERSION, "dataset_readiness": "absent" if not addresses else "partial" if partial else "available", "sources": len(sources), "rules": len(rules), "addresses": len(addresses), "resolved_municipalities": resolved, "last_extraction_outcome": outcome, **counts, "disclaimer": DISCLAIMER}
 
     @app.get("/api/v1/addresses", response_model=AddressPage)
     def addresses(q: str = Query(default="", max_length=200), offset: int = Query(default=0, ge=0), limit: int = Query(default=25, ge=1, le=100)):
@@ -89,7 +98,7 @@ def create_app(root=None, core_services=None, frontend_dist=None):
 
     @app.get("/api/v1/rules/{rule_id}", response_model=RuleDetail)
     def rule_detail(rule_id: str):
-        rules = store.rules()
+        rules, _ = prepare_rules(store)
         if rule_id not in rules: raise HTTPException(404, detail={"code": "unknown_id", "message": "Unknown rule ID"})
         rule = rules[rule_id]
         return {"rule": rule, "versions": [r for r in rules.values() if r.citation == rule.citation and r.jurisdiction == rule.jurisdiction and r.provision_key == rule.provision_key], "disclaimer": DISCLAIMER}
