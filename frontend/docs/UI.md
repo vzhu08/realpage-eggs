@@ -81,9 +81,11 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
 | Validation | Inline, before sending: date, typed answers, comparison form. |
 | 422 | "The request was not accepted" with the field-level detail from the API. |
 | 404 unknown ID | "That selection is no longer in the dataset" → choose another property. |
-| 404 unknown route | "Not available on the connected backend" (planned endpoints) with a visible fallback where one exists. |
+| 404 unknown route | "Not available on this backend" (an older backend without a route) with a visible fallback where one exists. |
 | 503 | "The dataset is not ready": a service state, explicitly not "no rules apply". |
-| 502 | "A backend dependency failed"; no partial result is shown. |
+| 502 / 503 `core_unavailable` | "A backend dependency failed"; no partial result is shown. |
+| Capability unavailable | A successful response whose `capabilities` mark the planner, renderer or evidence as unavailable: the result is shown, the missing part is named, and facts can still be supplied from `GET /facts`. |
+| Evidence failure | A missing or unsupported source keeps the result unknown; each check states its own status and reason. |
 | Transport / timeout | "The service could not be reached", retry, and the demo as an explicit choice. |
 | Contract mismatch | Response refused with the failing paths; extra fields surface as drift in "About this result". |
 | Partial data | Tag in the result bar and a notice listing missing/unprocessed sources. |
@@ -104,16 +106,24 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
   does not change the result on screen; the result keeps its own date until re-run.
 - **Answers** are request-local: kept only in page state, resent in full on every request,
   cleared when the property, date or fixture changes. `null` is sent as an explicit unknown
-  on the assist route; on the `/lookup` fallback an unknown is simply not sent.
+  on the assist route; on the `/lookup` fallback (older backends only) an unknown is not sent.
+- **No client-side planner.** Questions, their order, alternatives and intervals come from
+  `question_plan`. With no plan, the UI lists the facts the evaluator reported missing and
+  types their inputs from `GET /facts`; it does not rank them or predict outcomes.
 - **Demo answers.** Recorded probe values can be applied as `provenance: "demo"` only when
   the data declares itself synthetic. On other data, probes are displayed as hypotheticals
-  and cannot be applied.
-- **Evidence without a report.** When no `EvidenceReport` exists, each of the six rows says
-  "Not checked by the service" and lists only what the lookup data itself shows (capture
-  status, recorded hashes, offsets present, a literal quote comparison in the browser, the
-  rule's recorded semantic status). These are labeled observations, not verdicts.
-- **Encoded rule.** Until Core's renderer is available, the encoded expression is shown as a
-  structural tree (operators, facts, values as stored). It is not an English paraphrase.
+  and cannot be applied. A typed number is matched to a recorded outcome only through an
+  interval the planner declared (`AlternativeOutcome.interval`), never by the UI's own
+  reading of a threshold.
+- **Evidence checks.** Reports arrive with the assisted lookup (or from
+  `GET /rules/{id}/evidence`). The six kinds stay separate; a kind with several results shows
+  each one and a count per status, and a kind the report omits says "No result in the
+  report". With no report at all, each row says "Not checked by the service" and lists only
+  what the lookup data itself shows, labeled as observations, not verdicts.
+- **Encoded rule.** The renderer's text is shown as returned, beside the source quote, with
+  its validation status. The evaluation trace (`question_plan.traces`) is drawn as the
+  evaluator's own condition tree with each node's result. When the renderer is unavailable
+  the stored expression is shown as a structural tree, not an English paraphrase.
 - **Offsets** are treated as Unicode code points, as the contract specifies, not UTF-16 units.
 - **Fonts.** Inter is bundled (`@fontsource-variable/inter`); the serif and monospace use
   system faces, so the app has no runtime font requests.
@@ -122,31 +132,27 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
 
 ## Contract requests
 
-For the Platform steward (models, routes, fixtures) and Core. None of these blocks the UI;
-each is a place where the UI currently shows "not available".
+For the Platform steward (models, routes, fixtures) and Core. None of these blocks the UI.
 
-1. **Evidence examples.** A schema-valid `EvidenceReport` (including a failing/insufficient
-   case) and an `EncodedRuleRendering` example in `contracts/research_examples/`. The UI is
-   built and tested against test doubles shaped by `research.schema.json`.
-2. **`GET /facts` response shape.** `ASSIST_CONTRACT.md` names the route but not its response
-   (list or map of `FactDefinition`?). Needed to type the supply-a-fact inputs when no plan
-   exists; today the control type is chosen from how the encoded rule compares the fact.
-3. **`GET /sources/{id}/context` parameters.** Which span/offset parameters select the
-   context, and the response model (`SourceContext`?). Today context is cut client-side from
-   `GET /sources/{id}`.
-4. **Alternative intervals.** `AlternativeOutcome.interval` is `null` in every fixture. A
-   documented shape (bounds and inclusivity) would let the UI state which values an
-   alternative covers instead of only the probe value.
-5. **Change scenarios list.** A route (or a field on `/health`) listing available `test_id`s
+Resolved by `origin/main` at `3b1ef06` (PR #3–#5) and adopted here: evidence and rendering
+examples (`contracts/examples/assist.json`, `contracts/evidence_examples/`); the `GET /facts`
+shape (a map of `FactDefinition`); `GET /sources/{id}/context` parameters and `SourceContext`;
+the `AlternativeOutcome.interval` shape; and `null` supplemental facts on `/lookup`, which now
+keep the fact in `missing_facts`.
+
+Still open:
+
+1. **Change scenarios list.** A route (or a field on `/health`) listing available `test_id`s
    with titles. The UI offers T1–T5 because the handoff names them.
-6. **Rule titles in `ChangeResult`.** `differences` carries rule IDs and evaluations but no
+2. **Rule titles in `ChangeResult`.** `differences` carries rule IDs and evaluations but no
    rule title/citation, so the changes view shows IDs.
-7. **`two_unresolved_exemptions` fixture.** `address.facts.units` is 12 while
-   `address.missing_facts` still lists `units` and `provenance` has no entry for it. The UI
-   hides the contradiction (a fact with a value is not listed as missing) but the fixture
-   should be consistent.
-8. **`ChangeResult.differences` and `LookupResponse.metadata`** are open objects in the
+3. **`two_unresolved_exemptions` fixture.** `response.lookup.address.facts.units` is 12 while
+   `missing_facts` still lists `units` and `provenance` has no entry for it. The UI hides the
+   contradiction (a fact with a value is not listed as missing); the fixture should be
+   consistent.
+4. **`ChangeResult.differences` and `LookupResponse.metadata`** are open objects in the
    schema. Typed models would let the UI validate them instead of reading defensively.
-9. **Unknown answers on `/lookup`.** `supplemental_facts` with a `null` value currently
-   removes the fact from `missing_facts` in `service.lookup`; the UI therefore never sends
-   `null` on that path. Worth confirming the intended behavior.
+5. **`GET /sources/{id}/context`** returns spans and dependencies for an offset range. The UI
+   does not call it yet: surrounding text is cut from `GET /sources/{id}`. Using it would let
+   the evidence pane show cross-referenced sections; it needs an example payload in
+   `contracts/` to build against.

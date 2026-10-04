@@ -11,6 +11,8 @@ export const examples = {
   unknown: read('contracts/examples/unknown.json'),
   errors: read('contracts/examples/errors.json'),
   decisive: read('contracts/research_examples/decisive_question.json'),
+  /** The implemented API's own response for SYNTH-003 on 2026-11-15 (Platform + Core). */
+  assist: read('contracts/examples/assist.json'),
 };
 
 export const RULE_ID: string = examples.unknown.response.rules[0].team_rule_id;
@@ -91,6 +93,8 @@ export const baseHandlers = (): Record<string, Handler> => ({
 export async function openDemo(page: Page, hash = '#/lookup?mode=demo') {
   await page.goto(`/${hash}`);
   await expect(page.getByRole('note', { name: 'Synthetic demo notice' })).toBeVisible();
+  // The demo adapter loads on demand; wait for the app itself, not just the banner.
+  await expect(page.locator('#main')).toBeVisible();
 }
 
 export async function openLive(page: Page, hash = '#/lookup?mode=live') {

@@ -98,7 +98,11 @@ export function errorFromResponse(status: number, body: unknown, endpoint: strin
       message: routeMissing ? 'This endpoint is not available on the connected backend.' : (message ?? 'That ID is not in the dataset.'),
     });
   }
-  if (status === 503) return new ApiError({ ...base, kind: 'unavailable', message: message ?? 'The dataset or its extracted rules are not available.' });
+  if (status === 503) {
+    // A failing Core service is a dependency failure, not a missing dataset (docs/ASSIST_CONTRACT.md).
+    if (code === 'core_unavailable') return new ApiError({ ...base, kind: 'dependency', message: message ?? 'The question and rendering service failed.' });
+    return new ApiError({ ...base, kind: 'unavailable', message: message ?? 'The dataset or its extracted rules are not available.' });
+  }
   if (status === 502) return new ApiError({ ...base, kind: 'dependency', message: message ?? 'An upstream service returned output the API could not use.' });
   if (status >= 500 && !rawText.trim()) {
     // Vite's dev proxy answers with an empty 500 when its target is not listening.

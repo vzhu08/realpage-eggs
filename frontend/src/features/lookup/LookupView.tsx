@@ -6,6 +6,7 @@ import { ErrorNotice, Skeleton } from '../../components/ui';
 import { formatDate, isIsoDay } from '../../lib/dates';
 import { useSession } from '../../state/session';
 import { useSource } from '../../state/source';
+import { useAsync } from '../../state/useAsync';
 import { useMediaQuery } from '../../state/useMediaQuery';
 import { EvidencePanel } from '../evidence/EvidencePanel';
 import { PropertyFinder, addressLine } from '../property/PropertyFinder';
@@ -30,6 +31,8 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo }: Props) {
   const wide = useMediaQuery('(min-width: 1280px)');
   const mainRef = useRef<HTMLDivElement | null>(null);
   const catalog = useMemo(() => source.catalog?.(), [source]);
+  // Fact meanings and answer forms, for facts the plan does not ask about. Optional: older backends have no /facts.
+  const facts = useAsync(`facts:${source.mode}`, (signal) => source.facts(signal), 'GET /facts');
 
   // Deep link: open the property or fixture case named in the URL when the view mounts.
   useEffect(() => {
@@ -195,6 +198,7 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo }: Props) {
                 outcome={outcome}
                 selectedRuleId={inspecting}
                 relatedCases={relatedCases}
+                factDefinitions={facts.data ?? {}}
                 onOpenCase={openCase}
                 onInspect={(ruleId) => setInspecting(ruleId)}
                 onAnswer={session.answer}
@@ -238,7 +242,7 @@ function Welcome({ mode, cases }: { mode: DataMode; cases: FixtureCaseSummary[] 
           <span>Read what applies, answer factual questions, and inspect the evidence.</span>
         </li>
       </ol>
-      {mode === 'demo' && cases.length > 0 && <p className="hint">In the synthetic demo, the question-flow fixtures in the list open a recorded case in one step.</p>}
+      {mode === 'demo' && cases.length > 0 && <p className="hint">In the synthetic demo, the contract fixtures in the list each open a recorded case in one step.</p>}
     </div>
   );
 }

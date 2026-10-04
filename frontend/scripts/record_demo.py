@@ -1,8 +1,9 @@
 """Record replay data for the frontend's labeled synthetic demo mode.
 
 Every payload written here is produced by the backend's own code paths
-(navigator.demo.build_demo, navigator.service.lookup, navigator.changes.compute_changes)
-against the fictional Maple Harbor store. Nothing is authored by hand and nothing
+(navigator.demo.build_demo, navigator.assist_service.assist — the function behind
+POST /lookup/assist — and navigator.changes.compute_changes) against the fictional
+Maple Harbor store. Nothing is authored by hand and nothing
 here is legal evidence. The frontend replays these responses verbatim; it never
 evaluates rules itself.
 
@@ -29,8 +30,8 @@ sys.path.insert(0, str(ROOT))
 from navigator.changes import compute_changes  # noqa: E402
 from navigator.config import DISCLAIMER, VERSION  # noqa: E402
 from navigator.demo import build_demo  # noqa: E402
-from navigator.models import ChangeRequest, LookupRequest  # noqa: E402
-from navigator.service import lookup  # noqa: E402
+from navigator.assist_service import assist  # noqa: E402
+from navigator.models import AssistRequest, ChangeRequest  # noqa: E402
 from navigator.store import Store, read_json  # noqa: E402
 
 OUTPUT = ROOT / "frontend/src/demo/recorded/synthetic-replay.json"
@@ -47,21 +48,23 @@ DATE_COMPARISONS = [
 ]
 
 
-def head_commit() -> str | None:
+def backend_commit() -> str | None:
+    """The last commit that changed the backend code these payloads were produced by."""
     try:
-        return subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True, check=True).stdout.strip()
+        return subprocess.run(["git", "-C", str(ROOT), "log", "-1", "--format=%H", "--", "navigator", "fixtures", "config"], capture_output=True, text=True, check=True).stdout.strip() or None
     except Exception:
         return None
 
 
 def main() -> None:
-    lookups, rules, sources, changes = [], {}, {}, []
+    assists, rules, sources, changes = [], {}, {}, []
     with TemporaryDirectory() as temporary:
         store = build_demo(Path(temporary) / "synthetic")
         for ident in sorted(store.addresses()):
             for day in LOOKUP_DATES:
-                response = lookup(store, LookupRequest(address_id=ident, as_of=date.fromisoformat(day)))
-                lookups.append({"request": {"address_id": ident, "as_of": day}, "response": response.model_dump(mode="json")})
+                # The same call the API makes for POST /lookup/assist with no answers.
+                response = assist(store, AssistRequest(address_id=ident, as_of=date.fromisoformat(day)))
+                assists.append({"request": {"address_id": ident, "as_of": day}, "response": response.model_dump(mode="json")})
         all_rules = store.rules()
         for ident, rule in sorted(all_rules.items()):
             # Same selection as GET /api/v1/rules/{id} in navigator/api.py.
@@ -92,18 +95,18 @@ def main() -> None:
             "label": "SYNTHETIC_NOT_ACTUAL_LAW",
             "generated_by": "frontend/scripts/record_demo.py",
             "backend_version": VERSION,
-            "backend_commit": head_commit(),
+            "backend_commit": backend_commit(),
             "note": "Verbatim backend output for the fictional Maple Harbor store. Not legal evidence; not a live service.",
             "lookup_dates": LOOKUP_DATES,
         },
-        "lookups": lookups,
+        "assists": assists,
         "rules": rules,
         "sources": sources,
         "changes": changes,
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(payload, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Wrote {OUTPUT.relative_to(ROOT)}: {len(lookups)} lookups, {len(rules)} rules, {len(sources)} sources, {len(changes)} change results")
+    print(f"Wrote {OUTPUT.relative_to(ROOT)}: {len(assists)} assisted lookups, {len(rules)} rules, {len(sources)} sources, {len(changes)} change results")
 
 
 if __name__ == "__main__":

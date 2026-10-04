@@ -5,7 +5,7 @@ import { DemoSource } from '../../src/api/demo';
 import { ApiError } from '../../src/api/errors';
 import { LiveSource } from '../../src/api/live';
 import type { Answer } from '../../src/api/types';
-import { ERROR_EXAMPLES, LOOKUP_EXAMPLES, RESEARCH_FIXTURES } from '../../src/demo/fixtures';
+import { ASSIST_EXAMPLE, ERROR_EXAMPLES, LOOKUP_EXAMPLES, RESEARCH_FIXTURES } from '../../src/demo/fixtures';
 
 const rejects = async (promise: Promise<unknown>): Promise<ApiError> => {
   try {
@@ -55,13 +55,46 @@ test('demo: the address list is the three synthetic properties and search filter
   assert.equal(one.total, 1);
 });
 
-test('demo: a checked-in example is served verbatim and labeled with its path', async () => {
+test('demo: the API\'s checked-in assist example is served verbatim and labeled with its path', async () => {
   const outcome = await new DemoSource().lookup({ address_id: 'SYNTH-003', as_of: '2026-11-15', answers: [] });
-  assert.deepEqual(outcome.lookup, unknownExample.response);
+  assert.deepEqual(outcome.lookup, ASSIST_EXAMPLE.response.lookup);
+  assert.deepEqual(outcome.assist?.question_plan, ASSIST_EXAMPLE.response.question_plan);
   assert.equal(outcome.origin.kind, 'checked_in_example');
-  assert.equal(outcome.origin.detail, 'contracts/examples/unknown.json');
-  assert.equal(outcome.assist, null);
-  assert.equal(outcome.planner.kind, 'no_fixture');
+  assert.equal(outcome.origin.detail, 'contracts/examples/assist.json');
+  assert.equal(outcome.planner.kind, 'response');
+  assert.equal(outcome.fixture, undefined);
+  assert.equal(outcome.assist?.evidence_reports.length, 1);
+  assert.equal(outcome.assist?.encoded_rules.length, 1);
+});
+
+test('demo: an answer on the API example replays through the planner\'s interval', async () => {
+  const outcome = await new DemoSource().lookup({ address_id: 'SYNTH-003', as_of: '2026-11-15', answers: [{ field: 'units', value: 12, provenance: 'user_provided' }] });
+  assert.equal(outcome.lookup.evaluations[0]?.result, 'applies');
+  assert.equal(outcome.dispositions[0]?.status, 'applied');
+  assert.equal(outcome.origin.kind, 'fixture_replay');
+});
+
+test('demo: the ordinary lookup examples show the same evaluations as the recorded responses for those requests', async () => {
+  for (const example of LOOKUP_EXAMPLES) {
+    const outcome = await new DemoSource().lookup({ ...example.request, answers: [] });
+    const summary = (evaluations: typeof outcome.lookup.evaluations) => evaluations.map((item) => [item.team_rule_id, item.result, item.missing_facts, item.uncertainty_reasons, item.explanation]);
+    assert.deepEqual(summary(outcome.lookup.evaluations), summary(example.response.evaluations), example.path);
+    assert.deepEqual(outcome.lookup.address, example.response.address, example.path);
+  }
+});
+
+test('demo: a fixture whose source text is missing is not contradicted by the recorded source', async () => {
+  const demo = new DemoSource();
+  await demo.lookup({ address_id: 'SYNTH-001', as_of: '2026-11-15', answers: [], fixtureCase: 'missing_support' });
+  assert.equal((await demo.source('SYNTHETIC-42')).text, '');
+  await demo.lookup({ address_id: 'SYNTH-001', as_of: '2026-11-15', answers: [] });
+  assert.match((await demo.source('SYNTHETIC-42')).text ?? '', /^SYNTHETIC TEST DOCUMENT/);
+});
+
+test('demo: fact definitions come only from checked-in and recorded questions', async () => {
+  const facts = await new DemoSource().facts();
+  assert.equal(facts?.units?.data_type, 'integer');
+  assert.equal(facts?.certificate_of_occupancy?.data_type, 'date');
 });
 
 test('demo: the contract default date is served from recorded backend output', async () => {
@@ -179,6 +212,24 @@ test('live: 422 validation details are readable', async () => {
   assert.deepEqual(error.details, ['Supply exactly one of address_id or address']);
 });
 
+test('live: a failing Core service (503 core_unavailable) is a dependency failure, not a missing dataset', async () => {
+  const { impl } = fakeFetch({ 'POST /lookup/assist': () => ({ status: 503, body: { detail: { code: 'core_unavailable', message: 'Core service failed; no substitute analysis generated' } } }) });
+  const error = await rejects(new LiveSource('/api/v1', impl).lookup({ address_id: 'SYNTH-003', as_of: '2026-11-15', answers: [] }));
+  assert.equal(error.kind, 'dependency');
+  assert.match(error.message, /no substitute analysis/);
+});
+
+test('live: /facts is a validated map of definitions, and its absence is tolerated', async () => {
+  const units = ASSIST_EXAMPLE.response.question_plan.questions[0]!.fact;
+  const present = fakeFetch({ 'GET /facts': () => ({ status: 200, body: { units, broken: { field: 'broken' } } }) });
+  const live = new LiveSource('/api/v1', present.impl);
+  assert.deepEqual(Object.keys((await live.facts()) ?? {}), ['units']);
+  await live.facts();
+  assert.equal(present.calls.length, 1, 'definitions are fetched once');
+  const absent = fakeFetch({});
+  assert.equal(await new LiveSource('/api/v1', absent.impl).facts(), null);
+});
+
 test('live: 502 is a dependency failure; an empty 500 is treated as an unreachable backend', async () => {
   const dependency = fakeFetch({ 'POST /changes': () => ({ status: 502, body: { detail: { code: 'bad_core_output', message: 'Malformed planner output' } } }) });
   assert.equal((await rejects(new LiveSource('/api/v1', dependency.impl).changes({ test_id: 'T1' }))).kind, 'dependency');
@@ -203,12 +254,12 @@ test('live: a 200 that does not match the contract is refused, not rendered', as
   assert.ok(error.details.some((detail) => detail.includes('compliant')));
 });
 
-test('live: a missing evidence route reports "not implemented" instead of a report', async () => {
+test('live: a missing evidence route reports "not available" instead of a report', async () => {
   const { impl, calls } = fakeFetch({});
   const live = new LiveSource('/api/v1', impl);
   const first = await live.evidenceReport('r-1');
   assert.equal(first.report, null);
-  assert.match(first.unavailable ?? '', /not implemented/);
+  assert.match(first.unavailable ?? '', /not available on this backend/);
   await live.evidenceReport('r-2');
   assert.equal(calls.length, 1, 'the missing route is probed once');
 });
