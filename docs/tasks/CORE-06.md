@@ -57,7 +57,23 @@ Handoff: commit, exact source/run evidence, T1-T5 statuses, corrected versus unr
 counts, comparison examples, provenance and remaining input requests. No full-corpus/legal-accuracy
 claim from software tests. Do not edit Core B planner/renderer or UX files.
 
-## Current readiness follow-up — October 4, 2026
+## Current source review — October 4, 2026
+
+PR #20 delivered 21 new source captures at `9ff4396de5b6bdc5d8daed159a0778f993dd49cc`.
+Daniel / Codex /root, session `01a10555-b81d-7281-95f5-c06399af8238`, is the sole repository writer
+on `codex/core-a-source-review` in `/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence`.
+Claims: this card and `docs/core_rules/source_review_2026_10_04/**` only. Three agents review
+California, New Jersey and Massachusetts sources in parallel, with disjoint temporary reports.
+The previous source-takeover question is superseded by Platform's delivery.
+
+Scope: validate the captured bundle, prepare exact-span candidate corrections and new RuleDraft
+annotations, and probe supported dates with the existing evaluator. Preserve the original store,
+source captures, historical reports, and stopped provider run. Agent annotations remain review
+candidates; they are not a new live extraction, independent human review or a served-store update.
+Municipal publication/operative dates and official verification of the T5 court mirror remain
+Platform dependencies. Complete the independent source review before waiting on those gaps.
+
+## Previous readiness follow-up — October 4, 2026
 
 User request: continue Daniel's tasks after the other developers finish, using parallel agents;
 existing authority covers task PRs and merges. Paid extraction remains paused.

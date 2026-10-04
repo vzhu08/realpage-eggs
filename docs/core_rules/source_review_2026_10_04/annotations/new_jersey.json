@@ -1,0 +1,3039 @@
+{
+  "review_status": "needs_review",
+  "review_type": "agent source-content/encoding review; not independent legal review",
+  "base_commit": "9ff4396de5b6bdc5d8daed159a0778f993dd49cc",
+  "scope": "Six P11 NJ municipal sources plus unchanged saved D069; no provider calls/store mutation.",
+  "source_identity": {
+    "P11_NJ_HOB_ADOPTION": {
+      "url": "https://www.hobokennj.gov/news/city-of-hoboken-outlaws-algorithmic-rent-fixing",
+      "text_sha256": "7dc23b6b5348a62eb091e24a1bc7a9a638fb2aeab256d4ea5b945ff5917a1af4",
+      "manifest_sha256": null,
+      "retrieved_at": "2026-10-04T07:06:38.075589+00:00",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Announcement does not establish statutory publication."
+      ],
+      "raw_path": "docs/platform_sources/2026-10-04/raw/P11_NJ_HOB_ADOPTION.html",
+      "raw_sha256": "0797da1e99249cab6d61c4c23f03df70c3a2dec52e6700b4b37e2c1d6eaea33a",
+      "derivative_path": "docs/platform_sources/2026-10-04/text/P11_NJ_HOB_ADOPTION.txt"
+    },
+    "P11_NJ_HOB_B781_HTML": {
+      "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+      "text_sha256": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+      "manifest_sha256": null,
+      "retrieved_at": "2026-10-04T07:07:20.554550+00:00",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Title identifies158-2; body154-8. Preserve discrepancy.",
+        "Meeting history entries labeled Draft; not certified minutes.",
+        "Effective clause depends on passage and publication; publication date not acquired."
+      ],
+      "raw_path": "docs/platform_sources/2026-10-04/raw/P11_NJ_HOB_B781_HTML.html",
+      "raw_sha256": "8a01d62742ab1dea547487e55f05ba37d5cea0ffbd2ab24beb2a209ecb7c6097",
+      "derivative_path": "docs/platform_sources/2026-10-04/text/P11_NJ_HOB_B781_HTML.txt"
+    },
+    "P11_NJ_HOB_MINUTES": {
+      "url": "https://hobokennj.iqm2.com/Citizens/FileOpen.aspx?Type=12&ID=2206&Inline=True",
+      "text_sha256": "cff215dc6e06b784e8efa305937f1fbffb358257f0bf8bd26ce1e583631499f5",
+      "manifest_sha256": null,
+      "retrieved_at": "2026-10-04T07:07:21.150134+00:00",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "130-page minutes include unrelated business; target B-781 pp10-12 only.",
+        "Minutes approval/certification not verified; signature fields blank.",
+        "Title158-2/body154-8 discrepancy and publication-dependent date retained."
+      ],
+      "raw_path": "docs/platform_sources/2026-10-04/raw/P11_NJ_HOB_MINUTES.pdf",
+      "raw_sha256": "903bcc915ed54420f7a9a31831acb25336c77aeaeac06e22bd305093c2535943",
+      "derivative_path": "docs/platform_sources/2026-10-04/text/P11_NJ_HOB_MINUTES.txt"
+    },
+    "P11_NJ_JC_25_057": {
+      "url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+      "text_sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+      "manifest_sha256": null,
+      "retrieved_at": "2026-10-04T07:05:07.440231+00:00",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "REDLINE PDF: derivative text contains deleted and inserted language together. Review original PDF before extraction.",
+        "Body labels Chapter218 inconsistently as Fees and Charges.",
+        "No explicit effective-date clause found; exact operative date and publication remain unverified."
+      ],
+      "raw_path": "docs/platform_sources/2026-10-04/raw/P11_NJ_JC_25_057.pdf",
+      "raw_sha256": "f8ebbec4d617326b85dee29ced0dec2667fce8735095d5977365000476e1a272",
+      "derivative_path": "docs/platform_sources/2026-10-04/text/P11_NJ_JC_25_057.txt"
+    },
+    "P11_NJ_JC_25_098": {
+      "url": "https://cityofjerseycity.civicweb.net/document/436629/Ordinance%20Amending%20Chapter%20218%20Section%2012.pdf",
+      "text_sha256": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+      "manifest_sha256": null,
+      "retrieved_at": "2026-10-04T07:07:25.573673+00:00",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "REDLINE PDF requires original visual review; flattened numbering is ambiguous.",
+        "Separate change to218-1 security requirements is not an algorithm-definition change.",
+        "No explicit effective-date clause found; publication and exact operative date remain unverified."
+      ],
+      "raw_path": "docs/platform_sources/2026-10-04/raw/P11_NJ_JC_25_098.pdf",
+      "raw_sha256": "37e9bbb0ca07f50e1d969b47d86e0f6976838ac7397dc60d31db5b1a902581ae",
+      "derivative_path": "docs/platform_sources/2026-10-04/text/P11_NJ_JC_25_098.txt"
+    },
+    "P11_NJ_JC_25_105": {
+      "url": "https://cityofjerseycity.civicweb.net/document/437598/Ordinance%20Amending%20Chapter%201,%20Chapters%20218,%20254.pdf",
+      "text_sha256": "d4b6c44f558164f2e16bc731cf3dae6b1b7c082c410a7335596b314b0da50b4a",
+      "manifest_sha256": null,
+      "retrieved_at": "2026-10-04T07:07:25.892116+00:00",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "REDLINE PDF requires original visual review.",
+        "Changes1-25 referenced by25-057; does not explicitly amend218-12. Other housing penalties must not automatically be assigned to algorithm rule.",
+        "Vote page has inconsistent roster/tally details; do not reconcile silently.",
+        "Exact effective/publication date and later amendment completeness unverified."
+      ],
+      "raw_path": "docs/platform_sources/2026-10-04/raw/P11_NJ_JC_25_105.pdf",
+      "raw_sha256": "8154a07c399971db35e3fe32f09b168d1ed4379b51f86f21ea3278b3936e596e",
+      "derivative_path": "docs/platform_sources/2026-10-04/text/P11_NJ_JC_25_105.txt"
+    },
+    "D069": {
+      "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+      "text_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+      "retrieved_at": "2026-10-01T22:56Z",
+      "issues": [
+        "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+      ]
+    }
+  },
+  "visual_pages_reviewed": {
+    "P11_NJ_HOB_MINUTES": [
+      10,
+      11,
+      12
+    ],
+    "P11_NJ_JC_25_057": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "P11_NJ_JC_25_098": [
+      1,
+      2,
+      3
+    ],
+    "P11_NJ_JC_25_105": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "evidence": {
+    "hob_scope_and_conduct": {
+      "span": {
+        "doc_id": "P11_NJ_HOB_B781_HTML",
+        "source_hash": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+        "start": 1233,
+        "end": 2275,
+        "text": "A.    Prohibited conduct. Landlords who rent any residential dwelling unit (defined as any primary residence excluding medical/long-term care or detention facilities) in the City of Hoboken are prohibited from price fixing using algorithmic pricing. For purposes of this chapter, “price fixing using algorithmic pricing”shall be defined as the use of software, algorithms, or data-sharing platforms to collect and analyze nonpublic competitor information from other real estate lessors in order to coordinate, recommend, or implement rental prices, lease terms, or occupancy levels for residential dwelling units among competing real estate lessors.  For purposes of this chapter, “nonpublic competitor information” shall be defined as information including, but not limited to, prices, supply levels, security deposits, ideal occupancy levels, lease contract termination, renewal dates of residential dwelling units or any other material terms that is less than 365 days old and is not widely and readily available to the public at no cost.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": "Exact legislative HTML; visually corroborated by minutes page11. No size threshold.",
+      "agent_review_only": true
+    },
+    "hob_adoption_record": {
+      "span": {
+        "doc_id": "P11_NJ_HOB_B781_HTML",
+        "source_hash": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+        "start": 5324,
+        "end": 5717,
+        "text": "Jul 9, 2025 7:00 PM\nCity Council\nRegular Meeting\nDraft\nMembers of the public who spoke: Adrian Orozco, Ron Bautista, Kevin Weller, Sylvia Aelou, Saoirse Mooney\nRESULT:\nADOPTED [UNANIMOUS]\nMOVER:\nPhil Cohen, Council Vice President\nSECONDER:\nEmily Jabbour, Council-at-Large\nAYES:\nPhil Cohen, Tiffanie Fisher, Emily Jabbour, Paul Presinzano, Joe Quintero, Ruben Ramos, Michael Russo, James Doyle\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "hob_effective_condition": {
+      "span": {
+        "doc_id": "P11_NJ_HOB_B781_HTML",
+        "source_hash": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+        "start": 3832,
+        "end": 3925,
+        "text": "This Ordinance shall take effect immediately upon passage and publication as provided by law.",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "hob_penalties": {
+      "span": {
+        "doc_id": "P11_NJ_HOB_B781_HTML",
+        "source_hash": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+        "start": 2493,
+        "end": 2857,
+        "text": "C.     Penalties. Any person violating the requirements set forth in this chapter shall, upon conviction, be subject to one or more of the following penalties:\n1.              Penalties as prescribed under N.J.S.A. 40:49-5; or,\n2.              By a fine not exceeding $2,000.00; or,\n3.              By a period of community service not exceeding ninety (90) days.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "hob_numbering_discrepancy": {
+      "span": {
+        "doc_id": "P11_NJ_HOB_B781_HTML",
+        "source_hash": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+        "start": 932,
+        "end": 1233,
+        "text": "SECTION ONE: ORDINANCE AMENDING AND SUPPLEMENTING CHAPTER 158 (RENT INCREASES) OF THE HOBOKEN CITY CODE BY ADDING A NEW SECTION 158-2, ENTITLED “PROHIBITION AGAINST ALGORITHMIC RENT-FIXING IN THE RENTAL HOUSING MARKET”\n§ 154-8 PROHIBITION AGAINST ALGORITHMIC RENT-FIXING IN THE RENTAL HOUSING MARKET.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "hob_adoption_announcement": {
+      "span": {
+        "doc_id": "P11_NJ_HOB_ADOPTION",
+        "source_hash": "7dc23b6b5348a62eb091e24a1bc7a9a638fb2aeab256d4ea5b945ff5917a1af4",
+        "start": 1494,
+        "end": 2071,
+        "text": "Mayor Ravi S. Bhalla today announced the City of Hoboken has outlawed the use of algorithmic rent-setting software in the rental housing market, following the adoption of the Administration’s legislation by the City Council during its July 9 meeting. It will now be illegal for landlords renting residential units in Hoboken to engage in price-fixing through algorithmic rent-fixing, meaning they can no longer use software, algorithms, or data-sharing platforms to coordinate, recommend, or implement rental prices, lease terms, or occupancy levels among competing landlords.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "hob_minutes_prohibition": {
+      "span": {
+        "doc_id": "P11_NJ_HOB_MINUTES",
+        "source_hash": "cff215dc6e06b784e8efa305937f1fbffb358257f0bf8bd26ce1e583631499f5",
+        "start": 24565,
+        "end": 25621,
+        "text": "A.    Prohibited conduct. Landlords who rent any residential dwelling unit (defined as any \nprimary residence excluding medical/long-term care or detention facilities) in the City of \nHoboken are prohibited from price fixing using algorithmic pricing. For purposes of this \nchapter, “price fixing using algorithmic pricing”shall be defined as the use of software, \nalgorithms, or data-sharing platforms to collect and analyze nonpublic competitor \ninformation from other real estate lessors in order to coordinate, recommend, or \nimplement rental prices, lease terms, or occupancy levels for residential dwelling units \namong competing real estate lessors.  For purposes of this chapter, “nonpublic competitor \ninformation” shall be defined as information including, but not limited to, prices, supply \nlevels, security deposits, ideal occupancy levels, lease contract termination, renewal dates \nof residential dwelling units or any other material terms that is less than 365 days old and \nis not widely and readily available to the public at no cost. \n \n",
+        "section": null
+      },
+      "page": 11,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "hob_minutes_adopted": {
+      "span": {
+        "doc_id": "P11_NJ_HOB_MINUTES",
+        "source_hash": "cff215dc6e06b784e8efa305937f1fbffb358257f0bf8bd26ce1e583631499f5",
+        "start": 28040,
+        "end": 28296,
+        "text": "Members of the public who spoke: Adrian Orozco, Ron Bautista, Kevin Weller, Sylvia Aelou, Saoirse \nMooney \nRESULT: Adopted  [Unanimous] \nSPONSOR: Phil Cohen \nSECOND: Emily Jabbour \nAYES: Cohen, Fisher, Jabbour, Presinzano, Quintero, Ramos, Russo, Doyle \n \n",
+        "section": null
+      },
+      "page": 12,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_collection_inserted": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 2562,
+        "end": 2632,
+        "text": "collecting nonpublic competitor \ninformation from real estate lessors;",
+        "section": null
+      },
+      "page": 1,
+      "visual_interpretation": "Underlined italic insertion. Adjacent old historical/contemporaneous/public-database limb is struck out and excluded from candidate meaning.",
+      "agent_review_only": true
+    },
+    "jc_collection_deleted": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 2639,
+        "end": 2892,
+        "text": "collecting of historical or contemporaneous prices, price changes, supply \nlevels, occupancy rates, or lease or rental contract termination and renewal dates of residential dwelling units from \ntwo or more real estate lessors or from public databases; \n",
+        "section": null
+      },
+      "page": 1,
+      "visual_interpretation": "Visually struck out. Evidence of redline only; do not use as operative coverage.",
+      "agent_review_only": true
+    },
+    "jc_process": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 3154,
+        "end": 3303,
+        "text": "1.analyzing or processing of the information described in subparagraph (1)(a)(i) using a system, software, or process \nthat uses computation; and \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_recommend": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 3303,
+        "end": 3471,
+        "text": "2.Recommending to any other party rental prices, lease terms, or occupancy levels to a real estate lessorusing the \ninformation described in subparagraph (1)(a)(i). \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": "Italic underlined additions include to any other party and using the information. Preserve awkward surviving sentence rather than silently repairing cross-reference.",
+      "agent_review_only": true
+    },
+    "jc_same_owner": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 3471,
+        "end": 3636,
+        "text": "a.This definition exempts owners of multiple properties for actions related exclusively to multiple properties \ncontrolled by the same rental property owner; and \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": "Italic underlined insertion; exemption is actions exclusively concerning properties controlled by same rental-property owner, not merely small owners.",
+      "agent_review_only": true
+    },
+    "jc_agent_exemption": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 3636,
+        "end": 3790,
+        "text": "3.Licensed Real Estate Agents are not included in this definition so long as they are operating in accordance with all \napplicable state regulations.  \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_dwelling": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 3906,
+        "end": 4166,
+        "text": "iii.“Residential dwelling unit” means any house, apartment, accessory unit, or other unit intended to be used as a \nperson’s primary residence; and does not include inpatient medical care, licensed long-term care, and detention or \ncorrectional facilities. \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_lessor": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 4166,
+        "end": 4431,
+        "text": "iv.“Real estate lessor” means any individual, corporation, partnership, association, joint-stock company, trust, or \nunincorporated organization that owns real property and leases such property or any portion thereof in the form of a \nresidential dwelling unit. \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_provider": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 4431,
+        "end": 4749,
+        "text": "v.“Service provider” means any person that performs a coordination function, as defined in Section 1(a)(i)(1) of this \nAct, for any real estate lessor or rentor.  \n1.Licensed Real Estate Agents are not included in this definition so long as they are operating in accordance with all \napplicable state regulations.  \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_recent_nonpublic": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 4749,
+        "end": 5110,
+        "text": "vi.“Nonpublic Competitor Information” means information, including but not limited to prices, supply levels, \nsecurity deposits, ideal occupancy levels, lease contract termination, renewal dates of residential dwelling units or \nany other material lease terms that is less than 365 days old and is not widely and readily available to the public at \nno cost. \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": "Underlined italic new definition; less than365days AND not widely/readily available free.",
+      "agent_review_only": true
+    },
+    "jc_service_purchase_prohibition": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 5132,
+        "end": 5336,
+        "text": "a.It is unlawful for any real estate lessor, agent, or subcontractor thereof, to subscribe to, contract with, or otherwise \nexchange anything of value in return for the services of a Service Provider. \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_provider_agreement_prohibition": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 5336,
+        "end": 5550,
+        "text": "b.No service provider shall facilitate an agreement not to compete among real estate lessors with respect to any \naspect of residential dwelling units, including rental pricing, fees, or any other rental terms. \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_algorithm_penalties": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 7140,
+        "end": 7519,
+        "text": "i.A first violation of § 218-12 shall be punishable as provided in Chapter 1, General Provisions, Art. I, § 1-25. \nSubsequent violations shall be punished by a fine of not less than $100 and up to $2000, as provided in Chapter 1, \nGeneral Provisions, Art. I, § 1-25. Each day during which an owner is in violation of § 218-12 shall constitute a \nseparate violation hereunder. \n \n",
+        "section": null
+      },
+      "page": 3,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_adoption": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 10279,
+        "end": 10343,
+        "text": "Adopted on second and final reading after hearing on May 21 2025",
+        "section": null
+      },
+      "page": 4,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_mayor_approval": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 10598,
+        "end": 10647,
+        "text": "Date to Mayor: May 22 2025 \nApproved: May 22 2025",
+        "section": null
+      },
+      "page": 4,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_old_section_renumbering": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_057",
+        "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+        "start": 8380,
+        "end": 8721,
+        "text": "§ 218-1213. - Exempt dwellings. \nNo changes \n \n§ 218-1314. - Occupancy required. \nNo changes \n \n§ 218-1415. - Extension of time period. \nNo Changes \n \n§ 218-1516. - Violations and penalties \nNo Changes \n \n§ 218-1617. - Conflicts with state law. \nNo Changes \n \n§ 218-1718. - Findings. \nNo Changes \n \n§ 218-1819. - Seating requirements. \n \n  \n",
+        "section": null
+      },
+      "page": 3,
+      "visual_interpretation": "Existing adjacent section headings are renumbered, with No changes; these headings supply no new algorithm-specific exemption or state-conflict text.",
+      "agent_review_only": true
+    },
+    "jc_disclosure_duty": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_098",
+        "source_hash": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+        "start": 3226,
+        "end": 3459,
+        "text": "a. Any landlord must include, with any lease or written notice of rent increase for a residential dwelling unit, a sworn \ndisclosure statement, executed under penalty of perjury, in substantially the following form: \n \n              ",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": "Underlined insertion; applies with any lease OR written rent-increase notice, despite narrower subsection title.",
+      "agent_review_only": true
+    },
+    "jc_disclosure_form": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_098",
+        "source_hash": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+        "start": 3563,
+        "end": 4552,
+        "text": "I, the undersigned, being the landlord or an authorized agent of the landlord for the property located at \n____________________, for dwelling unit ______, hereby certify under the penalty of perjury that: \n \n               1. No entity subscribed to, contracted with, or otherwise exchanged anything of value in return for the \nservices of a Service Provider, in   accordance with Chapter 218-12.2, in connection with the rent amount of \n$______ to $_______ proposed on ____________.. \n \n               2. The methodology used to determine this rent increase did not make use of any shared non-public \ncompetitor data. \n \n               3. I understand that, as elaborated in the Truth in Renting Guide and N.J.S.A. 56:8-2, any deception, fraud, \nmisrepresentation, with connection in information important provide refusal the or failure knowing or to \nadvertisement of real estate, including this lease, is illegal in New Jersey under the Consumer Fraud Act, N.J.S.A. \n56:8-1 et seq. \n  \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": "Full inserted form. pypdf word order corrupts item3; visual PDF has ordinary deception/fraud/knowing failure/refusal text. Do not silently replace derivative wording.",
+      "agent_review_only": true
+    },
+    "jc_definition_unchanged": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_098",
+        "source_hash": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+        "start": 2880,
+        "end": 2917,
+        "text": "1. NO CHANGES \n \n \n2. NO CHANGES \n. \n",
+        "section": null
+      },
+      "page": 1,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_security_unrelated": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_098",
+        "source_hash": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+        "start": 1589,
+        "end": 2503,
+        "text": "A. Every owner or agent of an owner of a multiple dwelling of 100 or more dwelling units shall furnish a minimum \nof one uniformed security guard for each residential building in the property or community upon its premises \ntwenty-four (24) hours a day, seven days a week. The owner or agent of the multiple dwelling shall post conspicuous \nsignage inside the common areas and entrance points of the building that shall provide the direct onsite contact \ninformation of the uniformed security guards present. For the purposes of this chapter, a \"uniformed security guard\" \nshall consist of a Licensed New Jersey Security Guard, as specified in N.J.S.A. § 45:19A-1 et seq. and N.J.A.C. \n§13:55A-1.1 et seq, hired for the purpose of protection of persons or property, real or personal, from injury or harm \nthat wears a particular set of clothes that clearly identifies them as a security guard.                 \n  \n",
+        "section": null
+      },
+      "page": 1,
+      "visual_interpretation": "100-unit uniformed security rule in218-1, not algorithmic scope or a new size threshold for218-12.",
+      "agent_review_only": true
+    },
+    "jc_disclosure_adoption": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_098",
+        "source_hash": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+        "start": 5802,
+        "end": 5866,
+        "text": "Adopted on second and final reading after hearing on Sep 24 2025",
+        "section": null
+      },
+      "page": 3,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_disclosure_mayor": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_098",
+        "source_hash": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+        "start": 6121,
+        "end": 6170,
+        "text": "Date to Mayor: Sep 25 2025 \nApproved: Sep 25 2025",
+        "section": null
+      },
+      "page": 3,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_general_penalty_inserted": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_105",
+        "source_hash": "d4b6c44f558164f2e16bc731cf3dae6b1b7c082c410a7335596b314b0da50b4a",
+        "start": 1697,
+        "end": 2571,
+        "text": "all penalties for violating any provisions of this Code \nare subject to the maximums authorized by law (including N.J.S.A. 40:49-5) of a fine of up to two thousand dollars \n($2,000.00) and/or imprisonment for a period of up to ninety (90) days and/or a period of community service not \nexceeding ninety (90) days; provided, however, that for the violation of an ordinance pertaining to solid waste \ndisposal the maximum penalty shall be ten thousand dollars ($10,000.00), and the minimum penalty shall be two \nthousand five hundred dollars ($2,500.00); provided further, however, that for violations of Chapter 287 by owners \nof multiple-family residential property, the minimum penalty shall be: \n1.Two hundred fifty dollars ($250.00) for properties that are one (1) to four (4) units; and \n2.Five hundred dollars ($500.00) for properties that are five (5) or more units. \n",
+        "section": null
+      },
+      "page": 1,
+      "visual_interpretation": "Starts at underlined replacement. Following preserved general maximums are distinct from targeted housing mandatory minimums.",
+      "agent_review_only": true
+    },
+    "jc_daily_old_deleted": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_105",
+        "source_hash": "d4b6c44f558164f2e16bc731cf3dae6b1b7c082c410a7335596b314b0da50b4a",
+        "start": 2571,
+        "end": 2813,
+        "text": "B.Each day a violation of any provision of this Code or any ordinance shall continue shall constitute a separate \noffense. This section shall not affect any mandatory minimum penalty established by any section of the Code or \nordinance. \n \n \n",
+        "section": null
+      },
+      "page": 1,
+      "visual_interpretation": "Visually struck out; replaced by more detailed continuing-offense paragraphs.",
+      "agent_review_only": true
+    },
+    "jc_continuing_offense_new": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_105",
+        "source_hash": "d4b6c44f558164f2e16bc731cf3dae6b1b7c082c410a7335596b314b0da50b4a",
+        "start": 2813,
+        "end": 4113,
+        "text": "B.Continuing violations. \n1.Continuing offense:  A period that begins with a first violation and continues until compliance is established. Each \nday that a violation of this Code or any ordinance continues shall constitute a separate offense. \n \nPage 1 of 5\n\f\nOrd. 25-105 \n \nAn Ordinance amending and supplementing Chapter 1 (General Provisions) Chapter 218 (Multiple \nDwellings), Chapter 260 (Rent Control), Chapter 254 (Property Maintenance) and Chapter 1 of the Code \nof Ordinances of the City of Jersey City to establish mandatory minimums for violations of housing-\nrelated ordinances. \n \n2.Single summons sufficient: The City may charge a continuing offense in a single summons, and upon conviction \nby plea or trial, the court may impose a separate penalty for each day the violation continued without the need to \nissue a separate summons for each day. For purposes of calculating daily penalties, the period of violation shall run \nfrom the date of offense alleged on the summons and shall continue until the violation is abated or until conviction \nby plea or trial, whichever is first. \n3.Stacking: Penalties shall be assessed per violation, per day. \n4.Mandatory minimums: Nothing in this section alters any mandatory minimum penalty established elsewhere in this \nCode or ordinance. \n \n",
+        "section": null
+      },
+      "page": 1,
+      "visual_interpretation": "Underlined inserted continuing-offense paragraphs continue on PDFpage2.",
+      "agent_review_only": true
+    },
+    "jc_targeted_housing_minima": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_105",
+        "source_hash": "d4b6c44f558164f2e16bc731cf3dae6b1b7c082c410a7335596b314b0da50b4a",
+        "start": 5132,
+        "end": 6552,
+        "text": "ARTICLE I - Security Service and Security Cameras \n \n§ 218-2.1. - Violations and penalties. \n \nAn owner or managing agent who fails to comply with the provisions of this article shall, upon conviction, be \npunishable as provided in Chapter 1, General Provisions, § 1-25, except that there shall be a mandatory minimum \nfine of $100 per unit per day of the continuing offense.  \n  \nARTICLE II - Registration of Vacant Dwelling Units \n \n§ 218-6. - Violations and penalties.  \nViolation of any part of this article by an owner shall, upon conviction, be punishable as provided in Chapter 1, \nGeneral Provisions, § 1-25. \n \nA violation of Article II shall, upon conviction, be punishable by a fine of up to $2000 per unit, as provided in \nChapter 1, General Provisions, § 1-25, but not less than $100 per unit per day of the continuing offense \n \nARTICLE III - Harassment and Eviction  \n \n§ 218-11. - Violations and penalties. \n \nA.A violation of this article shall be punishable by a fine or imprisonment as set forth in Chapter 1, General \nProvisions, § 1-25, but there shall be a mandatory minimum of $100, per lawful occupant per day of the continuing \noffense. \n \nB.Each violation of this article shall constitute a separate violation independent of any other section or any order \nissued pursuant to this chapter. Each day's failure to comply with this article or subsection shall constitute a separate \nviolation. \n \n",
+        "section": null
+      },
+      "page": 2,
+      "visual_interpretation": "Targets218-2.1,218-6,218-11; does not target218-12. Preserve scope; no algorithm $100/unit/day import.",
+      "agent_review_only": true
+    },
+    "jc_penalty_adoption": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_105",
+        "source_hash": "d4b6c44f558164f2e16bc731cf3dae6b1b7c082c410a7335596b314b0da50b4a",
+        "start": 10085,
+        "end": 10148,
+        "text": "Adopted on second and final reading after hearing on Oct 8 2025",
+        "section": null
+      },
+      "page": 4,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "jc_penalty_mayor": {
+      "span": {
+        "doc_id": "P11_NJ_JC_25_105",
+        "source_hash": "d4b6c44f558164f2e16bc731cf3dae6b1b7c082c410a7335596b314b0da50b4a",
+        "start": 10398,
+        "end": 10445,
+        "text": "Date to Mayor: Oct 9 2025 \nApproved: Oct 9 2025",
+        "section": null
+      },
+      "page": 4,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_approval": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 213,
+        "end": 253,
+        "text": "2026, CHAPTER 43,\napproved July 20, 2026",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_algorithmic_device": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 3190,
+        "end": 3724,
+        "text": "“\nAlgorithmic\ndevice” means a device that uses one or more algorithms to process or otherwise\nperform calculations of data, including, but not limited to, data concerning\nrental prices, material lease terms, or occupancy levels.  An algorithmic\ndevice does not include: (1) a spreadsheet that (a) operates without artificial\nintelligence and (b) requires human analysis to process or otherwise perform\ncalculations of data; or (2) a database that only uses an algorithm to query\nunprocessed data stored on or within that database\n.\n1\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": "Delivered statute carries amendment-marker 1 tokens; bracketed deletion in coordinator definition is separately excluded.",
+      "agent_review_only": true
+    },
+    "nj_sensitive_information": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 3724,
+        "end": 3995,
+        "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_coordination_definition": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 3995,
+        "end": 5021,
+        "text": "“Coordinating function” means:\n(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_coordination_exclusions": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 5021,
+        "end": 6060,
+        "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_coordinator": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 6060,
+        "end": 6547,
+        "text": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": "Bracketed a software or data analytics service is deleted material; algorithmic revenue management software or an algorithmic device is inserted text.",
+      "agent_review_only": true
+    },
+    "nj_nonpublic": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 6547,
+        "end": 6773,
+        "text": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_common_control_owner": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 7317,
+        "end": 7623,
+        "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_dwelling": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 7623,
+        "end": 7902,
+        "text": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_prohibition": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 8071,
+        "end": 8909,
+        "text": "4.    It\nshall be unlawful and a violation of the “New Jersey Antitrust Act,” P.L.1970,\nc.73 (C.56:9-1 et seq.) for:\na.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\nb.    a coordinator to facilitate a tacit or express\nagreement among rental property owners that restricts competition with respect\nto residential dwelling units, including by performing a coordinating\nfunction;\nc.     two or more persons to engage in\n1\nor\notherwise facilitate\n1\nparallel pricing coordination;\nd.    any agent or representative of a coordinator or\nsubcontractor thereof to engage in parallel pricing coordination; or\ne.     any person to perform a coordinating function.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_cumulative": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 9115,
+        "end": 9341,
+        "text": "6.    a.  This act shall not authorize or permit any\nconduct already unlawful pursuant to the “New Jersey Antitrust Act,” P.L.1970,\nc.73 (C.56:9-1 et seq.), or any other law, and shall be construed as in\naddition to that act.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_qualified_municipal_conflict": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 9341,
+        "end": 9571,
+        "text": "b.    A municipality shall be prohibited from enacting\nan ordinance that conflicts with this act.  This subsection shall not be\nconstrued to prohibit the enactment of ordinances explicitly authorized or\nrequired by any other law.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    },
+    "nj_effective_formula": {
+      "span": {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 10175,
+        "end": 10284,
+        "text": "9.    This act shall take effect on the first day of\nthe twelfth month next following the date of enactment.\n",
+        "section": null
+      },
+      "page": null,
+      "visual_interpretation": null,
+      "agent_review_only": true
+    }
+  },
+  "lifecycle": {
+    "P11_NJ_HOB_B781_HTML": {
+      "adopted": "2025-07-09",
+      "approval": null,
+      "effective_date": null,
+      "support": [
+        "hob_adoption_record",
+        "hob_minutes_adopted",
+        "hob_adoption_announcement",
+        "hob_effective_condition"
+      ],
+      "uncertainty": "Publication not established; minutes certification not verified; title/body numbering mismatch."
+    },
+    "P11_NJ_JC_25_057": {
+      "adopted": "2025-05-21",
+      "approval": "2025-05-22",
+      "effective_date": null,
+      "support": [
+        "jc_adoption",
+        "jc_mayor_approval"
+      ],
+      "uncertainty": "No effective clause in captured ordinance; publication/general commencement authority and later amendments not established."
+    },
+    "P11_NJ_JC_25_098": {
+      "adopted": "2025-09-24",
+      "approval": "2025-09-25",
+      "effective_date": null,
+      "support": [
+        "jc_disclosure_adoption",
+        "jc_disclosure_mayor"
+      ],
+      "uncertainty": "Separate disclosure amendment; publication/operative date not established."
+    },
+    "P11_NJ_JC_25_105": {
+      "adopted": "2025-10-08",
+      "approval": "2025-10-09",
+      "effective_date": null,
+      "support": [
+        "jc_penalty_adoption",
+        "jc_penalty_mayor"
+      ],
+      "uncertainty": "Roster/tally differs on final-vote page; preserve as printed. Publication/operative date and later completeness unverified."
+    },
+    "D069": {
+      "enactment_approval": "2026-07-20",
+      "effective_date_candidate": "2027-07-01",
+      "derivation": "Month1 next following enactment=August2026; month12=July2027; first day=2027-07-01. Agent calendar derivation from§9, not quoted literal date.",
+      "support": [
+        "nj_approval",
+        "nj_effective_formula"
+      ],
+      "uncertainty": "Delivered source manifest mismatch retained; semantic/support review required; do not activate state restrictions on2026-10-01."
+    }
+  },
+  "candidate_rules": [
+    {
+      "candidate_id": "nj-hob-b781-prohibited-conduct",
+      "rule_draft": {
+        "jurisdiction": "Hoboken, NJ",
+        "level": "city",
+        "category": "algorithmic_rent_setting",
+        "provision_key": "nj-hob-b781-prohibited-conduct",
+        "title": "Hoboken algorithmic price-fixing prohibition",
+        "requirement": "A landlord renting a residential dwelling in Hoboken must not use software, algorithms or data-sharing platforms to collect/analyze nonpublic competitor information from other lessors to coordinate, recommend or implement rents, lease terms or occupancy levels among competing lessors.",
+        "key_value": null,
+        "citation": "Hoboken B-781, Section One (title158-2/body154-8), A",
+        "quoted_span": "A.    Prohibited conduct. Landlords who rent any residential dwelling unit (defined as any primary residence excluding medical/long-term care or detention facilities) in the City of Hoboken are prohibited from price fixing using algorithmic pricing. For purposes of this chapter, “price fixing using algorithmic pricing”shall be defined as the use of software, algorithms, or data-sharing platforms to collect and analyze nonpublic competitor information from other real estate lessors in order to coordinate, recommend, or implement rental prices, lease terms, or occupancy levels for residential dwelling units among competing real estate lessors.  For purposes of this chapter, “nonpublic competitor information” shall be defined as information including, but not limited to, prices, supply levels, security deposits, ideal occupancy levels, lease contract termination, renewal dates of residential dwelling units or any other material terms that is less than 365 days old and is not widely and readily available to the public at no cost.\n",
+        "source_doc_id": "P11_NJ_HOB_B781_HTML",
+        "source_url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+        "coverage_conditions": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "args": [],
+              "fact": "residential",
+              "value": true,
+              "reason": null
+            },
+            {
+              "op": "unsupported",
+              "args": [],
+              "fact": null,
+              "value": null,
+              "reason": "Establish landlord renting primary-residence unit and covered collection/analysis of competitor data (<365days old and not widely/readily available free) for coordinated prices/terms/occupancy. Generic software use alone is insufficient."
+            }
+          ],
+          "fact": null,
+          "value": null,
+          "reason": null
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Medical/long-term-care and detention facilities excluded; establish dwelling use. Do not invent size, owner-occupancy, rent-control or brokerage exemptions."
+        },
+        "exemptions": "Medical/long-term-care and detention facilities excluded; establish dwelling use. Do not invent size, owner-occupancy, rent-control or brokerage exemptions.",
+        "lifecycle": "enacted",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": null,
+        "status_events": [],
+        "evidence": [
+          {
+            "doc_id": "P11_NJ_HOB_B781_HTML",
+            "quote": "A.    Prohibited conduct. Landlords who rent any residential dwelling unit (defined as any primary residence excluding medical/long-term care or detention facilities) in the City of Hoboken are prohibited from price fixing using algorithmic pricing. For purposes of this chapter, “price fixing using algorithmic pricing”shall be defined as the use of software, algorithms, or data-sharing platforms to collect and analyze nonpublic competitor information from other real estate lessors in order to coordinate, recommend, or implement rental prices, lease terms, or occupancy levels for residential dwelling units among competing real estate lessors.  For purposes of this chapter, “nonpublic competitor information” shall be defined as information including, but not limited to, prices, supply levels, security deposits, ideal occupancy levels, lease contract termination, renewal dates of residential dwelling units or any other material terms that is less than 365 days old and is not widely and readily available to the public at no cost.\n",
+            "start": 1233,
+            "end": 2275,
+            "supports": [
+              "requirement",
+              "coverage_conditions",
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_HOB_B781_HTML",
+            "quote": "This Ordinance shall take effect immediately upon passage and publication as provided by law.",
+            "start": 3832,
+            "end": 3925,
+            "supports": [
+              "effective_date"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_HOB_B781_HTML",
+            "quote": "Jul 9, 2025 7:00 PM\nCity Council\nRegular Meeting\nDraft\nMembers of the public who spoke: Adrian Orozco, Ron Bautista, Kevin Weller, Sylvia Aelou, Saoirse Mooney\nRESULT:\nADOPTED [UNANIMOUS]\nMOVER:\nPhil Cohen, Council Vice President\nSECONDER:\nEmily Jabbour, Council-at-Large\nAYES:\nPhil Cohen, Tiffanie Fisher, Emily Jabbour, Paul Presinzano, Joe Quintero, Ruben Ramos, Michael Russo, James Doyle\n",
+            "start": 5324,
+            "end": 5717,
+            "supports": [
+              "lifecycle"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_HOB_B781_HTML",
+            "quote": "C.     Penalties. Any person violating the requirements set forth in this chapter shall, upon conviction, be subject to one or more of the following penalties:\n1.              Penalties as prescribed under N.J.S.A. 40:49-5; or,\n2.              By a fine not exceeding $2,000.00; or,\n3.              By a period of community service not exceeding ninety (90) days.\n",
+            "start": 2493,
+            "end": 2857,
+            "supports": [
+              "penalties"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": "Upon conviction: penalties prescribed by N.J.S.A.40:49-5 OR fine not exceeding$2,000 OR community service not exceeding90days. Enumerated jail term was removed before first reading; statutory cross-reference must be independently reviewed.",
+        "review_issues": [
+          "Agent source review only; independent human legal/semantic review remains required.",
+          "Conduct and statutory exclusions are not available as validated factual inputs; preserve unsupported predicates.",
+          "Adoption and/or approval is supported, but statutory publication and exact operative date are not established."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      },
+      "semantic_verification_required": "needs_review",
+      "promotion": "review-only; do not persist as a completed provider extraction or legal-reviewed rule"
+    },
+    {
+      "candidate_id": "nj-jc21812-service-purchase",
+      "rule_draft": {
+        "jurisdiction": "Jersey City, NJ",
+        "level": "city",
+        "category": "algorithmic_rent_setting",
+        "provision_key": "nj-jc21812-service-purchase",
+        "title": "Jersey City purchase of coordination service prohibition",
+        "requirement": "A real-estate lessor or its agent/subcontractor must not subscribe, contract or give anything of value for a defined Service Provider’s coordination services.",
+        "key_value": null,
+        "citation": "Jersey City Ord.25-057 §218-12.2(a)",
+        "quoted_span": "a.It is unlawful for any real estate lessor, agent, or subcontractor thereof, to subscribe to, contract with, or otherwise \nexchange anything of value in return for the services of a Service Provider. \n \n",
+        "source_doc_id": "P11_NJ_JC_25_057",
+        "source_url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+        "coverage_conditions": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "args": [],
+              "fact": "residential",
+              "value": true,
+              "reason": null
+            },
+            {
+              "op": "unsupported",
+              "args": [],
+              "fact": null,
+              "value": null,
+              "reason": "Resolve actor, service purchase, collection of nonpublic competitor information (<365days and not widely/readily available free), computational processing and recommendation; struck public-data alternative is excluded."
+            }
+          ],
+          "fact": null,
+          "value": null,
+          "reason": null
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Residential definition excludes inpatient medical, licensed long-term care and detention/correctional facilities; same-owner-exclusive property actions and licensed agents acting under applicable state regulations are excluded from definitions."
+        },
+        "exemptions": "Residential definition excludes inpatient medical, licensed long-term care and detention/correctional facilities; same-owner-exclusive property actions and licensed agents acting under applicable state regulations are excluded from definitions.",
+        "lifecycle": "enacted",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": null,
+        "status_events": [],
+        "evidence": [
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "a.It is unlawful for any real estate lessor, agent, or subcontractor thereof, to subscribe to, contract with, or otherwise \nexchange anything of value in return for the services of a Service Provider. \n \n",
+            "start": 5132,
+            "end": 5336,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "collecting nonpublic competitor \ninformation from real estate lessors;",
+            "start": 2562,
+            "end": 2632,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "1.analyzing or processing of the information described in subparagraph (1)(a)(i) using a system, software, or process \nthat uses computation; and \n \n",
+            "start": 3154,
+            "end": 3303,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "2.Recommending to any other party rental prices, lease terms, or occupancy levels to a real estate lessorusing the \ninformation described in subparagraph (1)(a)(i). \n \n",
+            "start": 3303,
+            "end": 3471,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "v.“Service provider” means any person that performs a coordination function, as defined in Section 1(a)(i)(1) of this \nAct, for any real estate lessor or rentor.  \n1.Licensed Real Estate Agents are not included in this definition so long as they are operating in accordance with all \napplicable state regulations.  \n \n",
+            "start": 4431,
+            "end": 4749,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "vi.“Nonpublic Competitor Information” means information, including but not limited to prices, supply levels, \nsecurity deposits, ideal occupancy levels, lease contract termination, renewal dates of residential dwelling units or \nany other material lease terms that is less than 365 days old and is not widely and readily available to the public at \nno cost. \n \n",
+            "start": 4749,
+            "end": 5110,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "iii.“Residential dwelling unit” means any house, apartment, accessory unit, or other unit intended to be used as a \nperson’s primary residence; and does not include inpatient medical care, licensed long-term care, and detention or \ncorrectional facilities. \n \n",
+            "start": 3906,
+            "end": 4166,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "a.This definition exempts owners of multiple properties for actions related exclusively to multiple properties \ncontrolled by the same rental property owner; and \n \n",
+            "start": 3471,
+            "end": 3636,
+            "supports": [
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "3.Licensed Real Estate Agents are not included in this definition so long as they are operating in accordance with all \napplicable state regulations.  \n \n",
+            "start": 3636,
+            "end": 3790,
+            "supports": [
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "Adopted on second and final reading after hearing on May 21 2025",
+            "start": 10279,
+            "end": 10343,
+            "supports": [
+              "lifecycle"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "Date to Mayor: May 22 2025 \nApproved: May 22 2025",
+            "start": 10598,
+            "end": 10647,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": "First violation cross-refers to general§1-25; subsequent violation$100–$2,000; each day separate.25-105 general penalty changes need version/date review; no import of other housing minima.",
+        "review_issues": [
+          "Agent source review only; independent human legal/semantic review remains required.",
+          "Conduct and statutory exclusions are not available as validated factual inputs; preserve unsupported predicates.",
+          "Adoption and/or approval is supported, but statutory publication and exact operative date are not established."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      },
+      "semantic_verification_required": "needs_review",
+      "promotion": "review-only; do not persist as a completed provider extraction or legal-reviewed rule"
+    },
+    {
+      "candidate_id": "nj-jc21812-provider-agreement",
+      "rule_draft": {
+        "jurisdiction": "Jersey City, NJ",
+        "level": "city",
+        "category": "algorithmic_rent_setting",
+        "provision_key": "nj-jc21812-provider-agreement",
+        "title": "Jersey City provider agreement-not-to-compete prohibition",
+        "requirement": "A defined Service Provider must not facilitate an agreement not to compete among real-estate lessors on residential pricing, fees or other rental terms.",
+        "key_value": null,
+        "citation": "Jersey City Ord.25-057 §218-12.2(b)",
+        "quoted_span": "b.No service provider shall facilitate an agreement not to compete among real estate lessors with respect to any \naspect of residential dwelling units, including rental pricing, fees, or any other rental terms. \n \n",
+        "source_doc_id": "P11_NJ_JC_25_057",
+        "source_url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+        "coverage_conditions": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "args": [],
+              "fact": "residential",
+              "value": true,
+              "reason": null
+            },
+            {
+              "op": "unsupported",
+              "args": [],
+              "fact": null,
+              "value": null,
+              "reason": "Establish defined service-provider status and facilitation of agreement not to compete; property unit count cannot establish this conduct."
+            }
+          ],
+          "fact": null,
+          "value": null,
+          "reason": null
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Carry full defined-service/provider/dwelling limitations, same-owner-exclusive actions, and compliant licensed-agent exclusions."
+        },
+        "exemptions": "Carry full defined-service/provider/dwelling limitations, same-owner-exclusive actions, and compliant licensed-agent exclusions.",
+        "lifecycle": "enacted",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": null,
+        "status_events": [],
+        "evidence": [
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "b.No service provider shall facilitate an agreement not to compete among real estate lessors with respect to any \naspect of residential dwelling units, including rental pricing, fees, or any other rental terms. \n \n",
+            "start": 5336,
+            "end": 5550,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "v.“Service provider” means any person that performs a coordination function, as defined in Section 1(a)(i)(1) of this \nAct, for any real estate lessor or rentor.  \n1.Licensed Real Estate Agents are not included in this definition so long as they are operating in accordance with all \napplicable state regulations.  \n \n",
+            "start": 4431,
+            "end": 4749,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "collecting nonpublic competitor \ninformation from real estate lessors;",
+            "start": 2562,
+            "end": 2632,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "vi.“Nonpublic Competitor Information” means information, including but not limited to prices, supply levels, \nsecurity deposits, ideal occupancy levels, lease contract termination, renewal dates of residential dwelling units or \nany other material lease terms that is less than 365 days old and is not widely and readily available to the public at \nno cost. \n \n",
+            "start": 4749,
+            "end": 5110,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "iii.“Residential dwelling unit” means any house, apartment, accessory unit, or other unit intended to be used as a \nperson’s primary residence; and does not include inpatient medical care, licensed long-term care, and detention or \ncorrectional facilities. \n \n",
+            "start": 3906,
+            "end": 4166,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "a.This definition exempts owners of multiple properties for actions related exclusively to multiple properties \ncontrolled by the same rental property owner; and \n \n",
+            "start": 3471,
+            "end": 3636,
+            "supports": [
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "3.Licensed Real Estate Agents are not included in this definition so long as they are operating in accordance with all \napplicable state regulations.  \n \n",
+            "start": 3636,
+            "end": 3790,
+            "supports": [
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "Adopted on second and final reading after hearing on May 21 2025",
+            "start": 10279,
+            "end": 10343,
+            "supports": [
+              "lifecycle"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "Date to Mayor: May 22 2025 \nApproved: May 22 2025",
+            "start": 10598,
+            "end": 10647,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": null,
+        "review_issues": [
+          "Agent source review only; independent human legal/semantic review remains required.",
+          "Conduct and statutory exclusions are not available as validated factual inputs; preserve unsupported predicates.",
+          "Adoption and/or approval is supported, but statutory publication and exact operative date are not established."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      },
+      "semantic_verification_required": "needs_review",
+      "promotion": "review-only; do not persist as a completed provider extraction or legal-reviewed rule"
+    },
+    {
+      "candidate_id": "nj-jc21812-disclosure",
+      "rule_draft": {
+        "jurisdiction": "Jersey City, NJ",
+        "level": "city",
+        "category": "algorithmic_rent_setting",
+        "provision_key": "nj-jc21812-disclosure",
+        "title": "Jersey City sworn algorithmic-rent disclosure",
+        "requirement": "With any lease or written rent-increase notice for a residential dwelling, a landlord must include a sworn statement under penalty of perjury substantially using the adopted algorithmic-rent disclosure form.",
+        "key_value": null,
+        "citation": "Jersey City Ord.25-098 §218-12.3(a)",
+        "quoted_span": "a. Any landlord must include, with any lease or written notice of rent increase for a residential dwelling unit, a sworn \ndisclosure statement, executed under penalty of perjury, in substantially the following form: \n \n              ",
+        "source_doc_id": "P11_NJ_JC_25_098",
+        "source_url": "https://cityofjerseycity.civicweb.net/document/436629/Ordinance%20Amending%20Chapter%20218%20Section%2012.pdf",
+        "coverage_conditions": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "args": [],
+              "fact": "residential",
+              "value": true,
+              "reason": null
+            },
+            {
+              "op": "unsupported",
+              "args": [],
+              "fact": null,
+              "value": null,
+              "reason": "Establish landlord, primary-residence dwelling, and any lease or written rent-increase notice. Subsection title does not narrow operative any lease wording."
+            }
+          ],
+          "fact": null,
+          "value": null,
+          "reason": null
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Dwelling exclusions arise from unchanged25-057 definitions; do not import separate218-1 100-unit security threshold. Whether definition-based service exclusions affect each certification requires review."
+        },
+        "exemptions": "Dwelling exclusions arise from unchanged25-057 definitions; do not import separate218-1 100-unit security threshold. Whether definition-based service exclusions affect each certification requires review.",
+        "lifecycle": "enacted",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": null,
+        "status_events": [],
+        "evidence": [
+          {
+            "doc_id": "P11_NJ_JC_25_098",
+            "quote": "a. Any landlord must include, with any lease or written notice of rent increase for a residential dwelling unit, a sworn \ndisclosure statement, executed under penalty of perjury, in substantially the following form: \n \n              ",
+            "start": 3226,
+            "end": 3459,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_098",
+            "quote": "I, the undersigned, being the landlord or an authorized agent of the landlord for the property located at \n____________________, for dwelling unit ______, hereby certify under the penalty of perjury that: \n \n               1. No entity subscribed to, contracted with, or otherwise exchanged anything of value in return for the \nservices of a Service Provider, in   accordance with Chapter 218-12.2, in connection with the rent amount of \n$______ to $_______ proposed on ____________.. \n \n               2. The methodology used to determine this rent increase did not make use of any shared non-public \ncompetitor data. \n \n               3. I understand that, as elaborated in the Truth in Renting Guide and N.J.S.A. 56:8-2, any deception, fraud, \nmisrepresentation, with connection in information important provide refusal the or failure knowing or to \nadvertisement of real estate, including this lease, is illegal in New Jersey under the Consumer Fraud Act, N.J.S.A. \n56:8-1 et seq. \n  \n",
+            "start": 3563,
+            "end": 4552,
+            "supports": [
+              "requirement"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_057",
+            "quote": "iii.“Residential dwelling unit” means any house, apartment, accessory unit, or other unit intended to be used as a \nperson’s primary residence; and does not include inpatient medical care, licensed long-term care, and detention or \ncorrectional facilities. \n \n",
+            "start": 3906,
+            "end": 4166,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_098",
+            "quote": "Adopted on second and final reading after hearing on Sep 24 2025",
+            "start": 5802,
+            "end": 5866,
+            "supports": [
+              "lifecycle"
+            ]
+          },
+          {
+            "doc_id": "P11_NJ_JC_25_098",
+            "quote": "Date to Mayor: Sep 25 2025 \nApproved: Sep 25 2025",
+            "start": 6121,
+            "end": 6170,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": null,
+        "review_issues": [
+          "Agent source review only; independent human legal/semantic review remains required.",
+          "Conduct and statutory exclusions are not available as validated factual inputs; preserve unsupported predicates.",
+          "Adoption and/or approval is supported, but statutory publication and exact operative date are not established."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      },
+      "semantic_verification_required": "needs_review",
+      "promotion": "review-only; do not persist as a completed provider extraction or legal-reviewed rule"
+    },
+    {
+      "candidate_id": "nj-fair-sec4-prohibition",
+      "rule_draft": {
+        "jurisdiction": "NJ",
+        "level": "state",
+        "category": "algorithmic_rent_setting",
+        "provision_key": "nj-fair-sec4-prohibition",
+        "title": "New Jersey FAIR Act prohibited coordination conduct",
+        "requirement": "The FAIR Act prohibits specified receipt/purchase of coordinator services, anticompetitive facilitation, parallel pricing coordination and performance of a coordinating function.",
+        "key_value": null,
+        "citation": "P.L.2026,c.43 §4 (C.56:9-23)",
+        "quoted_span": "4.    It\nshall be unlawful and a violation of the “New Jersey Antitrust Act,” P.L.1970,\nc.73 (C.56:9-1 et seq.) for:\na.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\nb.    a coordinator to facilitate a tacit or express\nagreement among rental property owners that restricts competition with respect\nto residential dwelling units, including by performing a coordinating\nfunction;\nc.     two or more persons to engage in\n1\nor\notherwise facilitate\n1\nparallel pricing coordination;\nd.    any agent or representative of a coordinator or\nsubcontractor thereof to engage in parallel pricing coordination; or\ne.     any person to perform a coordinating function.\n",
+        "source_doc_id": "D069",
+        "source_url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+        "coverage_conditions": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "args": [],
+              "fact": "residential",
+              "value": true,
+              "reason": null
+            },
+            {
+              "op": "unsupported",
+              "args": [],
+              "fact": null,
+              "value": null,
+              "reason": "Establish the applicable§4 actor/conduct limb and§3 definitions, including qualifying nonpublic information or parallel coordination. Shared algorithms alone do not settle every limb."
+            }
+          ],
+          "fact": null,
+          "value": null,
+          "reason": null
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Apply§3 research-only/no current/future lease setting, public free rent estimate, qualifying brokerage database and government affordability-control exclusions, plus device and dwelling exclusions."
+        },
+        "exemptions": "Apply§3 research-only/no current/future lease setting, public free rent estimate, qualifying brokerage database and government affordability-control exclusions, plus device and dwelling exclusions.",
+        "lifecycle": "enacted",
+        "effective_date": "2027-07-01",
+        "end_date": null,
+        "status_as_of": null,
+        "status_events": [],
+        "evidence": [
+          {
+            "doc_id": "D069",
+            "quote": "4.    It\nshall be unlawful and a violation of the “New Jersey Antitrust Act,” P.L.1970,\nc.73 (C.56:9-1 et seq.) for:\na.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\nb.    a coordinator to facilitate a tacit or express\nagreement among rental property owners that restricts competition with respect\nto residential dwelling units, including by performing a coordinating\nfunction;\nc.     two or more persons to engage in\n1\nor\notherwise facilitate\n1\nparallel pricing coordination;\nd.    any agent or representative of a coordinator or\nsubcontractor thereof to engage in parallel pricing coordination; or\ne.     any person to perform a coordinating function.\n",
+            "start": 8071,
+            "end": 8909,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "D069",
+            "quote": "“\nAlgorithmic\ndevice” means a device that uses one or more algorithms to process or otherwise\nperform calculations of data, including, but not limited to, data concerning\nrental prices, material lease terms, or occupancy levels.  An algorithmic\ndevice does not include: (1) a spreadsheet that (a) operates without artificial\nintelligence and (b) requires human analysis to process or otherwise perform\ncalculations of data; or (2) a database that only uses an algorithm to query\nunprocessed data stored on or within that database\n.\n1\n",
+            "start": 3190,
+            "end": 3724,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "D069",
+            "quote": "“Coordinating function” means:\n(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+            "start": 3995,
+            "end": 5021,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "D069",
+            "quote": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.\n",
+            "start": 5021,
+            "end": 6060,
+            "supports": [
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "D069",
+            "quote": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.\n",
+            "start": 6060,
+            "end": 6547,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "D069",
+            "quote": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.\n",
+            "start": 6547,
+            "end": 6773,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "D069",
+            "quote": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n",
+            "start": 7317,
+            "end": 7623,
+            "supports": [
+              "requirement",
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "D069",
+            "quote": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.\n",
+            "start": 7623,
+            "end": 7902,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions"
+            ]
+          },
+          {
+            "doc_id": "D069",
+            "quote": "2026, CHAPTER 43,\napproved July 20, 2026",
+            "start": 213,
+            "end": 253,
+            "supports": [
+              "lifecycle"
+            ]
+          },
+          {
+            "doc_id": "D069",
+            "quote": "9.    This act shall take effect on the first day of\nthe twelfth month next following the date of enactment.\n",
+            "start": 10175,
+            "end": 10284,
+            "supports": [
+              "effective_date"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": null,
+        "review_issues": [
+          "Agent source review only; independent human legal/semantic review remains required.",
+          "Conduct and statutory exclusions are not available as validated factual inputs; preserve unsupported predicates."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      },
+      "semantic_verification_required": "needs_review",
+      "promotion": "review-only; do not persist as a completed provider extraction or legal-reviewed rule"
+    }
+  ],
+  "claim_comparisons": {
+    "nj_hob_nonpublic_age": {
+      "comparison": {
+        "field": "definition/nonpublic_information",
+        "rule_ids": [],
+        "before": {
+          "value": "State nonpublic definition has no365-day age cutoff; mixed public/nonpublic information deemed nonpublic.",
+          "support": [
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 3724,
+                "end": 3995,
+                "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 6547,
+                "end": 6773,
+                "text": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "after": {
+          "value": "Hoboken requires information less than365days old and not widely/readily available at no cost.",
+          "support": [
+            {
+              "span": {
+                "doc_id": "P11_NJ_HOB_B781_HTML",
+                "source_hash": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+                "start": 1233,
+                "end": 2275,
+                "text": "A.    Prohibited conduct. Landlords who rent any residential dwelling unit (defined as any primary residence excluding medical/long-term care or detention facilities) in the City of Hoboken are prohibited from price fixing using algorithmic pricing. For purposes of this chapter, “price fixing using algorithmic pricing”shall be defined as the use of software, algorithms, or data-sharing platforms to collect and analyze nonpublic competitor information from other real estate lessors in order to coordinate, recommend, or implement rental prices, lease terms, or occupancy levels for residential dwelling units among competing real estate lessors.  For purposes of this chapter, “nonpublic competitor information” shall be defined as information including, but not limited to, prices, supply levels, security deposits, ideal occupancy levels, lease contract termination, renewal dates of residential dwelling units or any other material terms that is less than 365 days old and is not widely and readily available to the public at no cost.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "P11_NJ_HOB_B781_HTML",
+                "jurisdictions": [
+                  "Hoboken, NJ"
+                ],
+                "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+                "retrieved_at": "2026-10-04T07:07:20.554550+00:00",
+                "sha256": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+                "manifest_sha256": null,
+                "capture_status": "supplementary",
+                "authority": "official",
+                "source_type": "Official Hoboken legislative record",
+                "issues": [
+                  "New acquisition; Core review pending. Not installed in any existing store.",
+                  "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+                  "Title identifies158-2; body154-8. Preserve discrepancy.",
+                  "Meeting history entries labeled Draft; not certified minutes.",
+                  "Effective clause depends on passage and publication; publication date not acquired."
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "classification": "different_claims",
+        "status": "unresolved",
+        "semantic_support": "not_checked",
+        "winner": null,
+        "legal_amendment": null,
+        "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+      },
+      "interpretation_notes": "Different definitions do not alone establish an actual legal conflict or winner; apply respective conduct and exceptions.",
+      "semantic_verification": "needs_review"
+    },
+    "nj_jc_nonpublic_age": {
+      "comparison": {
+        "field": "definition/nonpublic_information",
+        "rule_ids": [],
+        "before": {
+          "value": "State no365-day age cutoff; combined data deemed nonpublic.",
+          "support": [
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 3724,
+                "end": 3995,
+                "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 6547,
+                "end": 6773,
+                "text": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "after": {
+          "value": "Jersey City less-than365days and not widely/readily available free; old public-database limb deleted.",
+          "support": [
+            {
+              "span": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "start": 4749,
+                "end": 5110,
+                "text": "vi.“Nonpublic Competitor Information” means information, including but not limited to prices, supply levels, \nsecurity deposits, ideal occupancy levels, lease contract termination, renewal dates of residential dwelling units or \nany other material lease terms that is less than 365 days old and is not widely and readily available to the public at \nno cost. \n \n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "jurisdictions": [
+                  "Jersey City, NJ"
+                ],
+                "url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+                "retrieved_at": "2026-10-04T07:05:07.440231+00:00",
+                "sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "manifest_sha256": null,
+                "capture_status": "supplementary",
+                "authority": "official",
+                "source_type": "Adopted Jersey City original ordinance",
+                "issues": [
+                  "New acquisition; Core review pending. Not installed in any existing store.",
+                  "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+                  "REDLINE PDF: derivative text contains deleted and inserted language together. Review original PDF before extraction.",
+                  "Body labels Chapter218 inconsistently as Fees and Charges.",
+                  "No explicit effective-date clause found; exact operative date and publication remain unverified."
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "start": 2562,
+                "end": 2632,
+                "text": "collecting nonpublic competitor \ninformation from real estate lessors;",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "jurisdictions": [
+                  "Jersey City, NJ"
+                ],
+                "url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+                "retrieved_at": "2026-10-04T07:05:07.440231+00:00",
+                "sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "manifest_sha256": null,
+                "capture_status": "supplementary",
+                "authority": "official",
+                "source_type": "Adopted Jersey City original ordinance",
+                "issues": [
+                  "New acquisition; Core review pending. Not installed in any existing store.",
+                  "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+                  "REDLINE PDF: derivative text contains deleted and inserted language together. Review original PDF before extraction.",
+                  "Body labels Chapter218 inconsistently as Fees and Charges.",
+                  "No explicit effective-date clause found; exact operative date and publication remain unverified."
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "classification": "different_claims",
+        "status": "unresolved",
+        "semantic_support": "not_checked",
+        "winner": null,
+        "legal_amendment": null,
+        "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+      },
+      "interpretation_notes": "Use rendered redline interpretation; never treat deleted limb as operative.",
+      "semantic_verification": "needs_review"
+    },
+    "nj_jc_same_owner": {
+      "comparison": {
+        "field": "definition/coordinator_and_common_owner",
+        "rule_ids": [],
+        "before": {
+          "value": "State includes owner performing coordinating function for own benefit; controlled entity counted with controlling owner, and each coordinating-function limb still must be met.",
+          "support": [
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 6060,
+                "end": 6547,
+                "text": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 7317,
+                "end": 7623,
+                "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 3995,
+                "end": 5021,
+                "text": "“Coordinating function” means:\n(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "after": {
+          "value": "Jersey City exempts actions related exclusively to multiple properties controlled by same rental-property owner.",
+          "support": [
+            {
+              "span": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "start": 3471,
+                "end": 3636,
+                "text": "a.This definition exempts owners of multiple properties for actions related exclusively to multiple properties \ncontrolled by the same rental property owner; and \n \n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "jurisdictions": [
+                  "Jersey City, NJ"
+                ],
+                "url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+                "retrieved_at": "2026-10-04T07:05:07.440231+00:00",
+                "sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "manifest_sha256": null,
+                "capture_status": "supplementary",
+                "authority": "official",
+                "source_type": "Adopted Jersey City original ordinance",
+                "issues": [
+                  "New acquisition; Core review pending. Not installed in any existing store.",
+                  "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+                  "REDLINE PDF: derivative text contains deleted and inserted language together. Review original PDF before extraction.",
+                  "Body labels Chapter218 inconsistently as Fees and Charges.",
+                  "No explicit effective-date clause found; exact operative date and publication remain unverified."
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "classification": "different_claims",
+        "status": "unresolved",
+        "semantic_support": "not_checked",
+        "winner": null,
+        "legal_amendment": null,
+        "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+      },
+      "interpretation_notes": "Potential scope difference; no categorical conclusion that state bans all same-owner internal pricing.",
+      "semantic_verification": "needs_review"
+    },
+    "nj_hob_qualified_interaction": {
+      "comparison": {
+        "field": "interaction",
+        "rule_ids": [],
+        "before": {
+          "value": "State§6(a) preserves other unlawful conduct;§6(b) bars conflicting municipal ordinances but expressly excepts ordinances explicitly authorized/required by other law.",
+          "support": [
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 9115,
+                "end": 9341,
+                "text": "6.    a.  This act shall not authorize or permit any\nconduct already unlawful pursuant to the “New Jersey Antitrust Act,” P.L.1970,\nc.73 (C.56:9-1 et seq.), or any other law, and shall be construed as in\naddition to that act.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 9341,
+                "end": 9571,
+                "text": "b.    A municipality shall be prohibited from enacting\nan ordinance that conflicts with this act.  This subsection shall not be\nconstrued to prohibit the enactment of ordinances explicitly authorized or\nrequired by any other law.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 10175,
+                "end": 10284,
+                "text": "9.    This act shall take effect on the first day of\nthe twelfth month next following the date of enactment.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "after": {
+          "value": "Hoboken adopts a defined algorithmic price-fixing ban subject to passage/publication.",
+          "support": [
+            {
+              "span": {
+                "doc_id": "P11_NJ_HOB_B781_HTML",
+                "source_hash": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+                "start": 1233,
+                "end": 2275,
+                "text": "A.    Prohibited conduct. Landlords who rent any residential dwelling unit (defined as any primary residence excluding medical/long-term care or detention facilities) in the City of Hoboken are prohibited from price fixing using algorithmic pricing. For purposes of this chapter, “price fixing using algorithmic pricing”shall be defined as the use of software, algorithms, or data-sharing platforms to collect and analyze nonpublic competitor information from other real estate lessors in order to coordinate, recommend, or implement rental prices, lease terms, or occupancy levels for residential dwelling units among competing real estate lessors.  For purposes of this chapter, “nonpublic competitor information” shall be defined as information including, but not limited to, prices, supply levels, security deposits, ideal occupancy levels, lease contract termination, renewal dates of residential dwelling units or any other material terms that is less than 365 days old and is not widely and readily available to the public at no cost.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "P11_NJ_HOB_B781_HTML",
+                "jurisdictions": [
+                  "Hoboken, NJ"
+                ],
+                "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+                "retrieved_at": "2026-10-04T07:07:20.554550+00:00",
+                "sha256": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+                "manifest_sha256": null,
+                "capture_status": "supplementary",
+                "authority": "official",
+                "source_type": "Official Hoboken legislative record",
+                "issues": [
+                  "New acquisition; Core review pending. Not installed in any existing store.",
+                  "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+                  "Title identifies158-2; body154-8. Preserve discrepancy.",
+                  "Meeting history entries labeled Draft; not certified minutes.",
+                  "Effective clause depends on passage and publication; publication date not acquired."
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "P11_NJ_HOB_B781_HTML",
+                "source_hash": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+                "start": 3832,
+                "end": 3925,
+                "text": "This Ordinance shall take effect immediately upon passage and publication as provided by law.",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "P11_NJ_HOB_B781_HTML",
+                "jurisdictions": [
+                  "Hoboken, NJ"
+                ],
+                "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+                "retrieved_at": "2026-10-04T07:07:20.554550+00:00",
+                "sha256": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+                "manifest_sha256": null,
+                "capture_status": "supplementary",
+                "authority": "official",
+                "source_type": "Official Hoboken legislative record",
+                "issues": [
+                  "New acquisition; Core review pending. Not installed in any existing store.",
+                  "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+                  "Title identifies158-2; body154-8. Preserve discrepancy.",
+                  "Meeting history entries labeled Draft; not certified minutes.",
+                  "Effective clause depends on passage and publication; publication date not acquired."
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "classification": "different_claims",
+        "status": "unresolved",
+        "semantic_support": "not_checked",
+        "winner": null,
+        "legal_amendment": null,
+        "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+      },
+      "interpretation_notes": "No supersedes edge. Need exact conflict, controlling dates, whether pre-existing ordinances implicated, and identified other-law authorization.",
+      "semantic_verification": "needs_review"
+    },
+    "nj_jc_qualified_interaction": {
+      "comparison": {
+        "field": "interaction",
+        "rule_ids": [],
+        "before": {
+          "value": "Qualified conflict restriction and express other-law exception in state§6(b).",
+          "support": [
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 9341,
+                "end": 9571,
+                "text": "b.    A municipality shall be prohibited from enacting\nan ordinance that conflicts with this act.  This subsection shall not be\nconstrued to prohibit the enactment of ordinances explicitly authorized or\nrequired by any other law.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 9115,
+                "end": 9341,
+                "text": "6.    a.  This act shall not authorize or permit any\nconduct already unlawful pursuant to the “New Jersey Antitrust Act,” P.L.1970,\nc.73 (C.56:9-1 et seq.), or any other law, and shall be construed as in\naddition to that act.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "D069",
+                "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "start": 10175,
+                "end": 10284,
+                "text": "9.    This act shall take effect on the first day of\nthe twelfth month next following the date of enactment.\n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "D069",
+                "jurisdictions": [
+                  "NJ"
+                ],
+                "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+                "retrieved_at": "2026-10-01T22:56Z",
+                "sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0",
+                "capture_status": "supplied",
+                "authority": "official",
+                "source_type": "unclassified",
+                "issues": [
+                  "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "after": {
+          "value": "Jersey City separately prohibits service purchase/agreement facilitation and later adds sworn disclosure.",
+          "support": [
+            {
+              "span": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "start": 5132,
+                "end": 5336,
+                "text": "a.It is unlawful for any real estate lessor, agent, or subcontractor thereof, to subscribe to, contract with, or otherwise \nexchange anything of value in return for the services of a Service Provider. \n \n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "jurisdictions": [
+                  "Jersey City, NJ"
+                ],
+                "url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+                "retrieved_at": "2026-10-04T07:05:07.440231+00:00",
+                "sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "manifest_sha256": null,
+                "capture_status": "supplementary",
+                "authority": "official",
+                "source_type": "Adopted Jersey City original ordinance",
+                "issues": [
+                  "New acquisition; Core review pending. Not installed in any existing store.",
+                  "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+                  "REDLINE PDF: derivative text contains deleted and inserted language together. Review original PDF before extraction.",
+                  "Body labels Chapter218 inconsistently as Fees and Charges.",
+                  "No explicit effective-date clause found; exact operative date and publication remain unverified."
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "source_hash": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "start": 5336,
+                "end": 5550,
+                "text": "b.No service provider shall facilitate an agreement not to compete among real estate lessors with respect to any \naspect of residential dwelling units, including rental pricing, fees, or any other rental terms. \n \n",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "P11_NJ_JC_25_057",
+                "jurisdictions": [
+                  "Jersey City, NJ"
+                ],
+                "url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+                "retrieved_at": "2026-10-04T07:05:07.440231+00:00",
+                "sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "manifest_sha256": null,
+                "capture_status": "supplementary",
+                "authority": "official",
+                "source_type": "Adopted Jersey City original ordinance",
+                "issues": [
+                  "New acquisition; Core review pending. Not installed in any existing store.",
+                  "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+                  "REDLINE PDF: derivative text contains deleted and inserted language together. Review original PDF before extraction.",
+                  "Body labels Chapter218 inconsistently as Fees and Charges.",
+                  "No explicit effective-date clause found; exact operative date and publication remain unverified."
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+                "identity_valid": true
+              }
+            },
+            {
+              "span": {
+                "doc_id": "P11_NJ_JC_25_098",
+                "source_hash": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+                "start": 3226,
+                "end": 3459,
+                "text": "a. Any landlord must include, with any lease or written notice of rent increase for a residential dwelling unit, a sworn \ndisclosure statement, executed under penalty of perjury, in substantially the following form: \n \n              ",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "P11_NJ_JC_25_098",
+                "jurisdictions": [
+                  "Jersey City, NJ"
+                ],
+                "url": "https://cityofjerseycity.civicweb.net/document/436629/Ordinance%20Amending%20Chapter%20218%20Section%2012.pdf",
+                "retrieved_at": "2026-10-04T07:07:25.573673+00:00",
+                "sha256": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+                "manifest_sha256": null,
+                "capture_status": "supplementary",
+                "authority": "official",
+                "source_type": "Jersey City subsequent amendment",
+                "issues": [
+                  "New acquisition; Core review pending. Not installed in any existing store.",
+                  "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+                  "REDLINE PDF requires original visual review; flattened numbering is ambiguous.",
+                  "Separate change to218-1 security requirements is not an algorithm-definition change.",
+                  "No explicit effective-date clause found; publication and exact operative date remain unverified."
+                ],
+                "duplicate_of": null,
+                "actual_sha256": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "classification": "different_claims",
+        "status": "unresolved",
+        "semantic_support": "not_checked",
+        "winner": null,
+        "legal_amendment": null,
+        "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+      },
+      "interpretation_notes": "No automatic preemption. Disclosure may impose different conduct; need conflict analysis and enabling-authority evidence.",
+      "semantic_verification": "needs_review"
+    }
+  },
+  "evaluation_probes": [
+    {
+      "synthetic_property": "hob-residential",
+      "known_municipality": "Hoboken",
+      "as_of": "2026-10-01",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "not_yet_effective",
+          "temporal_status": "not_yet_effective",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "hob-residential",
+      "known_municipality": "Hoboken",
+      "as_of": "2027-06-30",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "not_yet_effective",
+          "temporal_status": "not_yet_effective",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "hob-residential",
+      "known_municipality": "Hoboken",
+      "as_of": "2027-07-01",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "unknown",
+          "temporal_status": "in_force",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "jc-residential",
+      "known_municipality": "Jersey City",
+      "as_of": "2026-10-01",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "not_yet_effective",
+          "temporal_status": "not_yet_effective",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "jc-residential",
+      "known_municipality": "Jersey City",
+      "as_of": "2027-06-30",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "not_yet_effective",
+          "temporal_status": "not_yet_effective",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "jc-residential",
+      "known_municipality": "Jersey City",
+      "as_of": "2027-07-01",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "unknown",
+          "temporal_status": "in_force",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "other-nj-residential",
+      "known_municipality": "Newark",
+      "as_of": "2026-10-01",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "not_yet_effective",
+          "temporal_status": "not_yet_effective",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "other-nj-residential",
+      "known_municipality": "Newark",
+      "as_of": "2027-06-30",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "not_yet_effective",
+          "temporal_status": "not_yet_effective",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "other-nj-residential",
+      "known_municipality": "Newark",
+      "as_of": "2027-07-01",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "unknown",
+          "temporal_status": "in_force",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "jc-nonresidential",
+      "known_municipality": "Jersey City",
+      "as_of": "2026-10-01",
+      "residential": false,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "inapplicable",
+          "temporal_status": "not_yet_effective",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "jc-nonresidential",
+      "known_municipality": "Jersey City",
+      "as_of": "2027-06-30",
+      "residential": false,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "inapplicable",
+          "temporal_status": "not_yet_effective",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "jc-nonresidential",
+      "known_municipality": "Jersey City",
+      "as_of": "2027-07-01",
+      "residential": false,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "inapplicable",
+          "temporal_status": "in_force",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "inapplicable",
+          "temporal_status": "unknown",
+          "coverage": "false",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "unresolved-city",
+      "known_municipality": null,
+      "as_of": "2026-10-01",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "not_yet_effective",
+          "temporal_status": "not_yet_effective",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "unresolved-city",
+      "known_municipality": null,
+      "as_of": "2027-06-30",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "not_yet_effective",
+          "temporal_status": "not_yet_effective",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    },
+    {
+      "synthetic_property": "unresolved-city",
+      "known_municipality": null,
+      "as_of": "2027-07-01",
+      "residential": true,
+      "evaluations": [
+        {
+          "rule_id": "review-nj-fair-sec4-prohibition",
+          "result": "unknown",
+          "temporal_status": "in_force",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-hob-b781-prohibited-conduct",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-disclosure",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-provider-agreement",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        },
+        {
+          "rule_id": "review-nj-jc21812-service-purchase",
+          "result": "unknown",
+          "temporal_status": "unknown",
+          "coverage": "unknown",
+          "conflict_flag": false
+        }
+      ]
+    }
+  ],
+  "integration_findings": [
+    "New local sources resolve the absence of local text; they do not resolve publication, exhaustive amendment history, meaning, or state/local priority.",
+    "Use Unicode character offsets into exact derivative UTF-8 text including form-feed separators. Raw PDF typography determines inclusion/deletion; stored derivative is not rewritten.",
+    "JC25-057 deleted public-database/historical collection limb; insertion requires nonpublic competitor information. No arbitrary owner-unit/property-size exemption.",
+    "JC25-098 adds any-lease or written-rent-increase sworn disclosure and keeps definitions/prohibitions unchanged;100-unit security wording is a different section.",
+    "JC25-105 affects general1-25 and listed housing sections; do not import targeted per-unit/occupant minima into218-12. General maximum/continuing-violation framework needs version-aware review.",
+    "D069§6(b) exception means neither lexical conflict nor retrieval recency establishes supersession; no interaction edges are generated.",
+    "Candidate local operative dates remain null. State date2027-07-01 is derived from quoted approval and statutory month formula. All drafts retain needs_review on conversion to Rule."
+  ],
+  "unresolved_dependencies": [
+    {
+      "owner": "Platform",
+      "need": "Hoboken B-781 statutory publication proof/date, approval/certification of minutes, and final codification number158-2 versus154-8."
+    },
+    {
+      "owner": "Platform",
+      "need": "Jersey City25-057/25-098/25-105 publication evidence and operative-date legal authority; current code/version chain verifying later amendments and numbering."
+    },
+    {
+      "owner": "Platform",
+      "need": "Any identified statute explicitly authorizing/requiring challenged municipal provisions; no other-law exception can be presumed absent."
+    },
+    {
+      "owner": "Human legal reviewer/Core A",
+      "need": "Review exact conflict, scope, pre-existing ordinance effect, grandfathering if any, and other-law exception after state commencement; do not automatically suppress local rules."
+    },
+    {
+      "owner": "Platform fact steward/Core A",
+      "need": "If executable factual conduct probes are desired, agree validated facts for primary-residence/facility use, qualifying data age/public availability, coordination/service exchange, licensed-agent compliance, and same-owner-exclusive actions. Keep unsupported until then."
+    },
+    {
+      "owner": "Human legal reviewer/Core A",
+      "need": "Check JC awkward definition/cross-reference wording and disclosure form derivative ordering against visual source; independently review consequential encoded interpretation."
+    }
+  ],
+  "proposed_additional_synthetic_boundaries": [
+    "364 versus365days data age for local definition; state has no equivalent age cutoff.",
+    "Single-owner-only internal actions versus cross-owner use; do not infer same owner from building count.",
+    "Qualifying licensed brokerage versus software coordinator; local agent exception distinct from state database exclusion.",
+    "Any lease versus written rent-increase notice for JC disclosure; compare neither trigger without imposing a100-unit threshold.",
+    "State calendar boundary2027-06-30/2027-07-01; local publication unknown must remain unknown."
+  ],
+  "verification": {
+    "all_source_text_hashes_match": true,
+    "all_quote_spans_exact": true,
+    "rule_draft_model_validation": "passed",
+    "claim_comparison_anchor_checks": "both sides present and valid",
+    "provider_calls": 0,
+    "store_writes": 0
+  }
+}

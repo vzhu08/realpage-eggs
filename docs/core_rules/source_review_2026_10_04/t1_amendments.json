@@ -1,0 +1,556 @@
+[
+  {
+    "existing_rule_id": "r-57328356379e89d4f338",
+    "original_rule_sha256_sorted_json": "68fe1e6c1e98aa6014e9573f5d77d0efc1af63d5e1d6acf2991630fb54198b92",
+    "authorship": "agent_review_annotation_no_provider_call",
+    "state": "needs_review_not_applied",
+    "superseded_missing_source_notes": [
+      "The incorporated definition of person in Section 16702 is not supplied. Algorithm user count must count qualifying persons, not merely software accounts.",
+      "The source establishes enactment but does not state an effective date or an end date; neither is inferred."
+    ],
+    "draft": {
+      "jurisdiction": "CA",
+      "level": "state",
+      "category": "algorithmic_rent_setting",
+      "provision_key": "common_pricing_algorithm_restraint",
+      "title": "Common pricing algorithms used in unlawful restraints of trade",
+      "requirement": "A person may not use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of the Cartwright Act. A common pricing algorithm is a methodology used by two or more persons that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial term. Distribution includes selling, licensing, providing access to, or otherwise making available by any means. Commercial terms include, without limitation, level of service, availability, and output. Section 16729 does not impair or limit the applicability of antitrust laws. This is a general commercial prohibition, not a rental-specific prohibition on all pricing algorithms.",
+      "key_value": "Use or distribution prohibited when part of an unlawful restraint of trade or commerce",
+      "citation": "California Business and Professions Code § 16729(a), (c), (d)",
+      "quoted_span": "(a) It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of this chapter.",
+      "source_doc_id": "D022",
+      "source_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB325",
+      "coverage_conditions": {
+        "op": "all",
+        "args": [
+          {
+            "op": "unsupported",
+            "args": [],
+            "fact": null,
+            "value": null,
+            "reason": "The actor and each person counted as an algorithm user require factual and interpretive classification under BPC16702 and16729(d)(5); the incorporated definition is now available, but qualifying persons cannot be inferred from an address or software account count."
+          },
+          {
+            "op": "gte",
+            "args": [],
+            "fact": "algorithm_user_count",
+            "value": 2,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "algorithm_uses_competitor_data",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "algorithm_recommends_aligns_stabilizes_sets_or_otherwise_influences_price_or_commercial_term",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "in",
+            "args": [],
+            "fact": "algorithm_activity",
+            "value": [
+              "use",
+              "distribute"
+            ],
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "activity_part_of_contract_combination_or_conspiracy_restraining_trade_in_violation_of_cartwright_act",
+            "value": true,
+            "reason": null
+          }
+        ],
+        "fact": null,
+        "value": null,
+        "reason": null
+      },
+      "exemption_conditions": {
+        "op": "eq",
+        "args": [],
+        "fact": "end_consumer_of_product_or_service",
+        "value": true,
+        "reason": null
+      },
+      "exemptions": "The statutory definition of person excludes the end consumer of a product or service.",
+      "lifecycle": "enacted",
+      "effective_date": "2026-01-01",
+      "end_date": null,
+      "status_as_of": "2025-10-06",
+      "status_events": [
+        {
+          "status": "enacted",
+          "on": "2025-10-06",
+          "evidence": [
+            {
+              "doc_id": "P11_CA_AB325_HISTORY",
+              "quote": "10/06/25\nChaptered by Secretary of State - Chapter 338, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+              "start": 839,
+              "end": 947,
+              "supports": [
+                "status",
+                "on"
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "doc_id": "D022",
+          "quote": "Section 16729 is added to the Business and Professions Code, to read:",
+          "start": 3708,
+          "end": 3777,
+          "supports": [
+            "citation",
+            "provision_key"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "The people of the State of California do enact as follows:",
+          "start": 3638,
+          "end": 3696,
+          "supports": [
+            "jurisdiction",
+            "level"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(a) It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of this chapter.",
+          "start": 3785,
+          "end": 4003,
+          "supports": [
+            "title",
+            "category",
+            "requirement",
+            "key_value",
+            "quoted_span",
+            "coverage_conditions"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(c) Nothing in this section shall impair or limit the applicability of antitrust laws.\n(d) For purposes of this section, the following definitions apply:\n(1) “Antitrust laws” means the provisions of this part.",
+          "start": 4306,
+          "end": 4515,
+          "supports": [
+            "citation",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(2) “Commercial term” includes, without limitation, any of the following:\n(A) Level of service.\n(B) Availability.\n(C) Output, including quantities of products produced or distributed or the amount or level of service provided.",
+          "start": 4516,
+          "end": 4742,
+          "supports": [
+            "requirement",
+            "coverage_conditions"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(3) “Common pricing algorithm” means any\nmethodology, including a computer, software, or other technology, used by two or more persons, that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial\nterm.",
+          "start": 4743,
+          "end": 4992,
+          "supports": [
+            "coverage_conditions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(4) “Distribute,” “distribution,” and “distributing” include selling, licensing, providing access to, or otherwise making available by any means, including through a subscription or the sale of a service.",
+          "start": 4993,
+          "end": 5197,
+          "supports": [
+            "coverage_conditions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(5) “Person” has the same meaning as defined in Section 16702 and does not include the end consumer of a product or service.",
+          "start": 5198,
+          "end": 5322,
+          "supports": [
+            "coverage_conditions",
+            "exemption_conditions",
+            "exemptions"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(6) “Price” means the amount of money or other thing of value, whether tangible or not, expected, required, or given in payment for any product or service, including compensation paid to an employee or independent contractor for services provided.",
+          "start": 5323,
+          "end": 5570,
+          "supports": [
+            "coverage_conditions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "10/06/25 - Chaptered\n09/16/25 - Enrolled",
+          "start": 498,
+          "end": 538,
+          "supports": [
+            "lifecycle",
+            "status_as_of"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "Because the bill would expand the scope of activities prohibited by the Cartwright Act, the violation of which is punishable as a crime, the bill would impose a state-mandated local program.",
+          "start": 3048,
+          "end": 3238,
+          "supports": [
+            "penalties"
+          ]
+        },
+        {
+          "doc_id": "P11_CA_BPC_ART2",
+          "quote": "(Added by Stats. 2025, Ch. 338, Sec. 1.   (AB 325)   Effective January 1, 2026.)",
+          "start": 12125,
+          "end": 12205,
+          "supports": [
+            "effective_date"
+          ]
+        },
+        {
+          "doc_id": "P11_CA_BPC_ART1",
+          "quote": "As used in this chapter “person” or “persons” includes corporations, firms, partnerships and associations existing under or authorized by the laws of this State or any other State, or any foreign country.",
+          "start": 2023,
+          "end": 2227,
+          "supports": [
+            "coverage_conditions/args/0"
+          ]
+        },
+        {
+          "doc_id": "P11_CA_AB325_HISTORY",
+          "quote": "10/06/25\nChaptered by Secretary of State - Chapter 338, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+          "start": 839,
+          "end": 947,
+          "supports": [
+            "lifecycle",
+            "status_as_of"
+          ]
+        }
+      ],
+      "interactions": [],
+      "penalties": "The legislative counsel's digest describes Cartwright Act violations as punishable as a crime. The supplied text does not specify a penalty amount or sentencing range.",
+      "review_issues": [
+        "All six categories were reviewed. The supplied text supports two distinct algorithmic-pricing prohibitions but supplies no rules or express negative findings for rent increase limits, just-cause eviction, security deposits, application screening fees, or screening restrictions. Silence does not establish that no such rules exist.",
+        "Earlier bill versions are listed, but their substantive text is not supplied. No earlier substantive requirements, repeal events, or supersession dates are reconstructed.",
+        "Price includes money or other tangible or intangible value expected, required, or given for a product or service, including employee or independent-contractor compensation.",
+        "Section 16729(c) preserves antitrust-law applicability. No exact target citation and directional supersession or conflict are established, so no structured interaction is inferred.",
+        "Section 16756.1 establishes a general Cartwright Act pleading standard: factual allegations demonstrating a plausible contract, combination, or conspiracy to restrain trade or commerce suffice, and allegations tending to exclude independent action are not required. This procedural provision is not a separate rental-housing obligation within the six requested categories, but may apply to litigation involving the extracted prohibitions.",
+        "Section 3 addresses reimbursement of local agencies and school districts, not a rental-housing obligation within the requested categories.",
+        "The applicability-preservation clause in subsection (c) does not establish a directional supersession or conflict with an exactly identified provision.",
+        "The dated chaptering entry establishes enactment independently of the operative bill language. The lifecycle snapshot is tied to that entry, not to retrieval, and does not establish the effective date.",
+        "The predicate concerning a Cartwright Act violation requires an independently established legal and factual determination; the supplied section does not compile the underlying antitrust standard.",
+        "The prohibition applies generally to products and services and does not expressly identify rental housing.",
+        "The actor and each person counted as an algorithm user require factual and interpretive classification under BPC16702 and16729(d)(5); the incorporated definition is now available, but qualifying persons cannot be inferred from an address or software account count.",
+        "Official consolidated BPC16729 annotation expressly records January 1, 2026 as the effective date of AB325 section1. The bill/header and dated history separately establish October6,2025 enactment. No end date is supplied; none is invented.",
+        "These are agent-reviewed candidate amendments only. Independent human review, conduct facts, interpretation and any relevant chapter-wide exceptions remain unresolved; semantic_verification remains needs_review."
+      ],
+      "conflict_flag": false,
+      "conflict_note": null
+    }
+  },
+  {
+    "existing_rule_id": "r-912998e64d23de87a92c",
+    "original_rule_sha256_sorted_json": "c4fb96c4cd2ce0c7d27e4398dbc697b69a0622ca9144cce33f4420a1c09150a7",
+    "authorship": "agent_review_annotation_no_provider_call",
+    "state": "needs_review_not_applied",
+    "superseded_missing_source_notes": [
+      "The incorporated definition of person in Section 16702 is not supplied. It affects the actor, the coerced person, and the algorithm's qualifying user count.",
+      "The source establishes enactment but does not state an effective date or an end date; neither is inferred."
+    ],
+    "draft": {
+      "jurisdiction": "CA",
+      "level": "state",
+      "category": "algorithmic_rent_setting",
+      "provision_key": "common_pricing_algorithm_coercion",
+      "title": "Coercion to adopt algorithm-recommended prices or commercial terms",
+      "requirement": "A person may not use or distribute a common pricing algorithm if the person coerces another person to set or adopt a price or commercial term recommended by that algorithm for the same or similar products or services in California. A common pricing algorithm is a methodology used by two or more persons that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial term. Distribution includes selling, licensing, providing access to, or otherwise making available by any means. Commercial terms include, without limitation, level of service, availability, and output. Section 16729 does not impair or limit the applicability of antitrust laws.",
+      "key_value": "Prohibition on algorithm-related coercion to set or adopt recommended prices or commercial terms",
+      "citation": "California Business and Professions Code § 16729(b), (c), (d)",
+      "quoted_span": "(b) It shall be unlawful for a person to use or distribute a common pricing algorithm if the person coerces another person to set or adopt a recommended price or commercial term recommended by the common pricing algorithm for the same or similar products or services in the jurisdiction of this state.",
+      "source_doc_id": "D022",
+      "source_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB325",
+      "coverage_conditions": {
+        "op": "all",
+        "args": [
+          {
+            "op": "unsupported",
+            "args": [],
+            "fact": null,
+            "value": null,
+            "reason": "The actor, coerced person and each person counted as an algorithm user require factual and interpretive classification under BPC16702 and16729(d)(5); the incorporated definition is now available, but qualifying persons cannot be inferred from an address or software account count."
+          },
+          {
+            "op": "gte",
+            "args": [],
+            "fact": "algorithm_user_count",
+            "value": 2,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "algorithm_uses_competitor_data",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "algorithm_recommends_aligns_stabilizes_sets_or_otherwise_influences_price_or_commercial_term",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "in",
+            "args": [],
+            "fact": "algorithm_activity",
+            "value": [
+              "use",
+              "distribute"
+            ],
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "coerces_another_person_to_set_or_adopt_algorithm_recommended_price_or_commercial_term",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "products_or_services_are_same_or_similar",
+            "value": true,
+            "reason": null
+          },
+          {
+            "op": "eq",
+            "args": [],
+            "fact": "products_or_services_in_california",
+            "value": true,
+            "reason": null
+          }
+        ],
+        "fact": null,
+        "value": null,
+        "reason": null
+      },
+      "exemption_conditions": {
+        "op": "eq",
+        "args": [],
+        "fact": "end_consumer_of_product_or_service",
+        "value": true,
+        "reason": null
+      },
+      "exemptions": "The statutory definition of person excludes the end consumer of a product or service.",
+      "lifecycle": "enacted",
+      "effective_date": "2026-01-01",
+      "end_date": null,
+      "status_as_of": "2025-10-06",
+      "status_events": [
+        {
+          "status": "enacted",
+          "on": "2025-10-06",
+          "evidence": [
+            {
+              "doc_id": "P11_CA_AB325_HISTORY",
+              "quote": "10/06/25\nChaptered by Secretary of State - Chapter 338, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+              "start": 839,
+              "end": 947,
+              "supports": [
+                "status",
+                "on"
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "doc_id": "D022",
+          "quote": "Section 16729 is added to the Business and Professions Code, to read:",
+          "start": 3708,
+          "end": 3777,
+          "supports": [
+            "citation",
+            "provision_key"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "The people of the State of California do enact as follows:",
+          "start": 3638,
+          "end": 3696,
+          "supports": [
+            "jurisdiction",
+            "level"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(b) It shall be unlawful for a person to use or distribute a common pricing algorithm if the person coerces another person to set or adopt a recommended price or commercial term recommended by the common pricing algorithm for the same or similar products or services in the jurisdiction of this state.",
+          "start": 4004,
+          "end": 4305,
+          "supports": [
+            "jurisdiction",
+            "category",
+            "title",
+            "requirement",
+            "key_value",
+            "quoted_span",
+            "coverage_conditions"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(c) Nothing in this section shall impair or limit the applicability of antitrust laws.\n(d) For purposes of this section, the following definitions apply:\n(1) “Antitrust laws” means the provisions of this part.",
+          "start": 4306,
+          "end": 4515,
+          "supports": [
+            "citation",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(2) “Commercial term” includes, without limitation, any of the following:\n(A) Level of service.\n(B) Availability.\n(C) Output, including quantities of products produced or distributed or the amount or level of service provided.",
+          "start": 4516,
+          "end": 4742,
+          "supports": [
+            "requirement",
+            "coverage_conditions"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(3) “Common pricing algorithm” means any\nmethodology, including a computer, software, or other technology, used by two or more persons, that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial\nterm.",
+          "start": 4743,
+          "end": 4992,
+          "supports": [
+            "coverage_conditions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(4) “Distribute,” “distribution,” and “distributing” include selling, licensing, providing access to, or otherwise making available by any means, including through a subscription or the sale of a service.",
+          "start": 4993,
+          "end": 5197,
+          "supports": [
+            "coverage_conditions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(5) “Person” has the same meaning as defined in Section 16702 and does not include the end consumer of a product or service.",
+          "start": 5198,
+          "end": 5322,
+          "supports": [
+            "coverage_conditions",
+            "exemption_conditions",
+            "exemptions"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "(6) “Price” means the amount of money or other thing of value, whether tangible or not, expected, required, or given in payment for any product or service, including compensation paid to an employee or independent contractor for services provided.",
+          "start": 5323,
+          "end": 5570,
+          "supports": [
+            "coverage_conditions",
+            "requirement"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "10/06/25 - Chaptered\n09/16/25 - Enrolled",
+          "start": 498,
+          "end": 538,
+          "supports": [
+            "lifecycle",
+            "status_as_of"
+          ]
+        },
+        {
+          "doc_id": "D022",
+          "quote": "Because the bill would expand the scope of activities prohibited by the Cartwright Act, the violation of which is punishable as a crime, the bill would impose a state-mandated local program.",
+          "start": 3048,
+          "end": 3238,
+          "supports": [
+            "penalties"
+          ]
+        },
+        {
+          "doc_id": "P11_CA_BPC_ART2",
+          "quote": "(Added by Stats. 2025, Ch. 338, Sec. 1.   (AB 325)   Effective January 1, 2026.)",
+          "start": 12125,
+          "end": 12205,
+          "supports": [
+            "effective_date"
+          ]
+        },
+        {
+          "doc_id": "P11_CA_BPC_ART1",
+          "quote": "As used in this chapter “person” or “persons” includes corporations, firms, partnerships and associations existing under or authorized by the laws of this State or any other State, or any foreign country.",
+          "start": 2023,
+          "end": 2227,
+          "supports": [
+            "coverage_conditions/args/0"
+          ]
+        },
+        {
+          "doc_id": "P11_CA_AB325_HISTORY",
+          "quote": "10/06/25\nChaptered by Secretary of State - Chapter 338, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+          "start": 839,
+          "end": 947,
+          "supports": [
+            "lifecycle",
+            "status_as_of"
+          ]
+        }
+      ],
+      "interactions": [],
+      "penalties": "The legislative counsel's digest describes Cartwright Act violations as punishable as a crime. The supplied text does not specify a penalty amount or sentencing range.",
+      "review_issues": [
+        "All six categories were reviewed. The supplied text supports two distinct algorithmic-pricing prohibitions but supplies no rules or express negative findings for rent increase limits, just-cause eviction, security deposits, application screening fees, or screening restrictions. Silence does not establish that no such rules exist.",
+        "Coercion and whether products or services are the same or similar require factual evaluation; coercion is not defined in the supplied text.",
+        "Earlier bill versions are listed, but their substantive text is not supplied. No earlier substantive requirements, repeal events, or supersession dates are reconstructed.",
+        "Price includes money or other tangible or intangible value expected, required, or given for a product or service, including employee or independent-contractor compensation.",
+        "Section 16729(c) preserves antitrust-law applicability. No exact target citation and directional supersession or conflict are established, so no structured interaction is inferred.",
+        "Section 16756.1 establishes a general Cartwright Act pleading standard: factual allegations demonstrating a plausible contract, combination, or conspiracy to restrain trade or commerce suffice, and allegations tending to exclude independent action are not required. This procedural provision is not a separate rental-housing obligation within the six requested categories, but may apply to litigation involving the extracted prohibitions.",
+        "Section 3 addresses reimbursement of local agencies and school districts, not a rental-housing obligation within the requested categories.",
+        "Subsection (b) does not expressly require proof of the contract, combination, or conspiracy specified separately in subsection (a); that condition is not imported.",
+        "The applicability-preservation clause in subsection (c) does not establish a directional supersession or conflict with an exactly identified provision.",
+        "The dated chaptering entry establishes enactment independently of the operative bill language. The lifecycle snapshot is tied to that entry, not to retrieval, and does not establish the effective date.",
+        "The text applies generally to products and services and does not expressly identify rental housing.",
+        "The actor, coerced person and each person counted as an algorithm user require factual and interpretive classification under BPC16702 and16729(d)(5); the incorporated definition is now available, but qualifying persons cannot be inferred from an address or software account count.",
+        "Official consolidated BPC16729 annotation expressly records January 1, 2026 as the effective date of AB325 section1. The bill/header and dated history separately establish October6,2025 enactment. No end date is supplied; none is invented.",
+        "These are agent-reviewed candidate amendments only. Independent human review, conduct facts, interpretation and any relevant chapter-wide exceptions remain unresolved; semantic_verification remains needs_review."
+      ],
+      "conflict_flag": false,
+      "conflict_note": null
+    }
+  }
+]

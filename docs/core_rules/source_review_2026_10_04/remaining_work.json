@@ -1,0 +1,53 @@
+{
+  "label": "CORE_A_REVIEW_HANDOFF_NOT_STORE_PROMOTION",
+  "provider_run": {
+    "state": "paused",
+    "new_calls": 0,
+    "authorized_additional_provider_budget": null,
+    "resumption": "Requires explicit human resumption and an agreed budget; generic continuation does not resume it."
+  },
+  "ordered_cases": [
+    {
+      "case": "T1",
+      "completed": "AB325 exact date/person/history evidence reviewed; two existing-rule Draft amendments prepared. SB763 provision-specific penalty and procedural findings retained separately.",
+      "source_requests_satisfied": ["AB325 effective-date authority", "BPC16702 definition", "actual SB763 text and history"],
+      "remaining": ["Independent human review of candidate interpretation", "Verified qualifying-person and conduct facts; suitable fact-input definitions", "Any broader chapter exceptions and incorporated Penal Code1170(h) before expanded sentencing claims"],
+      "next_owner": "Core A human review; Platform/Core input-contract coordination if additional conduct inputs are accepted",
+      "acceptance": "partial; no replacement 500-address result or stored temporal correction"
+    },
+    {
+      "case": "T2",
+      "completed": "Captured local prohibitions and separate disclosure/version changes reviewed against PDF redlines.",
+      "remaining": ["Hoboken statutory publication/date and certified minutes approval", "Jersey City publication/operative-date authority and later-amendment completeness", "Independent review of local scope, exclusions and codification discrepancy"],
+      "next_owner": "Platform acquisition, then Core A candidate acceptance",
+      "acceptance": "blocked for definitive date-sensitive local impact"
+    },
+    {
+      "case": "T3",
+      "completed": "Saved D069 and new local provisions provide both sides for qualified state/local disagreement review.",
+      "remaining": ["T2 local operative-date evidence", "Exact conflict conditions and whether an ordinance is explicitly authorized or required by another law", "Independent legal review before any directional supersession"],
+      "next_owner": "Platform acquisition and Core A human interpretation",
+      "acceptance": "unresolved; no automatic preemption winner"
+    },
+    {
+      "case": "T4",
+      "completed": "Three distinct proposed prohibitions encoded as conservative RuleDrafts; pending and hypothetical temporal paths checked.",
+      "remaining": ["Historical bill-text version identity for exact October1 substantive replay", "Reviewed conduct predicates and independent review before accepted property results"],
+      "next_owner": "Platform source-version confirmation; Core A review",
+      "acceptance": "pending candidates available; no actual enactment or blanket MA coverage"
+    },
+    {
+      "case": "T5",
+      "completed": "Petition rent-cap and exemption-notice drafts separated; primary unknown lifecycle and mirror-conditioned failed variants retained separately.",
+      "remaining": ["Official opinion/current docket verification and final county judgment", "Independent human review of failed lifecycle and scope"],
+      "next_owner": "Platform acquisition, then Core A review",
+      "acceptance": "blocked for authoritative failed-proposal empty-set acceptance"
+    }
+  ],
+  "later_in_order": [
+    {"case": "Berkeley date disagreement", "owner": "Platform acquisition", "remaining": "Final Ordinance7992 adoption/operative authority and attributed competing date claim"},
+    {"case": "LA date disagreement", "owner": "Platform acquisition", "remaining": "Underlying adopted RSO amendment/operative clause and actual January24 claim with its subject/version"},
+    {"case": "Remaining corpus", "owner": "Core A after explicit provider resume/budget", "remaining": "Use historical core06 extraction queue after incorporating these delivered source dependencies; do not run a blind sequential pass"}
+  ],
+  "promotion": "These are annotation artifacts and RuleDrafts, not replacement Store files or accepted extraction-cache records. Platform assembles any separately accepted snapshot without overwriting original D IDs, bytes, offsets or provider lineage."
+}
