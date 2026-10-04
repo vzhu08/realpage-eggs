@@ -31,7 +31,8 @@ def main(output=OUTPUT):
     runs = []
     with tempfile.TemporaryDirectory(prefix="realpage-core-a-integration-") as temporary:
         copied = Path(temporary)
-        for name in ("navigator", "tests", "fixtures", "config", "contracts", "scripts", "deploy"):
+        for name in ("navigator", "tests", "fixtures", "config", "contracts", "scripts", "deploy",
+                     "docs/core_rules/d069_predicates", "docs/platform_pilots/2026-10-04-d069"):
             shutil.copytree(ROOT / name, copied / name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
         for name in ("pyproject.toml", "requirements.lock"):
             shutil.copy2(ROOT / name, copied / name)

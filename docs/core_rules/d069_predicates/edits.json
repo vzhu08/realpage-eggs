@@ -1,0 +1,458 @@
+{
+  "label": "AGENT_AUTHORED_CANDIDATE_OVERLAYS_NOT_PROVIDER_OUTPUT",
+  "candidates": [
+    {
+      "original_rule_id": "r-b557a89502e37db1bddd",
+      "edits": [
+        {
+          "path": "coverage_conditions",
+          "expected_original_sha256": "0c784e92688f9ed5ec6f5b1f711020749873d8bad1f3337f038cdc3bb07d9864",
+          "expression": {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "intended_primary_residence",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "any",
+                "args": [
+                  {
+                    "op": "all",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "fact": "activity_collects_owner_information",
+                        "value": true
+                      },
+                      {
+                        "op": "gte",
+                        "fact": "collected_information_owner_count",
+                        "value": 2
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "collected_information_nonpublic",
+                        "value": true
+                      },
+                      {
+                        "op": "any",
+                        "args": [
+                          {
+                            "op": "in",
+                            "fact": "collected_information_category",
+                            "value": [
+                              "prices",
+                              "supply_levels",
+                              "security_deposits",
+                              "ideal_occupancy_levels",
+                              "lease_contract_termination",
+                              "renewal_dates"
+                            ]
+                          },
+                          {
+                            "op": "all",
+                            "args": [
+                              {
+                                "op": "eq",
+                                "fact": "collected_information_category",
+                                "value": "other_information"
+                              },
+                              {
+                                "op": "unsupported",
+                                "reason": "The competitively-sensitive-information definition gives nonexhaustive examples. Classification of other information, including materiality of other lease terms, requires legal review; do not treat an unlisted category as excluded."
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "collection_for_automated_analysis_or_training",
+                        "value": true
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy",
+                        "value": true
+                      }
+                    ]
+                  },
+                  {
+                    "op": "all",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "fact": "activity_sets_rent_terms_or_occupancy",
+                        "value": true
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "setting_uses_automated_analysis_or_training",
+                        "value": true
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "setting_dataset_from_other_owner",
+                        "value": true
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "setting_information_nonpublic",
+                        "value": true
+                      },
+                      {
+                        "op": "any",
+                        "args": [
+                          {
+                            "op": "in",
+                            "fact": "setting_information_category",
+                            "value": [
+                              "prices",
+                              "supply_levels",
+                              "security_deposits",
+                              "ideal_occupancy_levels",
+                              "lease_contract_termination",
+                              "renewal_dates"
+                            ]
+                          },
+                          {
+                            "op": "all",
+                            "args": [
+                              {
+                                "op": "eq",
+                                "fact": "setting_information_category",
+                                "value": "other_information"
+                              },
+                              {
+                                "op": "unsupported",
+                                "reason": "The competitively-sensitive-information definition gives nonexhaustive examples. Classification of other information, including materiality of other lease terms, requires legal review; do not treat an unlisted category as excluded."
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "all",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "fact": "activity_sets_or_recommends_rent_terms_or_occupancy",
+                        "value": true
+                      },
+                      {
+                        "op": "gte",
+                        "fact": "recipient_rental_owner_count",
+                        "value": 2
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "recommendations_use_algorithm_or_automated_process",
+                        "value": true
+                      },
+                      {
+                        "op": "any",
+                        "args": [
+                          {
+                            "op": "eq",
+                            "fact": "same_underlying_process_for_recipients",
+                            "value": true
+                          },
+                          {
+                            "op": "unsupported",
+                            "reason": "Whether different underlying algorithms or automated processes are substantially similar requires legal review."
+                          }
+                        ]
+                      },
+                      {
+                        "op": "unsupported",
+                        "reason": "Whether this activity facilitates parallel pricing coordination remains uncompiled: tacit/express agreement between qualifying owners, reasonably interchangeable residential units, pricing conduct and affordability-control exception require evidence and legal review. Parallel prices alone do not establish agreement."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "doc_id": "D069",
+              "start": 7623,
+              "end": 7902,
+              "quote": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.\n",
+              "supports": [
+                "coverage_conditions/args/0"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 4026,
+              "end": 4427,
+              "quote": "(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n",
+              "supports": [
+                "coverage_conditions/args/1/args/0/args/0",
+                "coverage_conditions/args/1/args/0/args/1",
+                "coverage_conditions/args/1/args/0/args/2",
+                "coverage_conditions/args/1/args/0/args/3/args/0",
+                "coverage_conditions/args/1/args/0/args/3/args/1/args/0",
+                "coverage_conditions/args/1/args/0/args/4",
+                "coverage_conditions/args/1/args/0/args/5"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 8855,
+              "end": 8909,
+              "quote": "e.     any person to perform a coordinating function.\n",
+              "supports": [
+                "coverage_conditions/args/1/args/0/args/0"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 7317,
+              "end": 7623,
+              "quote": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n",
+              "supports": [
+                "coverage_conditions/args/1/args/0/args/1",
+                "coverage_conditions/args/1/args/1/args/2",
+                "coverage_conditions/args/1/args/2/args/1",
+                "coverage_conditions/args/1/args/2/args/4"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 3724,
+              "end": 3995,
+              "quote": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.\n",
+              "supports": [
+                "coverage_conditions/args/1/args/0/args/2",
+                "coverage_conditions/args/1/args/0/args/3/args/0",
+                "coverage_conditions/args/1/args/0/args/3/args/1/args/0",
+                "coverage_conditions/args/1/args/0/args/3/args/1/args/1",
+                "coverage_conditions/args/1/args/1/args/3",
+                "coverage_conditions/args/1/args/1/args/4/args/0",
+                "coverage_conditions/args/1/args/1/args/4/args/1/args/0",
+                "coverage_conditions/args/1/args/1/args/4/args/1/args/1"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 6547,
+              "end": 6773,
+              "quote": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.\n",
+              "supports": [
+                "coverage_conditions/args/1/args/0/args/2",
+                "coverage_conditions/args/1/args/1/args/3"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 4427,
+              "end": 4746,
+              "quote": "(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n",
+              "supports": [
+                "coverage_conditions/args/1/args/1/args/0",
+                "coverage_conditions/args/1/args/1/args/1",
+                "coverage_conditions/args/1/args/1/args/2",
+                "coverage_conditions/args/1/args/1/args/3",
+                "coverage_conditions/args/1/args/1/args/4/args/0",
+                "coverage_conditions/args/1/args/1/args/4/args/1/args/0"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 4746,
+              "end": 5021,
+              "quote": "(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+              "supports": [
+                "coverage_conditions/args/1/args/2/args/0",
+                "coverage_conditions/args/1/args/2/args/1",
+                "coverage_conditions/args/1/args/2/args/2",
+                "coverage_conditions/args/1/args/2/args/3/args/0",
+                "coverage_conditions/args/1/args/2/args/3/args/1",
+                "coverage_conditions/args/1/args/2/args/4"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 6935,
+              "end": 7317,
+              "quote": "“Parallel pricing coordination” means a tacit or\nexpress agreement between two or more rental property owners to raise, change,\nmaintain, or manipulate pricing for the leasing of reasonably interchangeable\nresidential dwelling units, unless required to do so in accordance with\naffordability controls.  This includes agreements between a coordinator and\nmultiple property owners.\n1\n",
+              "supports": [
+                "coverage_conditions/args/1/args/2/args/4"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 7902,
+              "end": 8071,
+              "quote": "“Tacit agreement” means mutual consent demonstrated\nwithout verbal or written communication.  Mutual consent may, but need not, be\ndemonstrated by a pattern of conduct.\n",
+              "supports": [
+                "coverage_conditions/args/1/args/2/args/4"
+              ]
+            }
+          ],
+          "reason": "Refine unsupported conduct into source-backed factual gates and precise legal residuals; remove the inherited actual-use gate because intended primary-residence use is the statutory trigger."
+        }
+      ],
+      "review_notes": [
+        "Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency."
+      ]
+    },
+    {
+      "original_rule_id": "r-b9212520dd133bdf1584",
+      "edits": [
+        {
+          "path": "coverage_conditions",
+          "expected_original_sha256": "30c07bdae283ad388406b983a8f1f3584f569f695f8af6bff2703efa86d796be",
+          "expression": {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "args": [],
+                "fact": "intended_primary_residence",
+                "value": true,
+                "reason": null
+              },
+              {
+                "op": "in",
+                "args": [],
+                "fact": "actor_role",
+                "value": [
+                  "rental_property_owner",
+                  "owner_agent",
+                  "owner_representative",
+                  "owner_subcontractor"
+                ],
+                "reason": null
+              },
+              {
+                "op": "all",
+                "args": [
+                  {
+                    "op": "gte",
+                    "fact": "transaction_owner_rental_unit_count",
+                    "value": 1
+                  },
+                  {
+                    "op": "any",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "fact": "receives_coordinator_candidate_services",
+                        "value": true
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "subscribes_to_coordinator_candidate_services",
+                        "value": true
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "contracts_for_coordinator_candidate_services",
+                        "value": true
+                      },
+                      {
+                        "op": "eq",
+                        "fact": "exchanges_consideration_for_coordinator_candidate_services",
+                        "value": true
+                      }
+                    ]
+                  },
+                  {
+                    "op": "unsupported",
+                    "reason": "The actor must be the qualifying owner or its agent, representative or subcontractor, and the identified service provider must satisfy the operative coordinator/software-or-device/coordinating-function definition and scoped exclusions. Owner units and a service action do not settle these uncompiled relationships and legal qualifications."
+                  }
+                ]
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "doc_id": "D069",
+              "start": 7623,
+              "end": 7902,
+              "quote": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.\n",
+              "supports": [
+                "coverage_conditions/args/0"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 8188,
+              "end": 8421,
+              "quote": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;\n",
+              "supports": [
+                "coverage_conditions/args/1",
+                "coverage_conditions/args/2/args/0",
+                "coverage_conditions/args/2/args/1/args/0",
+                "coverage_conditions/args/2/args/1/args/1",
+                "coverage_conditions/args/2/args/1/args/2",
+                "coverage_conditions/args/2/args/1/args/3",
+                "coverage_conditions/args/2/args/2"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 7317,
+              "end": 7623,
+              "quote": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.\n1\n",
+              "supports": [
+                "coverage_conditions/args/1",
+                "coverage_conditions/args/2/args/0",
+                "coverage_conditions/args/2/args/2"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 6060,
+              "end": 6547,
+              "quote": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.\n",
+              "supports": [
+                "coverage_conditions/args/2/args/2"
+              ]
+            },
+            {
+              "doc_id": "D069",
+              "start": 5021,
+              "end": 6060,
+              "quote": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.\n",
+              "supports": [
+                "coverage_conditions/args/2/args/2"
+              ]
+            }
+          ],
+          "reason": "Refine unsupported conduct into source-backed factual gates and precise legal residuals; remove the inherited actual-use gate because intended primary-residence use is the statutory trigger."
+        }
+      ],
+      "review_notes": [
+        "Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency."
+      ]
+    }
+  ]
+}

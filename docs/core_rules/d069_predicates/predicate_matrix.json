@@ -1,0 +1,2651 @@
+{
+  "label": "AGENT_REVIEW_PREDICATE_MATRIX_NEEDS_REVIEW_NOT_APPLIED",
+  "base_commit": "fec517db973f102c7623a22947b57eb644b2aaa5",
+  "source_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+  "pilot_rules_sha256": "fe172043989f6dc3c4275eb430740a27fc3f8e2168bc17c4fd79f3682bf182d5",
+  "scope": "Every unsupported coverage/exemption node in the seven paid D069 candidate Rules. Existing non-unsupported nodes also have separate registry audit; schema-valid does not mean user-input available.",
+  "unsupported_node_count": 9,
+  "unsupported_coverage_nodes": 6,
+  "unsupported_exemption_nodes": 3,
+  "rows": [
+    {
+      "rule_id": "r-92c9813fd2e2b9362ac9",
+      "provision": "4b",
+      "provision_key": "coordinator_competition_restricting_agreement",
+      "pointer": "/coverage_conditions/args/2",
+      "original_node": {
+        "op": "unsupported",
+        "args": [],
+        "fact": null,
+        "value": null,
+        "reason": "Statutory coordinator status and facilitation of a tacit or express agreement among rental property owners restricting competition are not compiled. Residential ownership or software use alone does not establish these conditions."
+      },
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8421,
+          "end": 8632,
+          "text": "b.    a coordinator to facilitate a tacit or express\nagreement among rental property owners that restricts competition with respect\nto residential dwelling units, including by performing a coordinating\nfunction;",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6060,
+          "end": 6546,
+          "text": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 3995,
+          "end": 5021,
+          "text": "“Coordinating function” means:\n(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7317,
+          "end": 7620,
+          "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7902,
+          "end": 8070,
+          "text": "“Tacit agreement” means mutual consent demonstrated\nwithout verbal or written communication.  Mutual consent may, but need not, be\ndemonstrated by a pattern of conduct.",
+          "section": null
+        }
+      ],
+      "required_factual_inputs": [
+        {
+          "field": "operates_algorithmic_revenue_management_software",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the relevant provider or principal operate algorithmic revenue management software for this activity",
+          "question_text": "Does the relevant provider or principal operate algorithmic revenue management software for this activity?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "coordinator"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "operates_algorithmic_device",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the relevant provider or principal operate the defined algorithmic device for this activity",
+          "question_text": "Does the relevant provider or principal operate the defined algorithmic device for this activity?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "coordinator",
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "agreement_owner_groups",
+          "data_type": "integer",
+          "unit": "distinct owner groups",
+          "allowed_values": [],
+          "meaning": "How many qualifying rental-property-owner groups participate in the particular pricing agreement after controlling-interest aggregation",
+          "question_text": "How many qualifying rental-property-owner groups participate in the particular pricing agreement after controlling-interest aggregation?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "owner",
+            "parallel_coordination"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        }
+      ],
+      "existing_fact_definition_matches": {
+        "exact_matching_required_inputs": [],
+        "near_matches_rejected": {
+          "owner_total_units": "Counts dwelling units, not distinct legally aggregated owners or represented principal ownership.",
+          "owner_total_properties": "Counts properties, not distinct owners.",
+          "owner_type": "Corporate form does not establish person/agent/principal/municipality role or controlling interest.",
+          "subsidized": "Does not establish a particular agreement is required by affordability controls.",
+          "residential": "Broad rental-use fact; does not replace statutory intended-primary-residence or institutional-use tests."
+        }
+      },
+      "gap_categories": [
+        "uncompiled_logic",
+        "missing_conduct_facts",
+        "legal_ambiguity"
+      ],
+      "interpretation_issue": "Facilitation of tacit/express agreement and restriction of competition are legal/factual determinations; source does not supply an algorithm to infer them.",
+      "proposed_expression": null,
+      "disposition": "defer to next bounded coordinator/agreements task; require documentary conduct and reviewed restriction-of-competition test, not a bare software-use or parallel-price fact",
+      "dependency_owners": [
+        "Core A: source-grounded AST and tests",
+        "Platform: typed factual input definitions and selected-snapshot assembly",
+        "Human reviewer/user: actual conduct and legal interpretation"
+      ],
+      "semantic_verification": "needs_review"
+    },
+    {
+      "rule_id": "r-92c9813fd2e2b9362ac9",
+      "provision": "4b",
+      "provision_key": "coordinator_competition_restricting_agreement",
+      "pointer": "/exemption_conditions/args/2",
+      "original_node": {
+        "op": "unsupported",
+        "args": [],
+        "fact": null,
+        "value": null,
+        "reason": "Coordinator status is limited by the algorithmic-device and coordinating-function exclusions. Their application to the actor's activities is not compiled; an excluded activity does not exempt every other activity of the actor."
+      },
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 3420,
+          "end": 3719,
+          "text": "An algorithmic\ndevice does not include: (1) a spreadsheet that (a) operates without artificial\nintelligence and (b) requires human analysis to process or otherwise perform\ncalculations of data; or (2) a database that only uses an algorithm to query\nunprocessed data stored on or within that database",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 5021,
+          "end": 6059,
+          "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6060,
+          "end": 6546,
+          "text": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.",
+          "section": null
+        }
+      ],
+      "required_factual_inputs": [
+        {
+          "field": "spreadsheet_without_ai",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is the particular device a spreadsheet that operates without artificial intelligence",
+          "question_text": "Is the particular device a spreadsheet that operates without artificial intelligence?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "spreadsheet_requires_human_analysis",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does that spreadsheet require human analysis to process or calculate data",
+          "question_text": "Does that spreadsheet require human analysis to process or calculate data?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "database_only_queries_unprocessed_data",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does that database only use an algorithm to query unprocessed data stored within it",
+          "question_text": "Does that database only use an algorithm to query unprocessed data stored within it?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "activity",
+          "data_type": "enum",
+          "unit": null,
+          "allowed_values": [
+            "developing_estimated_rent",
+            "using_real_estate_brokerage_database",
+            "other"
+          ],
+          "meaning": "Which particular activity is being evaluated, with separate activity records for simultaneous service functions",
+          "question_text": "Which particular activity is being evaluated, with separate activity records for simultaneous service functions?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "rent_estimate_public_at_no_cost",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is the estimated rent from this activity made available to the public at no cost",
+          "question_text": "Is the estimated rent from this activity made available to the public at no cost?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        }
+      ],
+      "existing_fact_definition_matches": {
+        "exact_matching_required_inputs": [],
+        "near_matches_rejected": {
+          "owner_total_units": "Counts dwelling units, not distinct legally aggregated owners or represented principal ownership.",
+          "owner_total_properties": "Counts properties, not distinct owners.",
+          "owner_type": "Corporate form does not establish person/agent/principal/municipality role or controlling interest.",
+          "subsidized": "Does not establish a particular agreement is required by affordability controls.",
+          "residential": "Broad rental-use fact; does not replace statutory intended-primary-residence or institutional-use tests."
+        }
+      },
+      "gap_categories": [
+        "uncompiled_logic",
+        "missing_activity_facts",
+        "residual_legal_interpretation"
+      ],
+      "interpretation_issue": "Only activity-specific definition limits; no actor-wide software safe harbor.",
+      "proposed_expression": null,
+      "disposition": "defer provider/activity binding as for4a, preserving current unknown",
+      "dependency_owners": [
+        "Core A: source-grounded AST and tests",
+        "Platform: typed factual input definitions and selected-snapshot assembly",
+        "Human reviewer/user: actual conduct and legal interpretation"
+      ],
+      "semantic_verification": "needs_review"
+    },
+    {
+      "rule_id": "r-ae6bf8b690dd32748832",
+      "provision": "4d",
+      "provision_key": "coordinator_agents_parallel_pricing",
+      "pointer": "/coverage_conditions/args/2",
+      "original_node": {
+        "op": "unsupported",
+        "args": [],
+        "fact": null,
+        "value": null,
+        "reason": "The covered agency, representation, or subcontracting relationship, the principal's statutory coordinator status, and engagement in the defined parallel-pricing agreement are not compiled. The precise antecedent of 'subcontractor thereof' remains an interpretation issue."
+      },
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8732,
+          "end": 8854,
+          "text": "d.    any agent or representative of a coordinator or\nsubcontractor thereof to engage in parallel pricing coordination; or",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6060,
+          "end": 6546,
+          "text": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6935,
+          "end": 7314,
+          "text": "“Parallel pricing coordination” means a tacit or\nexpress agreement between two or more rental property owners to raise, change,\nmaintain, or manipulate pricing for the leasing of reasonably interchangeable\nresidential dwelling units, unless required to do so in accordance with\naffordability controls.  This includes agreements between a coordinator and\nmultiple property owners.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7317,
+          "end": 7620,
+          "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7902,
+          "end": 8070,
+          "text": "“Tacit agreement” means mutual consent demonstrated\nwithout verbal or written communication.  Mutual consent may, but need not, be\ndemonstrated by a pattern of conduct.",
+          "section": null
+        }
+      ],
+      "required_factual_inputs": [
+        {
+          "field": "actor_is_coordinator_agent_or_representative",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is there a documented agency or representation relationship to the relevant principal",
+          "question_text": "Is there a documented agency or representation relationship to the relevant principal?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "4d"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "operates_algorithmic_revenue_management_software",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the relevant provider or principal operate algorithmic revenue management software for this activity",
+          "question_text": "Does the relevant provider or principal operate algorithmic revenue management software for this activity?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "coordinator"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "operates_algorithmic_device",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the relevant provider or principal operate the defined algorithmic device for this activity",
+          "question_text": "Does the relevant provider or principal operate the defined algorithmic device for this activity?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "coordinator",
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "agreement_owner_groups",
+          "data_type": "integer",
+          "unit": "distinct owner groups",
+          "allowed_values": [],
+          "meaning": "How many qualifying rental-property-owner groups participate in the particular pricing agreement after controlling-interest aggregation",
+          "question_text": "How many qualifying rental-property-owner groups participate in the particular pricing agreement after controlling-interest aggregation?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "owner",
+            "parallel_coordination"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        }
+      ],
+      "existing_fact_definition_matches": {
+        "exact_matching_required_inputs": [],
+        "near_matches_rejected": {
+          "owner_total_units": "Counts dwelling units, not distinct legally aggregated owners or represented principal ownership.",
+          "owner_total_properties": "Counts properties, not distinct owners.",
+          "owner_type": "Corporate form does not establish person/agent/principal/municipality role or controlling interest.",
+          "subsidized": "Does not establish a particular agreement is required by affordability controls.",
+          "residential": "Broad rental-use fact; does not replace statutory intended-primary-residence or institutional-use tests."
+        }
+      },
+      "gap_categories": [
+        "uncompiled_logic",
+        "missing_relationship_facts",
+        "legal_ambiguity"
+      ],
+      "interpretation_issue": "Antecedent of subcontractor thereof remains unresolved; do not select coordinator versus its agent/representative without review.",
+      "proposed_expression": null,
+      "disposition": "defer; preserve unsupported subcontractor antecedent and defined coordination. Later an agent-or-representative alternative can be compiled only alongside unsupported subcontractor alternative, not an exhaustive role gate that excludes it",
+      "dependency_owners": [
+        "Core A: source-grounded AST and tests",
+        "Platform: typed factual input definitions and selected-snapshot assembly",
+        "Human reviewer/user: actual conduct and legal interpretation"
+      ],
+      "semantic_verification": "needs_review"
+    },
+    {
+      "rule_id": "r-ae6bf8b690dd32748832",
+      "provision": "4d",
+      "provision_key": "coordinator_agents_parallel_pricing",
+      "pointer": "/exemption_conditions/args/3",
+      "original_node": {
+        "op": "unsupported",
+        "args": [],
+        "fact": null,
+        "value": null,
+        "reason": "Whether the principal falls outside statutory coordinator status through the algorithmic-device or coordinating-function exclusions is not compiled. Such exclusions do not necessarily remove coverage under other section 4 prohibitions."
+      },
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 3420,
+          "end": 3719,
+          "text": "An algorithmic\ndevice does not include: (1) a spreadsheet that (a) operates without artificial\nintelligence and (b) requires human analysis to process or otherwise perform\ncalculations of data; or (2) a database that only uses an algorithm to query\nunprocessed data stored on or within that database",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 5021,
+          "end": 6059,
+          "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6060,
+          "end": 6546,
+          "text": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.",
+          "section": null
+        }
+      ],
+      "required_factual_inputs": [
+        {
+          "field": "spreadsheet_without_ai",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is the particular device a spreadsheet that operates without artificial intelligence",
+          "question_text": "Is the particular device a spreadsheet that operates without artificial intelligence?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "spreadsheet_requires_human_analysis",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does that spreadsheet require human analysis to process or calculate data",
+          "question_text": "Does that spreadsheet require human analysis to process or calculate data?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "database_only_queries_unprocessed_data",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does that database only use an algorithm to query unprocessed data stored within it",
+          "question_text": "Does that database only use an algorithm to query unprocessed data stored within it?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "activity",
+          "data_type": "enum",
+          "unit": null,
+          "allowed_values": [
+            "developing_estimated_rent",
+            "using_real_estate_brokerage_database",
+            "other"
+          ],
+          "meaning": "Which particular activity is being evaluated, with separate activity records for simultaneous service functions",
+          "question_text": "Which particular activity is being evaluated, with separate activity records for simultaneous service functions?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "rent_estimate_public_at_no_cost",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is the estimated rent from this activity made available to the public at no cost",
+          "question_text": "Is the estimated rent from this activity made available to the public at no cost?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        }
+      ],
+      "existing_fact_definition_matches": {
+        "exact_matching_required_inputs": [],
+        "near_matches_rejected": {
+          "owner_total_units": "Counts dwelling units, not distinct legally aggregated owners or represented principal ownership.",
+          "owner_total_properties": "Counts properties, not distinct owners.",
+          "owner_type": "Corporate form does not establish person/agent/principal/municipality role or controlling interest.",
+          "subsidized": "Does not establish a particular agreement is required by affordability controls.",
+          "residential": "Broad rental-use fact; does not replace statutory intended-primary-residence or institutional-use tests."
+        }
+      },
+      "gap_categories": [
+        "uncompiled_logic",
+        "missing_principal_activity_facts",
+        "residual_legal_interpretation"
+      ],
+      "interpretation_issue": "Bind excluded activity to relevant principal; it does not remove4c direct-person liability.",
+      "proposed_expression": null,
+      "disposition": "defer principal-specific coordinator-definition exclusions; preserve current unknown",
+      "dependency_owners": [
+        "Core A: source-grounded AST and tests",
+        "Platform: typed factual input definitions and selected-snapshot assembly",
+        "Human reviewer/user: actual conduct and legal interpretation"
+      ],
+      "semantic_verification": "needs_review"
+    },
+    {
+      "rule_id": "r-b557a89502e37db1bddd",
+      "provision": "4e",
+      "provision_key": "person_performing_coordinating_function",
+      "pointer": "/coverage_conditions/args/2",
+      "original_node": {
+        "op": "unsupported",
+        "args": [],
+        "fact": null,
+        "value": null,
+        "reason": "The three alternative coordinating-function branches are not compiled. They require activity-specific facts about qualifying owners, competitively sensitive information, automated processing or training, set or recommended prices/terms/occupancy levels, and, for the third branch, parallel pricing coordination."
+      },
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8855,
+          "end": 8908,
+          "text": "e.     any person to perform a coordinating function.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 4026,
+          "end": 4427,
+          "text": "(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 4427,
+          "end": 4746,
+          "text": "(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 4746,
+          "end": 5021,
+          "text": "(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7317,
+          "end": 7620,
+          "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 3724,
+          "end": 3994,
+          "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6547,
+          "end": 6772,
+          "text": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6935,
+          "end": 7314,
+          "text": "“Parallel pricing coordination” means a tacit or\nexpress agreement between two or more rental property owners to raise, change,\nmaintain, or manipulate pricing for the leasing of reasonably interchangeable\nresidential dwelling units, unless required to do so in accordance with\naffordability controls.  This includes agreements between a coordinator and\nmultiple property owners.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6773,
+          "end": 6934,
+          "text": "“Person” means, unless the context requires otherwise,\nany natural person or persons, or any corporation, partnership, company, trust,\nor association of persons.",
+          "section": null
+        }
+      ],
+      "required_factual_inputs": [
+        {
+          "field": "information_owner_groups",
+          "data_type": "integer",
+          "unit": "distinct owner groups",
+          "allowed_values": [],
+          "meaning": "How many distinct rental-property-owner groups supplied the information in this activity after treating each controlling-interest holder and its owning entity as a single owner",
+          "question_text": "How many distinct rental-property-owner groups supplied the information in this activity after treating each controlling-interest holder and its owning entity as a single owner?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "owner",
+            "function_1"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "collects_competitively_sensitive_information",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does this activity collect the specified competitively sensitive information",
+          "question_text": "Does this activity collect the specified competitively sensitive information?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_1",
+            "sensitive_information",
+            "nonpublic"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "collection_for_automated_analysis_processing_or_training",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is the purpose of this collection analysis or processing using an algorithm or other automated process, including training",
+          "question_text": "Is the purpose of this collection analysis or processing using an algorithm or other automated process, including training?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_1"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "process_used_to_set_or_recommend_rental_prices_terms_or_occupancy",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is that algorithm or automated process used to set or recommend rental prices, material lease terms or occupancy levels",
+          "question_text": "Is that algorithm or automated process used to set or recommend rental prices, material lease terms or occupancy levels?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_1"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "activity_sets_rental_prices_terms_or_occupancy",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does this activity set rental prices, material lease terms or occupancy levels",
+          "question_text": "Does this activity set rental prices, material lease terms or occupancy levels?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_2"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "setting_uses_process_analyzing_other_owner_sensitive_information",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is the setting pursuant to an algorithm or automated process analyzing or processing competitively sensitive information from another qualifying rental owner, including use in training",
+          "question_text": "Is the setting pursuant to an algorithm or automated process analyzing or processing competitively sensitive information from another qualifying rental owner, including use in training?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_2",
+            "owner",
+            "sensitive_information",
+            "nonpublic"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        }
+      ],
+      "existing_fact_definition_matches": {
+        "exact_matching_required_inputs": [],
+        "near_matches_rejected": {
+          "owner_total_units": "Counts dwelling units, not distinct legally aggregated owners or represented principal ownership.",
+          "owner_total_properties": "Counts properties, not distinct owners.",
+          "owner_type": "Corporate form does not establish person/agent/principal/municipality role or controlling interest.",
+          "subsidized": "Does not establish a particular agreement is required by affordability controls.",
+          "residential": "Broad rental-use fact; does not replace statutory intended-primary-residence or institutional-use tests."
+        }
+      },
+      "gap_categories": [
+        "uncompiled_logic",
+        "missing_conduct_facts",
+        "residual_legal_interpretation"
+      ],
+      "interpretation_issue": "First branch purpose differs from completed processing. Second branch requires setting, not mere recommendation. Third branch does not mandate competitively sensitive/nonpublic information. Count distinct aggregated owners rather than accounts, properties or units.",
+      "proposed_expression": {
+        "op": "any",
+        "args": [
+          {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "fact": "collects_competitively_sensitive_information",
+                "value": true
+              },
+              {
+                "op": "gte",
+                "fact": "information_owner_groups",
+                "value": 2
+              },
+              {
+                "op": "eq",
+                "fact": "collection_for_automated_analysis_processing_or_training",
+                "value": true
+              },
+              {
+                "op": "eq",
+                "fact": "process_used_to_set_or_recommend_rental_prices_terms_or_occupancy",
+                "value": true
+              }
+            ]
+          },
+          {
+            "op": "all",
+            "args": [
+              {
+                "op": "eq",
+                "fact": "activity_sets_rental_prices_terms_or_occupancy",
+                "value": true
+              },
+              {
+                "op": "eq",
+                "fact": "setting_uses_process_analyzing_other_owner_sensitive_information",
+                "value": true
+              }
+            ]
+          },
+          {
+            "op": "unsupported",
+            "reason": "Branch3 requires determining the defined parallel-pricing agreement, same/substantially-similar process and at least two qualifying owner groups; no global nonpublic-information gate applies."
+          }
+        ]
+      },
+      "disposition": "compile first two factual branches as an any; retain third parallel-pricing branch unsupported; retain current activity-specific exemption AST",
+      "dependency_owners": [
+        "Core A: source-grounded AST and tests",
+        "Platform: typed factual input definitions and selected-snapshot assembly",
+        "Human reviewer/user: actual conduct and legal interpretation"
+      ],
+      "semantic_verification": "needs_review"
+    },
+    {
+      "rule_id": "r-b9212520dd133bdf1584",
+      "provision": "4a",
+      "provision_key": "owner_use_of_coordinator",
+      "pointer": "/coverage_conditions/args/3",
+      "original_node": {
+        "op": "unsupported",
+        "args": [],
+        "fact": null,
+        "value": null,
+        "reason": "Statutory rental-property-owner status, the receipt or acquisition of services, and whether the service provider is a statutory coordinator are not fully compiled. Owner status includes direct or indirect ownership and the controlling-interest aggregation rule. Coordinator status requires operating the specified software or device and performing a coordinating function."
+      },
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8188,
+          "end": 8420,
+          "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7317,
+          "end": 7620,
+          "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6773,
+          "end": 6934,
+          "text": "“Person” means, unless the context requires otherwise,\nany natural person or persons, or any corporation, partnership, company, trust,\nor association of persons.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7623,
+          "end": 7901,
+          "text": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6060,
+          "end": 6546,
+          "text": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 3995,
+          "end": 5021,
+          "text": "“Coordinating function” means:\n(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+          "section": null
+        }
+      ],
+      "required_factual_inputs": [
+        {
+          "field": "actor_role",
+          "data_type": "enum",
+          "unit": null,
+          "allowed_values": [
+            "rental_property_owner",
+            "owner_agent",
+            "owner_representative",
+            "owner_subcontractor",
+            "New_Jersey_Attorney_General",
+            "other"
+          ],
+          "meaning": "What documented role does the actor have in this evaluated activity",
+          "question_text": "What documented role does the actor have in this evaluated activity?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "4a",
+            "7"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "relevant_owner_owns_rental_units_directly_or_indirectly",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the actor or represented principal directly or indirectly own one or more qualifying rental residential dwelling units",
+          "question_text": "Does the actor or represented principal directly or indirectly own one or more qualifying rental residential dwelling units?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "owner",
+            "4a"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "service_transaction_receives",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the actor receive the relevant provider service",
+          "question_text": "Does the actor receive the relevant provider service?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "4a"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "service_transaction_subscribes",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the actor subscribe to the relevant provider service",
+          "question_text": "Does the actor subscribe to the relevant provider service?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "4a"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "service_transaction_contracts",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the actor contract for the relevant provider service",
+          "question_text": "Does the actor contract for the relevant provider service?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "4a"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "service_transaction_exchanges_consideration",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the actor otherwise exchange any form of consideration for use of the relevant provider service",
+          "question_text": "Does the actor otherwise exchange any form of consideration for use of the relevant provider service?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "4a"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "operates_algorithmic_revenue_management_software",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the relevant provider or principal operate algorithmic revenue management software for this activity",
+          "question_text": "Does the relevant provider or principal operate algorithmic revenue management software for this activity?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "coordinator"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "operates_algorithmic_device",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does the relevant provider or principal operate the defined algorithmic device for this activity",
+          "question_text": "Does the relevant provider or principal operate the defined algorithmic device for this activity?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "coordinator",
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        }
+      ],
+      "existing_fact_definition_matches": {
+        "exact_matching_required_inputs": [],
+        "near_matches_rejected": {
+          "owner_total_units": "Counts dwelling units, not distinct legally aggregated owners or represented principal ownership.",
+          "owner_total_properties": "Counts properties, not distinct owners.",
+          "owner_type": "Corporate form does not establish person/agent/principal/municipality role or controlling interest.",
+          "subsidized": "Does not establish a particular agreement is required by affordability controls.",
+          "residential": "Broad rental-use fact; does not replace statutory intended-primary-residence or institutional-use tests."
+        }
+      },
+      "gap_categories": [
+        "uncompiled_logic",
+        "missing_conduct_facts",
+        "residual_legal_interpretation"
+      ],
+      "interpretation_issue": "Do not require consideration for every service alternative; receiver, subscription, contract and exchange alternatives are independent. Represented owner ownership differs from agent ownership.",
+      "proposed_expression": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "fact": "relevant_owner_owns_rental_units_directly_or_indirectly",
+            "value": true
+          },
+          {
+            "op": "any",
+            "args": [
+              {
+                "op": "eq",
+                "fact": "service_transaction_receives",
+                "value": true
+              },
+              {
+                "op": "eq",
+                "fact": "service_transaction_subscribes",
+                "value": true
+              },
+              {
+                "op": "eq",
+                "fact": "service_transaction_contracts",
+                "value": true
+              },
+              {
+                "op": "eq",
+                "fact": "service_transaction_exchanges_consideration",
+                "value": true
+              }
+            ]
+          },
+          {
+            "op": "unsupported",
+            "reason": "The relevant service provider must be a statutory coordinator in this transaction; retain software/device route, activity-specific coordinating-function exclusions and actual facts."
+          }
+        ]
+      },
+      "disposition": "compile bounded owner/service gates; keep coordinator residual unsupported",
+      "dependency_owners": [
+        "Core A: source-grounded AST and tests",
+        "Platform: typed factual input definitions and selected-snapshot assembly",
+        "Human reviewer/user: actual conduct and legal interpretation"
+      ],
+      "semantic_verification": "needs_review"
+    },
+    {
+      "rule_id": "r-b9212520dd133bdf1584",
+      "provision": "4a",
+      "provision_key": "owner_use_of_coordinator",
+      "pointer": "/exemption_conditions/args/2",
+      "original_node": {
+        "op": "unsupported",
+        "args": [],
+        "fact": null,
+        "value": null,
+        "reason": "The algorithmic-device and coordinating-function exclusions have not been compiled for this services transaction. They include qualifying non-AI spreadsheets requiring human analysis, query-only databases, research/statistical analysis/testing without lease-setting use, free public rent estimates, qualifying brokerage databases, and lawful government affordability-control activities. These are definitional limitations, not blanket exemptions from other prohibited conduct."
+      },
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 3420,
+          "end": 3719,
+          "text": "An algorithmic\ndevice does not include: (1) a spreadsheet that (a) operates without artificial\nintelligence and (b) requires human analysis to process or otherwise perform\ncalculations of data; or (2) a database that only uses an algorithm to query\nunprocessed data stored on or within that database",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 5021,
+          "end": 6059,
+          "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6060,
+          "end": 6546,
+          "text": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 2577,
+          "end": 3187,
+          "text": "“Affordability controls” means a restriction on rent\nprice established pursuant to a government program, including but not limited\nto: the federal section 8 Housing Choice Voucher Homeownership Program,\nauthorized pursuant to Subpart M of Part 982 of Title 24 of the Code of Federal\nRegulations (24 CFR 982.601 et seq.); P.L.2004, c.140 (C.52:27D-287.1 et seq.);\nthe “Fair Housing Act,” P.L.1985, c.222 (C.52:27D-301 et al.); any program\nadministered by the New Jersey Housing and Mortgage Finance Agency; a rent\ncontrol or rent leveling ordinance; or other local, State, or federal\ngovernment housing program.",
+          "section": null
+        }
+      ],
+      "required_factual_inputs": [
+        {
+          "field": "spreadsheet_without_ai",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is the particular device a spreadsheet that operates without artificial intelligence",
+          "question_text": "Is the particular device a spreadsheet that operates without artificial intelligence?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "spreadsheet_requires_human_analysis",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does that spreadsheet require human analysis to process or calculate data",
+          "question_text": "Does that spreadsheet require human analysis to process or calculate data?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "database_only_queries_unprocessed_data",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does that database only use an algorithm to query unprocessed data stored within it",
+          "question_text": "Does that database only use an algorithm to query unprocessed data stored within it?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "device_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "activity",
+          "data_type": "enum",
+          "unit": null,
+          "allowed_values": [
+            "developing_estimated_rent",
+            "using_real_estate_brokerage_database",
+            "other"
+          ],
+          "meaning": "Which particular activity is being evaluated, with separate activity records for simultaneous service functions",
+          "question_text": "Which particular activity is being evaluated, with separate activity records for simultaneous service functions?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "rent_estimate_public_at_no_cost",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is the estimated rent from this activity made available to the public at no cost",
+          "question_text": "Is the estimated rent from this activity made available to the public at no cost?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "function_exclusions"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        }
+      ],
+      "existing_fact_definition_matches": {
+        "exact_matching_required_inputs": [],
+        "near_matches_rejected": {
+          "owner_total_units": "Counts dwelling units, not distinct legally aggregated owners or represented principal ownership.",
+          "owner_total_properties": "Counts properties, not distinct owners.",
+          "owner_type": "Corporate form does not establish person/agent/principal/municipality role or controlling interest.",
+          "subsidized": "Does not establish a particular agreement is required by affordability controls.",
+          "residential": "Broad rental-use fact; does not replace statutory intended-primary-residence or institutional-use tests."
+        }
+      },
+      "gap_categories": [
+        "uncompiled_logic",
+        "missing_activity_facts",
+        "residual_legal_interpretation"
+      ],
+      "interpretation_issue": "A excluded device or an excluded separate activity does not exempt all services or all section4 conduct.",
+      "proposed_expression": null,
+      "disposition": "defer this whole residual during the two-rule increment; compile only after binding device and function exceptions to this provider/service and preserving alternative revenue-management-software route",
+      "dependency_owners": [
+        "Core A: source-grounded AST and tests",
+        "Platform: typed factual input definitions and selected-snapshot assembly",
+        "Human reviewer/user: actual conduct and legal interpretation"
+      ],
+      "semantic_verification": "needs_review"
+    },
+    {
+      "rule_id": "r-c243bf954944d60c4643",
+      "provision": "4c",
+      "provision_key": "persons_parallel_pricing_coordination",
+      "pointer": "/coverage_conditions/args/3",
+      "original_node": {
+        "op": "unsupported",
+        "args": [],
+        "fact": null,
+        "value": null,
+        "reason": "Engagement in or facilitation of the defined pricing agreement is not compiled. The underlying agreement must involve qualifying rental property owners and reasonably interchangeable residential dwelling units; parallel price movements alone do not establish the statutory agreement."
+      },
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8633,
+          "end": 8731,
+          "text": "c.     two or more persons to engage in\n1\nor\notherwise facilitate\n1\nparallel pricing coordination;",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6935,
+          "end": 7314,
+          "text": "“Parallel pricing coordination” means a tacit or\nexpress agreement between two or more rental property owners to raise, change,\nmaintain, or manipulate pricing for the leasing of reasonably interchangeable\nresidential dwelling units, unless required to do so in accordance with\naffordability controls.  This includes agreements between a coordinator and\nmultiple property owners.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7902,
+          "end": 8070,
+          "text": "“Tacit agreement” means mutual consent demonstrated\nwithout verbal or written communication.  Mutual consent may, but need not, be\ndemonstrated by a pattern of conduct.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 6773,
+          "end": 6934,
+          "text": "“Person” means, unless the context requires otherwise,\nany natural person or persons, or any corporation, partnership, company, trust,\nor association of persons.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7317,
+          "end": 7620,
+          "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7623,
+          "end": 7901,
+          "text": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.",
+          "section": null
+        }
+      ],
+      "required_factual_inputs": [
+        {
+          "field": "participating_or_facilitating_persons",
+          "data_type": "integer",
+          "unit": "persons",
+          "allowed_values": [],
+          "meaning": "How many statutory persons engage in or facilitate the conduct, separately from owner-group counts",
+          "question_text": "How many statutory persons engage in or facilitate the conduct, separately from owner-group counts?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "4c",
+            "person"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "agreement_owner_groups",
+          "data_type": "integer",
+          "unit": "distinct owner groups",
+          "allowed_values": [],
+          "meaning": "How many qualifying rental-property-owner groups participate in the particular pricing agreement after controlling-interest aggregation",
+          "question_text": "How many qualifying rental-property-owner groups participate in the particular pricing agreement after controlling-interest aggregation?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "owner",
+            "parallel_coordination"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "pricing_agreement_required_by_affordability_controls",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Is the specific pricing agreement required by the documented affordability controls, beyond mere subsidy status",
+          "question_text": "Is the specific pricing agreement required by the documented affordability controls, beyond mere subsidy status?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "parallel_coordination",
+            "affordability"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        }
+      ],
+      "existing_fact_definition_matches": {
+        "exact_matching_required_inputs": [],
+        "near_matches_rejected": {
+          "owner_total_units": "Counts dwelling units, not distinct legally aggregated owners or represented principal ownership.",
+          "owner_total_properties": "Counts properties, not distinct owners.",
+          "owner_type": "Corporate form does not establish person/agent/principal/municipality role or controlling interest.",
+          "subsidized": "Does not establish a particular agreement is required by affordability controls.",
+          "residential": "Broad rental-use fact; does not replace statutory intended-primary-residence or institutional-use tests."
+        }
+      },
+      "gap_categories": [
+        "uncompiled_logic",
+        "missing_conduct_facts",
+        "legal_ambiguity"
+      ],
+      "interpretation_issue": "Mutual consent may be demonstrated by conduct; coincident prices alone do not establish it. No algorithmic-device restriction applies to this clause.",
+      "proposed_expression": null,
+      "disposition": "defer pricing-agreement inference; potential next safe count gate is agreement_owner_groups>=2 with controlling-interest aggregation, distinct from existing participating-persons>=2, but retain defined agreement/interchangeability residual",
+      "dependency_owners": [
+        "Core A: source-grounded AST and tests",
+        "Platform: typed factual input definitions and selected-snapshot assembly",
+        "Human reviewer/user: actual conduct and legal interpretation"
+      ],
+      "semantic_verification": "needs_review"
+    },
+    {
+      "rule_id": "r-f1b8f964acfc1c2e3687",
+      "provision": "6b",
+      "provision_key": "municipal_conflicting_ordinance_prohibition",
+      "pointer": "/coverage_conditions/args/1",
+      "original_node": {
+        "op": "unsupported",
+        "args": [],
+        "fact": null,
+        "value": null,
+        "reason": "Enactment of a conflicting ordinance is not compiled. Determining conflict requires the particular ordinance and legal analysis; no target ordinance is identified in the source."
+      },
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 9341,
+          "end": 9570,
+          "text": "b.    A municipality shall be prohibited from enacting\nan ordinance that conflicts with this act.  This subsection shall not be\nconstrued to prohibit the enactment of ordinances explicitly authorized or\nrequired by any other law.",
+          "section": null
+        }
+      ],
+      "required_factual_inputs": [
+        {
+          "field": "municipality_enacts_relevant_ordinance",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Did the municipality enact the particular ordinance identified for this comparison",
+          "question_text": "Did the municipality enact the particular ordinance identified for this comparison?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "6b"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "ordinance_explicitly_authorized_by_other_law",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does an identified other law explicitly authorize this exact ordinance provision",
+          "question_text": "Does an identified other law explicitly authorize this exact ordinance provision?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "6b"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        },
+        {
+          "field": "ordinance_required_by_other_law",
+          "data_type": "boolean",
+          "unit": null,
+          "allowed_values": [],
+          "meaning": "Does an identified other law require this exact ordinance provision",
+          "question_text": "Does an identified other law require this exact ordinance provision?",
+          "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+          "source_refs": [
+            "6b"
+          ],
+          "existing_definition_match": {
+            "status": "absent",
+            "owner": "Platform fact steward",
+            "reason": "No current field defines this activity/relationship fact."
+          },
+          "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+        }
+      ],
+      "existing_fact_definition_matches": {
+        "exact_matching_required_inputs": [],
+        "near_matches_rejected": {
+          "owner_total_units": "Counts dwelling units, not distinct legally aggregated owners or represented principal ownership.",
+          "owner_total_properties": "Counts properties, not distinct owners.",
+          "owner_type": "Corporate form does not establish person/agent/principal/municipality role or controlling interest.",
+          "subsidized": "Does not establish a particular agreement is required by affordability controls.",
+          "residential": "Broad rental-use fact; does not replace statutory intended-primary-residence or institutional-use tests."
+        }
+      },
+      "gap_categories": [
+        "missing_target_sources",
+        "legal_ambiguity",
+        "missing_conduct_facts"
+      ],
+      "interpretation_issue": "Different definitions do not prove legal conflict or actual preemption; effective local ordinance/version and authorizing other law must be established.",
+      "proposed_expression": null,
+      "disposition": "defer conflict determination; document exact target/provision/date/other-law comparison and leave interactions empty",
+      "dependency_owners": [
+        "Core A: source-grounded AST and tests",
+        "Platform: typed factual input definitions and selected-snapshot assembly",
+        "Human reviewer/user: actual conduct and legal interpretation",
+        "Platform: municipal publication/version/other-law sources"
+      ],
+      "semantic_verification": "needs_review"
+    }
+  ],
+  "proposed_input_catalog": {
+    "information_owner_groups": {
+      "field": "information_owner_groups",
+      "data_type": "integer",
+      "unit": "distinct owner groups",
+      "allowed_values": [],
+      "meaning": "How many distinct rental-property-owner groups supplied the information in this activity after treating each controlling-interest holder and its owning entity as a single owner",
+      "question_text": "How many distinct rental-property-owner groups supplied the information in this activity after treating each controlling-interest holder and its owning entity as a single owner?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "owner",
+        "function_1"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "collects_competitively_sensitive_information": {
+      "field": "collects_competitively_sensitive_information",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does this activity collect the specified competitively sensitive information",
+      "question_text": "Does this activity collect the specified competitively sensitive information?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_1",
+        "sensitive_information",
+        "nonpublic"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "collection_for_automated_analysis_processing_or_training": {
+      "field": "collection_for_automated_analysis_processing_or_training",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is the purpose of this collection analysis or processing using an algorithm or other automated process, including training",
+      "question_text": "Is the purpose of this collection analysis or processing using an algorithm or other automated process, including training?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_1"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "process_used_to_set_or_recommend_rental_prices_terms_or_occupancy": {
+      "field": "process_used_to_set_or_recommend_rental_prices_terms_or_occupancy",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is that algorithm or automated process used to set or recommend rental prices, material lease terms or occupancy levels",
+      "question_text": "Is that algorithm or automated process used to set or recommend rental prices, material lease terms or occupancy levels?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_1"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "activity_sets_rental_prices_terms_or_occupancy": {
+      "field": "activity_sets_rental_prices_terms_or_occupancy",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does this activity set rental prices, material lease terms or occupancy levels",
+      "question_text": "Does this activity set rental prices, material lease terms or occupancy levels?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_2"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "setting_uses_process_analyzing_other_owner_sensitive_information": {
+      "field": "setting_uses_process_analyzing_other_owner_sensitive_information",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is the setting pursuant to an algorithm or automated process analyzing or processing competitively sensitive information from another qualifying rental owner, including use in training",
+      "question_text": "Is the setting pursuant to an algorithm or automated process analyzing or processing competitively sensitive information from another qualifying rental owner, including use in training?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_2",
+        "owner",
+        "sensitive_information",
+        "nonpublic"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "relevant_owner_owns_rental_units_directly_or_indirectly": {
+      "field": "relevant_owner_owns_rental_units_directly_or_indirectly",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the actor or represented principal directly or indirectly own one or more qualifying rental residential dwelling units",
+      "question_text": "Does the actor or represented principal directly or indirectly own one or more qualifying rental residential dwelling units?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "owner",
+        "4a"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "service_transaction_receives": {
+      "field": "service_transaction_receives",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the actor receive the relevant provider service",
+      "question_text": "Does the actor receive the relevant provider service?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "4a"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "service_transaction_subscribes": {
+      "field": "service_transaction_subscribes",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the actor subscribe to the relevant provider service",
+      "question_text": "Does the actor subscribe to the relevant provider service?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "4a"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "service_transaction_contracts": {
+      "field": "service_transaction_contracts",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the actor contract for the relevant provider service",
+      "question_text": "Does the actor contract for the relevant provider service?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "4a"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "service_transaction_exchanges_consideration": {
+      "field": "service_transaction_exchanges_consideration",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the actor otherwise exchange any form of consideration for use of the relevant provider service",
+      "question_text": "Does the actor otherwise exchange any form of consideration for use of the relevant provider service?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "4a"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "actor_role": {
+      "field": "actor_role",
+      "data_type": "enum",
+      "unit": null,
+      "allowed_values": [
+        "rental_property_owner",
+        "owner_agent",
+        "owner_representative",
+        "owner_subcontractor",
+        "New_Jersey_Attorney_General",
+        "other"
+      ],
+      "meaning": "What documented role does the actor have in this evaluated activity",
+      "question_text": "What documented role does the actor have in this evaluated activity?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "4a",
+        "7"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "operates_algorithmic_revenue_management_software": {
+      "field": "operates_algorithmic_revenue_management_software",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the relevant provider or principal operate algorithmic revenue management software for this activity",
+      "question_text": "Does the relevant provider or principal operate algorithmic revenue management software for this activity?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "coordinator"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "operates_algorithmic_device": {
+      "field": "operates_algorithmic_device",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the relevant provider or principal operate the defined algorithmic device for this activity",
+      "question_text": "Does the relevant provider or principal operate the defined algorithmic device for this activity?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "coordinator",
+        "device_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "spreadsheet_without_ai": {
+      "field": "spreadsheet_without_ai",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is the particular device a spreadsheet that operates without artificial intelligence",
+      "question_text": "Is the particular device a spreadsheet that operates without artificial intelligence?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "device_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "spreadsheet_requires_human_analysis": {
+      "field": "spreadsheet_requires_human_analysis",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does that spreadsheet require human analysis to process or calculate data",
+      "question_text": "Does that spreadsheet require human analysis to process or calculate data?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "device_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "database_only_queries_unprocessed_data": {
+      "field": "database_only_queries_unprocessed_data",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does that database only use an algorithm to query unprocessed data stored within it",
+      "question_text": "Does that database only use an algorithm to query unprocessed data stored within it?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "device_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "agreement_owner_groups": {
+      "field": "agreement_owner_groups",
+      "data_type": "integer",
+      "unit": "distinct owner groups",
+      "allowed_values": [],
+      "meaning": "How many qualifying rental-property-owner groups participate in the particular pricing agreement after controlling-interest aggregation",
+      "question_text": "How many qualifying rental-property-owner groups participate in the particular pricing agreement after controlling-interest aggregation?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "owner",
+        "parallel_coordination"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "participating_or_facilitating_persons": {
+      "field": "participating_or_facilitating_persons",
+      "data_type": "integer",
+      "unit": "persons",
+      "allowed_values": [],
+      "meaning": "How many statutory persons engage in or facilitate the conduct, separately from owner-group counts",
+      "question_text": "How many statutory persons engage in or facilitate the conduct, separately from owner-group counts?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "4c",
+        "person"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "pricing_agreement_required_by_affordability_controls": {
+      "field": "pricing_agreement_required_by_affordability_controls",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is the specific pricing agreement required by the documented affordability controls, beyond mere subsidy status",
+      "question_text": "Is the specific pricing agreement required by the documented affordability controls, beyond mere subsidy status?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "parallel_coordination",
+        "affordability"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "actor_is_coordinator_agent_or_representative": {
+      "field": "actor_is_coordinator_agent_or_representative",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is there a documented agency or representation relationship to the relevant principal",
+      "question_text": "Is there a documented agency or representation relationship to the relevant principal?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "4d"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "municipality_enacts_relevant_ordinance": {
+      "field": "municipality_enacts_relevant_ordinance",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Did the municipality enact the particular ordinance identified for this comparison",
+      "question_text": "Did the municipality enact the particular ordinance identified for this comparison?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "6b"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "ordinance_explicitly_authorized_by_other_law": {
+      "field": "ordinance_explicitly_authorized_by_other_law",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does an identified other law explicitly authorize this exact ordinance provision",
+      "question_text": "Does an identified other law explicitly authorize this exact ordinance provision?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "6b"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "ordinance_required_by_other_law": {
+      "field": "ordinance_required_by_other_law",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does an identified other law require this exact ordinance provision",
+      "question_text": "Does an identified other law require this exact ordinance provision?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "6b"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": {
+      "field": "sensitive_information_used_solely_for_research_statistical_analysis_or_testing",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is use of the information in this evaluated activity solely for research, statistical analysis or testing",
+      "question_text": "Is use of the information in this evaluated activity solely for research, statistical analysis or testing?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "sensitive_information_used_to_set_or_recommend_current_or_future_lease_prices_terms_fees_or_occupancy": {
+      "field": "sensitive_information_used_to_set_or_recommend_current_or_future_lease_prices_terms_fees_or_occupancy",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is information from this evaluated activity used to set or recommend current or future lease prices, terms, fees or occupancy",
+      "question_text": "Is information from this evaluated activity used to set or recommend current or future lease prices, terms, fees or occupancy?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "activity": {
+      "field": "activity",
+      "data_type": "enum",
+      "unit": null,
+      "allowed_values": [
+        "developing_estimated_rent",
+        "using_real_estate_brokerage_database",
+        "other"
+      ],
+      "meaning": "Which particular activity is being evaluated, with separate activity records for simultaneous service functions",
+      "question_text": "Which particular activity is being evaluated, with separate activity records for simultaneous service functions?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "rent_estimate_public_at_no_cost": {
+      "field": "rent_estimate_public_at_no_cost",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is the estimated rent from this activity made available to the public at no cost",
+      "question_text": "Is the estimated rent from this activity made available to the public at no cost?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "database_available_on_equal_terms_to_subscribers": {
+      "field": "database_available_on_equal_terms_to_subscribers",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is the particular brokerage database available on equal terms to subscribers",
+      "question_text": "Is the particular brokerage database available on equal terms to subscribers?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "database_lists_properties_for_rent_or_sale": {
+      "field": "database_lists_properties_for_rent_or_sale",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the particular brokerage database list properties for rent or sale",
+      "question_text": "Does the particular brokerage database list properties for rent or sale?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "database_sets_or_recommends_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": {
+      "field": "database_sets_or_recommends_rental_prices_material_lease_terms_or_occupancy_rates_or_levels",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the particular database set or recommend rental prices, material lease terms or occupancy rates or levels",
+      "question_text": "Does the particular database set or recommend rental prices, material lease terms or occupancy rates or levels?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "database_collects_competitively_sensitive_information_to_set_or_recommend_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": {
+      "field": "database_collects_competitively_sensitive_information_to_set_or_recommend_rental_prices_material_lease_terms_or_occupancy_rates_or_levels",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Does the particular database collect competitively sensitive information for that price, term or occupancy setting or recommendation",
+      "question_text": "Does the particular database collect competitively sensitive information for that price, term or occupancy setting or recommendation?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_exclusions"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "government_sets_or_limits_residential_prices_through_lawful_affordability_controls": {
+      "field": "government_sets_or_limits_residential_prices_through_lawful_affordability_controls",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is this evaluated government activity setting or limiting residential prices through lawful documented affordability controls",
+      "question_text": "Is this evaluated government activity setting or limiting residential prices through lawful documented affordability controls?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "function_exclusions",
+        "affordability"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "intended_primary_residence": {
+      "field": "intended_primary_residence",
+      "data_type": "boolean",
+      "unit": null,
+      "allowed_values": [],
+      "meaning": "Is the particular unit intended as a primary residence rather than inferred from actual occupancy",
+      "question_text": "Is the particular unit intended as a primary residence rather than inferred from actual occupancy?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "residential_unit"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    },
+    "facility_type": {
+      "field": "facility_type",
+      "data_type": "enum",
+      "unit": null,
+      "allowed_values": [
+        "ordinary_residential",
+        "inpatient_medical_care",
+        "licensed_long_term_care",
+        "detention_facility",
+        "correctional_facility",
+        "other"
+      ],
+      "meaning": "What is the documented use of the particular residential or institutional facility",
+      "question_text": "What is the documented use of the particular residential or institutional facility?",
+      "provenance": "user_provided documentary/conduct evidence; synthetic only in labeled probes; never infer from assessor/address data",
+      "source_refs": [
+        "residential_unit"
+      ],
+      "existing_definition_match": {
+        "status": "absent",
+        "owner": "Platform fact steward",
+        "reason": "No current field defines this activity/relationship fact."
+      },
+      "dependency_owner": "Platform fact steward for field contract; Core A for interpretation; human/user supplies actual evidence"
+    }
+  },
+  "already_encoded_fact_registry_audit": {
+    "activity": {
+      "match": "missing",
+      "definition": null
+    },
+    "actor_role": {
+      "match": "missing",
+      "definition": null
+    },
+    "actor_type": {
+      "match": "missing",
+      "definition": null
+    },
+    "database_available_on_equal_terms_to_subscribers": {
+      "match": "missing",
+      "definition": null
+    },
+    "database_collects_competitively_sensitive_information_to_set_or_recommend_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": {
+      "match": "missing",
+      "definition": null
+    },
+    "database_lists_properties_for_rent_or_sale": {
+      "match": "missing",
+      "definition": null
+    },
+    "database_sets_or_recommends_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": {
+      "match": "missing",
+      "definition": null
+    },
+    "facility_type": {
+      "match": "missing",
+      "definition": null
+    },
+    "government_sets_or_limits_residential_prices_through_lawful_affordability_controls": {
+      "match": "missing",
+      "definition": null
+    },
+    "intended_primary_residence": {
+      "match": "missing",
+      "definition": null
+    },
+    "ordinance_explicitly_authorized_by_other_law": {
+      "match": "missing",
+      "definition": null
+    },
+    "ordinance_required_by_other_law": {
+      "match": "missing",
+      "definition": null
+    },
+    "participating_or_facilitating_persons": {
+      "match": "missing",
+      "definition": null
+    },
+    "pricing_agreement_required_by_affordability_controls": {
+      "match": "missing",
+      "definition": null
+    },
+    "principal_sets_or_limits_residential_prices_through_lawful_affordability_controls": {
+      "match": "missing",
+      "definition": null
+    },
+    "principal_type": {
+      "match": "missing",
+      "definition": null
+    },
+    "rent_estimate_public_at_no_cost": {
+      "match": "missing",
+      "definition": null
+    },
+    "residential": {
+      "match": "exact_registry_name_partial_source_semantics",
+      "definition": {
+        "field": "residential",
+        "meaning": "Whether this property is used for residential rental housing",
+        "data_type": "boolean",
+        "unit": null,
+        "allowed_values": [],
+        "minimum": null,
+        "maximum": null,
+        "answer_effort": 2,
+        "allow_partial_date": true
+      },
+      "source_semantics_note": "The registered meaning is Whether this property is used for residential rental housing. D069 defines residential dwelling unit by intended primary-residence use and institutional exclusions; current occupancy or present rental activity is not explicitly required by that definition. Do not claim exact semantic equivalence or infer actual occupancy."
+    },
+    "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": {
+      "match": "missing",
+      "definition": null
+    },
+    "sensitive_information_used_to_set_or_recommend_current_or_future_lease_prices_terms_fees_or_occupancy": {
+      "match": "missing",
+      "definition": null
+    },
+    "service_provider_sets_or_limits_residential_prices_through_lawful_affordability_controls": {
+      "match": "missing",
+      "definition": null
+    },
+    "service_provider_type": {
+      "match": "missing",
+      "definition": null
+    }
+  },
+  "source_spans": {
+    "4a": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 8188,
+      "end": 8420,
+      "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;",
+      "section": null
+    },
+    "4b": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 8421,
+      "end": 8632,
+      "text": "b.    a coordinator to facilitate a tacit or express\nagreement among rental property owners that restricts competition with respect\nto residential dwelling units, including by performing a coordinating\nfunction;",
+      "section": null
+    },
+    "4c": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 8633,
+      "end": 8731,
+      "text": "c.     two or more persons to engage in\n1\nor\notherwise facilitate\n1\nparallel pricing coordination;",
+      "section": null
+    },
+    "4d": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 8732,
+      "end": 8854,
+      "text": "d.    any agent or representative of a coordinator or\nsubcontractor thereof to engage in parallel pricing coordination; or",
+      "section": null
+    },
+    "4e": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 8855,
+      "end": 8908,
+      "text": "e.     any person to perform a coordinating function.",
+      "section": null
+    },
+    "6b": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 9341,
+      "end": 9570,
+      "text": "b.    A municipality shall be prohibited from enacting\nan ordinance that conflicts with this act.  This subsection shall not be\nconstrued to prohibit the enactment of ordinances explicitly authorized or\nrequired by any other law.",
+      "section": null
+    },
+    "7": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 9571,
+      "end": 9984,
+      "text": "7.    The Attorney General shall establish, on the\nofficial website of the Department of Law and Public Safety, a location to\nreceive complaints alleging any violation or suspected violation of this act,\nwhich requirement may be satisfied by establishing or maintaining such a\nlocation for complaints alleging violations or suspected violations of the “New\nJersey Antitrust Act” P.L.1970, c.73 (C.56:9-1 et seq.).",
+      "section": null
+    },
+    "owner": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 7317,
+      "end": 7620,
+      "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.",
+      "section": null
+    },
+    "person": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 6773,
+      "end": 6934,
+      "text": "“Person” means, unless the context requires otherwise,\nany natural person or persons, or any corporation, partnership, company, trust,\nor association of persons.",
+      "section": null
+    },
+    "residential_unit": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 7623,
+      "end": 7901,
+      "text": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.",
+      "section": null
+    },
+    "coordinator": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 6060,
+      "end": 6546,
+      "text": "“Coordinator” means any person who operates\n1\n[\na software or\ndata analytics service\n]\nalgorithmic revenue management software or an algorithmic device\n1\nthat\nperforms a coordinating function for any rental property owner, including a\nrental property owner performing a coordinating function for their own benefit.\n“Coordinator” shall not include a government entity that sets or limits rents\nor sale prices of residential property through affordability controls in\naccordance with law.",
+      "section": null
+    },
+    "device_exclusions": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 3420,
+      "end": 3719,
+      "text": "An algorithmic\ndevice does not include: (1) a spreadsheet that (a) operates without artificial\nintelligence and (b) requires human analysis to process or otherwise perform\ncalculations of data; or (2) a database that only uses an algorithm to query\nunprocessed data stored on or within that database",
+      "section": null
+    },
+    "function_exclusions": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 5021,
+      "end": 6059,
+      "text": "“Coordinating function” shall not include the following:\n(1)\nproviding, using, or collecting competitively sensitive\ninformation solely for the purpose of conducting\nresearch, statistical analysis, or testing, where the competitively\nsensitive information is not used in setting or recommending rental prices,\nmaterial lease terms, fees, occupancy rates or levels, or other contract terms\nfor current or future leases;\n(2)\ndeveloping an estimated amount of rent that is\nmade available to the public at no cost;\n(3)\nthe use of a real estate brokerage database that is available on\nequal terms to subscribers that lists properties for rent or sale but does not:\n(a) set or recommend rental prices, material lease\nterms, or occupancy rates or levels; or\n(b) collect competitively sensitive information to set or\nrecommend rental prices, material lease terms, or occupancy rates or levels; or\n(4)   a government entity setting or limiting rents or\nsale prices of residential property through affordability controls in\naccordance with the law.",
+      "section": null
+    },
+    "sensitive_information": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 3724,
+      "end": 3994,
+      "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.",
+      "section": null
+    },
+    "nonpublic": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 6547,
+      "end": 6772,
+      "text": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.",
+      "section": null
+    },
+    "parallel_coordination": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 6935,
+      "end": 7314,
+      "text": "“Parallel pricing coordination” means a tacit or\nexpress agreement between two or more rental property owners to raise, change,\nmaintain, or manipulate pricing for the leasing of reasonably interchangeable\nresidential dwelling units, unless required to do so in accordance with\naffordability controls.  This includes agreements between a coordinator and\nmultiple property owners.",
+      "section": null
+    },
+    "tacit_agreement": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 7902,
+      "end": 8070,
+      "text": "“Tacit agreement” means mutual consent demonstrated\nwithout verbal or written communication.  Mutual consent may, but need not, be\ndemonstrated by a pattern of conduct.",
+      "section": null
+    },
+    "affordability": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 2577,
+      "end": 3187,
+      "text": "“Affordability controls” means a restriction on rent\nprice established pursuant to a government program, including but not limited\nto: the federal section 8 Housing Choice Voucher Homeownership Program,\nauthorized pursuant to Subpart M of Part 982 of Title 24 of the Code of Federal\nRegulations (24 CFR 982.601 et seq.); P.L.2004, c.140 (C.52:27D-287.1 et seq.);\nthe “Fair Housing Act,” P.L.1985, c.222 (C.52:27D-301 et al.); any program\nadministered by the New Jersey Housing and Mortgage Finance Agency; a rent\ncontrol or rent leveling ordinance; or other local, State, or federal\ngovernment housing program.",
+      "section": null
+    },
+    "approval": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 213,
+      "end": 253,
+      "text": "2026, CHAPTER 43,\napproved July 20, 2026",
+      "section": null
+    },
+    "commencement": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 10175,
+      "end": 10283,
+      "text": "9.    This act shall take effect on the first day of\nthe twelfth month next following the date of enactment.",
+      "section": null
+    },
+    "function_1": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 4026,
+      "end": 4427,
+      "text": "(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n",
+      "section": null
+    },
+    "function_2": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 4427,
+      "end": 4746,
+      "text": "(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n",
+      "section": null
+    },
+    "function_3": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 4746,
+      "end": 5021,
+      "text": "(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+      "section": null
+    },
+    "function_definition": {
+      "doc_id": "D069",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "start": 3995,
+      "end": 5021,
+      "text": "“Coordinating function” means:\n(1)   collecting the competitively sensitive\ninformation of two or more rental property owners for the purpose of analyzing\nor processing information through the use of an algorithm or other automated\nprocess, including by using the information to train an algorithm, where the\nalgorithm or other automated process is used to set or recommend rental prices,\nmaterial lease terms, or occupancy levels;\n(2)   setting rental prices, material lease terms, or\noccupancy levels pursuant to an underlying algorithm or other automated process\nthat analyzes or processes competitively sensitive information of any other\nrental property owner, including by using that competitively sensitive\ninformation to train an algorithm; or\n(3)   setting for or recommending to two or more rental\nproperty owners: rental prices, material lease terms, or occupancy levels\npursuant to the same or a substantially similar underlying algorithm or other\nautomated process, that facilitates parallel pricing coordination.\n",
+      "section": null
+    }
+  },
+  "minimum_increment": {
+    "compile": [
+      "4e first two coordinating-function branches with third unresolved",
+      "4a ownership/service-transaction gates with coordinator unresolved"
+    ],
+    "avoid": [
+      "Inferring qualified owner counts from dwelling-unit/property/account counts",
+      "Making considerations payment mandatory for receiving/subscribing/contracting alternatives",
+      "Applying4e data conditions to parallel-pricing branch3 or4c",
+      "Reusing activity-specific exclusions as whole-actor exemptions",
+      "Using publicly available at any cost as public at no cost",
+      "Treating owner/principal legal labels as assessor-derived facts",
+      "Removing needs_review or assigning real affected-address sets"
+    ],
+    "further_minimum_safe_condition": "A supported negative transaction gate is sufficient for a useful4a inapplicable branch. For4e preserve the already-compiled free-estimate/research/brokerage exclusions bound to a single activity; no extra runtime behavior needed.",
+    "provenance": "Proposed fields are absent from current fact registry and candidate-only; Platform approval is required before API accepts them. Root may use different agreed names with equivalent source-bound meaning."
+  },
+  "checks": {
+    "pilot_verifier": "passed;7rules,25distinct_evidence_spans,6unsupported_coverage_rules,allneeds_review",
+    "providers_invoked": 0,
+    "stores_changed": 0,
+    "span_models_validated": 24,
+    "new_AST_models_validated": 2
+  },
+  "inherited_predicate_questions": [
+    {
+      "paid_rule_pointer": "/coverage_conditions/args/0",
+      "applies_to_provisions": [
+        "4a",
+        "4b",
+        "4c",
+        "4d",
+        "4e"
+      ],
+      "fact": "residential",
+      "issue": "Paid rules require both residential=true and intended_primary_residence=true. The registry wording uses actual use, while the source uses intended primary residence. This inherited dual gate needs explicit review.",
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7623,
+          "end": 7901,
+          "text": "“Residential dwelling unit” means any house, apartment,\naccessory unit, or other unit intended to be used as a primary residence in the\nState. “Residential dwelling unit” shall not include inpatient medical care,\nlicensed long-term care, or detention or correctional facilities.",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 7317,
+          "end": 7620,
+          "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.",
+          "section": null
+        }
+      ],
+      "candidate_handling": "Do not silently equate the two. For scoped4a/4e candidates, removing/rebinding the additional residential gate is supportable only when remaining predicates explicitly retain qualifying rental-unit context and intended-primary-residence/institutional boundaries. Otherwise disclose inherited uncertainty and defer. Never derive intended use from occupancy dates or assessor residential labels.",
+      "dependency_owner": "Core A interpretation and candidate data; Platform if fact meaning changes"
+    },
+    {
+      "issue": "All seven paid Rules repeat a generic unsupported-conditions review issue even though section7 has no unsupported AST node.",
+      "candidate_handling": "Preserve the original paid text. New candidate validation should enumerate current exact residual pointers separately; do not use the generic historical issue to assert a current node count.",
+      "dependency_owner": "Core A candidate report"
+    }
+  ],
+  "underlying_information_fact_decomposition": {
+    "competitively_sensitive_information": [
+      "Identify exact information category/content relevant to rental prices, supply, deposits, occupancy, lease termination/renewal or other material lease terms.",
+      "Establish whether the information is available to the public at no cost.",
+      "Preserve mixed public/nonpublic information as nonpublic.",
+      "Bind information to actual qualifying rental-owner group, and for branch2 establish that group differs from actor/relevant rental owner."
+    ],
+    "source_spans": [
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 3724,
+        "end": 3994,
+        "text": "“Competitively\nsensitive information” means nonpublic information including, but not limited\nto, prices, supply levels, security deposits, ideal occupancy levels, lease\ncontract termination, renewal dates of residential dwelling units, or any other\nmaterial lease terms.",
+        "section": null
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 6547,
+        "end": 6772,
+        "text": "“Nonpublic information” means information that is not\navailable to the public at no cost. In instances where the information is\ncombined with public information, all combined information shall be deemed\nnonpublic information.",
+        "section": null
+      },
+      {
+        "doc_id": "D069",
+        "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+        "start": 7317,
+        "end": 7620,
+        "text": "“Rental\nproperty owner” means a person that owns, directly or indirectly, one or more\nrental residential dwelling units.  Any person that holds a controlling\ninterest in an entity that owns a rental residential dwelling unit shall be\ndeemed to constitute a single rental property owner with that entity.",
+        "section": null
+      }
+    ],
+    "warning": "Named proposed sensitive-information booleans are compound review inputs; an end-to-end fact contract should expose/document these underlying facts and preserve interpretation uncertainty, not ask a user to certify a legal conclusion without evidence."
+  }
+}

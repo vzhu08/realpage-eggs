@@ -7,7 +7,44 @@ from navigator.engine import evaluate_rule, evaluate_rules, temporal
 from navigator.models import Expression, Bound, Interaction, StatusEvent
 from navigator.predicates import evaluate_expression
 
+# Synthetic activity facts exercise source-backed review candidates, never a
+# served Store. Review issues remain set even when a factual branch is true.
+from docs.core_rules.d069_predicates.build_candidates import HERE as D069_REVIEW, build as build_d069, read as read_d069
+from docs.core_rules.d069_predicates.check_candidates import run_case as run_d069_case
+
 DAY = date(2026, 11, 15)
+
+
+@pytest.mark.parametrize("case", read_d069(D069_REVIEW / "cases.json")["cases"], ids=lambda case: case["name"])
+def test_d069_candidate_activity_and_temporal_boundaries(case):
+    run_d069_case(case)
+
+
+def test_d069_candidate_drafts_preserve_paid_output_and_reproduce():
+    candidates, report = build_d069()
+    assert candidates == read_d069(D069_REVIEW / "candidate_drafts.json")
+    assert report["pilot_rule_count"] == 7
+    assert report["candidate_rule_count"] == 2
+    for row in candidates.values():
+        assert row["review_state"] == "needs_review" and not row["eligible_for_direct_store_import"]
+        assert not {"extraction_run_id", "evidence_mode", "team_rule_id"} & row["rule_draft"].keys()
+
+
+def test_d069_proposed_owner_counts_require_typed_nonnegative_integers():
+    from navigator.fact_inputs import FACT_DEFINITIONS, validate_facts
+    from navigator.models import FactDefinition
+
+    registry_before = {field: definition.model_dump() for field, definition in FACT_DEFINITIONS.items()}
+    requests = read_d069(D069_REVIEW / "fact_requests.json")["new_field_requests"]
+    definitions = {row["definition"]["field"]: FactDefinition.model_validate(row["definition"]) for row in requests}
+    counts = ("collected_information_owner_count", "recipient_rental_owner_count", "transaction_owner_rental_unit_count")
+    for field in counts:
+        validate_facts({field: 0}, definitions)
+        validate_facts({field: None}, definitions)
+        for invalid in (-1, True, 1.5):
+            with pytest.raises(ValueError):
+                validate_facts({field: invalid}, definitions)
+    assert registry_before == {field: definition.model_dump() for field, definition in FACT_DEFINITIONS.items()}
 
 
 @pytest.mark.parametrize("op,known,expected", [("all", False, "false"), ("any", True, "true"), ("all", True, "unknown"), ("any", False, "unknown")])

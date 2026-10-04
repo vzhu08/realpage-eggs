@@ -1,0 +1,100 @@
+{
+  "label": "REVIEW_CANDIDATES_NOT_PROVIDER_OUTPUT_OR_ACCEPTED_RELEASE",
+  "base_commit": "fec517db973f102c7623a22947b57eb644b2aaa5",
+  "provider_calls": 0,
+  "store_writes": 0,
+  "pilot_rule_count": 7,
+  "candidate_rule_count": 2,
+  "unique_exact_anchors_checked": 39,
+  "pilot_unsupported_nodes": [
+    [
+      "r-92c9813fd2e2b9362ac9",
+      "/coverage_conditions/args/2"
+    ],
+    [
+      "r-92c9813fd2e2b9362ac9",
+      "/exemption_conditions/args/2"
+    ],
+    [
+      "r-ae6bf8b690dd32748832",
+      "/coverage_conditions/args/2"
+    ],
+    [
+      "r-ae6bf8b690dd32748832",
+      "/exemption_conditions/args/3"
+    ],
+    [
+      "r-b557a89502e37db1bddd",
+      "/coverage_conditions/args/2"
+    ],
+    [
+      "r-b9212520dd133bdf1584",
+      "/coverage_conditions/args/3"
+    ],
+    [
+      "r-b9212520dd133bdf1584",
+      "/exemption_conditions/args/2"
+    ],
+    [
+      "r-c243bf954944d60c4643",
+      "/coverage_conditions/args/3"
+    ],
+    [
+      "r-f1b8f964acfc1c2e3687",
+      "/coverage_conditions/args/1"
+    ]
+  ],
+  "candidate_remaining_unsupported_nodes": [
+    [
+      "r-b557a89502e37db1bddd",
+      "/coverage_conditions/args/1/args/0/args/3/args/1/args/1",
+      "The competitively-sensitive-information definition gives nonexhaustive examples. Classification of other information, including materiality of other lease terms, requires legal review; do not treat an unlisted category as excluded."
+    ],
+    [
+      "r-b557a89502e37db1bddd",
+      "/coverage_conditions/args/1/args/1/args/4/args/1/args/1",
+      "The competitively-sensitive-information definition gives nonexhaustive examples. Classification of other information, including materiality of other lease terms, requires legal review; do not treat an unlisted category as excluded."
+    ],
+    [
+      "r-b557a89502e37db1bddd",
+      "/coverage_conditions/args/1/args/2/args/3/args/1",
+      "Whether different underlying algorithms or automated processes are substantially similar requires legal review."
+    ],
+    [
+      "r-b557a89502e37db1bddd",
+      "/coverage_conditions/args/1/args/2/args/4",
+      "Whether this activity facilitates parallel pricing coordination remains uncompiled: tacit/express agreement between qualifying owners, reasonably interchangeable residential units, pricing conduct and affordability-control exception require evidence and legal review. Parallel prices alone do not establish agreement."
+    ],
+    [
+      "r-b9212520dd133bdf1584",
+      "/coverage_conditions/args/2/args/2",
+      "The actor must be the qualifying owner or its agent, representative or subcontractor, and the identified service provider must satisfy the operative coordinator/software-or-device/coordinating-function definition and scoped exclusions. Owner units and a service action do not settle these uncompiled relationships and legal qualifications."
+    ],
+    [
+      "r-b9212520dd133bdf1584",
+      "/exemption_conditions/args/2",
+      "The algorithmic-device and coordinating-function exclusions have not been compiled for this services transaction. They include qualifying non-AI spreadsheets requiring human analysis, query-only databases, research/statistical analysis/testing without lease-setting use, free public rent estimates, qualifying brokerage databases, and lawful government affordability-control activities. These are definitional limitations, not blanket exemptions from other prohibited conduct."
+    ]
+  ],
+  "interpretation": "Refined factual gates; residual legal issues remain. Node counts alone do not measure resolved scope.",
+  "pilot_inputs_sha256": {
+    "sources.json": "24d8faf58c5f62ccf0b4343f7d06f4ec01f89248c6d3f95390a72132e322d5f3",
+    "rules.json": "fe172043989f6dc3c4275eb430740a27fc3f8e2168bc17c4fd79f3682bf182d5",
+    "run.json": "51fec7f40586ce9a1f72b4c4369528bf29a0c6b58919766afacbdc9bf63fd0b3",
+    "pilot_budget.json": "0d1e94b6033d6e9db2ec19c2d129db63556c6710924e8d8479bb326a4f5eefe9",
+    "usage.json": "95b56a7821f2d953a4ab10a6e2eef52c255726abefca473a5fc25123e15fa0b8",
+    "provider_review.json": "27ed7d2bea475cfa698147b5e7c2bb12c9b7147d85ed8f8bdd94506a8d4f7d5f"
+  },
+  "candidate_inputs_sha256": {
+    ".gitattributes": "65ab25261c77fb3d502037cf3bb75ff4c0fbc0ebb8c7d218d9800762aabcec43",
+    "build_candidates.py": "f422d32ec15ba82bc57d4aab6fba83207a541d9d7707ecc44d3eb795a25e726c",
+    "cases.json": "3faee0bee9fe69650abcb5412d2b1075d8f59976d4a1b5be781fa52c75604981",
+    "check_candidates.py": "788c9e44b403b9475f3735e7bb83f2dab7c61c9da4922393066c846737f3fd33",
+    "compilation_design.json": "69802598fef34de85b238f5c161b2999b4ba60c4a667128724c4b9c87ca357ec",
+    "edits.json": "586802f7e73a6d99f96ccc165860867b86bb71feecfd096305a61e13243631fd",
+    "fact_requests.json": "834537390da775fdaf3b784dd0f7c1696ef99659b064213bf680ae21b0ab9b21",
+    "next_paid_slice.json": "438c42fc9cedd9d575ce80dd1c3ef59bbbeff9df8715995a9b26768003196a15",
+    "predicate_matrix.json": "72a544ea69c564c87ea8dc1292d2761e71f81dbacd490a3ff5b3944d71fc962e",
+    "reconciliation.json": "df9c9cb8a44b14951c1e5e611c63fabe92a6204c9971d4c6ab309b48aa6080ae"
+  }
+}

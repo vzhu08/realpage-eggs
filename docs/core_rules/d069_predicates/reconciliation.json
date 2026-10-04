@@ -1,0 +1,257 @@
+{
+  "label": "D069_RECONCILIATION_AGENT_REVIEW_NEEDS_REVIEW",
+  "base_commit": "fec517db973f102c7623a22947b57eb644b2aaa5",
+  "pilot_run_id": "a6f959812096402480a583f7e4310452",
+  "previous_grouped_d069_candidates": 1,
+  "previous_grouped_candidate_id": "nj-fair-sec4-prohibition",
+  "paid_rules": 7,
+  "clause_accounting": [
+    {
+      "paid_rule_id": "r-2a817e247c471c2a583b",
+      "paid_provision_key": "attorney_general_complaint_location",
+      "provision": "7",
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 9571,
+          "end": 9984,
+          "text": "7.    The Attorney General shall establish, on the\nofficial website of the Department of Law and Public Safety, a location to\nreceive complaints alleging any violation or suspected violation of this act,\nwhich requirement may be satisfied by establishing or maintaining such a\nlocation for complaints alleging violations or suspected violations of the “New\nJersey Antitrust Act” P.L.1970, c.73 (C.56:9-1 et seq.).",
+          "section": null
+        }
+      ],
+      "earlier_candidate_id": null,
+      "relation": "new separate institutional obligation not represented by earlier grouped section4 candidate",
+      "recommendation": "Retain separately for governmental actor context; do not add as a rental-owner duplicate obligation.",
+      "semantic_verification": "needs_review",
+      "paid_origin_run_id": "a6f959812096402480a583f7e4310452",
+      "important_scope": "Existing general antitrust complaint location can satisfy the obligation; alternative satisfaction is not an exemption. Literal-false exemption has missing field-level support review issue; preserve it until reviewed. No source proof of implementation."
+    },
+    {
+      "paid_rule_id": "r-92c9813fd2e2b9362ac9",
+      "paid_provision_key": "coordinator_competition_restricting_agreement",
+      "provision": "4b",
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8421,
+          "end": 8632,
+          "text": "b.    a coordinator to facilitate a tacit or express\nagreement among rental property owners that restricts competition with respect\nto residential dwelling units, including by performing a coordinating\nfunction;",
+          "section": null
+        }
+      ],
+      "earlier_candidate_id": "nj-fair-sec4-prohibition",
+      "relation": "refines grouped nj-fair-sec4-prohibition into one explicit actor/conduct limb",
+      "recommendation": "Select this granular paid candidate and its reviewed Draft refinement for a future snapshot; keep the prior grouped candidate as historical comparison only.",
+      "semantic_verification": "needs_review",
+      "paid_origin_run_id": "a6f959812096402480a583f7e4310452"
+    },
+    {
+      "paid_rule_id": "r-ae6bf8b690dd32748832",
+      "paid_provision_key": "coordinator_agents_parallel_pricing",
+      "provision": "4d",
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8732,
+          "end": 8854,
+          "text": "d.    any agent or representative of a coordinator or\nsubcontractor thereof to engage in parallel pricing coordination; or",
+          "section": null
+        }
+      ],
+      "earlier_candidate_id": "nj-fair-sec4-prohibition",
+      "relation": "refines grouped nj-fair-sec4-prohibition into one explicit actor/conduct limb",
+      "recommendation": "Select this granular paid candidate and its reviewed Draft refinement for a future snapshot; keep the prior grouped candidate as historical comparison only.",
+      "semantic_verification": "needs_review",
+      "paid_origin_run_id": "a6f959812096402480a583f7e4310452",
+      "important_scope": "Additional actor relationship limb can overlap facts of4c; these are separate statutory provisions, not duplicate extraction of the same clause. Do not automatically double-count penalties."
+    },
+    {
+      "paid_rule_id": "r-b557a89502e37db1bddd",
+      "paid_provision_key": "person_performing_coordinating_function",
+      "provision": "4e",
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8855,
+          "end": 8908,
+          "text": "e.     any person to perform a coordinating function.",
+          "section": null
+        }
+      ],
+      "earlier_candidate_id": "nj-fair-sec4-prohibition",
+      "relation": "refines grouped nj-fair-sec4-prohibition into one explicit actor/conduct limb",
+      "recommendation": "Select this granular paid candidate and its reviewed Draft refinement for a future snapshot; keep the prior grouped candidate as historical comparison only.",
+      "semantic_verification": "needs_review",
+      "paid_origin_run_id": "a6f959812096402480a583f7e4310452",
+      "important_scope": "Any person performing coordinating function; does not require coordinator software/device gate from4a/4b."
+    },
+    {
+      "paid_rule_id": "r-b9212520dd133bdf1584",
+      "paid_provision_key": "owner_use_of_coordinator",
+      "provision": "4a",
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8188,
+          "end": 8420,
+          "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;",
+          "section": null
+        }
+      ],
+      "earlier_candidate_id": "nj-fair-sec4-prohibition",
+      "relation": "refines grouped nj-fair-sec4-prohibition into one explicit actor/conduct limb",
+      "recommendation": "Select this granular paid candidate and its reviewed Draft refinement for a future snapshot; keep the prior grouped candidate as historical comparison only.",
+      "semantic_verification": "needs_review",
+      "paid_origin_run_id": "a6f959812096402480a583f7e4310452"
+    },
+    {
+      "paid_rule_id": "r-c243bf954944d60c4643",
+      "paid_provision_key": "persons_parallel_pricing_coordination",
+      "provision": "4c",
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8633,
+          "end": 8731,
+          "text": "c.     two or more persons to engage in\n1\nor\notherwise facilitate\n1\nparallel pricing coordination;",
+          "section": null
+        }
+      ],
+      "earlier_candidate_id": "nj-fair-sec4-prohibition",
+      "relation": "refines grouped nj-fair-sec4-prohibition into one explicit actor/conduct limb",
+      "recommendation": "Select this granular paid candidate and its reviewed Draft refinement for a future snapshot; keep the prior grouped candidate as historical comparison only.",
+      "semantic_verification": "needs_review",
+      "paid_origin_run_id": "a6f959812096402480a583f7e4310452",
+      "important_scope": "Two or more participating/facilitating statutory persons is distinct from qualifying owner groups in underlying agreement; no device requirement."
+    },
+    {
+      "paid_rule_id": "r-f1b8f964acfc1c2e3687",
+      "paid_provision_key": "municipal_conflicting_ordinance_prohibition",
+      "provision": "6b",
+      "source_spans": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 9341,
+          "end": 9570,
+          "text": "b.    A municipality shall be prohibited from enacting\nan ordinance that conflicts with this act.  This subsection shall not be\nconstrued to prohibit the enactment of ordinances explicitly authorized or\nrequired by any other law.",
+          "section": null
+        }
+      ],
+      "earlier_candidate_id": null,
+      "relation": "new separate institutional obligation not represented by earlier grouped section4 candidate",
+      "recommendation": "Retain separately for governmental actor context; do not add as a rental-owner duplicate obligation.",
+      "semantic_verification": "needs_review",
+      "paid_origin_run_id": "a6f959812096402480a583f7e4310452",
+      "important_scope": "Earlier regional claim comparisons retain different definitions and unresolved possible conflict; paid6b is the qualified municipal enactment rule, not proof that any named local ordinance is superseded."
+    }
+  ],
+  "duplicate_policy": {
+    "future_selection": "Five paid section4 clauses replace one grouped section4 candidate as the executable choice; retain historical annotation without concurrently serving it. Add6b and7 once each in correct governmental context.",
+    "originals_unchanged": true,
+    "unapplied": true,
+    "no_automatic_penalty_multiplication": true
+  },
+  "supported_refinements": [
+    {
+      "finding": "Paid output distinguishes4a-e actors and conduct rather than flattening definitions across all limbs. This narrows risk from the old omnibus unsupported/exemptions bundle.",
+      "support": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8188,
+          "end": 8420,
+          "text": "a.     a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8421,
+          "end": 8632,
+          "text": "b.    a coordinator to facilitate a tacit or express\nagreement among rental property owners that restricts competition with respect\nto residential dwelling units, including by performing a coordinating\nfunction;",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8633,
+          "end": 8731,
+          "text": "c.     two or more persons to engage in\n1\nor\notherwise facilitate\n1\nparallel pricing coordination;",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8732,
+          "end": 8854,
+          "text": "d.    any agent or representative of a coordinator or\nsubcontractor thereof to engage in parallel pricing coordination; or",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 8855,
+          "end": 8908,
+          "text": "e.     any person to perform a coordinating function.",
+          "section": null
+        }
+      ]
+    },
+    {
+      "finding": "Paid output adds actual dated enacted status event; earlier grouped candidate had effective date but empty status_events. Both retain July1,2027 effective-date candidate from July20,2026 approval and section9, not retrieval.",
+      "support": [
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 213,
+          "end": 253,
+          "text": "2026, CHAPTER 43,\napproved July 20, 2026",
+          "section": null
+        },
+        {
+          "doc_id": "D069",
+          "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+          "start": 10175,
+          "end": 10283,
+          "text": "9.    This act shall take effect on the first day of\nthe twelfth month next following the date of enactment.",
+          "section": null
+        }
+      ]
+    },
+    {
+      "finding": "Source D069 text/hash is unchanged; pilot source_type changed unclassified to legal_text metadata. Organizer-manifest mismatch remains disclosed.",
+      "source_hash": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6"
+    },
+    {
+      "finding": "No concrete mistranscription found here requiring paid rerun. Offline compilation can remove avoidable unsupported logic while preserving actual missing facts and legal meaning."
+    }
+  ],
+  "remaining_review": [
+    "All seven retain needs_review; no independent human legal acceptance.",
+    "§6b exact conflict and other-law exception remain unresolved; municipal operative/publication records remain Platform work.",
+    "§7 no field-level exemption evidence and no actual complaint-site implementation evidence; alternative satisfaction must not be recast as exemption.",
+    "First-reprint bracketed deletions remain quoted verbatim but deleted words are not operative.",
+    "Algorithmic-device exclusion is not an exclusion from4c or4e merely because a spreadsheet/database is involved.",
+    "Payer/service-provider/principal/actor bindings must be explicit in any typed input contract.",
+    "Inherited residential=true gate is not an exact semantic match for intended-primary-residence definition; preserve rental context without inventing actual occupancy/current-use condition. See matrix inherited_predicate_questions."
+  ],
+  "next_supported_slice": "Compile only4a bounded gates and4e first two branches now; keep precise residuals and present true/false/unknown labeled synthetic checks.",
+  "verification": {
+    "bundle_command": ".venv/bin/python -B docs/platform_pilots/2026-10-04-d069/verify.py",
+    "result": "passed",
+    "providers_invoked": 0,
+    "stores_changed": 0
+  },
+  "inputs_sha256": {
+    "pilot_rules.json": "fe172043989f6dc3c4275eb430740a27fc3f8e2168bc17c4fd79f3682bf182d5",
+    "pilot_sources.json": "24d8faf58c5f62ccf0b4343f7d06f4ec01f89248c6d3f95390a72132e322d5f3",
+    "previous_new_jersey.json": "3841c0eaf285da84e81e16d3c4084bd77463780681b512b2a71676a6c63aa566"
+  }
+}
