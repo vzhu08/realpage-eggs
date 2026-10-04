@@ -1,8 +1,9 @@
 /**
- * Reads the records a comparison refers to so it can be shown with names instead of IDs:
- * the sample properties (GET /addresses), each changed rule (GET /rules/{id}) and each rule's
- * source document (GET /sources/{id}). The comparison is usable before any of this arrives,
- * and a record that cannot be read simply keeps its ID as its label.
+ * Reads the records a comparison refers to: the sample properties (GET /addresses), each
+ * compared rule (GET /rules/{id}) and each rule's source document (GET /sources/{id}). They
+ * supply the legal location, the source text and the dates behind each change. The comparison
+ * is usable before any of this arrives: POST /changes/summary already names every property and
+ * rule, and a record that cannot be read keeps that name (or its ID when there is no summary).
  */
 import { useEffect, useMemo, useState } from 'react';
 import { type ApiError, isAbort, toApiError } from '../../api/errors';
@@ -160,6 +161,7 @@ export function usePortfolioDetails(source: DataSource, outcome: ChangeOutcome |
     return () => controller.abort();
   }, [source, outcome, attempt]);
 
-  const lookups = useMemo<Lookups>(() => ({ addresses: addresses.items, rules: rules.items, sources: sources.items }), [addresses.items, rules.items, sources.items]);
+  const summary = outcome?.summary ?? null;
+  const lookups = useMemo<Lookups>(() => ({ addresses: addresses.items, rules: rules.items, sources: sources.items, summary }), [addresses.items, rules.items, sources.items, summary]);
   return { lookups, addresses: addresses.progress, rules: rules.progress, sources: sources.progress, retry: () => setAttempt((value) => value + 1) };
 }

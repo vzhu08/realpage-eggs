@@ -1,7 +1,7 @@
 import { useEffect, useId, useState } from 'react';
 import type { AddressItem, FixtureCaseSummary } from '../../api/types';
 import { Icon } from '../../components/Icon';
-import { Empty, Skeleton, Tag } from '../../components/ui';
+import { Disclosure, Empty, Skeleton, Tag } from '../../components/ui';
 import { formatDate } from '../../lib/dates';
 import { MATCH_QUALITY } from '../../lib/labels';
 import { useSource } from '../../state/source';
@@ -20,9 +20,11 @@ interface Props {
   onSelect: (item: AddressItem) => void;
   onSelectCase: (item: AddressItem, fixtureCase: FixtureCaseSummary) => void;
   onSwitchToDemo?: () => void;
+  /** Put the keyboard in the search box when the chooser opens as a dialog. */
+  autoFocus?: boolean;
 }
 
-export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCase, onSwitchToDemo }: Props) {
+export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCase, onSwitchToDemo, autoFocus = false }: Props) {
   const source = useSource();
   const inputId = useId();
   const [text, setText] = useState('');
@@ -50,7 +52,7 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
   return (
     <div className="finder">
       <div className="finder__search">
-        <label htmlFor={inputId} className="label">
+        <label htmlFor={inputId} className="sr-only">
           Sample properties
         </label>
         <div className="search">
@@ -60,13 +62,14 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
             type="search"
             value={text}
             onChange={(event) => setText(event.target.value)}
-            placeholder="Search address or ID"
+            placeholder="Search by address or property ID"
             autoComplete="off"
+            data-autofocus={autoFocus ? '' : undefined}
             spellCheck={false}
             maxLength={200}
           />
         </div>
-        <p className="hint" aria-live="polite">
+        <p className="hint finder__count" aria-live="polite">
           {page.status === 'ready' ? `${total} ${total === 1 ? 'property' : 'properties'}${query ? ` matching “${query}”` : ''}` : page.status === 'loading' ? 'Searching…' : ' '}
         </p>
       </div>
@@ -105,15 +108,16 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
           {items.map((item) => {
             const quality = MATCH_QUALITY[item.resolution.match_quality ?? 'unresolved'];
             const selected = item.property.address_id === selectedId && !selectedCase;
+            const established = item.resolution.match_quality === 'resolved';
             return (
               <li key={item.property.address_id}>
-                <button type="button" className="finder__item" aria-pressed={selected} onClick={() => onSelect(item)}>
+                <button type="button" className="finder__item" aria-pressed={selected} data-location={established ? 'resolved' : 'open'} onClick={() => onSelect(item)}>
                   <span className="finder__address">{addressLine(item)}</span>
+                  <span className="mono finder__id">{item.property.address_id}</span>
                   <span className="finder__meta">
-                    <span className="mono">{item.property.address_id}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{item.resolution.municipality ?? 'Municipality not established'}</span>
-                    {item.resolution.match_quality !== 'resolved' && quality && <Tag tone={quality.tone}>{quality.label}</Tag>}
+                    {/* The legal municipality, or the plain statement that it is not established. Never the postal city. */}
+                    <span className="finder__place">{item.resolution.municipality ?? 'Municipality not established'}</span>
+                    {!established && quality && <Tag tone={quality.tone}>{quality.label}</Tag>}
                     {developmentIds.has(item.property.address_id) && <span className="finder__fixture">Development fixture</span>}
                   </span>
                 </button>
@@ -129,13 +133,12 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
         </button>
       )}
 
-      {catalog && (
-        <section className="finder__cases" aria-labelledby={`${inputId}-cases`}>
-          <h2 id={`${inputId}-cases`} className="label">
-            Contract fixtures
-          </h2>
-          <p className="hint">Five question-flow examples and one evidence-failure example from contracts/. Each opens with its own property and date.</p>
-          <ul className="finder__list">
+      {catalog && catalog.cases.length > 0 && (
+        <Disclosure summary={`Contract examples (${catalog.cases.length})`} className="finder__cases" defaultOpen={!!selectedCase}>
+          <p className="hint" id={`${inputId}-cases`}>
+            Question-flow and evidence-failure examples from contracts/. Each opens with its own property and date.
+          </p>
+          <ul className="finder__list finder__list--cases" aria-labelledby={`${inputId}-cases`}>
             {catalog.cases.map((fixtureCase) => {
               const item = all.data?.items.find((candidate) => candidate.property.address_id === fixtureCase.address_id);
               return (
@@ -144,16 +147,15 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
                     <span className="finder__address">{fixtureCase.title}</span>
                     <span className="finder__purpose">{fixtureCase.purpose}</span>
                     <span className="finder__meta">
-                      <span className="mono">{fixtureCase.address_id}</span>
-                      <span aria-hidden="true">·</span>
                       <span>as of {formatDate(fixtureCase.as_of)}</span>
+                      <span className="mono finder__id">{fixtureCase.address_id}</span>
                     </span>
                   </button>
                 </li>
               );
             })}
           </ul>
-        </section>
+        </Disclosure>
       )}
     </div>
   );

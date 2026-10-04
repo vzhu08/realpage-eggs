@@ -1,8 +1,9 @@
 """Record replay data for the frontend's labeled synthetic demo mode.
 
-Every response written here is produced by the backend's own code paths
-(navigator.assist_service.assist — the function behind POST /lookup/assist — and
-navigator.changes.compute_changes over evidence-prepared rules, as POST /changes does).
+Every response written here is produced by the backend's own code paths:
+navigator.assist_service.assist (POST /lookup/assist), navigator.service.change_summary
+(POST /changes/summary, which wraps the same Core result POST /changes returns) and
+navigator.service.source_comparisons (GET /source-comparisons).
 The frontend replays these responses verbatim; it never evaluates rules itself.
 
 Two files are written:
@@ -13,7 +14,8 @@ Two files are written:
   sources and properties are authored in frontend/scripts/dev_portfolio.py so the portfolio
   view has several jurisdictions, categories and dates to lay out; the rules are created by
   the backend's extraction validation and every result is computed by the backend. Its
-  `proposed_disagreements` entry is authored and labeled as a proposed shape (no contract yet).
+  claim annotations are authored too (dev_portfolio.write_claim_annotations); the recorded
+  `source_comparisons` response is the backend's own re-check and classification of them.
 
 Nothing here is legal evidence.
 
@@ -39,12 +41,12 @@ sys.path.insert(0, str(ROOT))
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from navigator.changes import compute_changes  # noqa: E402
 from navigator.config import DISCLAIMER, VERSION  # noqa: E402
 from navigator.demo import build_demo  # noqa: E402
 from navigator.assist_service import assist  # noqa: E402
-from navigator.evidence import EvidenceStoreView, prepare_rules  # noqa: E402
+from navigator.evidence import prepare_rules  # noqa: E402
 from navigator.models import AssistRequest, ChangeRequest, date_bounds  # noqa: E402
+from navigator.service import change_summary, source_comparisons  # noqa: E402
 from navigator.store import Store, digest, read_json  # noqa: E402
 
 from dev_portfolio import LABEL as DEV_LABEL, build_dev_portfolio  # noqa: E402
@@ -72,10 +74,14 @@ def backend_commit() -> str | None:
         return None
 
 
-def changes_like_api(store, request):
-    """POST /changes evaluates against evidence-prepared rules (navigator/api.py); do the same."""
-    prepared, _ = prepare_rules(store)
-    return compute_changes(EvidenceStoreView(store, prepared), request)
+def recorded_change(store, name, request, wire):
+    """One comparison as POST /changes/summary returns it: Core's result plus labels and groups.
+
+    The result is stored as `response` (what POST /changes returns) and the rest as `summary`,
+    so the demo can replay either route from one recording.
+    """
+    summary = change_summary(store, request).model_dump(mode="json")
+    return {"store": name, "request": wire, "response": summary.pop("result"), "summary": summary}
 
 
 def intern(payload, minimum=160):
@@ -149,7 +155,7 @@ def record_dev_portfolio(temporary: Path) -> dict:
     changes = []
     for before, after, scenario in comparisons:
         request = ChangeRequest(before=date.fromisoformat(before), after=date.fromisoformat(after), scenario=scenario)
-        changes.append({"store": "dev_portfolio", "request": {"before": before, "after": after, "scenario": scenario}, "response": changes_like_api(store, request).model_dump(mode="json")})
+        changes.append(recorded_change(store, "dev_portfolio", request, {"before": before, "after": after, "scenario": scenario}))
 
     lookup_dates = ["2026-10-01", "2026-12-15", "2027-01-15"]
     assists = []
@@ -173,7 +179,7 @@ def record_dev_portfolio(temporary: Path) -> dict:
             "generated_by": "frontend/scripts/record_demo.py (store built by frontend/scripts/dev_portfolio.py)",
             "backend_version": VERSION,
             "backend_commit": backend_commit(),
-            "note": "Fictional law and properties authored by the UX lane for layout development. Every rule was created by the backend's ingest/extraction validation and every result was computed by the backend. Not Core A output, not a real snapshot, not legal evidence.",
+            "note": "Fictional law, properties and claim annotations authored by the UX lane for layout development. Every rule was created by the backend's ingest/extraction validation and every result, including each claim comparison's anchor checks and classification, was computed by the backend. Not Core A output, not a real snapshot, not legal evidence.",
             "lookup_dates": lookup_dates,
             "source_texts": {doc: digest((ROOT / f"frontend/scripts/dev_fixture/{doc}.txt").read_bytes()) for doc in sorted(all_sources)},
         },
@@ -183,39 +189,8 @@ def record_dev_portfolio(temporary: Path) -> dict:
         "sources": {ident: source.model_dump(mode="json") for ident, source in sorted(all_sources.items())},
         "evidence_reports": {ident: report.model_dump(mode="json") for ident, report in sorted(reports.items())},
         "changes": changes,
-        "proposed_disagreements": proposed_disagreements(all_rules, all_sources),
+        "source_comparisons": source_comparisons(store).model_dump(mode="json"),
     }
-
-
-def proposed_disagreements(rules, sources) -> list[dict]:
-    """A PROPOSED shape for field-level source disagreements, pending PLAT-06 / CORE-06.
-
-    No contract or endpoint exists for this yet. The entry below is authored by the UX lane so
-    the disagreement view can be laid out; the backend did not produce or evaluate it. Offsets
-    and hashes are read from the stored fixture sources, never typed by hand. It names no winner.
-    """
-    def span(doc_id, quote):
-        text = sources[doc_id].text
-        start = text.find(quote)
-        if start < 0 or text.find(quote, start + 1) >= 0: raise RuntimeError(f"Fixture quote must occur exactly once in {doc_id}")
-        return {"doc_id": doc_id, "source_hash": sources[doc_id].sha256, "start": start, "end": start + len(quote), "text": quote, "section": None}
-
-    target = next(rule for rule in rules.values() if rule.citation == "Cedar Landing Ordinance DEV-07, section 3")
-    return [{
-        "disagreement_id": "ux-dev-effective-date-cedar-landing-s3",
-        "contract_status": "ux_proposed_shape_awaiting_PLAT-06",
-        "authored_by": "UX lane development fixture; not backend output",
-        "field": "effective_date",
-        "status": "unresolved",
-        "affected_rule_ids": [target.team_rule_id],
-        "claims": [
-            {"claim_id": "adopted-text", "stated_value": "2026-11-01", "span": span("DEV-CL-ORD-07", "Beginning November 1, 2026, residential rental buildings containing at least five units must limit a security deposit to one month's rent."), "status_dates": [{"status": "enacted", "on": "2026-08-18"}]},
-            {"claim_id": "clerk-notice", "stated_value": "2026-12-01", "span": span("DEV-CL-NOTICE-07", "The clerk's office advises that section 3 of Ordinance DEV-07, the security deposit limit, takes effect on December 1, 2026."), "status_dates": [{"status": "posted", "on": "2026-09-02"}]},
-        ],
-        "unresolved_reason": "Two captured sources state different effective dates for the same section, and no captured source establishes which date is operative.",
-        "remedy_kind": "source_gap",
-        "remedy": "Obtain the adopting record or an official correction for section 3 and review the authority of each source. A property fact cannot settle this.",
-    }]
 
 
 def main() -> None:
@@ -236,8 +211,7 @@ def main() -> None:
             sources[ident] = source.model_dump(mode="json")
         for before, after, scenario in DATE_COMPARISONS:
             request = ChangeRequest(before=date.fromisoformat(before), after=date.fromisoformat(after), scenario=scenario)
-            result = changes_like_api(store, request)
-            changes.append({"store": "synthetic", "request": {"before": before, "after": after, "scenario": scenario}, "response": result.model_dump(mode="json")})
+            changes.append(recorded_change(store, "synthetic", request, {"before": before, "after": after, "scenario": scenario}))
 
         # Published change scenarios against a store that has properties but no extracted
         # rules — the state of the real dataset before a provider is configured. The backend
@@ -248,8 +222,7 @@ def main() -> None:
         tests = read_json(ROOT / "tests/fixtures/change_tests.json")
         empty.write("change_tests.json", tests)
         for test in tests:
-            result = changes_like_api(empty, ChangeRequest(test_id=test["test_id"]))
-            changes.append({"store": "no_extracted_rules", "request": {"test_id": test["test_id"]}, "response": result.model_dump(mode="json")})
+            changes.append(recorded_change(empty, "no_extracted_rules", ChangeRequest(test_id=test["test_id"]), {"test_id": test["test_id"]}))
 
         dev = record_dev_portfolio(Path(temporary))
 
@@ -274,7 +247,7 @@ def main() -> None:
 
     pooled = intern({name: value for name, value in dev.items() if name != "manifest"})
     DEV_OUTPUT.write_text(json.dumps({"manifest": dev["manifest"], **pooled}, indent=None, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
-    print(f"Wrote {DEV_OUTPUT.relative_to(ROOT)}: {len(dev['addresses'])} properties, {len(dev['assists'])} assisted lookups, {len(dev['rules'])} rules, {len(dev['sources'])} sources, {len(dev['changes'])} change results, {len(pooled['pool'])} pooled subtrees")
+    print(f"Wrote {DEV_OUTPUT.relative_to(ROOT)}: {len(dev['addresses'])} properties, {len(dev['assists'])} assisted lookups, {len(dev['rules'])} rules, {len(dev['sources'])} sources, {len(dev['changes'])} change results, {len(dev['source_comparisons']['observations'])} claim comparisons, {len(pooled['pool'])} pooled subtrees")
 
 
 if __name__ == "__main__":

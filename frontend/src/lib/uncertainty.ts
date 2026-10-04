@@ -23,7 +23,13 @@ export function groupUncertainty(items: Uncertainty[]): GroupedUncertainty[] {
     groups.set(key, group);
     for (const ruleId of item.rule_ids ?? []) if (!group.ruleIds.includes(ruleId)) group.ruleIds.push(ruleId);
     for (const ref of item.source_refs ?? []) {
-      if (!group.sourceRefs.some((existing) => existing.doc_id === ref.doc_id && existing.start === ref.start && existing.end === ref.end)) group.sourceRefs.push(ref);
+      // Offsets identify a passage only within one source version. Keep every distinct
+      // version, quote and section when identical statements are grouped for reading.
+      if (!group.sourceRefs.some((existing) =>
+        existing.doc_id === ref.doc_id && existing.source_hash === ref.source_hash &&
+        existing.start === ref.start && existing.end === ref.end &&
+        existing.text === ref.text && (existing.section ?? null) === (ref.section ?? null)
+      )) group.sourceRefs.push(ref);
     }
   }
   return [...groups.values()];
@@ -44,6 +50,76 @@ export const NEXT_STEP: Record<string, { label: string; answerable: boolean; ord
   service_dependency: { label: 'A backend service', answerable: false, order: 7 },
 };
 export const nextStep = (kind: string) => NEXT_STEP[kind] ?? { label: 'Review', answerable: false, order: 9 };
+
+/**
+ * How many results at least one recorded answer to a question would move. `listed` is how many
+ * of those are among the results on screen now; an answer can also bring in a rule that is not
+ * listed yet, so the two can differ.
+ */
+export function movableResults(current: Evaluation[], question: { alternatives: Array<{ evaluations: Evaluation[] }> }): { movable: number; listed: number; shown: number } {
+  const ids = new Set(question.alternatives.flatMap((alternative) => consequenceOf(current, alternative.evaluations).changed.map((change) => change.ruleId)));
+  const onScreen = new Set(current.map((evaluation) => evaluation.team_rule_id));
+  return { movable: ids.size, listed: [...ids].filter((id) => onScreen.has(id)).length, shown: current.length };
+}
+
+/** "2 of the 3 results above", "the one result above", or "2 results" when an answer would also bring in a rule not listed yet. */
+export function movableWords(count: { movable: number; listed: number; shown: number }): string {
+  if (count.listed !== count.movable || count.shown === 0) return `${count.movable} ${count.movable === 1 ? 'result' : 'results'}`;
+  return count.shown === 1 ? 'the one result above' : `${count.movable} of the ${count.shown} results above`;
+}
+
+/**
+ * One readable topic: every open statement of one kind about one fact (or about no fact).
+ * A topic is a way to read the statements together; each statement stays intact inside it,
+ * with its own wording, remedy, rule references and source text.
+ */
+export interface UncertaintyTopic<T extends TopicStatement> {
+  key: string;
+  kind: string;
+  field: string | null;
+  statements: T[];
+  /** Every rule any statement in the topic refers to, in first-seen order. */
+  ruleIds: string[];
+  /** The distinct next steps the statements give, in first-seen order. */
+  remedies: string[];
+}
+
+export interface TopicStatement {
+  kind: string;
+  field?: string | null;
+  remedy: string;
+  ruleIds: string[];
+}
+
+/** Groups by the typed kind and field only. Message text is never read to decide a group. */
+export function topicsOf<T extends TopicStatement>(statements: T[]): UncertaintyTopic<T>[] {
+  const topics = new Map<string, UncertaintyTopic<T>>();
+  for (const statement of statements) {
+    const field = statement.field ?? null;
+    const key = `${statement.kind}|${field ?? ''}`;
+    const topic = topics.get(key) ?? { key, kind: statement.kind, field, statements: [], ruleIds: [], remedies: [] };
+    topics.set(key, topic);
+    topic.statements.push(statement);
+    for (const ruleId of statement.ruleIds) if (!topic.ruleIds.includes(ruleId)) topic.ruleIds.push(ruleId);
+    if (statement.remedy && !topic.remedies.includes(statement.remedy)) topic.remedies.push(statement.remedy);
+  }
+  return [...topics.values()];
+}
+
+/**
+ * A plain heading for each kind of open item. It names the kind of gap, in the interface's own
+ * words; the service's statements, shown beneath it, say what the gap is.
+ */
+export const TOPIC_HEADING: Record<string, string> = {
+  property_fact: 'A fact about the property is not on record',
+  jurisdiction: 'The legal municipality is not established',
+  source_gap: 'Source support is incomplete',
+  cross_reference: 'A cited provision has not been retrieved',
+  conflict: 'Sources conflict and no precedence is established',
+  interpretation: 'Encoded rules need interpretation review',
+  analysis_limit: 'The analysis did not cover every case',
+  service_dependency: 'A backend service was not available',
+};
 
 /** Lookup lists omit rules that do not cover the property; an alternative records them explicitly. */
 const UNLISTED = new Set(['inapplicable', 'failed']);

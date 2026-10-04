@@ -4,10 +4,31 @@
  */
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { validate } from '../../src/api/validate';
-import { ASSIST_EXAMPLE, ERROR_EXAMPLES, EVIDENCE_FIXTURES, LOOKUP_EXAMPLES, RECORDED_ASSISTS, RECORDED_CHANGES, RECORDED_RULES, RECORDED_SOURCES, RESEARCH_FIXTURES, SOURCE_COMPARISON } from '../../src/demo/fixtures';
+import {
+  ASSIST_EXAMPLE,
+  DEV_ADDRESSES,
+  DEV_ASSISTS,
+  DEV_CHANGES,
+  DEV_EVIDENCE_REPORTS,
+  DEV_MANIFEST,
+  DEV_RULES,
+  DEV_SOURCE_COMPARISONS,
+  DEV_SOURCES,
+  ERROR_EXAMPLES,
+  EVIDENCE_FIXTURES,
+  LOOKUP_EXAMPLES,
+  RECORDED_ASSISTS,
+  RECORDED_CHANGES,
+  RECORDED_MANIFEST,
+  RECORDED_RULES,
+  RECORDED_SOURCES,
+  RESEARCH_FIXTURES,
+  SOURCE_COMPARISON,
+} from '../../src/demo/fixtures';
 
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
 
@@ -67,6 +88,46 @@ test('every recorded replay payload matches its contract model', () => {
   for (const entry of RECORDED_CHANGES) {
     assert.deepEqual(validate('ChangeResult', entry.response).errors, [], JSON.stringify(entry.request));
     assert.deepEqual(validate('ChangeRequest', entry.request).errors, [], JSON.stringify(entry.request));
+    // Recorded as POST /changes/summary returns it: the same result, plus labels and groups.
+    assert.deepEqual(validate('ChangeSummary', { result: entry.response, ...entry.summary }), { errors: [], warnings: [] }, JSON.stringify(entry.request));
+  }
+  assert.equal(RECORDED_MANIFEST.fixture_mode, 'synthetic');
+});
+
+test('every development-fixture payload matches its contract model and is labeled synthetic', () => {
+  assert.equal(DEV_MANIFEST.fixture_mode, 'synthetic');
+  assert.equal(DEV_MANIFEST.fixture_kind, 'ux_development_fixture');
+  assert.equal(DEV_MANIFEST.label, 'UX_DEVELOPMENT_FIXTURE_NOT_ACTUAL_LAW');
+  assert.ok(DEV_ADDRESSES.length >= 14 && DEV_ASSISTS.length >= DEV_ADDRESSES.length);
+  for (const item of DEV_ADDRESSES) assert.deepEqual(validate('AddressItem', item).errors, [], item.property.address_id);
+  for (const entry of DEV_ASSISTS) {
+    assert.deepEqual(validate('AssistResponse', entry.response), { errors: [], warnings: [] }, JSON.stringify(entry.request));
+    assert.equal(entry.response.mode, 'synthetic');
+  }
+  for (const [id, detail] of Object.entries(DEV_RULES)) {
+    assert.deepEqual(validate('RuleDetail', detail).errors, [], id);
+    assert.equal(detail.rule.evidence_mode, 'synthetic', id);
+  }
+  for (const [id, source] of Object.entries(DEV_SOURCES)) {
+    assert.deepEqual(validate('SourceDocument', source).errors, [], id);
+    assert.equal(source.capture_status, 'synthetic', id);
+  }
+  for (const [id, report] of Object.entries(DEV_EVIDENCE_REPORTS)) assert.deepEqual(validate('EvidenceReport', report).errors, [], id);
+  for (const entry of DEV_CHANGES) {
+    assert.equal(entry.store, 'dev_portfolio');
+    assert.deepEqual(validate('ChangeRequest', entry.request).errors, [], JSON.stringify(entry.request));
+    assert.deepEqual(validate('ChangeSummary', { result: entry.response, ...entry.summary }), { errors: [], warnings: [] }, JSON.stringify(entry.request));
+  }
+  assert.deepEqual(validate('SourceComparisonsResponse', DEV_SOURCE_COMPARISONS), { errors: [], warnings: [] });
+});
+
+test('the released-integration examples match their models: claim comparison, change summary, evidence packages', () => {
+  const read = (name: string) => JSON.parse(readFileSync(fileURLToPath(new URL(`../../../contracts/evidence_examples/${name}.json`, import.meta.url)), 'utf8')) as { fixture_mode: string; response: unknown };
+  const models = { claim_comparison: 'SourceComparisonsResponse', change_summary: 'ChangeSummary', property_package: 'EvidencePackage', package_missing_support: 'EvidencePackage' } as const;
+  for (const [name, model] of Object.entries(models)) {
+    const example = read(name);
+    assert.equal(example.fixture_mode, 'synthetic', name);
+    assert.deepEqual(validate(model, example.response), { errors: [], warnings: [] }, name);
   }
 });
 

@@ -141,6 +141,9 @@ test.describe('changes view', () => {
     await openLive(page, '#/changes?mode=live');
     await page.getByLabel('To date').fill('2027-07-02');
     await page.getByLabel('Treat pending rules as').selectOption('if_enacted');
+    // Raw rule IDs are an advanced filter, behind a disclosure.
+    await expect(page.getByLabel(/Limit to rule IDs/)).toBeHidden();
+    await page.getByText('Limit to specific rules (optional)').click();
     await page.getByLabel(/Limit to rule IDs/).fill(`${evaluation.team_rule_id}, r-other`);
     await page.getByRole('button', { name: 'Compare', exact: true }).click();
 
@@ -148,14 +151,20 @@ test.describe('changes view', () => {
     await expect(result.getByRole('group', { name: 'Comparison context' })).toContainText('Hypothetical · if enacted');
     await expect(result.getByRole('group', { name: 'Comparison context' })).toContainText('Live API');
     await expect(result.locator('[data-impact="Conflict flagged"]')).toHaveAttribute('data-count', '1');
-    const row = result.locator('.impact-row[data-address="SYNTH-001"]');
-    await expect(row).toContainText('1 Test Street');
+    // The comparison opens property by property: the property is named, then each rule's before → after.
+    const property = result.locator('.property-node[data-address="SYNTH-001"]');
+    await expect(property.locator('.property-name')).toContainText('1 Test Street');
+    await expect(property.locator('.property-node__counts')).toContainText('1 definite');
+    const row = property.locator('.impact-row');
+    await expect(row).toHaveCount(1);
     await expect(row).toContainText('Conflict');
     await expect(row).toContainText('Pending');
     await row.locator('summary').first().click();
     await expect(row.getByRole('link', { name: 'Compare the conflicting sources' })).toHaveAttribute('href', /#\/disagreements\?.*address=SYNTH-001.*as_of=2027-07-02/);
-    const post = calls.find((call) => call.method === 'POST' && call.path === '/changes');
-    expect(post?.body).toEqual({ before: '2026-10-01', after: '2027-07-02', scenario: 'if_enacted', rule_ids: [evaluation.team_rule_id, 'r-other'] });
+    // This double has no summary route: it is tried once with the same body, then the plain route answers.
+    const body = { before: '2026-10-01', after: '2027-07-02', scenario: 'if_enacted', rule_ids: [evaluation.team_rule_id, 'r-other'] };
+    expect(calls.filter((call) => call.method === 'POST').map((call) => [call.path, call.body])).toEqual([['/changes/summary', body], ['/changes', body]]);
+    await expect(result.getByRole('status').filter({ hasText: 'POST /changes/summary is not available on this backend' })).toBeVisible();
 
     await page.getByRole('radio', { name: 'Published scenario' }).check();
     await page.getByLabel('Scenario ID').fill('NOPE');

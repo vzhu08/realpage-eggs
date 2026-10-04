@@ -4,7 +4,7 @@
  * comparison itself, GET /addresses, GET /rules/{id}, GET /sources/{id}). Nothing is
  * evaluated, inferred or ranked here, and no date is produced that a payload did not state.
  */
-import type { AddressItem, ChangeResult, Evaluation, Evidence, Rule, SourceDocument } from '../api/types';
+import type { AddressItem, ChangeImpactGroup, ChangeResult, ChangeSummaryExtras, Evaluation, Evidence, Rule, SourceDocument } from '../api/types';
 import { readDifferences } from './changes';
 import { dateBounds, datePrecision, shiftDay, type DatePrecision } from './dates';
 import { MATCH_QUALITY, categoryLabel } from './labels';
@@ -23,8 +23,13 @@ export interface PropertyLabel {
   postalCity: string | null;
 }
 
-export function propertyLabel(addressId: string, item: AddressItem | undefined): PropertyLabel {
-  if (!item) return { addressId, street: null, place: 'Location not loaded', placeKey: 'unloaded', resolved: false, postalCity: null };
+/**
+ * `fallback` is the label POST /changes/summary gives the property (its normalized address).
+ * It names the property while its record is still being read; it says nothing about where the
+ * property legally is, so the place stays "not loaded" until the record arrives.
+ */
+export function propertyLabel(addressId: string, item: AddressItem | undefined, fallback?: string | null): PropertyLabel {
+  if (!item) return { addressId, street: fallback?.replace(/[\s,]+$/, '') || null, place: 'Location not loaded', placeKey: 'unloaded', resolved: false, postalCity: null };
   const { resolution, property } = item;
   const state = resolution.state ?? property.raw_address.state ?? null;
   const resolved = resolution.match_quality === 'resolved' && !!resolution.municipality;
@@ -84,26 +89,35 @@ export type ImpactKind = 'definite' | 'uncertain' | 'conflict';
 
 export interface Filters {
   impact: ImpactKind | null;
+  /** A property-location group (computed from address records). */
   place: string | null;
+  /** A rule-jurisdiction group from POST /changes/summary. */
+  jurisdiction: string | null;
   category: string | null;
 }
 
-export const NO_FILTERS: Filters = { impact: null, place: null, category: null };
+export const NO_FILTERS: Filters = { impact: null, place: null, jurisdiction: null, category: null };
 
 export interface Lookups {
   addresses: ReadonlyMap<string, AddressItem>;
   rules: ReadonlyMap<string, Rule>;
   sources: ReadonlyMap<string, SourceDocument>;
+  /** Labels and groups from POST /changes/summary, when the backend has that route. */
+  summary?: ChangeSummaryExtras | null;
 }
 
 const matchesImpact = (row: ImpactRow, impact: ImpactKind | null) => impact === null || (impact === 'conflict' ? row.conflict : row.certainty === impact);
 
 export function filterRows(rows: ImpactRow[], filters: Filters, lookups: Lookups): ImpactRow[] {
+  const { summary } = lookups;
+  // With a summary, a group is the service's own list of rule IDs; without one it is read from the rule records.
+  const inCategory = (row: ImpactRow) => (summary ? (summary.by_category[filters.category ?? '']?.rule_ids.includes(row.ruleId) ?? false) : (lookups.rules.get(row.ruleId)?.category ?? UNLABELED) === filters.category);
   return rows.filter(
     (row) =>
       matchesImpact(row, filters.impact) &&
       (filters.place === null || propertyLabel(row.addressId, lookups.addresses.get(row.addressId)).placeKey === filters.place) &&
-      (filters.category === null || (lookups.rules.get(row.ruleId)?.category ?? UNLABELED) === filters.category),
+      (filters.jurisdiction === null || (summary?.by_jurisdiction[filters.jurisdiction]?.rule_ids.includes(row.ruleId) ?? false)) &&
+      (filters.category === null || inCategory(row)),
   );
 }
 
@@ -156,6 +170,24 @@ export function summarizeByCategory(rows: ImpactRow[], lookups: Lookups): GroupS
     const rule = lookups.rules.get(row.ruleId);
     return rule ? { key: rule.category, label: categoryLabel(rule.category) } : { key: UNLABELED, label: 'Rule details not loaded', last: true };
   });
+}
+
+/**
+ * The service's own groups (POST /changes/summary), as table rows. Counts are the sizes of the
+ * lists it returned; a property can be in several groups and in more than one list, so the
+ * numbers are not additive.
+ */
+export function summarizeGroups(groups: Record<string, ChangeImpactGroup>, label: (key: string) => string): GroupSummary[] {
+  return Object.entries(groups)
+    .map(([key, group]) => ({
+      key,
+      label: label(key),
+      properties: new Set([...group.affected_address_ids, ...group.uncertain_address_ids, ...group.conflict_flag_address_ids]).size,
+      definite: group.affected_address_ids.length,
+      uncertain: group.uncertain_address_ids.length,
+      conflict: group.conflict_flag_address_ids.length,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
 }
 
 /* ---------- timeline ---------- */
@@ -291,7 +323,7 @@ export function propertyTree(rows: ImpactRow[], lookups: Lookups): PropertyNode[
   for (const row of rows) byAddress.set(row.addressId, [...(byAddress.get(row.addressId) ?? []), row]);
   return [...byAddress.entries()]
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([addressId, addressRows]) => ({ addressId, label: propertyLabel(addressId, lookups.addresses.get(addressId)), rows: addressRows }));
+    .map(([addressId, addressRows]) => ({ addressId, label: propertyLabel(addressId, lookups.addresses.get(addressId), lookups.summary?.property_labels[addressId]), rows: addressRows }));
 }
 
 /** Rule IDs a comparison mentions: every rule with a changed result, plus scenario mappings. */

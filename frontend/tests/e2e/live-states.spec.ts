@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { RULE_ID, RULE_TITLE, addressPage, baseHandlers, clone, examples, expectNoHorizontalOverflow, health, mockApi, openEvidence, openLive, ruleRow, selectProperty } from './helpers';
+import { RULE_ID, RULE_TITLE, addressPage, baseHandlers, clone, examples, expectNoHorizontalOverflow, health, mockApi, openEvidence, openLive, openPropertyRecord, questionCard, ruleRow, selectProperty, showHypotheticals } from './helpers';
 
 const unknown = examples.unknown.response;
 
@@ -38,10 +38,18 @@ test.describe('live API: failure, partial and unavailable states', () => {
     await expect(page.getByText(/The last extraction run ended as “failed” \(for example, a provider failure\)/)).toBeVisible();
 
     await selectProperty(page, '9 Sample Avenue');
+    // Unresolved legal geography stays on the page; it is not folded into the property record.
+    const open = page.getByRole('note').filter({ hasText: 'Legal municipality not established' });
+    await expect(open).toBeVisible();
+    await expect(open).toContainText('The postal city on the address is not treated as the legal municipality.');
+    await expect(open).toContainText('Legal municipality not resolved');
+    await expect(page.locator('.subject__line')).toContainText('Unresolved');
+    await expect(page.locator('.subject__line')).not.toContainText('Springfield');
+    await openPropertyRecord(page);
     const jurisdiction = page.getByRole('region', { name: 'Jurisdiction' });
     await expect(jurisdiction).toContainText('Unresolved');
     await expect(jurisdiction).toContainText('Not established');
-    await expect(jurisdiction).toContainText('The postal city on the address is not treated as the legal municipality.');
+    await expect(jurisdiction).toContainText('census_geocoder');
 
     await page.getByRole('button', { name: 'Run lookup' }).click();
     const alert = page.getByRole('alert').filter({ hasText: 'The dataset is not ready' });
@@ -165,16 +173,24 @@ test.describe('live API: failure, partial and unavailable states', () => {
 
     const remaining = page.getByRole('region', { name: /What remains uncertain/ });
     // Each open item names the kind of next step it needs; only a property fact is answerable.
-    const conflict = remaining.locator('[data-reason="conflicting_legal_evidence"]');
-    await expect(conflict).toContainText('Needs: review of conflicting sources');
+    const head = (kind: string) => remaining.locator(`.uncertainty__item[data-kind="${kind}"] .uncertainty__head`);
+    const conflict = remaining.locator('.uncertainty__item[data-kind="conflict"]');
+    await expect(head('conflict')).toContainText('Review of conflicting sources');
     await expect(conflict.getByRole('link', { name: 'Compare the conflicting sources' })).toHaveAttribute('href', /#\/disagreements\?.*address=SYNTH-003.*as_of=2026-11-15/);
-    await expect(remaining.locator('[data-reason="unsupported_condition"]')).toContainText('cross-reference to section 9 not encoded');
-    await expect(remaining.locator('[data-reason="jurisdiction_uncertainty"]')).toContainText('Needs: location evidence');
-    await expect(remaining.locator('[data-kind="property_fact"]')).toContainText('Needs: a factual answer');
+    await expect(conflict.locator('.statement[data-reason="conflicting_legal_evidence"]')).toContainText('Review source disagreement');
+    await expect(remaining.locator('.statement[data-reason="unsupported_condition"]')).toContainText('cross-reference to section 9 not encoded');
+    await expect(head('jurisdiction')).toContainText('Location evidence');
+    await expect(remaining.locator('.statement[data-reason="jurisdiction_uncertainty"]')).toContainText('legal municipality unresolved');
+    await expect(head('property_fact')).toContainText('A factual answer');
     await expect(remaining.getByText('A fact about the property can close these')).toBeVisible();
     await expect(remaining.getByText('Needs evidence, interpretation or more analysis')).toBeVisible();
     // The conflict is also announced above the results, with the way to compare the sources.
-    await expect(page.getByRole('note').filter({ hasText: 'Sources conflict for 1 rule here' }).getByRole('link', { name: 'Compare the conflicting sources' })).toBeVisible();
+    const cues = page.getByRole('list', { name: 'What is unresolved' });
+    await expect(cues.locator('[data-cue="conflict"]')).toContainText('Sources conflict for 1 rule here');
+    await expect(cues.locator('[data-cue="conflict"]').getByRole('link', { name: 'Compare the conflicting sources' })).toBeVisible();
+    await expect(cues.locator('[data-cue="jurisdiction"]')).toContainText('Legal municipality ambiguous');
+    // With a missing fact and no planner on this backend, nothing is asked; the next step is to read what remains.
+    await expect(page.locator('.next')).toHaveAttribute('data-next', 'review');
     await expectNoHorizontalOverflow(page);
   });
 });
@@ -201,6 +217,7 @@ test.describe('live API: questions and evidence against the agreed assist contra
     await questions.getByRole('button', { name: 'Evaluate with this fact' }).click();
     await expect(ruleRow(page)).toHaveAttribute('data-result', 'applies');
     await expect(page.getByRole('region', { name: /Your answers/ })).toContainText('Sent as supplemental fact');
+    await openPropertyRecord(page);
     await expect(page.getByRole('region', { name: 'Property facts' })).toContainText('User-supplied supplemental fact (not independently verified)');
 
     const lookups = calls.filter((call) => call.path === '/lookup');
@@ -270,8 +287,9 @@ test.describe('live API: questions and evidence against the agreed assist contra
     await page.getByRole('button', { name: 'Run lookup' }).click();
 
     await expect(page.getByText('This plan is an authored contract fixture')).toHaveCount(0);
-    const question = page.getByRole('article', { name: "What is the property's units?" });
+    const question = questionCard(page, 'Number of dwelling units in this building?');
     // Demo answers are offered here only because this dataset declares itself synthetic.
+    await showHypotheticals(question);
     await expect(question.getByRole('button', { name: /as a demo answer/ })).toHaveCount(2);
     await question.getByRole('textbox').fill('8');
     await question.getByRole('button', { name: 'Apply answer' }).click();
@@ -339,7 +357,10 @@ test.describe('live API: questions and evidence against the agreed assist contra
     await expect(questions.getByText('Planner unavailable', { exact: true })).toBeVisible();
     await expect(questions).toContainText('The question planner is not available');
     await expect(page.getByRole('alert')).toHaveCount(0);
-    await expect(page.getByRole('region', { name: /What remains uncertain/ }).locator('[data-kind="service_dependency"]')).toContainText('Core question planner has not been integrated');
+    const dependency = page.getByRole('region', { name: /What remains uncertain/ }).locator('.uncertainty__item[data-kind="service_dependency"]');
+    await expect(dependency.locator('.uncertainty__head')).toContainText('A backend service was not available');
+    await expect(dependency.locator('.statement__message')).toHaveText('Core question planner has not been integrated');
+    await expect(dependency).toContainText('Complete CORE-03/04 and supply navigator.core_assist.plan_questions');
     // The fact definition comes from GET /facts, not from inference.
     await expect(questions).toContainText('Number of dwelling units in this building (dwelling units)');
     await questions.getByRole('textbox', { name: 'Units' }).fill('12');
@@ -362,7 +383,8 @@ test.describe('live API: questions and evidence against the agreed assist contra
     await openLive(page);
     await selectProperty(page, '3 Test Street');
     await page.getByRole('button', { name: 'Run lookup' }).click();
-    const question = page.getByRole('article', { name: "What is the property's units?" });
+    const question = questionCard(page, 'Number of dwelling units in this building?');
+    await showHypotheticals(question);
     await expect(question.getByText('Hypothetical', { exact: true })).toHaveCount(2);
     await expect(question.getByRole('button', { name: /as a demo answer/ })).toHaveCount(0);
     await expect(page.getByRole('group', { name: 'Result context' })).not.toContainText('Synthetic data');

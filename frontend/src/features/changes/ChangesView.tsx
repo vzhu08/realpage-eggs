@@ -2,7 +2,7 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { type ApiError, isAbort, toApiError } from '../../api/errors';
 import { DEFAULT_AS_OF } from '../../api/generated/meta';
 import type { ChangeOutcome, ChangeRequest, RecordedStore } from '../../api/types';
-import { Disclosure, ErrorNotice, Skeleton } from '../../components/ui';
+import { Disclosure, ErrorNotice, Spinner } from '../../components/ui';
 import { formatDate, isIsoDay } from '../../lib/dates';
 import { useSource } from '../../state/source';
 import { ChangeResultView } from './ChangeResultView';
@@ -22,11 +22,26 @@ const STORE_COPY: Record<RecordedStore, { title: string; note: string }> = {
 const STORE_ORDER: RecordedStore[] = ['dev_portfolio', 'synthetic', 'no_extracted_rules'];
 
 interface Props {
+  /** A comparison named in the address, run once when the view opens. */
+  initial?: { before: string | null; after: string | null; scenario: string | null; test: string | null };
   lookupHref: (addressId: string, asOf: string) => string;
   disagreementHref: (addressId: string, asOf: string) => string;
 }
 
-export function ChangesView({ lookupHref, disagreementHref }: Props) {
+/** Whole seconds since `since`, while a request is in flight. A clock, not a progress estimate. */
+function useElapsed(running: boolean): number {
+  const [seconds, setSeconds] = useState(0);
+  useEffect(() => {
+    if (!running) return;
+    setSeconds(0);
+    const started = Date.now();
+    const timer = window.setInterval(() => setSeconds(Math.floor((Date.now() - started) / 1000)), 1000);
+    return () => window.clearInterval(timer);
+  }, [running]);
+  return seconds;
+}
+
+export function ChangesView({ initial, lookupHref, disagreementHref }: Props) {
   const source = useSource();
   const id = useId();
   const catalog = useMemo(() => source.catalog?.(), [source]);
@@ -39,8 +54,9 @@ export function ChangesView({ lookupHref, disagreementHref }: Props) {
   const [touched, setTouched] = useState(false);
   const [state, setState] = useState<State>({ status: 'idle' });
   const controller = useRef<AbortController | null>(null);
+  const elapsed = useElapsed(state.status === 'loading');
   const resultRegion = useRef<HTMLDivElement | null>(null);
-  /** Set when a comparison is started from inside a result, so the new result is brought into view. */
+  /** Set when a comparison is started, so its result (totals first) is brought to the top of the window. */
   const reveal = useRef(false);
 
   // Leaving the view must not let a late response touch it.
@@ -65,6 +81,7 @@ export function ChangesView({ lookupHref, disagreementHref }: Props) {
     controller.current?.abort();
     const abort = new AbortController();
     controller.current = abort;
+    reveal.current = true;
     setState({ status: 'loading' });
     try {
       const outcome = await source.changes(request, abort.signal);
@@ -112,6 +129,17 @@ export function ChangesView({ lookupHref, disagreementHref }: Props) {
     void submit(request);
   };
 
+  // A comparison named in the address (a walkthrough example or a shared link) runs once on opening.
+  useEffect(() => {
+    if (initial?.test) apply({ test_id: initial.test });
+    else if (initial?.before && initial.after && isIsoDay(initial.before) && isIsoDay(initial.after)) apply({ before: initial.before, after: initial.after, scenario: initial.scenario === 'if_enacted' ? 'if_enacted' : 'actual' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const cancel = () => {
+    controller.current?.abort();
+    setState({ status: 'idle' });
+  };
+
   /** From the timeline: compare two days under actual law, keeping the form in step. */
   const compareDates = (first: string, second: string) => {
     reveal.current = true;
@@ -121,11 +149,8 @@ export function ChangesView({ lookupHref, disagreementHref }: Props) {
   return (
     <div className="changes">
       <header className="changes__intro">
-        <p className="eyebrow">Changes</p>
-        <h1 className="welcome__title">What changes for the sample properties between two dates.</h1>
-        <p className="welcome__lead">
-          Compare the rules on two dates, or run a published scenario, then follow each change from its source to the rule to the properties it reaches. Definite and uncertain impacts stay apart, and a blocked comparison is reported as blocked, never as “nothing changed”.
-        </p>
+        <h1 className="page-title">What changes for the sample properties between two dates.</h1>
+        <p className="page-lead">Definite and uncertain impacts stay apart, and a blocked comparison is reported as blocked, never as “nothing changed”.</p>
       </header>
 
       <form
@@ -185,15 +210,6 @@ export function ChangesView({ lookupHref, disagreementHref }: Props) {
                 <option value="if_enacted">Enacted (hypothetical)</option>
               </select>
             </div>
-            <div className="field field--wide">
-              <label htmlFor={`${id}-rules`} className="label">
-                Limit to rule IDs <span className="label__optional">optional</span>
-              </label>
-              <input id={`${id}-rules`} type="text" className="input" value={ruleIds} onChange={(event) => edit(setRuleIds)(event.target.value)} placeholder="All rules" autoComplete="off" spellCheck={false} aria-describedby={`${id}-rules-hint`} />
-              <p id={`${id}-rules-hint`} className="hint">
-                Separate IDs with commas. The first date starts at the contract default, {formatDate(DEFAULT_AS_OF)}.
-              </p>
-            </div>
           </div>
         ) : (
           <div className="changes__fields">
@@ -219,10 +235,24 @@ export function ChangesView({ lookupHref, disagreementHref }: Props) {
           </div>
         )}
 
+        {kind === 'dates' && (
+          <Disclosure summary="Limit to specific rules (optional)" className="changes__advanced" defaultOpen={ruleIds !== ''}>
+            <div className="field field--wide">
+              <label htmlFor={`${id}-rules`} className="label">
+                Limit to rule IDs <span className="label__optional">optional</span>
+              </label>
+              <input id={`${id}-rules`} type="text" className="input" value={ruleIds} onChange={(event) => edit(setRuleIds)(event.target.value)} placeholder="All rules" autoComplete="off" spellCheck={false} aria-describedby={`${id}-rules-hint`} />
+              <p id={`${id}-rules-hint`} className="hint">
+                Separate IDs with commas. A rule’s ID is on its record, under “Rule record”.
+              </p>
+            </div>
+          </Disclosure>
+        )}
         <div className="changes__actions">
           <button type="submit" className="button button--primary" disabled={state.status === 'loading'}>
             {state.status === 'loading' ? 'Comparing…' : 'Compare'}
           </button>
+          {kind === 'dates' && <span className="hint">The first date starts at the contract default, {formatDate(DEFAULT_AS_OF)}.</span>}
         </div>
 
         {recordedGroups.length > 0 && (
@@ -263,7 +293,19 @@ export function ChangesView({ lookupHref, disagreementHref }: Props) {
       </form>
 
       <div className="changes__result" aria-live="polite" ref={resultRegion} tabIndex={-1}>
-        {state.status === 'loading' && <Skeleton lines={5} label="Comparing dates" />}
+        {state.status === 'loading' && (
+          <div className="waiting" role="status" data-waiting>
+            <Spinner label={`Comparing… ${elapsed} s`} />
+            <p className="waiting__text">
+              {source.mode === 'live'
+                ? 'The service evaluates every sample property on both dates. When no prepared result exists for these dates it recalculates, which can take a minute or more. Nothing is shown until it answers.'
+                : 'Reading the recorded comparison.'}
+            </p>
+            <button type="button" className="button button--small" onClick={cancel}>
+              Cancel
+            </button>
+          </div>
+        )}
         {state.status === 'error' && (
           <ErrorNotice
             error={state.error}
@@ -277,6 +319,7 @@ export function ChangesView({ lookupHref, disagreementHref }: Props) {
             }
           >
             {state.error.kind === 'not_found' && <p>The scenario or rule ID is not in the connected dataset.</p>}
+            {state.error.kind === 'timeout' && <p>The comparison was still being computed when the wait ended. No result is shown; nothing was substituted for it. Trying again asks the service to compute it again.</p>}
             {state.error.kind === 'unavailable' && <p>No comparison can be computed until the dataset is ingested. This is a service state, not an empty result.</p>}
             {state.error.suggestions.length > 0 && <p>Recorded comparisons: {state.error.suggestions.join('; ')}.</p>}
           </ErrorNotice>

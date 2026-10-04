@@ -3,7 +3,19 @@ import { type RefObject, useEffect } from 'react';
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
 
 /**
- * Focus handling for the evidence panel. Escape always closes it. When it is shown as a modal
+ * True when Tab can land on the element. Content of a closed <details> is skipped by the
+ * browser without being `display: none`, so `offsetParent` alone would count it; if the last
+ * such element were taken for the end of the panel, Tab would walk out of a modal panel.
+ */
+function reachable(item: HTMLElement): boolean {
+  const closed = item.closest('details:not([open])');
+  if (closed && !(item.tagName === 'SUMMARY' && item.parentElement === closed)) return false;
+  if (typeof item.checkVisibility === 'function') return item.checkVisibility({ visibilityProperty: true });
+  return item.offsetParent !== null;
+}
+
+/**
+ * Focus handling for the evidence panel and the property chooser. Escape always closes it. When it is shown as a modal
  * sheet (narrow screens) focus moves in, Tab is kept inside, the page behind does not scroll,
  * and focus returns to the control that opened it.
  */
@@ -33,7 +45,7 @@ export function usePanelFocus(ref: RefObject<HTMLElement | null>, options: { mod
         return;
       }
       if (event.key !== 'Tab' || !modal) return;
-      const items = [...panel.querySelectorAll<HTMLElement>(FOCUSABLE)].filter((item) => item.offsetParent !== null);
+      const items = [...panel.querySelectorAll<HTMLElement>(FOCUSABLE)].filter(reachable);
       const first = items[0];
       const last = items[items.length - 1];
       if (!first || !last) return;
