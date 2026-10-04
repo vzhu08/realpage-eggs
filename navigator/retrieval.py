@@ -9,7 +9,7 @@ HEADINGS = re.compile(r"(?im)^[ \t]*(?:(?:section|sec\.?|§)\s+(\d[\w.()\-]*)|((
 # Conservative code-compilation headings: a standalone, unindented statutory
 # number. Short or inline numbered list items remain ordinary section text.
 BARE_STATUTORY_HEADINGS = re.compile(r"(?m)^(\d{3,}(?:\.\d+)*)\.[ \t]*\r?$")
-REFERENCES = re.compile(r"(?i)\b(?:see|under|pursuant to|subject to|defined in|as defined in|as provided in|except as provided in|except as stated in)\s+(?:(?P<doc>[A-Z][A-Z0-9_-]*\d[A-Z0-9_-]*)\s+)?(?:section|sec\.?|§)\s+(?P<section>\d[\w.()\-]*)")
+REFERENCES = re.compile(r"(?i)\b(?:see|under|pursuant to|subject to|defined in|as defined in|as provided in|except as provided in|except as stated in)\s+(?:(?P<doc>[A-Z][A-Z0-9_-]*\d[A-Z0-9_-]*)\s+)?(?:section|sec\.?|§)\s+(?P<section>\d[\w.()\-]*)(?:\s+of\s+(?:the\s+)?(?:chapter|ch\.?)\s+(?P<chapter>\d[\w.()\-]*|[IVXLCDM]+)\b)?")
 
 
 def section_key(value):
@@ -99,6 +99,15 @@ class ContextRetriever:
                 target_doc = match.group("doc") or item.doc_id
                 target_section = section_key(match.group("section"))
                 origin = span(self.sources[item.doc_id], item.start + match.start(), item.start + match.end(), item.section)
+                if match.group("chapter"):
+                    # A section number does not identify its chapter. Neither a
+                    # local match nor an anchored foreign section establishes
+                    # that relationship in this section-only index.
+                    dependencies.append(SourceDependency(
+                        reference=match.group(), origin=origin, status="missing",
+                        target_doc_id=match.group("doc"), target_section=target_section, spans=[],
+                        explanation=f"Referenced chapter {section_key(match.group('chapter'))} identity is not established by available section headings; chapter-qualified reference remains unresolved, not proof the authority does not exist"))
+                    continue
                 candidates = [(label, a, b) for label, a, b in self.section_index.get(target_doc, []) if label == target_section]
                 used_support = False
                 if not candidates and not match.group("doc"):
