@@ -7,7 +7,6 @@ import { humanize, resultMeta, sentence } from '../../lib/labels';
 const BASIS: Record<DisagreementView['basis'], { eyebrow: string; gloss: string }> = {
   same_provision: { eyebrow: 'Two records of one provision', gloss: 'Two captured sources were encoded for the same provision and state different things. The backend keeps both and flags the conflict.' },
   interaction: { eyebrow: 'Two rules, precedence not established', gloss: 'A source describes how these two rules relate, and the evaluator could not turn that into a settled priority.' },
-  proposed_fixture: { eyebrow: 'Two sources, one field', gloss: 'A field-level comparison of two captured sources. The service does not produce this yet.' },
 };
 
 const FIELD_LABELS: Record<string, string> = {
@@ -52,7 +51,6 @@ export function DisagreementCard({ view, ruleTitle, footer }: Props) {
           <Tag tone="neutral" icon={false}>
             No source is preferred
           </Tag>
-          {view.basis === 'proposed_fixture' && <Tag tone="unknown">Development fixture · proposed shape</Tag>}
         </div>
         <p className="disagreement__gloss">{basis.gloss}</p>
       </header>
@@ -119,7 +117,7 @@ export function DisagreementCard({ view, ruleTitle, footer }: Props) {
 
       {view.affectedRuleIds.length > 0 && (
         <p className="disagreement__affects">
-          <span className="disagreement__subhead">{view.basis === 'proposed_fixture' ? 'Rule this concerns' : 'Rules held open'}</span>{' '}
+          <span className="disagreement__subhead">Rules held open</span>{' '}
           {view.affectedRuleIds.map((ruleId, index) => (
             <span key={ruleId}>
               {index > 0 && '; '}
@@ -139,7 +137,7 @@ function Claim({ claim, index, fields }: { claim: ClaimView; index: number; fiel
   return (
     <div className="claim" data-claim={claim.key}>
       <p className="claim__label">
-        Source {index + 1} <span className="mono">{claim.docId}</span>
+        Record {index + 1} <span className="mono">{claim.docId}</span>
       </p>
       {claim.source ? (
         <p className="claim__authority">

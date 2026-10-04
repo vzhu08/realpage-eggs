@@ -1,5 +1,5 @@
 import { expect, test, type Page, type Request } from '@playwright/test';
-import { baseHandlers, clone, examples, mockApi, openLive, ruleRow, selectProperty } from './helpers';
+import { baseHandlers, clone, examples, mockApi, openLive, ruleRow, selectProperty, questionCard } from './helpers';
 
 /** Hold a lookup while allowing later requests to finish first. */
 async function delayedLookup(page: Page, completion: 'success' | 'failure', holdRequest = 1) {
@@ -92,7 +92,7 @@ for (const completion of ['success', 'failure'] as const) {
     await page.getByLabel('As of date').fill('2026-11-15');
     await page.getByRole('button', { name: 'Run lookup', exact: true }).click();
     await expect(ruleRow(page)).toHaveAttribute('data-result', 'unknown');
-    const question = page.getByRole('article', { name: "What is the property's units?" });
+    const question = questionCard(page, 'Number of dwelling units in this building?');
     await question.getByRole('textbox').fill('8');
     await question.getByRole('button', { name: 'Apply answer' }).click();
     await delayed.started;

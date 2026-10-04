@@ -119,7 +119,9 @@ export function QuestionsPanel({ outcome, answers, definitions, busy, synthetic,
             ? 'Every question in this plan has an answer below.'
             : unasked.length > 0
               ? `No question is offered. The plan does not show that knowing ${unasked.map(humanize).join(' or ')} would settle a result on its own; see what remains uncertain below.`
-              : 'Nothing to ask: the plan found no missing property fact that could change a result.'}
+              : answers.length > 0
+                ? 'No further question: with your answers, the plan finds no other property fact that could change a result.'
+                : 'Nothing to ask: the plan found no missing property fact that could change a result.'}
         </p>
       )}
 
@@ -145,7 +147,7 @@ export function QuestionsPanel({ outcome, answers, definitions, busy, synthetic,
         </div>
       )}
 
-      <Disclosure summary="Plan details">
+      <Disclosure summary="Plan details" className="questions__plan">
         <dl className="facts facts--dense">
           <div className="facts__row">
             <dt>Status</dt>

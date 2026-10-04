@@ -6,7 +6,7 @@ import { formatDate, formatTimestamp } from '../../lib/dates';
 import { categoryLabel, humanize, parseReason, resultMeta, sentence } from '../../lib/labels';
 import { type ImpactRow, type Lookups, type PropertyLabel, type RuleNode, propertyLabel, propertyTree, sourceTree } from '../../lib/portfolio';
 
-export type Grouping = 'source' | 'property';
+export type Grouping = 'property' | 'source' | 'timeline';
 
 const PAGE = 20;
 
@@ -20,27 +20,38 @@ interface Props {
   onGrouping: (grouping: Grouping) => void;
   lookupHref: (addressId: string, asOf: string) => string;
   disagreementHref: (addressId: string, asOf: string) => string;
+  /** The chronology of dated statements, shown as the third view. Null when there is none to show. */
+  timeline: ReactNode | null;
+  timelineCount: number;
 }
 
-/** Source document → changed rule → impacted property, or the same rows grouped by property. */
-export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping, onGrouping, lookupHref, disagreementHref }: Props) {
-  const links = { result, lookupHref, disagreementHref };
+/**
+ * Three readings of one comparison: property by property, source → rule → property, and the
+ * dated statements behind it in order. The first two show the same rows; filters apply to both.
+ */
+export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping, onGrouping, lookupHref, disagreementHref, timeline, timelineCount }: Props) {
+  const links = { result, lookupHref, disagreementHref, lookups };
+  const [shownProperties, setShownProperties] = useState(PAGE);
+  const properties = grouping === 'property' ? propertyTree(rows, lookups) : [];
   return (
     <div className="drill" data-grouping={grouping}>
       <Tabs
         idBase="drill"
         label="Group the comparison results"
         active={grouping}
-        onChange={(id) => onGrouping(id === 'property' ? 'property' : 'source')}
+        onChange={(id) => onGrouping(id === 'source' ? 'source' : id === 'timeline' ? 'timeline' : 'property')}
         tabs={[
-          { id: 'source', label: 'By source and rule' },
           { id: 'property', label: 'By property' },
+          { id: 'source', label: 'By source and rule' },
+          ...(timeline ? [{ id: 'timeline', label: 'Timeline', badge: timelineCount }] : []),
         ]}
       />
       <div {...tabPanelProps('drill', grouping)} className="drill__panel">
-        {rows.length === 0 ? (
-          <Empty title={totalRows ? 'No comparison result matches the selected filters' : 'No comparison results'} icon="layers">
-            {totalRows > 0 && <p>Clear a filter to see the other comparison results.</p>}
+        {grouping === 'timeline' ? (
+          <div className="drill__timeline">{timeline}</div>
+        ) : rows.length === 0 ? (
+          <Empty title={totalRows ? 'No comparison result matches the selected filters' : 'No differences between these dates'} icon="layers">
+            {totalRows > 0 ? <p>Clear a filter to see the other comparison results.</p> : <p>The evaluator returned the same result for every sample property on both dates{result.status === 'partial' ? ', within the limits noted above' : ''}.</p>}
           </Empty>
         ) : grouping === 'source' ? (
           <ul className="drill__sources">
@@ -52,12 +63,12 @@ export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping,
                     <span className="source-node__head">
                       <span className="eyebrow">Source</span>
                       <span className="source-node__title">
-                        {node.docId ? <span className="mono">{node.docId}</span> : 'Source not known yet'}
-                        {node.source && (
-                          <span className="source-node__kind">
-                            {sentence(node.source.authority)} · {humanize(node.source.source_type ?? 'unclassified')}
-                          </span>
-                        )}
+                        {node.docId
+                          ? node.source
+                            ? `${sentence(node.source.authority)} ${humanize(node.source.source_type ?? 'source')}${node.source.jurisdictions.length ? ` · ${node.source.jurisdictions.join(', ')}` : ''}`
+                            : 'Source'
+                          : 'Source not known yet'}
+                        {node.docId && <span className="mono source-node__kind">{node.docId}</span>}
                       </span>
                       <span className="source-node__count">
                         {node.rules.length} compared {node.rules.length === 1 ? 'rule' : 'rules'} · {node.properties} {node.properties === 1 ? 'property' : 'properties'}
@@ -82,7 +93,7 @@ export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping,
                   )}
                   <ul className="source-node__rules">
                     {node.rules.map((rule, ruleIndex) => (
-                      <RuleBranch key={rule.ruleId} node={rule} lookups={lookups} defaultOpen={index === 0 && ruleIndex === 0} {...links} />
+                      <RuleBranch key={rule.ruleId} node={rule} defaultOpen={index === 0 && ruleIndex === 0} {...links} />
                     ))}
                   </ul>
                 </Branch>
@@ -90,24 +101,39 @@ export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping,
             ))}
           </ul>
         ) : (
-          <ul className="drill__properties">
-            {propertyTree(rows, lookups).map((node) => (
-              <li key={node.addressId} className="property-node" data-address={node.addressId}>
-                <div className="property-node__head">
-                  <PropertyName label={node.label} />
-                  {result.conflict_flag_address_ids.includes(node.addressId) && <Tag tone="danger">Conflict flagged</Tag>}
-                  <a className="link property-node__open" href={lookupHref(node.addressId, result.after)}>
-                    Open lookup as of {formatDate(result.after)}
-                  </a>
-                </div>
-                <ul className="impact-rows">
-                  {node.rows.map((row) => (
-                    <ImpactRowView key={row.key} row={row} heading={<RuleName ruleId={row.ruleId} rule={lookups.rules.get(row.ruleId)} showSource />} {...links} />
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul className="drill__properties">
+              {properties.slice(0, shownProperties).map((node) => {
+                const definite = node.rows.filter((row) => row.certainty === 'definite').length;
+                const uncertain = node.rows.filter((row) => row.certainty === 'uncertain').length;
+                return (
+                  <li key={node.addressId} className="property-node" data-address={node.addressId}>
+                    <div className="property-node__head">
+                      <PropertyName label={node.label} />
+                      <span className="property-node__counts">
+                        {definite > 0 && <Tag tone="applies" icon={false}>{`${definite} definite`}</Tag>}
+                        {uncertain > 0 && <Tag tone="unknown" icon={false}>{`${uncertain} uncertain`}</Tag>}
+                        {result.conflict_flag_address_ids.includes(node.addressId) && <Tag tone="danger">Conflict flagged</Tag>}
+                      </span>
+                      <a className="link property-node__open" href={lookupHref(node.addressId, result.after)}>
+                        Open lookup as of {formatDate(result.after)}
+                      </a>
+                    </div>
+                    <ul className="impact-rows">
+                      {node.rows.map((row) => (
+                        <ImpactRowView key={row.key} row={row} heading={<RuleName ruleId={row.ruleId} rule={lookups.rules.get(row.ruleId)} fallback={lookups.summary?.rule_labels[row.ruleId]} showSource />} {...links} />
+                      ))}
+                    </ul>
+                  </li>
+                );
+              })}
+            </ul>
+            {properties.length > shownProperties && (
+              <button type="button" className="button button--small" onClick={() => setShownProperties((value) => value + PAGE)}>
+                Show {Math.min(PAGE, properties.length - shownProperties)} more of {properties.length} properties
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>
@@ -118,6 +144,7 @@ interface Links {
   result: ChangeResult;
   lookupHref: (addressId: string, asOf: string) => string;
   disagreementHref: (addressId: string, asOf: string) => string;
+  lookups: Lookups;
 }
 
 /** One level of the drill-down: a native <details>, so it works from the keyboard without script. */
@@ -133,7 +160,8 @@ function Branch({ summary, children, defaultOpen = false, className }: { summary
   );
 }
 
-function RuleBranch({ node, lookups, defaultOpen, ...links }: { node: RuleNode; lookups: Lookups; defaultOpen: boolean } & Links) {
+function RuleBranch({ node, defaultOpen, ...links }: { node: RuleNode; defaultOpen: boolean } & Links) {
+  const { lookups } = links;
   const [shown, setShown] = useState(PAGE);
   const { rule } = node;
   const definite = node.rows.filter((row) => row.certainty === 'definite').length;
@@ -146,7 +174,7 @@ function RuleBranch({ node, lookups, defaultOpen, ...links }: { node: RuleNode; 
         summary={
           <span className="rule-node__head">
             <span className="eyebrow">Compared rule</span>
-            <RuleName ruleId={node.ruleId} rule={rule ?? undefined} large />
+            <RuleName ruleId={node.ruleId} rule={rule ?? undefined} fallback={lookups.summary?.rule_labels[node.ruleId]} large />
             <span className="rule-node__count">
               {node.rows.length} {node.rows.length === 1 ? 'property' : 'properties'}
               {definite > 0 && ` · ${definite} definite`}
@@ -182,7 +210,7 @@ function RuleBranch({ node, lookups, defaultOpen, ...links }: { node: RuleNode; 
         <p className="eyebrow rule-node__impacted">Impacted properties</p>
         <ul className="impact-rows">
           {node.rows.slice(0, shown).map((row) => (
-            <ImpactRowView key={row.key} row={row} heading={<PropertyName label={propertyLabel(row.addressId, lookups.addresses.get(row.addressId))} />} {...links} />
+            <ImpactRowView key={row.key} row={row} heading={<PropertyName label={propertyLabel(row.addressId, lookups.addresses.get(row.addressId), lookups.summary?.property_labels[row.addressId])} />} {...links} />
           ))}
         </ul>
         {node.rows.length > shown && (
@@ -200,18 +228,19 @@ export function PropertyName({ label }: { label: PropertyLabel }) {
     <span className="property-name">
       <span className="property-name__street">{label.street ?? <span className="mono">{label.addressId}</span>}</span>
       <span className="property-name__meta">
-        {label.street && <span className="mono">{label.addressId}</span>}
         <span className={label.resolved ? undefined : 'property-name__open'}>{label.place}</span>
+        {label.street && <span className="mono">{label.addressId}</span>}
       </span>
     </span>
   );
 }
 
-export function RuleName({ ruleId, rule, large = false, showSource = false }: { ruleId: string; rule: Rule | undefined; large?: boolean; showSource?: boolean }) {
+/** `fallback` is the title POST /changes/summary gives the rule, used until its record is read. */
+export function RuleName({ ruleId, rule, fallback, large = false, showSource = false }: { ruleId: string; rule: Rule | undefined; fallback?: string | null; large?: boolean; showSource?: boolean }) {
   if (!rule) {
     return (
       <span className={large ? 'rule-name rule-name--large' : 'rule-name'}>
-        <span className="rule-name__title mono break">{ruleId}</span>
+        <span className={fallback ? 'rule-name__title' : 'rule-name__title mono break'}>{fallback ?? ruleId}</span>
         <span className="rule-name__meta">Rule record not loaded</span>
       </span>
     );
@@ -232,7 +261,7 @@ export function RuleName({ ruleId, rule, large = false, showSource = false }: { 
   );
 }
 
-function ImpactRowView({ row, heading, result, lookupHref, disagreementHref }: { row: ImpactRow; heading: ReactNode } & Links) {
+function ImpactRowView({ row, heading, result, lookupHref, disagreementHref }: { row: ImpactRow; heading: ReactNode } & Omit<Links, 'lookups'> & { lookups?: Lookups }) {
   const was = row.before ? resultMeta(row.before.result) : null;
   const now = row.after ? resultMeta(row.after.result) : null;
   const definite = row.certainty === 'definite';

@@ -13,8 +13,8 @@ import {
   DEV_EVIDENCE_REPORTS,
   DEV_MANIFEST,
   DEV_PATH,
-  DEV_PROPOSED_DISAGREEMENTS,
   DEV_RULES,
+  DEV_SOURCE_COMPARISONS,
   DEV_SOURCES,
   EVIDENCE_FIXTURES,
   FIXTURE_COPY,
@@ -27,9 +27,13 @@ import {
   RECORDED_SOURCES,
   RESEARCH_FIXTURES,
   type ResearchFixture,
+  WALKTHROUGH,
 } from '../demo/fixtures';
 import { replayAssist } from '../demo/replay';
+import { formatDate } from '../lib/dates';
 import { readMetadata } from '../lib/metadata';
+import { COUNT_ORDER, arrangeComparisons, comparisonCounts, countPhrase } from '../lib/sourceComparisons';
+import { movableResults } from '../lib/uncertainty';
 import { ApiError } from './errors';
 import type {
   AddressItem,
@@ -38,12 +42,14 @@ import type {
   ChangeRequest,
   DataSource,
   DemoCatalog,
+  DemoExample,
   EvidenceReportOutcome,
   FactDefinition,
   LookupOutcome,
   LookupQuery,
   LookupResponse,
   RuleDetail,
+  SourceComparisonsOutcome,
   SourceDocument,
 } from './types';
 import { validate, type SchemaName } from './validate';
@@ -53,11 +59,18 @@ const REPLAY_DELAY_MS = 220;
 
 function pause(signal?: AbortSignal): Promise<void> {
   return new Promise((resolve, reject) => {
-    const timer = setTimeout(resolve, REPLAY_DELAY_MS);
-    signal?.addEventListener('abort', () => {
+    const cancel = () => reject(new DOMException('Aborted', 'AbortError'));
+    // A caller that has already gone away gets a cancellation, not a replayed result.
+    if (signal?.aborted) return cancel();
+    const onAbort = () => {
       clearTimeout(timer);
-      reject(new DOMException('Aborted', 'AbortError'));
-    });
+      cancel();
+    };
+    const timer = setTimeout(() => {
+      signal?.removeEventListener('abort', onAbort);
+      resolve();
+    }, REPLAY_DELAY_MS);
+    signal?.addEventListener('abort', onAbort, { once: true });
   });
 }
 
@@ -252,15 +265,74 @@ export class DemoSource implements DataSource {
         suggestions: ALL_CHANGES.map((candidate) => describeChange(candidate.request)),
       });
     }
-    const { warnings } = checked('ChangeResult', match.response, 'demo changes');
+    // Replayed as POST /changes/summary returns it: Core's result plus the recorded labels and groups.
+    const { warnings } = checked('ChangeSummary', { result: match.response, ...match.summary }, 'demo changes');
     const development = match.store === 'dev_portfolio';
     return {
       request,
       result: match.response,
+      summary: match.summary,
+      notices: [],
       origin: { kind: 'recorded_replay', label: development ? DEV_ORIGIN_LABEL : 'Recorded backend output', detail: development ? DEV_PATH : RECORDED_PATH },
       recordedStore: match.store,
       contractWarnings: warnings,
     };
+  }
+
+  /** The development fixture's claim annotations, as the backend re-checked and classified them. */
+  async sourceComparisons(signal?: AbortSignal): Promise<SourceComparisonsOutcome> {
+    await pause(signal);
+    const { data, warnings } = checked('SourceComparisonsResponse', DEV_SOURCE_COMPARISONS, 'demo source comparisons');
+    return { response: data, origin: { kind: 'recorded_replay', label: DEV_ORIGIN_LABEL, detail: DEV_PATH }, recordedStore: 'dev_portfolio', contractWarnings: warnings };
+  }
+
+  /** Walkthrough examples. Every sentence about an example is counted from the recording it opens. */
+  private examples(): DemoExample[] {
+    const examples: DemoExample[] = [];
+    const street = (addressId: string) => DEV_ADDRESSES.find((item) => item.property.address_id === addressId)?.property.raw_address.street_address ?? addressId;
+
+    const lookup = DEV_ASSISTS.find((entry) => entry.request.address_id === WALKTHROUGH.lookup.address_id && entry.request.as_of === WALKTHROUGH.lookup.as_of);
+    const question = lookup?.response.question_plan.questions[0];
+    if (lookup && question) {
+      const current = lookup.response.lookup.evaluations;
+      const count = movableResults(current, question);
+      const { movable } = count;
+      // "N of its M results" only when every result an answer can move is one of the M on screen.
+      const reach = count.listed === movable ? `${movable} of its ${current.length} ${current.length === 1 ? 'result' : 'results'}` : `${movable} ${movable === 1 ? 'result' : 'results'}`;
+      examples.push({
+        id: 'consequential_fact',
+        title: 'One fact that changes the answer',
+        detail: movable > 0 ? `One question about this property can change ${reach}. Answer it and see what moves, and what stays unknown.` : 'A question plan for one property, with what each answer would and would not settle.',
+        meta: `${street(lookup.request.address_id)} · as of ${formatDate(lookup.request.as_of)}`,
+        target: { view: 'lookup', ...lookup.request },
+      });
+    }
+
+    const change = DEV_CHANGES.find((entry) => normalizeChange(entry.request) === normalizeChange(WALKTHROUGH.changes));
+    if (change) {
+      const { response } = change;
+      examples.push({
+        id: 'portfolio_impact',
+        title: 'What changes across the portfolio',
+        detail: `Between two dates, ${response.affected_address_ids.length} sample properties are definitely affected and ${response.uncertain_address_ids.length} are uncertain. Follow any change from its source to the rule to each property.`,
+        meta: `${formatDate(response.before)} → ${formatDate(response.after)} · ${DEV_ADDRESSES.length} properties`,
+        target: { view: 'changes', request: change.request },
+      });
+    }
+
+    const views = arrangeComparisons(DEV_SOURCE_COMPARISONS);
+    if (views.length) {
+      const counts = comparisonCounts(views);
+      const kinds = COUNT_ORDER.filter((kind) => counts[kind] > 0).map((kind) => countPhrase(kind, counts[kind]));
+      examples.push({
+        id: 'source_comparison',
+        title: 'Two sources, side by side',
+        detail: `${views.length} ${views.length === 1 ? 'pair' : 'pairs'} of recorded claims with the exact passages they cite: ${kinds.join(', ')}. None is given a winner, and each says what would settle it.`,
+        meta: `${Object.keys(DEV_SOURCE_COMPARISONS.source_hashes).length} fictional sources re-checked`,
+        target: { view: 'disagreements' },
+      });
+    }
+    return examples;
   }
 
   catalog(): DemoCatalog {
@@ -286,12 +358,12 @@ export class DemoSource implements DataSource {
       lookupDates,
       changeRequests: ALL_CHANGES.map((entry) => ({ request: entry.request, store: entry.store })),
       manifest: RECORDED_MANIFEST,
+      examples: this.examples(),
       development: {
         path: DEV_PATH,
         manifest: DEV_MANIFEST,
         properties: DEV_ADDRESSES,
         conflictLookups: DEV_ASSISTS.filter((entry) => entry.response.lookup.evaluations.some((evaluation) => evaluation.conflict_flag)).map((entry) => entry.request),
-        proposedDisagreements: DEV_PROPOSED_DISAGREEMENTS,
       },
     };
   }

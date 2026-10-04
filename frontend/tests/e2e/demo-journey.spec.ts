@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test';
-import { RULE_TITLE, expectNoHorizontalOverflow, openCase, openDemo, openEvidence, ruleRow, selectProperty, showFinder } from './helpers';
+import { RULE_TITLE, expectNoHorizontalOverflow, openCase, openDemo, openEvidence, openPropertyRecord, questionCard, ruleRow, selectProperty, showFinder, showHypotheticals } from './helpers';
+
+const UNITS = 'Number of dwelling units in this building?';
+const CERTIFICATE = /certificate of occupancy, not the year built\?/;
 
 test.describe('synthetic demo: the complete journey', () => {
   test('lookup → useful question → labeled answer → reevaluation → supporting evidence', async ({ page }) => {
@@ -14,10 +17,23 @@ test.describe('synthetic demo: the complete journey', () => {
     await expect(page.getByText('Contract fixture: Decisive question')).toBeVisible();
     await expect(ruleRow(page)).toHaveAttribute('data-result', 'unknown');
 
-    // The question explains itself and offers hypothetical outcomes.
-    const question = page.getByRole('article', { name: "What is the property's units?" });
-    await expect(question).toContainText('Number of dwelling units in this building');
-    await expect(question).toContainText('Why this matters');
+    // The result leads with what is known, what is open and the next step.
+    await expect(page.getByRole('list', { name: 'Results by status' })).toContainText('Unknown');
+    const next = page.locator('.next');
+    await expect(next).toHaveAttribute('data-next', 'question');
+    await expect(next).toContainText('Answer one question about the property.');
+    // Evidence opens only when asked for.
+    await expect(page.locator('.evidence')).toHaveCount(0);
+
+    // The question is asked in the words of the fact definition; the planner's own wording and
+    // every hypothetical outcome are one disclosure away.
+    await next.getByRole('button', { name: 'Go to the question' }).click();
+    const question = questionCard(page, UNITS);
+    await expect(question).toContainText('Most useful question');
+    await expect(question.locator('.question__consequence')).toHaveText('Depending on the answer, the one result above can change.');
+    await expect(question.getByText('Why this matters')).toBeHidden();
+    await expect(question).toContainText("What is the property's units?");
+    await showHypotheticals(question);
     await expect(question.getByText('Hypothetical', { exact: true })).toHaveCount(2);
     await expect(question).toContainText('If units is 7');
     await expect(question).toContainText('Does not cover');
@@ -27,9 +43,11 @@ test.describe('synthetic demo: the complete journey', () => {
     await question.getByRole('button', { name: 'Apply answer' }).click();
 
     const changed = page.getByRole('region', { name: 'Re-evaluated with your answers' });
+    await expect(changed.locator('[data-change="changed"]')).toHaveCount(1);
     await expect(changed).toContainText('Unknown');
     await expect(changed).toContainText('Applies');
     await expect(ruleRow(page)).toHaveAttribute('data-result', 'applies');
+    await expect(page.locator('.next')).toHaveAttribute('data-next', 'none');
 
     const answers = page.getByRole('region', { name: /Your answers/ });
     await expect(answers).toContainText('Units');
@@ -83,8 +101,8 @@ test.describe('synthetic demo: the complete journey', () => {
     await expect(page.getByRole('heading', { name: 'Useful questions 1' })).toBeVisible();
     await expect(page.getByText('Partial analysis', { exact: true })).toBeVisible();
 
-    const question = page.getByRole('article', { name: "What is the property's certificate of occupancy?" });
-    await expect(question).toContainText('not the year built');
+    const question = questionCard(page, CERTIFICATE);
+    await expect(question).toBeVisible();
     await question.getByRole('textbox').fill('2020-06-30');
     await question.getByRole('button', { name: 'Apply answer' }).click();
 
@@ -114,7 +132,7 @@ test.describe('synthetic demo: the complete journey', () => {
   test('a value the demo has no evaluator output for is labeled "not evaluated", never guessed', async ({ page }) => {
     await openDemo(page);
     await openCase(page, 'Decisive question');
-    const question = page.getByRole('article', { name: "What is the property's units?" });
+    const question = questionCard(page, UNITS);
     await question.getByRole('textbox').fill('12');
     await question.getByRole('button', { name: 'Apply answer' }).click();
     const answers = page.getByRole('region', { name: /Your answers/ });
@@ -127,7 +145,7 @@ test.describe('synthetic demo: the complete journey', () => {
   test('typed input is validated before anything is sent', async ({ page }) => {
     await openDemo(page);
     await openCase(page, 'Decisive question');
-    const question = page.getByRole('article', { name: "What is the property's units?" });
+    const question = questionCard(page, UNITS);
     const input = question.getByRole('textbox');
     await question.getByRole('button', { name: 'Apply answer' }).click();
     await expect(question.getByRole('alert')).toHaveText('Enter a value, or choose “I don’t know”.');
@@ -141,7 +159,7 @@ test.describe('synthetic demo: the complete journey', () => {
     await expect(page.getByRole('region', { name: /Your answers/ })).toHaveCount(0);
 
     await openCase(page, 'Two unresolved exemptions');
-    const date = page.getByRole('article', { name: "What is the property's certificate of occupancy?" });
+    const date = questionCard(page, CERTIFICATE);
     await date.getByRole('textbox').fill('2020-06-31');
     await date.getByRole('button', { name: 'Apply answer' }).click();
     await expect(date.getByRole('alert')).toHaveText('Use YYYY, YYYY-MM or YYYY-MM-DD, with a real calendar date.');
@@ -150,6 +168,7 @@ test.describe('synthetic demo: the complete journey', () => {
   test('answers can be edited and removed, with a visible history; each change re-evaluates', async ({ page }) => {
     await openDemo(page);
     await openCase(page, 'Decisive question');
+    await showHypotheticals(questionCard(page, UNITS));
     await page.getByRole('button', { name: 'Answer with 8 as a demo answer' }).click();
     const answers = page.getByRole('region', { name: /Your answers/ });
     await expect(answers).toContainText('Demo answer · synthetic');
@@ -172,14 +191,18 @@ test.describe('synthetic demo: the complete journey', () => {
 
     await answers.getByRole('button', { name: 'Remove answer for Units' }).click();
     await expect(ruleRow(page)).toHaveAttribute('data-result', 'unknown');
-    await expect(page.getByRole('article', { name: "What is the property's units?" })).toBeVisible();
+    await expect(questionCard(page, UNITS)).toBeVisible();
     await expect(page.getByText('No answers are in play.')).toBeVisible();
   });
 
   test('all five research fixtures are explorable and say what kind of gap remains', async ({ page }) => {
     await openDemo(page);
     await showFinder(page);
-    await expect(page.getByRole('region', { name: 'Contract fixtures' }).getByRole('button')).toHaveCount(6);
+    // The contract examples are kept out of the way of the properties, one disclosure down.
+    const cases = page.locator('details.finder__cases');
+    await expect(cases.locator('summary')).toHaveText('Contract examples (6)');
+    await expect(cases.getByRole('button').first()).toBeHidden();
+    await expect(cases.locator('.finder__item')).toHaveCount(6);
 
     await openCase(page, 'Irrelevant missing fact');
     await expect(page.getByText('No rules were returned for this property on this date')).toBeVisible();
@@ -191,21 +214,25 @@ test.describe('synthetic demo: the complete journey', () => {
     await expect(remaining).toContainText('Source gap');
     await expect(remaining).toContainText('Referenced exception source is not supplied');
     await expect(remaining).toContainText('do not ask the renter to decide the law');
-    await expect(remaining.locator('[data-kind="source_gap"]')).toContainText('Needs: a source to be obtained');
+    const gap = remaining.locator('.uncertainty__item[data-kind="source_gap"]');
+    await expect(gap.locator('.uncertainty__head')).toContainText('A source to be obtained');
+    await expect(gap.locator('.uncertainty__head')).toContainText('Source support is incomplete');
     await expect(remaining.getByText('Needs evidence, interpretation or more analysis')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Useful questions 0' })).toBeVisible();
-    await expect(page.getByRole('article')).toHaveCount(0);
+    await expect(page.locator('article.question')).toHaveCount(0);
+    // With nothing to ask, the next step points at what remains instead.
+    await expect(page.locator('.next')).toHaveAttribute('data-next', 'review');
 
     await openCase(page, 'Bounded partial analysis');
     await expect(page.getByText('The analysis stopped at an explicit limit')).toBeVisible();
     await expect(page.getByText(/Limit reached: max evaluations\. 1 of 1 allowed evaluations were used\./)).toBeVisible();
     await expect(page.getByRole('region', { name: /What remains uncertain/ })).toContainText('Only one alternative evaluated');
-    await expect(page.getByRole('article').getByText('Hypothetical', { exact: true })).toHaveCount(1);
+    await expect(page.locator('article.question').getByText('Hypothetical', { exact: true })).toHaveCount(1);
 
     await openCase(page, 'Two unresolved exemptions');
-    await expect(page.getByRole('article', { name: "What is the property's certificate of occupancy?" })).toBeVisible();
+    await expect(questionCard(page, CERTIFICATE)).toBeVisible();
     await openCase(page, 'Decisive question');
-    await expect(page.getByRole('article', { name: "What is the property's units?" })).toBeVisible();
+    await expect(questionCard(page, UNITS)).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
 
@@ -254,9 +281,9 @@ test.describe('synthetic demo: the complete journey', () => {
     await expect(ruleRow(page)).toHaveAttribute('data-result', 'unknown');
     await expect(page.getByText('This plan is an authored contract fixture')).toHaveCount(0);
 
-    const question = page.getByRole('article', { name: /Number of dwelling units in this building\?/ });
+    const question = questionCard(page, UNITS);
     await expect(question).toContainText('Feasible evaluator probes show this fact can change a result');
-    await expect(question.locator('.alternative')).toHaveCount(3);
+    await expect(await showHypotheticals(question)).toHaveCount(3);
     await expect(question).toContainText('If units is in [1, 7]');
     await expect(question).toContainText('Covers 1 to 7 dwelling units. Evaluated at the probe value 1, which stands in for the whole range.');
     await expect(question).toContainText('Covers 9 dwelling units or more.');
@@ -273,10 +300,15 @@ test.describe('synthetic demo: the complete journey', () => {
 
     // What still is not established after the answer stays on screen, by kind.
     const remaining = page.getByRole('region', { name: /What remains uncertain/ });
-    await expect(remaining.locator('[data-kind="source_gap"]').first()).toContainText('Needs: a source to be obtained');
+    await expect(remaining.locator('.uncertainty__item[data-kind="source_gap"] .uncertainty__head').first()).toContainText('A source to be obtained');
     await expect(remaining.getByText('Needs evidence, interpretation or more analysis')).toBeVisible();
     await expect(remaining).toContainText('Exact quote/retrieval is not semantic verification');
     await expect(remaining.locator('[data-kind="property_fact"]')).toHaveCount(0);
+    // Each topic keeps the service's statements word for word, one disclosure down.
+    const interpretation = remaining.locator('.uncertainty__item[data-kind="interpretation"]').first();
+    await expect(interpretation.locator('.statement').first()).toBeHidden();
+    await interpretation.locator('summary').click();
+    await expect(interpretation.locator('.statement__message').first()).toContainText('Exact quote/retrieval is not semantic verification');
 
     const panel = await openEvidence(page);
     await panel.getByRole('tab', { name: /Checks/ }).click();
@@ -378,7 +410,15 @@ test.describe('synthetic demo: the complete journey', () => {
     await search.fill('');
     await selectProperty(page, '3 Test Street');
     await expect(page.getByRole('heading', { level: 1, name: '3 Test Street, Maple Harbor, CA' })).toBeVisible();
+    // Where the property legally is and what is missing are on the page without opening anything.
+    await expect(page.locator('.subject__line')).toContainText('Maple Harbor, CA');
+    await expect(page.locator('.subject__line')).toContainText('Resolved');
+    await expect(page.locator('.subject__line')).toContainText('Not on record');
+    // Provenance and the resolution method are one disclosure away.
+    await expect(page.getByRole('region', { name: 'Jurisdiction' })).toHaveCount(0);
+    await openPropertyRecord(page);
     await expect(page.getByRole('region', { name: 'Jurisdiction' })).toContainText('Resolved');
     await expect(page.getByRole('region', { name: 'Property facts' })).toContainText('Not on record: units');
+    await expect(page.getByRole('region', { name: 'Property facts' })).toContainText('Synthetic fixture');
   });
 });

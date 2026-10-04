@@ -1,28 +1,118 @@
-import type { AddressItem, JurisdictionResolution, PropertyFacts } from '../../api/types';
-import { Disclosure, Facts, Tag } from '../../components/ui';
+import type { AddressItem, Answer, JurisdictionResolution, PropertyFacts } from '../../api/types';
+import { Icon } from '../../components/Icon';
+import { Disclosure, Facts, Notice, Tag } from '../../components/ui';
 import { formatTimestamp } from '../../lib/dates';
 import { MATCH_QUALITY, formatValue, humanize, sentence } from '../../lib/labels';
 import { addressLine } from './PropertyFinder';
 
-/** Property facts and jurisdiction quality are kept apart: one is about the building, the other about which local law can be matched. */
-export function PropertySummary({ item }: { item: AddressItem }) {
+interface Props {
+  item: AddressItem;
+  /** Opens the property chooser. */
+  onChange: () => void;
+  /**
+   * The request-local answers behind the result on screen. The service echoes an answered fact
+   * into the property it returns; such a value is labeled as an answer, never shown as if it
+   * were on the stored record.
+   */
+  answers?: Answer[];
+}
+
+/**
+ * The property a lookup is about. The address, where it is legally located and the facts on
+ * record are on one line each; provenance and the resolution record are a disclosure away.
+ * A legal municipality that is not established is never tucked away: it stays on the page.
+ */
+export function PropertySummary({ item, onChange, answers = [] }: Props) {
+  const { property, resolution } = item;
+  const quality = MATCH_QUALITY[resolution.match_quality ?? 'unresolved'] ?? { label: sentence(resolution.match_quality ?? 'unresolved'), tone: 'unknown' as const, gloss: '' };
+  const resolved = resolution.match_quality === 'resolved';
+  const unresolved = resolution.unresolved ?? [];
+  const facts = Object.entries(property.facts ?? {});
+  const bounds = Object.entries(property.bounds ?? {});
+  // A fact can be listed as missing while a value is present (e.g. a request-local value); show only real gaps here.
+  const missing = (property.missing_facts ?? []).filter((name) => !(name in (property.facts ?? {})) && !(name in (property.bounds ?? {})));
+  const place = [resolution.municipality, resolution.state].filter(Boolean).join(', ');
+  const answered = new Map(answers.filter((answer) => answer.value !== null).map((answer) => [answer.field, answer]));
   return (
-    <header className="property">
-      <p className="eyebrow">
-        Property <span className="mono">{item.property.address_id}</span>
-      </p>
-      <h1 className="property__title">{addressLine(item)}</h1>
-      <div className="property__grid">
-        <JurisdictionBlock resolution={item.resolution} />
-        <FactsBlock property={item.property} />
+    <header className="subject">
+      <div className="subject__top">
+        <div className="subject__name">
+          <p className="eyebrow">Property</p>
+          <h1 className="subject__title">{addressLine(item)}</h1>
+        </div>
+        <button type="button" className="button subject__change" onClick={onChange}>
+          <Icon name="search" />
+          Change property
+        </button>
       </div>
+
+      <dl className="subject__line">
+        <div className="subject__cell" data-jurisdiction={resolution.match_quality ?? 'unresolved'}>
+          <dt>Legal location</dt>
+          <dd>
+            {resolved ? place : resolution.state ? `Municipality not established · ${resolution.state}` : 'Not established'}
+            <Tag tone={quality.tone} title={quality.gloss}>
+              {quality.label}
+            </Tag>
+          </dd>
+        </div>
+        {facts.map(([name, value]) => {
+          const answer = answered.get(name);
+          return (
+            <div className={answer ? 'subject__cell subject__cell--answer' : 'subject__cell'} key={name} data-fact={name} data-origin={answer ? 'answer' : 'record'}>
+              <dt>{sentence(name)}</dt>
+              <dd className="num">
+                {formatValue(value)}
+                {answer && (
+                  <Tag tone={answer.provenance === 'demo' ? 'info' : 'neutral'} icon={false}>
+                    {answer.provenance === 'demo' ? 'Demo answer · not on record' : 'Your answer · unverified, not on record'}
+                  </Tag>
+                )}
+              </dd>
+            </div>
+          );
+        })}
+        {bounds.map(([name, bound]) => (
+          <div className="subject__cell" key={`bound-${name}`}>
+            <dt>{sentence(name)}</dt>
+            <dd className="num">
+              {bound.lower ?? 'unbounded'} to {bound.upper ?? 'unbounded'}
+            </dd>
+          </div>
+        ))}
+        {missing.length > 0 && (
+          <div className="subject__cell subject__cell--missing">
+            <dt>Not on record</dt>
+            <dd>{missing.map(humanize).join(', ')}</dd>
+          </div>
+        )}
+      </dl>
+
+      {!resolved && (
+        <Notice tone="unknown" title="Legal municipality not established" compact>
+          <p>{quality.gloss} The postal city on the address is not treated as the legal municipality.</p>
+          {unresolved.length > 0 && (
+            <ul className="plain-list plain-list--tight">
+              {unresolved.map((reason) => (
+                <li key={reason}>{reason}</li>
+              ))}
+            </ul>
+          )}
+        </Notice>
+      )}
+
+      <Disclosure summary="Property record: fact provenance and how the location was established" className="subject__record">
+        <div className="subject__grid">
+          <JurisdictionBlock resolution={resolution} />
+          <FactsBlock property={property} missing={missing} />
+        </div>
+      </Disclosure>
     </header>
   );
 }
 
 function JurisdictionBlock({ resolution }: { resolution: JurisdictionResolution }) {
   const quality = MATCH_QUALITY[resolution.match_quality ?? 'unresolved'] ?? { label: sentence(resolution.match_quality ?? 'unresolved'), tone: 'unknown' as const, gloss: '' };
-  const unresolved = resolution.unresolved ?? [];
   const identifiers = Object.entries(resolution.identifiers ?? {});
   const attempts = resolution.attempts ?? [];
   return (
@@ -41,41 +131,23 @@ function JurisdictionBlock({ resolution }: { resolution: JurisdictionResolution 
           { label: 'State', value: resolution.state ?? 'Not established' },
           { label: 'Municipality', value: resolution.municipality ?? 'Not established' },
           ...(resolution.county ? [{ label: 'County', value: resolution.county }] : []),
-          { label: 'Method', value: <span className="mono">{resolution.method ?? 'not recorded'}</span> },
+          { label: 'Method', value: resolution.method ? sentence(resolution.method) : 'Not recorded', note: resolution.method ? <span className="mono">{resolution.method}</span> : undefined },
+          ...(resolution.benchmark ? [{ label: 'Benchmark', value: resolution.benchmark }] : []),
+          ...(resolution.vintage ? [{ label: 'Vintage', value: resolution.vintage }] : []),
+          ...(resolution.retrieved_at ? [{ label: 'Retrieved', value: formatTimestamp(resolution.retrieved_at) }] : []),
+          ...identifiers.map(([key, value]) => ({ label: sentence(key), value: <span className="mono">{value}</span> })),
+          ...(attempts.length ? [{ label: 'Attempts', value: `${attempts.length} recorded` }] : []),
+          { label: 'Property ID', value: <span className="mono">{resolution.address_id}</span> },
         ]}
       />
-      {resolution.match_quality !== 'resolved' && <p className="block__note block__note--warn">{quality.gloss} The postal city on the address is not treated as the legal municipality.</p>}
-      {unresolved.length > 0 && (
-        <ul className="plain-list plain-list--tight">
-          {unresolved.map((reason) => (
-            <li key={reason}>{reason}</li>
-          ))}
-        </ul>
-      )}
-      {(resolution.benchmark || resolution.retrieved_at || identifiers.length > 0 || attempts.length > 0) && (
-        <Disclosure summary="Resolution record">
-          <Facts
-            dense
-            rows={[
-              ...(resolution.benchmark ? [{ label: 'Benchmark', value: resolution.benchmark }] : []),
-              ...(resolution.vintage ? [{ label: 'Vintage', value: resolution.vintage }] : []),
-              ...(resolution.retrieved_at ? [{ label: 'Retrieved', value: formatTimestamp(resolution.retrieved_at) }] : []),
-              ...identifiers.map(([key, value]) => ({ label: sentence(key), value: <span className="mono">{value}</span> })),
-              ...(attempts.length ? [{ label: 'Attempts', value: `${attempts.length} recorded` }] : []),
-            ]}
-          />
-        </Disclosure>
-      )}
     </section>
   );
 }
 
-function FactsBlock({ property }: { property: PropertyFacts }) {
+function FactsBlock({ property, missing }: { property: PropertyFacts; missing: string[] }) {
   const facts = Object.entries(property.facts ?? {});
   const bounds = Object.entries(property.bounds ?? {});
   const provenance = property.provenance ?? {};
-  // A fact can be listed as missing while a value is present (e.g. a request-local value); show only real gaps here.
-  const missing = (property.missing_facts ?? []).filter((name) => !(name in (property.facts ?? {})) && !(name in (property.bounds ?? {})));
   return (
     <section className="block" aria-labelledby="facts-heading">
       <div className="block__head">

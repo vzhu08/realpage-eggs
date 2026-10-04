@@ -9,7 +9,7 @@
  * The script follows docs/DEMO_SCRIPT.md step for step.
  */
 import { type Page, expect, test } from '@playwright/test';
-import { openDemo } from './helpers';
+import { openDemo, showHypotheticals, showView } from './helpers';
 
 test.skip(!process.env.DEMO_BACKUP, 'Set DEMO_BACKUP=1 to regenerate docs/demo-backup');
 test.use({ viewport: { width: 1280, height: 720 }, video: { mode: 'on', size: { width: 1280, height: 720 } } });
@@ -53,7 +53,9 @@ test('synthetic rehearsal of the four-minute journey (labeled backup)', async ({
   // 3. One consequential question, and what stays unknown after the answer.
   await top(page, '.question');
   await frame(page, '04-consequential-question');
-  await page.getByRole('article', { name: /Whether the owner occupies the property/ }).getByRole('button', { name: 'Answer with No as a demo answer' }).click();
+  const question = page.getByRole('article', { name: /Whether the owner occupies the property/ });
+  await showHypotheticals(question);
+  await question.getByRole('button', { name: 'Answer with No as a demo answer' }).click();
   await expect(page.getByRole('region', { name: /Re-evaluated/ })).toBeVisible();
   await beat(page, 900);
   await frame(page, '05-after-answer-still-unknown');
@@ -61,33 +63,35 @@ test('synthetic rehearsal of the four-minute journey (labeled backup)', async ({
   await frame(page, '06-remaining-uncertainty');
 
   // 4. Across a date change: the portfolio.
-  await page.getByRole('link', { name: 'Changes', exact: true }).click();
+  await page.getByRole('link', { name: 'Portfolio changes', exact: true }).click();
   await page.getByRole('button', { name: 'Oct 1, 2026 → Jan 15, 2027', exact: true }).click();
   const result = page.getByRole('article', { name: 'Comparison result' });
-  await expect(result.locator('.source-node')).toHaveCount(4);
+  await expect(result.locator('.property-node')).toHaveCount(14);
   await top(page, '.change-result .context');
   await frame(page, '07-portfolio-impact');
-  await top(page, '#change-timeline');
+  await showView(result, 'Timeline');
+  await top(page, '.drill__timeline');
   await frame(page, '08-portfolio-timeline');
   await top(page, '#change-summaries');
-  await result.locator('[data-summary="Legal municipality"]').getByRole('button', { name: 'Larch Point, ZZ' }).click();
+  await result.getByRole('table', { name: 'By rule jurisdiction' }).getByRole('button', { name: 'Larch Point, ZZ' }).click();
   await frame(page, '09-portfolio-summaries-filtered');
 
   // 5. Source → changed rule → impacted property.
+  await showView(result, 'By source and rule');
   await top(page, '#change-diffs');
   const source = result.locator('.source-node[data-source="DEV-LP-ORD-03"]');
-  await source.locator('summary').first().click();
-  await source.locator('.rule-node summary').first().click();
+  if ((await source.locator('details').first().getAttribute('open')) === null) await source.locator('summary').first().click();
+  if ((await source.locator('.rule-node details').first().getAttribute('open')) === null) await source.locator('.rule-node summary').first().click();
   await source.locator('.impact-row[data-address="DEV-P07"] summary').first().click();
   await top(page, '.source-node[data-source="DEV-LP-ORD-03"]');
   await frame(page, '10-source-rule-property');
 
   // 6. The source disagreement, and what would resolve it.
   await source.locator('.impact-row[data-address="DEV-P07"]').getByRole('link', { name: 'Compare the conflicting sources' }).click();
-  await expect(page.locator('.disagreement')).toBeVisible();
-  await top(page, '.disagreement');
+  await expect(page.locator('[data-disagreement]').first()).toBeVisible();
+  await top(page, '[data-disagreement]');
   await frame(page, '11-source-disagreement');
-  await top(page, '.disagreement__resolution');
+  await top(page, '[data-disagreement] .disagreement__resolution');
   await frame(page, '12-what-would-resolve-it');
 
   // 7. Keep the result.

@@ -145,6 +145,14 @@ export function useSession(source: DataSource, defaultAsOf: string) {
     },
     [execute],
   );
+  /** Open a property on a stated date and look it up at once (walkthrough examples, shared links). */
+  const open = useCallback(
+    (item: AddressItem, asOf: string) => {
+      dispatch({ type: 'select', item, fixtureCase: null, asOf });
+      void execute({ keepPrevious: false, item, fixtureCase: null, asOf, answers: [] });
+    },
+    [execute],
+  );
   const clear = useCallback(() => {
     controller.current?.abort();
     dispatch({ type: 'clear' });
@@ -184,7 +192,7 @@ export function useSession(source: DataSource, defaultAsOf: string) {
     [execute],
   );
 
-  return { state, select, selectCase, clear, setAsOf, run, answer, removeAnswer };
+  return { state, select, selectCase, open, clear, setAsOf, run, answer, removeAnswer };
 }
 
 export type Session = ReturnType<typeof useSession>;

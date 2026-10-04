@@ -1,10 +1,11 @@
 /**
  * A working export of one lookup result, assembled in the browser from the payloads already
- * on screen. It is NOT the reproducible evidence package planned in PLAT-06: it carries no
- * snapshot or code hashes beyond what the response itself reports, and nothing in it has been
- * re-verified. Its purpose is to let a reader keep exactly what they saw, with each kind of
- * statement kept apart: stored facts, request-local answers, evaluator results, model review
- * and human review.
+ * on screen. It is NOT the evidence package the service builds (POST /lookup/evidence-package):
+ * it carries no source texts and no input, response or code hashes beyond what the response
+ * itself reports, and nothing in it has been re-verified. Its purpose is to let a reader keep
+ * exactly what they saw, including the order of their answers, with each kind of statement
+ * kept apart: stored facts, request-local answers, evaluator results, model review and human
+ * review.
  */
 import { CONTRACT_DIGEST } from '../api/generated/meta';
 import type { Answer, AnswerDisposition, DataMode, LookupOutcome } from '../api/types';
@@ -37,9 +38,9 @@ export function buildWorkingExport({ outcome, answers, history, mode, apiBase, e
     export_kind: WORKING_EXPORT_KIND,
     export_version: WORKING_EXPORT_VERSION,
     notice:
-      'Working export assembled in the browser from the responses shown on screen. It is not the reproducible evidence package (PLAT-06), carries no independent verification, and is not legal advice. Applicability is not a finding of compliance or violation.',
+      'Working export assembled in the browser from the responses shown on screen. It is not the evidence package the service builds (POST /lookup/evidence-package), carries no independent verification, and is not legal advice. Applicability is not a finding of compliance or violation.',
     limitations: [
-      'No snapshot or code hash is included beyond what the response metadata reports.',
+      'No input, response or code hash is included beyond what the response metadata reports; the service-built evidence package carries those.',
       'Request-local answers were supplied by the person using the workspace and are unverified; they are not stored facts.',
       'Source documents are listed with their recorded hashes; their full text is not embedded.',
       'Nothing in this file was re-evaluated or re-verified when it was exported.',
@@ -131,8 +132,13 @@ export const workingExportFilename = (addressId: string, asOf: string) => `navig
 
 /** Hands the file to the browser. Returns false where downloads are not possible. */
 export function downloadJson(filename: string, data: unknown): boolean {
+  return downloadText(filename, `${JSON.stringify(data, null, 2)}\n`);
+}
+
+/** Saves text exactly as given, so a file whose hashes describe its bytes is not re-serialized. */
+export function downloadText(filename: string, text: string): boolean {
   try {
-    const url = URL.createObjectURL(new Blob([`${JSON.stringify(data, null, 2)}\n`], { type: 'application/json' }));
+    const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
     const link = document.createElement('a');
     link.href = url;
     link.download = filename;
