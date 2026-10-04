@@ -126,7 +126,9 @@ export function EvidencePanel({ rule, evaluation, lookup, assist, modal, onClose
 
       <div className="evidence__body" {...tabPanelProps(tabBase, tab)}>
         {tab === 'source' && <SourceTab rule={rule} evidence={evidence} sources={lookup.sources} loaded={loaded} onRetry={documents.reload} />}
-        {tab === 'encoded' && <EncodedTab rule={rule} evaluation={evaluation} rendering={rendering} rendererState={rendererState} asOf={lookup.as_of} />}
+        {tab === 'encoded' && (
+          <EncodedTab rule={rule} evaluation={evaluation} rendering={rendering} rendererState={rendererState} traces={(assist?.question_plan.traces ?? []).filter((trace) => trace.rule_id === rule.team_rule_id)} asOf={lookup.as_of} />
+        )}
         {tab === 'checks' && <ChecksTab rule={rule} report={report} reportState={reportState} reportLoading={!embedded && fetched.status === 'loading'} loaded={loaded} />}
         {tab === 'versions' && <VersionsTab rule={rule} evaluation={evaluation} asOf={lookup.as_of} detail={detail} />}
 

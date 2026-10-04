@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import { ApiError } from '../../src/api/errors';
 import { DEFAULT_AS_OF } from '../../src/api/generated/meta';
 import type { AddressItem, Answer, Rule } from '../../src/api/types';
-import { LOOKUP_EXAMPLES, RECORDED_LOOKUPS, RECORDED_SOURCES, RESEARCH_FIXTURES } from '../../src/demo/fixtures';
+import { LOOKUP_EXAMPLES, RECORDED_ASSISTS, RECORDED_SOURCES, RESEARCH_FIXTURES } from '../../src/demo/fixtures';
 import { formFromDefinition, parseAnswer } from '../../src/lib/answers';
 import { readDifferences } from '../../src/lib/changes';
 import { datePrecision, formatDate, formatTimestamp, isIsoDay } from '../../src/lib/dates';
@@ -96,8 +96,8 @@ test('offsets are code points, so astral characters do not shift later quotes', 
 
 test('every quote in the recorded lookups is found at its offsets in the recorded source', () => {
   let checked = 0;
-  for (const entry of [...RECORDED_LOOKUPS, ...LOOKUP_EXAMPLES]) {
-    for (const rule of entry.response.rules) {
+  for (const lookup of [...RECORDED_ASSISTS.map((entry) => entry.response.lookup), ...LOOKUP_EXAMPLES.map((entry) => entry.response)]) {
+    for (const rule of lookup.rules) {
       for (const item of rule.evidence) {
         const source = RECORDED_SOURCES[item.doc_id];
         assert.ok(source, item.doc_id);

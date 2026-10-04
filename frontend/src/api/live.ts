@@ -15,6 +15,7 @@ import type {
   DataSource,
   EvidenceReport,
   EvidenceReportOutcome,
+  FactDefinition,
   HealthResponse,
   LookupOutcome,
   LookupQuery,
@@ -44,6 +45,7 @@ export class LiveSource implements DataSource {
   /** Remembered per session so a missing planned route is probed once, not on every request. */
   private assistRoute: 'untested' | 'present' | 'absent' = 'untested';
   private evidenceRoute: 'untested' | 'present' | 'absent' = 'untested';
+  private factDefinitions: Promise<Record<string, FactDefinition> | null> | null = null;
 
   constructor(baseUrl: string, fetchImpl: FetchLike = (input, init) => fetch(input, init)) {
     this.base = baseUrl.replace(/\/+$/, '');
@@ -156,7 +158,7 @@ export class LiveSource implements DataSource {
       query,
       lookup: data,
       assist: null,
-      planner: { kind: 'endpoint_unavailable', detail: 'POST /lookup/assist is not implemented on this backend. Results below come from POST /lookup.' },
+      planner: { kind: 'endpoint_unavailable', detail: 'POST /lookup/assist is not available on this backend. Results below come from POST /lookup.' },
       origin: { kind: 'live', label: 'Live API', detail: `POST ${this.base}/lookup` },
       dispositions,
       notices,
@@ -173,7 +175,7 @@ export class LiveSource implements DataSource {
   }
 
   async evidenceReport(ruleId: string, signal?: AbortSignal): Promise<EvidenceReportOutcome> {
-    const unavailable = 'GET /rules/{id}/evidence is not implemented on this backend, so no evidence checks have been run by the service.';
+    const unavailable = 'GET /rules/{id}/evidence is not available on this backend, so no evidence checks have been run by the service.';
     if (this.evidenceRoute === 'absent') return { report: null, unavailable };
     try {
       const path = `/rules/${encodeURIComponent(ruleId)}/evidence`;
@@ -187,6 +189,27 @@ export class LiveSource implements DataSource {
       }
       throw error;
     }
+  }
+
+  /** GET /facts is a map of field → FactDefinition. Fetched once; an older backend without it yields null. */
+  facts(signal?: AbortSignal): Promise<Record<string, FactDefinition> | null> {
+    this.factDefinitions ??= (async () => {
+      try {
+        const response = await this.fetchImpl(`${this.base}/facts`, { headers: { Accept: 'application/json' }, signal });
+        if (!response.ok) return null;
+        const body = (await response.json()) as unknown;
+        if (!body || typeof body !== 'object' || Array.isArray(body)) return null;
+        const definitions: Record<string, FactDefinition> = {};
+        for (const [field, definition] of Object.entries(body)) {
+          if (validate('FactDefinition', definition).errors.length === 0) definitions[field] = definition as FactDefinition;
+        }
+        return definitions;
+      } catch {
+        this.factDefinitions = null;
+        return null;
+      }
+    })();
+    return this.factDefinitions;
   }
 
   async changes(request: ChangeRequest, signal?: AbortSignal): Promise<ChangeOutcome> {

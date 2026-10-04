@@ -54,13 +54,14 @@ test.describe('live API: failure, partial and unavailable states', () => {
   });
 
   test('stale selection (404), invalid request (422), dependency failure (502) and contract mismatch each get their own state', async ({ page }) => {
-    let mode: '404' | '422' | '502' | 'drift' | 'bad' = '404';
+    let mode: '404' | '422' | '502' | 'core' | 'drift' | 'bad' = '404';
     await mockApi(page, {
       ...baseHandlers(),
       'POST /lookup': () => {
         if (mode === '404') return { status: 404, json: examples.errors.unknown_address };
         if (mode === '422') return { status: 422, json: { detail: [{ type: 'date_from_datetime_parsing', loc: ['body', 'as_of'], msg: 'Input should be a valid date', input: 'x' }] } };
-        if (mode === '502') return { status: 502, json: { detail: { code: 'malformed_core_output', message: 'Core returned a malformed question plan' } } };
+        if (mode === '502') return { status: 502, json: { detail: { code: 'core_contract_error', message: 'Core output did not satisfy the shared contract' } } };
+        if (mode === 'core') return { status: 503, json: { detail: { code: 'core_unavailable', message: 'Core service failed; no substitute analysis generated' } } };
         if (mode === 'drift') return { json: { ...clone(unknown), confidence: 0.97 } };
         return { json: { ...clone(unknown), evaluations: [{ ...clone(unknown.evaluations[0]), result: 'violation' }] } };
       },
@@ -81,7 +82,14 @@ test.describe('live API: failure, partial and unavailable states', () => {
 
     mode = '502';
     await run.click();
-    await expect(page.getByRole('alert').filter({ hasText: 'A backend dependency failed' })).toContainText('Core returned a malformed question plan');
+    await expect(page.getByRole('alert').filter({ hasText: 'A backend dependency failed' })).toContainText('Core output did not satisfy the shared contract');
+
+    // A failing Core service is a dependency failure too, never "the dataset is not ready".
+    mode = 'core';
+    await run.click();
+    const core = page.getByRole('alert').filter({ hasText: 'A backend dependency failed' });
+    await expect(core).toContainText('Core service failed; no substitute analysis generated');
+    await expect(page.getByText('The dataset is not ready')).toHaveCount(0);
 
     mode = 'bad';
     await run.click();
@@ -177,7 +185,7 @@ test.describe('live API: questions and evidence against the agreed assist contra
 
     const questions = page.getByRole('region', { name: 'Useful questions' });
     await expect(questions).toContainText('Question planning is not available on this backend');
-    await expect(questions).toContainText('POST /lookup/assist is not implemented on this backend');
+    await expect(questions).toContainText('POST /lookup/assist is not available on this backend');
     await expect(questions).toContainText('No questions are ranked and no alternatives are shown.');
     await expect(questions.getByText('Hypothetical', { exact: true })).toHaveCount(0);
 
@@ -197,7 +205,7 @@ test.describe('live API: questions and evidence against the agreed assist contra
     // Evidence still works; the six checks say the service has not run them.
     const panel = await openEvidence(page);
     await panel.getByRole('tab', { name: /Checks/ }).click();
-    await expect(panel).toContainText('GET /rules/{id}/evidence is not implemented on this backend');
+    await expect(panel).toContainText('GET /rules/{id}/evidence is not available on this backend');
     await expect(panel.getByText('Not checked by the service')).toHaveCount(6);
   });
 
@@ -273,7 +281,8 @@ test.describe('live API: questions and evidence against the agreed assist contra
     await expect(status('source_identity')).toHaveText('Stale');
     await expect(status('citation_anchor')).toHaveText('Pass');
     await expect(status('quote_presence')).toHaveText('Pass');
-    await expect(status('semantic_support')).toHaveText('Insufficient · exemption conditions');
+    await expect(status('semantic_support')).toHaveText('Insufficient');
+    await expect(panel.locator('.check[data-check="semantic_support"] .check__result')).toContainText('Insufficient · exemption conditions — Test double: the passage does not establish the exemption.');
     await expect(status('dependencies')).toHaveText('Missing');
     await expect(panel.getByText('Blocking issues reported')).toBeVisible();
     await expect(panel).toContainText('Test double: unresolved dependency on section 9');
@@ -284,6 +293,55 @@ test.describe('live API: questions and evidence against the agreed assist contra
     await expect(panel.locator('.compare__rendering')).toHaveText(rendering.text);
     await expect(panel).toContainText('Deterministic rendering · renderer test-double-1');
     await expect(panel).toContainText('Showing it is not legal validation of that reading.');
+  });
+
+  test('Core absent: the response is a successful partial capability, and facts can still be supplied with their definitions', async ({ page }) => {
+    const units = examples.assist.response.question_plan.questions[0].fact;
+    const calls = await mockApi(page, {
+      ...baseHandlers(),
+      'GET /facts': () => ({ json: { units } }),
+      'POST /lookup/assist': ({ body }) => {
+        const response = clone(examples.assist.response);
+        response.capabilities = { lookup: 'implemented', evidence: 'implemented', question_planner: 'dependency_unavailable', rule_renderer: 'dependency_unavailable' };
+        response.encoded_rules = [];
+        response.question_plan = {
+          status: 'unavailable',
+          questions: [],
+          remaining_uncertainty: [{ kind: 'service_dependency', message: 'Core question planner has not been integrated', remedy: 'Complete CORE-03/04 and supply navigator.core_assist.plan_questions', rule_ids: [], predicate_ids: [], field: null, source_refs: [] }],
+          traces: [],
+          limits: response.question_plan.limits,
+          evaluations_used: 0,
+          limits_hit: [],
+          algorithm_version: 'unavailable',
+          exhaustive: false,
+        };
+        response.answers_applied = body.answers;
+        if (body.answers.some((answer: { field: string; value: unknown }) => answer.field === 'units' && answer.value === 12)) {
+          response.lookup.evaluations = examples.assist.response.question_plan.questions[0].alternatives[2].evaluations;
+        }
+        return { json: response };
+      },
+    });
+    await openLive(page);
+    await selectProperty(page, '3 Test Street');
+    await page.getByLabel('As of date').fill('2026-11-15');
+    await page.getByRole('button', { name: 'Run lookup' }).click();
+
+    const questions = page.getByRole('region', { name: /Useful questions/ });
+    await expect(questions.getByText('Planner unavailable', { exact: true })).toBeVisible();
+    await expect(questions).toContainText('The question planner is not available');
+    await expect(page.getByRole('alert')).toHaveCount(0);
+    await expect(page.getByRole('region', { name: /What remains uncertain/ }).locator('[data-kind="service_dependency"]')).toContainText('Core question planner has not been integrated');
+    // The fact definition comes from GET /facts, not from inference.
+    await expect(questions).toContainText('Number of dwelling units in this building (dwelling units)');
+    await questions.getByRole('textbox', { name: 'Units' }).fill('12');
+    await questions.getByRole('button', { name: 'Evaluate with this fact' }).click();
+    await expect(ruleRow(page)).toHaveAttribute('data-result', 'applies');
+    expect(calls.filter((call) => call.path === '/lookup/assist').at(-1)?.body).toEqual({ address_id: 'SYNTH-003', as_of: '2026-11-15', answers: [{ field: 'units', value: 12, provenance: 'user_provided' }] });
+
+    const panel = await openEvidence(page);
+    await panel.getByRole('tab', { name: 'Encoded rule' }).click();
+    await expect(panel).toContainText('rule_renderer: dependency unavailable');
   });
 
   test('probe values are never offered as answers on a non-synthetic dataset', async ({ page }) => {
