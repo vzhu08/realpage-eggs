@@ -75,7 +75,7 @@ def test_dry_run_and_input_guards_never_touch_source_or_create_output(tmp_path, 
     text = "SYNTHETIC TEST CONTENT: non-production fixture for dry-run guards only."
     document = SourceDocument(doc_id="TEST", jurisdictions=["CA"], url="https://example.invalid/synthetic",
                               retrieved_at="2026-10-04T00:00Z", text=text, sha256=digest(text.encode()),
-                              capture_status="supplementary", authority="synthetic test fixture")
+                              capture_status="supplementary", authority="official")  # Eligible metadata shape only.
     store.save_collection("sources", {"TEST": document})
     original = store.path("sources.json").read_bytes()
     def forbidden(*args, **kwargs):
@@ -108,7 +108,7 @@ def test_execute_uses_core_in_a_new_copy_with_mocked_api(demo, tmp_path, monkeyp
     source = next(iter(demo.sources().values()))
     # Synthetic content stays in a test-only temp store; exercise the real-source preflight shape.
     source.capture_status = "supplementary"
-    source.authority = "synthetic test fixture"
+    source.authority = "official"  # Mock the eligible provenance shape; no real source/provider is used.
     demo.save_collection("sources", {source.doc_id: source})
     before = {p.relative_to(demo.root): p.read_bytes() for p in demo.root.rglob("*") if p.is_file()}
     calls = []

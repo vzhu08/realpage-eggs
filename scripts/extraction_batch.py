@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import httpx
 from navigator.extraction import OpenAIProvider, ProviderFailure, chunks, extract
+from navigator.source_policy import POLICY_VERSION, source_use
 from navigator.store import Store, digest, now, write_json
 from scripts.extraction_pilot import configure_credentials, MODEL, MAX_OUTPUT_TOKENS, MAX_REQUEST_BYTES
 
@@ -128,7 +129,7 @@ def plan(source_dir, output, pack):
     sources, index = store.sources(), store.read('extraction_index.json', {})
     with (pack / 'corpus/corpus_manifest.csv').open(encoding='utf-8-sig', newline='') as stream:
         manifest = {r['doc_id']: r for r in csv.DictReader(stream)}
-    selected, completed, unavailable = [], [], []
+    selected, completed, unavailable, excluded = [], [], [], []
     for ident, row in sorted(manifest.items()):
         source = sources.get(ident)
         if not source or not source.text:
@@ -136,6 +137,10 @@ def plan(source_dir, output, pack):
             continue
         if source.capture_status == 'synthetic' or digest(source.text.encode()) != source.sha256:
             raise ValueError(f'Invalid source identity: {ident}')
+        use = source_use(source)
+        if not use.extraction_allowed:
+            excluded.append({'doc_id': ident, 'status': use.status, 'reason': use.reason})
+            continue
         rel = row.get('text_file')
         if not rel:
             raise ValueError(f'Missing supplied text path: {ident}')
@@ -150,7 +155,8 @@ def plan(source_dir, output, pack):
             selected.append({'doc_id': ident, 'sha256': source.sha256,
                              'chunks': sum(1 for _ in chunks(source.text))})
     return {'source_dir': str(source_dir), 'output': str(output), 'selected': selected,
-            'completed_preserved': completed, 'unavailable': unavailable,
+            'completed_preserved': completed, 'unavailable': unavailable, 'excluded_sources': excluded,
+            'source_policy_version': POLICY_VERSION,
             'model': MODEL, 'provider_calls_started': 0, 'label': 'REVIEW_CANDIDATES_NOT_RELEASE'}
 
 
