@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_MA_S2983_TEXT",
+  "cases": [
+    "T4"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://malegislature.gov/Bills/194/S2983/Senate/Bill/Text",
+  "title": "S2983 substantive bill text",
+  "related_existing_id": "D046",
+  "attempted_at": "2026-10-04T07:06:40.940220+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://malegislature.gov/Bills/194/S2983/Senate/Bill/Text",
+  "retrieved_at": "2026-10-04T07:06:41.719883+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Date": "Sun, 04 Oct 2026 07:06:42 GMT"
+  },
+  "raw_path": "raw/P11_MA_S2983_TEXT.html",
+  "raw_sha256": "021f5871ad83a37ceeca4e6cfb00144444d08e8cc9e0a95e2d4a64e188011646",
+  "raw_bytes": 7015,
+  "text_path": "text/P11_MA_S2983_TEXT.txt",
+  "text_sha256": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+  "text_characters": 4633,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

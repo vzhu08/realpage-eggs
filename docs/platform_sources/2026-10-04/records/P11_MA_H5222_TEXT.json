@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_MA_H5222_TEXT",
+  "cases": [
+    "T4"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://malegislature.gov/Bills/194/H5222/House/Bill/Text",
+  "title": "H5222 substantive bill text",
+  "related_existing_id": "D045",
+  "attempted_at": "2026-10-04T07:06:38.086590+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://malegislature.gov/Bills/194/H5222/House/Bill/Text",
+  "retrieved_at": "2026-10-04T07:06:38.713282+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Date": "Sun, 04 Oct 2026 07:06:39 GMT"
+  },
+  "raw_path": "raw/P11_MA_H5222_TEXT.html",
+  "raw_sha256": "48e2426130b3a258f1d05d1a0aa62255f21b0dc3c07f40f092c9d70af07ed832",
+  "raw_bytes": 9286,
+  "text_path": "text/P11_MA_H5222_TEXT.txt",
+  "text_sha256": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+  "text_characters": 5074,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

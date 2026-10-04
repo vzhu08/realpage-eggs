@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_MA_S2983_STATUS",
+  "cases": [
+    "T4"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://malegislature.gov/Bills/194/S2983",
+  "title": "S2983 current landing/history",
+  "related_existing_id": "D046",
+  "attempted_at": "2026-10-04T07:06:41.724882+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://malegislature.gov/Bills/194/S2983",
+  "retrieved_at": "2026-10-04T07:06:43.402125+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Date": "Sun, 04 Oct 2026 07:06:43 GMT"
+  },
+  "raw_path": "raw/P11_MA_S2983_STATUS.html",
+  "raw_sha256": "b31aa32381547a01b38cf38f8e024537f952da2f72173fcae1e27242615ebc01",
+  "raw_bytes": 86331,
+  "text_path": "text/P11_MA_S2983_STATUS.txt",
+  "text_sha256": "9ac8888c7d059eebd0d1bbbf36745987213cd5ab20ab9e6368480f55c270805f",
+  "text_characters": 6292,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

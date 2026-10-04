@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_CA_BPC_ART2",
+  "cases": [
+    "T1"
+  ],
+  "jurisdictions": [
+    "CA"
+  ],
+  "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=2.",
+  "title": "BPC Article 2 including 16729 and date annotation",
+  "related_existing_id": "D022",
+  "attempted_at": "2026-10-04T07:05:04.762681+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=2.",
+  "retrieved_at": "2026-10-04T07:05:05.248997+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8",
+    "Date": "Sun, 04 Oct 2026 07:05:05 GMT"
+  },
+  "raw_path": "raw/P11_CA_BPC_ART2.html",
+  "raw_sha256": "fe376081059f58ce36c12bd4b8062ed0e2a9cc5da7450b23ac080f5a851ae7f0",
+  "raw_bytes": 146907,
+  "text_path": "text/P11_CA_BPC_ART2.txt",
+  "text_sha256": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+  "text_characters": 12247,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

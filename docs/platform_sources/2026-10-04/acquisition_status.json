@@ -1,0 +1,75 @@
+{
+  "T1": {
+    "state": "requested_primary_texts_captured_core_review_pending",
+    "delivered": [
+      "P11_CA_AB325_TEXT",
+      "P11_CA_AB325_HISTORY",
+      "P11_CA_BPC_ART1",
+      "P11_CA_BPC_ART2",
+      "P11_CA_BPC_ART3",
+      "P11_CA_SB763_TEXT",
+      "P11_CA_SB763_HISTORY",
+      "P11_CA_CONS_ART4"
+    ],
+    "next_owner": "Core A",
+    "next_action": "Review provisions, incorporated definitions and official effective-date annotations; retain provision-specific applicability uncertainty."
+  },
+  "T2": {
+    "state": "municipal_versions_captured_publication_and_effectiveness_gaps_remain",
+    "delivered": [
+      "P11_NJ_HOB_B781_HTML",
+      "P11_NJ_HOB_MINUTES",
+      "P11_NJ_HOB_ADOPTION",
+      "P11_NJ_JC_25_057",
+      "P11_NJ_JC_25_098",
+      "P11_NJ_JC_25_105"
+    ],
+    "next_owner": "Platform acquisition and Core A review",
+    "remaining": [
+      "Hoboken statutory publication record/date; certified minutes approval remains unverified.",
+      "Jersey City operative-date/publication authority; full later-amendment completeness unverified.",
+      "Core must visually resolve redlines, version chains, scope and exclusions; do not extract stricken clauses as operative text."
+    ]
+  },
+  "T3": {
+    "state": "NJ_state_text_already_saved_local_documents_now_delivered",
+    "existing": [
+      "D069"
+    ],
+    "delivered_same_as": "T2",
+    "next_owner": "Platform acquisition for local dates; Core A for interpretation/extraction",
+    "remaining": [
+      "D069 needs no re-fetch just to extract; retain saved source.",
+      "NJ/local conflict target, scope and other-law exception require Core review; no preemption winner asserted.",
+      "Local date/publication gaps from T2 remain."
+    ]
+  },
+  "T4": {
+    "state": "substantive_texts_and_observed_histories_captured_core_review_pending",
+    "delivered": [
+      "P11_MA_H5222_TEXT",
+      "P11_MA_H5222_STATUS",
+      "P11_MA_S2983_TEXT",
+      "P11_MA_S2983_STATUS"
+    ],
+    "next_owner": "Core A",
+    "remaining": [
+      "Observed October4 histories list March12 referrals; do not backdate retrieval or infer enactment.",
+      "Core determines historical status and hypothetical scenario interpretation."
+    ]
+  },
+  "T5": {
+    "state": "petition_and_court_authored_mirror_captured_official_docket_verification_remaining",
+    "delivered": [
+      "P11_MA_IP25_21_ORIGINAL",
+      "P11_MA_H5008",
+      "P11_MA_CELLA_OPINION_MIRROR"
+    ],
+    "next_owner": "Platform for official docket verification; Core A for lifecycle review",
+    "remaining": [
+      "Official-hosted opinion/current docket and final county judgment not verified.",
+      "Court-authored slip opinion is hosted by an amicus participant; mirror provenance must be retained.",
+      "Majority disposition and separate concurrence must remain distinct."
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "doc_id": "P11_MA_CELLA_IDENTITY",
+  "cases": [
+    "T5"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://www.mass.gov/doc/arcangelo-cella-et-al-v-andrea-joy-campbell-attorney-general-et-al-sjc-13893/download",
+  "title": "Official reservation/report WITHOUT DECISION (identity only); default Python User-Agent",
+  "user_agent": null,
+  "attempted_at": "2026-10-04T07:08:12.315037+00:00",
+  "status": "failed",
+  "request_headers": {
+    "Accept-Encoding": "identity"
+  },
+  "error": "HTTP Error 404: Not Found"
+}

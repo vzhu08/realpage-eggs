@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_CA_AB325_HISTORY",
+  "cases": [
+    "T1"
+  ],
+  "jurisdictions": [
+    "CA"
+  ],
+  "url": "https://leginfo.legislature.ca.gov/faces/billHistoryClient.xhtml?bill_id=202520260AB325",
+  "title": "AB325 history",
+  "related_existing_id": "D022",
+  "attempted_at": "2026-10-04T07:05:03.812367+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://leginfo.legislature.ca.gov/faces/billHistoryClient.xhtml?bill_id=202520260AB325",
+  "retrieved_at": "2026-10-04T07:05:04.181297+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8",
+    "Date": "Sun, 04 Oct 2026 07:05:04 GMT"
+  },
+  "raw_path": "raw/P11_CA_AB325_HISTORY.html",
+  "raw_sha256": "8732bd97d19cc890adfbe55cef22d77e4743124330ca0cfe14a19d9ddbd645ad",
+  "raw_bytes": 69035,
+  "text_path": "text/P11_CA_AB325_HISTORY.txt",
+  "text_sha256": "b89c2fcdb90580c9b9016017b222f9261ebaa82bcaaad631364bbfb4b009f6ee",
+  "text_characters": 3218,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

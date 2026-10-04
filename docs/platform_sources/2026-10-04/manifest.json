@@ -1,0 +1,1016 @@
+{
+  "label": "SUPPLEMENTARY_SOURCE_ACQUISITION_CORE_REVIEW_PENDING",
+  "base_commit": "445102a0b0f306f51feae94e1ac3207f025b8a92",
+  "capture_date_utc": "2026-10-04",
+  "original_stores_modified": false,
+  "captured_documents": 21,
+  "failed_attempts": 5,
+  "hash_semantics": "Raw hashes identify response bodies; SourceDocument.sha256 identifies separately derived UTF-8 text.",
+  "records": [
+    {
+      "doc_id": "P11_CA_AB325_HISTORY",
+      "cases": [
+        "T1"
+      ],
+      "jurisdictions": [
+        "CA"
+      ],
+      "url": "https://leginfo.legislature.ca.gov/faces/billHistoryClient.xhtml?bill_id=202520260AB325",
+      "title": "AB325 history",
+      "related_existing_id": "D022",
+      "attempted_at": "2026-10-04T07:05:03.812367+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://leginfo.legislature.ca.gov/faces/billHistoryClient.xhtml?bill_id=202520260AB325",
+      "retrieved_at": "2026-10-04T07:05:04.181297+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Date": "Sun, 04 Oct 2026 07:05:04 GMT"
+      },
+      "raw_path": "raw/P11_CA_AB325_HISTORY.html",
+      "raw_sha256": "8732bd97d19cc890adfbe55cef22d77e4743124330ca0cfe14a19d9ddbd645ad",
+      "raw_bytes": 69035,
+      "text_path": "text/P11_CA_AB325_HISTORY.txt",
+      "text_sha256": "b89c2fcdb90580c9b9016017b222f9261ebaa82bcaaad631364bbfb4b009f6ee",
+      "text_characters": 3218,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "AB325 legislative history",
+        "checks": [
+          "Approval/chaptering and passage history present."
+        ],
+        "caveats": [
+          "Flattened table preserves date/action order; version selector dates are distinct from history events."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "cases": [
+        "T1"
+      ],
+      "jurisdictions": [
+        "CA"
+      ],
+      "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB325",
+      "title": "AB325 chaptered text",
+      "related_existing_id": "D022",
+      "attempted_at": "2026-10-04T07:05:03.339158+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB325",
+      "retrieved_at": "2026-10-04T07:05:03.801231+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Date": "Sun, 04 Oct 2026 07:05:04 GMT"
+      },
+      "raw_path": "raw/P11_CA_AB325_TEXT.html",
+      "raw_sha256": "cee911155967ad2fbe28dab9acdb91cfb2b22b00a4889a77b3579ad0332b5288",
+      "raw_bytes": 84118,
+      "text_path": "text/P11_CA_AB325_TEXT.txt",
+      "text_sha256": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "text_characters": 6434,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "Chaptered AB325 text",
+        "checks": [
+          "Chapter 338; approval/filing October 6, 2025; complete sections 16729 and 16756.1."
+        ],
+        "caveats": [
+          "Chaptering is not itself effectiveness; see the separate code annotations."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_CA_BPC_ART1",
+      "cases": [
+        "T1"
+      ],
+      "jurisdictions": [
+        "CA"
+      ],
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=1.",
+      "title": "BPC Article 1 including 16702",
+      "related_existing_id": "D022",
+      "attempted_at": "2026-10-04T07:05:04.190273+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=1.",
+      "retrieved_at": "2026-10-04T07:05:04.743441+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Date": "Sun, 04 Oct 2026 07:05:05 GMT"
+      },
+      "raw_path": "raw/P11_CA_BPC_ART1.html",
+      "raw_sha256": "ad2c110c83c1defb0528493ef15e1eab759cea215f8aeddd59bf9b79ae8af91f",
+      "raw_bytes": 132160,
+      "text_path": "text/P11_CA_BPC_ART1.txt",
+      "text_sha256": "2384f2fc2d33b25366bafec58796c99e9abd411446bd61a15ecaea2067329bf5",
+      "text_characters": 2435,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "Incorporated definition",
+        "checks": [
+          "BPC16702 present in full article."
+        ],
+        "caveats": [
+          "Current consolidated article includes neighboring provisions and older amendment dates."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_CA_BPC_ART2",
+      "cases": [
+        "T1"
+      ],
+      "jurisdictions": [
+        "CA"
+      ],
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=2.",
+      "title": "BPC Article 2 including 16729 and date annotation",
+      "related_existing_id": "D022",
+      "attempted_at": "2026-10-04T07:05:04.762681+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=2.",
+      "retrieved_at": "2026-10-04T07:05:05.248997+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Date": "Sun, 04 Oct 2026 07:05:05 GMT"
+      },
+      "raw_path": "raw/P11_CA_BPC_ART2.html",
+      "raw_sha256": "fe376081059f58ce36c12bd4b8062ed0e2a9cc5da7450b23ac080f5a851ae7f0",
+      "raw_bytes": 146907,
+      "text_path": "text/P11_CA_BPC_ART2.txt",
+      "text_sha256": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "text_characters": 12247,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "AB325 code and effective-date annotation",
+        "checks": [
+          "BPC16729 and annotation linking AB325 to January 1, 2026 present."
+        ],
+        "caveats": [
+          "Effective-date annotation does not determine provision-specific application."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_CA_BPC_ART3",
+      "cases": [
+        "T1"
+      ],
+      "jurisdictions": [
+        "CA"
+      ],
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=3.",
+      "title": "BPC Article 3 and SB763/AB325 date annotations",
+      "related_existing_id": null,
+      "attempted_at": "2026-10-04T07:05:06.231259+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=3.",
+      "retrieved_at": "2026-10-04T07:05:06.791726+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Date": "Sun, 04 Oct 2026 07:05:07 GMT"
+      },
+      "raw_path": "raw/P11_CA_BPC_ART3.html",
+      "raw_sha256": "2a5746bc2b0d69caf73647df2fcf7435b891a12e45b2b6c9e22b71b185c8f247",
+      "raw_bytes": 169823,
+      "text_path": "text/P11_CA_BPC_ART3.txt",
+      "text_sha256": "38bd66c93d6363c00b125620c79e8e967aa7a1f56da16f9ea9769525e63de04a",
+      "text_characters": 30918,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "SB763 and AB325 codified provisions",
+        "checks": [
+          "SB763 sections and AB32516756.1 with January 1, 2026 annotations present."
+        ],
+        "caveats": [
+          "Broader article includes older sections with different dates; do not apply one date to all sections."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_CA_CONS_ART4",
+      "cases": [
+        "T1"
+      ],
+      "jurisdictions": [
+        "CA"
+      ],
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&article=IV",
+      "title": "California Constitution Article IV",
+      "related_existing_id": null,
+      "attempted_at": "2026-10-04T07:05:06.802727+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&article=IV",
+      "retrieved_at": "2026-10-04T07:05:07.260959+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Date": "Sun, 04 Oct 2026 07:05:07 GMT"
+      },
+      "raw_path": "raw/P11_CA_CONS_ART4.html",
+      "raw_sha256": "0bee76e543b7f308daa721660d6ea772c884ba8ddc44bce404cffead16680700",
+      "raw_bytes": 184257,
+      "text_path": "text/P11_CA_CONS_ART4.txt",
+      "text_sha256": "fc5cd24041f3ab6bf8b5d7bf8c54d8ac3b8743d8e71798211b1468e8ea489661",
+      "text_characters": 39965,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "General effective-date authority",
+        "checks": [
+          "Article IV section8(c) and urgency exceptions present."
+        ],
+        "caveats": [
+          "Conditional general provisions; Core must assess applicability."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_CA_SB763_HISTORY",
+      "cases": [
+        "T1"
+      ],
+      "jurisdictions": [
+        "CA"
+      ],
+      "url": "https://leginfo.legislature.ca.gov/faces/billHistoryClient.xhtml?bill_id=202520260SB763",
+      "title": "SB763 history",
+      "related_existing_id": null,
+      "attempted_at": "2026-10-04T07:05:05.725759+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://leginfo.legislature.ca.gov/faces/billHistoryClient.xhtml?bill_id=202520260SB763",
+      "retrieved_at": "2026-10-04T07:05:06.224268+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Date": "Sun, 04 Oct 2026 07:05:06 GMT"
+      },
+      "raw_path": "raw/P11_CA_SB763_HISTORY.html",
+      "raw_sha256": "9fd7bc7abc918999cc7ace05c93f613a4bd8f25e6573bb6eb0a12e5cfbc232e0",
+      "raw_bytes": 67414,
+      "text_path": "text/P11_CA_SB763_HISTORY.txt",
+      "text_sha256": "d5760b35751b382bba28102d11d7d4ac6baf07ec64f018268a0f108a4ad11c53",
+      "text_characters": 2760,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "SB763 legislative history",
+        "checks": [
+          "October 6, 2025 approval/chaptering and earlier actions present."
+        ],
+        "caveats": [
+          "Version selector publication dates are not enactment/effective dates."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "cases": [
+        "T1"
+      ],
+      "jurisdictions": [
+        "CA"
+      ],
+      "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB763",
+      "title": "SB763 chaptered text",
+      "related_existing_id": null,
+      "attempted_at": "2026-10-04T07:05:05.264998+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB763",
+      "retrieved_at": "2026-10-04T07:05:05.716755+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Date": "Sun, 04 Oct 2026 07:05:06 GMT"
+      },
+      "raw_path": "raw/P11_CA_SB763_TEXT.html",
+      "raw_sha256": "0ca3015a8a48ede7edfe6cd84e2cb43213204aa8decf1ff468f609327a56994a",
+      "raw_bytes": 86685,
+      "text_path": "text/P11_CA_SB763_TEXT.txt",
+      "text_sha256": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "text_characters": 7602,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "Actual chaptered SB763",
+        "checks": [
+          "Chapter 426; complete amended16755 and added16755.1/16762."
+        ],
+        "caveats": [
+          "Digest includes prior-law summaries; distinguish enacted sections from digest."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_MA_CELLA_IDENTITY",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.mass.gov/doc/arcangelo-cella-et-al-v-andrea-joy-campbell-attorney-general-et-al-sjc-13893/download",
+      "title": "Official reservation/report WITHOUT DECISION (identity only); default Python User-Agent",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:08:12.315037+00:00",
+      "status": "failed",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.uschamber.com/assets/documents/Opinion-Cella-v.-Campbell-Mass.pdf",
+      "title": "SJC-13893 court-authored slip opinion on amicus participant mirror",
+      "user_agent": "Mozilla/5.0",
+      "authority": "court_authored_third_party_mirror",
+      "attempted_at": "2026-10-04T07:07:27.253683+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "request_headers": {
+        "Accept-Encoding": "identity",
+        "User-Agent": "Mozilla/5.0"
+      },
+      "http_status": 200,
+      "final_url": "https://www.uschamber.com/assets/documents/Opinion-Cella-v.-Campbell-Mass.pdf",
+      "retrieved_at": "2026-10-04T07:07:27.482921+00:00",
+      "headers": {
+        "Content-Type": "application/pdf",
+        "Last-Modified": "Tue, 23 Jun 2026 20:42:30 GMT",
+        "ETag": "\"1008cb21153ec6639b22a37d058a010c\"",
+        "Date": "Sun, 04 Oct 2026 07:07:28 GMT"
+      },
+      "raw_path": "raw/P11_MA_CELLA_OPINION_MIRROR.pdf",
+      "raw_sha256": "6bc6f2e3e10be5e4c4dc39edbc8bc53798ab41714182969fff6e329ee0a030ef",
+      "raw_bytes": 159822,
+      "text_path": "text/P11_MA_CELLA_OPINION_MIRROR.txt",
+      "text_sha256": "378a2c17f7280575937c072bbaaafcb83b713b204ffec1e6c1bcc686eb9baff4",
+      "text_characters": 42199,
+      "derivation": {
+        "method": "pypdf.PdfReader.extract_text",
+        "version": "6.10.0",
+        "pages": 27
+      },
+      "content_review": {
+        "role": "Court-authored disposition, third-party mirror",
+        "checks": [
+          "SJC-13893; June23,2026; majority disposition p16, separate concurrence begins p17. Pages1,2,16,17 visually checked."
+        ],
+        "caveats": [
+          "Hosted by amicus participant US Chamber, not official court; official-hosted opinion/docket and final county judgment not verified.",
+          "Slip opinion subject to revision; majority and concurrence must remain distinct.",
+          "The opinion does not address all alternative challenges (footnote6)."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_MA_CELLA_REPORT",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.mass.gov/doc/arcangelo-cella-et-al-v-andrea-joy-campbell-attorney-general-et-al-sjc-13893/download",
+      "title": "Official reservation/report WITHOUT DECISION (identity only)",
+      "attempted_at": "2026-10-04T07:07:27.943135+00:00",
+      "status": "failed",
+      "request_headers": {
+        "Accept-Encoding": "identity",
+        "User-Agent": "Mozilla/5.0 (official document research)"
+      },
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "doc_id": "P11_MA_H5008",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/H5008.pdf",
+      "title": "H5008 petition and official certification/transmission",
+      "attempted_at": "2026-10-04T07:07:26.177947+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "request_headers": {
+        "Accept-Encoding": "identity",
+        "User-Agent": "Mozilla/5.0 (official document research)"
+      },
+      "http_status": 200,
+      "final_url": "https://malegislature.gov/Bills/194/H5008.pdf",
+      "retrieved_at": "2026-10-04T07:07:27.182317+00:00",
+      "headers": {
+        "Content-Type": "application/pdf",
+        "Date": "Sun, 04 Oct 2026 07:07:27 GMT"
+      },
+      "raw_path": "raw/P11_MA_H5008.pdf",
+      "raw_sha256": "277e0e09f2180dc2d3a2881081019347b0b672a496a830bcd24459ab94ceb193",
+      "raw_bytes": 2453485,
+      "text_path": "text/P11_MA_H5008.txt",
+      "text_sha256": "1436cfb89c41b875f5cb69cf52685a723a44671cedc508b3dc6225c9e93b42f5",
+      "text_characters": 7510,
+      "derivation": {
+        "method": "pypdf.PdfReader.extract_text",
+        "version": "6.10.0",
+        "pages": 7
+      },
+      "content_review": {
+        "role": "Official petition legislative transmission",
+        "checks": [
+          "Seven pages include petition, January7,2026 transmittal and September3,2025 certification. Pages6-7 visually checked and text complete."
+        ],
+        "caveats": [
+          "Prior certification/transmission is not proof of current ballot eligibility."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_MA_H5222_STATUS",
+      "cases": [
+        "T4"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/H5222",
+      "title": "H5222 current landing/history",
+      "related_existing_id": "D045",
+      "attempted_at": "2026-10-04T07:06:38.721283+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://malegislature.gov/Bills/194/H5222",
+      "retrieved_at": "2026-10-04T07:06:40.919682+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Sun, 04 Oct 2026 07:06:41 GMT"
+      },
+      "raw_path": "raw/P11_MA_H5222_STATUS.html",
+      "raw_sha256": "6b4eadfd6a7598bf2d970fd59619512f7380f6d3be5416de3c14a33e5137a6f6",
+      "raw_bytes": 85910,
+      "text_path": "text/P11_MA_H5222_STATUS.txt",
+      "text_sha256": "6ad96053828823b69a204d8af97116a768766526378ee46982e66928630543c2",
+      "text_characters": 5843,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "H5222 observed status/history",
+        "checks": [
+          "Three March12,2026 actions; House Ways and Means referral last listed."
+        ],
+        "caveats": [
+          "Observed October4,2026; do not backdate retrieval or infer historical status solely from current absence of later actions."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "cases": [
+        "T4"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/H5222/House/Bill/Text",
+      "title": "H5222 substantive bill text",
+      "related_existing_id": "D045",
+      "attempted_at": "2026-10-04T07:06:38.086590+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://malegislature.gov/Bills/194/H5222/House/Bill/Text",
+      "retrieved_at": "2026-10-04T07:06:38.713282+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Sun, 04 Oct 2026 07:06:39 GMT"
+      },
+      "raw_path": "raw/P11_MA_H5222_TEXT.html",
+      "raw_sha256": "48e2426130b3a258f1d05d1a0aa62255f21b0dc3c07f40f092c9d70af07ed832",
+      "raw_bytes": 9286,
+      "text_path": "text/P11_MA_H5222_TEXT.txt",
+      "text_sha256": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "text_characters": 5074,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "H5222 substantive pending proposal text",
+        "checks": [
+          "Definitions, exclusions, prohibited conduct and remedies present."
+        ],
+        "caveats": [
+          "Proposal text, not enactment evidence."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_MA_IP25_21",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+      "title": "Original IP25-21 petition",
+      "attempted_at": "2026-10-04T07:07:26.085400+00:00",
+      "status": "failed",
+      "request_headers": {
+        "Accept-Encoding": "identity",
+        "User-Agent": "Mozilla/5.0 (official document research)"
+      },
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "cases": [
+        "T5"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+      "title": "Original IP25-21 petition; retry with default Python User-Agent",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:08:11.831422+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "http_status": 200,
+      "final_url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+      "retrieved_at": "2026-10-04T07:08:11.983868+00:00",
+      "headers": {
+        "Content-Type": "application/pdf",
+        "Last-Modified": "Wed, 06 Aug 2025 17:17:43 GMT",
+        "ETag": "\"Zy7stfkFKzb2vk2SmvPobA==\"",
+        "Date": "Sun, 04 Oct 2026 07:08:12 GMT"
+      },
+      "raw_path": "raw/P11_MA_IP25_21_ORIGINAL.pdf",
+      "raw_sha256": "11c071b03ff75eaa54d3e2f66092915a2d053d860e2a4ffa4db46c5d8d21ac60",
+      "raw_bytes": 423741,
+      "text_path": "text/P11_MA_IP25_21_ORIGINAL.txt",
+      "text_sha256": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "text_characters": 3313,
+      "derivation": {
+        "method": "pypdf.PdfReader.extract_text",
+        "version": "6.10.0",
+        "pages": 2
+      },
+      "content_review": {
+        "role": "Original IP25-21 petition",
+        "checks": [
+          "Two-page official petition; source hash independently reproduced."
+        ],
+        "caveats": [
+          "Petition text does not establish later failure."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_MA_S2983_STATUS",
+      "cases": [
+        "T4"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/S2983",
+      "title": "S2983 current landing/history",
+      "related_existing_id": "D046",
+      "attempted_at": "2026-10-04T07:06:41.724882+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://malegislature.gov/Bills/194/S2983",
+      "retrieved_at": "2026-10-04T07:06:43.402125+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Sun, 04 Oct 2026 07:06:43 GMT"
+      },
+      "raw_path": "raw/P11_MA_S2983_STATUS.html",
+      "raw_sha256": "b31aa32381547a01b38cf38f8e024537f952da2f72173fcae1e27242615ebc01",
+      "raw_bytes": 86331,
+      "text_path": "text/P11_MA_S2983_STATUS.txt",
+      "text_sha256": "9ac8888c7d059eebd0d1bbbf36745987213cd5ab20ab9e6368480f55c270805f",
+      "text_characters": 6292,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "S2983 observed status/history",
+        "checks": [
+          "Three March12,2026 actions; Senate Ways and Means referral last listed."
+        ],
+        "caveats": [
+          "Observed October4,2026; no enacted status inferred."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "cases": [
+        "T4"
+      ],
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/S2983/Senate/Bill/Text",
+      "title": "S2983 substantive bill text",
+      "related_existing_id": "D046",
+      "attempted_at": "2026-10-04T07:06:40.940220+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://malegislature.gov/Bills/194/S2983/Senate/Bill/Text",
+      "retrieved_at": "2026-10-04T07:06:41.719883+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Sun, 04 Oct 2026 07:06:42 GMT"
+      },
+      "raw_path": "raw/P11_MA_S2983_TEXT.html",
+      "raw_sha256": "021f5871ad83a37ceeca4e6cfb00144444d08e8cc9e0a95e2d4a64e188011646",
+      "raw_bytes": 7015,
+      "text_path": "text/P11_MA_S2983_TEXT.txt",
+      "text_sha256": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "text_characters": 4633,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "S2983 substantive pending proposal text",
+        "checks": [
+          "Definitions, exclusions, prohibition and remedies present."
+        ],
+        "caveats": [
+          "Proposal text, not enactment evidence."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_NJ_HOB_ADOPTION",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "Hoboken, NJ"
+      ],
+      "url": "https://www.hobokennj.gov/news/city-of-hoboken-outlaws-algorithmic-rent-fixing",
+      "title": "Hoboken official adoption announcement",
+      "related_existing_id": null,
+      "attempted_at": "2026-10-04T07:06:37.941893+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://www.hobokennj.gov/news/city-of-hoboken-outlaws-algorithmic-rent-fixing",
+      "retrieved_at": "2026-10-04T07:06:38.075589+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Last-Modified": "Sun, 04 Oct 2026 07:06:38 GMT",
+        "Date": "Sun, 04 Oct 2026 07:06:38 GMT"
+      },
+      "raw_path": "raw/P11_NJ_HOB_ADOPTION.html",
+      "raw_sha256": "0797da1e99249cab6d61c4c23f03df70c3a2dec52e6700b4b37e2c1d6eaea33a",
+      "raw_bytes": 31963,
+      "text_path": "text/P11_NJ_HOB_ADOPTION.txt",
+      "text_sha256": "7dc23b6b5348a62eb091e24a1bc7a9a638fb2aeab256d4ea5b945ff5917a1af4",
+      "text_characters": 4434,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "Official Hoboken adoption announcement",
+        "checks": [
+          "City announcement dated July10,2025 links ordinance and reports July9 adoption."
+        ],
+        "caveats": [
+          "Announcement does not establish statutory publication."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_NJ_HOB_B781_HTML",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "Hoboken, NJ"
+      ],
+      "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+      "title": "Hoboken B-781 legislative record; retry with default Python UA",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:07:19.824082+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "http_status": 200,
+      "final_url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+      "retrieved_at": "2026-10-04T07:07:20.554550+00:00",
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Sun, 04 Oct 2026 07:07:20 GMT"
+      },
+      "raw_path": "raw/P11_NJ_HOB_B781_HTML.html",
+      "raw_sha256": "8a01d62742ab1dea547487e55f05ba37d5cea0ffbd2ab24beb2a209ecb7c6097",
+      "raw_bytes": 40017,
+      "text_path": "text/P11_NJ_HOB_B781_HTML.txt",
+      "text_sha256": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+      "text_characters": 5895,
+      "derivation": {
+        "method": "capture.py VisibleText HTMLParser",
+        "charset": "utf-8"
+      },
+      "content_review": {
+        "role": "Official Hoboken legislative record",
+        "checks": [
+          "Full ordinance, June4 amendment history, June16 tabling, July9 adoption record present."
+        ],
+        "caveats": [
+          "Title identifies158-2; body154-8. Preserve discrepancy.",
+          "Meeting history entries labeled Draft; not certified minutes.",
+          "Effective clause depends on passage and publication; publication date not acquired."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_NJ_HOB_B781_PDF",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "Hoboken, NJ"
+      ],
+      "url": "https://hobokennj.iqm2.com/Citizens/FileOpen.aspx?Type=30&ID=69209",
+      "title": "Hoboken B-781 legislative record PDF printout",
+      "related_existing_id": null,
+      "attempted_at": "2026-10-04T07:05:52.858165+00:00",
+      "status": "failed",
+      "error": "The read operation timed out"
+    },
+    {
+      "doc_id": "P11_NJ_HOB_B781_RECORD",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "Hoboken, NJ"
+      ],
+      "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+      "title": "Hoboken B-781 legislative record",
+      "related_existing_id": null,
+      "attempted_at": "2026-10-04T07:05:07.784720+00:00",
+      "status": "failed",
+      "error": "The read operation timed out"
+    },
+    {
+      "doc_id": "P11_NJ_HOB_MINUTES",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "Hoboken, NJ"
+      ],
+      "url": "https://hobokennj.iqm2.com/Citizens/FileOpen.aspx?Type=12&ID=2206&Inline=True",
+      "title": "Hoboken July 9, 2025 minutes, B-781 at pp10-12",
+      "user_agent": null,
+      "attempted_at": "2026-10-04T07:07:20.574352+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "request_headers": {
+        "Accept-Encoding": "identity"
+      },
+      "http_status": 200,
+      "final_url": "https://hobokennj.iqm2.com/Citizens/FileOpen.aspx?Type=12&ID=2206&Inline=True",
+      "retrieved_at": "2026-10-04T07:07:21.150134+00:00",
+      "headers": {
+        "Content-Type": "application/pdf",
+        "Last-Modified": "Thu, 04 Sep 2025 13:04:59 GMT",
+        "Date": "Sun, 04 Oct 2026 07:07:21 GMT"
+      },
+      "raw_path": "raw/P11_NJ_HOB_MINUTES.pdf",
+      "raw_sha256": "903bcc915ed54420f7a9a31831acb25336c77aeaeac06e22bd305093c2535943",
+      "raw_bytes": 1135382,
+      "text_path": "text/P11_NJ_HOB_MINUTES.txt",
+      "text_sha256": "cff215dc6e06b784e8efa305937f1fbffb358257f0bf8bd26ce1e583631499f5",
+      "text_characters": 268053,
+      "derivation": {
+        "method": "pypdf.PdfReader.extract_text",
+        "version": "6.10.0",
+        "pages": 130
+      },
+      "content_review": {
+        "role": "Official Hoboken minutes recording adoption",
+        "checks": [
+          "B-781 appears pp10-12; p12 adoption and effective clause visually checked."
+        ],
+        "caveats": [
+          "130-page minutes include unrelated business; target B-781 pp10-12 only.",
+          "Minutes approval/certification not verified; signature fields blank.",
+          "Title158-2/body154-8 discrepancy and publication-dependent date retained."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_NJ_JC_25_057",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "Jersey City, NJ"
+      ],
+      "url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+      "title": "Jersey City Ordinance 25-057 with vote record",
+      "related_existing_id": null,
+      "attempted_at": "2026-10-04T07:05:07.272937+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "http_status": 200,
+      "final_url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+      "retrieved_at": "2026-10-04T07:05:07.440231+00:00",
+      "headers": {
+        "Content-Type": "application/pdf",
+        "Last-Modified": "Tue, 27 May 2025 20:35:57",
+        "Date": "Sun, 04 Oct 2026 07:05:08 GMT"
+      },
+      "raw_path": "raw/P11_NJ_JC_25_057.pdf",
+      "raw_sha256": "f8ebbec4d617326b85dee29ced0dec2667fce8735095d5977365000476e1a272",
+      "raw_bytes": 222497,
+      "text_path": "text/P11_NJ_JC_25_057.txt",
+      "text_sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+      "text_characters": 11750,
+      "derivation": {
+        "method": "pypdf.PdfReader.extract_text",
+        "version": "6.10.0",
+        "pages": 5
+      },
+      "content_review": {
+        "role": "Adopted Jersey City original ordinance",
+        "checks": [
+          "Five pages; visual check pp1,2,4; May21,2025 final adoption and May22 mayor approval recorded."
+        ],
+        "caveats": [
+          "REDLINE PDF: derivative text contains deleted and inserted language together. Review original PDF before extraction.",
+          "Body labels Chapter218 inconsistently as Fees and Charges.",
+          "No explicit effective-date clause found; exact operative date and publication remain unverified."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_NJ_JC_25_098",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "Jersey City, NJ"
+      ],
+      "url": "https://cityofjerseycity.civicweb.net/document/436629/Ordinance%20Amending%20Chapter%20218%20Section%2012.pdf",
+      "title": "Jersey City 25-098 subsequent amendment",
+      "attempted_at": "2026-10-04T07:07:25.410928+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "request_headers": {
+        "Accept-Encoding": "identity",
+        "User-Agent": "Mozilla/5.0 (official document research)"
+      },
+      "http_status": 200,
+      "final_url": "https://cityofjerseycity.civicweb.net/document/436629/Ordinance%20Amending%20Chapter%20218%20Section%2012.pdf",
+      "retrieved_at": "2026-10-04T07:07:25.573673+00:00",
+      "headers": {
+        "Content-Type": "application/pdf",
+        "Last-Modified": "Thu, 25 Sep 2025 14:34:54",
+        "Date": "Sun, 04 Oct 2026 07:07:26 GMT"
+      },
+      "raw_path": "raw/P11_NJ_JC_25_098.pdf",
+      "raw_sha256": "37e9bbb0ca07f50e1d969b47d86e0f6976838ac7397dc60d31db5b1a902581ae",
+      "raw_bytes": 181739,
+      "text_path": "text/P11_NJ_JC_25_098.txt",
+      "text_sha256": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+      "text_characters": 7296,
+      "derivation": {
+        "method": "pypdf.PdfReader.extract_text",
+        "version": "6.10.0",
+        "pages": 4
+      },
+      "content_review": {
+        "role": "Jersey City subsequent amendment",
+        "checks": [
+          "Mandatory disclosure subsection, enforcement/severability renumbering; September24,2025 final adoption and September25 mayor approval present."
+        ],
+        "caveats": [
+          "REDLINE PDF requires original visual review; flattened numbering is ambiguous.",
+          "Separate change to218-1 security requirements is not an algorithm-definition change.",
+          "No explicit effective-date clause found; publication and exact operative date remain unverified."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    },
+    {
+      "doc_id": "P11_NJ_JC_25_105",
+      "cases": [
+        "T2",
+        "T3"
+      ],
+      "jurisdictions": [
+        "Jersey City, NJ"
+      ],
+      "url": "https://cityofjerseycity.civicweb.net/document/437598/Ordinance%20Amending%20Chapter%201,%20Chapters%20218,%20254.pdf",
+      "title": "Jersey City 25-105 penalties amendment; relevance requires Core review",
+      "attempted_at": "2026-10-04T07:07:25.713578+00:00",
+      "status": "captured_agent_checked_core_review_pending",
+      "request_headers": {
+        "Accept-Encoding": "identity",
+        "User-Agent": "Mozilla/5.0 (official document research)"
+      },
+      "http_status": 200,
+      "final_url": "https://cityofjerseycity.civicweb.net/document/437598/Ordinance%20Amending%20Chapter%201,%20Chapters%20218,%20254.pdf",
+      "retrieved_at": "2026-10-04T07:07:25.892116+00:00",
+      "headers": {
+        "Content-Type": "application/pdf",
+        "Last-Modified": "Fri, 13 Feb 2026 22:43:00",
+        "Date": "Sun, 04 Oct 2026 07:07:26 GMT"
+      },
+      "raw_path": "raw/P11_NJ_JC_25_105.pdf",
+      "raw_sha256": "8154a07c399971db35e3fe32f09b168d1ed4379b51f86f21ea3278b3936e596e",
+      "raw_bytes": 191467,
+      "text_path": "text/P11_NJ_JC_25_105.txt",
+      "text_sha256": "d4b6c44f558164f2e16bc731cf3dae6b1b7c082c410a7335596b314b0da50b4a",
+      "text_characters": 11539,
+      "derivation": {
+        "method": "pypdf.PdfReader.extract_text",
+        "version": "6.10.0",
+        "pages": 5
+      },
+      "content_review": {
+        "role": "Jersey City general penalties amendment",
+        "checks": [
+          "October8,2025 final adoption/October9 mayor approval recorded; general1-25 penalty clause present."
+        ],
+        "caveats": [
+          "REDLINE PDF requires original visual review.",
+          "Changes1-25 referenced by25-057; does not explicitly amend218-12. Other housing penalties must not automatically be assigned to algorithm rule.",
+          "Vote page has inconsistent roster/tally details; do not reconcile silently.",
+          "Exact effective/publication date and later amendment completeness unverified."
+        ],
+        "review_type": "agent source-content and integrity check; not independent legal review"
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "doc_id": "P11_NJ_HOB_B781_HTML",
+  "cases": [
+    "T2",
+    "T3"
+  ],
+  "jurisdictions": [
+    "Hoboken, NJ"
+  ],
+  "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+  "title": "Hoboken B-781 legislative record; retry with default Python UA",
+  "user_agent": null,
+  "attempted_at": "2026-10-04T07:07:19.824082+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity"
+  },
+  "http_status": 200,
+  "final_url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+  "retrieved_at": "2026-10-04T07:07:20.554550+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Date": "Sun, 04 Oct 2026 07:07:20 GMT"
+  },
+  "raw_path": "raw/P11_NJ_HOB_B781_HTML.html",
+  "raw_sha256": "8a01d62742ab1dea547487e55f05ba37d5cea0ffbd2ab24beb2a209ecb7c6097",
+  "raw_bytes": 40017,
+  "text_path": "text/P11_NJ_HOB_B781_HTML.txt",
+  "text_sha256": "f3316be812ddc9e26641a1adc0787ef39dce5c63d9cfa01054f5a4e0ce3637b5",
+  "text_characters": 5895,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

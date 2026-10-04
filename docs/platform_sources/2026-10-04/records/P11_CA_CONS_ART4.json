@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_CA_CONS_ART4",
+  "cases": [
+    "T1"
+  ],
+  "jurisdictions": [
+    "CA"
+  ],
+  "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&article=IV",
+  "title": "California Constitution Article IV",
+  "related_existing_id": null,
+  "attempted_at": "2026-10-04T07:05:06.802727+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&article=IV",
+  "retrieved_at": "2026-10-04T07:05:07.260959+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8",
+    "Date": "Sun, 04 Oct 2026 07:05:07 GMT"
+  },
+  "raw_path": "raw/P11_CA_CONS_ART4.html",
+  "raw_sha256": "0bee76e543b7f308daa721660d6ea772c884ba8ddc44bce404cffead16680700",
+  "raw_bytes": 184257,
+  "text_path": "text/P11_CA_CONS_ART4.txt",
+  "text_sha256": "fc5cd24041f3ab6bf8b5d7bf8c54d8ac3b8743d8e71798211b1468e8ea489661",
+  "text_characters": 39965,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

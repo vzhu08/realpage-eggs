@@ -1,0 +1,16 @@
+{
+  "doc_id": "P11_NJ_HOB_B781_RECORD",
+  "cases": [
+    "T2",
+    "T3"
+  ],
+  "jurisdictions": [
+    "Hoboken, NJ"
+  ],
+  "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+  "title": "Hoboken B-781 legislative record",
+  "related_existing_id": null,
+  "attempted_at": "2026-10-04T07:05:07.784720+00:00",
+  "status": "failed",
+  "error": "The read operation timed out"
+}

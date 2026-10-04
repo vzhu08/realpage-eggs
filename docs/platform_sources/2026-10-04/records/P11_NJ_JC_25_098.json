@@ -1,0 +1,37 @@
+{
+  "doc_id": "P11_NJ_JC_25_098",
+  "cases": [
+    "T2",
+    "T3"
+  ],
+  "jurisdictions": [
+    "Jersey City, NJ"
+  ],
+  "url": "https://cityofjerseycity.civicweb.net/document/436629/Ordinance%20Amending%20Chapter%20218%20Section%2012.pdf",
+  "title": "Jersey City 25-098 subsequent amendment",
+  "attempted_at": "2026-10-04T07:07:25.410928+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity",
+    "User-Agent": "Mozilla/5.0 (official document research)"
+  },
+  "http_status": 200,
+  "final_url": "https://cityofjerseycity.civicweb.net/document/436629/Ordinance%20Amending%20Chapter%20218%20Section%2012.pdf",
+  "retrieved_at": "2026-10-04T07:07:25.573673+00:00",
+  "headers": {
+    "Content-Type": "application/pdf",
+    "Last-Modified": "Thu, 25 Sep 2025 14:34:54",
+    "Date": "Sun, 04 Oct 2026 07:07:26 GMT"
+  },
+  "raw_path": "raw/P11_NJ_JC_25_098.pdf",
+  "raw_sha256": "37e9bbb0ca07f50e1d969b47d86e0f6976838ac7397dc60d31db5b1a902581ae",
+  "raw_bytes": 181739,
+  "text_path": "text/P11_NJ_JC_25_098.txt",
+  "text_sha256": "d97d04b52cb030071adb8cdb805f90d4cc4bec05eba4c35aad7beaba7060a768",
+  "text_characters": 7296,
+  "derivation": {
+    "method": "pypdf.PdfReader.extract_text",
+    "version": "6.10.0",
+    "pages": 4
+  }
+}

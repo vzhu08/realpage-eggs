@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_CA_BPC_ART1",
+  "cases": [
+    "T1"
+  ],
+  "jurisdictions": [
+    "CA"
+  ],
+  "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=1.",
+  "title": "BPC Article 1 including 16702",
+  "related_existing_id": "D022",
+  "attempted_at": "2026-10-04T07:05:04.190273+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=1.",
+  "retrieved_at": "2026-10-04T07:05:04.743441+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8",
+    "Date": "Sun, 04 Oct 2026 07:05:05 GMT"
+  },
+  "raw_path": "raw/P11_CA_BPC_ART1.html",
+  "raw_sha256": "ad2c110c83c1defb0528493ef15e1eab759cea215f8aeddd59bf9b79ae8af91f",
+  "raw_bytes": 132160,
+  "text_path": "text/P11_CA_BPC_ART1.txt",
+  "text_sha256": "2384f2fc2d33b25366bafec58796c99e9abd411446bd61a15ecaea2067329bf5",
+  "text_characters": 2435,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

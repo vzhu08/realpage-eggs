@@ -1,0 +1,37 @@
+{
+  "doc_id": "P11_NJ_JC_25_105",
+  "cases": [
+    "T2",
+    "T3"
+  ],
+  "jurisdictions": [
+    "Jersey City, NJ"
+  ],
+  "url": "https://cityofjerseycity.civicweb.net/document/437598/Ordinance%20Amending%20Chapter%201,%20Chapters%20218,%20254.pdf",
+  "title": "Jersey City 25-105 penalties amendment; relevance requires Core review",
+  "attempted_at": "2026-10-04T07:07:25.713578+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity",
+    "User-Agent": "Mozilla/5.0 (official document research)"
+  },
+  "http_status": 200,
+  "final_url": "https://cityofjerseycity.civicweb.net/document/437598/Ordinance%20Amending%20Chapter%201,%20Chapters%20218,%20254.pdf",
+  "retrieved_at": "2026-10-04T07:07:25.892116+00:00",
+  "headers": {
+    "Content-Type": "application/pdf",
+    "Last-Modified": "Fri, 13 Feb 2026 22:43:00",
+    "Date": "Sun, 04 Oct 2026 07:07:26 GMT"
+  },
+  "raw_path": "raw/P11_NJ_JC_25_105.pdf",
+  "raw_sha256": "8154a07c399971db35e3fe32f09b168d1ed4379b51f86f21ea3278b3936e596e",
+  "raw_bytes": 191467,
+  "text_path": "text/P11_NJ_JC_25_105.txt",
+  "text_sha256": "d4b6c44f558164f2e16bc731cf3dae6b1b7c082c410a7335596b314b0da50b4a",
+  "text_characters": 11539,
+  "derivation": {
+    "method": "pypdf.PdfReader.extract_text",
+    "version": "6.10.0",
+    "pages": 5
+  }
+}

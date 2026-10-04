@@ -1,0 +1,16 @@
+{
+  "doc_id": "P11_NJ_HOB_B781_PDF",
+  "cases": [
+    "T2",
+    "T3"
+  ],
+  "jurisdictions": [
+    "Hoboken, NJ"
+  ],
+  "url": "https://hobokennj.iqm2.com/Citizens/FileOpen.aspx?Type=30&ID=69209",
+  "title": "Hoboken B-781 legislative record PDF printout",
+  "related_existing_id": null,
+  "attempted_at": "2026-10-04T07:05:52.858165+00:00",
+  "status": "failed",
+  "error": "The read operation timed out"
+}
