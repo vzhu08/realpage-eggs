@@ -5,7 +5,7 @@ import json
 from .fact_inputs import FACT_DEFINITIONS
 from .models import EncodedRuleRendering, Expression, Rule, date_bounds
 
-RENDERER_VERSION = "encoded-rule-v1"
+RENDERER_VERSION = "encoded-rule-v2"
 
 
 def _value(value):
@@ -44,7 +44,8 @@ def render_rule(rule: Rule) -> EncodedRuleRendering:
             operator = "strictly before (<)" if expr.op == "date_before" else "on or before (<=)"
             return f"{subject} {operator} {_date(str(expr.value))}"
         if expr.op == "age_at_least":
-            if int(expr.value) != expr.value or expr.value > 9998:
+            # Check the range before int(): the shared schema admits NaN/Infinity.
+            if not 0 <= expr.value <= 9998 or int(expr.value) != expr.value:
                 unresolved.append(path)
                 return f"UNSUPPORTED [{path}]: age_at_least {_value(expr.value)} cannot be evaluated as whole calendar years within supported dates"
             return f"{subject}: age >= {_value(expr.value)} whole calendar years on the query date (anniversary cutoff; February 29 clips to February 28 when needed)"

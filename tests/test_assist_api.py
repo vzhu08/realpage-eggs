@@ -6,6 +6,7 @@ from fastapi.testclient import TestClient
 from navigator.api import create_app
 from navigator.config import ROOT
 from navigator.models import QuestionPlan, Rule
+from navigator.rule_renderer import RENDERER_VERSION
 from navigator.store import read_json
 
 REQUEST = {"address_id": "SYNTH-003", "as_of": "2026-11-15"}
@@ -125,7 +126,7 @@ def test_real_core_questions_reproduce_through_http_without_persisting_probes(de
         assert body["capabilities"]["question_planner"] == "implemented"
         assert body["capabilities"]["rule_renderer"] == "implemented"
         assert body["lookup"]["evaluations"][0]["result"] == "unknown"
-        assert body["encoded_rules"][0]["renderer_version"] == "encoded-rule-v1"
+        assert body["encoded_rules"][0]["renderer_version"] == RENDERER_VERSION
         assert body["encoded_rules"][0]["rule_id"] == body["lookup"]["rules"][0]["team_rule_id"]
         question, = body["question_plan"]["questions"]
         assert question["fact"]["field"] == "units" and question["alternatives"]

@@ -20,6 +20,37 @@
 - Handoff: actual commit, paths, exact checks/results, remaining dependencies and whether combined integration ran.
 - Authority: local task commits; no push, merge, deployment, external messages or new agents implied.
 
+## Current Core B assignment — 2026-10-03
+
+This claim supersedes the unallocated status above for this isolated continuation.
+Oliver explicitly assigned this session to complete Core B while Claude owns the frontend.
+No claim is made that Vincent or Daniel separately recorded a release. Daniel's candidate
+and original author record below are preserved; his active checkout is untouched.
+
+- Human: Oliver. Sole writing agent: Codex /root, session `01a103bd-84d1-7c50-bd19-1fe9267bc139`.
+- Branch: `codex/core-b-navigation`.
+- Checkout: `/Users/oliverchen/Documents/random shi/realpage-eggs-core`.
+- Review base: local `1d34fad`, combining Core candidate `3cf0361` with Platform main `9a96fda`.
+- Scope: only the Core B paths listed above and `docs/core_navigation/**`.
+- Mutable data: temporary test directories; reserve ignored `data/core-b-session` if needed.
+- State: Review — locally complete; combined real-Core/Platform HTTP integration verified with TestClient.
+- No frontend, Core A runtime, shared contract, dependency or Platform runtime edits.
+- Local review commits only; no remote publication, deployment or teammate messages.
+
+### Core B completion evidence
+
+Implementation: `6326deb6e3f68f656e065f99758c74f899150053`.
+See [Core B handoff](../core_navigation/HANDOFF.md) for behavior, scope, provenance and integration dependencies.
+Both Core B test files: 51 passed. Full combined suite: 176 passed, 1 skipped
+(organizer pack unavailable); compile, disposable contract generation and diff checks passed.
+The actual planner and renderer were exercised through Platform's HTTP handlers,
+including answer/alternative reproduction and source comparison; no injected fixture services.
+Fixed 8-case comparison: 11 questions vs 14 ask-all, 0 unnecessary, 0 missed,
+0 incorrect certainty / 16 alternatives (6 certain). This is synthetic software evidence.
+Runtime versions: correlated-partitions-v2 and encoded-rule-v2. Shared contracts and
+Claude's frontend checkout remain untouched. Next: Platform integration review and
+shared example regeneration; remote main/deployment/frontend acceptance remain separate.
+
 ## Daniel author record — preserved from PR #3 head 3cf0361
 
 The following is Daniel's complete task record at the imported commit, including historical

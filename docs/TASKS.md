@@ -41,3 +41,13 @@ verify deployed demo. Never rebase an active writer. Preserve user work and actu
 UX-01/02 are subflows of UX-03, not competing implementations. PLAT-01 is merged;
 PLAT-02 is merged through PR #6. CORE-01 keeps extraction ownership in Core A. Core B alone owns planner/renderer and core_assist.py. Priorities: P0 correctness/configuration and
 contracts; P1 bounded useful-question/evidence journey; P2 broader references, ranking and reviewed benchmarks.
+
+## Isolated integration review — Oliver, 2026-10-03
+
+At Oliver's request, `codex/integration-review` combines main `c57107a` (including Platform packaging
+and evidence updates), Core B `85cd70b` and Claude frontend `6d90470`. Task-card
+conflicts retain author records and the current four-lane file boundaries. This
+local candidate's validation is in `docs/core_navigation/integration_review/`.
+Core B and UX are implemented and locally verified in that candidate; historical
+allocation/status rows above describe the incoming coordination records.
+The original active checkouts are unchanged; this candidate is not remotely merged.

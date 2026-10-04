@@ -1,5 +1,6 @@
 """Core behavior tests; expectations are agent-authored synthetic cases."""
 from datetime import date
+import math
 
 import pytest
 
@@ -359,3 +360,121 @@ def test_absent_interaction_target_cannot_poison_date_partition(rule, prop, reso
     plan = plan_questions(context_for(rule, prop, resolution))
     assert question(plan, 'first_occupancy_date')
     assert any(u.kind == 'cross_reference' and 'Absent target' in u.message for u in plan.remaining_uncertainty)
+
+
+@pytest.mark.parametrize('low,high', [
+    (2**60, 2**60 + 2),
+    (float(2**60), math.nextafter(float(2**60), math.inf)),
+])
+def test_exact_integer_answers_between_float_endpoints_remain_material(rule, prop, resolution, low, high):
+    rule.coverage_conditions = Expression(op='all', args=[
+        Expression(op='gt', fact='amount', value=low),
+        Expression(op='lt', fact='amount', value=high)])
+    ctx = context_for(rule, prop, resolution)
+    ctx.fact_definitions['amount'] = FactDefinition(field='amount', meaning='Measured amount', data_type='number')
+    plan = plan_questions(ctx)
+    alternatives = question(plan, 'amount').alternatives
+    matching = [a for a in alternatives if a.evaluations[0].result == 'applies']
+    assert plan.exhaustive and len(matching) == 1
+    assert low < matching[0].probe_facts['amount'] < high
+    assert type(matching[0].probe_facts['amount']) is int
+    assert matching[0].interval['lower_inclusive'] is False
+    assert matching[0].interval['upper_inclusive'] is False
+    for alternative in alternatives:
+        changed = prop.model_copy(deep=True)
+        changed.facts.update(alternative.probe_facts)
+        actual = engine.evaluate_rules([rule], changed, resolution, DAY)
+        assert [e.result for e in actual] == [e.result for e in alternative.evaluations]
+        for endpoint in ('lower', 'upper'):
+            if alternative.interval[endpoint] is None:
+                assert alternative.interval[endpoint + '_inclusive'] is False
+
+
+@pytest.mark.parametrize('value', [math.inf, math.nan])
+@pytest.mark.parametrize('origin', ['property_bound', 'fact_definition'])
+def test_nonfinite_partition_bounds_stay_explicitly_partial(rule, prop, resolution, value, origin):
+    prop.facts.pop('units')
+    ctx = context_for(rule, prop, resolution)
+    if origin == 'property_bound':
+        ctx.property.bounds['units'] = Bound(lower=2, upper=value, provenance='Synthetic malformed bound')
+    else:
+        ctx.fact_definitions['units'] = FACT_DEFINITIONS['units'].model_copy(update={'maximum': value})
+    plan = plan_questions(ctx)
+    assert plan.status == 'partial' and not plan.exhaustive
+    assert plan.questions == [] and plan.evaluations_used == 1
+    assert any(u.kind == 'interpretation' and u.field == 'units' for u in plan.remaining_uncertainty)
+
+
+def test_real_core_http_questions_answers_and_every_alternative(demo):
+    from fastapi.testclient import TestClient
+    from navigator.api import create_app
+
+    request = {'address_id': 'SYNTH-003', 'as_of': DAY.isoformat()}
+    original = demo.read('addresses.json')
+    with TestClient(create_app(demo.root)) as client:
+        response = client.post('/api/v1/lookup/assist', json=request)
+        assert response.status_code == 200
+        body = AssistResponse.model_validate(response.json())
+        assert body.capabilities['question_planner'] == 'implemented'
+        assert body.capabilities['rule_renderer'] == 'implemented'
+        assert [q.fact.field for q in body.question_plan.questions] == ['units']
+        assert body.lookup.evaluations[0].result == 'unknown'
+        for alternative in body.question_plan.questions[0].alternatives:
+            answer = {'field': 'units', 'value': alternative.probe_facts['units']}
+            response = client.post('/api/v1/lookup/assist', json={**request, 'answers': [answer]})
+            assert response.status_code == 200
+            answered = AssistResponse.model_validate(response.json())
+            expected = {e.team_rule_id: (e.result, e.coverage.value, e.conflict_flag)
+                        for e in alternative.evaluations if e.result not in {'inapplicable', 'failed'}}
+            assert {e.team_rule_id: (e.result, e.coverage.value, e.conflict_flag)
+                    for e in answered.lookup.evaluations} == expected
+            assert answered.question_plan.questions == []
+            assert 'User-supplied' in answered.lookup.address.provenance['units']
+            assert any(u.kind == 'source_gap' for u in answered.question_plan.remaining_uncertainty)
+        # Stateless answers disappear on the next unanswered request.
+        reset = client.post('/api/v1/lookup/assist', json=request).json()
+        assert reset['lookup']['evaluations'][0]['result'] == 'unknown'
+        assert [q['question_id'] for q in reset['question_plan']['questions']] == ['q:units']
+        bounded = client.post('/api/v1/lookup/assist', json={**request, 'limits': {'max_evaluations': 1}}).json()
+        assert bounded['question_plan']['evaluations_used'] == 1
+        assert bounded['question_plan']['status'] == 'partial'
+        assert bounded['question_plan']['limits_hit'] == ['max_evaluations']
+        assert bounded['question_plan']['questions'][0]['alternatives'] == []
+    assert demo.read('addresses.json') == original
+
+
+def test_real_core_http_partial_date_then_two_exemptions(demo, rule):
+    from fastapi.testclient import TestClient
+    from navigator.api import create_app
+
+    rule.coverage_conditions = Expression(op='date_on_or_before', fact='certificate_of_occupancy', value='2020-06-15')
+    rule.exemption_conditions = Expression(op='any', args=[Expression(op='eq', fact=f, value=True)
+        for f in ('owner_occupied', 'exemption_filed')])
+    demo.save_collection('rules', {rule.team_rule_id: rule})
+    request = {'address_id': 'SYNTH-001', 'as_of': DAY.isoformat()}
+    with TestClient(create_app(demo.root)) as client:
+        def answer(facts):
+            response = client.post('/api/v1/lookup/assist', json={**request, 'answers': [
+                {'field': field, 'value': value} for field, value in facts.items()]})
+            assert response.status_code == 200
+            return AssistResponse.model_validate(response.json())
+
+        partial = answer({'certificate_of_occupancy': '2020-06'})
+        assert {q.fact.field for q in partial.question_plan.questions} == {
+            'certificate_of_occupancy', 'owner_occupied', 'exemption_filed'}
+        for alternative in question(partial.question_plan, 'certificate_of_occupancy').alternatives:
+            assert alternative.interval['lower'] >= '2020-06-01'
+            assert alternative.interval['upper'] <= '2020-06-30'
+        facts = {'certificate_of_occupancy': '2020-06-15'}
+        precise = answer(facts)
+        assert precise.lookup.evaluations[0].result == 'unknown'
+        assert {q.fact.field for q in precise.question_plan.questions} == {'owner_occupied', 'exemption_filed'}
+        assert {u.field for u in precise.question_plan.remaining_uncertainty if u.kind == 'property_fact'} == {
+            'owner_occupied', 'exemption_filed'}
+        facts['owner_occupied'] = False
+        assert [q.fact.field for q in answer(facts).question_plan.questions] == ['exemption_filed']
+        facts['exemption_filed'] = False
+        completed = answer(facts)
+        assert completed.lookup.evaluations[0].result == 'applies'
+        assert completed.question_plan.questions == []
+        assert any(u.kind == 'source_gap' for u in completed.question_plan.remaining_uncertainty)

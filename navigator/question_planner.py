@@ -19,7 +19,7 @@ from .fact_inputs import FACT_DEFINITIONS
 from .models import (AlternativeOutcome, AssistContext, Expression, FactDefinition,
                      FactQuestion, QuestionPlan, Uncertainty, date_bounds)
 
-ALGORITHM_VERSION = "correlated-partitions-v1"
+ALGORITHM_VERSION = "correlated-partitions-v2"
 PROBE_PROVENANCE = "Hypothetical planner probe; not a known property fact"
 
 
@@ -60,6 +60,11 @@ def _domain(definition: FactDefinition, expressions: list[Expression], prop, as_
     low = date.min.toordinal() if is_date else definition.minimum
     high = date.max.toordinal() if is_date else definition.maximum
     bound = prop.bounds.get(field)
+    # Shared models currently admit non-finite bounds. Do not round them into
+    # cells, ignore them while clipping, or claim a complete feasible domain.
+    if not is_date and any(v is not None and not math.isfinite(v) for v in
+            (low, high, bound.lower if bound else None, bound.upper if bound else None)):
+        return [], False
     if bound and not is_date:
         if bound.lower is not None: low = max(low, bound.lower) if low is not None else bound.lower
         if bound.upper is not None: high = min(high, bound.upper) if high is not None else bound.upper
@@ -123,20 +128,25 @@ def _domain(definition: FactDefinition, expressions: list[Expression], prop, as_
         elif hi is not None and hc:
             value = hi
         elif lo is not None and hi is not None:
-            value = lo / 2 + hi / 2
+            # JSON numbers include exact integers, even between adjacent floats.
+            # Float-only midpoints can erase a feasible cell above 2**53.
+            value = math.floor(lo) + 1
             if not lo < value < hi:
-                value = math.nextafter(lo, hi)
+                value = lo / 2 + hi / 2
                 if not lo < value < hi:
-                    continue  # No representable float between adjacent endpoints.
+                    value = math.nextafter(lo, hi)
+                    if not lo < value < hi:
+                        continue  # Neither an integer nor a float fits this cell.
         elif lo is not None:
-            value = lo + 1 if discrete else math.nextafter(lo, math.inf)
+            value = math.floor(lo) + 1
         elif hi is not None:
-            value = hi - 1 if discrete else math.nextafter(hi, -math.inf)
+            value = math.ceil(hi) - 1
         else:
             value = 0
         if not math.isfinite(value):
             return cells, False
         if discrete: value = int(value)
+        lc, hc = lc and lo is not None, hc and hi is not None
         def shown(v):
             return date.fromordinal(int(v)).isoformat() if is_date and v is not None else v
         interval = {"lower": shown(lo), "upper": shown(hi), "lower_inclusive": lc,

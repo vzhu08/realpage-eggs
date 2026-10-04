@@ -1,0 +1,56 @@
+{
+  "reviewed_refs": {
+    "origin/main": "3b1ef065a69c832daf92740a910bd3f33d8b150b",
+    "origin/codex/core-backend": "5eefae07652cad6a10a9caaf0dc624a90cbafa3f",
+    "origin/codex/platform-packaging": "aa7a2260d03d7a60bdb99a20aaf459ceada78b68",
+    "review/claude-frontend": "6d904700fc232e8f6388e9f85aafed55ae86a377",
+    "HEAD": "38b84b534e5054caf874ceeeedf37d15c209c5f5"
+  },
+  "conflicts_found": [
+    "docs/tasks/UX-03.md",
+    "docs/TASKS.md",
+    "docs/tasks/CORE-01.md",
+    "docs/tasks/CORE-02.md",
+    "docs/tasks/CORE-03.md",
+    "docs/tasks/CORE-04.md",
+    "docs/tasks/CORE-05.md"
+  ],
+  "conflict_resolution": "Preserve incoming Core A author records, local Core B completion, Claude delivery record, and both Platform coordination/packaging records.",
+  "frontend_dependencies": "Installed node_modules copied into isolated checkout; subsequently merged Claude lockfile from 6d90470 without changing it.",
+  "frontend_versions": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "6.0.3",
+    "vite": "7.3.6",
+    "@playwright/test": "1.63.0"
+  },
+  "checks": {
+    "frontend_generate_check": "passed; digest 8393dfe64420bf16",
+    "frontend_typecheck": "passed with real installed packages",
+    "frontend_unit": "79 passed",
+    "frontend_build": "passed; Vite production build",
+    "browser": "60 passed, 12 skipped: 10 opt-in screenshots, 2 viewport-specific cases",
+    "backend": "178 passed, 1 skipped: organizer pack absent",
+    "platform_smoke": "Passed on initial combined candidate; unchanged application/packaging runtime in latest main merge.",
+    "merge_tree": "clean with all four reviewed refs",
+    "diff_check": "passed"
+  },
+  "generated_file_sha256": {
+    "frontend/src/api/generated/meta.ts": "72091790228f0fc936807d6cd1378855bebc9fa5ff7e5ee3a40d281298f7a5a5",
+    "frontend/src/api/generated/contract.ts": "0aa3bf35f46595300eb5fa278b943a4a1e8520aaee11fe1697b4f30cba054a91",
+    "frontend/src/api/generated/schemas.json": "592aa3f9ed4b0c4800f4afe005c1932ad29bd983087eb068df5a75fc8cce1fe7"
+  },
+  "limitations": [
+    "Remote refs are checked snapshots; later pushes may need another merge check.",
+    "Browser tests use recorded synthetic fixtures and API doubles; a deployed browser/backend flow was not tested.",
+    "Docker image build and container runtime were not tested.",
+    "No organizer pack, real legal extraction or deployment verification."
+  ],
+  "publication": "Local integration candidate only; no push or remote merge.",
+  "preserved_user_change": "Uncommitted edit to docs/core_navigation/HANDOFF.md remains in original Core B checkout.",
+  "compatibility_fixes": [
+    "Regenerate frontend/src/api/generated/{contract.ts,meta.ts,schemas.json} from current canonical contracts; no backend schema or handwritten frontend logic change.",
+    "Newly merged Platform test hard-coded encoded-rule-v1; reproduced failure and compare emitted renderer version to canonical RENDERER_VERSION instead."
+  ],
+  "lockfile_sha256": "21daedfd18db4225a60578cb7628bfb2d5e7d73cf6661a222cf32789dbe3165a"
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.vite/
+
+# Root .gitignore hides .env.*; this one holds no secrets and selects the synthetic demo.
+!.env.demo
