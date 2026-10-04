@@ -104,6 +104,13 @@ def test_nine_primary_plan_is_bounded_and_separates_temporal_context(supplied, t
             assert rows[ident]["declaration"]["source_type"] == "status_record"
     fair = next(j for j in jobs if j["doc_id"] == "D069")
     assert fair["deferred_bounded_span_review_doc_ids"] == ["P11_NJ_HOB_MINUTES", "P12_NJ_CHARTER"]
+    ab325 = next(j for j in jobs if j["doc_id"] == "D022")
+    assert ab325["supporting_doc_ids"] == ["P11_CA_AB325_HISTORY", "P11_CA_BPC_ART1", "P11_CA_BPC_ART2"]
+    assert ab325["context_characters"] < 30000
+    assert ab325["retained_outside_this_job_doc_ids"] == ["P11_CA_AB325_TEXT", "P11_CA_BPC_ART3", "P11_CA_CONS_ART4"]
+    assert set(ab325["retained_outside_this_job_doc_ids"]) <= rows.keys()
+    sb763 = next(j for j in jobs if j["doc_id"] == "P11_CA_SB763_TEXT")
+    assert {"P11_CA_BPC_ART3", "P11_CA_CONS_ART4"} <= set(sb763["supporting_doc_ids"])
 
 
 def test_bundle_is_reproducible_for_same_inputs_and_reads_archive_without_extracting(tmp_path):

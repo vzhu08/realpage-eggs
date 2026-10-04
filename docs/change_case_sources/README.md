@@ -64,6 +64,15 @@ characters. The 268,053-character Hoboken minutes and 206,858-character charter 
 retained whole but deferred for bounded-span review; they are not silently truncated
 into an extraction request. The plan is neither provider output nor a legal finding.
 
+D022's job uses only `P11_CA_BPC_ART1` (the incorporated §16702 person definition),
+`P11_CA_BPC_ART2` (codified §16729, surrounding provisions and effective-date
+annotation), and `P11_CA_AB325_HISTORY`. This deliberate context selection leaves
+room for extraction/review payloads under the transport limit. The duplicate AB325
+capture, Article 3 and Constitution Article IV remain whole in the bundle, explicitly
+listed as outside this job; SB763 retains its own Article 3/date-authority context.
+The complete D022 body is unchanged. Its broad chapter/part qualifications and its
+separate reimbursement cross-references are not declared resolved by this selection.
+
 ## Corpus admission and remaining work
 
 Only `D022` and `D069` are labeled `supplied_corpus`. The other 22 are labeled

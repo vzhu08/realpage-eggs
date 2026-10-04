@@ -81,7 +81,7 @@ GAPS = {
 # Whole minutes/charter texts exceed a bounded extraction request; retain them in
 # the source bundle and defer relevant-span review rather than silently truncate.
 EXTRACTION_CONTEXT = {
-    "D022": ("P11_CA_AB325_TEXT", "P11_CA_AB325_HISTORY", "P11_CA_BPC_ART1", "P11_CA_BPC_ART2", "P11_CA_BPC_ART3", "P11_CA_CONS_ART4"),
+    "D022": ("P11_CA_AB325_HISTORY", "P11_CA_BPC_ART1", "P11_CA_BPC_ART2"),
     "P11_CA_SB763_TEXT": ("P11_CA_SB763_HISTORY", "P11_CA_BPC_ART1", "P11_CA_BPC_ART3", "P11_CA_CONS_ART4"),
     "D069": ("P11_NJ_HOB_B781_HTML", "P11_NJ_JC_25_057", "P11_NJ_JC_25_098", "P11_NJ_JC_25_105"),
     "P11_NJ_HOB_B781_HTML": (),
@@ -109,6 +109,12 @@ def _extraction_jobs(sources):
                      "substantive_context_doc_ids": sorted(i for i in supporting if sources[i]["source_type"] == "legal_text"),
                      "temporal_context_doc_ids": sorted(i for i in supporting if sources[i]["source_type"] == "status_record"),
                      "deferred_bounded_span_review_doc_ids": sorted(deferred)})
+        if primary == "D022":
+            jobs[-1]["purpose"] = (
+                "AB325 with its incorporated person definition, codified provision/effective-date annotation, "
+                "and legislative history. Broad chapter/part qualifications remain explicit; no inferred expansion."
+            )
+            jobs[-1]["retained_outside_this_job_doc_ids"] = ["P11_CA_AB325_TEXT", "P11_CA_BPC_ART3", "P11_CA_CONS_ART4"]
     return jobs
 
 
