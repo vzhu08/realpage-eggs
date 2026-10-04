@@ -131,3 +131,45 @@ def test_negative_case_requires_dated_failure_even_outside_geography(scenarios):
     assert result.status == 'partial'
     assert any('Failed lifecycle is not established' in note for note in result.notes)
     assert not any('creates no operative obligation' in note for note in result.notes)
+
+
+def test_conflict_dependencies_accept_explicit_local_to_state_edges(scenarios):
+    rules = scenarios.rules()
+    rules['nj'].interactions = []
+    for ident in ('hob', 'jc'):
+        rules[ident].interactions = [Interaction(kind='conflicts_with', target_citation=rules['nj'].citation,
+                                               target_jurisdiction=rules['nj'].jurisdiction, category=rules['nj'].category,
+                                               scope=Expression(op='literal', value=True), evidence=rules[ident].evidence,
+                                               note='Fictional local record identifies the state-law conflict')]
+    scenarios.save_collection('rules', rules)
+    result = compute_changes(scenarios, ChangeRequest(test_id='T3'))
+    assert set(result.conflict_flag_address_ids) == {'hob-home', 'jc-home'}
+    assert not any(note.startswith('No evidence-backed state/local interaction') for note in result.notes)
+    assert result.status == 'partial'  # A conflict still requires human interpretation.
+
+
+def test_unrelated_interaction_does_not_satisfy_mapped_conflict_dependencies(scenarios):
+    rules = scenarios.rules()
+    rules['nj'].interactions = [rules['nj'].interactions[0].model_copy(deep=True, update={
+        'target_citation': 'Unrelated fictional provision', 'target_jurisdiction': 'Newark, NJ'})]
+    scenarios.save_collection('rules', rules)
+    result = compute_changes(scenarios, ChangeRequest(test_id='T3'))
+    assert not result.conflict_flag_address_ids
+    assert result.status == 'partial'
+    for ref in ('JC-ALG-01', 'HOB-ALG-01'):
+        assert any(note.startswith(f'No evidence-backed state/local interaction extracted for {ref};') for note in result.notes)
+
+
+def test_missing_municipality_record_keeps_state_and_marks_local_coverage_uncertain(scenarios):
+    resolutions = scenarios.resolutions()
+    del resolutions['hob-home']
+    scenarios.save_collection('resolutions', resolutions)
+    result = compute_changes(scenarios, ChangeRequest(test_id='T2'))
+    assert result.affected_address_ids == ['jc-home']
+    assert result.uncertain_address_ids == ['hob-home']
+    assert result.status == 'partial'
+    # The supplied state remains usable; no postal-city inference supplies the municipality.
+    for delta in result.differences['hob-home']:
+        assert delta['after']['jurisdiction'] == 'unknown'
+    state_result = compute_changes(scenarios, ChangeRequest(test_id='T1'))
+    assert state_result.affected_address_ids == ['ca-home']
