@@ -33,7 +33,7 @@ def main():
             shutil.copytree(ROOT / name, copied / name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
         for name in ("pyproject.toml", "requirements.lock"):
             shutil.copy2(ROOT / name, copied / name)
-        for name in ("docs/core_navigation/benchmark.py", "docs/core/core01_d001_live.json"):
+        for name in ("docs/core_navigation/benchmark.py", "docs/core/core01_d001_live.json", "docs/METHOD.md"):
             (copied / name).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / name, copied / name)
         environment["NAVIGATOR_DATA_DIR"] = str(copied / "data")

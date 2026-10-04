@@ -14,9 +14,10 @@ creating/merging completed PRs. The user also asked to stop when another develop
 Previously uncommitted reversions of four files were backed up locally and those files restored
 from the intact commits. No committed work was lost; the cause of the reversions is unknown.
 
-Fetched main `1109d4a4bee24cbdcecd252848897e23f00ee299` includes Platform PR #14 and Core B/UX PR #15.
-It merged cleanly into this branch at `ef71e5a82f9bd5f7fb7883f7f7f8837216b27f8f`.
-The combined candidate passed **370 tests**, compilation, contract generation, and exact replay
+Fetched main `5b451f73d0f06a66e248f50acb5a9cd234bacb6f` includes Platform PR #14, Core B/UX PR #15,
+and Platform handoff PR #16. It merged cleanly into this branch at
+`cae2e36d5980cd4ebc08e734d393e5ee4db53781`, following the earlier PR #15 integration at `ef71e5a`.
+The combined candidate passed **396 tests**, compilation, contract generation, and exact replay
 of both freshly generated property evidence packages (normal and missing support).
 No schema differences or working-contract changes occurred. The earlier 291-test report below
 remains historical. The saved Core ZIP still matches its recorded SHA-256.

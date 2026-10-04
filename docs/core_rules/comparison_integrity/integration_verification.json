@@ -1,6 +1,6 @@
 {
-  "candidate_commit": "ef71e5a82f9bd5f7fb7883f7f7f8837216b27f8f",
-  "origin_main_at_verification": "1109d4a4bee24cbdcecd252848897e23f00ee299",
+  "candidate_commit": "cae2e36d5980cd4ebc08e734d393e5ee4db53781",
+  "origin_main_at_verification": "5b451f73d0f06a66e248f50acb5a9cd234bacb6f",
   "python": "3.13.15",
   "python_executable": "/Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/bin/python",
   "requirements_sha256": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8",
@@ -44,6 +44,7 @@
     "tests/test_api_exports.py": "f4ab210d24a29795d74e66fdb84bd9957304b5fa87f7417157d5b157d28e66de",
     "tests/test_extraction.py": "05fac6d993f64924b7e6a3bc485044c5fbea793bb0b3244f50d348db3d34e4af",
     "tests/test_traces.py": "c834341b47480e50c02f37cfd35d83b126c58f81d830b499f3433068e2187329",
+    "tests/test_handoff.py": "8e9f5655fd60fa13994eb96b3159c1d54f6f08caced1fd3c4a2611610e105779",
     "tests/test_geocode.py": "da613f3db666c84473ffc1cd079e447b7afd0c51b66a895863407aa7b7985473",
     "tests/test_question_planner.py": "6fcb1114b76e44aafc482d8c8a6da0aedeb5508710eb54bb454ae392c419c873",
     "tests/test_source_comparison.py": "164c013eb5311e27a4e99cdb7220ca0ef1a7d4d8a7a05cad5c3a4780c7a09a14",
@@ -56,6 +57,8 @@
     "tests/fixtures/core_navigation/benchmark_cases.json": "abab16fa991cedd8c9322e0807a94ab2c7908cbbdfccbdb82c4a6406e5927de7",
     "scripts/platform_ops.py": "d1e2505023ecbd13934e782827c8fad16c15d0c1898df815fff47aa747c419c4",
     "scripts/assemble_snapshot.py": "f31f14d8a425c6ffa61044a95418374952463ffb2bff122ee167e060d307dd46",
+    "scripts/prepare_handoff.py": "b088b7a99ec1bdd48eec4f480ab34cd9ac5572d4a8da01e2f98cdb36eb7dd173",
+    "docs/METHOD.md": "eb782a42baabca937fd66285689e6939b95b0ae0e4a70c143cbe49c59479b38e",
     "docs/core_navigation/benchmark.py": "dc32e67c7729b5a5172649f313a965ec65561a5a3defb62dbe43a3001ff2f8f7",
     "docs/core/core01_d001_live.json": "f22193b88ae470b73214eec9bf7c4802a2594d718fc9f0d006e3b9abeea04546"
   },
@@ -89,7 +92,7 @@
         "-rs"
       ],
       "exit_code": 0,
-      "stdout": "........................................................................ [ 19%]\n........................................................................ [ 38%]\n........................................................................ [ 58%]\n........................................................................ [ 77%]\n........................................................................ [ 97%]\n..........                                                               [100%]\n=============================== warnings summary ===============================\n../../../../../../../Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1\n  /Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n370 passed, 1 warning in 6.17s\n",
+      "stdout": "........................................................................ [ 18%]\n........................................................................ [ 36%]\n........................................................................ [ 54%]\n........................................................................ [ 72%]\n........................................................................ [ 90%]\n....................................                                     [100%]\n=============================== warnings summary ===============================\n../../../../../../../Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1\n  /Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n396 passed, 1 warning in 6.99s\n",
       "stderr": ""
     },
     {
@@ -113,7 +116,7 @@
         "contracts"
       ],
       "exit_code": 0,
-      "stdout": "{\n  \"generated\": \"/private/var/folders/85/xxlv99754cl3rlts52tsmhn40000gn/T/realpage-core-a-integration-th9bzbbn/contracts\",\n  \"examples\": \"synthetic; research examples are proposed Core output, not a live planner\"\n}\n",
+      "stdout": "{\n  \"generated\": \"/private/var/folders/85/xxlv99754cl3rlts52tsmhn40000gn/T/realpage-core-a-integration-_62_aumr/contracts\",\n  \"examples\": \"synthetic; research examples are proposed Core output, not a live planner\"\n}\n",
       "stderr": "/Users/danny/Documents/ChatGPT/RealPage/core-backend/.venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n  from starlette.testclient import TestClient as TestClient  # noqa\n"
     },
     {

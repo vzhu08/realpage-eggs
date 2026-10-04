@@ -79,8 +79,8 @@ The immutable 140-rule snapshot retains all unresolved review state; no provider
 Local review handoff: [comparison integrity](../core_rules/comparison_integrity/HANDOFF.md).
 
 User subsequently authorized retaining the fix and creating/merging completed PRs, with a stop
-when another developer is needed. Fetched main `1109d4a` (PR #14/#15) is integrated at `ef71e5a`.
-Combined verification: **370 passed**, compilation/contracts passed, zero schema changes, and both
+when another developer is needed. Fetched main `5b451f7` (PR #14/#15/#16) is integrated at `cae2e36`.
+Combined verification: **396 passed**, compilation/contracts passed, zero schema changes, and both
 fresh evidence packages reproduced. See the handoff's latest integration section and report.
 After integration, wait for Vincent/Platform's missing T1 source texts, then local ordinances;
 do not bypass source acquisition or the stopped provider run to fill the remaining cases.
