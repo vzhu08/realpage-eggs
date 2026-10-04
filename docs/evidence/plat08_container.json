@@ -1,0 +1,33 @@
+{
+  "task": "PLAT-08",
+  "branch": "codex/platform-container",
+  "state": "local_candidate_verified_runtime_pending_ci",
+  "label": "SOFTWARE_CONTAINER_CHECK_NOT_LEGAL_VALIDATION",
+  "checks": {
+    "deployment_tests_passed": 21,
+    "same_origin_actual_http": "passed",
+    "compose_restrictions": "passed",
+    "snapshot_preserved": true,
+    "frontend": {
+      "npm_ci": "passed",
+      "generation": "passed",
+      "typecheck": "passed",
+      "unit_tests_passed": 90,
+      "build": "passed",
+      "log": "artifacts/plat08/frontend-stage/frontend-verify-final.log"
+    }
+  },
+  "base_images": {
+    "node": "node:22-bookworm-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c",
+    "python": "python:3.12.14-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e"
+  },
+  "local_engine_available": false,
+  "local_runtime_verified": false,
+  "runtime_command": "python deploy/verify_container.py --synthetic --output artifacts/container-ci --port 8028 --build-and-run",
+  "limitations": [
+    "Local Docker engine is stopped; actual image/runtime verification is delegated to PLAT-10 Linux CI.",
+    "Synthetic structural checks do not establish real corpus coverage or legal accuracy.",
+    "Python package artifact hashes are not pinned; no byte-reproducible image claim.",
+    "No public deployment, paid provider calls or authored frontend/Core edits."
+  ]
+}

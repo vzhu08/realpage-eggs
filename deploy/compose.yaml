@@ -1,16 +1,22 @@
-# Local deployment candidate. No public ingress or provider credentials.
+# Local same-origin frontend/API. Use --env-file with an empty file; no ambient .env.
 services:
   api:
-    image: realpage-navigator:local
+    image: "${NAVIGATOR_IMAGE:-realpage-navigator:local}"
     build:
       context: ..
       dockerfile: deploy/Dockerfile
+      args:
+        SOURCE_REVISION: "${NAVIGATOR_SOURCE_REVISION:?Set the full reviewed Git commit SHA}"
+    user: "10001:10001"
     ports:
       - "127.0.0.1:${NAVIGATOR_PORT:-8000}:8000"
     environment:
       NAVIGATOR_DATA_DIR: /data
+      NAVIGATOR_FRONTEND_DIST: /app/public
       PYTHON_DOTENV_DISABLED: "1"
-      NAVIGATOR_CORS_ORIGINS: "${NAVIGATOR_CORS_ORIGINS:-http://localhost:3000,http://localhost:5173}"
+      NAVIGATOR_CORS_ORIGINS: ""
+      OPENAI_API_KEY: ""
+      OPENAI_MODEL: ""
     volumes:
       - type: bind
         source: "${NAVIGATOR_DATA_PATH:?Set an absolute path to a reviewed data snapshot}"
@@ -25,4 +31,5 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
+    pids_limit: 128
     restart: "no"
