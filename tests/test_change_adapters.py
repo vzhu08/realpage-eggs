@@ -116,3 +116,18 @@ def test_unestablished_failed_proposal_does_not_claim_no_operative_obligation(sc
     result = compute_changes(scenarios, ChangeRequest(test_id='T5'))
     assert result.status == 'partial'
     assert not any('creates no operative obligation' in note for note in result.notes)
+
+
+def test_negative_case_requires_dated_failure_even_outside_geography(scenarios):
+    rules = scenarios.rules()
+    rules['failed'].status_events = []
+    rules['failed'].status_as_of = None
+    scenarios.save_collection('rules', rules)
+    # Excluded addresses cannot turn an undated lifecycle label into proof of failure.
+    scenarios.save_collection('addresses', {'ca-home': scenarios.addresses()['ca-home']})
+    scenarios.save_collection('resolutions', {'ca-home': scenarios.resolutions()['ca-home']})
+    result = compute_changes(scenarios, ChangeRequest(test_id='T5'))
+    assert not result.affected_address_ids and not result.uncertain_address_ids
+    assert result.status == 'partial'
+    assert any('Failed lifecycle is not established' in note for note in result.notes)
+    assert not any('creates no operative obligation' in note for note in result.notes)

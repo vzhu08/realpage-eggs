@@ -54,7 +54,7 @@ def compute_changes(store, request: ChangeRequest):
     if not addresses: notes.append("Sample addresses unavailable")
     if not rules: notes.append("No extracted rules available")
     if scenario == "if_enacted": notes.append("Hypothetical only: selected pending rules are assumed enacted and effective on the comparison date; stored law is unchanged")
-    if kind == "negative" and any(r.lifecycle != "failed" for r in rules if r.team_rule_id in selected):
+    if kind == "negative" and any(temporal(r, after) != "failed" for r in rules if r.team_rule_id in selected):
         notes.append("Failed lifecycle is not established for all referenced proposal records")
     unresolved = sorted(r.team_rule_id for r in rules if r.team_rule_id in selected
                         and (r.review_issues or r.semantic_verification == "needs_review"))
