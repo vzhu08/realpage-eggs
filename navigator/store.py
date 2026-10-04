@@ -99,8 +99,12 @@ def cached_changes(store, request):
     from .changes import compute_changes
     from .models import ChangeResult
     key = change_cache_key(store, request)
-    cached = store.read(f"change_cache/{key}.json")
-    if cached and cached.get("key") == key and cached.get("result_sha256") == digest(cached.get("result")):
+    try:
+        cached = store.read(f"change_cache/{key}.json")
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        # Derived results are optional; unreadable/truncated caches cannot block Core.
+        cached = None
+    if isinstance(cached, dict) and cached.get("key") == key and cached.get("result_sha256") == digest(cached.get("result")):
         try:
             return ChangeResult.model_validate(cached["result"])
         except ValueError:
