@@ -25,17 +25,42 @@ RESERVATION = Decimal('1.50')
 
 
 class BudgetClient:
-    def __init__(self, client, path, budget):
+    def __init__(self, client, path, budget, *, prior_ledger=None):
         self.client, self.timeout = client, client.timeout
         self.path, self.budget = Path(path), Decimal(str(budget))
         if not self.budget.is_finite() or not 0 < self.budget <= 20:
             raise ValueError('Budget must be finite, positive and at most the authorized $20')
-        if self.path.exists():
+        if self.path.exists() and prior_ledger is None:
             raise ValueError('Existing ledger: reconcile the prior run before a new allocation')
         self.charged, self.blocked = Decimal('0'), False
         self.ledger = {'model': MODEL, 'budget_usd': str(self.budget), 'requests': [],
                        'charged_upper_estimate_usd': '0', 'actual_billing': False,
                        'pricing_checked': '2026-10-04', 'reservation_usd': str(RESERVATION)}
+        if prior_ledger is not None:
+            original = Path(prior_ledger).read_bytes()
+            if not self.path.exists() or self.path.read_bytes() != original:
+                raise ValueError('Continuation requires an unchanged copied ledger')
+            prior = json.loads(original)
+            if prior.get('model') != MODEL or Decimal(prior['budget_usd']) != self.budget:
+                raise ValueError('Continuation must preserve the model and total authorized budget')
+            total = Decimal('0')
+            for entry in prior['requests']:
+                usage = entry.get('usage', {})
+                incoming, outgoing = usage.get('input_tokens'), usage.get('output_tokens')
+                if (entry.get('status') != 'usage_recorded' or type(incoming) is not int
+                        or type(outgoing) is not int or not 0 <= incoming < 272000
+                        or not 0 <= outgoing <= MAX_OUTPUT_TOKENS):
+                    raise ValueError('Prior billing is unreconciled; continuation refused')
+                charge = incoming * INPUT_RATE + outgoing * OUTPUT_RATE
+                if charge != Decimal(entry['upper_estimate_usd']) or charge > RESERVATION:
+                    raise ValueError('Prior usage/rate mismatch; continuation refused')
+                total += charge
+            if total != Decimal(prior['charged_upper_estimate_usd']) or total > self.budget:
+                raise ValueError('Prior ledger total mismatch; continuation refused')
+            self.ledger, self.charged = prior, total
+            self.ledger.setdefault('continuations', []).append(
+                {'prior_ledger': str(Path(prior_ledger).resolve()), 'sha256': digest(original), 'at': now()})
+            self.save()
 
     def post(self, url, **kwargs):
         if self.blocked or self.charged + RESERVATION > self.budget:
@@ -85,6 +110,11 @@ class BudgetClient:
         self.ledger['charged_upper_estimate_usd'] = str(self.charged)
         write_json(self.path, self.ledger)
 
+    def close(self):
+        # Core closes its per-document provider. The outer batch context owns
+        # this shared HTTP transport and closes it once after all documents.
+        pass
+
 
 def plan(source_dir, output, pack):
     source_dir, output, pack = (Path(p).resolve() for p in (source_dir, output, pack))
@@ -132,6 +162,8 @@ def main(argv=None):
     p.add_argument('--env-file', type=Path)
     p.add_argument('--budget-usd', type=Decimal, default=Decimal('20'))
     p.add_argument('--execute', action='store_true')
+    p.add_argument('--continue-budget', action='store_true',
+                   help='Carry fully reconciled source ledger into the new output; preserve the same total cap')
     args = p.parse_args(argv)
     if not args.budget_usd.is_finite() or not 0 < args.budget_usd <= 20:
         p.error('Budget must be positive and at most $20')
@@ -146,14 +178,15 @@ def main(argv=None):
     store = Store(args.output)
     store.write('batch_plan.json', details)
     with httpx.Client(timeout=httpx.Timeout(120, read=600)) as transport:
-        budget = BudgetClient(transport, store.path('batch_budget.json'), args.budget_usd)
-        provider = OpenAIProvider(client=budget)
-        provider.max_output_tokens = MAX_OUTPUT_TOKENS
+        budget = BudgetClient(transport, store.path('batch_budget.json'), args.budget_usd,
+                              prior_ledger=args.source_dir / 'batch_budget.json' if args.continue_budget else None)
         for document in details['selected']:
             if budget.blocked or budget.charged + RESERVATION > budget.budget:
                 print('Stopped at budget/failure boundary; completed documents and caches preserved.', flush=True)
                 return 1
             print('Extracting ' + document['doc_id'], flush=True)
+            provider = OpenAIProvider(client=budget)
+            provider.max_output_tokens = MAX_OUTPUT_TOKENS
             result = extract(store, [document['doc_id']], provider=provider, limit=1)
             result.config.update(transport_attempts=1, batch_budget_usd=str(args.budget_usd),
                                  batch_ledger='batch_budget.json')

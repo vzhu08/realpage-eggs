@@ -68,10 +68,19 @@ copies the source Store into a new directory and preserves completed documents. 
 queue has 38 remaining captured documents / 59 chunks, 16 completed documents preserved and
 33 unavailable/link-only source entries excluded. New results remain review candidates.
 
-The active user-launched run is `data/corpus-batch-20` in this integration checkout. Do not
-restart it, edit its extractor or serve it while it is running. Inspect `batch_budget.json`,
+The first user-launched run was `data/corpus-batch-20` in this integration checkout. It stopped
+after saving D023 because the batch client lacked Core's per-document `close()` interface.
+Five calls were fully reconciled at a conservative $0.99463650; no process remains active.
+The wrapper now retains its outer-owned transport across documents and creates a fresh provider
+per document so usage receipts are not duplicated. A real Core/two-document mock-transport
+regression and continuation-ledger checks pass (27 extraction wrapper/pilot tests total).
+`--continue-budget` carries fully reconciled receipts into a new output directory under the same
+total $20 cap; any in-flight/unknown billing, changed rates or inconsistent totals refuse continuation.
+The stopped original output is preserved; its incomplete run manifest must be recovered and
+provenance-checked in a separate copy before resuming. Do not run overlapping jobs.
+Inspect `batch_budget.json`,
 `batch_plan.json`, per-document run files and `artifacts/integration/extraction.log` for progress.
-The existing launcher is `artifacts/integration/start-extraction.ps1`; it must not be invoked twice.
+The original launcher is `artifacts/integration/start-extraction.ps1`; it must not be invoked twice.
 
 The transport reserves $1.50 before each provider call. It reconciles returned usage at conservative
 rates of $2.75/M input and $11/M output, keeps the reservation on unknown billing, and stops without
