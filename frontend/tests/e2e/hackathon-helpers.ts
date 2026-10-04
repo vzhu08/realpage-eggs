@@ -11,7 +11,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { type Locator, type Page, type Route, expect, test } from '@playwright/test';
+import { type Locator, type Page, type Route, expect } from '@playwright/test';
 import { expandPooled } from '../../src/demo/pool';
 
 const read = (relative: string) => JSON.parse(readFileSync(fileURLToPath(new URL(`../../../${relative}`, import.meta.url)), 'utf8'));
