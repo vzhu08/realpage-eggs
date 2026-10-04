@@ -15,8 +15,8 @@ fits the remaining character budget, with truthful partial/limit markers and ori
 Repeated anchors within an already returned window must not consume the budget again.
 Oversized anchors and referenced sections remain explicitly bounded, never silently truncated.
 Checks: assigned evidence/retrieval suite, an HTTP context regression, and the full combined suite.
-User authorized starting this independent task on a new branch. Local commits only;
-this continuation does not claim a new push, PR, merge, or deployment.
+User authorized starting this independent task on a new branch, then publishing its PR
+after checking completion. Review/merge remain separate from software acceptance.
 
 Result: source windows now fit the remaining character budget around the complete anchor;
 already returned windows satisfy repeated/contained anchors without another budget charge.
@@ -27,8 +27,12 @@ Full tests and `python -m navigator contracts` ran in `artifacts/plat03-context-
 all four generated schemas are byte-identical to main. One existing Starlette/httpx warning remains.
 Exact request/response and check evidence: `docs/evidence/plat03_context.json`.
 Changed paths: the five paths claimed above. Models, routes, dependencies, Core and UX are unchanged.
-Result commit: the PLAT-03 continuation commit containing this card on `codex/platform-evidence`.
-Next action: review this local continuation; no teammate artifact is needed. Cross-reference
+Implementation commit: `a9537ae2730f763c9fb7321ef0011175e69b9889` on `codex/platform-evidence`.
+Acceptance review: missing/changed support, opposite interpretation, unresolved exceptions,
+cycles, long-section tails and lexical-versus-semantic distinctions are covered by the
+passing evidence/retrieval suite. The bounded-context continuation is also complete.
+Fetched main remains `3b1ef06`; runtime/tests and schemas match the verified copy.
+Next action: review the requested PR; no teammate artifact is needed. Cross-reference
 recognition remains heuristic and software checks do not establish legal accuracy.
 
 ## Original implementation record
