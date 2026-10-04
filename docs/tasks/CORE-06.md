@@ -1,5 +1,27 @@
 # CORE-06: real change-case evidence and source disagreements
 
+## Current follow-up: PERF-01 evaluator probe cost
+
+Daniel / Codex /root, session `01a10555-b81d-7281-95f5-c06399af8238`, claims the Core A
+portion of [PERF-01](PERF-01.md) after D069 PR #28 merged. Base `912643a`, branch
+`codex/core-a-evaluator-performance`, checkout
+`/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence`. Root is sole writer for
+`navigator/predicates.py`, `navigator/engine.py`, Core A tests (`test_engine.py`, `test_traces.py`),
+`docs/core_rules/evaluator_performance/**` and this card. Helpers review read-only.
+Scope: avoid allocating discarded audit traces during result-only evaluations, using one semantic
+traversal and preserving all results, requested traces, uncertainty, dates and mutation isolation.
+No planner budget reduction, cache, public contract, UX, Platform registry or deployment change.
+Measure a preserved local Core snapshot; it lacks the resolved geography of hosted `real-002`,
+so local timings cannot close the hosted PERF-01 acceptance gate.
+
+Delivery: [performance handoff](../core_rules/evaluator_performance/README.md). Result-only
+evaluation now avoids discarded audit allocations; requested trace behavior is preserved.
+182 focused tests pass. A pinned, disposable Core-snapshot benchmark compares full evaluations,
+audit traces and eight assist request variants with identical outputs: direct evaluation is
+3.60–3.81 times faster; complete assist requests are 1.13–1.38 times faster locally. No budgets,
+facts, sources, stores or provider calls change. Platform/UX retain actual hosted/browser,
+cold/warm, follow-up and two-user acceptance; PERF-01 is not closed by this Core increment.
+
 ## Current next action: completed D069 pilot, offline follow-up ready
 
 Execution claim: Daniel / Codex /root, session `01a10555-b81d-7281-95f5-c06399af8238`;
