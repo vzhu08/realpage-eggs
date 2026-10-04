@@ -8,7 +8,8 @@ Human owner: Oliver. Writer: Codex /root, session `01a103bd-84d1-7c50-bd19-1fe92
 Checkout: `/Users/oliverchen/Documents/random shi/realpage-eggs-core-explanations`.
 Branch: `codex/core-b-explanations`.
 Base: `0c441df4896cca844b9199597093267e1d4519a4`, reviewed main including PR #12.
-Implementation commit is recorded below after the local checkpoint.
+Implementation checkpoint: `5a8e1cd` (runtime, tests, fixed inputs and verification evidence).
+The following documentation-only commit records this checkpoint; runtime bytes are unchanged.
 
 ## Delivered behavior
 

@@ -70,3 +70,5 @@ compileall/contracts succeeded in a disposable copy. All 17 new software alterna
 reproduce through actual assist HTTP handlers. Original eight synthetic cases preserved.
 No complete corpus/legal score or human review is claimed. Named human reviewer was
 requested from Oliver and is unassigned until a response; do not fabricate a review.
+
+Local implementation checkpoint: `5a8e1cd`; runtime/tests match the recorded verification.
