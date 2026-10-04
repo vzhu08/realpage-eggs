@@ -96,6 +96,9 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
     const frame = window.requestAnimationFrame(() => {
       const results = document.getElementById('lookup-results');
       if (!results) return;
+      // A keyboard user may already have moved to a result control before this frame.
+      // Do not replace that deliberate focus with the automatic arrival announcement.
+      if (results.contains(document.activeElement)) return;
       const banner = document.querySelector<HTMLElement>('.synthetic')?.offsetHeight ?? 0;
       window.scrollTo({ top: Math.max(0, results.getBoundingClientRect().top + window.scrollY - banner) });
       document.getElementById('outcome-heading')?.focus({ preventScroll: true });
@@ -107,6 +110,7 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
   const revealMain = () => {
     const main = mainRef.current;
     if (!main) return;
+    if (document.activeElement !== main && main.contains(document.activeElement)) return;
     main.focus({ preventScroll: true });
     const top = main.getBoundingClientRect().top;
     if (top < 0 || top > window.innerHeight * 0.6) main.scrollIntoView({ block: 'start' });
