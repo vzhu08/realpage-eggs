@@ -1,3 +1,19 @@
+# Current readiness handoff
+
+COORD-04 is the current local fixes/assignment task on `codex/readiness-fixes-and-plan`,
+based on merged main `3b2d201`. See its card for exact checks and result status.
+The two fixes reject non-finite model inputs and make frontend contract checks portable across
+LF/CRLF checkouts. Four next cards are assigned in TASKS: PLAT-06, CORE-06, CORE-07, UX-04.
+PLAT-05's active work remains untouched; reconcile its latest card/evidence on integration.
+PLAT-04 baseline is merged but continuation `11afb55` remains local and is queued under PLAT-06.
+The latest Core store is partial (15/54 documents, 140 rules, 16 exportable); real data assembly,
+T1-T5 evidence and browser/API acceptance are next. No provider restart, publication or deployment
+has occurred in this task. The user authorizes local fixes and planning, not new feature execution.
+
+The sections below are historical handoffs; current state and ownership are in TASKS/OWNERSHIP.
+
+## Historical records
+
 # Current follow-up handoff
 
 ## PR #3 integration — October 3, 2026

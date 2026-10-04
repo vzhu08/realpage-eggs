@@ -24,7 +24,9 @@ const contractsDir = resolve(here, '../../contracts');
 const outDir = resolve(here, '../src/api/generated');
 const check = process.argv.includes('--check');
 
-const readRaw = (name) => readFileSync(resolve(contractsDir, name), 'utf8');
+// Git may check out identical contracts as LF or CRLF on different platforms.
+const normalizeNewlines = (text) => text.replace(/\r\n/g, '\n');
+const readRaw = (name) => normalizeNewlines(readFileSync(resolve(contractsDir, name), 'utf8'));
 const openapiRaw = readRaw('openapi.json');
 const researchRaw = readRaw('research.schema.json');
 const openapi = JSON.parse(openapiRaw);
@@ -213,7 +215,7 @@ const outputs = [
 if (check) {
   const stale = outputs.filter(([file, content]) => {
     try {
-      return readFileSync(resolve(outDir, file), 'utf8') !== content;
+      return normalizeNewlines(readFileSync(resolve(outDir, file), 'utf8')) !== content;
     } catch {
       return true;
     }

@@ -1,0 +1,44 @@
+{
+  "task": "COORD-04",
+  "base_commit": "3b2d2011de3d0319f96702bbeddb6ec72323dc27",
+  "branch": "codex/readiness-fixes-and-plan",
+  "date_local": "2026-10-03",
+  "mode": "offline_software_verification",
+  "pre_fix": {
+    "numeric_rejections_failed": 33,
+    "finite_control_passed": 1,
+    "generator_portability": "failed"
+  },
+  "post_fix": {
+    "focused_backend_passed": 85,
+    "full_backend_passed": 255,
+    "existing_warnings": 1,
+    "frontend_unit_passed": 80,
+    "typecheck": "passed",
+    "frontend_generated_check": "passed",
+    "production_build": "passed",
+    "contract_generation": "passed",
+    "canonical_schema_content_unchanged": true,
+    "doc_links": "passed",
+    "diff_check": "passed"
+  },
+  "source_hashes_lf": {
+    "navigator/models.py": "0aeaee642c81d8db21eafb2e292207933d1976b88e3897ce5f15c87064369829",
+    "frontend/scripts/generate-contract-types.mjs": "b541d7f0853cb3616f0bb65212f0015d7420f6f4cb0ef078559b6dbc364a936e",
+    "tests/test_numeric_contracts.py": "e7eb61f65d3edfc2efb689cccfb4216a518a710f59c77662bee056255a21c012",
+    "tests/test_question_planner.py": "54d8ce2888b0dc63b78d6fe741c67e4322004103437f4c0fbfdcab1458f05e0e",
+    "tests/test_rule_renderer.py": "8aa3da0cf76554c732769c5a1126491605c20b22adb1affc8c5f26c8a733ee0d",
+    "frontend/tests/unit/generator-portability.test.ts": "07c12a2b0304576ebea8dc887420e3fca10bfafb51df774f744319fefa001d18"
+  },
+  "limits": [
+    "No provider calls or legal accuracy claim",
+    "No data-store changes or deployment",
+    "Prior browser baseline 72 passed/12 skipped uses fixtures/API doubles; not rerun for these changes"
+  ],
+  "assignments": {
+    "PLAT-06": "Vincent / Platform",
+    "CORE-06": "Daniel / Core A",
+    "CORE-07": "Oliver / Core B",
+    "UX-04": "Existing Claude UX lane; Oliver recorded human coordinator"
+  }
+}

@@ -1,3 +1,24 @@
+# Current demo target and acceptance
+
+The current target is a four-minute journey: disclose automated extraction/live or replay mode;
+open a verified real property; answer one consequential fact; cross a source-supported date change;
+inspect portfolio impact; show a source disagreement and what would resolve it; export evidence.
+Select examples only after CORE-06/07 and PLAT-06 validate their actual outcomes. UX-04 owns the
+visible journey/recording; Platform owns the real API/snapshot/export and method-note coordination.
+
+Required from the supplied no-hour16 packet: rules.json, lookups.json for all 500 IDs, changes.json
+for T1-T5, live demo and one-page method note. No official scorer/weights or T6 was supplied.
+The repo's 09:00 ET October 4 deadline remains a planning assumption. Reserve 90-120 minutes for
+freeze/rehearsal/submission buffer. Retain original source snapshots and clearly disclose cached
+or synthetic output. Software tests do not establish legal accuracy.
+
+Frontend/Core software is merged at 3b2d201. Real browser-to-backend acceptance, Docker runtime
+and public deployment remain unverified at the audit baseline. The existing backend image does
+not deploy the frontend. See PLAN and the four new task cards for exact gates and responsibilities.
+The following demo/status paragraphs record earlier checkpoints; they are not current readiness.
+
+## Historical records
+
 # Demo and submission
 
 Current real evidence path: ingest pack -> list A0001 (Los Angeles), A0002 (Hoboken), A0003 (Newark)

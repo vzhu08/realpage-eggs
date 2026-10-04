@@ -1,26 +1,23 @@
-# Starter prompt — Platform/API / Vincent
+# Starter: Vincent / Platform/API
 
-You coordinate four human lanes: Platform/API, Core A Rules & Evaluation (existing author Daniel),
-Core B Questions & Rendering (new human pending), and Frontend/UX (Claude Code). Read AGENTS,
-docs/Hackathon_Development_Playbook.txt, OWNERSHIP, TASKS, ASSIST_CONTRACT and Platform cards.
-Current checkout C:\Users\vzhu0\PycharmProjects\realpage-eggs, branch codex/research-platform.
-Stop/handoff any current writer before replacement; record the actual session/base. COORD-02 is this
-staffing/docs revision. PLAT-03/04/05 implementation is a034e2b, locally checked with 74 tests.
+Assigned next task: [PLAT-06](../tasks/PLAT-06.md). Read that card, AGENTS, OWNERSHIP,
+PLAN, CONTRACTS, ASSIST_CONTRACT and the current playbook before editing.
+Main already includes Core A/B and frontend at `3b2d201`; the old candidate-only setup is historical.
+Use a reviewed base including accepted COORD-04 fixes and relevant later integration work.
 
-The user-requested Git repair pulled origin/main 354089f as merge 1f12f5b; this branch now tracks
-origin/main because the former remote feature branch was deleted. No remote push was performed.
-Fetched Core candidate c92ad8f contains both Core A/B features already; inspect docs/core/CORE_HANDOFF.md
-on that branch. Reported 96 tests belong to that candidate, not the combined Platform/API implementation.
+Finish the existing PLAT-05 assignment before overlapping Platform work. Review local PLAT-04 continuation 11afb55. Assemble a new verified snapshot from immutable inputs, steward additive contracts, wire source disagreements and evidence export, and verify the complete frontend/API release.
 
-Platform stewards models, generated contracts, facts, API/source services, persistence/exports,
-root dependencies/env, shared docs and the merge queue. Core A owns engine/predicates/extraction/traces;
-Core B owns planner/renderer/core_assist.py. UX owns all frontend/**. Preserve those boundaries.
+Core A owns evaluation/source-comparison semantics; Core B owns questions/rendering; UX owns frontend.
 
-Next bounded work: coordinate Daniel's release of Core B paths, allocate the new human's separate checkout,
-and review the existing Core candidate for combined integration. Do not rebuild another lane's features.
-Preserve candidate commits/evidence. After authorized integration, refresh generated examples and run real
-assist question -> answer -> remaining uncertainty tests, renderer/source comparisons and official exports.
-Core A handles live extraction when key/model exist; Core B handles planner/rendering quality; UX handles UI.
-Remaining PLAT-01 geocode recovery and PLAT-02 packaging are independent tasks. Record exact claims first.
-Return local commits, exact checks, provenance modes and blockers through the board. No external messages,
-push, merge beyond the user's specific requested pull, deployment or extra agents are implied by this prompt.
+Verify your actual checkout, current writer, branch, base SHA and existing changes; record them
+in the card. Its suggested branch is not an allocated checkout. Use private mutable data/cache,
+retain original source snapshots, and preserve all author history. One writer per file.
+Daniel's Core B path release is recorded in CORE_A_HANDOFF. No new session has been started or messaged.
+
+The card defines exact allowed paths, dependencies, acceptance and checks. Start independent work
+against current interfaces while Platform prepares the minimum new contract. Planned fields are
+not implemented endpoints. Use labeled fixtures for development, then separately verify real data.
+
+Return commit, changed paths, exact commands/results, data/provenance mode, unresolved evidence,
+contract requests and the next action. Do not claim legal accuracy from software tests. Use applicable
+human authority for provider resumption, pushes, merges, deployment, external messages or submission.

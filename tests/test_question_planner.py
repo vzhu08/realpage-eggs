@@ -396,7 +396,8 @@ def test_nonfinite_partition_bounds_stay_explicitly_partial(rule, prop, resoluti
     prop.facts.pop('units')
     ctx = context_for(rule, prop, resolution)
     if origin == 'property_bound':
-        ctx.property.bounds['units'] = Bound(lower=2, upper=value, provenance='Synthetic malformed bound')
+        # Deliberately bypass ingress validation to retain the consumer's defensive check.
+        ctx.property.bounds['units'] = Bound.model_construct(lower=2, upper=value, provenance='Synthetic malformed bound')
     else:
         ctx.fact_definitions['units'] = FACT_DEFINITIONS['units'].model_copy(update={'maximum': value})
     plan = plan_questions(ctx)
