@@ -1,0 +1,106 @@
+{
+  "version": "base-lineage-restoration-audit-v1",
+  "label": "HISTORICAL_PROVIDER_LINEAGE_INCOMPLETE_NO_BASE_PROMOTION",
+  "input_hashes": {
+    "rules.json": "ec75fef75ba44f119b1b184a327ac1d9db70134249cceb64649e3e8c2a9b70a6",
+    "sources.json": "c23ee3be0c033e2ae3c251654841963b03851dccdb26fb1d99248a7b20a3f7b7",
+    "extraction_index.json": "c59552d192c6788573bc73d3464f13ccdd2170b60b8083b3bc323513c150d8b6",
+    "addresses.json": "47876fe94bac5200ffc991b68117867dbc8121aab528441d33e5d28a568b8c18",
+    "resolutions.json": "6f0610b557c11d3b75e864b384e309d8da322457ddcc74d4d799dbfec888c860"
+  },
+  "input_store_unchanged": true,
+  "input_reconstruction_label": "OFFLINE_API_RECONSTRUCTION_FOR_ANALYSIS_NOT_ORIGINAL_RELEASE",
+  "full_original_base_found": false,
+  "current_rules": 678,
+  "local_run_files": 16,
+  "referenced_missing_runs": 60,
+  "current_rules_with_missing_original_run": 654,
+  "tracked_original_archive": {
+    "path": "docs/core_rules/snapshots/core-store.zip",
+    "sha256": "157581d64b1c19fdfcc0414d08bbd0ffeeeca60e3142bd621a7152fe5c6e44bc",
+    "files": 110,
+    "runs": 21,
+    "extraction_caches": 16,
+    "original_rule_count": 140,
+    "identical_current_rules": 130
+  },
+  "genuinely_available_historical_runs": [
+    {
+      "run_id": "296de71f2c794d6c9ca3ed48f133ebb2",
+      "archive_member": "runs/296de71f2c794d6c9ca3ed48f133ebb2.json",
+      "member_sha256": "f9a9d0b7bf9feb8f3f531315da42f8789fe942a1fed74ef89aada89a60768a18",
+      "operation": "extract",
+      "outcome": "partial",
+      "finished_at": "2026-10-04T00:09:47.066896+00:00",
+      "current_rule_count": 54
+    },
+    {
+      "run_id": "2c214d19d3b944a29f98847f16db16ca",
+      "archive_member": "runs/2c214d19d3b944a29f98847f16db16ca.json",
+      "member_sha256": "b34d9c15fb6c5bb4035a15375f6f965d341066695122ff84ed215621cd230ec6",
+      "operation": "extract",
+      "outcome": "success",
+      "finished_at": "2026-10-03T23:02:13.052294+00:00",
+      "current_rule_count": 2
+    },
+    {
+      "run_id": "6a01da26bbd44b0ca364b8f4988dcacd",
+      "archive_member": "runs/6a01da26bbd44b0ca364b8f4988dcacd.json",
+      "member_sha256": "5cbd256cc5a12376d40e74d2a7e8aa9e3ecd226d16cb9a90e9e4e5c37ffdae92",
+      "operation": "extract",
+      "outcome": "success",
+      "finished_at": "2026-10-03T23:24:15.653165+00:00",
+      "current_rule_count": 14
+    },
+    {
+      "run_id": "dec1982a0b2e4fe29ce31e8862b01430",
+      "archive_member": "runs/dec1982a0b2e4fe29ce31e8862b01430.json",
+      "member_sha256": "32c8362f9abe632fc7bd66bf19d4dc2cdb12ef823a7a9f261735d6cb3d36d1b3",
+      "operation": "extract",
+      "outcome": "partial",
+      "finished_at": "2026-10-03T23:46:14.118787+00:00",
+      "current_rule_count": 60
+    }
+  ],
+  "identical_archived_current_rule_id_list_sha256": "df6b39e238b6125674384d0860231f71336acde28c33913db3f69b4e08c92530",
+  "hypothetical_additive_restore_remaining_missing_runs": 56,
+  "hypothetical_additive_restore_remaining_rules_without_original_run": 524,
+  "correction_target_origins": [
+    {
+      "source_doc_id": "D023",
+      "run_id": "f61806a3f211498e97f93548c10cfc64",
+      "current_rule_count": 27,
+      "original_run_or_cache_found": false
+    },
+    {
+      "source_doc_id": "D025",
+      "run_id": "322a5320d216434d8da5c1697382f252",
+      "current_rule_count": 58,
+      "original_run_or_cache_found": false
+    }
+  ],
+  "final_research_archive": {
+    "path": "docs/change_case_results/final-research-archive.zip",
+    "sha256": "0ff9f391169958bcdaa4695995a4a0b7bef9c179112ad1043134929a74ccd1a2",
+    "run_files": 16,
+    "contains_missing_historical_runs": false
+  },
+  "search_scope": [
+    "Tracked original Core archive and final research archive members",
+    "Loose JSON/ZIP filenames throughout the task workspace, excluding Git internals/dependencies",
+    "Loose matching run filenames under temporary artifacts, Downloads and Codex worktrees"
+  ],
+  "known_limitation_evidence": [
+    {
+      "path": "artifacts/local-app-2026-10-04/data/capture_manifest.json",
+      "statement": "Original extraction run files, raw provider responses, cache, negative findings and source comparisons are unavailable."
+    },
+    {
+      "path": "docs/change_case_results/README.md",
+      "line": 29,
+      "statement": "Original provider artifacts for 654 older retained rule records remain unavailable because the baseline was reconstructed from captured API responses."
+    }
+  ],
+  "conclusion": "The missing 296de71f2c794d6c9ca3ed48f133ebb2 run genuinely exists as a completed partial run in the older tracked Core archive. This alone cannot supply a complete 678-rule base: the D023 and D025 correction origins and 524 other current historical rule origins remain unavailable after accounting for 130 identical archived records. No completion, provider output, cache or original extraction provenance may be reconstructed from inference.",
+  "actions": "Audit only. No archive files restored, no mixed base assembled, no input Store edits, no provenance-gate changes, no provider calls."
+}

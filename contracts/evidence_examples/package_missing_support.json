@@ -163,7 +163,8 @@
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
           "extraction_run_id": "d0d99fbaee7a40ebb8c397cde3fb7778",
-          "semantic_verification": "synthetic_fixture"
+          "semantic_verification": "synthetic_fixture",
+          "source_review": null
         }
       },
       "sources": {
@@ -199,7 +200,8 @@
         "mode": "synthetic",
         "label": "SYNTHETIC_NOT_ACTUAL_LAW"
       },
-      "semantic_reviews": {}
+      "semantic_reviews": {},
+      "source_reviews": {}
     },
     "response": {
       "lookup": {
@@ -437,7 +439,8 @@
             "team_rule_id": "r-694ad9fbae9083966e86",
             "evidence_mode": "synthetic",
             "extraction_run_id": "d0d99fbaee7a40ebb8c397cde3fb7778",
-            "semantic_verification": "needs_review"
+            "semantic_verification": "needs_review",
+            "source_review": null
           }
         ],
         "sources": [
@@ -1112,7 +1115,7 @@
       "evidence_reports": [
         {
           "rule_id": "r-694ad9fbae9083966e86",
-          "rule_hash": "e19ef4386412cf60cad54a32a52a29d4387f0c0a565773a9042d9c86c8cc3186",
+          "rule_hash": "76cc24a322dfad06ad64afeea4ceafd00e7e9e12df090606858d02f6e4d0f8ff",
           "checks": [
             {
               "kind": "source_eligibility",
@@ -1226,7 +1229,7 @@
             "status": "missing",
             "limits": {
               "max_depth": 2,
-              "max_chars": 24000,
+              "max_chars": 32000,
               "max_spans": 12
             },
             "limits_hit": [],
@@ -1298,7 +1301,7 @@
         "navigator/__init__.py": "279710f99c5c14d54c4b5bf7336be4848dd252749083477baddd35b10ef95531",
         "navigator/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
         "navigator/api.py": "3b593aaa7ba99905355619c4ca06df81395e0bdc2ff497f6d9cc3d268896ac0b",
-        "navigator/assist_cache.py": "217ba51b583bc3c183f48ed16474b6855ea3a84d603adacd2594c7c7c12befed",
+        "navigator/assist_cache.py": "a7448130eba402f11d823bef6060ec6e6ddbf76321020732439b87e372e954d6",
         "navigator/assist_service.py": "f01800c14d24a4592c5ac6ca21435d058e85c23e2f702c78c21f8e492a0056d4",
         "navigator/assist_wire.py": "534601f1c62b8b6c5e81ee0889ed1d666e0c737057740bcf1055f865ec614a4a",
         "navigator/changes.py": "a423aa473407d0620d5c57da421d0df7e251ee72acdfb9ebe1746cc80b91c9ec",
@@ -1308,33 +1311,35 @@
         "navigator/core_assist.py": "79128ba6cdb95cb5afc104d9b993105cd12928ba65c568b702fcb5c490d68e61",
         "navigator/demo.py": "db337c9e6c4adb583e9dcba4b6fa39d9bb531b42a9f4711bcdbeeffc9b0a0d47",
         "navigator/engine.py": "adef99bc3d59abb1a4cc8e30bd24b7dd37f84fbebeab8fd8bda753d1344d474b",
-        "navigator/evidence.py": "845c81cdd8687917f6a8d81331e1c9270894d68115da7eccd7d2f5da60424d81",
-        "navigator/evidence_package.py": "c380327a7c2a3582c4a575e95703adba9c43f8a2f448ecaeff6234d0bf4eef99",
+        "navigator/evidence.py": "3b3527c263487a00617b893a8a63a98774769790407fdf44fc847269d6d93cd5",
+        "navigator/evidence_package.py": "81f691f43982291a7ec0bc7b9d85d7f43d19b9e0ee99983f83a9656333a6d04f",
         "navigator/export.py": "3c4f2b6d13c93bd1be916321d30040e10b9039dcc7ae0ab65f3a81e9ebee7fdc",
-        "navigator/extraction.py": "051c4217b76e0db6273e3eb1bd8ccb5c4f9fde70b2623c5ea747bf2d9860bb16",
-        "navigator/fact_inputs.py": "1d945b9bce5145e1aabcb2846e1a31a1425fbdaef4f3086a025aaa63fce6632e",
+        "navigator/extraction.py": "475c4a7fa8517dc1180786ec6573bf0aba8052077d53bcc263b5e9a971cf4d5b",
+        "navigator/fact_inputs.py": "4718e85e8d5c93a61bfab7ea53ede539d11e9209489707c56ef417d313206ce9",
         "navigator/geocode.py": "f5ce5fd996950fe701f8dc556f706c4eac80db396efd39d2c9703517dd9f7d27",
         "navigator/ingest.py": "3c72d47b0adea5c4559cc3fa6da4e9e5d5296b2f88bdc7486eb8370602915dd8",
-        "navigator/models.py": "8c4b9146ce559c24567fbfbaa1273f23e4110b21f818a8e2fffe361c9c4647fe",
+        "navigator/models.py": "4c6ddd38ec666044713a114b709485c30c480decfd4acb74f49a91758580ce80",
         "navigator/predicates.py": "36e6cd612f6847405088b06c0695b25f3c184c8336211791bf513a0a63770cf8",
-        "navigator/question_planner.py": "33263f28b849caa5e10380d919672c9bca39bf6a2ada6de2edafd329a892d23a",
+        "navigator/question_planner.py": "0bb4265e3c4a7de87951d87221a479248f577770204d323fb4d6e53c7b23688e",
         "navigator/research_fixtures.py": "7de7a954f3c22f27f66297335dce19ce5ceb94f6d1e759b494ea35849f12b4fb",
-        "navigator/retrieval.py": "c4ec0a74edfaa9d780b22d838452bbeddf8e900120a4baccf71f7edcebbc0f94",
+        "navigator/retrieval.py": "647030345358b253d397a2a85e8430c34b06c434282aa46121a02267f32ab80e",
+        "navigator/reviewed_context.py": "8e3fb6c61051b2375257b181abfeda8403e126925f6d60c4ccd8273b408bcd9b",
         "navigator/rule_renderer.py": "794f9ca6a2aadd76b0928dd1838ea0380379b746fbd09f9d25a53f5f163bf8b6",
         "navigator/semantic_review.py": "2f53998d2c36585846ffae9126b91f6254341e8a47a256ef3e463eff70305da0",
         "navigator/service.py": "b76a80f1c2c75af2fecc9ca4a895a4aa65df34fe2eec3a4844c9f627f063a8c4",
         "navigator/source_comparison.py": "21913cf58bc6703f7f882e343c53e31f95de93452a8b25aca538ee9823ed1140",
         "navigator/source_inventory.py": "3f90d627fce96a33a21925f1e3a44237c8f89f6931d5dd9708f4dd92106afae1",
         "navigator/source_policy.py": "4eb1e87783c140810858241e108aadb6a7979dd7b98da624515e3840556ef75c",
+        "navigator/source_review.py": "c97c733e1191cce99187d772060861194019196490910adf5a9f6930bbae4684",
         "navigator/store.py": "9b800afea3685c29690512d2f266fe6850340c03b70bfb0f4dff90ed002ba31d",
         "navigator/validation.py": "3210f6145fd4a9398ed1cea132b63226c5fecc78912f37f2c8a6cbfb47c8b90a",
         "requirements.lock": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8"
       },
-      "fingerprint": "39a24a44e5b863b16886b6922e150d6d1e3d0bb8da698e7e66061d2a7f3e4893"
+      "fingerprint": "8e0ebc8645d3e4419ee8163bbe79b916953a13a60c655b7bf41e3d44ead1fdc4"
     },
-    "input_sha256": "296e1e5a33fbab0137b3acd11f3da272dab354f9fc9581d0e9832b687808313c",
-    "response_sha256": "0add6fa5c2a9b49c7cc92692d6b98ec1e39eed68854282e33b9f3683eda2f53c",
-    "package_sha256": "88f37843658053d826977b390d2e1d8352a73780f046294197c2a9762f70045e",
+    "input_sha256": "bf5a895d2d9d68056a4926bfb6638aef029dd3608e6a36fbc253df9f8e35ffc0",
+    "response_sha256": "b61c71b68e94d46fc0b1b7b476045f3e2d859d9ae815a1049b31aa7d82d43dc1",
+    "package_sha256": "0a9c8ff487c4ee5b007ffd9daeb4ea2e692341822c82eab5bcbb90e5c3fd2811",
     "limitations": [
       "Reproduction verifies software output, not legal accuracy or complete source coverage.",
       "Original facts and submitted answers are separate; answers remain unverified and request-local.",

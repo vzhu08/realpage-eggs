@@ -1746,6 +1746,13 @@
             },
             "type": "object",
             "title": "Semantic Reviews"
+          },
+          "source_reviews": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SourceReviewRecord"
+            },
+            "type": "object",
+            "title": "Source Reviews"
           }
         },
         "additionalProperties": false,
@@ -2995,6 +3002,17 @@
               "synthetic_fixture"
             ],
             "title": "Semantic Verification"
+          },
+          "source_review": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SourceReview"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Separate post-extraction correction record. evidence_mode and extraction_run_id retain the original extraction origin."
           }
         },
         "additionalProperties": false,
@@ -3285,6 +3303,7 @@
             "type": "string",
             "enum": [
               "resolved",
+              "not_applicable",
               "missing",
               "ambiguous",
               "cycle",
@@ -3438,6 +3457,249 @@
           "authority"
         ],
         "title": "SourceDocument"
+      },
+      "SourceReview": {
+        "properties": {
+          "review_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$",
+            "title": "Review Id"
+          },
+          "reviewer": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Reviewer",
+            "default": "Codex source review"
+          },
+          "reviewed_at": {
+            "type": "string",
+            "title": "Reviewed At"
+          },
+          "original_rule_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Original Rule Sha256"
+          },
+          "original_extraction_run_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Original Extraction Run Id"
+          },
+          "changed_fields": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "title",
+                "requirement",
+                "key_value",
+                "coverage_conditions",
+                "exemption_conditions",
+                "exemptions",
+                "lifecycle",
+                "effective_date",
+                "end_date",
+                "status_as_of",
+                "status_events",
+                "evidence",
+                "interactions",
+                "penalties",
+                "review_issues",
+                "conflict_flag",
+                "conflict_note",
+                "semantic_verification"
+              ]
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Changed Fields"
+          },
+          "source_hashes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "minProperties": 1,
+            "title": "Source Hashes"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Evidence"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Notes"
+          },
+          "review_scope": {
+            "type": "string",
+            "enum": [
+              "selected_fields",
+              "complete_rule"
+            ],
+            "title": "Review Scope",
+            "default": "selected_fields"
+          },
+          "reviewed_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reviewed Fields"
+          },
+          "context_scope": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "title": "Context Scope"
+          },
+          "context_scope_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context Scope Note"
+          },
+          "context_reference_decisions": {
+            "items": {
+              "$ref": "#/components/schemas/SourceReviewReferenceDecision"
+            },
+            "type": "array",
+            "title": "Context Reference Decisions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "review_id",
+          "reviewed_at",
+          "original_rule_sha256",
+          "original_extraction_run_id",
+          "changed_fields",
+          "source_hashes",
+          "evidence",
+          "notes"
+        ],
+        "title": "SourceReview",
+        "description": "Post-extraction correction provenance, not independent legal certification."
+      },
+      "SourceReviewRecord": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "const": "rule-source-review-v1",
+            "title": "Version",
+            "default": "rule-source-review-v1"
+          },
+          "rule_id": {
+            "type": "string",
+            "title": "Rule Id"
+          },
+          "original_rule": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Original Rule"
+          },
+          "amended_rule_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Amended Rule Sha256"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rule_id",
+          "original_rule",
+          "amended_rule_sha256"
+        ],
+        "title": "SourceReviewRecord"
+      },
+      "SourceReviewReferenceDecision": {
+        "properties": {
+          "origin": {
+            "$ref": "#/components/schemas/SourceReviewReferenceSpan"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "resolved",
+              "not_applicable"
+            ],
+            "title": "Status"
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Explanation"
+          },
+          "target_spans": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "title": "Target Spans"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "origin",
+          "status",
+          "explanation"
+        ],
+        "title": "SourceReviewReferenceDecision"
+      },
+      "SourceReviewReferenceSpan": {
+        "properties": {
+          "doc_id": {
+            "type": "string",
+            "title": "Doc Id"
+          },
+          "quote": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Quote"
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Start"
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "End"
+          },
+          "supports": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Supports"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "doc_id",
+          "quote",
+          "start",
+          "end"
+        ],
+        "title": "SourceReviewReferenceSpan"
       },
       "SourceSpan": {
         "properties": {

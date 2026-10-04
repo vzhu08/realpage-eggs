@@ -1,5 +1,5 @@
 {
- "digest": "781213730391a798",
+ "digest": "40c9c981231626dc",
  "defs": {
   "AddressItem": {
    "properties": {
@@ -1089,6 +1089,12 @@
     "semantic_reviews": {
      "additionalProperties": {
       "$ref": "SemanticReview"
+     },
+     "type": "object"
+    },
+    "source_reviews": {
+     "additionalProperties": {
+      "$ref": "SourceReviewRecord"
      },
      "type": "object"
     }
@@ -2218,6 +2224,17 @@
       "needs_review",
       "synthetic_fixture"
      ]
+    },
+    "source_review": {
+     "anyOf": [
+      {
+       "$ref": "SourceReview"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "Separate post-extraction correction record. evidence_mode and extraction_run_id retain the original extraction origin."
     }
    },
    "additionalProperties": false,
@@ -2473,6 +2490,7 @@
      "type": "string",
      "enum": [
       "resolved",
+      "not_applicable",
       "missing",
       "ambiguous",
       "cycle",
@@ -2606,6 +2624,219 @@
     "sha256",
     "capture_status",
     "authority"
+   ]
+  },
+  "SourceReview": {
+   "properties": {
+    "review_id": {
+     "type": "string",
+     "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$"
+    },
+    "reviewer": {
+     "type": "string",
+     "minLength": 1,
+     "default": "Codex source review"
+    },
+    "reviewed_at": {
+     "type": "string"
+    },
+    "original_rule_sha256": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "original_extraction_run_id": {
+     "type": "string",
+     "minLength": 1
+    },
+    "changed_fields": {
+     "items": {
+      "type": "string",
+      "enum": [
+       "title",
+       "requirement",
+       "key_value",
+       "coverage_conditions",
+       "exemption_conditions",
+       "exemptions",
+       "lifecycle",
+       "effective_date",
+       "end_date",
+       "status_as_of",
+       "status_events",
+       "evidence",
+       "interactions",
+       "penalties",
+       "review_issues",
+       "conflict_flag",
+       "conflict_note",
+       "semantic_verification"
+      ]
+     },
+     "type": "array",
+     "minItems": 1
+    },
+    "source_hashes": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object",
+     "minProperties": 1
+    },
+    "evidence": {
+     "items": {
+      "$ref": "Evidence"
+     },
+     "type": "array",
+     "minItems": 1
+    },
+    "notes": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array",
+     "minItems": 1
+    },
+    "review_scope": {
+     "type": "string",
+     "enum": [
+      "selected_fields",
+      "complete_rule"
+     ],
+     "default": "selected_fields"
+    },
+    "reviewed_fields": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "context_scope": {
+     "items": {
+      "$ref": "Evidence"
+     },
+     "type": "array"
+    },
+    "context_scope_note": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "context_reference_decisions": {
+     "items": {
+      "$ref": "SourceReviewReferenceDecision"
+     },
+     "type": "array"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "review_id",
+    "reviewed_at",
+    "original_rule_sha256",
+    "original_extraction_run_id",
+    "changed_fields",
+    "source_hashes",
+    "evidence",
+    "notes"
+   ],
+   "description": "Post-extraction correction provenance, not independent legal certification."
+  },
+  "SourceReviewRecord": {
+   "properties": {
+    "version": {
+     "type": "string",
+     "const": "rule-source-review-v1",
+     "default": "rule-source-review-v1"
+    },
+    "rule_id": {
+     "type": "string"
+    },
+    "original_rule": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "amended_rule_sha256": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "rule_id",
+    "original_rule",
+    "amended_rule_sha256"
+   ]
+  },
+  "SourceReviewReferenceDecision": {
+   "properties": {
+    "origin": {
+     "$ref": "SourceReviewReferenceSpan"
+    },
+    "status": {
+     "type": "string",
+     "enum": [
+      "resolved",
+      "not_applicable"
+     ]
+    },
+    "explanation": {
+     "type": "string",
+     "minLength": 1
+    },
+    "target_spans": {
+     "items": {
+      "$ref": "Evidence"
+     },
+     "type": "array"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "origin",
+    "status",
+    "explanation"
+   ]
+  },
+  "SourceReviewReferenceSpan": {
+   "properties": {
+    "doc_id": {
+     "type": "string"
+    },
+    "quote": {
+     "type": "string",
+     "minLength": 1
+    },
+    "start": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "end": {
+     "type": "integer",
+     "minimum": 1
+    },
+    "supports": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array",
+     "minItems": 1
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "doc_id",
+    "quote",
+    "start",
+    "end"
    ]
   },
   "SourceSpan": {

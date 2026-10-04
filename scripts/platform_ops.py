@@ -113,7 +113,7 @@ def release_inputs(data, frontend):
                 f"Unexpected public file: {name}")
         require(path.parts[0] not in {"api", "data", "navigator", "config"}, f"Reserved public path: {name}")
     selected = {name: value for name, value in data_hashes.items() if name in SERVING_FILES
-                or (name.startswith(("semantic_reviews/", "change_cache/")) and name.endswith(".json"))}
+                or (name.startswith(("semantic_reviews/", "source_reviews/", "change_cache/")) and name.endswith(".json"))}
     return selected, public_hashes
 
 

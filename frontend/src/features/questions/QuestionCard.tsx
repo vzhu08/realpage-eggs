@@ -22,6 +22,7 @@ interface Props {
 
 // Short labels only: the service's complete qualification remains visible below.
 const CONCISE_TITLES: Record<string, string> = {
+  used_as_tenant_dwelling: 'Is this a tenant’s home under a rental agreement?',
   person_under_bpc_16702: 'Is the actor a “person” under BPC §16702?',
   end_consumer_of_product_or_service: 'Is the same actor the end consumer?',
 };

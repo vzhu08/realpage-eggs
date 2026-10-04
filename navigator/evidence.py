@@ -6,6 +6,8 @@ from .models import EvidenceCheck, EvidenceReport, SemanticReview, SourceContext
 from .retrieval import ContextRetriever, section_key, span
 from .store import digest
 from .source_policy import rule_source_issues, source_use
+from .source_review import source_review_original, SourceReviewError
+from .reviewed_context import reviewed_context
 
 
 def rule_hash(rule):
@@ -21,7 +23,7 @@ def all_evidence(rule):
     return rule.evidence + [e for event in rule.status_events for e in event.evidence] + [e for interaction in rule.interactions for e in interaction.evidence]
 
 
-def check_rule(rule, sources, retriever=None, semantic=None):
+def check_rule(rule, sources, retriever=None, semantic=None, validated_source_review=None):
     retriever = retriever or ContextRetriever(sources)
     checks, anchors, blocking = [], [], []
     primary = sources.get(rule.source_doc_id)
@@ -72,8 +74,12 @@ def check_rule(rule, sources, retriever=None, semantic=None):
             checks.append(EvidenceCheck(kind="citation_anchor", status="pass" if len(candidates) == 1 else "ambiguous" if candidates else "not_checked", message=f"Citation section {number}: " + ("unique heading located; authority/meaning not established" if len(candidates) == 1 else "no unique structured section anchor in this snapshot"), spans=[span(primary, a, b, label) for label, a, b in candidates[:2]]))
     else:
         checks.append(EvidenceCheck(kind="citation_anchor", status="not_checked", message="No supported section identifier parsed from citation; quote presence does not validate citation identity"))
-    context = retriever.context(anchors)
-    gaps = [d for d in context.dependencies if d.status != "resolved"]
+    scoped = validated_source_review and validated_source_review.context_scope
+    context = reviewed_context(validated_source_review, sources) if scoped else retriever.context(anchors)
+    if validated_source_review:
+        checks.append(EvidenceCheck(kind="source_identity", status="pass",
+            message="Post-extraction AI source review matches the original rule, amended payload, and exact retained source bytes; not independent legal validation"))
+    gaps = [d for d in context.dependencies if d.status not in {"resolved", "not_applicable"}]
     checks.append(EvidenceCheck(kind="dependencies", status="insufficient" if gaps or context.status != "available" else "pass", message="Missing, ambiguous, cyclic or bounded context remains" if gaps or context.status != "available" else "Recognized explicit references resolved within bounded snapshot context; not exhaustive legal reference coverage"))
     blocking.extend(f"cross_reference:{d.reference}:{d.status}" for d in gaps)
     if context.limits_hit: blocking.append("context_incomplete:" + ",".join(context.limits_hit))
@@ -102,7 +108,17 @@ def prepare_rules(store):
     reports, prepared = {}, {}
     for ident, rule in rules.items():
         cached = store.read(f"semantic_reviews/{semantic_key(rule, sources)}.json")
-        report = check_rule(rule, sources, retriever, cached)
+        validated, review_error = None, None
+        if rule.source_review:
+            try:
+                source_review_original(store, rule, sources)
+                validated = rule.source_review
+            except (SourceReviewError, OSError, ValueError) as error:
+                review_error = str(error)
+        report = check_rule(rule, sources, retriever, cached, validated)
+        if review_error:
+            report.checks.append(EvidenceCheck(kind="source_identity", status="stale", message=review_error))
+            report.blocking_issues.append("invalid_source_review")
         source = sources.get(rule.source_doc_id)
         extracted_hash = extraction_index.get(rule.source_doc_id, {}).get("sha256")
         if source and extracted_hash and extracted_hash != source.sha256:

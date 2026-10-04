@@ -165,7 +165,7 @@ export function ChecksTab({ rule, report, reportState, reportLoading, loaded }: 
             <ul className="plain-list">
               {report.context.dependencies.map((dependency, index) => (
                 <li key={index}>
-                  <Tag tone={dependency.status === 'resolved' ? 'applies' : dependency.status === 'missing' ? 'danger' : 'unknown'}>{sentence(dependency.status)}</Tag> <strong>{dependency.reference}</strong> — {dependency.explanation}
+                  <Tag tone={dependency.status === 'resolved' ? 'applies' : dependency.status === 'not_applicable' ? 'muted' : dependency.status === 'missing' ? 'danger' : 'unknown'}>{sentence(dependency.status)}</Tag> <strong>{dependency.reference}</strong> — {dependency.explanation}
                 </li>
               ))}
             </ul>

@@ -120,6 +120,6 @@ def test_registration_preserves_review_gates_and_unregistered_input_rejection(ac
     assert result.coverage.value == "true" and result.result == "unknown"
     with TestClient(create_app(actor_store.root)) as client:
         response = client.post("/api/v1/lookup/assist", json={**REQUEST,
-            "answers": [answer("used_as_tenant_dwelling", True)]})
+            "answers": [answer("fictional_unregistered_fact", True)]})
         assert response.status_code == 422
         assert "Unsupported supplemental fact" in response.text

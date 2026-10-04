@@ -32,6 +32,17 @@ import {
 
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
 
+test('source review contract requires a nonempty source-hash map', () => {
+  const report = validate('SourceReview', {
+    review_id: 'test', reviewer: 'Fictional source review', reviewed_at: '2026-10-04T12:00:00Z',
+    original_rule_sha256: 'a'.repeat(64), original_extraction_run_id: 'fictional',
+    changed_fields: ['effective_date'], source_hashes: {},
+    evidence: [{ doc_id: 'SYNTH', start: 0, end: 24, quote: 'Fictional source wording', supports: ['effective_date'] }],
+    notes: ['Synthetic validation test'],
+  });
+  assert.ok(report.errors.some((error) => error.includes('source_hashes: fewer than 1 properties')));
+});
+
 test('generated types, schemas and meta are in sync with contracts/', () => {
   const script = fileURLToPath(new URL('../../scripts/generate-contract-types.mjs', import.meta.url));
   const output = execFileSync(process.execPath, [script, '--check'], { encoding: 'utf8' });

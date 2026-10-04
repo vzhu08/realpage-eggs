@@ -13,7 +13,7 @@ from .config import DISCLAIMER, ROOT, VERSION
 from .evidence import semantic_key
 from .models import (EvidenceCodeVersion, EvidencePackage, EvidencePackageInputs,
                      EvidencePackageRequest, EvidenceReplayResult, JurisdictionResolution,
-                     PropertyFacts, Rule, SemanticReview, SourceDocument)
+                     PropertyFacts, Rule, SemanticReview, SourceDocument, SourceReviewRecord)
 from .service import DatasetUnavailable
 from .store import Store, digest, write_json
 
@@ -27,7 +27,8 @@ class PackageStore(Store):
         self.values = {"addresses.json": {inputs.original_property.address_id: values["original_property"]},
                        "resolutions.json": {inputs.jurisdiction.address_id: values["jurisdiction"]},
                        **{f"{name}.json": values[name] for name in ("rules", "sources", "dataset", "extraction_index")},
-                       **{f"semantic_reviews/{key}.json": value for key, value in values["semantic_reviews"].items()}}
+                       **{f"semantic_reviews/{key}.json": value for key, value in values["semantic_reviews"].items()},
+                       **{f"source_reviews/{key}.json": value for key, value in values["source_reviews"].items()}}
 
     def read(self, name, default=None):
         return deepcopy(self.values.get(name, default))
@@ -71,14 +72,20 @@ def capture_inputs(store, request):
     dataset = capture("dataset.json", {})
     # Do not include local pack paths or arbitrary deployment configuration.
     dataset = {key: dataset[key] for key in ("mode", "label", "input_hashes", "ingest_run_id") if key in dataset}
-    reviews = {}
+    reviews, source_reviews = {}, {}
     for rule in rules.values():
         key = semantic_key(rule, sources)
         value = capture(f"semantic_reviews/{key}.json", None)
         if value is not None:
             reviews[key] = SemanticReview.model_validate(value)
+        if rule.source_review:
+            review_id = rule.source_review.review_id
+            value = capture(f"source_reviews/{review_id}.json", None)
+            if value is not None:
+                source_reviews[review_id] = SourceReviewRecord.model_validate(value)
     inputs = EvidencePackageInputs(original_property=prop, jurisdiction=jurisdiction, rules=rules,
-                                   sources=sources, extraction_index=index, dataset=dataset, semantic_reviews=reviews)
+                                   sources=sources, extraction_index=index, dataset=dataset, semantic_reviews=reviews,
+                                   source_reviews=source_reviews)
     check_input_ids(inputs, request)
     for name, raw in captured.items():
         path = store.path(name)

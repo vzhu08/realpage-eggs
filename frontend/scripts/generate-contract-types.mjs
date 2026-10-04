@@ -36,7 +36,7 @@ const research = JSON.parse(researchRaw);
 const KNOWN = new Set([
   '$ref', '$defs', 'type', 'properties', 'required', 'additionalProperties', 'items', 'anyOf',
   'enum', 'const', 'default', 'title', 'description', 'format', 'pattern', 'minimum', 'maximum',
-  'minLength', 'maxLength', 'minItems', 'maxItems',
+  'minLength', 'maxLength', 'minItems', 'maxItems', 'minProperties',
 ]);
 
 const stable = (value) =>

@@ -1,0 +1,145 @@
+{
+  "before": {
+    "A0001": {
+      "results": {
+        "unknown": 221
+      },
+      "temporal": {
+        "in_force": 102,
+        "unknown": 119
+      },
+      "runtime_blocked": 217,
+      "review_issue_occurrences": 4106
+    },
+    "A0002": {
+      "results": {
+        "unknown": 80,
+        "not_yet_effective": 8
+      },
+      "temporal": {
+        "unknown": 68,
+        "not_yet_effective": 8,
+        "in_force": 12
+      },
+      "runtime_blocked": 39,
+      "review_issue_occurrences": 1487
+    },
+    "A0006": {
+      "results": {
+        "unknown": 204,
+        "pending": 5
+      },
+      "temporal": {
+        "unknown": 197,
+        "in_force": 7,
+        "pending": 5
+      },
+      "runtime_blocked": 50,
+      "review_issue_occurrences": 2951
+    }
+  },
+  "after": {
+    "A0001": {
+      "results": {
+        "unknown": 221
+      },
+      "temporal": {
+        "in_force": 146,
+        "unknown": 75
+      },
+      "runtime_blocked": 214,
+      "review_issue_occurrences": 4015
+    },
+    "A0002": {
+      "results": {
+        "unknown": 80,
+        "not_yet_effective": 8
+      },
+      "temporal": {
+        "unknown": 68,
+        "not_yet_effective": 8,
+        "in_force": 12
+      },
+      "runtime_blocked": 39,
+      "review_issue_occurrences": 1487
+    },
+    "A0006": {
+      "results": {
+        "unknown": 204,
+        "pending": 5
+      },
+      "temporal": {
+        "unknown": 197,
+        "in_force": 7,
+        "pending": 5
+      },
+      "runtime_blocked": 50,
+      "review_issue_occurrences": 2951
+    }
+  },
+  "corrected_rules": {
+    "r-bd3d4c1f2930f27dbd89": {
+      "blocking": [],
+      "issues": [],
+      "semantic": "model_reviewed"
+    },
+    "r-df8529c24c470b70fdfd": {
+      "blocking": [],
+      "issues": [],
+      "semantic": "model_reviewed"
+    },
+    "r-ef975bb4faf5444a01cb": {
+      "blocking": [],
+      "issues": [],
+      "semantic": "model_reviewed"
+    }
+  },
+  "hypothetical_tenant_dwelling_True": {
+    "results": {
+      "unknown": 218,
+      "applies": 3
+    },
+    "assertion": "Test only; not user confirmed or saved as property data."
+  },
+  "hypothetical_tenant_dwelling_False": {
+    "results": {
+      "unknown": 185
+    },
+    "assertion": "Test only; not user confirmed or saved as property data."
+  },
+  "hypothetical_tenant_dwelling_None": {
+    "results": {
+      "unknown": 221
+    },
+    "assertion": "Test only; not user confirmed or saved as property data."
+  },
+  "questions": [
+    {
+      "field": "used_as_tenant_dwelling",
+      "rank": 0
+    },
+    {
+      "field": "end_consumer_of_product_or_service",
+      "rank": 1
+    },
+    {
+      "field": "person_under_bpc_16702",
+      "rank": 2
+    },
+    {
+      "field": "tenancy_start",
+      "rank": 3
+    },
+    {
+      "field": "owner_occupied",
+      "rank": 4
+    }
+  ],
+  "unchanged_source_and_property_bytes": {
+    "sources.json": true,
+    "addresses.json": true,
+    "resolutions.json": true
+  },
+  "as_of": "2026-10-01",
+  "baseline_note": "Before uses original data with the corrected bounded retriever; date and rule changes are isolated."
+}

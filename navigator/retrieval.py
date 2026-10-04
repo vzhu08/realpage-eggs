@@ -10,6 +10,9 @@ HEADINGS = re.compile(r"(?im)^[ \t]*(?:(?:section|sec\.?|§)\s+(\d[\w.()\-]*)|((
 # number. Short or inline numbered list items remain ordinary section text.
 BARE_STATUTORY_HEADINGS = re.compile(r"(?m)^(\d{3,}(?:\.\d+)*)\.[ \t]*\r?$")
 REFERENCES = re.compile(r"(?i)\b(?:see|under|pursuant to|subject to|defined in|as defined in|as provided in|except as provided in|except as stated in)\s+(?:(?P<doc>[A-Z][A-Z0-9_-]*\d[A-Z0-9_-]*)\s+)?(?:section|sec\.?|§)\s+(?P<section>\d[\w.()\-]*)(?:\s+of\s+(?:the\s+)?(?:chapter|ch\.?)\s+(?P<chapter>\d[\w.()\-]*|[IVXLCDM]+)\b)?")
+# Enough for medium statutory pages and their citation headers, still bounded.
+# Explicit caller budgets take precedence; omitted text remains visible as a gap.
+DEFAULT_CONTEXT_CHARS = 32000
 
 
 def section_key(value):
@@ -62,7 +65,7 @@ class ContextRetriever:
             if score: hits.append({"score": round(score, 8), "span": unit.model_dump(mode="json")})
         return {"items": sorted(hits, key=lambda h: (-h["score"], h["span"]["doc_id"], h["span"]["start"]))[:limit], "method": "local_tfidf_cosine_independently_implemented", "semantic_verification": False}
 
-    def context(self, anchors, max_depth=2, max_chars=24000, max_spans=12, radius=800):
+    def context(self, anchors, max_depth=2, max_chars=DEFAULT_CONTEXT_CHARS, max_spans=12, radius=800):
         result, dependencies, hits, visited = [], [], [], set()
         chars = 0
         valid_anchors, anchored_sections = [], set()
@@ -125,13 +128,26 @@ class ContextRetriever:
                 status, explanation, targets = "resolved", "Exact source section heading located; meaning not verified", []
                 if used_support:
                     explanation = "Unique explicitly anchored supporting section located; legal relationship and meaning not verified"
-                if key in trail:
+                # A notice may refer its reader to the very section containing
+                # that notice. If the entire uniquely identified section is
+                # already present, this adds no traversal or missing context.
+                # A -> B -> A remains a cycle: the reference origin is in B.
+                same_section = (len(candidates) == 1 and target_doc == item.doc_id
+                                and candidates[0][1] <= origin.start < origin.end <= candidates[0][2])
+                present_section = same_section and any(
+                    s.doc_id == target_doc and s.start <= candidates[0][1]
+                    and candidates[0][2] <= s.end for s in result)
+                if present_section:
+                    label, start, end = candidates[0]
+                    targets = [span(self.sources[target_doc], start, end, label)]
+                    explanation = "Reference identifies its own complete, already retained section; meaning not verified"
+                elif key in trail and not same_section:
                     status, explanation = "cycle", "Cross-reference cycle; no completeness inferred"
                 elif not candidates:
                     status, explanation = "missing", "Referenced section not present in available snapshots; not proof the authority does not exist"
                 elif len(candidates) > 1:
                     status, explanation = "ambiguous", "More than one explicitly anchored supporting section" if used_support else "More than one matching section heading"
-                elif depth >= max_depth:
+                elif depth >= max_depth and not same_section:
                     status, explanation = "depth_limit", "Explicit cross-reference depth budget reached"
                     hits.append("max_depth")
                 else:

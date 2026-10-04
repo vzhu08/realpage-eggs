@@ -60,7 +60,8 @@ def build():
         assert sha256((PILOT / name).read_bytes()).hexdigest() == expected
     source = SourceDocument.model_validate(read(PILOT / "sources.json")["D069"])
     assert sha256(source.text.encode("utf-8")).hexdigest() == source.sha256 == manifest["source_sha256"]
-    originals = {key: Rule.model_validate(value) for key, value in read(PILOT / "rules.json").items()}
+    original_payloads = read(PILOT / "rules.json")
+    originals = {key: Rule.model_validate(value) for key, value in original_payloads.items()}
     plan = read(HERE / "edits.json")
     candidates, anchors = {}, set()
     for entry in plan["candidates"]:
@@ -90,7 +91,7 @@ def build():
             "review_state": "needs_review", "eligible_for_direct_store_import": False,
             "basis": {"bundle": "docs/platform_pilots/2026-10-04-d069",
                       "original_rule_id": ident, "original_run_id": original.extraction_run_id,
-                      "original_rule_sha256": canonical_hash(original.model_dump(mode="json")),
+                      "original_rule_sha256": canonical_hash(original_payloads[ident]),
                       "source_sha256": source.sha256},
             "changes": changes, "candidate_sha256": canonical_hash(draft.model_dump(mode="json")),
             "rule_draft": draft.model_dump(mode="json"),
