@@ -23,10 +23,10 @@ test.describe('portfolio changes: timeline, summaries and drill-down', () => {
     const result = await openPortfolio(page);
     const timeline = result.locator('[data-timeline]');
     const items = timeline.locator('.timeline__item');
-    await expect(items).toHaveCount(9);
-    await expect(items.nth(3)).toHaveAttribute('data-query', 'from');
-    await expect(items.nth(3)).toContainText('Oct 1, 2026');
-    await expect(items.nth(3)).toContainText('First compared date');
+    await expect(items).toHaveCount(10);
+    await expect(items.nth(4)).toHaveAttribute('data-query', 'from');
+    await expect(items.nth(4)).toContainText('Oct 1, 2026');
+    await expect(items.nth(4)).toContainText('First compared date');
     await expect(items.last()).toHaveAttribute('data-query', 'to');
     await expect(items.last()).toContainText('Jan 15, 2027');
 
@@ -40,7 +40,7 @@ test.describe('portfolio changes: timeline, summaries and drill-down', () => {
     const fee = timeline.locator('[data-event="effective::2026-10-15"]');
     await expect(fee).toContainText('Takes effect');
     await expect(fee).toContainText('Larch Point screening fee cap (fictional) (2 records)');
-    await expect(fee).toContainText('6 properties have a changed result under these rules');
+    await expect(fee).toContainText('6 properties have a definite or possible impact under these rules');
 
     // A month stated by the source stays a month.
     const month = timeline.locator('[data-event="effective::2026-12"]');
@@ -63,11 +63,12 @@ test.describe('portfolio changes: timeline, summaries and drill-down', () => {
     await expect(page.getByLabel('From date')).toHaveValue('2026-10-31');
     await expect(page.getByLabel('To date')).toHaveValue('2026-11-01');
     await expect(page.locator('.changes__result')).toBeFocused();
-    // One rule changes on that day, for the buildings it covers.
+    // One definite change; unresolved equal-status results remain possible impacts.
     await expect(comparisonResult(page).locator('[data-impact="Definitely affected"]')).toHaveAttribute('data-count', '3');
     const next = comparisonResult(page);
-    await expect(next.locator('.rule-node')).toHaveCount(1);
-    await expect(next.locator('.rule-node')).toContainText('Cedar Landing deposit cap (fictional)');
+    await expect(next.locator('.rule-node')).toHaveCount(5);
+    await expect(next.locator('.rule-node').first()).toContainText('Cedar Landing deposit cap (fictional)');
+    await expect(next.locator('[data-impact="Uncertain"]')).toHaveAttribute('data-count', '7');
 
     // Inside a month the source did not pin to a day, the result is uncertain rather than guessed.
     await page.getByRole('button', { name: 'Oct 1, 2026 → Dec 15, 2026', exact: true }).click();
@@ -75,7 +76,7 @@ test.describe('portfolio changes: timeline, summaries and drill-down', () => {
     await expect(inside.getByRole('group', { name: 'Comparison context' })).toContainText('to Dec 15, 2026');
     await expect(inside.locator('[data-event="effective::2026-12"]')).toHaveAttribute('data-position', 'overlaps');
     await expect(inside.locator('[data-event="effective::2026-12"]')).toContainText('overlaps a compared date');
-    // Only rules whose result changes between the two dates are on the timeline.
+    // A resolved rule with no impact stays off the timeline; unresolved impacts remain.
     await expect(inside.locator('[data-event="effective::2027-01-01"]')).toHaveCount(0);
     await expect(inside.locator('[data-impact="Uncertain"]')).toHaveAttribute('data-count', '11');
   });
@@ -93,28 +94,28 @@ test.describe('portfolio changes: timeline, summaries and drill-down', () => {
     await expect(categories.getByRole('row', { name: /Security deposits/ })).toContainText('14866');
     await expect(categories.getByRole('row', { name: /Just-cause eviction/ })).toContainText('7430');
 
-    const shown = result.locator('#change-diffs').locator('..').getByText(/changed results?$/);
-    await expect(shown).toHaveText('14 properties · 39 changed results');
+    const shown = result.locator('#change-diffs').locator('..').getByText(/comparison results?$/);
+    await expect(shown).toHaveText('14 properties · 42 comparison results');
 
     // Keyboard: a group name is a button that toggles a filter.
     const larch = places.getByRole('button', { name: 'Larch Point, ZZ' });
     await larch.focus();
     await page.keyboard.press('Enter');
     await expect(larch).toHaveAttribute('aria-pressed', 'true');
-    await expect(shown).toHaveText('5 properties · 13 changed results');
+    await expect(shown).toHaveText('5 properties · 14 comparison results');
     await categories.getByRole('button', { name: 'Application and screening fees' }).click();
-    await expect(shown).toHaveText('4 properties · 8 changed results');
+    await expect(shown).toHaveText('4 properties · 8 comparison results');
     await expect(result.locator('.source-node')).toHaveCount(2);
 
     // The definite count narrows further; nothing matches, and the view says so instead of showing zero impact.
     await result.locator('[data-impact="Definitely affected"]').getByRole('button').click();
-    await expect(result.getByText('No changed result matches the selected filters')).toBeVisible();
+    await expect(result.getByText('No comparison result matches the selected filters')).toBeVisible();
     const filters = result.getByRole('group', { name: 'Active filters' });
     await expect(filters.getByRole('button')).toHaveCount(4);
     await filters.getByRole('button', { name: /Definitely affected/ }).click();
-    await expect(shown).toHaveText('4 properties · 8 changed results');
+    await expect(shown).toHaveText('4 properties · 8 comparison results');
     await filters.getByRole('button', { name: 'Clear filters' }).click();
-    await expect(shown).toHaveText('14 properties · 39 changed results');
+    await expect(shown).toHaveText('14 properties · 42 comparison results');
     await expect(larch).toHaveAttribute('aria-pressed', 'false');
     await expectNoHorizontalOverflow(page);
   });
@@ -122,10 +123,10 @@ test.describe('portfolio changes: timeline, summaries and drill-down', () => {
   test('drill-down: source → changed rule → impacted property → evidence, then on to the conflicting sources', async ({ page }) => {
     const result = await openPortfolio(page);
     const sources = result.locator('.source-node');
-    await expect(sources).toHaveCount(4);
+    await expect(sources).toHaveCount(5);
     const ordinance = result.locator('.source-node[data-source="DEV-CL-ORD-07"]');
     await expect(ordinance).toContainText('Official · legal text');
-    await expect(ordinance).toContainText('2 changed rules · 7 properties');
+    await expect(ordinance).toContainText('2 compared rules · 7 properties');
     await expect(ordinance).toContainText('retrieved Oct 3, 2026, 00:00 UTC');
     await expect(ordinance).toContainText('synthetic source, not actual law');
     await expect(ordinance.getByRole('link', { name: 'https://example.invalid/ux-dev-fixture/dev-cl-ord-07' })).toBeVisible();
@@ -224,7 +225,7 @@ test.describe('portfolio changes against the live API (double built from recorde
     await expect(result.locator('[data-impact="Definitely affected"]')).toHaveAttribute('data-count', '11');
 
     const status = result.getByRole('note').filter({ hasText: 'Some names could not be read' });
-    await expect(status).toContainText('5 rule records');
+    await expect(status).toContainText('6 rule records');
     await expect(status).toContainText('The comparison itself is unaffected.');
     // Without rule records there is one "source not known" group and rules keep their IDs.
     await expect(result.locator('.source-node')).toHaveCount(1);
@@ -236,7 +237,7 @@ test.describe('portfolio changes against the live API (double built from recorde
 
     failRules = false;
     await status.getByRole('button', { name: 'Try again' }).click();
-    await expect(result.locator('.source-node')).toHaveCount(4);
+    await expect(result.locator('.source-node')).toHaveCount(5);
     await expect(result.getByRole('note').filter({ hasText: 'Some names could not be read' })).toHaveCount(0);
     await expect(result.getByRole('group', { name: 'Comparison context' })).toContainText('Synthetic data · not actual law');
     await expect(result.locator('[data-summary="Category"]')).toContainText('Security deposits');

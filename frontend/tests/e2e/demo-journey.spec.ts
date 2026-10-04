@@ -192,7 +192,7 @@ test.describe('synthetic demo: the complete journey', () => {
     await expect(remaining).toContainText('Referenced exception source is not supplied');
     await expect(remaining).toContainText('do not ask the renter to decide the law');
     await expect(remaining.locator('[data-kind="source_gap"]')).toContainText('Needs: a source to be obtained');
-    await expect(remaining.getByText('No answer about the property can close these')).toBeVisible();
+    await expect(remaining.getByText('Needs evidence, interpretation or more analysis')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Useful questions 0' })).toBeVisible();
     await expect(page.getByRole('article')).toHaveCount(0);
 
@@ -274,7 +274,7 @@ test.describe('synthetic demo: the complete journey', () => {
     // What still is not established after the answer stays on screen, by kind.
     const remaining = page.getByRole('region', { name: /What remains uncertain/ });
     await expect(remaining.locator('[data-kind="source_gap"]').first()).toContainText('Needs: a source to be obtained');
-    await expect(remaining.getByText('No answer about the property can close these')).toBeVisible();
+    await expect(remaining.getByText('Needs evidence, interpretation or more analysis')).toBeVisible();
     await expect(remaining).toContainText('Exact quote/retrieval is not semantic verification');
     await expect(remaining.locator('[data-kind="property_fact"]')).toHaveCount(0);
 

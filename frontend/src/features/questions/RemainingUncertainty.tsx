@@ -58,7 +58,6 @@ export function RemainingUncertainty({ outcome, answers, onInspect, disagreement
   }
 
   // Reasons the evaluator attached to rules that the plan (if any) did not already cover.
-  const coveredFields = new Set(rows.filter((row) => row.kind === 'property_fact' && row.field).map((row) => row.field));
   const planMessages = new Set(rows.map((row) => row.message));
   // A question that is still open is shown above; one answered "I don't know" belongs here.
   const markedUnknown = new Set(answers.filter((answer) => answer.value === null).map((answer) => answer.field));
@@ -66,14 +65,21 @@ export function RemainingUncertainty({ outcome, answers, onInspect, disagreement
   for (const evaluation of outcome.lookup.evaluations) {
     for (const raw of evaluation.uncertainty_reasons ?? []) {
       const reason = parseReason(raw);
+      // Core B already distinguishes imprecise property values from imprecise
+      // legal thresholds. Preserve that classification instead of adding a
+      // contradictory, generic interpretation row from the evaluator prefix.
+      if (raw.startsWith('insufficient_fact_precision:')) {
+        const field = raw.slice(raw.indexOf(':') + 1).trim().split(/\s+/)[0];
+        if (field && (asked.has(field) || rows.some((row) => row.field === field && row.ruleIds.includes(evaluation.team_rule_id)))) continue;
+      }
       if (reason.kind === 'missing_property_fact') {
         const field = raw.slice(raw.indexOf(':') + 1).trim();
+        if (asked.has(field) || rows.some((row) => row.field === field && row.ruleIds.includes(evaluation.team_rule_id))) continue;
         const existing = rows.find((row) => row.key === `fact-${field}`);
         if (existing) {
           if (!existing.ruleIds.includes(evaluation.team_rule_id)) existing.ruleIds.push(evaluation.team_rule_id);
           continue;
         }
-        if (coveredFields.has(field) || asked.has(field)) continue;
         rows.push({
           key: `fact-${field}`,
           kind: 'property_fact',
@@ -208,7 +214,7 @@ export function RemainingUncertainty({ outcome, answers, onInspect, disagreement
       {other.length > 0 && (
         <>
           <p className="uncertainty__group" id="uncertainty-other">
-            No answer about the property can close these
+            Needs evidence, interpretation or more analysis
           </p>
           <ul className="uncertainty" aria-labelledby="uncertainty-other">
             {other.map(item)}

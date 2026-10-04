@@ -13,7 +13,7 @@ interface TableProps {
 }
 
 /**
- * Counts of properties with a changed result, grouped. The numbers regroup the comparison's
+ * Counts of properties with a comparison result, grouped. The numbers regroup the comparison's
  * own per-property results; a property under two headings is counted in both.
  */
 export function SummaryTable({ caption, columnLabel, groups, selected, onSelect, pending }: TableProps) {
@@ -56,7 +56,7 @@ export function SummaryTable({ caption, columnLabel, groups, selected, onSelect,
           {!groups.length && (
             <tr role="row">
               <td colSpan={5} role="cell" className="table__muted summary__empty">
-                {pending ?? 'No property has a changed result.'}
+                {pending ?? 'No property has a comparison result.'}
               </td>
             </tr>
           )}

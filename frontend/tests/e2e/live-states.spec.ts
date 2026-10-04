@@ -172,7 +172,7 @@ test.describe('live API: failure, partial and unavailable states', () => {
     await expect(remaining.locator('[data-reason="jurisdiction_uncertainty"]')).toContainText('Needs: location evidence');
     await expect(remaining.locator('[data-kind="property_fact"]')).toContainText('Needs: a factual answer');
     await expect(remaining.getByText('A fact about the property can close these')).toBeVisible();
-    await expect(remaining.getByText('No answer about the property can close these')).toBeVisible();
+    await expect(remaining.getByText('Needs evidence, interpretation or more analysis')).toBeVisible();
     // The conflict is also announced above the results, with the way to compare the sources.
     await expect(page.getByRole('note').filter({ hasText: 'Sources conflict for 1 rule here' }).getByRole('link', { name: 'Compare the conflicting sources' })).toBeVisible();
     await expectNoHorizontalOverflow(page);

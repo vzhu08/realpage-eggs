@@ -226,7 +226,7 @@ def _uncertainty(context, evaluations, traces, prop=None):
                     add("interpretation", reason +
                         f"; the {role} cannot be decided from the available encoding",
                         "Interpretation review: resolve this condition against the cited authority; repeating a property answer cannot repair a legal definition",
-                        [node.rule_id], [node.predicate_id], source_refs=trace_spans(node))
+                        [node.rule_id], [node.predicate_id], field=node.field, source_refs=trace_spans(node))
     if context.jurisdiction.match_quality != "resolved":
         add("jurisdiction", "Legal location/boundary resolution remains incomplete; local-rule applicability may change. " +
             "; ".join(context.jurisdiction.unresolved),

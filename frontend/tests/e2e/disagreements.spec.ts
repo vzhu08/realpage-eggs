@@ -38,7 +38,7 @@ test.describe('source disagreements', () => {
 
     await expect(card(page).getByRole('region', { name: 'Why this is unresolved' })).toContainText('Different supported interpretations of the same provision/version; no automatic precedence');
     const next = card(page).getByRole('region', { name: 'What would resolve it' });
-    await expect(next).toContainText('Review source authority; factual answers do not resolve legal conflicts');
+    await expect(next).toContainText('Interpretation review: compare both authorities and their dated support; factual answers do not resolve legal conflicts');
     await expect(next).toContainText('A fact about the property cannot settle it.');
     await expect(card(page)).not.toContainText(/preferred source|more likely|confidence/i);
     await expectNoHorizontalOverflow(page);

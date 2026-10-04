@@ -18,3 +18,8 @@ Regenerate after the UI changes:
 What it is not: a recording of the real-data journey. That recording has to be made against
 the integrated snapshot once PLAT-06 and CORE-06 land, with the examples chosen in
 `../DEMO_SCRIPT.md`, and labeled with the snapshot it was made from.
+
+Integration note (October 4, 2026): the checked-in frames are Claude’s pre-integration
+UX-04 capture. Core B v3 explanations and CORE-06’s additional uncertain comparison rows
+are verified in the integration branch but are not depicted by these historical frames.
+Regenerate the backup before a presentation of the integrated build.

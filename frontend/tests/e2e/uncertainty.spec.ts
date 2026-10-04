@@ -46,7 +46,7 @@ test.describe('consequential questions and what stays uncertain after an answer'
     await expect(changed.getByRole('heading')).toHaveText('Re-evaluated with your answers');
     const still = changed.locator('[data-still-unknown]');
     await expect(still).toHaveCount(2);
-    await expect(still.first()).toContainText('Still unknown, and not for want of a property fact');
+    await expect(still.first()).toContainText('Still unknown:');
     await expect(still.first()).toContainText('Conflicting evidence: Different supported interpretations of the same provision/version; no automatic precedence');
     // The answer is on screen with its provenance and how it was treated.
     const answers = page.getByRole('region', { name: /Your answers/ });
@@ -55,13 +55,13 @@ test.describe('consequential questions and what stays uncertain after an answer'
 
     const remaining = page.getByRole('region', { name: /What remains uncertain/ });
     await expect(remaining.getByText('A fact about the property can close these')).toHaveCount(0);
-    await expect(remaining.getByText('No answer about the property can close these')).toBeVisible();
+    await expect(remaining.getByText('Needs evidence, interpretation or more analysis')).toBeVisible();
     const conflict = remaining.locator('[data-kind="conflict"]').first();
     await expect(conflict).toContainText('Needs: review of conflicting sources');
     await expect(conflict).toContainText('Holds back');
-    await expect(conflict).toContainText('Next step Review source authority; factual answers do not resolve legal conflicts');
+    await expect(conflict).toContainText('Next step Interpretation review: compare both authorities and their dated support; factual answers do not resolve legal conflicts');
     // Identical statements are listed once, and items about rules that do not reach this property are set aside.
-    await expect(remaining.getByText('Different supported interpretations of the same provision/version; no automatic precedence')).toHaveCount(1);
+    await expect(remaining.getByText('Different supported interpretations of the same provision/version; no automatic precedence', { exact: true })).toHaveCount(1);
     await expect(remaining.getByText(/more items? concerns? rules? that do not reach this property/)).toBeVisible();
     await expect(notice).toBeVisible();
 

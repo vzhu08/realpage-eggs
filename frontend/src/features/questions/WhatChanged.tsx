@@ -44,7 +44,7 @@ export function WhatChanged({ previous, outcome }: { previous: LookupOutcome; ou
               {change.after && still.length > 0 && <p className="changed__note changed__note--needs">Still needs: {still.map(humanize).join(', ')}.</p>}
               {open.length > 0 && (
                 <p className="changed__note changed__note--needs" data-still-unknown>
-                  Still unknown, and not for want of a property fact: {open.join('; ')}.
+                  Still unknown: {open.join('; ')}.
                 </p>
               )}
               {change.kind === 'no_longer_listed' && (

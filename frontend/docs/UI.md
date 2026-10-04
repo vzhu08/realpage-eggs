@@ -156,8 +156,9 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
 - **Timeline dates are the rule records’ own.** Status events, effective and end dates are
   shown with the precision the record carries. “Compare across this date” offers the day
   before against that day; for a month or year it offers the first and the last possible day
-  and says the evaluator returns unknown inside the span. Only rules whose result changed
-  appear, so the timeline cannot suggest a change the comparison did not report.
+  and says the evaluator returns unknown inside the span. Rules come from the comparison’s
+  own differences, including equal-status rows Core retains as unresolved possible impacts.
+  A timeline entry does not by itself establish a definite change.
 - **Names.** A property is named by its street address and its *legal* municipality when that
   is resolved; otherwise “Municipality unresolved”. Two records of one provision share a title,
   so a repeated title is followed by its source document.
@@ -165,7 +166,8 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
   order of authority or a score. The two claims appear in the order the response gives them.
 - **Next step for each uncertainty** comes from `Uncertainty.kind` and `Uncertainty.remedy`.
   Only `property_fact` is presented as answerable. Identical statements are shown once with
-  every rule they hold back.
+  every rule they hold back. Core B’s dated, version-specific statements stay separate when
+  their text differs; rule and field identity keep interpretation gaps from becoming property questions.
 - **What an answer would move** compares the evaluator’s recorded output for a probe with the
   evaluator’s current output. Both sides are service output; the UI only lists differences.
 - **Working export** is assembled in the browser from the payloads on screen and says in its

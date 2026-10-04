@@ -136,7 +136,7 @@ export function PortfolioTimeline({ timeline, rules, rows, loading, blocked, bus
                 </p>
                 <p className="hint">
                   {POSITION_NOTE[event.position]}
-                  {affected > 0 && ` ${affected === 1 ? '1 property has' : `${affected} properties have`} a changed result under ${event.ruleIds.length === 1 ? 'this rule' : 'these rules'} in this comparison.`}
+                  {affected > 0 && ` ${affected === 1 ? '1 property has' : `${affected} properties have`} a definite or possible impact under ${event.ruleIds.length === 1 ? 'this rule' : 'these rules'} in this comparison.`}
                 </p>
                 {event.precision !== 'day' && (
                   <p className="timeline__imprecise">
@@ -169,7 +169,7 @@ export function PortfolioTimeline({ timeline, rules, rows, loading, blocked, bus
       </ol>
       {loading && <p className="hint">Reading the rule records for their dates…</p>}
       {!loading && timeline.events.length === 0 && (
-        <p className="hint">{blocked ? 'No dated rule records to show: the comparison is blocked.' : 'No rule record with a changed result carries a date, so only the two compared dates are shown.'}</p>
+        <p className="hint">{blocked ? 'No dated rule records to show: the comparison is blocked.' : 'No rule record with a comparison result carries a date, so only the two compared dates are shown.'}</p>
       )}
       {timeline.unreadable.length > 0 && (
         <p className="hint">

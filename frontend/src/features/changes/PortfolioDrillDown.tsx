@@ -29,7 +29,7 @@ export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping,
     <div className="drill" data-grouping={grouping}>
       <Tabs
         idBase="drill"
-        label="Group the changed results"
+        label="Group the comparison results"
         active={grouping}
         onChange={(id) => onGrouping(id === 'property' ? 'property' : 'source')}
         tabs={[
@@ -39,8 +39,8 @@ export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping,
       />
       <div {...tabPanelProps('drill', grouping)} className="drill__panel">
         {rows.length === 0 ? (
-          <Empty title={totalRows ? 'No changed result matches the selected filters' : 'No changed results'} icon="layers">
-            {totalRows > 0 && <p>Clear a filter to see the other changed results.</p>}
+          <Empty title={totalRows ? 'No comparison result matches the selected filters' : 'No comparison results'} icon="layers">
+            {totalRows > 0 && <p>Clear a filter to see the other comparison results.</p>}
           </Empty>
         ) : grouping === 'source' ? (
           <ul className="drill__sources">
@@ -60,7 +60,7 @@ export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping,
                         )}
                       </span>
                       <span className="source-node__count">
-                        {node.rules.length} changed {node.rules.length === 1 ? 'rule' : 'rules'} · {node.properties} {node.properties === 1 ? 'property' : 'properties'}
+                        {node.rules.length} compared {node.rules.length === 1 ? 'rule' : 'rules'} · {node.properties} {node.properties === 1 ? 'property' : 'properties'}
                       </span>
                     </span>
                   }
@@ -145,7 +145,7 @@ function RuleBranch({ node, lookups, defaultOpen, ...links }: { node: RuleNode; 
         defaultOpen={defaultOpen}
         summary={
           <span className="rule-node__head">
-            <span className="eyebrow">Changed rule</span>
+            <span className="eyebrow">Compared rule</span>
             <RuleName ruleId={node.ruleId} rule={rule ?? undefined} large />
             <span className="rule-node__count">
               {node.rows.length} {node.rows.length === 1 ? 'property' : 'properties'}

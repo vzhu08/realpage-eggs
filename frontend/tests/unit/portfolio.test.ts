@@ -193,7 +193,7 @@ test('summaries count distinct properties per group and keep unresolved location
   assert.equal(places[0]!.note, undefined);
 
   const categories = summarizeByCategory(rows, lookups);
-  assert.deepEqual(categories.map((group) => group.label), ['Application and screening fees', 'Just-cause eviction', 'Security deposits']);
+  assert.deepEqual(categories.map((group) => group.label), ['Application and screening fees', 'Just-cause eviction', 'Rent increase limits', 'Security deposits']);
   assert.equal(categories.find((group) => group.key === 'security_deposits')?.properties, 14);
   // With no rule records yet, nothing is guessed: every row falls under one "not loaded" group.
   const bare = summarizeByCategory(rows, { ...lookups, rules: new Map() });
@@ -227,6 +227,7 @@ test('the timeline orders the dated statements on the rule records and never sha
       ['2026-06-10', 'status', 'enacted', 'earlier'],
       ['2026-08-18', 'status', 'enacted', 'earlier'],
       ['2026-09-09', 'status', 'enacted', 'earlier'],
+      ['2026-09-22', 'status', 'pending', 'earlier'],
       ['2026-10-15', 'effective', null, 'between'],
       ['2026-11-01', 'effective', null, 'between'],
       ['2026-12', 'effective', null, 'between'],
@@ -263,7 +264,7 @@ test('the timeline orders the dated statements on the rule records and never sha
 test('the drill-down goes source → rule → property, and falls back to IDs when records are missing', () => {
   const { rows } = impactRows(headline);
   const tree = sourceTree(rows, lookups);
-  assert.deepEqual(tree.map((node) => node.docId), ['DEV-CL-ORD-07', 'DEV-LP-CODE-03', 'DEV-LP-ORD-03', 'DEV-ZZ-ACT-11']);
+  assert.deepEqual(tree.map((node) => node.docId), ['DEV-CL-ORD-07', 'DEV-LP-BILL-19', 'DEV-LP-CODE-03', 'DEV-LP-ORD-03', 'DEV-ZZ-ACT-11']);
   const ordinance = tree[0]!;
   assert.equal(ordinance.source?.authority, 'official');
   assert.deepEqual(ordinance.rules.map((rule) => rule.rule?.citation), ['Cedar Landing Ordinance DEV-07, section 3', 'Cedar Landing Ordinance DEV-07, section 5']);
@@ -283,7 +284,9 @@ test('a hypothetical comparison differs from the actual one only where a pending
   const hypothetical = change('2026-10-01', '2027-01-15', 'if_enacted');
   assert.equal(hypothetical.scenario, 'if_enacted');
   const pending = ruleByCitation('Larch Point Proposed Ordinance DEV-19, section 1').team_rule_id;
-  assert.equal(impactRows(headline).rows.some((row) => row.ruleId === pending), false);
+  const actualPending = impactRows(headline).rows.filter((row) => row.ruleId === pending);
+  assert.ok(actualPending.length > 0, 'Core preserves equal pending results with unresolved geography as uncertain impacts');
+  assert.ok(actualPending.every((row) => row.certainty === 'uncertain' && row.before?.result === 'pending' && row.after?.result === 'pending'));
   const assumed = impactRows(hypothetical).rows.filter((row) => row.ruleId === pending);
   assert.ok(assumed.length > 0);
   for (const row of assumed) assert.equal(row.before?.result, 'pending');
@@ -306,7 +309,7 @@ test('a lookup’s conflicts are shown as two source-backed claims, with no pref
     assert.deepEqual(claim.statusDates, [{ status: 'enacted', on: '2026-09-09' }, { status: 'takes effect', on: '2026-10-15' }]);
   }
   assert.ok(view.reasons.includes('Different supported interpretations of the same provision/version; no automatic precedence'));
-  assert.ok(view.remedies.includes('Review source authority; factual answers do not resolve legal conflicts'));
+  assert.ok(view.remedies.some((remedy) => remedy.includes('factual answers do not resolve legal conflicts')));
   assert.doesNotMatch(JSON.stringify(view), /preferred|winner|confidence|score/i);
 
   const interaction = disagreementsFromLookup(await demo.lookup({ address_id: 'DEV-P01', as_of: '2027-01-15', answers: [] }));
@@ -347,7 +350,9 @@ test('identical uncertainty statements are shown once, with every rule they hold
   const grouped = groupUncertainty([item('r-1'), item('r-2'), item('r-2'), item('r-3', { remedy: 'Obtain the adopting record' })]);
   assert.deepEqual(grouped.map((group) => [group.remedy, group.ruleIds]), [['Review authority', ['r-1', 'r-2']], ['Obtain the adopting record', ['r-3']]]);
   const plan = DEV_ASSISTS.find((entry) => entry.request.address_id === 'DEV-P08' && entry.request.as_of === '2027-01-15')!.response.question_plan;
-  assert.ok(groupUncertainty(plan.remaining_uncertainty).length < plan.remaining_uncertainty.length);
+  const versioned = groupUncertainty(plan.remaining_uncertainty);
+  assert.ok(versioned.some((item) => item.message.includes('encoding ')));
+  assert.deepEqual(new Set(versioned.flatMap((item) => item.ruleIds)), new Set(plan.remaining_uncertainty.flatMap((item) => item.rule_ids ?? [])), 'Grouping preserves every version-specific rule reference');
   assert.deepEqual(['property_fact', 'jurisdiction', 'source_gap', 'conflict', 'interpretation', 'analysis_limit'].map((kind) => nextStep(kind).answerable), [true, false, false, false, false, false]);
   assert.deepEqual(nextStep('something_new'), { label: 'Review', answerable: false, order: 9 });
 });

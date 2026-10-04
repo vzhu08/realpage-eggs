@@ -159,7 +159,7 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
           <p className="hint impact__overlap">A property is counted under both “definitely affected” and “uncertain” when one rule’s effect on it is settled and another’s is not.</p>
         )}
         {flaggedWithoutChange.length > 0 && (
-          <Disclosure summary={`${flaggedWithoutChange.length} flagged ${flaggedWithoutChange.length === 1 ? 'property has' : 'properties have'} no changed result between these dates`}>
+          <Disclosure summary={`${flaggedWithoutChange.length} flagged ${flaggedWithoutChange.length === 1 ? 'property has' : 'properties have'} no comparison result between these dates`}>
             <ul className="plain-list plain-list--tight">
               {flaggedWithoutChange.map((addressId) => (
                 <li key={addressId} className="flagged">
@@ -179,7 +179,7 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
       {!blocked && (
         <section className="section" aria-labelledby="change-timeline">
           <SectionHeading id="change-timeline" title="Dates behind this comparison" level={3} />
-          <p className="section__lead">Dated statements on the rule records whose result changed, in order, with the two compared dates marked. Each date is shown as its source states it.</p>
+          <p className="section__lead">Dated statements on the rule records in this comparison, in order, with the two compared dates marked. Each date is shown as its source states it.</p>
           <PortfolioTimeline timeline={timeline} rules={lookups.rules} rows={rows} loading={details.rules.status === 'loading'} blocked={blocked} busy={busy} onCompare={onCompare} />
         </section>
       )}
@@ -187,7 +187,7 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
       {!blocked && rows.length > 0 && (
         <section className="section" aria-labelledby="change-summaries">
           <SectionHeading id="change-summaries" title="Where and what" level={3} />
-          <p className="section__lead">Properties with a changed result, grouped two ways. Select a row to filter the detail below.</p>
+          <p className="section__lead">Properties with definite changes or unresolved possible impacts, grouped two ways. Select a row to filter the detail below.</p>
           <div className="summaries">
             <SummaryTable caption="By property location" columnLabel="Legal municipality" groups={places} selected={filters.place} onSelect={(place) => setFilters((current) => ({ ...current, place }))} pending={details.addresses.status === 'loading' ? 'Reading the property list…' : undefined} />
             <SummaryTable caption="By rule category" columnLabel="Category" groups={categories} selected={filters.category} onSelect={(category) => setFilters((current) => ({ ...current, category }))} pending={details.rules.status === 'loading' ? 'Reading the rule records…' : undefined} />
@@ -203,7 +203,7 @@ export function ChangeResultView({ outcome, lookupHref, disagreementHref, onComp
             level={3}
             aside={
               <span className="hint" aria-live="polite">
-                {shownProperties} {shownProperties === 1 ? 'property' : 'properties'} · {visible.length} changed {visible.length === 1 ? 'result' : 'results'}
+                {shownProperties} {shownProperties === 1 ? 'property' : 'properties'} · {visible.length} comparison {visible.length === 1 ? 'result' : 'results'}
               </span>
             }
           />

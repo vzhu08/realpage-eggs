@@ -63,7 +63,7 @@ Fictional state “ZZ”, fictional cities and properties. Start with `npm run d
 | --- | --- | --- |
 | 1 | Header status button | The build replays recorded files; the development portfolio is named as authored by the UX lane. |
 | 2 | Search “Ember” → **61 Ember Road** → recorded date **Jan 15, 2027** → **Run lookup** | One rule applies, two are unknown, and a red notice says sources conflict for two rules. |
-| 3 | **Useful questions**: “Depending on the answer, 2 of 6 results can change.” → **Answer with No as a demo answer** | Nothing moves, and each fee-cap rule says “Still unknown, and not for want of a property fact”. (Answering **Yes** instead takes the property out of the rule and the conflict notice disappears.) |
+| 3 | **Useful questions**: “Depending on the answer, 2 of 6 results can change.” → **Answer with No as a demo answer** | Nothing moves, and each fee-cap rule says “Still unknown”. (Answering **Yes** instead takes the property out of the rule and the conflict notice disappears.) |
 | 4 | Click a fee-cap rule | Exact quote, offsets, the six checks. |
 | 5 | **Changes** → **Oct 1, 2026 → Jan 15, 2027** | 11 definite, 10 uncertain, 10 conflict flagged; the timeline with “Dec 2026 · month only”; summaries by municipality and category; source → rule → property. |
 | 6 | Open source `DEV-LP-ORD-03` → the rule → **25 Dune Lane** → **Compare the conflicting sources** | Two records of one provision: $35 in the ordinance, $50 in the codified text. No source is preferred. |

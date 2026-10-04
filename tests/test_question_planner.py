@@ -539,7 +539,8 @@ def test_unregistered_legal_classification_is_not_a_property_remedy(rule, prop, 
     plan = plan_questions(context_for(rule, prop, resolution))
     assert plan.questions == []
     assert all(u.kind != 'property_fact' for u in plan.remaining_uncertainty)
-    assert any('legal classification' in u.message for u in plan.remaining_uncertainty)
+    assert any('legal classification' in u.message and u.field == 'rent_ordinance_coverage'
+               for u in plan.remaining_uncertainty)
     assert plan.status == 'partial'
 
 
