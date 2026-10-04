@@ -1,0 +1,225 @@
+{
+  "P11_CA_AB325_TEXT": {
+    "role": "Chaptered AB325 text",
+    "checks": [
+      "Chapter 338; approval/filing October 6, 2025; complete sections 16729 and 16756.1."
+    ],
+    "caveats": [
+      "Chaptering is not itself effectiveness; see the separate code annotations."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_CA_AB325_HISTORY": {
+    "role": "AB325 legislative history",
+    "checks": [
+      "Approval/chaptering and passage history present."
+    ],
+    "caveats": [
+      "Flattened table preserves date/action order; version selector dates are distinct from history events."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_CA_BPC_ART1": {
+    "role": "Incorporated definition",
+    "checks": [
+      "BPC16702 present in full article."
+    ],
+    "caveats": [
+      "Current consolidated article includes neighboring provisions and older amendment dates."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_CA_BPC_ART2": {
+    "role": "AB325 code and effective-date annotation",
+    "checks": [
+      "BPC16729 and annotation linking AB325 to January 1, 2026 present."
+    ],
+    "caveats": [
+      "Effective-date annotation does not determine provision-specific application."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_CA_SB763_TEXT": {
+    "role": "Actual chaptered SB763",
+    "checks": [
+      "Chapter 426; complete amended16755 and added16755.1/16762."
+    ],
+    "caveats": [
+      "Digest includes prior-law summaries; distinguish enacted sections from digest."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_CA_SB763_HISTORY": {
+    "role": "SB763 legislative history",
+    "checks": [
+      "October 6, 2025 approval/chaptering and earlier actions present."
+    ],
+    "caveats": [
+      "Version selector publication dates are not enactment/effective dates."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_CA_BPC_ART3": {
+    "role": "SB763 and AB325 codified provisions",
+    "checks": [
+      "SB763 sections and AB32516756.1 with January 1, 2026 annotations present."
+    ],
+    "caveats": [
+      "Broader article includes older sections with different dates; do not apply one date to all sections."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_CA_CONS_ART4": {
+    "role": "General effective-date authority",
+    "checks": [
+      "Article IV section8(c) and urgency exceptions present."
+    ],
+    "caveats": [
+      "Conditional general provisions; Core must assess applicability."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_NJ_JC_25_057": {
+    "role": "Adopted Jersey City original ordinance",
+    "checks": [
+      "Five pages; visual check pp1,2,4; May21,2025 final adoption and May22 mayor approval recorded."
+    ],
+    "caveats": [
+      "REDLINE PDF: derivative text contains deleted and inserted language together. Review original PDF before extraction.",
+      "Body labels Chapter218 inconsistently as Fees and Charges.",
+      "No explicit effective-date clause found; exact operative date and publication remain unverified."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_NJ_HOB_ADOPTION": {
+    "role": "Official Hoboken adoption announcement",
+    "checks": [
+      "City announcement dated July10,2025 links ordinance and reports July9 adoption."
+    ],
+    "caveats": [
+      "Announcement does not establish statutory publication."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_NJ_HOB_B781_HTML": {
+    "role": "Official Hoboken legislative record",
+    "checks": [
+      "Full ordinance, June4 amendment history, June16 tabling, July9 adoption record present."
+    ],
+    "caveats": [
+      "Title identifies158-2; body154-8. Preserve discrepancy.",
+      "Meeting history entries labeled Draft; not certified minutes.",
+      "Effective clause depends on passage and publication; publication date not acquired."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_NJ_HOB_MINUTES": {
+    "role": "Official Hoboken minutes recording adoption",
+    "checks": [
+      "B-781 appears pp10-12; p12 adoption and effective clause visually checked."
+    ],
+    "caveats": [
+      "130-page minutes include unrelated business; target B-781 pp10-12 only.",
+      "Minutes approval/certification not verified; signature fields blank.",
+      "Title158-2/body154-8 discrepancy and publication-dependent date retained."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_NJ_JC_25_098": {
+    "role": "Jersey City subsequent amendment",
+    "checks": [
+      "Mandatory disclosure subsection, enforcement/severability renumbering; September24,2025 final adoption and September25 mayor approval present."
+    ],
+    "caveats": [
+      "REDLINE PDF requires original visual review; flattened numbering is ambiguous.",
+      "Separate change to218-1 security requirements is not an algorithm-definition change.",
+      "No explicit effective-date clause found; publication and exact operative date remain unverified."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_NJ_JC_25_105": {
+    "role": "Jersey City general penalties amendment",
+    "checks": [
+      "October8,2025 final adoption/October9 mayor approval recorded; general1-25 penalty clause present."
+    ],
+    "caveats": [
+      "REDLINE PDF requires original visual review.",
+      "Changes1-25 referenced by25-057; does not explicitly amend218-12. Other housing penalties must not automatically be assigned to algorithm rule.",
+      "Vote page has inconsistent roster/tally details; do not reconcile silently.",
+      "Exact effective/publication date and later amendment completeness unverified."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_MA_H5222_TEXT": {
+    "role": "H5222 substantive pending proposal text",
+    "checks": [
+      "Definitions, exclusions, prohibited conduct and remedies present."
+    ],
+    "caveats": [
+      "Proposal text, not enactment evidence."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_MA_H5222_STATUS": {
+    "role": "H5222 observed status/history",
+    "checks": [
+      "Three March12,2026 actions; House Ways and Means referral last listed."
+    ],
+    "caveats": [
+      "Observed October4,2026; do not backdate retrieval or infer historical status solely from current absence of later actions."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_MA_S2983_TEXT": {
+    "role": "S2983 substantive pending proposal text",
+    "checks": [
+      "Definitions, exclusions, prohibition and remedies present."
+    ],
+    "caveats": [
+      "Proposal text, not enactment evidence."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_MA_S2983_STATUS": {
+    "role": "S2983 observed status/history",
+    "checks": [
+      "Three March12,2026 actions; Senate Ways and Means referral last listed."
+    ],
+    "caveats": [
+      "Observed October4,2026; no enacted status inferred."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_MA_IP25_21_ORIGINAL": {
+    "role": "Original IP25-21 petition",
+    "checks": [
+      "Two-page official petition; source hash independently reproduced."
+    ],
+    "caveats": [
+      "Petition text does not establish later failure."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_MA_H5008": {
+    "role": "Official petition legislative transmission",
+    "checks": [
+      "Seven pages include petition, January7,2026 transmittal and September3,2025 certification. Pages6-7 visually checked and text complete."
+    ],
+    "caveats": [
+      "Prior certification/transmission is not proof of current ballot eligibility."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  },
+  "P11_MA_CELLA_OPINION_MIRROR": {
+    "role": "Court-authored disposition, third-party mirror",
+    "checks": [
+      "SJC-13893; June23,2026; majority disposition p16, separate concurrence begins p17. Pages1,2,16,17 visually checked."
+    ],
+    "caveats": [
+      "Hosted by amicus participant US Chamber, not official court; official-hosted opinion/docket and final county judgment not verified.",
+      "Slip opinion subject to revision; majority and concurrence must remain distinct.",
+      "The opinion does not address all alternative challenges (footnote6)."
+    ],
+    "review_type": "agent source-content and integrity check; not independent legal review"
+  }
+}

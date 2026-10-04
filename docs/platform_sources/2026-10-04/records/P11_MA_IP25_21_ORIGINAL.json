@@ -1,0 +1,37 @@
+{
+  "doc_id": "P11_MA_IP25_21_ORIGINAL",
+  "cases": [
+    "T5"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+  "title": "Original IP25-21 petition; retry with default Python User-Agent",
+  "user_agent": null,
+  "attempted_at": "2026-10-04T07:08:11.831422+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity"
+  },
+  "http_status": 200,
+  "final_url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+  "retrieved_at": "2026-10-04T07:08:11.983868+00:00",
+  "headers": {
+    "Content-Type": "application/pdf",
+    "Last-Modified": "Wed, 06 Aug 2025 17:17:43 GMT",
+    "ETag": "\"Zy7stfkFKzb2vk2SmvPobA==\"",
+    "Date": "Sun, 04 Oct 2026 07:08:12 GMT"
+  },
+  "raw_path": "raw/P11_MA_IP25_21_ORIGINAL.pdf",
+  "raw_sha256": "11c071b03ff75eaa54d3e2f66092915a2d053d860e2a4ffa4db46c5d8d21ac60",
+  "raw_bytes": 423741,
+  "text_path": "text/P11_MA_IP25_21_ORIGINAL.txt",
+  "text_sha256": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+  "text_characters": 3313,
+  "derivation": {
+    "method": "pypdf.PdfReader.extract_text",
+    "version": "6.10.0",
+    "pages": 2
+  }
+}

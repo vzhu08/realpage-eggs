@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_CA_AB325_TEXT",
+  "cases": [
+    "T1"
+  ],
+  "jurisdictions": [
+    "CA"
+  ],
+  "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB325",
+  "title": "AB325 chaptered text",
+  "related_existing_id": "D022",
+  "attempted_at": "2026-10-04T07:05:03.339158+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB325",
+  "retrieved_at": "2026-10-04T07:05:03.801231+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8",
+    "Date": "Sun, 04 Oct 2026 07:05:04 GMT"
+  },
+  "raw_path": "raw/P11_CA_AB325_TEXT.html",
+  "raw_sha256": "cee911155967ad2fbe28dab9acdb91cfb2b22b00a4889a77b3579ad0332b5288",
+  "raw_bytes": 84118,
+  "text_path": "text/P11_CA_AB325_TEXT.txt",
+  "text_sha256": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+  "text_characters": 6434,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

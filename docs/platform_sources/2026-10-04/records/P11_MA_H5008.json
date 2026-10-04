@@ -1,0 +1,35 @@
+{
+  "doc_id": "P11_MA_H5008",
+  "cases": [
+    "T5"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://malegislature.gov/Bills/194/H5008.pdf",
+  "title": "H5008 petition and official certification/transmission",
+  "attempted_at": "2026-10-04T07:07:26.177947+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity",
+    "User-Agent": "Mozilla/5.0 (official document research)"
+  },
+  "http_status": 200,
+  "final_url": "https://malegislature.gov/Bills/194/H5008.pdf",
+  "retrieved_at": "2026-10-04T07:07:27.182317+00:00",
+  "headers": {
+    "Content-Type": "application/pdf",
+    "Date": "Sun, 04 Oct 2026 07:07:27 GMT"
+  },
+  "raw_path": "raw/P11_MA_H5008.pdf",
+  "raw_sha256": "277e0e09f2180dc2d3a2881081019347b0b672a496a830bcd24459ab94ceb193",
+  "raw_bytes": 2453485,
+  "text_path": "text/P11_MA_H5008.txt",
+  "text_sha256": "1436cfb89c41b875f5cb69cf52685a723a44671cedc508b3dc6225c9e93b42f5",
+  "text_characters": 7510,
+  "derivation": {
+    "method": "pypdf.PdfReader.extract_text",
+    "version": "6.10.0",
+    "pages": 7
+  }
+}

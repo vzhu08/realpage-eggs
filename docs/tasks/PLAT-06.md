@@ -1,7 +1,13 @@
 # PLAT-06: integrated snapshot, evidence package and runnable release
 
 Priority: P0 data/release, then P1 evidence package.
-State: Platform software merged in PR #14; full release acceptance remains partial pending Core evidence/review and additive UX adoption.
+State: Platform software merged in PR #14; full release acceptance remains partial pending Platform source acquisition, Core evidence/review and additive UX adoption.
+
+October 4 correction: missing T1-T5 source acquisition was incorrectly grouped into Core's
+remaining work. Platform owns those captures. [PLAT-11](PLAT-11.md) delivers 21 new documents
+with original response bodies and provenance; municipal publication/effectiveness evidence and
+official verification of the T5 court mirror remain explicit Platform gaps. This does not update
+the frozen release or make the saved T1-T5 evaluation results complete.
 
 Integration follow-up: [PR #14](https://github.com/vzhu08/realpage-eggs/pull/14) includes the
 PLAT-07 integrity fixes and unreadable-cache fallback. Combined backend verification passes
@@ -64,8 +70,9 @@ The earlier real-001 run was superseded after its performance issue, not accepte
 
 Legal/corpus release gate stays explicit: all 140 rules need review; only 16 currently project to
 the official rule schema, with 124 unresolved temporal projections. T1 is partial (250 uncertain
-properties); T2-T5 are blocked by absent extracted support/lifecycle evidence. Core owns the legal
-evidence repairs and human review. No final judge readiness or accepted partial scope is asserted.
+properties); T2-T5 are blocked by absent extracted support/lifecycle evidence. Platform owns
+missing source acquisition; Core owns interpretation, extraction and rule review. Independent
+human review also remains required. No final judge readiness or accepted partial scope is asserted.
 
 Handoff evidence: `docs/evidence/plat06_release.json`; detailed local report:
 `artifacts/plat06/real-acceptance-verified/report.json`. Runtime code is frozen at `5145f1b`;
@@ -80,8 +87,8 @@ Local UI/API: `http://127.0.0.1:8016`. Restart from this checkout with the exist
 & C:/Users/vzhu0/PycharmProjects/realpage-eggs/.venv/Scripts/python.exe scripts/platform_ops.py serve-release --release artifacts/plat06/releases/real-002 --port 8016
 ```
 
-Next action: review/integrate the local Platform branch. Core A owns resolving the disclosed
-evidence/lifecycle blockers and rule review; UX-04 owns the new summary/comparison/download controls.
+Next action (updated after merge): Platform delivers missing sources through PLAT-11; Core A
+reviews the captured evidence and lifecycle interpretation; UX-04 owns adoption of additive controls.
 The immutable local artifacts are not included in Git and must be retained for the release handoff.
 
 ## Historical independent increment — October 4

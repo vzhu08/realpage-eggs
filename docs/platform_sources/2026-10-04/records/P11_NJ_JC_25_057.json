@@ -1,0 +1,34 @@
+{
+  "doc_id": "P11_NJ_JC_25_057",
+  "cases": [
+    "T2",
+    "T3"
+  ],
+  "jurisdictions": [
+    "Jersey City, NJ"
+  ],
+  "url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+  "title": "Jersey City Ordinance 25-057 with vote record",
+  "related_existing_id": null,
+  "attempted_at": "2026-10-04T07:05:07.272937+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://cityofjerseycity.civicweb.net/document/429156/Ordinance%20Amending%20Chapter%20218%20creating%20section.pdf",
+  "retrieved_at": "2026-10-04T07:05:07.440231+00:00",
+  "headers": {
+    "Content-Type": "application/pdf",
+    "Last-Modified": "Tue, 27 May 2025 20:35:57",
+    "Date": "Sun, 04 Oct 2026 07:05:08 GMT"
+  },
+  "raw_path": "raw/P11_NJ_JC_25_057.pdf",
+  "raw_sha256": "f8ebbec4d617326b85dee29ced0dec2667fce8735095d5977365000476e1a272",
+  "raw_bytes": 222497,
+  "text_path": "text/P11_NJ_JC_25_057.txt",
+  "text_sha256": "95d3aa83c069ff8435e81300986179611bfde3d9e6058a6ed47191e09ccf11a1",
+  "text_characters": 11750,
+  "derivation": {
+    "method": "pypdf.PdfReader.extract_text",
+    "version": "6.10.0",
+    "pages": 5
+  }
+}

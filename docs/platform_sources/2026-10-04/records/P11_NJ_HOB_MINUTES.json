@@ -1,0 +1,37 @@
+{
+  "doc_id": "P11_NJ_HOB_MINUTES",
+  "cases": [
+    "T2",
+    "T3"
+  ],
+  "jurisdictions": [
+    "Hoboken, NJ"
+  ],
+  "url": "https://hobokennj.iqm2.com/Citizens/FileOpen.aspx?Type=12&ID=2206&Inline=True",
+  "title": "Hoboken July 9, 2025 minutes, B-781 at pp10-12",
+  "user_agent": null,
+  "attempted_at": "2026-10-04T07:07:20.574352+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity"
+  },
+  "http_status": 200,
+  "final_url": "https://hobokennj.iqm2.com/Citizens/FileOpen.aspx?Type=12&ID=2206&Inline=True",
+  "retrieved_at": "2026-10-04T07:07:21.150134+00:00",
+  "headers": {
+    "Content-Type": "application/pdf",
+    "Last-Modified": "Thu, 04 Sep 2025 13:04:59 GMT",
+    "Date": "Sun, 04 Oct 2026 07:07:21 GMT"
+  },
+  "raw_path": "raw/P11_NJ_HOB_MINUTES.pdf",
+  "raw_sha256": "903bcc915ed54420f7a9a31831acb25336c77aeaeac06e22bd305093c2535943",
+  "raw_bytes": 1135382,
+  "text_path": "text/P11_NJ_HOB_MINUTES.txt",
+  "text_sha256": "cff215dc6e06b784e8efa305937f1fbffb358257f0bf8bd26ce1e583631499f5",
+  "text_characters": 268053,
+  "derivation": {
+    "method": "pypdf.PdfReader.extract_text",
+    "version": "6.10.0",
+    "pages": 130
+  }
+}

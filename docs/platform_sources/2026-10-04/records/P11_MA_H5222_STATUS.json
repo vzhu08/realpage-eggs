@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_MA_H5222_STATUS",
+  "cases": [
+    "T4"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://malegislature.gov/Bills/194/H5222",
+  "title": "H5222 current landing/history",
+  "related_existing_id": "D045",
+  "attempted_at": "2026-10-04T07:06:38.721283+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://malegislature.gov/Bills/194/H5222",
+  "retrieved_at": "2026-10-04T07:06:40.919682+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Date": "Sun, 04 Oct 2026 07:06:41 GMT"
+  },
+  "raw_path": "raw/P11_MA_H5222_STATUS.html",
+  "raw_sha256": "6b4eadfd6a7598bf2d970fd59619512f7380f6d3be5416de3c14a33e5137a6f6",
+  "raw_bytes": 85910,
+  "text_path": "text/P11_MA_H5222_STATUS.txt",
+  "text_sha256": "6ad96053828823b69a204d8af97116a768766526378ee46982e66928630543c2",
+  "text_characters": 5843,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

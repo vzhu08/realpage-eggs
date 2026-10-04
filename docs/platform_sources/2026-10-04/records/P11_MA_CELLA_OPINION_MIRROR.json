@@ -1,0 +1,39 @@
+{
+  "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+  "cases": [
+    "T5"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://www.uschamber.com/assets/documents/Opinion-Cella-v.-Campbell-Mass.pdf",
+  "title": "SJC-13893 court-authored slip opinion on amicus participant mirror",
+  "user_agent": "Mozilla/5.0",
+  "authority": "court_authored_third_party_mirror",
+  "attempted_at": "2026-10-04T07:07:27.253683+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity",
+    "User-Agent": "Mozilla/5.0"
+  },
+  "http_status": 200,
+  "final_url": "https://www.uschamber.com/assets/documents/Opinion-Cella-v.-Campbell-Mass.pdf",
+  "retrieved_at": "2026-10-04T07:07:27.482921+00:00",
+  "headers": {
+    "Content-Type": "application/pdf",
+    "Last-Modified": "Tue, 23 Jun 2026 20:42:30 GMT",
+    "ETag": "\"1008cb21153ec6639b22a37d058a010c\"",
+    "Date": "Sun, 04 Oct 2026 07:07:28 GMT"
+  },
+  "raw_path": "raw/P11_MA_CELLA_OPINION_MIRROR.pdf",
+  "raw_sha256": "6bc6f2e3e10be5e4c4dc39edbc8bc53798ab41714182969fff6e329ee0a030ef",
+  "raw_bytes": 159822,
+  "text_path": "text/P11_MA_CELLA_OPINION_MIRROR.txt",
+  "text_sha256": "378a2c17f7280575937c072bbaaafcb83b713b204ffec1e6c1bcc686eb9baff4",
+  "text_characters": 42199,
+  "derivation": {
+    "method": "pypdf.PdfReader.extract_text",
+    "version": "6.10.0",
+    "pages": 27
+  }
+}

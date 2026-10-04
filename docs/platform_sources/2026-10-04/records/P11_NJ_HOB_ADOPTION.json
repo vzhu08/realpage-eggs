@@ -1,0 +1,33 @@
+{
+  "doc_id": "P11_NJ_HOB_ADOPTION",
+  "cases": [
+    "T2",
+    "T3"
+  ],
+  "jurisdictions": [
+    "Hoboken, NJ"
+  ],
+  "url": "https://www.hobokennj.gov/news/city-of-hoboken-outlaws-algorithmic-rent-fixing",
+  "title": "Hoboken official adoption announcement",
+  "related_existing_id": null,
+  "attempted_at": "2026-10-04T07:06:37.941893+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://www.hobokennj.gov/news/city-of-hoboken-outlaws-algorithmic-rent-fixing",
+  "retrieved_at": "2026-10-04T07:06:38.075589+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Last-Modified": "Sun, 04 Oct 2026 07:06:38 GMT",
+    "Date": "Sun, 04 Oct 2026 07:06:38 GMT"
+  },
+  "raw_path": "raw/P11_NJ_HOB_ADOPTION.html",
+  "raw_sha256": "0797da1e99249cab6d61c4c23f03df70c3a2dec52e6700b4b37e2c1d6eaea33a",
+  "raw_bytes": 31963,
+  "text_path": "text/P11_NJ_HOB_ADOPTION.txt",
+  "text_sha256": "7dc23b6b5348a62eb091e24a1bc7a9a638fb2aeab256d4ea5b945ff5917a1af4",
+  "text_characters": 4434,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

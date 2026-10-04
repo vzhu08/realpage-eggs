@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_CA_BPC_ART3",
+  "cases": [
+    "T1"
+  ],
+  "jurisdictions": [
+    "CA"
+  ],
+  "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=3.",
+  "title": "BPC Article 3 and SB763/AB325 date annotations",
+  "related_existing_id": null,
+  "attempted_at": "2026-10-04T07:05:06.231259+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=3.",
+  "retrieved_at": "2026-10-04T07:05:06.791726+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8",
+    "Date": "Sun, 04 Oct 2026 07:05:07 GMT"
+  },
+  "raw_path": "raw/P11_CA_BPC_ART3.html",
+  "raw_sha256": "2a5746bc2b0d69caf73647df2fcf7435b891a12e45b2b6c9e22b71b185c8f247",
+  "raw_bytes": 169823,
+  "text_path": "text/P11_CA_BPC_ART3.txt",
+  "text_sha256": "38bd66c93d6363c00b125620c79e8e967aa7a1f56da16f9ea9769525e63de04a",
+  "text_characters": 30918,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}

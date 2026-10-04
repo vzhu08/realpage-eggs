@@ -1,0 +1,114 @@
+[
+  {
+    "doc_id": "P11_NJ_HOB_B781_HTML",
+    "cases": [
+      "T2",
+      "T3"
+    ],
+    "jurisdictions": [
+      "Hoboken, NJ"
+    ],
+    "url": "https://hobokennj.iqm2.com/Citizens/Detail_LegiFile.aspx?ID=12291&MeetingID=2943",
+    "title": "Hoboken B-781 legislative record; retry with default Python UA",
+    "user_agent": null
+  },
+  {
+    "doc_id": "P11_NJ_HOB_MINUTES",
+    "cases": [
+      "T2",
+      "T3"
+    ],
+    "jurisdictions": [
+      "Hoboken, NJ"
+    ],
+    "url": "https://hobokennj.iqm2.com/Citizens/FileOpen.aspx?Type=12&ID=2206&Inline=True",
+    "title": "Hoboken July 9, 2025 minutes, B-781 at pp10-12",
+    "user_agent": null
+  },
+  {
+    "doc_id": "P11_NJ_JC_25_098",
+    "cases": [
+      "T2",
+      "T3"
+    ],
+    "jurisdictions": [
+      "Jersey City, NJ"
+    ],
+    "url": "https://cityofjerseycity.civicweb.net/document/436629/Ordinance%20Amending%20Chapter%20218%20Section%2012.pdf",
+    "title": "Jersey City 25-098 subsequent amendment"
+  },
+  {
+    "doc_id": "P11_NJ_JC_25_105",
+    "cases": [
+      "T2",
+      "T3"
+    ],
+    "jurisdictions": [
+      "Jersey City, NJ"
+    ],
+    "url": "https://cityofjerseycity.civicweb.net/document/437598/Ordinance%20Amending%20Chapter%201,%20Chapters%20218,%20254.pdf",
+    "title": "Jersey City 25-105 penalties amendment; relevance requires Core review"
+  },
+  {
+    "doc_id": "P11_MA_IP25_21",
+    "cases": [
+      "T5"
+    ],
+    "jurisdictions": [
+      "MA"
+    ],
+    "url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+    "title": "Original IP25-21 petition"
+  },
+  {
+    "doc_id": "P11_MA_H5008",
+    "cases": [
+      "T5"
+    ],
+    "jurisdictions": [
+      "MA"
+    ],
+    "url": "https://malegislature.gov/Bills/194/H5008.pdf",
+    "title": "H5008 petition and official certification/transmission"
+  },
+  {
+    "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+    "cases": [
+      "T5"
+    ],
+    "jurisdictions": [
+      "MA"
+    ],
+    "url": "https://www.uschamber.com/assets/documents/Opinion-Cella-v.-Campbell-Mass.pdf",
+    "title": "SJC-13893 court-authored slip opinion on amicus participant mirror",
+    "user_agent": "Mozilla/5.0",
+    "authority": "court_authored_third_party_mirror"
+  },
+  {
+    "doc_id": "P11_MA_CELLA_REPORT",
+    "cases": [
+      "T5"
+    ],
+    "jurisdictions": [
+      "MA"
+    ],
+    "url": "https://www.mass.gov/doc/arcangelo-cella-et-al-v-andrea-joy-campbell-attorney-general-et-al-sjc-13893/download",
+    "title": "Official reservation/report WITHOUT DECISION (identity only)"
+  },
+  {
+    "doc_id": "P11_MA_IP25_21_ORIGINAL",
+    "cases": ["T5"],
+    "jurisdictions": ["MA"],
+    "url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+    "title": "Original IP25-21 petition; retry with default Python User-Agent",
+    "user_agent": null
+  },
+  {
+    "doc_id": "P11_MA_CELLA_IDENTITY",
+    "cases": ["T5"],
+    "jurisdictions": ["MA"],
+    "url": "https://www.mass.gov/doc/arcangelo-cella-et-al-v-andrea-joy-campbell-attorney-general-et-al-sjc-13893/download",
+    "title": "Official reservation/report WITHOUT DECISION (identity only); default Python User-Agent",
+    "user_agent": null
+  }
+]

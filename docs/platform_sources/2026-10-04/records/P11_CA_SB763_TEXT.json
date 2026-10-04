@@ -1,0 +1,31 @@
+{
+  "doc_id": "P11_CA_SB763_TEXT",
+  "cases": [
+    "T1"
+  ],
+  "jurisdictions": [
+    "CA"
+  ],
+  "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB763",
+  "title": "SB763 chaptered text",
+  "related_existing_id": null,
+  "attempted_at": "2026-10-04T07:05:05.264998+00:00",
+  "status": "captured_pending_content_review",
+  "http_status": 200,
+  "final_url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB763",
+  "retrieved_at": "2026-10-04T07:05:05.716755+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8",
+    "Date": "Sun, 04 Oct 2026 07:05:06 GMT"
+  },
+  "raw_path": "raw/P11_CA_SB763_TEXT.html",
+  "raw_sha256": "0ca3015a8a48ede7edfe6cd84e2cb43213204aa8decf1ff468f609327a56994a",
+  "raw_bytes": 86685,
+  "text_path": "text/P11_CA_SB763_TEXT.txt",
+  "text_sha256": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+  "text_characters": 7602,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}
