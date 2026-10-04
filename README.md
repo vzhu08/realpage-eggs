@@ -6,6 +6,18 @@ FastAPI backend and CLI for evidence-backed rule extraction, jurisdiction resolu
 three-valued coverage, date comparisons and competition-format exports. **Not legal advice.**
 Frontend implementation is reserved for the UX / Claude Code owner.
 
+## Latest research results and presentation
+
+The October 4 bounded rerun contains **678 rules, 86 sources and 500 properties**.
+All five change cases now have their required rule references mapped, but all five
+remain **partial**. Overall legal accuracy has not been independently measured.
+See the [rerun results and reproducible research snapshot](docs/change_case_results/README.md)
+for the evidence, remaining gaps and offline reproduction instructions. This research
+snapshot is separate from the historical submission below and the deployed snapshot.
+
+The [pitch materials](docs/pitch/README.md) include the three-minute slide deck,
+presenter script and interview preparation document with 28 questions and answers.
+
 ## RealPage submission files
 
 **[Download the saved three-file JSON archive (.zip)](submission/submission.zip?raw=true)**

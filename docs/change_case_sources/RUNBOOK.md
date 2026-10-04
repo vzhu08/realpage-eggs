@@ -4,6 +4,12 @@ This workflow uses the existing extractor and evaluator. It preserves the input
 Store, supplies explicit related documents, and writes candidates into a new private
 copy. It does not publish, deploy, change corpus admission, or mark T1–T5 complete.
 
+The completed October 4 run and its cumulative budget ledger are preserved in the
+[final research handoff](../change_case_results/README.md). Its 34 requests used a
+conservative estimate of $3.55834050 under a $5 cap. All five cases remain partial.
+Use that snapshot for offline inspection; the commands below describe a new run
+and must not overwrite or silently resume the preserved completed work.
+
 ## Prepare and inspect without API access
 
 Use the full producing Store when available. An API reconstruction can support

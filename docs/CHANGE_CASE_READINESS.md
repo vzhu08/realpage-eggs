@@ -1,5 +1,26 @@
 # T1–T5 diagnosis and repair
 
+## Latest bounded rerun — October 4
+
+The final local rerun evaluated all **678 rules and 500 properties** against T1–T5.
+All five cases are **partial**, none are blocked, and every required rule reference
+maps. T1–T5 respectively report 250, 92, 140, 110 and 0 uncertain properties, with
+zero definite affected properties in each case. Empty sets do not establish complete
+coverage or no impact. The canonical gate exits 1 for incomplete readiness.
+
+The rerun removed four enum mismatches and ten missing field-evidence bindings in
+the six corrective extraction targets. Genuine interpretation and date issues remain.
+All 500 property records stayed unchanged. The cumulative conservative API cost estimate was
+**$3.55834050 across 34 reconciled requests**, within the cumulative $5 cap.
+
+The [final rerun handoff](change_case_results/README.md) includes the research Store,
+provenance, full reports and reproduction instructions. A fresh A0001 evidence
+package replay reproduced its outputs; that establishes reproducibility, not legal
+accuracy. There are still no independently reviewed benchmark answers or official
+scores. The historical archive and captured hosted baseline below remain distinct.
+
+## Historical submission diagnosis
+
 The saved submission has no definite affected addresses in any of the five cases.
 Its own report labels T1/T3 partial and T2/T4/T5 blocked. Passing unit and browser
 tests verifies the software's behavior, including uncertainty handling; it does
@@ -24,7 +45,7 @@ establish a blanket organizer prohibition on official public supplementation. Ke
 source provenance and final admission decisions explicit. Do not substitute expected
 address sets from the scenario descriptions.
 
-## Current deployed-data diagnosis
+## Captured deployed-data baseline
 
 The October 4 API capture contains 666 rules, 83 sources and 500 properties with
 487 resolved municipalities. The canonical gate evaluated all rules and properties
@@ -50,8 +71,9 @@ health counts during address capture do not establish an atomic server snapshot.
 The new [source bundle](change_case_sources/README.md) preserves 24 exact captures
 and a nine-primary extraction plan. Follow the [bounded rerun runbook](change_case_sources/RUNBOOK.md)
 to supply explicit supporting documents, record fresh extraction lineage and rerun
-the data gate. Fresh provider results and unresolved source/version decisions remain
-necessary; the software changes do not alter these observed case results.
+the data gate. The completed rerun above records the later provider results and gate
+outcomes; it does not retroactively change this captured baseline or resolve all
+source/version decisions.
 
 ## Software repairs
 
