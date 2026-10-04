@@ -1,5 +1,12 @@
 # RENDER-01: local Render deployment preparation
 
+## Prioritized follow-up
+
+At the user's request, [PERF-01](PERF-01.md) is now a P0 task-board item and deployment/rehearsal
+gate. Read its local CPU profile, endpoint-specific timeout/progressive UX options, correctness
+requirements and optional paid-compute comparison. This session's additional claim is limited to
+`docs/TASKS.md` and `docs/tasks/PERF-01.md`; runtime ownership stays with the existing human lanes.
+
 ## Dashboard repair (October 4)
 
 The user now explicitly requested computer use to repair Render and approved uploading the prepared
