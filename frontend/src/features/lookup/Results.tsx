@@ -7,7 +7,7 @@ import { diffOutcomes } from '../../lib/diff';
 import { MATCH_QUALITY, RESULT_ORDER, resultMeta, sentence } from '../../lib/labels';
 import { isSynthetic, readMetadata } from '../../lib/metadata';
 import { groupOpenItems, openItems } from '../../lib/openItems';
-import { consequenceOf } from '../../lib/uncertainty';
+import { movableResults } from '../../lib/uncertainty';
 import type { SessionState } from '../../state/session';
 import { addressLine } from '../property/PropertyFinder';
 import { AnswerHistory } from '../questions/AnswerHistory';
@@ -71,15 +71,18 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
   const fixtureNote = `${fixtureText.charAt(0).toUpperCase()}${fixtureText.slice(1)}${/[.!?]$/.test(fixtureText) ? '' : '.'}`;
 
   // What to do next, read from the plan and the open statements. Nothing here predicts an outcome.
-  const answered = new Set(session.answers.map((answer) => answer.field));
+  // While the date control has been changed but not run, the result on screen is still the one
+  // computed with the earlier answers. Those are the answers shown with it, read-only.
+  const shownAnswers = stale ? outcome.query.answers : session.answers;
+  const answered = new Set(shownAnswers.map((answer) => answer.field));
   const openQuestions = (outcome.assist?.question_plan.questions ?? []).filter((question) => !answered.has(question.fact.field));
   const lead = openQuestions[0];
-  const movable = lead ? new Set(lead.alternatives.flatMap((alternative) => consequenceOf(lookup.evaluations, alternative.evaluations).changed.map((change) => change.ruleId))).size : 0;
-  const open = useMemo(() => groupOpenItems(openItems(outcome, session.answers), new Set(lookup.rules.map((rule) => rule.team_rule_id))), [outcome, session.answers, lookup.rules]);
+  const movable = lead ? movableResults(lookup.evaluations, lead).movable : 0;
+  const open = useMemo(() => groupOpenItems(openItems(outcome, shownAnswers), new Set(lookup.rules.map((rule) => rule.team_rule_id))), [outcome, shownAnswers, lookup.rules]);
   const reviewTopics = open.other.length;
 
   return (
-    <div className={busy && session.reevaluating ? 'results is-busy' : 'results'} aria-busy={busy}>
+    <div id="lookup-results" className={busy && session.reevaluating ? 'results is-busy' : 'results'} aria-busy={busy}>
       <div className="context" role="group" aria-label="Result context">
         <p className="context__asof">
           {session.selection && <span className="context__subject">{addressLine(session.selection)}</span>}
@@ -118,7 +121,7 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
 
       <section className="verdict" aria-labelledby="outcome-heading">
         <div className="verdict__head">
-          <h2 id="outcome-heading" className="verdict__title">
+          <h2 id="outcome-heading" className="verdict__title" tabIndex={-1}>
             Rules for this property on {formatDate(lookup.as_of)}
           </h2>
           <span className="hint">
@@ -250,9 +253,9 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
         </Notice>
       )}
 
-      <QuestionsPanel outcome={outcome} answers={session.answers} definitions={definitions} busy={busy} synthetic={synthetic} relatedCases={relatedCases} onOpenCase={onOpenCase} onAnswer={onAnswer} onInspect={onInspect} />
+      <QuestionsPanel outcome={outcome} answers={shownAnswers} definitions={definitions} busy={busy} synthetic={synthetic} relatedCases={relatedCases} onOpenCase={onOpenCase} onAnswer={onAnswer} onInspect={onInspect} />
 
-      <AnswerHistory answers={session.answers} history={session.history} outcome={outcome} definitions={definitions} busy={busy} onAnswer={onAnswer} onRemove={onRemoveAnswer} />
+      <AnswerHistory answers={shownAnswers} history={session.history} outcome={outcome} definitions={definitions} busy={busy} readOnly={stale} onAnswer={onAnswer} onRemove={onRemoveAnswer} />
 
       {total > 0 && (
         <section className="section" aria-labelledby="rules-heading">
@@ -266,7 +269,7 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
         </section>
       )}
 
-      <RemainingUncertainty outcome={outcome} answers={session.answers} onInspect={onInspect} definitions={definitions} disagreementHref={conflicted.length > 0 ? conflictHref : undefined} />
+      <RemainingUncertainty outcome={outcome} answers={shownAnswers} onInspect={onInspect} definitions={definitions} disagreementHref={conflicted.length > 0 ? conflictHref : undefined} />
 
       <KeepResult session={session} outcome={outcome} mode={mode} apiBase={apiBase} busy={busy} />
 

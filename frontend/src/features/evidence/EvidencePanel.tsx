@@ -21,12 +21,14 @@ interface Props {
   assist: AssistResponse | null;
   /** True when shown as a full-height sheet over the page (narrow screens). */
   modal: boolean;
+  /** The result is synthetic. The drawer can cover the page banner, so it says so itself. */
+  synthetic?: boolean;
   onClose: () => void;
 }
 
 type TabId = 'source' | 'encoded' | 'checks' | 'versions';
 
-export function EvidencePanel({ rule, evaluation, lookup, assist, modal, onClose }: Props) {
+export function EvidencePanel({ rule, evaluation, lookup, assist, modal, synthetic = false, onClose }: Props) {
   const source = useSource();
   const ref = useRef<HTMLElement | null>(null);
   const tabBase = useId();
@@ -101,6 +103,7 @@ export function EvidencePanel({ rule, evaluation, lookup, assist, modal, onClose
           </h2>
           <p className="evidence__meta">
             {meta ? <Tag tone={meta.tone}>{meta.label}</Tag> : <Tag tone="muted">Not in the current result</Tag>}
+            {(synthetic || rule.evidence_mode === 'synthetic') && <Tag tone="unknown">Synthetic data · not actual law</Tag>}
             <span>{categoryLabel(rule.category)}</span>
             <span aria-hidden="true">·</span>
             <span>{rule.jurisdiction}</span>

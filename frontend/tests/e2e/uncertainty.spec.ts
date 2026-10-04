@@ -17,7 +17,7 @@ test.describe('consequential questions and what stays uncertain after an answer'
     await openEmberRoad(page);
     await expect(page.getByRole('group', { name: 'Result context' })).toContainText('UX development fixture');
     const question = questionCard(page, OWNER);
-    await expect(question.locator('.question__consequence')).toHaveText('Depending on the answer, 2 of 6 results can change.');
+    await expect(question.locator('.question__consequence')).toHaveText('Depending on the answer, 2 of the 3 results above can change.');
     // Same title, two source documents: the two records are told apart.
     await expect(question.getByRole('button', { name: 'Larch Point screening fee cap (fictional) · DEV-LP-CODE-03' })).toBeVisible();
     await expect(question.getByRole('button', { name: 'Larch Point screening fee cap (fictional) · DEV-LP-ORD-03' })).toBeVisible();

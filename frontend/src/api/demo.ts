@@ -33,7 +33,7 @@ import { replayAssist } from '../demo/replay';
 import { formatDate } from '../lib/dates';
 import { readMetadata } from '../lib/metadata';
 import { COUNT_ORDER, arrangeComparisons, comparisonCounts, countPhrase } from '../lib/sourceComparisons';
-import { consequenceOf } from '../lib/uncertainty';
+import { movableResults } from '../lib/uncertainty';
 import { ApiError } from './errors';
 import type {
   AddressItem,
@@ -295,11 +295,14 @@ export class DemoSource implements DataSource {
     const question = lookup?.response.question_plan.questions[0];
     if (lookup && question) {
       const current = lookup.response.lookup.evaluations;
-      const movable = new Set(question.alternatives.flatMap((alternative) => consequenceOf(current, alternative.evaluations).changed.map((change) => change.ruleId))).size;
+      const count = movableResults(current, question);
+      const { movable } = count;
+      // "N of its M results" only when every result an answer can move is one of the M on screen.
+      const reach = count.listed === movable ? `${movable} of its ${current.length} ${current.length === 1 ? 'result' : 'results'}` : `${movable} ${movable === 1 ? 'result' : 'results'}`;
       examples.push({
         id: 'consequential_fact',
         title: 'One fact that changes the answer',
-        detail: movable > 0 ? `One question about this property can change ${movable} of its ${current.length} ${current.length === 1 ? 'result' : 'results'}. Answer it and see what moves, and what stays unknown.` : 'A question plan for one property, with what each answer would and would not settle.',
+        detail: movable > 0 ? `One question about this property can change ${reach}. Answer it and see what moves, and what stays unknown.` : 'A question plan for one property, with what each answer would and would not settle.',
         meta: `${street(lookup.request.address_id)} · as of ${formatDate(lookup.request.as_of)}`,
         target: { view: 'lookup', ...lookup.request },
       });

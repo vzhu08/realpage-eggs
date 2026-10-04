@@ -52,7 +52,7 @@ Tokens live in `src/styles/tokens.css`; text/background pairs are tested for WCA
 
 ## Layout
 
-- One reading column (`--page`, 67.5rem) on every view. Nothing sits beside the result.
+- One reading column (`--page`, 76rem) on every view. Nothing sits beside the result.
 - **Lookup start:** a one-sentence purpose, three one-click examples in the synthetic demo
   (or links to the other two views on the live API), then the property chooser.
 - **Lookup result, top to bottom:** the address with its legal location and stored facts on

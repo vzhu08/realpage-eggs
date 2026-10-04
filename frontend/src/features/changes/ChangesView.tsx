@@ -56,7 +56,7 @@ export function ChangesView({ initial, lookupHref, disagreementHref }: Props) {
   const controller = useRef<AbortController | null>(null);
   const elapsed = useElapsed(state.status === 'loading');
   const resultRegion = useRef<HTMLDivElement | null>(null);
-  /** Set when a comparison is started from inside a result, so the new result is brought into view. */
+  /** Set when a comparison is started, so its result (totals first) is brought to the top of the window. */
   const reveal = useRef(false);
 
   // Leaving the view must not let a late response touch it.
@@ -81,6 +81,7 @@ export function ChangesView({ initial, lookupHref, disagreementHref }: Props) {
     controller.current?.abort();
     const abort = new AbortController();
     controller.current = abort;
+    reveal.current = true;
     setState({ status: 'loading' });
     try {
       const outcome = await source.changes(request, abort.signal);

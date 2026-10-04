@@ -3,7 +3,7 @@ import { Disclosure, Tag } from '../../components/ui';
 import { formFromDefinition } from '../../lib/answers';
 import { type NumericInterval, readInterval } from '../../demo/replay';
 import { UNCERTAINTY_KINDS, formatValue, humanize, resultMeta, sentence } from '../../lib/labels';
-import { consequenceOf, groupUncertainty } from '../../lib/uncertainty';
+import { consequenceOf, groupUncertainty, movableResults, movableWords } from '../../lib/uncertainty';
 import { AnswerInput } from './AnswerInput';
 
 interface Props {
@@ -25,8 +25,7 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
   const form = formFromDefinition(fact);
   const headingId = `question-${question.question_id.replace(/[^A-Za-z0-9_-]/g, '-')}`;
   // Results at least one recorded answer would move — the reason this question is worth asking.
-  const movable = new Set(question.alternatives.flatMap((alternative) => consequenceOf(current, alternative.evaluations).changed.map((change) => change.ruleId)));
-  const considered = new Set(question.alternatives.flatMap((alternative) => alternative.evaluations.map((evaluation) => evaluation.team_rule_id)));
+  const count = movableResults(current, question);
   // Rules this question is about, by name. Two records of one provision are named once each.
   const affected = question.rule_ids;
   return (
@@ -37,10 +36,8 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
       </h3>
 
       {question.alternatives.length > 0 && (
-        <p className="question__consequence" data-consequence={movable.size}>
-          {movable.size > 0
-            ? `Depending on the answer, ${movable.size} of ${considered.size} ${considered.size === 1 ? 'result' : 'results'} can change.`
-            : 'No recorded answer changes a result on its own. Other open items below still hold the result.'}
+        <p className="question__consequence" data-consequence={count.movable}>
+          {count.movable > 0 ? `Depending on the answer, ${movableWords(count)} can change.` : 'No recorded answer changes a result on its own. Other open items below still hold the result.'}
         </p>
       )}
       {affected.length > 0 && (

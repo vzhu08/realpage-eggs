@@ -63,7 +63,11 @@ export function PortfolioDrillDown({ result, rows, totalRows, lookups, grouping,
                     <span className="source-node__head">
                       <span className="eyebrow">Source</span>
                       <span className="source-node__title">
-                        {node.docId ? (node.source ? `${sentence(node.source.authority)} ${humanize(node.source.source_type ?? 'source')}` : 'Source') : 'Source not known yet'}
+                        {node.docId
+                          ? node.source
+                            ? `${sentence(node.source.authority)} ${humanize(node.source.source_type ?? 'source')}${node.source.jurisdictions.length ? ` · ${node.source.jurisdictions.join(', ')}` : ''}`
+                            : 'Source'
+                          : 'Source not known yet'}
                         {node.docId && <span className="mono source-node__kind">{node.docId}</span>}
                       </span>
                       <span className="source-node__count">

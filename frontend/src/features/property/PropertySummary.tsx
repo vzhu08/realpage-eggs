@@ -1,4 +1,4 @@
-import type { AddressItem, JurisdictionResolution, PropertyFacts } from '../../api/types';
+import type { AddressItem, Answer, JurisdictionResolution, PropertyFacts } from '../../api/types';
 import { Icon } from '../../components/Icon';
 import { Disclosure, Facts, Notice, Tag } from '../../components/ui';
 import { formatTimestamp } from '../../lib/dates';
@@ -9,6 +9,12 @@ interface Props {
   item: AddressItem;
   /** Opens the property chooser. */
   onChange: () => void;
+  /**
+   * The request-local answers behind the result on screen. The service echoes an answered fact
+   * into the property it returns; such a value is labeled as an answer, never shown as if it
+   * were on the stored record.
+   */
+  answers?: Answer[];
 }
 
 /**
@@ -16,7 +22,7 @@ interface Props {
  * record are on one line each; provenance and the resolution record are a disclosure away.
  * A legal municipality that is not established is never tucked away: it stays on the page.
  */
-export function PropertySummary({ item, onChange }: Props) {
+export function PropertySummary({ item, onChange, answers = [] }: Props) {
   const { property, resolution } = item;
   const quality = MATCH_QUALITY[resolution.match_quality ?? 'unresolved'] ?? { label: sentence(resolution.match_quality ?? 'unresolved'), tone: 'unknown' as const, gloss: '' };
   const resolved = resolution.match_quality === 'resolved';
@@ -26,6 +32,7 @@ export function PropertySummary({ item, onChange }: Props) {
   // A fact can be listed as missing while a value is present (e.g. a request-local value); show only real gaps here.
   const missing = (property.missing_facts ?? []).filter((name) => !(name in (property.facts ?? {})) && !(name in (property.bounds ?? {})));
   const place = [resolution.municipality, resolution.state].filter(Boolean).join(', ');
+  const answered = new Map(answers.filter((answer) => answer.value !== null).map((answer) => [answer.field, answer]));
   return (
     <header className="subject">
       <div className="subject__top">
@@ -49,12 +56,22 @@ export function PropertySummary({ item, onChange }: Props) {
             </Tag>
           </dd>
         </div>
-        {facts.map(([name, value]) => (
-          <div className="subject__cell" key={name}>
-            <dt>{sentence(name)}</dt>
-            <dd className="num">{formatValue(value)}</dd>
-          </div>
-        ))}
+        {facts.map(([name, value]) => {
+          const answer = answered.get(name);
+          return (
+            <div className={answer ? 'subject__cell subject__cell--answer' : 'subject__cell'} key={name} data-fact={name} data-origin={answer ? 'answer' : 'record'}>
+              <dt>{sentence(name)}</dt>
+              <dd className="num">
+                {formatValue(value)}
+                {answer && (
+                  <Tag tone={answer.provenance === 'demo' ? 'info' : 'neutral'} icon={false}>
+                    {answer.provenance === 'demo' ? 'Demo answer · not on record' : 'Your answer · unverified, not on record'}
+                  </Tag>
+                )}
+              </dd>
+            </div>
+          );
+        })}
         {bounds.map(([name, bound]) => (
           <div className="subject__cell" key={`bound-${name}`}>
             <dt>{sentence(name)}</dt>
