@@ -1,6 +1,6 @@
 # COORD-04: readiness fixes and four-lane next assignments
 
-State: Review; implementation and local verification complete. Human coordinator: Vincent. Session: current readiness-audit chat.
+State: Verified software; integration is tracked in [PR #11](https://github.com/vzhu08/realpage-eggs/pull/11). Human coordinator: Vincent. Session: current readiness-audit chat.
 User assignment: fix the two audit findings regardless of the usual lane boundaries,
 then assign the proposed next work to the four existing developer lanes in the docs.
 This exception is limited to these fixes and coordination; it does not add writers.
@@ -53,8 +53,8 @@ do not describe the additional PLAT-04 fixes as already merged.
 Evidence: [coord04_readiness.json](../evidence/coord04_readiness.json).
 Limitations: stricter ingress rejects previously accepted non-finite stored values; absent bounds
 must use null. No model calls, original-store writes, new feature implementation or remote operations.
-Next action: review/integrate this branch with PLAT-05's latest changes, then execute the assigned
-four-lane cards from the recorded common base. Preserve local PLAT-04 continuation `11afb55`.
+Next action after PR #11 merges: execute the assigned cards from that common base and
+reconcile PLAT-05 separately when ready. Preserve local PLAT-04 continuation `11afb55`.
 
 ## Authorized integration
 
