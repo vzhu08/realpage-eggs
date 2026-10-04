@@ -48,6 +48,17 @@ def test_source_filter_precedes_limit(demo):
     assert run.config['skipped_sources'][0]['doc_id'] == blocked.doc_id
 
 
+def test_primary_source_priority_precedes_alphabetical_order_and_limit(demo):
+    primary = next(iter(demo.sources().values())).model_copy(
+        update={'doc_id': 'Z-PRIMARY', 'source_type': 'legal_text'}, deep=True)
+    guidance = primary.model_copy(update={'doc_id': 'A-GUIDANCE', 'source_type': 'agency_guidance'})
+    demo.save_collection('sources', {s.doc_id: s for s in (guidance, primary)})
+    demo.save_collection('rules', {})
+    run = extract(demo, limit=1, provider=SyntheticProvider(primary))
+    assert run.outcome == 'success' and run.counts['processed'] == 1
+    assert list(run.input_hashes) == [primary.doc_id]
+
+
 @pytest.mark.parametrize('kind', ['agency_guidance', 'status_record', 'secondary', 'unclassified'])
 def test_nonprimary_bundle_cannot_certify_rules_or_negative_findings(demo, kind):
     source = real_source(demo)
@@ -151,6 +162,24 @@ def test_batch_queue_excludes_captured_news_and_terms_blocked_source(demo, tmp_p
     assert {item['doc_id'] for item in result['excluded_sources']} == {'NEWS', 'TERMS'}
     assert result['provider_calls_started'] == 0 and not output.exists()
     assert before == {p.relative_to(demo.root): p.read_bytes() for p in demo.root.rglob('*') if p.is_file()}
+
+
+def test_batch_queue_prioritizes_primary_then_unclassified_then_guidance(demo, tmp_path):
+    source = real_source(demo)
+    candidates = [source.model_copy(update={'doc_id': ident, 'source_type': kind})
+                  for ident, kind in [('A-GUIDANCE', 'agency_guidance'), ('M-UNKNOWN', 'unclassified'),
+                                      ('Z-PRIMARY-B', 'legal_text'), ('Z-PRIMARY-A', 'legal_text')]]
+    demo.save_collection('sources', {s.doc_id: s for s in candidates})
+    demo.write('extraction_index.json', {})
+    pack = tmp_path / 'pack'
+    (pack / 'corpus').mkdir(parents=True)
+    (pack / 'corpus/source.txt').write_text(source.text)
+    (pack / 'corpus/corpus_manifest.csv').write_text(
+        'doc_id,text_file\n' + ''.join(f'{s.doc_id},source.txt\n' for s in candidates))
+    result = plan(demo.root, tmp_path / 'unused-output', pack)
+    assert [item['doc_id'] for item in result['selected']] == [
+        'Z-PRIMARY-A', 'Z-PRIMARY-B', 'M-UNKNOWN', 'A-GUIDANCE']
+    assert result['provider_calls_started'] == 0
 
 
 @pytest.mark.parametrize('updates', [

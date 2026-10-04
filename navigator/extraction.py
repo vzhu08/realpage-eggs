@@ -239,6 +239,13 @@ def saved_draft(store, cache_key, provider):
     return None, None
 
 
+def extraction_priority(source):
+    """Spend bounded extraction work on recorded primary text before guidance."""
+    kind = source.source_type.strip().casefold()
+    rank = 0 if kind == "legal_text" else 1 if kind == "unclassified" else 2
+    return rank, source.doc_id
+
+
 def extract(store, doc_ids=None, provider=None, limit=None):
     sources = store.sources()
     if not sources: raise ValueError("Dataset absent; ingest source documents first")
@@ -252,7 +259,7 @@ def extract(store, doc_ids=None, provider=None, limit=None):
             candidates.append(source)
         else:
             skipped.append({"doc_id": ident, "status": use.status, "reason": use.reason})
-    selected = candidates[:limit]
+    selected = sorted(candidates, key=extraction_priority)[:limit]
     run = store.new_run("extract", getattr(provider, "mode", "live"), input_hashes={s.doc_id: s.sha256 for s in selected}, config={"prompt_version": PROMPT_VERSION, "chunk_chars": 18000, "overlap_chars": 1500, "concurrency": 1, "transport_attempts": 3, "repair_attempts": 1, "source_policy_version": POLICY_VERSION, "skipped_sources": skipped})
     if not selected:
         message = "No eligible captured source text selected; inspect skipped_sources in the extraction run"

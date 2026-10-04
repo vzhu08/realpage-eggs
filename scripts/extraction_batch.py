@@ -12,7 +12,7 @@ os.environ['PYTHON_DOTENV_DISABLED'] = '1'
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import httpx
-from navigator.extraction import OpenAIProvider, ProviderFailure, chunks, extract
+from navigator.extraction import OpenAIProvider, ProviderFailure, chunks, extract, extraction_priority
 from navigator.source_policy import POLICY_VERSION, source_use
 from navigator.store import Store, digest, now, write_json
 from scripts.extraction_pilot import configure_credentials, MODEL, MAX_OUTPUT_TOKENS, MAX_REQUEST_BYTES
@@ -154,6 +154,7 @@ def plan(source_dir, output, pack):
         else:
             selected.append({'doc_id': ident, 'sha256': source.sha256,
                              'chunks': sum(1 for _ in chunks(source.text))})
+    selected.sort(key=lambda item: extraction_priority(sources[item['doc_id']]))
     return {'source_dir': str(source_dir), 'output': str(output), 'selected': selected,
             'completed_preserved': completed, 'unavailable': unavailable, 'excluded_sources': excluded,
             'source_policy_version': POLICY_VERSION,
