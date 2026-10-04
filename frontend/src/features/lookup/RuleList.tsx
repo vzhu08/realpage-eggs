@@ -1,8 +1,10 @@
+import { useId, useMemo, useState } from 'react';
 import type { Evaluation, Rule } from '../../api/types';
 import { Icon } from '../../components/Icon';
 import { Disclosure, Tag } from '../../components/ui';
 import { formatDate } from '../../lib/dates';
 import { RESULT_ORDER, categoryLabel, humanize, parseReason, resultMeta } from '../../lib/labels';
+import { filterRuleEvaluations } from '../../lib/ruleBrowser';
 
 interface Props {
   evaluations: Evaluation[];
@@ -15,13 +17,39 @@ interface Props {
 
 /** Rules grouped by the evaluator's result. Groups are never merged into one "status". */
 export function RuleList({ evaluations, rules, selectedRuleId, onInspect, changed }: Props) {
+  const searchId = useId();
+  const categoryId = useId();
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState('');
   const byId = new Map(rules.map((rule) => [rule.team_rule_id, rule]));
-  const groups = RESULT_ORDER.map((result) => ({ result, items: evaluations.filter((evaluation) => evaluation.result === result) })).filter((group) => group.items.length > 0);
-  const other = evaluations.filter((evaluation) => !RESULT_ORDER.includes(evaluation.result));
+  const visible = useMemo(() => filterRuleEvaluations(evaluations, rules, query, category), [evaluations, rules, query, category]);
+  const categories = [...new Set(evaluations.map(evaluation => byId.get(evaluation.team_rule_id)?.category).filter((value): value is Rule['category'] => !!value))].sort((a, b) => categoryLabel(a).localeCompare(categoryLabel(b)));
+  const groups = RESULT_ORDER.map((result) => ({ result, items: visible.filter((evaluation) => evaluation.result === result) })).filter((group) => group.items.length > 0);
+  const other = visible.filter((evaluation) => !RESULT_ORDER.includes(evaluation.result));
   if (other.length) groups.push({ result: other[0]!.result, items: other });
 
   return (
     <div className="rules">
+      <div className="rule-browser" role="search" aria-label="Search returned rules">
+        <div className="rule-browser__fields">
+          <label htmlFor={searchId}>
+            <span>Search returned rules</span>
+            <input className="input" id={searchId} type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Title, provision, citation or source ID" autoComplete="off" maxLength={200} />
+          </label>
+          <label htmlFor={categoryId}>
+            <span>Topic</span>
+            <select className="input" id={categoryId} value={category} onChange={event => setCategory(event.target.value)}>
+              <option value="">All topics</option>
+              {categories.map(value => <option key={value} value={value}>{categoryLabel(value)}</option>)}
+            </select>
+          </label>
+        </div>
+        <div className="rule-browser__count">
+          <p className="hint" role="status">Showing {visible.length} of {evaluations.length} returned rules. Coverage statuses are unchanged.</p>
+          {(query || category) && <button type="button" className="button button--small button--quiet" onClick={() => { setQuery(''); setCategory(''); }}>Clear filters</button>}
+        </div>
+        {visible.length === 0 && <p>No returned rules match these filters. Clear them to see the full result; this is not a finding that no law applies.</p>}
+      </div>
       {groups.map((group) => {
         const meta = resultMeta(group.result);
         return (
@@ -63,7 +91,7 @@ function RuleRow({ evaluation, rule, selected, changed, onInspect }: { evaluatio
     <li className={`rule rule--${meta.tone}${selected ? ' is-selected' : ''}${changed ? ' is-changed' : ''}`} data-rule-id={evaluation.team_rule_id} data-result={evaluation.result}>
       <div className="rule__main">
         <div className="rule__head">
-          <Tag tone={meta.tone}>{meta.label}</Tag>
+          <Tag tone={meta.tone}>{evaluation.result === 'unknown' ? 'Coverage unknown' : meta.label}</Tag>
           {evaluation.conflict_flag && <Tag tone="danger">Conflict flagged</Tag>}
           {rule && <span className="rule__kicker">{categoryLabel(rule.category)}</span>}
         </div>
@@ -99,6 +127,7 @@ function RuleRow({ evaluation, rule, selected, changed, onInspect }: { evaluatio
                 <span className="rule__needs-label">Needs:</span> {missing.map(humanize).join(', ')}
               </span>
             )}
+            {kinds.length > 0 && <span className="rule__needs-label">Other unresolved issues:</span>}
             {kinds.map((kind) => (
               <span key={kind} className="rule__open">
                 {kind}

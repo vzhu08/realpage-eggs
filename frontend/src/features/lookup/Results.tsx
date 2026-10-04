@@ -78,7 +78,7 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
   const openQuestions = (outcome.assist?.question_plan.questions ?? []).filter((question) => !answered.has(question.fact.field));
   const lead = openQuestions[0];
   const movable = lead ? movableResults(lookup.evaluations, lead).movable : 0;
-  const open = useMemo(() => groupOpenItems(openItems(outcome, shownAnswers), new Set(lookup.rules.map((rule) => rule.team_rule_id))), [outcome, shownAnswers, lookup.rules]);
+  const open = useMemo(() => groupOpenItems(openItems(outcome, shownAnswers), new Set(lookup.evaluations.map((evaluation) => evaluation.team_rule_id))), [outcome, shownAnswers, lookup.evaluations]);
   const reviewTopics = open.other.length;
 
   return (
@@ -149,6 +149,19 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
           </Empty>
         )}
 
+        {total > 0 && (
+          <div className="result-browse">
+            <div>
+              <p className="result-browse__title">Read the returned provisions and inspect their sources</p>
+              <p className="hint">Unknown means coverage is not established for this property and date. You can still read the extracted provisions and inspect their evidence.</p>
+            </div>
+            <button type="button" className="button button--primary" onClick={() => jumpTo('rules-heading')}>
+              Browse {total} returned {total === 1 ? 'rule' : 'rules'}
+              <Icon name="arrow" />
+            </button>
+          </div>
+        )}
+
         {(conflicted.length > 0 || jurisdictionOpen || reviewTopics > 0) && (
           <ul className="cues" aria-label="What is unresolved">
             {conflicted.length > 0 && (
@@ -179,8 +192,9 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
                 <Icon name="info" size={18} className="cue__icon" />
                 <div className="cue__body">
                   <p className="cue__title">
-                    {reviewTopics} open {reviewTopics === 1 ? 'item needs' : 'items need'} evidence or review, not an answer
+                    {reviewTopics} open review {reviewTopics === 1 ? 'topic' : 'topics'} for returned rules
                   </p>
+                  <p className="cue__text">These are evidence, interpretation or analysis gaps, not a count of missing property facts. Property answers cannot close these gaps.</p>
                 </div>
                 <button type="button" className="button button--small button--quiet cue__action" onClick={() => jumpTo('uncertainty-heading')}>
                   See what remains
@@ -189,6 +203,8 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
             )}
           </ul>
         )}
+
+        {open.outside.length > 0 && <p className="hint">{open.outside.length} additional review {open.outside.length === 1 ? 'topic concerns' : 'topics concern'} rules outside this result. Their statements remain in “What remains uncertain” below.</p>}
 
         <div className="next" data-next={lead ? 'question' : open.statements > 0 ? 'review' : 'none'}>
           <p className="next__label">Next</p>
@@ -260,12 +276,13 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
       {total > 0 && (
         <section className="section" aria-labelledby="rules-heading">
           <div className="section-heading">
-            <h2 id="rules-heading">Rule by rule</h2>
+            <h2 id="rules-heading">Returned rules and source evidence</h2>
             <div className="section-heading__aside">
               <span className="hint">Applicability is not a finding of compliance or violation.</span>
             </div>
           </div>
-          <RuleList evaluations={lookup.evaluations} rules={lookup.rules} selectedRuleId={selectedRuleId} onInspect={onInspect} changed={changedIds} />
+          <p className="section__lead">Search the returned provisions, then open Evidence for the captured text and unresolved checks.</p>
+          <RuleList key={`${lookup.address.address_id}:${lookup.as_of}`} evaluations={lookup.evaluations} rules={lookup.rules} selectedRuleId={selectedRuleId} onInspect={onInspect} changed={changedIds} />
         </section>
       )}
 
