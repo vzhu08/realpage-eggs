@@ -134,17 +134,18 @@ def check_store(root, required_ids=DEFAULT_REQUIRED_IDS):
         related = {rule_id for ids in result.mapped_rule_ids.values() for rule_id in ids}
         source_issues = {rule_id: issues for rule_id in sorted(related)
                          if (issues := rule_source_issues(prepared[rule_id], sources))}
+        blocking_issues = {rid: evidence[rid].blocking_issues for rid in sorted(related)
+                           if evidence[rid].blocking_issues}
         missing_refs = sorted(ref for ref, ids in result.mapped_rule_ids.items() if not ids)
         outcomes.append({
             "test_id": ident, "status": result.status,
-            "ready": result.status == "complete" and not missing_refs and not source_issues,
+            "ready": result.status == "complete" and not missing_refs and not source_issues and not blocking_issues,
             "scenario": result.scenario, "before": result.before.isoformat(), "after": result.after.isoformat(),
             "mapped_rule_ids": result.mapped_rule_ids, "missing_references": missing_refs,
             "counts": {"affected": len(result.affected_address_ids), "uncertain": len(result.uncertain_address_ids),
                        "conflict": len(result.conflict_flag_address_ids), "mapped_rules": len(related)},
             "reasons": result.notes, "source_issues": source_issues,
-            "evidence_blocking_issues": {rid: evidence[rid].blocking_issues for rid in sorted(related)
-                                         if evidence[rid].blocking_issues},
+            "evidence_blocking_issues": blocking_issues,
         })
     missing = sorted(set(required_ids) - {case["test_id"] for case in cases})
     store.verify_unchanged()

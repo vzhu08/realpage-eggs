@@ -6,6 +6,7 @@ import httpx
 import pytest
 
 from navigator.store import Store
+from scripts import check_change_cases as gate
 from scripts.check_change_cases import check_store, main
 
 
@@ -88,6 +89,33 @@ def test_source_eligibility_is_preserved_by_prepared_evidence(complete_case):
     assert not report["ready"] and case["status"] == "partial"
     assert case["source_issues"] and case["evidence_blocking_issues"]
     assert any("source_eligibility" in issue for issues in case["source_issues"].values() for issue in issues)
+    assert fingerprint(complete_case.root) == before
+
+
+def test_complete_engine_result_cannot_hide_a_related_rule_evidence_blocker(complete_case, monkeypatch):
+    rules = complete_case.rules()
+    related = next(iter(rules.values())).model_copy(deep=True)
+    related.team_rule_id = "synthetic-related-rule"
+    related.jurisdiction, related.level = "Hoboken, NJ", "city"
+    related.quoted_span = "This fabricated synthetic quote does not occur in the original source."
+    rules[related.team_rule_id] = related
+    complete_case.save_collection("rules", rules)
+    before = fingerprint(complete_case.root)
+    original = gate.cached_changes
+
+    def complete_with_related_mapping(store, request):
+        result = original(store, request)
+        assert result.status == "complete"
+        assert store.rules()[related.team_rule_id].review_issues  # Evidence was prepared first.
+        return result.model_copy(update={"mapped_rule_ids": {
+            **result.mapped_rule_ids, "HOB-ALG-01": [related.team_rule_id]}})
+
+    monkeypatch.setattr(gate, "cached_changes", complete_with_related_mapping)
+    report = check_store(complete_case.root, ["T1"])
+    case = report["cases"][0]
+    assert case["status"] == "complete" and case["source_issues"] == {}
+    assert not case["ready"] and not report["ready"]
+    assert "primary_quote_absent" in case["evidence_blocking_issues"][related.team_rule_id]
     assert fingerprint(complete_case.root) == before
 
 
