@@ -62,6 +62,9 @@ This runner uses an explicitly unverified planner probe to test answer mechanics
 It saves the probe's provenance, restores the original result, and checks release files remain unchanged.
 Exports run against a separate working copy, never the immutable served data. Reports retain T1-T5
 blocker notes and actual validation status. A software pass is not legal or submission acceptance.
+The existing CLI returns exit 1 when the validation report contains errors, even when
+`--allow-partial` successfully writes all exports. The verification runner records that exit and
+requires the explicit `PARTIAL_NOT_JUDGE_READY` label; exit 2 or missing/different payloads fail.
 
 Rollback: stop the current process, run `verify-release` against the prior saved known-good directory,
 then `serve-release` with that directory on the same port. Reload the browser and check health/counts,

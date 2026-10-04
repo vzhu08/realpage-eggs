@@ -1,17 +1,84 @@
 # PLAT-06: integrated snapshot, evidence package and runnable release
 
 Priority: P0 data/release, then P1 evidence package.
-State: Evidence-package increment verified and ready for review; real snapshot remains blocked on the Core store.
+State: Platform software complete and verified locally; ready for integration review. Full release acceptance remains partial pending Core evidence/review and UX-04 adoption.
 Owner: Vincent / Platform/API; current Codex session `01a104f0-cfea-7820-ac83-0bb1fb8349c5`.
 Claimed checkout: `C:\Users\vzhu0\PycharmProjects\realpage-eggs\artifacts\platform-release`.
 Branch: `codex/platform-release`; starting SHA: `a7f9447815b53860c0f4a644dc0e00ca776139a1`
 (PR #10 merged, including PLAT-05 and accepted COORD-04). Original PLAT-05 checkout stays unchanged.
 Private data/cache: this checkout's ignored `data/plat06/`; verification artifacts: `artifacts/plat06/`.
 The current user requested beginning the next Platform task. No additional agents are assigned.
-Initial input gap: the transferred `data/plat05-internal-input` contains rules/sources only;
-the full Core store (facts, extraction index, run manifests and caches) is required before real assembly.
+The initial transfer gap is resolved by Daniel's archive merged in PR #13. Its archive hash and all
+96 archived files (94 checkpoint files plus transfer notes/checksums) verify. PR #12 and #13 are
+integrated locally without modifying another lane's authored code or checkout.
 
-## Independent work authorized October 4
+## Resumed completion — October 4
+
+The user requested finishing PLAT-06 and explicitly approved sending the 59 failing geography
+records to the official Census geocoder. That approval followed automatic review blocking the
+initial live request for missing specific egress authorization. The approved check ran only in a
+new private copy. Of those 59, 55 now reproduce; four are ambiguous (A0071, A0242, A0311, A0344).
+The original nine unresolved records remain byte-identical. Total: 487 resolved / 13 unresolved.
+The original Core checkpoint, sources, facts and geography input remain unchanged. No paid model
+call, extraction resumption, public deployment, remote push or teammate contact occurred.
+
+Runtime checkpoint: `5145f1b2c421ac2f5e6a12c5a4b0027ee9749855`, following integration of main
+`84c2887` and the additive API/launch commit `761f05b`. Platform now exposes Core claim observations
+with refreshed anchor checks and grouped change results with property/rule labels. No evaluator,
+AST, planner, renderer or official competition shape was replaced. UX-04 still owns adoption of
+the additive endpoints and evidence-download control; this task verifies the existing UI flows.
+
+The new native frontend/API release serves one origin and checks all code/data/asset hashes before
+launch. A real browser revealed concurrent portfolio work could exceed the UI's 20-second timeout.
+Offline published-scenario caching now retains Core's exact result and invalidates on input,
+selector, evaluator/runtime or payload drift; HTTP remains read-only. Uncached ad hoc portfolio
+requests can still be slow and should be precomputed before rehearsal.
+
+Shared snapshot: `data/plat06/integrated-release`, ID
+`8c0a2b50e0eda0839cf881cfb251b2762583840d1bec2f36454f77a63c7ae165`.
+It retains all 500 addresses, 140 rules, 87 sources and full transfer/geography provenance.
+`data/plat06/integrated-serving` is a separate copy with validated derived scenario caches.
+Runnable bundle: `artifacts/plat06/releases/real-002`; backup: `artifacts/plat06/releases/known-good-backup`.
+Both are private local artifacts, with identical manifest hash
+`08e95c386914a570cd159000da4799c616100ffe059a727f5702648517910d5b`.
+The selected deployment candidate is the native loopback launch; Docker/public hosting remain unverified.
+
+Current software checks: 342 backend tests pass with the organizer pack; contracts generate;
+frontend generation/typecheck, 90 unit tests and production build pass in a disposable copy;
+the existing fixture/API-double desktop/mobile suite has 80 passing tests and 14 skips.
+Fresh real browser checks cover question, temporary unverified answer, reset, exact source and
+separate evidence checks, desktop/mobile layouts, T1 partial impacts and property/date drill-down.
+The published T1-T5 HTTP requests now take about 0.6-1.1 seconds, preserving available uncached outputs.
+Backup launch reproduces health, HTML, a real lookup and T1 exactly. The final real-data runner
+passes: all 500 addresses paginate/export, lookup references resolve, a downloaded package replays
+offline, and all seven export payloads match byte-for-byte across two separate runs. Both export
+commands return exit 1 with the explicit partial label because corpus validation still has errors;
+the runner records this and does not relabel the corpus as valid. Served files remain unchanged.
+The earlier real-001 run was superseded after its performance issue, not accepted as a successful release.
+
+Legal/corpus release gate stays explicit: all 140 rules need review; only 16 currently project to
+the official rule schema, with 124 unresolved temporal projections. T1 is partial (250 uncertain
+properties); T2-T5 are blocked by absent extracted support/lifecycle evidence. Core owns the legal
+evidence repairs and human review. No final judge readiness or accepted partial scope is asserted.
+
+Handoff evidence: `docs/evidence/plat06_release.json`; detailed local report:
+`artifacts/plat06/real-acceptance-verified/report.json`. Runtime code is frozen at `5145f1b`;
+the final handoff commit also records the partial-export verification correction and these notes.
+Changed Platform paths span `navigator/{api,service,store,export,models,contracts,evidence_package,cli}.py`,
+`scripts/{assemble_snapshot,platform_ops}.py`, `deploy/**`, Platform tests, generated contracts,
+and shared handoff/evidence/card/board docs. Integrated Core/frontend changes retain their owners' commits.
+
+Local UI/API: `http://127.0.0.1:8016`. Restart from this checkout with the existing project venv:
+
+```powershell
+& C:/Users/vzhu0/PycharmProjects/realpage-eggs/.venv/Scripts/python.exe scripts/platform_ops.py serve-release --release artifacts/plat06/releases/real-002 --port 8016
+```
+
+Next action: review/integrate the local Platform branch. Core A owns resolving the disclosed
+evidence/lifecycle blockers and rule review; UX-04 owns the new summary/comparison/download controls.
+The immutable local artifacts are not included in Git and must be retained for the release handoff.
+
+## Historical independent increment — October 4
 
 The user requested useful Platform work that does not depend on the missing Core transfer.
 This same writer/check-out now claims `navigator/evidence_package.py`,

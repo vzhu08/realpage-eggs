@@ -49,9 +49,10 @@ def child_env(data=None, frontend=None):
 def cli(data, *args, expected=0):
     result = subprocess.run([sys.executable, "-m", "navigator", "--data-dir", str(data), *args],
                             cwd=ROOT, env=child_env(data), capture_output=True, text=True, timeout=120)
-    require(result.returncode == expected, f"navigator {args[0]} returned {result.returncode}; expected {expected}")
+    allowed = (expected,) if isinstance(expected, int) else expected
+    require(result.returncode in allowed, f"navigator {args[0]} returned {result.returncode}; expected {expected}")
     # Parse structured output, avoiding ambient environment or arbitrary process logs in reports.
-    return json.loads(result.stderr if expected else result.stdout)
+    return json.loads(result.stderr if result.returncode == 2 else result.stdout)
 
 
 def bootstrap(args):
@@ -238,7 +239,9 @@ def local_api(data):
 def export_replay(data, output, *, synthetic):
     options = ["--allow-partial"] + (["--synthetic"] if synthetic else [])
     for name in ["first", "replay"]:
-        cli(data, "export", "--as-of", "2026-10-01", *options, "--output", str(output / name))
+        result = cli(data, "export", "--as-of", "2026-10-01", *options, "--output", str(output / name), expected=(0, 1))
+        require(result.get("artifact_label") in {"SYNTHETIC_NOT_FOR_SUBMISSION", "PARTIAL_NOT_JUDGE_READY", "COMPLETE_INTERNAL_VALIDATION"},
+                "Export must return an explicit validation label")
     hashes = {}
     for path in sorted((output / "first").glob("*.json")):
         if path.name == "run_manifest.json":
@@ -308,7 +311,7 @@ def smoke(args):
                 health = client.get("/api/v1/health")
                 require(health.status_code == 200, "Real snapshot health contract")
                 report["checks"]["real_http"] = health.json()
-            report["checks"]["real_validation"] = cli(copied, "validate", "--output", str(output / "real-validation.json"))
+            report["checks"]["real_validation"] = cli(copied, "validate", "--output", str(output / "real-validation.json"), expected=(0, 1))
             report["checks"]["real_exports"] = export_replay(copied, output / "real-exports", synthetic=False)
             require(snapshot_hashes(real) == before, "Original real store changed during verification")
             report["checks"]["original_real_store_unchanged"] = True

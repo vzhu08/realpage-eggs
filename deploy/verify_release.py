@@ -97,8 +97,14 @@ def verify(args):
         def cli(data, *arguments):
             result = subprocess.run([sys.executable, "-m", "navigator", "--data-dir", str(data), *arguments],
                 cwd=release / "runtime", env=child_env(data), capture_output=True, text=True, timeout=300)
-            require(result.returncode == 0, f"Release CLI {arguments[0]} failed: {result.stderr[-1000:]}")
-            return json.loads(result.stdout)
+            allowed = (0, 1) if arguments[0] == "export" and "--allow-partial" in arguments else (0,)
+            require(result.returncode in allowed, f"Release CLI {arguments[0]} failed with exit {result.returncode}: {result.stderr[-1000:]}")
+            value = json.loads(result.stdout)
+            if result.returncode == 1:
+                require(value.get("artifact_label") == "PARTIAL_NOT_JUDGE_READY" and value.get("ready_for_submission") is False,
+                        "Nonzero export exit must retain its explicit partial validation result")
+            report["checks"].setdefault("cli_exits", []).append({"command": arguments[0], "exit_code": result.returncode})
+            return value
         report["checks"]["evidence_replay"] = cli(output / "absent", "replay-evidence-package", str(output / "property-evidence.json"))
         working = output / "export-store"
         shutil.copytree(release / "data", working)
