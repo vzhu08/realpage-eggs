@@ -1,0 +1,83 @@
+{
+  "task": "PLAT-08",
+  "branch": "codex/platform-container",
+  "state": "linux_container_runtime_verified_in_ci",
+  "label": "SOFTWARE_CONTAINER_CHECK_NOT_LEGAL_VALIDATION",
+  "checks": {
+    "deployment_tests_passed": 21,
+    "same_origin_actual_http": "passed",
+    "compose_restrictions": "passed",
+    "snapshot_preserved": true,
+    "frontend": {
+      "npm_ci": "passed",
+      "generation": "passed",
+      "typecheck": "passed",
+      "unit_tests_passed": 90,
+      "build": "passed",
+      "log": "artifacts/plat08/frontend-stage/frontend-verify-final.log"
+    }
+  },
+  "base_images": {
+    "node": "node:22-bookworm-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c",
+    "python": "python:3.12.14-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e"
+  },
+  "local_engine_available": false,
+  "local_runtime_verified": false,
+  "runtime_command": "python deploy/verify_container.py --synthetic --output artifacts/container-ci --port 8028 --build-and-run",
+  "limitations": [
+    "Local Docker engine remains stopped; full build and runtime passed on the Linux CI runner.",
+    "Synthetic structural checks do not establish real corpus coverage or legal accuracy.",
+    "Python package artifact hashes are not pinned; no byte-reproducible image claim.",
+    "No public deployment, paid provider calls or authored frontend/Core edits."
+  ],
+  "linux_ci": {
+    "run_url": "https://github.com/vzhu08/realpage-eggs/actions/runs/37182634028",
+    "report": {
+      "label": "SOFTWARE_CONTAINER_CHECK_NOT_LEGAL_VALIDATION",
+      "checks": {
+        "compose_restrictions": "passed",
+        "runtime_restrictions": "passed",
+        "http": {
+          "health": {
+            "status": "ok",
+            "version": "0.1.0",
+            "dataset_readiness": "available",
+            "sources": 1,
+            "rules": 1,
+            "addresses": 3,
+            "resolved_municipalities": 3,
+            "last_extraction_outcome": "success",
+            "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+          },
+          "frontend_assets": [
+            "/assets/index-BfPcKHWO.css",
+            "/assets/index-CHNFtUNd.js"
+          ],
+          "address_count": 3,
+          "lookup_address_id": "SYNTH-001",
+          "lookup_evaluations": 1,
+          "private_paths_not_served": true
+        },
+        "write_denial": {
+          "uid": 10001,
+          "denied": [
+            "/app/container-write-probe",
+            "/data/container-write-probe"
+          ]
+        },
+        "cleanup": "passed",
+        "snapshot_unchanged": true
+      },
+      "runtime_verified": true,
+      "source_revision": "70157f78f891f46b2d5f7764df50b213cb3779eb",
+      "source_worktree_dirty": false,
+      "project": "navigator-check-7a792b2e6c92",
+      "snapshot_mode": "synthetic",
+      "snapshot_sha256": "6048cb968eb4ebfbfbed549ea49a172844b8bad9b79eb7527797fded0868c2fd",
+      "snapshot_files": 15,
+      "engine_available": true,
+      "image_id": "sha256:8c08858d18dec17cb468b84177589cd5b0e4621837c011adad5a20a6d75365da",
+      "status": "passed"
+    }
+  }
+}

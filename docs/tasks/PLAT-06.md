@@ -1,7 +1,7 @@
 # PLAT-06: integrated snapshot, evidence package and runnable release
 
 Priority: P0 data/release, then P1 evidence package.
-State: Platform software complete and verified locally; ready for integration review. Full release acceptance remains partial pending Core evidence/review and UX-04 adoption.
+State: Platform software merged in PR #14; full release acceptance remains partial pending Core evidence/review and additive UX adoption.
 
 Integration follow-up: [PR #14](https://github.com/vzhu08/realpage-eggs/pull/14) includes the
 PLAT-07 integrity fixes and unreadable-cache fallback. Combined backend verification passes

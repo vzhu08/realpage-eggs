@@ -176,7 +176,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "c32face8827b42bc88fa112417f31247",
+          "extraction_run_id": "acd3363df67749d8b57952477d764dee",
           "semantic_verification": "synthetic_fixture"
         }
       },
@@ -202,7 +202,7 @@
         "SYNTHETIC-42": {
           "status": "complete",
           "sha256": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064",
-          "run_id": "c32face8827b42bc88fa112417f31247",
+          "run_id": "acd3363df67749d8b57952477d764dee",
           "mode": "synthetic",
           "rules": 1,
           "issues": []
@@ -424,7 +424,7 @@
             "conflict_note": null,
             "team_rule_id": "r-694ad9fbae9083966e86",
             "evidence_mode": "synthetic",
-            "extraction_run_id": "c32face8827b42bc88fa112417f31247",
+            "extraction_run_id": "acd3363df67749d8b57952477d764dee",
             "semantic_verification": "synthetic_fixture"
           }
         ],
@@ -459,7 +459,7 @@
             "synthetic"
           ],
           "extraction_run_ids": [
-            "c32face8827b42bc88fa112417f31247"
+            "acd3363df67749d8b57952477d764dee"
           ],
           "partial_data": false,
           "missing_source_ids": [],
@@ -473,8 +473,8 @@
         "remaining_uncertainty": [
           {
             "kind": "source_gap",
-            "message": "Citation section 2: no unique structured section anchor in this snapshot",
-            "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+            "message": "As of 2026-11-15: citation_anchor (not_checked): Citation section 2: no unique structured section anchor in this snapshot; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Source acquisition: retrieve or reconcile the original source version, URL and exact quotation anchors with Platform; property answers cannot repair source support",
             "rule_ids": [
               "r-694ad9fbae9083966e86"
             ],
@@ -484,8 +484,8 @@
           },
           {
             "kind": "interpretation",
-            "message": "Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.",
-            "remedy": "Platform/Core must retrieve and verify supporting source evidence",
+            "message": "As of 2026-11-15: semantic_support (not_checked): Exact quote/retrieval is not semantic verification. Extraction's model_reviewed label is not this separate review.; support for the encoded result is unresolved. Rule: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42",
+            "remedy": "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support",
             "rule_ids": [
               "r-694ad9fbae9083966e86"
             ],
@@ -495,8 +495,8 @@
           },
           {
             "kind": "source_gap",
-            "message": "Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered",
-            "remedy": "Platform must verify the separate source inventory, including missing rules and references",
+            "message": "As of 2026-11-15: Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered, so omitted law may change the result.",
+            "remedy": "Source acquisition/inventory review: Platform must verify the separate source inventory, including missing rules and references",
             "rule_ids": [],
             "predicate_ids": [],
             "field": null,
@@ -504,8 +504,8 @@
           },
           {
             "kind": "analysis_limit",
-            "message": "Unsupported analysis prevents exhaustive coverage",
-            "remedy": "Review the unsupported domain or expression",
+            "message": "As of 2026-11-15: unsupported analysis prevents exhaustive coverage; unexamined values may change the result",
+            "remedy": "More analysis/interpretation review: resolve the unsupported domain or expression",
             "rule_ids": [],
             "predicate_ids": [],
             "field": null,
@@ -660,7 +660,7 @@
         },
         "evaluations_used": 1,
         "limits_hit": [],
-        "algorithm_version": "correlated-partitions-v2",
+        "algorithm_version": "correlated-partitions-v3",
         "exhaustive": false
       },
       "evidence_reports": [
@@ -814,9 +814,9 @@
       "encoded_rules": [
         {
           "rule_id": "r-694ad9fbae9083966e86",
-          "text": "Encoded rule: Synthetic Maple Harbor deposit cap\nJurisdiction: Maple Harbor, CA (city); category: security_deposits.\nRequirement: Covered buildings must limit security deposits to one month's rent.\nKey value: one month's rent.\nCoverage: (residential == true AND units [dwelling units] >= 8).\nExemption: FALSE.\nCombined property condition: ((residential == true AND units [dwelling units] >= 8)) AND NOT (FALSE).\nRecorded exemption description: None\nRecorded lifecycle: enacted; snapshot: unspecified (unresolved).\nEffective boundary (inclusive): 2026-11-15 (day precision; 2026-11-15 through 2026-11-15).\nEnd boundary (exclusive): none encoded.\nStatus event 1: enacted on 2026-09-01 (day precision; 2026-09-01 through 2026-09-01).\nThis displays the encoded rule, not legal validation or a property-specific evaluation. Pending measures do not automatically enact; partial dates may leave uncertainty.",
+          "text": "Encoded rule: Synthetic Maple Harbor deposit cap\nRule reference: Synthetic Maple Harbor deposit cap [r-694ad9fbae9083966e86; encoding 77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504]; Maple Harbor Ordinance TEST-42, section 2; source SYNTHETIC-42: https://example.invalid/synthetic-42\nJurisdiction: Maple Harbor, CA (city); category: security_deposits.\nRequirement: Covered buildings must limit security deposits to one month's rent.\nKey value: one month's rent.\nCoverage: (residential == true AND units [dwelling units] >= 8).\nExemption: FALSE.\nCombined property condition: ((residential == true AND units [dwelling units] >= 8)) AND NOT (FALSE).\nRecorded exemption description: None\nRecorded lifecycle: enacted; snapshot: unspecified (unresolved).\nEffective boundary (inclusive): 2026-11-15 (day precision; 2026-11-15 through 2026-11-15).\nEnd boundary (exclusive): none encoded.\nRule evidence: SYNTHETIC-42 [149, 289); recorded support: requirement, key_value, coverage_conditions, effective_date. Exact recorded quote: Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.\nRule evidence: SYNTHETIC-42 [291, 392); recorded support: exemptions, exemption_conditions. Exact recorded quote: There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.\nRule evidence: SYNTHETIC-42 [78, 147); recorded support: lifecycle. Exact recorded quote: Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nStatus event 1: enacted on 2026-09-01 (day precision; 2026-09-01 through 2026-09-01).\nStatus event 1 evidence: SYNTHETIC-42 [78, 147); recorded support: lifecycle. Exact recorded quote: Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.\nThis displays the encoded rule, not legal validation or a property-specific evaluation. Pending measures do not automatically enact; partial dates may leave uncertainty.",
           "expression_hash": "77689ecef6e60851911f13d7ba66fde1973a266a1d0170e4b618e45bf9f3e504",
-          "renderer_version": "encoded-rule-v2",
+          "renderer_version": "encoded-rule-v3",
           "unresolved_nodes": [],
           "kind": "encoded_rule_not_legal_validation"
         }
@@ -859,7 +859,7 @@
         "navigator/cli.py": "f747386e95c2a6119c2534ac104b85f3a08363b2a9f4593f4840900b844b27c2",
         "navigator/config.py": "ab3c3b0a8135e2816ad6e46e2a12a4ff999820e414d20073dabf4852d671f7ce",
         "navigator/contracts.py": "612854b2dfbccbe4d8e93e5f38832eca0935381a416d2039860d69c1f48f1d8e",
-        "navigator/core_assist.py": "9221c13c00396e415f330ad97e750e58a5e72482a00b4284a9142883d3a44ef3",
+        "navigator/core_assist.py": "79128ba6cdb95cb5afc104d9b993105cd12928ba65c568b702fcb5c490d68e61",
         "navigator/demo.py": "db337c9e6c4adb583e9dcba4b6fa39d9bb531b42a9f4711bcdbeeffc9b0a0d47",
         "navigator/engine.py": "e9e9b01e2d131f66052917b08575b62d6ca05f6a8b47439d0df8d7ff6ff66414",
         "navigator/evidence.py": "55212cb5afd85d5f189ecdc8381176bcc1e6d9be207f860102ec2e000b8273c9",
@@ -871,10 +871,10 @@
         "navigator/ingest.py": "dcdabbc16dbf90d2a899f30fca65a3bc0336098b4afd5b30adeeb6b3792e9f2c",
         "navigator/models.py": "6666d33eb6c248f2edb1bface343979fb4cb4849ddb43b773850f720cb442890",
         "navigator/predicates.py": "bf00596766fce89bfc07d204a2a759cd2802ea2b0b26cc413aa0b23801edc8f3",
-        "navigator/question_planner.py": "8c38901fcbca732d120e486e5b855fe4466d181fb63c5c86e2af3505ea7a346f",
+        "navigator/question_planner.py": "8429b1bfe8e1daafdcc7bbde36d3d895c1455c7e041da7f74b44eddfe32ae9d6",
         "navigator/research_fixtures.py": "7de7a954f3c22f27f66297335dce19ce5ceb94f6d1e759b494ea35849f12b4fb",
         "navigator/retrieval.py": "6a7a7940fe94887ca7470b7e4d9ddc999e4a7e262694645256e931e14f745048",
-        "navigator/rule_renderer.py": "c294e328f55d00bceb208672ae9eea9771e05836ed08b8752c0092e2c7a8b9a2",
+        "navigator/rule_renderer.py": "794f9ca6a2aadd76b0928dd1838ea0380379b746fbd09f9d25a53f5f163bf8b6",
         "navigator/semantic_review.py": "2f53998d2c36585846ffae9126b91f6254341e8a47a256ef3e463eff70305da0",
         "navigator/service.py": "73ce09f1d93f72054313bae1f248e5a1e0d82b3c54091487ba2d98d71400ce31",
         "navigator/source_comparison.py": "24de2490127e92f658111dafed3ea6b874b9a2d36a9bf4b1c97945e72347066c",
@@ -883,11 +883,11 @@
         "navigator/validation.py": "cbe09ebe67cbe2096eb66b0017368fb388df772994355543b6e4b392448edb09",
         "requirements.lock": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8"
       },
-      "fingerprint": "f1b2443f64738b6a6809b8ce6b0b7732a310d9c776559d0902acb728ae1c1c9b"
+      "fingerprint": "4431e5aef259bf4f06c7e99f396d324b8bf6392698045bc5266f3d125c44c60d"
     },
-    "input_sha256": "eef17ce506e7af9371518302652ea21b79eb14ca0331e7d54b41784e1e56c137",
-    "response_sha256": "3dc4b7909f0d22953a9b8c8ad052b4b05571a3ebcf3d8ecd9b498383b9eb1437",
-    "package_sha256": "dd38ae4251db506aa930a97894e7300b03db23052ea5fcd38896f5838ad2a5cc",
+    "input_sha256": "13f60e2170ed9407fe9881140ba58e40d405c697127560232ff45c73f916cef3",
+    "response_sha256": "d880b9e7bb397abf6ef885f963698c337b6ac89dace5be44d5f4b682c68af7ff",
+    "package_sha256": "ef197f5f222c07575d551148d8f42ce7b0f170e89d799a35cded47c92725c4b6",
     "limitations": [
       "Reproduction verifies software output, not legal accuracy or complete source coverage.",
       "Original facts and submitted answers are separate; answers remain unverified and request-local.",

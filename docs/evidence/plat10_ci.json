@@ -1,0 +1,97 @@
+{
+  "task": "PLAT-10 with PLAT-08 runtime acceptance",
+  "branch": "codex/platform-ci",
+  "pull_request": "https://github.com/vzhu08/realpage-eggs/pull/17",
+  "run_url": "https://github.com/vzhu08/realpage-eggs/actions/runs/37182634028",
+  "workflow_head_revision": "390acde3b055aa04c4954475efb55dab3d053ee8",
+  "tested_merge_revision": "70157f78f891f46b2d5f7764df50b213cb3779eb",
+  "status": "all_three_ci_jobs_passed",
+  "label": "SYNTHETIC_SOFTWARE_CHECKS_NOT_REAL_CORPUS_OR_LEGAL_ACCEPTANCE",
+  "checks": {
+    "linux_backend": {
+      "passed": 405,
+      "skipped": 1,
+      "skip_reason": "private organizer pack not installed",
+      "warnings": 1
+    },
+    "schema_regeneration": "passed; four schema files unchanged",
+    "frontend": {
+      "unit_passed": 118,
+      "browser_passed": 114,
+      "browser_skipped": 22,
+      "generation_typecheck_build": "passed"
+    },
+    "container": {
+      "label": "SOFTWARE_CONTAINER_CHECK_NOT_LEGAL_VALIDATION",
+      "checks": {
+        "compose_restrictions": "passed",
+        "runtime_restrictions": "passed",
+        "http": {
+          "health": {
+            "status": "ok",
+            "version": "0.1.0",
+            "dataset_readiness": "available",
+            "sources": 1,
+            "rules": 1,
+            "addresses": 3,
+            "resolved_municipalities": 3,
+            "last_extraction_outcome": "success",
+            "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+          },
+          "frontend_assets": [
+            "/assets/index-BfPcKHWO.css",
+            "/assets/index-CHNFtUNd.js"
+          ],
+          "address_count": 3,
+          "lookup_address_id": "SYNTH-001",
+          "lookup_evaluations": 1,
+          "private_paths_not_served": true
+        },
+        "write_denial": {
+          "uid": 10001,
+          "denied": [
+            "/app/container-write-probe",
+            "/data/container-write-probe"
+          ]
+        },
+        "cleanup": "passed",
+        "snapshot_unchanged": true
+      },
+      "runtime_verified": true,
+      "source_revision": "70157f78f891f46b2d5f7764df50b213cb3779eb",
+      "source_worktree_dirty": false,
+      "project": "navigator-check-7a792b2e6c92",
+      "snapshot_mode": "synthetic",
+      "snapshot_sha256": "6048cb968eb4ebfbfbed549ea49a172844b8bad9b79eb7527797fded0868c2fd",
+      "snapshot_files": 15,
+      "engine_available": true,
+      "image_id": "sha256:8c08858d18dec17cb468b84177589cd5b0e4621837c011adad5a20a6d75365da",
+      "status": "passed"
+    },
+    "windows_backend_with_organizer_pack": {
+      "passed": 405,
+      "skipped": 1,
+      "skip_reason": "Windows symlink creation privilege unavailable",
+      "warnings": 1,
+      "environment": "PYTHONUTF8=1, PYTHON_DOTENV_DISABLED=1",
+      "log": "artifacts/plat10/backend-utf8.log"
+    },
+    "current_package_examples": {
+      "property_package.json": "reproduced",
+      "package_missing_support.json": "reproduced"
+    }
+  },
+  "integration": {
+    "PLAT06_PLAT07": "PR #14 merged at 607dce32ae690c8b9276fbfa53c23c4d104ed07c",
+    "CoreB_UX": "PR #15 merged by its owner; included in checks",
+    "PLAT09": "PR #16 merged at 5b451f73d0f06a66e248f50acb5a9cd234bacb6f"
+  },
+  "windows_followup": "Core benchmark uses a default-encoding read. CP1252 failed before evaluation; UTF-8 mode reproduces all checks. Platform child processes and CI now force UTF-8; explicit encoding in the Core-owned benchmark remains an owner follow-up.",
+  "limitations": [
+    "Container run used three labeled synthetic properties, not the incomplete real corpus.",
+    "Local Docker engine remains stopped; Linux execution was verified on GitHub Actions.",
+    "No public deployment, paid extraction, submission or new legal acceptance.",
+    "The frozen native real-002 bundle remains unchanged at its recorded runtime.",
+    "Final documentation/environment update will receive a fresh PR check run before merge."
+  ]
+}

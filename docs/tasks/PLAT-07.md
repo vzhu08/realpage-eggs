@@ -1,7 +1,7 @@
 # PLAT-07: snapshot and evidence integrity review
 
 Owner: Platform evidence agent, delegated by the current user-authorized Platform run.
-State: Review. Implementation and offline real-input verification complete; root owns integration.
+State: Complete and merged with PLAT-06 in PR #14; software integrity verified, legal acceptance unchanged.
 Base: parallel-assignment commit `b335857`, including PLAT-06 `798b7d3`.
 Branch: `codex/platform-evidence-integrity`.
 Checkout: `C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/platform-evidence-integrity`.

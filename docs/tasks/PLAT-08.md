@@ -1,7 +1,8 @@
 # PLAT-08: complete container launch candidate
 
 Owner: Platform deployment agent, delegated by the current user-authorized Platform run.
-State: Assigned. Base: PLAT-06 `798b7d3` plus the parallel-assignment commit.
+State: Implemented and verified, including full Linux container execution in PLAT-10 CI. Integration: PR #17.
+Base: PLAT-06 `798b7d3` plus the parallel-assignment commit.
 Branch: `codex/platform-container`.
 Checkout: `C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/platform-container`.
 
@@ -17,3 +18,23 @@ Exclusive writes: `deploy/Dockerfile`, `deploy/compose.yaml`, `.dockerignore`,
 Read AGENTS, OWNERSHIP, CONTRACTS, TASKS, playbook, PLAT-02 and PLAT-06. Verify branch/base.
 Use shared Python venv and private outputs. No public hosting/provider calls. Root owns merge and board.
 Handoff includes commit, commands, actual results, runtime limits and next action.
+
+## Implementation and local verification
+
+The image now builds the existing frontend in a separate Node stage and serves its production
+assets through the API. Official Node/Python manifests are pinned, the source commit is recorded,
+and the build context excludes local stores, credentials, dependencies and Git metadata.
+Compose retains non-root/read-only execution and loopback publication. The verifier uses a unique
+project, explicit empty environment file, immutable input checks and private-path/write-denial probes.
+
+21 deployment tests pass, including real same-origin HTTP checks and privilege/mount rejection.
+The exact frontend npm lock installed in a disposable copy; generation, typecheck, all 90 unit tests
+and production build pass. The first sandboxed build hit an esbuild directory-access restriction;
+the approved build completed successfully. No authored frontend or Core file changed.
+
+Compose configuration validates and retains the snapshot. The local Docker engine is stopped.
+`--build-and-run` passed on the Linux CI runner: non-root/read-only restrictions, same-origin assets,
+API pagination/lookup, denied writes, snapshot preservation and project cleanup all pass on three
+labeled synthetic properties. It includes the concurrently merged Core B/UX PR #15.
+The native PLAT-06 bundle stays available on port 8016. No public deployment occurs.
+See `docs/CONTAINER_RUNBOOK.md` and `docs/evidence/plat08_container.json` for commands and evidence.
