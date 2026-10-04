@@ -66,7 +66,9 @@ export function ServiceNotice({ mode, health, onDemo }: { mode: DataMode; health
         <p>
           {data.rules === 0
             ? 'No rules have been extracted yet, so lookups will report extraction as unavailable rather than return an empty result.'
-            : `${data.rules} rules are extracted from ${data.sources} sources. Coverage is incomplete, so an unlisted rule has not been ruled out.`}
+            : `${data.rules} extracted rule candidates${data.rule_sources != null ? ` from ${data.rule_sources} documents` : ''}; ${data.sources} sources listed in the dataset. Coverage is incomplete, so an unlisted rule has not been ruled out.`}
+          {data.source_review_rules ? ` ${data.source_review_rules} candidates still need primary-source review.` : ''}
+          {data.context_only_sources ? ` ${data.context_only_sources} sources are context only, not operative legal authority.` : ''}
           {unresolved > 0 ? ` ${unresolved} of ${data.addresses} sample properties have no resolved municipality; local rules for those stay uncertain.` : ''}
         </p>
         {(data.last_extraction_outcome === 'failed' || data.last_extraction_outcome === 'partial') && (
