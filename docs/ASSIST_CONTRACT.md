@@ -28,6 +28,15 @@ QuestionPlan has complete/partial/unavailable status, questions, residual traces
 limits/evaluations_used/limits_hit and an explicit exhaustive flag. Default budgets: 5 questions, 8 fields,
 64 evaluations, at most 3 jointly explored fields. Platform validates request ceilings. Rank by a documented
 heuristic using fact answer-effort weights in `navigator/fact_inputs.py`, deterministic tie breaks.
+Before applying field/question limits, the planner first prioritizes supported missing inputs for a
+potentially applicable rule with true jurisdiction, an in-force date, no recorded review/semantic/conflict
+blocker, and a present evidence report with available context and no blocking issues or unresolved dependencies.
+Every relevant unknown leaf of that rule must have a supported factual definition and partition domain;
+missing interaction targets prevent this priority. A missing evidence report never earns the first tier.
+Within each tier, order is relevant unresolved predicate count divided by answer effort, then field name.
+`rank_score` reports only that within-tier score; `ranking_rationale` states the tier and tie break.
+This selection heuristic adds no certainty, does not suppress remaining issues, and does not change probe
+budgets or exhaustive-analysis requirements. The algorithm version changes when these ranking rules change.
 Alternatives are hypothetical `probe_facts` plus evaluator outputs and remaining uncertainty; never persist probes.
 Numeric/date partitions must preserve endpoint inclusion and partial-date precision. Do not expose internal
 representatives as newly known property facts. Occupancy/certificate date is distinct from year_built.
