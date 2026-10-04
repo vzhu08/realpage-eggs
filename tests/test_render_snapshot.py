@@ -1,5 +1,6 @@
 """Snapshot transfer checks use labeled synthetic data and the existing evaluator."""
 import json
+from binascii import Error as Base64Error
 from pathlib import Path
 import shutil
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -132,3 +133,50 @@ def test_changed_source_release_is_not_packaged(release, tmp_path):
     with pytest.raises(RuntimeError, match="Release files changed"):
         render.prepare(release, tmp_path / "package")
     assert not (tmp_path / "package").exists()
+
+
+def test_secret_file_build_installs_verified_inputs_and_hides_content(tmp_path, package, capsys):
+    archive, digest = package
+    output = tmp_path / "private/snapshot.b64"
+    report = render.secret_file(archive, digest, output)
+    assert report["bytes"] == output.stat().st_size < render.SECRET_FILE_LIMIT
+    receipt = render.build_secret(output, digest, tmp_path / "image-data", required=True)
+    assert receipt["counts"]["addresses"] == 3
+    assert receipt["artifact_label"] == "SYNTHETIC_NOT_FOR_SUBMISSION"
+    assert Path(receipt["NAVIGATOR_DATA_DIR"]).is_dir()
+    assert output.read_text() not in capsys.readouterr().out
+    with pytest.raises(FileExistsError):
+        render.secret_file(archive, digest, output)
+
+
+def test_missing_required_secret_fails_without_creating_data(tmp_path):
+    missing = tmp_path / "snapshot.b64"
+    root = tmp_path / "image-data"
+    assert render.build_secret(missing, "", root, required=False)["status"] == "snapshot_not_configured"
+    with pytest.raises(RuntimeError, match="Add Render secret file"):
+        render.build_secret(missing, "", root, required=True)
+    assert not root.exists()
+
+
+def test_secret_file_enforces_size_limit_before_writing(tmp_path, package, monkeypatch):
+    archive, digest = package
+    monkeypatch.setattr(render, "SECRET_FILE_LIMIT", 10)
+    output = tmp_path / "snapshot.b64"
+    with pytest.raises(RuntimeError, match="1 MB"):
+        render.secret_file(archive, digest, output)
+    assert not output.exists()
+    output.write_bytes(b"A" * 11)
+    with pytest.raises(RuntimeError, match="1 MB"):
+        render.build_secret(output, digest, tmp_path / "image-data", required=True)
+
+
+def test_invalid_or_mismatched_secret_is_never_installed(tmp_path, package):
+    archive, digest = package
+    output = tmp_path / "snapshot.b64"
+    render.secret_file(archive, digest, output)
+    with pytest.raises(RuntimeError, match="SHA-256 mismatch"):
+        render.build_secret(output, "0" * 64, tmp_path / "image-data", required=True)
+    output.write_bytes(b"not-base64!")
+    with pytest.raises(Base64Error):
+        render.build_secret(output, digest, tmp_path / "image-data", required=True)
+    assert not (tmp_path / "image-data").exists()

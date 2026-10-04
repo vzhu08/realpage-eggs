@@ -1,4 +1,8 @@
-# Render setup
+# Historical paid Render setup
+
+**Superseded by [the free deployment guide](RENDER_FREE_SETUP.md).** The root `render.yaml` now
+selects Render Free with no persistent disk. This document records the earlier paid proposal;
+its account/billing/SSH/disk instructions are not needed for the current free setup.
 
 This branch prepares one Docker web service that serves the existing React frontend and Python API
 from the same URL. It uses a 1 GB persistent disk for the saved JSON dataset. No Postgres, Redis,

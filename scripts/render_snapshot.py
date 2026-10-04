@@ -1,11 +1,13 @@
 """Prepare/verify/install a private serving snapshot; no deployment or provider calls."""
 import argparse
+from base64 import b64decode, b64encode
 from hashlib import sha256
 import json
 import os
 from pathlib import Path
 import re
 import sys
+from tempfile import TemporaryDirectory
 from zipfile import ZipFile, ZIP_DEFLATED
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +16,7 @@ from scripts.platform_ops import SERVING_FILES, fingerprint, require, save, veri
 
 REQUIRED = {"addresses.json", "resolutions.json", "rules.json", "sources.json", "dataset.json"}
 LABELS = {"SYNTHETIC_NOT_FOR_SUBMISSION", "RESEARCH_RELEASE_NOT_VALIDATED"}
+SECRET_FILE_LIMIT = 1_000_000  # Render's combined secret-file limit; use decimal MB conservatively.
 
 
 def allowed(name):
@@ -118,6 +121,31 @@ def install(archive, expected_sha256, data_root, name):
     return receipt
 
 
+def secret_file(archive, expected_sha256, output):
+    """Create plaintext transport without putting the dataset in the repository."""
+    verify_archive(archive, expected_sha256)
+    content = b64encode(archive.read_bytes())
+    require(len(content) <= SECRET_FILE_LIMIT, "Snapshot exceeds Render's 1 MB secret-file allowance")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("xb") as stream:
+        stream.write(content)
+    return {"status": "prepared", "secret_file": str(output), "bytes": len(content),
+            "NAVIGATOR_SNAPSHOT_SHA256": expected_sha256}
+
+
+def build_secret(secret, expected_sha256, data_root, required):
+    """Initialize the image at build time so free-service cold starts do no work."""
+    if not secret.exists():
+        require(not required, "Add Render secret file snapshot.b64, then rebuild. No snapshot was installed.")
+        return {"status": "snapshot_not_configured"}
+    require(secret.stat().st_size <= SECRET_FILE_LIMIT, "Secret file exceeds 1 MB")
+    content = b64decode(secret.read_bytes().strip(), validate=True)
+    with TemporaryDirectory(prefix="navigator-snapshot-") as temporary:
+        archive = Path(temporary) / "snapshot.zip"
+        archive.write_bytes(content)
+        return install(archive, expected_sha256, data_root, "snapshot-v1")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -131,14 +159,27 @@ def main():
         if name == "install":
             command.add_argument("--data-root", type=Path, default=Path("/var/data"))
             command.add_argument("--name", required=True)
+    secret = commands.add_parser("secret-file", help="Encode a verified snapshot for Render's private secret-file upload")
+    secret.add_argument("--archive", required=True, type=Path)
+    secret.add_argument("--sha256", required=True)
+    secret.add_argument("--output", required=True, type=Path)
+    build = commands.add_parser("build-secret", help="Prepare an image from a BuildKit secret; never run on each startup")
+    build.add_argument("--secret-file", required=True, type=Path)
+    build.add_argument("--sha256", default="")
+    build.add_argument("--data-root", required=True, type=Path)
+    build.add_argument("--require-snapshot", choices=("0", "1"), default="0")
     args = parser.parse_args()
     if args.command == "prepare":
         result = prepare(args.release, args.output)
     elif args.command == "verify":
         verified = verify_archive(args.archive, args.sha256)
         result = {"status": "verified", "files": len(verified["files_sha256"]), "artifact_label": verified["artifact_label"]}
-    else:
+    elif args.command == "install":
         result = install(args.archive, args.sha256, args.data_root, args.name)
+    elif args.command == "secret-file":
+        result = secret_file(args.archive, args.sha256, args.output)
+    else:
+        result = build_secret(args.secret_file, args.sha256, args.data_root, args.require_snapshot == "1")
     print(json.dumps(result, indent=2))
 
 

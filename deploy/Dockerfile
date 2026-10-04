@@ -33,6 +33,18 @@ COPY contracts/ contracts/
 COPY fixtures/ fixtures/
 COPY scripts/platform_ops.py scripts/render_snapshot.py scripts/
 COPY --from=frontend /build/frontend/dist/ public/
+# Render Free has no persistent disk or SSH. Its optional private data file is a
+# BuildKit secret; the validated serving data and current-runtime caches enter
+# Render's private image, outside the public frontend. Credentials never enter it.
+# Changing the declared SHA invalidates this build layer when data is updated.
+ARG NAVIGATOR_SNAPSHOT_SHA256=""
+ARG NAVIGATOR_REQUIRE_SNAPSHOT="0"
+RUN --mount=type=secret,id=snapshot_b64,target=/run/secrets/snapshot.b64 \
+    python scripts/render_snapshot.py build-secret \
+      --secret-file /run/secrets/snapshot.b64 \
+      --sha256 "${NAVIGATOR_SNAPSHOT_SHA256}" \
+      --require-snapshot "${NAVIGATOR_REQUIRE_SNAPSHOT}" \
+      --data-root /opt/navigator-snapshot
 USER 10001:10001
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"

@@ -1,5 +1,16 @@
 # RENDER-01: local Render deployment preparation
 
+## Free-hosting follow-up (October 4)
+
+The user asked to deploy on a free platform. This session now replaces the default paid Blueprint
+with Render Free and a build-time, hash-verified snapshot supplied through a Render secret file.
+The frozen source ZIP fits Render's 1 MB secret-file limit after base64 encoding. The existing
+evaluator prepares caches in the private image once per build; cold starts need no extraction,
+external data download, persistent disk or SSH. Snapshot contents remain outside Git and logs.
+Additional exclusive claims: `docs/RENDER_FREE_SETUP.md` and `.github/workflows/render-free.yml`,
+for a synthetic image test under 512 MB RAM / 0.1 CPU. Existing claims below remain. This is the same writer and checkout; base
+`e986453`. The paid procedure below is historical. No cloud account or resources are created here.
+
 Owner: Vincent / this setup session; one writer, no delegated agents.
 User assignment: do as much setup as possible through the terminal; user handles Render accounts/dashboard.
 Branch: `codex/render-setup`; base: `9ff4396de5b6bdc5d8daed159a0778f993dd49cc`.
