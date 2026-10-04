@@ -112,7 +112,7 @@ def release_inputs(data, frontend):
                 f"Unexpected public file: {name}")
         require(path.parts[0] not in {"api", "data", "navigator", "config"}, f"Reserved public path: {name}")
     selected = {name: value for name, value in data_hashes.items() if name in SERVING_FILES
-                or (name.startswith("semantic_reviews/") and name.endswith(".json"))}
+                or (name.startswith(("semantic_reviews/", "change_cache/")) and name.endswith(".json"))}
     return selected, public_hashes
 
 
@@ -185,6 +185,27 @@ def serve_release(args):
     release = args.release.resolve()
     verify_release(release)
     return launch_server(release / "runtime", release / "data", release / "frontend", args.port)
+
+
+def cache_changes(args):
+    """Precompute published scenarios once, retaining Core's complete/partial/blocked result."""
+    from navigator.changes import compute_changes
+    from navigator.evidence import prepare_rules, EvidenceStoreView
+    from navigator.models import ChangeRequest
+    from navigator.store import Store, save_change_cache
+    data, output = args.data_dir.resolve(), args.output.resolve()
+    require(not output.exists() and not output.is_relative_to(data), "Choose a new cache directory outside the input snapshot")
+    before = snapshot_hashes(data)
+    store = Store(data)
+    prepared, _ = prepare_rules(store)
+    view = EvidenceStoreView(store, prepared)
+    output.mkdir(parents=True)
+    for test in store.read("change_tests.json", []):
+        request = ChangeRequest(test_id=test["test_id"])
+        result = compute_changes(view, request)
+        key = save_change_cache(output, view, request, result)
+        print(json.dumps({"test_id": request.test_id, "status": result.status, "cache_key": key}), flush=True)
+    require(snapshot_hashes(data) == before, "Input snapshot changed during precomputation")
 
 
 @contextmanager
@@ -301,6 +322,8 @@ def smoke(args):
 
 
 def main():
+    os.environ.update(OPENAI_API_KEY="", OPENAI_MODEL="", PYTHON_DOTENV_DISABLED="1")
+    sys.path.insert(0, str(ROOT))
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     setup = commands.add_parser("bootstrap", help="Install the lock in a new environment; requires network")
@@ -323,10 +346,13 @@ def main():
     frozen = commands.add_parser("serve-release", help="Verify and launch a saved frontend/API release on loopback")
     frozen.add_argument("--release", type=Path, required=True)
     frozen.add_argument("--port", type=int, choices=range(1, 65536), metavar="PORT", default=8000)
+    cache = commands.add_parser("cache-changes", help="Offline precomputation through Core; no providers or input-store writes")
+    cache.add_argument("--data-dir", type=Path, required=True)
+    cache.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
         return {"bootstrap": bootstrap, "serve": serve, "smoke": smoke, "prepare-release": prepare_release,
-                "verify-release": verify_release_command, "serve-release": serve_release}[args.command](args) or 0
+                "verify-release": verify_release_command, "serve-release": serve_release, "cache-changes": cache_changes}[args.command](args) or 0
     except (RuntimeError, OSError, ValueError, subprocess.SubprocessError) as exc:
         print(f"Packaging check failed: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 2

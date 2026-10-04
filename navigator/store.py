@@ -73,3 +73,45 @@ class Store:
         run.counts.update(counts)
         self.save_run(run)
         return run
+
+
+def change_cache_key(store, request):
+    """Bind cached Core output to every consumed input and the actual evaluator code."""
+    from importlib.metadata import version
+    import platform
+    from .config import ROOT
+    inputs = {"request": request.model_dump(mode="json"),
+              "rules": {k: v.model_dump(mode="json") for k, v in store.rules().items()},
+              "addresses": {k: v.model_dump(mode="json") for k, v in store.addresses().items()},
+              "resolutions": {k: v.model_dump(mode="json") for k, v in store.resolutions().items()},
+              "change_tests": store.read("change_tests.json", [])}
+    # compute_changes consumes prepared rules, property/resolution models and selectors.
+    # Hash its whole implementation dependency set; no timestamp-only invalidation.
+    names = ["navigator/changes.py", "navigator/engine.py", "navigator/predicates.py",
+             "navigator/models.py", "navigator/config.py", "navigator/store.py", "config/test_rule_selectors.json"]
+    code = {name: digest((ROOT / name).read_bytes().replace(b"\r\n", b"\n")) for name in names}
+    return digest({"format": "change-cache-v1", "inputs": inputs, "code": code,
+                   "python": platform.python_version(), "pydantic": version("pydantic"), "pydantic_core": version("pydantic_core")})
+
+
+def cached_changes(store, request):
+    """Read verified offline results or use Core; HTTP never writes a result cache."""
+    from .changes import compute_changes
+    from .models import ChangeResult
+    key = change_cache_key(store, request)
+    cached = store.read(f"change_cache/{key}.json")
+    if cached and cached.get("key") == key and cached.get("result_sha256") == digest(cached.get("result")):
+        try:
+            return ChangeResult.model_validate(cached["result"])
+        except ValueError:
+            pass
+    return compute_changes(store, request)
+
+
+def save_change_cache(output, store, request, result):
+    """Persist a just-computed Core result for a separately prepared immutable release."""
+    key = change_cache_key(store, request)
+    value = result.model_dump(mode="json")
+    write_json(output / f"{key}.json", {"key": key, "request": request.model_dump(mode="json"),
+                                      "result": value, "result_sha256": digest(value)})
+    return key

@@ -9,7 +9,7 @@ from .changes import compute_changes
 from .config import DISCLAIMER, VERSION, data_dir
 from .models import LookupRequest, LookupResponse, ChangeRequest, ChangeResult, SourceDocument, HealthResponse, AddressPage, RuleDetail
 from .service import DatasetUnavailable, lookup
-from .store import Store
+from .store import Store, cached_changes
 from .assist_service import assist, CoreUnavailable, CoreContractError
 from .evidence import prepare_rules, EvidenceStoreView
 from .fact_inputs import FACT_DEFINITIONS
@@ -96,7 +96,7 @@ def create_app(root=None, core_services=None, frontend_dist=None):
     def changes(request: ChangeRequest):
         if not store.addresses(): raise HTTPException(503, detail={"code": "dataset_unavailable", "message": "Run navigator ingest"})
         prepared, _ = prepare_rules(store)
-        return call(compute_changes, EvidenceStoreView(store, prepared), request)
+        return call(cached_changes, EvidenceStoreView(store, prepared), request)
 
     @app.post("/api/v1/changes/summary", response_model=ChangeSummary)
     def summarized_changes(request: ChangeRequest):

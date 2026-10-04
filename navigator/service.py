@@ -87,14 +87,14 @@ def source_comparisons(store):
 
 def change_summary(store, request):
     """Group the existing Core result without evaluating legal truth a second time."""
-    from .changes import compute_changes
+    from .store import cached_changes
     from .evidence import prepare_rules, EvidenceStoreView
     from .models import ChangeSummary, ChangeImpactGroup
 
     if not store.addresses():
         raise DatasetUnavailable("Dataset absent; run navigator ingest")
     rules, _ = prepare_rules(store)
-    result = compute_changes(EvidenceStoreView(store, rules), request)
+    result = cached_changes(EvidenceStoreView(store, rules), request)
     by_id = rules
     groups = [{}, {}]
     changed_rules = set()

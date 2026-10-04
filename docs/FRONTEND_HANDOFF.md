@@ -126,3 +126,25 @@ Daniel's Core services merged through PR #3 at `3b1ef06`; no new Core work is re
 the current API journey. Missing-service states above remain supported failure paths.
 Do not ask either Core developer to rebuild the merged features. Future Core edits still require
 the ownership handoff recorded in OWNERSHIP.
+# PLAT-06 additive API and local release handoff — October 4
+
+Platform now supplies `/api/v1/changes/summary`, preserving the existing `ChangeResult` and adding
+property/rule labels and jurisdiction/category groups. Use `result.status` and `result.notes` even
+when groups are empty; group counts overlap. Existing `/changes` and official exports are unchanged.
+`GET /api/v1/source-comparisons` exposes Core's saved claim annotations after fresh source/anchor checks.
+Both claims, exact spans, authority, dates, hashes, unresolved status and remedies are retained.
+Semantic support is explicitly not checked and no winner or legal amendment is selected.
+See CONTRACTS and the two new synthetic `claim_comparison`/`change_summary` fixtures.
+
+The earlier property evidence download/replay contract remains available. UX-04 owns the comparison
+view, summary adoption and download control; the existing UI remains usable with its current endpoints.
+Run `npm run generate` in the UX checkout before adopting the additive models. The Platform build
+regenerates only inside its disposable verification copy; no frontend source or generated file is
+edited in this task checkout. The native release serves that verified build and the API on one origin.
+
+Real-data handoff: 500 addresses, 140 rules, 87 sources, 487 resolved municipalities and 13 unresolved.
+All rules remain review-needed. Use actual request results for examples; factual answers cannot cure
+missing legal evidence. Current portfolio computation is expensive, so rehearsal uses validated
+offline caches for published scenarios, bound to the exact code/data. Cache misses are recalculated
+and can exceed the UI's existing 20-second timeout. Detailed acceptance results follow in the release
+evidence report; this is not a claim that UX-04 or legal review is complete.

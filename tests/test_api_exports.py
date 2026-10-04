@@ -195,3 +195,47 @@ def test_release_rejects_unsafe_inputs_before_writing(local_release, damage):
         (args.frontend_dist / "data/addresses.json").write_text("{}")
     with pytest.raises(RuntimeError): prepare_release(args)
     assert not args.output.exists()
+
+
+def test_cached_changes_match_core_and_never_write_from_http(demo, monkeypatch):
+    from navigator.evidence import prepare_rules, EvidenceStoreView
+    from navigator.store import cached_changes, save_change_cache
+    from navigator import changes
+    from scripts.platform_ops import snapshot_hashes
+    request = ChangeRequest(before=date(2026,11,14), after=date(2026,11,15))
+    rules, _ = prepare_rules(demo)
+    view = EvidenceStoreView(demo, rules)
+    result = compute_changes(view, request)
+    save_change_cache(demo.root / "change_cache", view, request, result)
+    before = snapshot_hashes(demo.root)
+    monkeypatch.setattr(changes, "compute_changes", lambda *a: pytest.fail("Valid cache should avoid recomputation"))
+    assert cached_changes(view, request) == result
+    with TestClient(create_app(demo.root)) as client:
+        assert client.post("/api/v1/changes", json=request.model_dump(mode="json")).json() == result.model_dump(mode="json")
+        assert client.post("/api/v1/changes/summary", json=request.model_dump(mode="json")).json()["result"] == result.model_dump(mode="json")
+    assert snapshot_hashes(demo.root) == before
+
+
+@pytest.mark.parametrize("damage", ["facts", "geography", "rules", "request", "payload", "code"])
+def test_changed_inputs_or_cache_content_require_core_recalculation(demo, monkeypatch, damage):
+    from navigator.evidence import prepare_rules, EvidenceStoreView
+    from navigator.store import cached_changes, save_change_cache
+    from navigator import changes, store as store_module
+    request = ChangeRequest(before=date(2026,11,14), after=date(2026,11,15))
+    rules, _ = prepare_rules(demo)
+    view = EvidenceStoreView(demo, rules)
+    result = compute_changes(view, request)
+    key = save_change_cache(demo.root / "change_cache", view, request, result)
+    if damage == "facts":
+        rows = demo.addresses(); rows['SYNTH-003'].facts['units'] = 3; demo.save_collection('addresses', rows)
+    elif damage == "geography":
+        rows = demo.resolutions(); rows['SYNTH-003'].municipality = None; demo.save_collection('resolutions', rows)
+    elif damage == "rules": next(iter(rules.values())).title += " updated"
+    elif damage == "request": request.after = date(2026,11,16)
+    elif damage == "payload":
+        name = f"change_cache/{key}.json"; row = demo.read(name); row['result']['affected_address_ids'] = []; demo.write(name,row)
+    else: monkeypatch.setattr(store_module, 'change_cache_key', lambda *a: 'b'*64)
+    called = []
+    monkeypatch.setattr(changes, 'compute_changes', lambda *a: called.append(True) or result)
+    cached_changes(view,request)
+    assert called == [True]
