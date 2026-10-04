@@ -162,7 +162,7 @@
           "conflict_note": null,
           "team_rule_id": "r-694ad9fbae9083966e86",
           "evidence_mode": "synthetic",
-          "extraction_run_id": "d8f4ee590122441ba95a7c6e553033c5",
+          "extraction_run_id": "5a2fd7ffe00d4a8bafc661e9621e1ecf",
           "semantic_verification": "synthetic_fixture"
         }
       },
@@ -188,10 +188,11 @@
         "SYNTHETIC-42": {
           "status": "complete",
           "sha256": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
-          "run_id": "d8f4ee590122441ba95a7c6e553033c5",
+          "run_id": "5a2fd7ffe00d4a8bafc661e9621e1ecf",
           "mode": "synthetic",
           "rules": 1,
-          "issues": []
+          "issues": [],
+          "notes": []
         }
       },
       "dataset": {
@@ -435,7 +436,7 @@
             "conflict_note": null,
             "team_rule_id": "r-694ad9fbae9083966e86",
             "evidence_mode": "synthetic",
-            "extraction_run_id": "d8f4ee590122441ba95a7c6e553033c5",
+            "extraction_run_id": "5a2fd7ffe00d4a8bafc661e9621e1ecf",
             "semantic_verification": "needs_review"
           }
         ],
@@ -473,7 +474,7 @@
             "synthetic"
           ],
           "extraction_run_ids": [
-            "d8f4ee590122441ba95a7c6e553033c5"
+            "5a2fd7ffe00d4a8bafc661e9621e1ecf"
           ],
           "partial_data": true,
           "missing_source_ids": [
@@ -1297,10 +1298,10 @@
         "navigator/__init__.py": "279710f99c5c14d54c4b5bf7336be4848dd252749083477baddd35b10ef95531",
         "navigator/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
         "navigator/api.py": "3b593aaa7ba99905355619c4ca06df81395e0bdc2ff497f6d9cc3d268896ac0b",
-        "navigator/assist_cache.py": "0fa776db1236602f213c861958bf5535e114adc546ee193db9d8c469ca368f79",
+        "navigator/assist_cache.py": "217ba51b583bc3c183f48ed16474b6855ea3a84d603adacd2594c7c7c12befed",
         "navigator/assist_service.py": "f01800c14d24a4592c5ac6ca21435d058e85c23e2f702c78c21f8e492a0056d4",
         "navigator/assist_wire.py": "534601f1c62b8b6c5e81ee0889ed1d666e0c737057740bcf1055f865ec614a4a",
-        "navigator/changes.py": "2060c6d521001d2bf0721d2bd1b372cce07f0110c4726b435d60cc4eee62b5f7",
+        "navigator/changes.py": "efc101120004ee99ad756e6388c61e1099946772ec6c033b86564e80d7a01a12",
         "navigator/cli.py": "f747386e95c2a6119c2534ac104b85f3a08363b2a9f4593f4840900b844b27c2",
         "navigator/config.py": "ab3c3b0a8135e2816ad6e46e2a12a4ff999820e414d20073dabf4852d671f7ce",
         "navigator/contracts.py": "24bca26db980819d2945e96bee523c8ebfed9db3b3aea13ba248c162ec0d163f",
@@ -1310,11 +1311,11 @@
         "navigator/evidence.py": "845c81cdd8687917f6a8d81331e1c9270894d68115da7eccd7d2f5da60424d81",
         "navigator/evidence_package.py": "c380327a7c2a3582c4a575e95703adba9c43f8a2f448ecaeff6234d0bf4eef99",
         "navigator/export.py": "3c4f2b6d13c93bd1be916321d30040e10b9039dcc7ae0ab65f3a81e9ebee7fdc",
-        "navigator/extraction.py": "5e2fe65e4ed6a383330fc9f4b57280d5ed2bea691ea70d07d59f00948676ac76",
+        "navigator/extraction.py": "8011266eb6b0202aa9cdb93809ed0112071e7d4ce659cd037f951013a36ca9c4",
         "navigator/fact_inputs.py": "c9c503e1e1d36a61c417bb85c9b705d7ec42294f65e28079a7b5d14e5f26e054",
         "navigator/geocode.py": "f5ce5fd996950fe701f8dc556f706c4eac80db396efd39d2c9703517dd9f7d27",
         "navigator/ingest.py": "3c72d47b0adea5c4559cc3fa6da4e9e5d5296b2f88bdc7486eb8370602915dd8",
-        "navigator/models.py": "959de001c57c2a4daabe8e4ee9fe10f0115432748563fd6647e6d10fe1747144",
+        "navigator/models.py": "8c4b9146ce559c24567fbfbaa1273f23e4110b21f818a8e2fffe361c9c4647fe",
         "navigator/predicates.py": "36e6cd612f6847405088b06c0695b25f3c184c8336211791bf513a0a63770cf8",
         "navigator/question_planner.py": "8429b1bfe8e1daafdcc7bbde36d3d895c1455c7e041da7f74b44eddfe32ae9d6",
         "navigator/research_fixtures.py": "7de7a954f3c22f27f66297335dce19ce5ceb94f6d1e759b494ea35849f12b4fb",
@@ -1329,11 +1330,11 @@
         "navigator/validation.py": "3210f6145fd4a9398ed1cea132b63226c5fecc78912f37f2c8a6cbfb47c8b90a",
         "requirements.lock": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8"
       },
-      "fingerprint": "07a489464c531f363988a130cb16bc5585c8788f4f0346d5263c65b8b4c9c4b0"
+      "fingerprint": "22579c8f020c174a482a917aa029fdac0ce8605e5216ce8c99120b14be9c2815"
     },
-    "input_sha256": "05f619ed5fc59e29399abcee0fd5a3ee54eddffc31bee7c5526af0d704c038bf",
-    "response_sha256": "61ad3f171a9af71ee829592e9c0133e33ae09cf8d821338d2398c0cc122ee7d3",
-    "package_sha256": "3399075fba1868b5c7f57e76e28a2178abcb13d8dae7b0eee40a0baf7d41b94e",
+    "input_sha256": "f6cf45bb69d38fe6014afbdb0fc8bda1fd236fb5798c2fe47efacb960cd981d9",
+    "response_sha256": "1302326ca34f3aa007b2bca035b95cc57a1d5083d09423033c75aa5fad20d694",
+    "package_sha256": "b734cbdad6b08f3dd8a5a6cd5a88cd7960417dae16f606bb72e3ec4b30487be7",
     "limitations": [
       "Reproduction verifies software output, not legal accuracy or complete source coverage.",
       "Original facts and submitted answers are separate; answers remain unverified and request-local.",
