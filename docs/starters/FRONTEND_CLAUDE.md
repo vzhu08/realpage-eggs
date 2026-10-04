@@ -1,18 +1,23 @@
-# Starter prompt — entire frontend / Claude Code
+# Starter: Frontend/UX lane using Claude; Oliver is the recorded human coordinator
 
-Own the entire frontend under frontend/**, including its local dependencies, styling, state, tests and UI docs.
-You are the Frontend/UX lane in a four-human team. Implement UX-03; UX-01/02 are its subflows.
-Read AGENTS, docs/Hackathon_Development_Playbook.txt, OWNERSHIP, UX-03,
-FRONTEND_HANDOFF, ASSIST_CONTRACT, contracts/openapi.json, research.schema.json and research_examples/*.json.
-Have Vincent allocate your human claim and separate checkout/branch from the released contract commit.
-Record actual base/checkout in your card; preserve teammate work. Platform/Vincent stewards backend routes,
-models, generated contracts, root dependencies and shared docs; request changes there. Stop only overlapping work.
-Core A owns source/evaluator/trace semantics; Core B owns questions/rendering. Daniel's existing Core
-candidate c92ad8f has these features; combined Platform integration is pending. Coordinate API changes
-through Platform, question behavior with Core B, evaluator/source issues with Core A.
-First ready task: full UI with working Platform calls and labeled fixtures while Core integration is pending. Show hypothesis/remaining
-unknowns; source identity/quotes/semantics separately; not-legal-advice, synthetic and pending/failed labels.
-Use implemented calls from FRONTEND_HANDOFF; handle dependency_unavailable visibly. Do not invent a client legal planner.
-Choose a frontend stack under frontend/, record and run exact typecheck/test/build commands. Return a local commit,
-interaction checks and integration blockers. No push/merge/deploy authority. This prompt is prepared for Vincent;
-it does not claim any teammate has received it or started.
+Assigned next task: [UX-04](../tasks/UX-04.md). Read that card, AGENTS, OWNERSHIP,
+PLAN, CONTRACTS, ASSIST_CONTRACT and the current playbook before editing.
+Main already includes Core A/B and frontend at `3b2d201`; the old candidate-only setup is historical.
+Use a reviewed base including accepted COORD-04 fixes and relevant later integration work.
+
+Continue the integrated frontend. Extend its existing change view into a portfolio timeline/drill-down and source disagreement view, then wire evidence downloads and rehearse a real-data judge demo. Preserve stale-request cancellation, evidence distinctions and unknown/blocked states.
+
+Use generated contracts and Platform APIs; do not implement legal truth or source comparisons in the browser.
+
+Verify your actual checkout, current writer, branch, base SHA and existing changes; record them
+in the card. Its suggested branch is not an allocated checkout. Use private mutable data/cache,
+retain original source snapshots, and preserve all author history. One writer per file.
+Daniel's Core B path release is recorded in CORE_A_HANDOFF. No new session has been started or messaged.
+
+The card defines exact allowed paths, dependencies, acceptance and checks. Start independent work
+against current interfaces while Platform prepares the minimum new contract. Planned fields are
+not implemented endpoints. Use labeled fixtures for development, then separately verify real data.
+
+Return commit, changed paths, exact commands/results, data/provenance mode, unresolved evidence,
+contract requests and the next action. Do not claim legal accuracy from software tests. Use applicable
+human authority for provider resumption, pushes, merges, deployment, external messages or submission.

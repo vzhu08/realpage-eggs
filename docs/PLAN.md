@@ -1,26 +1,75 @@
-# Current plan — four developers
+# Current plan: real-data change intelligence
 
-The user's October 3 staffing update supersedes the historical three-lane plan below. Read the current
-playbook, OWNERSHIP and four starter prompts. The Git fix/pull is complete: current branch tracks
-origin/main, merge 1f12f5b preserves Platform a034e2b. Existing Core candidate c92ad8f is separate.
+User-assigned next work after the October 3 readiness audit. This section supersedes the historical
+planning snapshots below. Main `3b2d201` already includes Core A/B and frontend; do not rebuild them.
+The signature journey is: source -> rule -> property -> useful question -> date change -> portfolio
+impact -> unresolved source disagreement, with a reproducible evidence package.
 
-| Lane | First independent work | Next dependency / acceptance |
+| Lane | Assigned next deliverable | First independent work |
 | --- | --- | --- |
-| Platform / Vincent | Coordinate Core B path release and review the existing Core candidate; keep APIs/exports stable | After authorized integration, actual Core HTTP answers/rendering and official exports pass; refresh shared fixtures |
-| Core A / existing author Daniel | Review existing extraction/date/trace repairs; prepare real D001 extraction | Key/model for live run; stable rule_traces/evaluate_rules for Core B; no invented occupancy or lifecycle |
-| Core B / new human pending | Read/review delivered planner/renderer and comparison; write after handoff | Isolated checkout + path release; planner uses Core A traces and one evaluator; bounded correlated alternatives reproduce |
-| Frontend / Claude | Entire UI with working calls and labeled fixtures | Consume actual integrated planner/renderer; verify unknown -> question -> answer plus still-unknown case |
+| Vincent / Platform | [PLAT-06](tasks/PLAT-06.md): integrated snapshot, additive contracts, evidence package, complete launch/export acceptance | Finish active PLAT-05; prepare immutable store assembly and review local PLAT-04 continuation `11afb55` |
+| Daniel / Core A | [CORE-06](tasks/CORE-06.md): T1-T5/lifecycle evidence and reusable source comparisons | Review saved evidence and prioritize missing support; the stopped provider run is not automatically resumed |
+| Oliver / Core B | [CORE-07](tasks/CORE-07.md): actionable uncertainty, change/conflict explanations, real-case planner benchmark | Improve existing-interface explanations and prepare fixed benchmark harness |
+| Frontend/UX / Claude | [UX-04](tasks/UX-04.md): portfolio timeline, disagreement view, evidence download, judge journey | Extend current changes UI with readable labels and drill-down using current contracts |
 
-Existing Core features must be reviewed and continued, not implemented a second time. Remote candidate
-reports 96 tests; local Platform's last software suite has 74. Neither number is a combined integration
-result. Current checkout still lacks the Core module until coordinated integration. Model credentials,
-missing source material and independent legal review remain separate blockers.
+## Gate 1: one honest, usable dataset (P0)
 
-Order: P0 real extraction/source/schema/export correctness and candidate integration; P1 handoff/complete
-question-renderer-frontend integration; P2 independently reviewed boundaries and broader source/reference
-coverage. Core A owns legal/evaluator cases; Core B owns the planner comparison and rendering fidelity;
-Platform stewards the candidate manifest/shared reports. Keep richer ranking/translations/features later.
-Names and actual checkouts beyond the evidenced existing author are not invented; Vincent records them.
+Combine Daniel's saved rules and Platform's 491/500 geography only after ID/source/provenance checks.
+Baseline source evidence remains incomplete: 15/54 captured documents processed; 140 review-needed rules;
+16 exportable; 124 unresolved temporal projections. T2-T5 were blocked in the saved Core report.
+Do not conflate these reported counts with a new run. Missing or contradictory source support must
+remain visible, and 500 output IDs alone do not establish coverage.
+
+Prioritize the five required change cases and consequential lifecycle gaps, then expand the corpus.
+The user previously stopped extraction; saved-source review and software can proceed, while new
+provider calls require a human resumption decision and a recorded budget. No synthetic replacements.
+
+## Gate 2: integrated feature contracts (P0/P1)
+
+Platform releases the smallest shared types/examples needed by the four lanes. Prefer existing
+ChangeResult, EvidenceReport, SourceSpan, Uncertainty and rendered-rule structures. A disagreement
+must retain both supported observations, authority/version/date, affected field/rules and remedy.
+Core A owns what changed and why; Core B owns faithful explanations/questions; UX owns presentation.
+Schema additions are plans until implemented, generated and checked through actual HTTP integration.
+
+## Gate 3: signature demonstration (P1)
+
+- Portfolio: timeline, jurisdiction/category summaries and property labels; drill down to source-backed
+  changed provisions. Existing impact counts are already implemented and should be reused.
+- Disagreements: compare claims and preserve unresolved conclusions. A moved citation or new source
+  formatting is distinct from a substantive requirement, exemption or effective-date change.
+- Evidence package: facts/answer provenance, dates, quotes, remaining uncertainty and code/data hashes.
+- Real-case evaluation: quantify useful questions, missed facts, unnecessary questions, incorrect
+  certainty and latency against fixed baselines, with author/reviewer and denominators disclosed.
+
+Organizer open-question priority:
+
+| Case | Priority / reason |
+| --- | --- |
+| NJ FAIR Act and local ordinances | First: also supports required T3; possible conflict/preemption needs source-backed treatment |
+| Berkeley effective-date claims | Second: reuse disagreement mechanism; preserve source authority and missing adoption/effectiveness evidence |
+| Los Angeles RSO date claims | Third: demonstrate the same mechanism across jurisdictions |
+| California screening-fee cap | Optional later: dated formula and missing inputs; no invented definitive annual figure |
+
+These are investigation targets, not facts to hard-code from the participant guide.
+English/Spanish explanations are the first optional UX stretch after required flows pass, with
+original quotes/dates retained and translation reviewed. Defer a new jurisdiction, generic chat,
+notification systems, broad scraping and framework changes until the supplied scope is usable.
+
+## Gate 4: release, evidence and submission
+
+Use one reviewed code/data snapshot for the real browser journey, all 500 address exports and T1-T5.
+Resolve critical blockers or explicitly document accepted partial scope; passing software checks is
+not legal accuracy or an official score. Verify the complete frontend/API launch; the existing Docker
+candidate packages only the backend and its runtime remains unverified at the audit checkpoint.
+
+Prepare the organizer's rules.json, lookups.json, changes.json, live demo and one-page method note.
+The supplied no-hour16 pack has five cases and no surprise document requirement. Confirm any conflicting
+organizer logistics; do not add historical T6/video/scorer requirements without that confirmation.
+
+Planning assumption remains October 4, 09:00 America/New_York, not a verified organizer deadline.
+Reserve the final 90-120 minutes for feature freeze, fresh-session rehearsal, exports, method note,
+backup recording and submission buffer. Public deployment/submission use applicable human authority.
 
 ## Historical planning snapshots
 

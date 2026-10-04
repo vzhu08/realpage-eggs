@@ -24,15 +24,18 @@ Core A (Rules & Evaluation) owns extraction, predicates, evaluator, traces and c
 Core B (Questions & Rendering) owns the planner, renderer and core_assist adapter.
 UX owns the entire frontend. These are four human lanes, not additional agent sessions.
 See the exact file map in OWNERSHIP. Board/merge queue steward: Platform/API owner (provisional role).
-BOOT-01 is checkpointed at `5ef1de1`. Follow-up coordinator: Vincent / Platform/API.
-Current session claims COORD-03 (Daniel PR #3 integration) on `codex/core-integration`.
-COORD-01 and PLAT-03/04/05 are in Review at the recorded checkpoints.
-Read `docs/ASSIST_CONTRACT.md` and `docs/starters/` for the additive contract and lane boundaries.
-Core A retains extraction/evaluator/change/validation internals and owns rule_traces.
-Core B consumes that boundary and exclusively owns navigator/core_assist.py.
-Imported Core candidate: PR #3 at 3cf0361, authored by Daniel; integration record: docs/tasks/COORD-03.md. Preserve it;
-record the release of Core B paths before a new writer starts. See OWNERSHIP and the Core cards.
-Platform adds separate evidence/retrieval/input services and wires routes; no extraction transfer occurred.
+Current merged baseline: PR #9 at `3b2d201`, including Core A PR #8 and Core B/frontend.
+The current readiness session claims COORD-04 on `codex/readiness-fixes-and-plan` in its
+isolated `artifacts/readiness-fixes-and-plan` checkout. The user explicitly authorizes its
+cross-lane model/generator fixes and assignment docs; this exception does not add writers.
+PLAT-05 remains active in its original checkout. Preserve its local changes and latest card.
+Next user-assigned cards: PLAT-06 (Vincent), CORE-06 (Daniel), CORE-07 (Oliver), UX-04 (Claude UX lane).
+Read docs/PLAN.md, docs/TASKS.md and the updated starters for dependencies and acceptance.
+Daniel's Core B path release is recorded in docs/core_rules/CORE_A_HANDOFF.md.
+Core A's corpus is partial and explicitly paused; assigning next tasks does not restart it.
+Local PLAT-04 continuation `11afb55` still needs integration review; baseline APIs are merged.
+Read docs/ASSIST_CONTRACT.md. Preserve one AST/evaluator and the existing rule_traces boundary.
+Platform owns source acquisition/store assembly/API contracts; Core A keeps extraction/evaluation.
 Use one evaluator for probes and actual answers. Source identity, quote presence, anchor validity,
 semantic support and dependency gaps are separate; lexical retrieval never proves legal support.
 Do not switch/rebase another active writer's checkout. Use the `codex/` branch prefix.

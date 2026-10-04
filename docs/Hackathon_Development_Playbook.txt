@@ -3,7 +3,9 @@ Hackathon Development Playbook
 Four developers using Codex, Claude Code, or both
 
 RealPage project edition — updated October 3, 2026 at the user's request.
-Current team: Platform/API, Core A (Rules & Evaluation), Core B (Questions & Rendering), Frontend/UX.
+Current team: Platform/API (Vincent), Core A (Daniel), Core B (Oliver), Frontend/UX (Claude lane).
+Current next assignments are PLAT-06, CORE-06, CORE-07 and UX-04 in docs/TASKS.md and docs/PLAN.md.
+The readiness assignment supersedes historical candidate/status references in this playbook.
 This edition supersedes the original documents' three-developer staffing. Feature and evidence requirements remain.
 The original is preserved unchanged at docs/reference/Hackathon_Development_Playbook.txt.
 Read docs/OWNERSHIP.md for exact file claims, docs/TASKS.md for state, and docs/ASSIST_CONTRACT.md for boundaries.
@@ -69,7 +71,7 @@ Use this project's actual structure. UX owns frontend/**. Platform owns navigato
 
 The boundary is the existing candidate's engine.rule_traces(rule, prop, resolution, as_of) -> list[PredicateTrace] plus the single evaluate_rules. Core B consumes those traces and produces plan_questions(AssistContext) and render_rule(Rule); Platform wires them into the API. Only Core B writes core_assist.py. Shared contracts remain Platform-stewarded.
 
-Existing work: a034e2b is the Platform implementation; origin/codex/core-backend at c92ad8f contains Daniel's implemented Core features. Review and preserve those commits before new work. Vincent records release of Core B paths from the original writer and assigns the new human in a separate checkout. Do not start duplicate implementations or move an active writer's checkout. The Core candidate is not yet combined with Platform in this checkout.
+Existing work: merged main 3b2d201 includes Core A/B and frontend. Daniel released Core B paths in docs/core_rules/CORE_A_HANDOFF.md. PLAT-05 is active separately; PLAT-04 continuation 11afb55 is local. Use current task cards and separate checkouts. Preserve earlier commits and evidence; do not rebuild the existing planner, renderer or frontend.
 
 Name one steward for each shared area: contracts, dependency manifest and lockfile, root layout, global styles, environment examples, database migrations, and deployment configuration. Announcing a change is not a lock: record its owner and release the claim after integration.
 

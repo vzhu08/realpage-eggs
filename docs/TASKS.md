@@ -1,53 +1,59 @@
 # Task board and merge queue
 
-Board steward: Platform/API owner (provisional role). Other lanes edit only their own cards.
-States: Planned -> Ready -> Running -> Review -> Queued -> Merged -> Verified; Blocked names
-an explicit dependency. Ready means technically ready, not a human claim or permission to start.
-Four human lanes: Platform/API, Core A (Rules & Evaluation), Core B (Questions & Rendering), Frontend/UX.
-Daniel's PR #3 is merged at 3b1ef06; Core A retains evaluator/extraction ownership.
-Core B is a new human assignment and requires the existing writer's path handoff before new edits.
-PLAT-02 PR #6 is merged at `e0cd133`. The current user-assigned Platform session is resolving
-the task-board conflict and checking PLAT-03 PR #7 against that main for its authorized merge.
-PLAT-03's contracts and baseline code are already available; no new Core/UX code is required.
+Current assignment: October 3, 2026 readiness follow-up. This board supersedes older
+status summaries in task cards; preserve their historical evidence. Four existing lanes:
+Vincent / Platform, Daniel / Core A, Oliver / Core B, and Frontend/UX using Claude
+(Oliver is the recorded UX human coordinator). No extra writing agents are assigned.
 
-| ID | Lane | State | Outcome / dependency |
+The user assigned COORD-04's two fixes and the next four cards below. Assigning a card
+is not a claim that its remote session started. Each developer records actual checkout,
+branch, base SHA and private data directory before writing. See [OWNERSHIP](OWNERSHIP.md)
+and the dependency gates in [PLAN](PLAN.md).
+
+Audited merged baseline: `3b2d201` (PR #9), including Core A PR #8 at `0ccaa1a`.
+Fresh baseline checks: 221 backend tests, 79 frontend unit tests, 72 browser tests passed;
+12 browser tests skipped. Browser tests use fixtures/API doubles. Real-data browser/API,
+Docker runtime and public deployment are not verified by those checks.
+
+## Active and next work
+
+| ID | Owner | State | Deliverable / dependency |
 | --- | --- | --- | --- |
-| BOOT-01 | User / bootstrap | Review | Backend and integration baseline locally checked; live extraction acceptance blocked on local provider configuration |
-| UX-01 | UX owner | Ready, unclaimed | Address/date/evidence UI using generated contracts and labeled fixtures |
-| UX-02 | UX owner | Ready, unclaimed | Change view with definite/uncertain/blocked/hypothetical states |
-| PLAT-01 | Vincent / Platform | Merged | PR #5 at 9a96fda; recovered 12/21: 491/500 in isolated store; 28 focused / 96 total tests pass; no deployment |
-| PLAT-02 | Vincent / Platform | Merged | PR #6 at e0cd133; fresh lock install, native HTTP and both export replays pass; Compose validated; Docker image/runtime unverified |
-| CORE-01 | Core A / Daniel | Merged software; corpus incomplete | PR #3 includes reported D001/D004 live slices and bounded resumption repairs; no local provider rerun |
-| CORE-02 | Core A / Daniel | Merged | Date/interaction implementation combined with Platform; 167 total tests pass |
-| COORD-01 | Vincent / Platform | Review P0 | Original shared contract checkpoint 3349851; historical three-lane staffing superseded |
-| COORD-02 | Vincent / Platform | Review P0 | Four-developer playbook, exclusive Core split, candidate-aware cards and starters |
-| COORD-03 | Vincent / Platform | Merged | PR #3 doc conflicts resolved with author history retained; actual Core/API verification and unchanged schemas |
-| PLAT-03 | Vincent / Platform | Queued P0/P1 | PR #7 preserves exact anchors under small budgets; 21 focused / 176 full tests pass; user authorized conflict resolution and merge |
-| PLAT-04 | Vincent / Platform | Review P1 | Actual Core/API integration passes 19 focused tests; synthetic alternatives and answers reproduce through HTTP |
-| PLAT-05 | Vincent / Platform | Review P1 | Inventory/verifier implemented; fixture/replay verified; live mode blocked by key/model |
-| CORE-03 | Core A / Daniel | Merged | rule_traces and actual occupancy semantics verified in combined suite; future lane handoff remains required |
-| CORE-04 | Core B / new human pending | Merged; future writer handoff required | Daniel's planner works through Platform HTTP; no new writer allocated |
-| CORE-05 | Core B / new human pending | Merged; future writer handoff required | Daniel's renderer works through Platform HTTP; no new writer allocated |
-| UX-03 | UX / Claude | Ready P1, unclaimed | Entire frontend including questions and evidence; contracts/fixtures ready |
+| [COORD-04](tasks/COORD-04.md) | Vincent / current readiness session | Review; verified locally | Fix LF/CRLF contract checks and non-finite model inputs; assign next work. Isolated branch `codex/readiness-fixes-and-plan`, base `3b2d201`. |
+| [PLAT-05](tasks/PLAT-05.md) | Vincent / existing Platform session | Running separately | Complete inventory/verifier work and distinguish offline/live acceptance. Preserve current `codex/platform-review` changes and latest card; real-store/provider prerequisites belong to that session. |
+| [PLAT-06](tasks/PLAT-06.md) | Vincent / Platform | Assigned; prep Ready | After PLAT-05: integrate saved rules/geography, reconcile local PLAT-04 continuation, publish additive contracts, evidence package and complete runnable release. |
+| [CORE-06](tasks/CORE-06.md) | Daniel / Core A | Assigned; saved review Ready | T1-T5 evidence, lifecycle gaps and source comparisons. Corpus provider run remains paused pending explicit human resumption. |
+| [CORE-07](tasks/CORE-07.md) | Oliver / Core B | Assigned; existing-interface work Ready | Actionable uncertainty, faithful change/conflict explanations and reviewed real-case planner benchmark. Real acceptance needs CORE-06/PLAT-06. |
+| [UX-04](tasks/UX-04.md) | Frontend/UX / Claude | Assigned; existing-contract UI Ready | Portfolio timeline/drill-down, disagreement view, evidence download and real-data judge demo. New payloads depend on PLAT-06. |
 
-Cards: `docs/tasks/<ID>.md`. Shared stewards and exact paths: OWNERSHIP.
-PR #3 merged as 3b1ef06 after user-authorized conflict resolution 5eefae0; COORD-03 records exact checks.
-Main already contains Platform and four-developer docs through PR #4 and PLAT-01 through PR #5 at 9a96fda.
-PLAT-02 merged through PR #6 at e0cd133. PLAT-03 PR #7 is updated against that main. No deployment is verified.
-For each candidate: owner reviews diff/scope -> steward orders dependencies -> update clean candidate
-against current main -> rerun required checks -> human-authorized merge -> verify main -> separately
-verify deployed demo. Never rebase an active writer. Preserve user work and actual base SHA.
+## Existing delivery status
 
-UX-01/02 are subflows of UX-03, not competing implementations. PLAT-01 is merged;
-PLAT-02 is merged through PR #6. CORE-01 keeps extraction ownership in Core A. Core B alone owns planner/renderer and core_assist.py. Priorities: P0 correctness/configuration and
-contracts; P1 bounded useful-question/evidence journey; P2 broader references, ranking and reviewed benchmarks.
+| ID | State at audited baseline | Evidence / remaining limit |
+| --- | --- | --- |
+| BOOT-01 | Baseline integrated; real-data acceptance incomplete | Initial bootstrap is historical; do not recreate it. |
+| COORD-01/02 | Coordination superseded | Current four-lane assignments and releases are in OWNERSHIP and these new cards. |
+| COORD-03 | Merged | PR #3 at `3b1ef06`; preserved Daniel's implementation/history. |
+| PLAT-01 | Merged | PR #5 at `9a96fda`; 491/500 municipalities in separate recovery store; nine remain unresolved. |
+| PLAT-02 | Merged packaging | PR #6 at `e0cd133`; native HTTP/export replay verified; Docker/public deployment still unverified. |
+| PLAT-03 | Merged | PR #7 at `c57107a`; bounded source context and evidence checks. |
+| PLAT-04 | Baseline merged; continuation local | Assist API baseline is integrated; additional request-isolation fix/checks at local `11afb55` require integration review. PLAT-06 carries this forward. |
+| CORE-01 | Software merged; corpus partial | Latest stopped store: 15/54 captured documents, 140 rules, 16 exportable, all review-needed. T2-T5 blocked. CORE-06 continues evidence work. |
+| CORE-02/03 | Merged | Latest date/trace repairs in PR #8; current full backend baseline passes 221 tests. |
+| CORE-04/05 | Merged | Oliver's planner/renderer continuation integrated in PR #9. Daniel released future Core B paths in CORE_A_HANDOFF. |
+| UX-01/02/03 | Merged software | PR #9 includes full frontend and request-race fix; UX-01/02 are subflows. Real-data acceptance remains for PLAT-06/UX-04. |
 
-## Isolated integration review — Oliver, 2026-10-03
+## Integration order and release gates
 
-At Oliver's request, `codex/integration-review` combines main `c57107a` (including Platform packaging
-and evidence updates), Core B `85cd70b` and Claude frontend `6d90470`. Task-card
-conflicts retain author records and the current four-lane file boundaries. This
-local candidate's validation is in `docs/core_navigation/integration_review/`.
-Core B and UX are implemented and locally verified in that candidate; historical
-allocation/status rows above describe the incoming coordination records.
-The original active checkouts are unchanged; this candidate is not remotely merged.
+1. Review COORD-04 on its isolated branch. Preserve active PLAT-05 changes; when merging,
+   retain the owner's latest runtime/card/evidence rather than replacing them with older status text.
+2. Finish PLAT-05 and reconcile PLAT-04 `11afb55`; record the exact combined reviewed base.
+3. PLAT-06 publishes the common snapshot and minimum contracts. CORE-06/07 and UX-04 can
+   do independent work beforehand; do not invent production payloads or duplicate the evaluator.
+4. Integrate Core evidence/comparison, explanations, API wiring and UX increments with affected checks.
+5. Release only after the real browser/API path, official-format exports, T1-T5 disposition,
+   method note and backup demo are checked against one recorded code/data version.
+
+States: Assigned -> Ready -> Running -> Review -> Queued -> Merged -> Verified;
+Blocked states name their dependency. Merged software is distinct from verified data and deployment.
+Local commits are allowed; use applicable human authority for push, merge, deployment, external
+messages and submission. No teammate has been contacted by this assignment update.

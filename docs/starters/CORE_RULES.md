@@ -1,32 +1,23 @@
-# Starter prompt — Core A / Rules & Evaluation
+# Starter: Daniel / Core A, Rules & Evaluation
 
-You are one of four human developer lanes. Own CORE-01/02/03: extraction and source review,
-evaluator/date/interaction correctness, predicate traces and residual expressions. Daniel authored the
-existing Core candidate on codex/core-backend; preserve that work. Core B separately owns planning,
-rendering and navigator/core_assist.py after the recorded handoff. Do not continue writing those files
-once released to Core B; do not change another session's checkout.
+Assigned next task: [CORE-06](../tasks/CORE-06.md). Read that card, AGENTS, OWNERSHIP,
+PLAN, CONTRACTS, ASSIST_CONTRACT and the current playbook before editing.
+Main already includes Core A/B and frontend at `3b2d201`; the old candidate-only setup is historical.
+Use a reviewed base including accepted COORD-04 fixes and relevant later integration work.
 
-Read AGENTS.md, docs/Hackathon_Development_Playbook.txt, OWNERSHIP, ASSIST_CONTRACT, your cards,
-models.py, and docs/core/CORE_HANDOFF.md on candidate c92ad8f. Its 96-test result is reported evidence;
-combined Platform/Core integration remains to be checked. Current staffing supersedes the old three-lane
-assignment. Have Vincent record the actual human/session, codex/ branch, absolute checkout, base and
-private NAVIGATOR_DATA_DIR. Preserve existing changes. Existing Daniel checkout stays his; Core B uses
-another. Suggested API port 8002. Do not assume remote main contains either full implementation.
+Start with saved-store/source review and T1-T5 dependency triage. Preserve the explicit corpus stop until the human resumes provider work. Resolve lifecycle gaps only from supporting evidence, then implement reusable source comparison on the existing evaluator.
 
-First ready work: review the existing CORE-03 trace/evaluator checkpoint and supply its contract/results
-to Core B; avoid rebuilding it. Prepare CORE-01's live D001 extraction when key/model are configured
-locally, keeping trace integration independent of the long corpus run. CORE-02 and CORE-03 edits to
-engine.py/predicates.py remain serialized within your lane. Review actual occupancy semantics and
-route any required ingest.py changes to Platform. Keep missing evidence and lifecycle ambiguity explicit.
+Platform assembles stores and captures new sources; Core B owns planner/renderer/adapter; UX owns frontend.
 
-Exact paths are in OWNERSHIP. Own existing engine/extraction/change tests; Core B owns planner/renderer
-tests. The existing interface is engine.rule_traces(rule, prop, resolution, as_of) -> list[PredicateTrace].
-Retain canonical Expression semantics and evaluate_rules; do not introduce another evaluator. Preserve
-stable IDs, grouping, source references, raw exemption truth, branch relevance and residuals.
+Verify your actual checkout, current writer, branch, base SHA and existing changes; record them
+in the card. Its suggested branch is not an allocated checkout. Use private mutable data/cache,
+retain original source snapshots, and preserve all author history. One writer per file.
+Daniel's Core B path release is recorded in CORE_A_HANDOFF. No new session has been started or messaged.
 
-Checks with checkout Python: python -m pytest tests/test_engine.py tests/test_change_adapters.py tests/test_extraction.py -q.
-If adding tests/test_traces.py, include it. Run live extraction only when configured and record actual run
-manifests, not invented legal results. Platform owns shared model/route/contracts/exports integration.
-Put new notes in docs/core_rules/ and your task cards; preserve docs/core/** as historical candidate evidence.
-Return local commit, exact tests, source/run evidence, requested contract changes and remaining blockers.
-No push, merge, deployment, external messages or extra writing agents are authorized by this starter.
+The card defines exact allowed paths, dependencies, acceptance and checks. Start independent work
+against current interfaces while Platform prepares the minimum new contract. Planned fields are
+not implemented endpoints. Use labeled fixtures for development, then separately verify real data.
+
+Return commit, changed paths, exact commands/results, data/provenance mode, unresolved evidence,
+contract requests and the next action. Do not claim legal accuracy from software tests. Use applicable
+human authority for provider resumption, pushes, merges, deployment, external messages or submission.
