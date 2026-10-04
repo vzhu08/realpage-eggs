@@ -2,23 +2,43 @@
 
 ## Current four-developer assignment (supersedes historical claims below)
 
-- Lane / future owner: Core A / Rules & Evaluation. Existing author Daniel; Vincent confirms continued session/base before edits.
-- State: Software integration in progress. Daniel reports successful D001/D004 live slices; full corpus remains incomplete. See `docs/core/CORE01_LIVE_REVIEW.md`; earlier credential/funding blockers below are historical.
+- Lane / human owner: Core A / Rules & Evaluation — Daniel, explicitly reassigned by the user in this session.
+- State: Partial: first live slice and saved-store closeout complete; remaining corpus stopped at the user’s request.
 - Read first: AGENTS, current four-developer playbook, OWNERSHIP, ASSIST_CONTRACT, existing candidate handoff.
 - Existing candidate: PR #3 head `3cf0361`; combined integration tracked in [COORD-03](COORD-03.md).
   Existing author checkout: /Users/danny/Documents/ChatGPT/RealPage/core-backend. Preserve it and its commits.
-- Future branch/absolute checkout/base/result commit: record at handoff; use the merged PR #3 base after its completion.
+- Current branch/checkout/base/result: `codex/core-backend`, `/Users/danny/Documents/ChatGPT/RealPage/core-backend`, merged main `3b1ef06`, runtime result `9ac58ba`.
 - Exclusive allowed paths for this task: navigator/extraction.py; tests/test_extraction.py; docs/core_rules/**; this card; private ignored run data.
 - Reserved: the other Core lane's runtime/tests/cards, frontend, Platform APIs/services, models/contracts,
   dependencies, tests/conftest.py and shared docs/board. Core B exclusively owns core_assist.py.
 - Dependency: Existing shared models and Platform contracts; keep the trace checkpoint independent of live extraction.
-- Next bounded action: Review 30cdfb7, configure locally when available, then run and independently review D001 before broader extraction.
+- Next bounded action: Keep extraction stopped. If explicitly resumed, finish D022 source review and continue the same resumable store; see the new Core A handoff.
 - Checks (checkout Python): python -m pytest tests/test_extraction.py -q; configured-only: python -m navigator extract --doc-id D001.
 - Acceptance: retain the task's behavioral acceptance below; preserve one evaluator and evidence uncertainty.
   Platform must test actual combined HTTP/exports before marking integration verified.
 - Non-goals: rewriting delivered features, changing another owner's files, model-authored legal certainty.
 - Handoff: actual commit, paths, exact checks/results, remaining dependencies and whether combined integration ran.
-- Authority: local task commits; no push, merge, deployment, external messages or new agents implied.
+- Authority: user-authorized local commits and local branch integration only; Daniel pushes manually. No remote merge, deployment or teammate contact.
+
+## Current Daniel continuation — 2026-10-03 local / 2026-10-04 UTC
+
+The user explicitly assigns this session to Core A and requests local branch integration.
+Human: Daniel. Sole writer: Codex /root, session 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`; branch `codex/core-backend`.
+Fetched merged-main base: `3b1ef06`; local integration: `3eced75`; final runtime candidate: `9ac58ba`.
+Read-only helpers reviewed Core A behavior; they made no edits. The prior task's extraction remains stopped.
+Daniel releases future writes to the planner, renderer, core_assist adapter, their tests and CORE-04/05
+to Core B under OWNERSHIP. No shared-board edit or teammate contact was made.
+
+Actual D001 run `2c214d19d3b944a29f98847f16db16ca` used `gpt-6.1-sol`, took 152.588s, and saved two rules with 26,229 observed tokens. Automated original-text review retained pending status, exact quotations, strict thresholds and exclusions without supplying an unsupported effective date.
+
+The final corpus run `296de71f2c794d6c9ca3ed48f133ebb2` stopped cleanly as partial after 1,296.981s: 15 processed documents, 140 stored rules, seven cache hits, and only the requested-interruption error. Valid empty D011 and all caches/drafts remain preserved. All 54 texts/hashes and evidence offsets match originals; 39 captures remain unprocessed and 33 captures are missing. All 500 addresses remain represented with unresolved local geography. No new provider call followed the stop.
+
+The enum-contract guard from `a422fb3` is preserved. The new extraction-to-evaluator regression ensures enactment snapshots do not create effective dates. Read-only evaluation of seven actual stored rules exposed and verified the related CORE-02 repair. Changes in this continuation: `tests/test_extraction.py`, this card and `docs/core_rules/**`; runtime extraction was not rebuilt.
+
+Core A focused tests: 93 passed. Disposable-copy checks: 125 historical focused / 200 full-suite passed; compileall/contracts/diff passed and working contracts stayed intact. Real evidence, replay, synthetic regressions and automated versus human review are distinguished in the handoff. All actual CLI/API closeout results, partial-export limitations, usage and missing dependencies are in `docs/core_rules/CORE_A_HANDOFF.md` and `saved_store_closeout.json`. CORE-01’s full-corpus acceptance remains incomplete, not blocked by missing credentials.
+
+Final local integration: actual lookup and assist both HTTP 200 on A0001 / 2026-10-01, with unresolved geography and bounded analysis preserved. Partial export contains 16 representable rules, retains all 500 input IDs, and has no broken lookup/override references. Validation's 124 unknown-temporal projection errors remain explicit; all 140 internal rules are retained and review-needed. These in-process checks do not constitute Platform release approval or independent legal review.
 
 ## Daniel author record — preserved from PR #3 head 3cf0361
 

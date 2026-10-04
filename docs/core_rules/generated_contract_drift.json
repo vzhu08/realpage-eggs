@@ -1,0 +1,117 @@
+{
+  "candidate_commit": "eef489ee9620f9f4a610e826669368cedd5bfcf3",
+  "method": "Generate contracts in a disposable candidate copy and recursively compare JSON leaves to tracked contracts; original artifacts unchanged",
+  "changes": {
+    "evidence_examples/missing_support.json": [
+      {
+        "path": "/response/lookup/metadata/extraction_run_ids/0",
+        "before": "561a346fa8564db094ffa22d1e821f5e",
+        "after": "505261e3c4f94504ad8d376387ef4643"
+      },
+      {
+        "path": "/response/lookup/rules/0/extraction_run_id",
+        "before": "561a346fa8564db094ffa22d1e821f5e",
+        "after": "505261e3c4f94504ad8d376387ef4643"
+      }
+    ],
+    "evidence_examples/source_comparison.json": [
+      {
+        "path": "/rule/extraction_run_id",
+        "before": "ed6932efce95444f930ca4c44c39db71",
+        "after": "505261e3c4f94504ad8d376387ef4643"
+      }
+    ],
+    "examples/normal.json": [
+      {
+        "path": "/response/metadata/extraction_run_ids/0",
+        "before": "ed6932efce95444f930ca4c44c39db71",
+        "after": "505261e3c4f94504ad8d376387ef4643"
+      },
+      {
+        "path": "/response/rules/0/extraction_run_id",
+        "before": "ed6932efce95444f930ca4c44c39db71",
+        "after": "505261e3c4f94504ad8d376387ef4643"
+      }
+    ],
+    "examples/unknown.json": [
+      {
+        "path": "/response/metadata/extraction_run_ids/0",
+        "before": "ed6932efce95444f930ca4c44c39db71",
+        "after": "505261e3c4f94504ad8d376387ef4643"
+      },
+      {
+        "path": "/response/rules/0/extraction_run_id",
+        "before": "ed6932efce95444f930ca4c44c39db71",
+        "after": "505261e3c4f94504ad8d376387ef4643"
+      }
+    ],
+    "examples/assist.json": [
+      {
+        "path": "/response/lookup/metadata/extraction_run_ids/0",
+        "before": "561a346fa8564db094ffa22d1e821f5e",
+        "after": "505261e3c4f94504ad8d376387ef4643"
+      },
+      {
+        "path": "/response/lookup/rules/0/extraction_run_id",
+        "before": "561a346fa8564db094ffa22d1e821f5e",
+        "after": "505261e3c4f94504ad8d376387ef4643"
+      }
+    ],
+    "research_examples/irrelevant_missing_fact.json": [
+      {
+        "path": "/response/lookup/rules/0/extraction_run_id",
+        "before": "7306809d45f6489399c28055965c0014",
+        "after": "66c01510d26549b290eb957fe2420e92"
+      }
+    ],
+    "research_examples/bounded_partial_analysis.json": [
+      {
+        "path": "/response/lookup/metadata/extraction_run_ids/0",
+        "before": "7306809d45f6489399c28055965c0014",
+        "after": "66c01510d26549b290eb957fe2420e92"
+      },
+      {
+        "path": "/response/lookup/rules/0/extraction_run_id",
+        "before": "7306809d45f6489399c28055965c0014",
+        "after": "66c01510d26549b290eb957fe2420e92"
+      }
+    ],
+    "research_examples/unresolved_source_coverage.json": [
+      {
+        "path": "/response/lookup/metadata/extraction_run_ids/0",
+        "before": "7306809d45f6489399c28055965c0014",
+        "after": "66c01510d26549b290eb957fe2420e92"
+      },
+      {
+        "path": "/response/lookup/rules/0/extraction_run_id",
+        "before": "7306809d45f6489399c28055965c0014",
+        "after": "66c01510d26549b290eb957fe2420e92"
+      }
+    ],
+    "research_examples/two_unresolved_exemptions.json": [
+      {
+        "path": "/response/lookup/metadata/extraction_run_ids/0",
+        "before": "7306809d45f6489399c28055965c0014",
+        "after": "66c01510d26549b290eb957fe2420e92"
+      },
+      {
+        "path": "/response/lookup/rules/0/extraction_run_id",
+        "before": "7306809d45f6489399c28055965c0014",
+        "after": "66c01510d26549b290eb957fe2420e92"
+      }
+    ],
+    "research_examples/decisive_question.json": [
+      {
+        "path": "/response/lookup/metadata/extraction_run_ids/0",
+        "before": "7306809d45f6489399c28055965c0014",
+        "after": "66c01510d26549b290eb957fe2420e92"
+      },
+      {
+        "path": "/response/lookup/rules/0/extraction_run_id",
+        "before": "7306809d45f6489399c28055965c0014",
+        "after": "66c01510d26549b290eb957fe2420e92"
+      }
+    ]
+  },
+  "schemas_unchanged": true
+}

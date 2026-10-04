@@ -2,23 +2,41 @@
 
 ## Current four-developer assignment (supersedes historical claims below)
 
-- Lane / future owner: Core A / Rules & Evaluation. Existing author Daniel; Vincent confirms continued session/base before edits.
-- State: Review for existing candidate; combined integration pending.
+- Lane / human owner: Core A / Rules & Evaluation — Daniel, explicitly reassigned by the user in this session.
+- State: Implementation complete and locally verified; independent legal/Platform review is not claimed.
 - Read first: AGENTS, current four-developer playbook, OWNERSHIP, ASSIST_CONTRACT, existing candidate handoff.
 - Existing candidate: PR #3 head `3cf0361`; combined integration tracked in [COORD-03](COORD-03.md).
   Existing author checkout: /Users/danny/Documents/ChatGPT/RealPage/core-backend. Preserve it and its commits.
-- Future branch/absolute checkout/base/result commit: record at handoff; use the merged PR #3 base after its completion.
+- Current branch/checkout/base/result: `codex/core-backend`, `/Users/danny/Documents/ChatGPT/RealPage/core-backend`, merged main `3b1ef06`, runtime result `9ac58ba`.
 - Exclusive allowed paths for this task: navigator/engine.py, predicates.py, changes.py; tests/test_engine.py, test_change_adapters.py; docs/core_rules/**; this card.
 - Reserved: the other Core lane's runtime/tests/cards, frontend, Platform APIs/services, models/contracts,
   dependencies, tests/conftest.py and shared docs/board. Core B exclusively owns core_assist.py.
 - Dependency: Existing shared models and Platform contracts; keep the trace checkpoint independent of live extraction.
-- Next bounded action: Review existing date/interaction repairs and serialize further evaluator edits with CORE-03.
+- Next bounded action: Review the recorded snapshot/effective-date repair and combined integration results; no evaluator rewrite or automatic cross-document linking is needed.
 - Checks (checkout Python): python -m pytest tests/test_engine.py tests/test_change_adapters.py -q.
 - Acceptance: retain the task's behavioral acceptance below; preserve one evaluator and evidence uncertainty.
   Platform must test actual combined HTTP/exports before marking integration verified.
 - Non-goals: rewriting delivered features, changing another owner's files, model-authored legal certainty.
 - Handoff: actual commit, paths, exact checks/results, remaining dependencies and whether combined integration ran.
-- Authority: local task commits; no push, merge, deployment, external messages or new agents implied.
+- Authority: user-authorized local commits and local branch integration only; Daniel pushes manually. No remote merge, deployment or teammate contact.
+
+## Current Daniel continuation — 2026-10-03 local / 2026-10-04 UTC
+
+The user explicitly assigns this session to Core A and requests local branch integration.
+Human: Daniel. Sole writer: Codex /root, session 01a103d0-b88b-7090-97aa-f9d5eec55d45.
+Checkout: `/Users/danny/Documents/ChatGPT/RealPage/core-backend`; branch `codex/core-backend`.
+Fetched merged-main base: `3b1ef06`; local integration: `3eced75`; final runtime candidate: `9ac58ba`.
+Read-only helpers reviewed Core A behavior; they made no edits. The prior task's extraction remains stopped.
+Daniel releases future writes to the planner, renderer, core_assist adapter, their tests and CORE-04/05
+to Core B under OWNERSHIP. No shared-board edit or teammate contact was made.
+
+Read-only review reproduced lifecycle-history gaps: older events ignored a later dated snapshot; contradictory future snapshots silently placed an undated transition; an enacted snapshot could imply an unsupported effective date. `eef489e` and `9ac58ba` repair these within `navigator/engine.py`. Dated snapshots and event intervals now retain uncertain history without imposing list order, and enacted rules lacking effective dates remain unknown. Seven real saved rules confirm the last defect; their original records were not changed. See `docs/core_rules/temporal_snapshot_evidence.json`.
+
+Twenty focused temporal cases and an extraction-boundary regression cover dated failure/enactment snapshots, partial and overlapping dates, corroborated versus undated transitions, exact observed days, missing effective dates and re-enactment. Existing scope/cycle/self-target/parallel-edge, pending/failed, end-date and change-adapter checks remain passing. Cross-document precedence still requires the shared citation/jurisdiction/category contract and explicit evidence; retrieval recency does not establish it.
+
+Core A focused tests: 93 passed. Disposable-copy full suite: 200 passed; compileall/contracts/diff passed. Written independent agent review found no blocker in the narrow repairs; this is software review, not independent legal review. Actual combined HTTP/export evidence and remaining data limitations are in `docs/core_rules/saved_store_closeout.json`. This task’s future writes remain serialized with CORE-03.
+
+Final local integration: actual lookup and assist both HTTP 200 on A0001 / 2026-10-01, with unresolved geography and bounded analysis preserved. Partial export contains 16 representable rules, retains all 500 input IDs, and has no broken lookup/override references. Validation's 124 unknown-temporal projection errors remain explicit; all 140 internal rules are retained and review-needed. These in-process checks do not constitute Platform release approval or independent legal review.
 
 ## Daniel author record — preserved from PR #3 head 3cf0361
 
