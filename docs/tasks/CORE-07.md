@@ -72,3 +72,13 @@ No complete corpus/legal score or human review is claimed. Named human reviewer 
 requested from Oliver and is unassigned until a response; do not fabricate a review.
 
 Local implementation checkpoint: `5a8e1cd`; runtime/tests match the recorded verification.
+
+## Combined integration follow-up — October 4, 2026
+
+The user authorized pushing both branches and fixing integration errors. Codex combined
+Core B `0161b95` and finished Claude UX-04 `43fa402` with main `84c2887` in the isolated
+`codex/core-b-ux04-integration` checkout. Original author checkouts are preserved.
+Compatibility fixes are at `af14cd8`; current checks, snapshot availability, and remaining
+acceptance gates are recorded in [the combined handoff](../core_navigation/UX04_INTEGRATION.md).
+This follow-up supersedes earlier toolchain-unavailable statements for the integrated build;
+the original task evidence above remains historical.

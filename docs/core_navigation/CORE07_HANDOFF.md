@@ -152,3 +152,10 @@ writer. This Core B branch edits no frontend, Core A, Platform runtime, canonica
 shared board or contracts. No new dependency, provider call, remote push, merge or
 publication was performed for this task. The original Core B handoff's local `.riv`
 edit remains intact in its original checkout.
+
+## Subsequent integration
+
+See [UX04_INTEGRATION.md](UX04_INTEGRATION.md) for the combined verification with
+Claude UX-04 and main `84c2887`, bounded compatibility fixes, and Daniel’s now-available
+partial source checkpoint. The earlier unavailable-input statements above describe the
+original Core B checkout. Real-snapshot and named-human acceptance remain pending.
