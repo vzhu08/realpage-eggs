@@ -1,7 +1,7 @@
 # PLAT-09: reproducible release handoff bundle
 
 Owner: Platform handoff agent, delegated by the current user-authorized Platform run.
-State: Verified locally; ready for root integration review. Corpus remains partial and not submission-ready.
+State: Verified locally after independent integrity review; ready for root integration. Corpus remains partial and not submission-ready.
 Base: `b3358579256706a4c1c6f4af30c1273feb5e0933` (PLAT-06 plus parallel assignments).
 Branch: `codex/platform-handoff`.
 Checkout: `C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/platform-handoff`.
@@ -36,13 +36,18 @@ Interrupted copying retains an incomplete marker; no existing output is deleted 
 
 Real exercise reads PLAT-06's immutable `real-acceptance-verified/report.json`, both export
 directories and `releases/real-002`. Both full source trees remain byte-identical. New private
-outputs are `artifacts/plat09/verified-handoff` and `artifacts/plat09/verified-handoff-replay`
+outputs are `artifacts/plat09/snapshot-bound-handoff` and `artifacts/plat09/snapshot-bound-handoff-replay`
 inside this checkout; all 14 files match between them. Their common manifest hash is
-`1044a73180048c6bd21b9304eb2c1035d65563e95a9e81c6512fa204bbec7ce1`.
+`9e07e01fb7608e6909577b6cbd1306a5d729ba2402758bacbd699d35c6ab33d1`.
 The initial `real-handoff` experiment is retained separately and superseded by these verified
 outputs after the final path guard update. No private bundle is tracked or published.
 
-Checks: `python -m pytest tests/test_handoff.py -q` reports **23 passed, 1 skipped**; the skip
+Independent review found a stale assembly identity could survive fresh release/report pins.
+The final fix recomputes the assembly ID from its hash inventory and checks each included original
+serving file against that inventory. Omitted provenance and derived scenario caches stay supported.
+Both real bundles were rebuilt after this fix; earlier `verified-handoff` experiments are superseded.
+
+Checks: `python -m pytest tests/test_handoff.py -q` reports **25 passed, 1 skipped**; the skip
 is the Windows host's missing symlink-creation privilege. Ordinary-file and ancestor link/junction
 rejection is implemented, but that OS integration case was not exercised here. Real preparation
 twice, independent recipient verification twice and explicit CLI verification all pass. Input

@@ -8,7 +8,9 @@ Inputs must be the immutable release plus the saved `deploy/verify_release.py` o
 the sibling `first/` and `replay/` directories, and their original run manifests. The command requires
 independently retained SHA-256 pins for the report and both run manifests. The report anchors the
 release manifest and seven payload hashes. The release manifest anchors every runtime/data/asset
-file. Never accept newly computed pins as evidence that an unexpectedly changed input is correct;
+file. Assembly identity is recomputed from its file inventory, and included original serving files
+must match that inventory; derived change caches and omitted historical provenance are supported.
+Never accept newly computed pins as evidence that an unexpectedly changed input is correct;
 compare them with the recorded verification handoff first. Hashes establish integrity, not authenticity.
 
 From this checkout, using the existing environment:

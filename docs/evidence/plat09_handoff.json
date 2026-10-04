@@ -2,7 +2,7 @@
   "artifact_label": "PARTIAL_NOT_JUDGE_READY",
   "base_revision": "b3358579256706a4c1c6f4af30c1273feb5e0933",
   "branch": "codex/platform-handoff",
-  "bundle_manifest_sha256": "1044a73180048c6bd21b9304eb2c1035d65563e95a9e81c6512fa204bbec7ce1",
+  "bundle_manifest_sha256": "9e07e01fb7608e6909577b6cbd1306a5d729ba2402758bacbd699d35c6ab33d1",
   "change_status": {
     "T1": "partial",
     "T2": "blocked",
@@ -13,14 +13,15 @@
   "checks": {
     "all_bundle_files_byte_reproducible": true,
     "both_original_run_manifests_preserved": true,
-    "focused_pytest": "23 passed, 1 skipped (Windows symlink privilege unavailable)",
+    "focused_pytest": "25 passed, 1 skipped (Windows symlink privilege unavailable)",
     "legal_evaluations": 0,
     "original_release_tree_unchanged": true,
     "original_verification_tree_unchanged": true,
     "prepare_twice": "passed",
     "provider_calls": 0,
     "recipient_verify_both": "passed",
-    "seven_original_payloads_preserved": true
+    "seven_original_payloads_preserved": true,
+    "assembly_identity_and_serving_hashes_match": true
   },
   "first_manifest_sha256": "1a7b1e03bf35a6fdbc72fd7b2cde451ff4e36151ae84b673e9167e69d16a9f11",
   "limitations": [
@@ -30,9 +31,9 @@
     "Full frozen runtime/source stores remain separate artifacts; handoff verification is integrity-only.",
     "No public deployment, submission or private bundle publication. Root owns code push/merge."
   ],
-  "packager_sha256": "cf69d5efd7d01fa9aa6c5420a60bc983d62965164b36c87407113b593f88f160",
-  "private_bundle": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-handoff\\artifacts\\plat09\\verified-handoff",
-  "private_replay_bundle": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-handoff\\artifacts\\plat09\\verified-handoff-replay",
+  "packager_sha256": "b088b7a99ec1bdd48eec4f480ab34cd9ac5572d4a8da01e2f98cdb36eb7dd173",
+  "private_bundle": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-handoff\\artifacts\\plat09\\snapshot-bound-handoff",
+  "private_replay_bundle": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\artifacts\\platform-handoff\\artifacts\\plat09\\snapshot-bound-handoff-replay",
   "ready_for_submission": false,
   "release_manifest_sha256": "08e95c386914a570cd159000da4799c616100ffe059a727f5702648517910d5b",
   "replay_manifest_sha256": "7204364a575d0e9f0605707957e058d1b857c1d55349991d48e2fc9d51ced104",
@@ -57,5 +58,6 @@
     "source_texts": 54,
     "sources": 87,
     "synthetic_rules": 0
-  }
+  },
+  "review_fix": "Reject a stale assembly snapshot ID or changed original serving file even when release/report pins are recomputed."
 }

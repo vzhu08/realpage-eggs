@@ -26,10 +26,15 @@ def saved(tmp_path):
     values = {"addresses": {"SYNTH-001": {"label": "Synthetic property"}},
               "rules": {"r-synthetic": {"label": "Synthetic rule"}}, "resolutions": {"SYNTH-001": {}},
               "sources": {"D-SYNTHETIC": {"text": "Synthetic source only"}},
-              "snapshot_manifest": {"status": "assembled", "snapshot_id": "b" * 64,
+              "snapshot_manifest": {"status": "assembled",
                                     "ready_for_submission": False, "artifact_label": handoff.LABEL}}
+    assembled = {f"{key}.json": handoff.sha(handoff.encoded(value)) for key, value in values.items() if key != "snapshot_manifest"}
+    # Full historical provenance can be omitted from a serving release.
+    assembled["runs/synthetic-provenance.json"] = "c" * 64
+    values["snapshot_manifest"].update(output_files=assembled, snapshot_id=json_digest(assembled))
     for key, value in values.items():
         write(release / f"data/{key}.json", value)
+    write(release / "data/change_cache/synthetic-derived.json", {"synthetic": "derived fixture"})
     for name in ("runtime/navigator/api.py", "runtime/requirements.lock", "frontend/index.html"):
         path = release / name
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -163,6 +168,27 @@ def test_rejects_submission_promotion_even_with_consistent_new_hashes(saved):
     write(saved["report_path"], report)
     saved["report_sha256"] = handoff.sha(saved["report_path"].read_bytes())
     with pytest.raises(ValueError, match="Only explicitly partial"):
+        handoff.prepare(**saved)
+    assert not saved["output"].exists()
+
+
+@pytest.mark.parametrize("damage", ["source_drift", "snapshot_id"])
+def test_rejects_stale_assembly_identity_even_with_repinned_release_and_report(saved, damage):
+    release = saved["release"]
+    if damage == "source_drift":
+        write(release / "data/sources.json", {"D-SYNTHETIC": {"text": "Altered synthetic source"}})
+    else:
+        snapshot = handoff.parse((release / "data/snapshot_manifest.json").read_bytes())
+        snapshot["snapshot_id"] = "f" * 64
+        write(release / "data/snapshot_manifest.json", snapshot)
+    manifest = handoff.parse((release / "release.json").read_bytes())
+    manifest["files_sha256"] = {key: value for key, value in handoff.inventory(release).items() if key != "release.json"}
+    write(release / "release.json", manifest)
+    report = handoff.parse(saved["report_path"].read_bytes())
+    report["release_manifest_sha256"] = handoff.sha((release / "release.json").read_bytes())
+    write(saved["report_path"], report)
+    saved["report_sha256"] = handoff.sha(saved["report_path"].read_bytes())
+    with pytest.raises(ValueError, match="Serving file differs from assembled snapshot|Snapshot identity does not match"):
         handoff.prepare(**saved)
     assert not saved["output"].exists()
 

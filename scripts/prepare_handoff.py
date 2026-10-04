@@ -54,6 +54,11 @@ def encoded(value):
     return (json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode("utf-8")
 
 
+def logical_digest(value):
+    # Same canonical JSON digest used by the existing store/export/assembly formats.
+    return sha(json.dumps(value, sort_keys=True, ensure_ascii=False, default=str).encode("utf-8"))
+
+
 def pinned(path, expected):
     require(isinstance(expected, str) and re.fullmatch(r"[0-9a-f]{64}", expected), "Expected SHA-256 must be 64 lowercase hex digits")
     data = raw(path)
@@ -119,8 +124,7 @@ def validate_exports(payloads, report, runs, release):
             "Scenario status differs from verification")
     require(all(status in {"complete", "partial", "blocked"} for status in statuses.values()), "Invalid change status")
     # Match the exporter's existing logical JSON input digest; never prepare/evaluate rules here.
-    inputs = {key: sha(json.dumps(parse(raw(release / f"data/{key}.json")), sort_keys=True,
-                                  ensure_ascii=False, default=str).encode("utf-8"))
+    inputs = {key: logical_digest(parse(raw(release / f"data/{key}.json")))
               for key in ("rules", "addresses", "resolutions")}
     require(runs[0]["run_id"] != runs[1]["run_id"], "Replay must be a separate export run")
     for run in runs:
@@ -169,6 +173,17 @@ def prepare(report_path, release, output, *, report_sha256, first_manifest_sha25
     require(snapshot.get("status") == "assembled" and snapshot.get("ready_for_submission") is False
             and snapshot.get("artifact_label") == LABEL, "Expected an assembled partial snapshot")
     require(re.fullmatch(r"[0-9a-f]{64}", snapshot.get("snapshot_id", "")), "Missing snapshot identity")
+    assembled = hash_map(snapshot.get("output_files"))
+    require(snapshot["snapshot_id"] == logical_digest(assembled), "Snapshot identity does not match assembly file hashes")
+    # Serving releases omit full provider/geocoder history and may add derived caches.
+    # Every included original serving file must still match the assembled snapshot.
+    for name, digest in release_manifest["files_sha256"].items():
+        if not name.startswith("data/"):
+            continue
+        relative = name.removeprefix("data/")
+        if relative == "snapshot_manifest.json" or relative.startswith("change_cache/"):
+            continue
+        require(assembled.get(relative) == digest, f"Serving file differs from assembled snapshot: {relative}")
     template = raw(ROOT / "docs/METHOD.md")
     note = template.decode("utf-8").replace("<!-- SAVED_RUN -->", "\n".join([
         f"- Export date: `{as_of}`. Runtime commit: `{release_manifest['source_revision']}`.",
