@@ -17,31 +17,42 @@
   --ink-3: #566072;
   --line: #e1e4ea;
   --line-strong: #c8cdd6;
+  /* The edge of a field you type or choose in: 3:1 against the surface it sits on. */
+  --control-line: #858fa1;
 
   /* Accent: used for actions, links, focus and selection only */
   --accent: #2343b5;
   --accent-hover: #1a3391;
   --accent-wash: #e8edfb;
+  --accent-line: #b9c6ee;
   --on-accent: #ffffff;
 
-  /* Status tones (text on wash) */
+  /* Status tones (text on wash). The -line colors are borders and marks, never text. */
   --applies: #17603f;
   --applies-wash: #def2e6;
+  --applies-line: #a9d8bd;
   --unknown: #7a4a00;
   --unknown-wash: #fcefd2;
+  --unknown-line: #e3c078;
+  --unknown-mark: #b77b0e;
   --future: #3b3f95;
   --future-wash: #e9eafa;
+  --future-line: #c3c6ee;
   --pending: #5b3a94;
   --pending-wash: #f0eafa;
+  --pending-line: #cdbdea;
   --muted: #4c586a;
   --muted-wash: #eaecf0;
   --danger: #a3271f;
   --danger-wash: #fbe6e3;
+  --danger-line: #eeb9b3;
   --info: #1c4f7d;
   --info-wash: #e3eef8;
+  --info-line: #b5d0e8;
 
-  /* Evidence */
+  /* Evidence: quoted source text sits on its own ground with a rule, wherever it appears. */
   --highlight: #fde68a;
+  --quote-wash: #fdf7e2;
   --quote-rule: #d0a021;
 
   /* Synthetic banner */
@@ -77,16 +88,41 @@
   --shadow-card: 0 1px 2px rgb(16 24 40 / 5%), 0 1px 3px rgb(16 24 40 / 4%);
   --shadow-raised: 0 2px 4px rgb(16 24 40 / 6%), 0 8px 20px rgb(16 24 40 / 8%);
   --shadow-panel: 0 4px 8px rgb(16 24 40 / 8%), 0 24px 56px rgb(16 24 40 / 18%);
-  --focus: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+  --scrim: rgb(16 24 40 / 46%);
 
   /* Page measure: results read as one column; evidence opens over it instead of beside it. */
-  --page: 67.5rem;
-  --control: 2.75rem;
+  --page: 76rem;
+  --gutter: 1.5rem;
+
+  /* Controls: 40px with a pointer, 44px on touch. */
+  --control: 2.5rem;
+  --control-sm: 2.125rem;
 
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Heights of the bars that stay pinned, so jumps and keyboard focus never land under them. */
   --banner-h: 0px;
+  --context-h: 4.5rem;
 }
 
+/* Set on the root as well, so the page's own scroll offsets account for the banner. */
+:root:has(.app--demo),
 .app--demo {
   --banner-h: 2.25rem;
+}
+
+@media (max-width: 860px) {
+  :root {
+    --gutter: 1rem;
+    --control: 2.75rem;
+    --control-sm: 2.5rem;
+    --context-h: 9rem;
+  }
+}
+
+@media (pointer: coarse) {
+  :root {
+    --control: 2.75rem;
+    --control-sm: 2.5rem;
+  }
 }

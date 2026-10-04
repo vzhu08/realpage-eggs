@@ -52,7 +52,7 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
   return (
     <div className="finder">
       <div className="finder__search">
-        <label htmlFor={inputId} className="label">
+        <label htmlFor={inputId} className="sr-only">
           Sample properties
         </label>
         <div className="search">
@@ -69,7 +69,7 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
             maxLength={200}
           />
         </div>
-        <p className="hint" aria-live="polite">
+        <p className="hint finder__count" aria-live="polite">
           {page.status === 'ready' ? `${total} ${total === 1 ? 'property' : 'properties'}${query ? ` matching “${query}”` : ''}` : page.status === 'loading' ? 'Searching…' : ' '}
         </p>
       </div>
@@ -108,14 +108,16 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
           {items.map((item) => {
             const quality = MATCH_QUALITY[item.resolution.match_quality ?? 'unresolved'];
             const selected = item.property.address_id === selectedId && !selectedCase;
+            const established = item.resolution.match_quality === 'resolved';
             return (
               <li key={item.property.address_id}>
-                <button type="button" className="finder__item" aria-pressed={selected} onClick={() => onSelect(item)}>
+                <button type="button" className="finder__item" aria-pressed={selected} data-location={established ? 'resolved' : 'open'} onClick={() => onSelect(item)}>
                   <span className="finder__address">{addressLine(item)}</span>
+                  <span className="mono finder__id">{item.property.address_id}</span>
                   <span className="finder__meta">
-                    <span>{item.resolution.municipality ?? 'Municipality not established'}</span>
-                    {item.resolution.match_quality !== 'resolved' && quality && <Tag tone={quality.tone}>{quality.label}</Tag>}
-                    <span className="mono finder__id">{item.property.address_id}</span>
+                    {/* The legal municipality, or the plain statement that it is not established. Never the postal city. */}
+                    <span className="finder__place">{item.resolution.municipality ?? 'Municipality not established'}</span>
+                    {!established && quality && <Tag tone={quality.tone}>{quality.label}</Tag>}
                     {developmentIds.has(item.property.address_id) && <span className="finder__fixture">Development fixture</span>}
                   </span>
                 </button>
