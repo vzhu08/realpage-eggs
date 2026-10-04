@@ -3,7 +3,7 @@
  *   SCREENSHOTS=1 npx playwright test screenshots
  */
 import { type Page, expect, test } from '@playwright/test';
-import { mockApi, openCase, openDemo, openEvidence, openPortfolio, selectProperty } from './helpers';
+import { mockApi, openCase, openDemo, openEvidence, openPortfolio, questionCard, selectProperty, showHypotheticals, showView } from './helpers';
 
 test.skip(!process.env.SCREENSHOTS, 'Set SCREENSHOTS=1 to regenerate docs/screenshots');
 
@@ -54,7 +54,7 @@ test('lookup, question, re-evaluation and evidence', async ({ page, isMobile }) 
 test('a case that stays unknown', async ({ page, isMobile }) => {
   await openDemo(page);
   await openCase(page, 'Two unresolved exemptions');
-  await page.getByRole('textbox', { name: "What is the property's certificate of occupancy?" }).fill('2020-06-30');
+  await questionCard(page, /certificate of occupancy/i).getByRole('textbox').fill('2020-06-30');
   await page.getByRole('button', { name: 'Apply answer' }).click();
   await expect(page.getByRole('region', { name: 'Re-evaluated with your answers' })).toBeVisible();
   await page.waitForTimeout(700);
@@ -70,7 +70,9 @@ test('changes: comparison and blocked scenario', async ({ page, isMobile }) => {
   await page.getByRole('group', { name: 'Comparison context' }).evaluate((element) => element.scrollIntoView({ block: 'start' }));
   await page.mouse.wheel(0, -70);
   await shot(page, '10-changes-comparison', isMobile);
-  await page.getByRole('button', { name: 'Scenario T1', exact: true }).click();
+  await openDemo(page, '#/changes?mode=demo&test=T1');
+  // Deep-link inputs are read when this view mounts; start a fresh document for the second capture.
+  await page.reload();
   await expect(page.getByText('Blocked: this comparison could not be established')).toBeVisible();
   await page.getByRole('group', { name: 'Comparison context' }).evaluate((element) => element.scrollIntoView({ block: 'start' }));
   await page.mouse.wheel(0, -70);
@@ -110,16 +112,18 @@ const frame = async (page: Page, selector: string, name: string, isMobile: boole
 test('portfolio: impact, timeline, summaries and drill-down (development fixture)', async ({ page, isMobile }) => {
   const result = await openPortfolio(page);
   await frame(page, '.change-result .context', '15-portfolio-impact', isMobile);
-  await frame(page, '#change-timeline', '16-portfolio-timeline', isMobile);
+  await showView(result, 'Timeline');
+  await frame(page, '.drill__timeline', '16-portfolio-timeline', isMobile);
   await frame(page, '#change-summaries', '17-portfolio-summaries', isMobile);
+  await showView(result, 'By property');
   await result.locator('.impact-row[data-address="DEV-P01"] summary').first().click();
   await frame(page, '#change-diffs', '18-portfolio-drilldown', isMobile);
 });
 
-test('source disagreements: evaluator-flagged records and the proposed-shape fixture', async ({ page, isMobile }) => {
+test('source disagreements: evaluator conflicts and backend-checked claim observations', async ({ page, isMobile }) => {
   await openDemo(page, '#/disagreements?mode=demo&address=DEV-P07&as_of=2027-01-15');
-  await expect(page.locator('.disagreement')).toBeVisible();
-  await frame(page, '.disagreement', '19-disagreement-records', isMobile);
+  await expect(page.locator('[data-disagreement]').first()).toBeVisible();
+  await frame(page, '[data-disagreement]', '19-disagreement-records', isMobile);
   await openDemo(page, '#/disagreements?mode=demo');
   await expect(page.locator('.disagreement .claim__meta').first()).toContainText('Retrieved');
   await frame(page, '.disagreement', '20-disagreement-proposed', isMobile);
@@ -131,6 +135,7 @@ test('consequential question, what stays unknown after the answer, and the worki
   const question = page.getByRole('article', { name: /Whether the owner occupies the property/ });
   await expect(question).toBeVisible();
   await frame(page, '.question', '21-question-consequence', isMobile);
+  await showHypotheticals(question);
   await question.getByRole('button', { name: 'Answer with No as a demo answer' }).click();
   await expect(page.getByRole('region', { name: /Re-evaluated/ })).toBeVisible();
   await page.waitForTimeout(700);
