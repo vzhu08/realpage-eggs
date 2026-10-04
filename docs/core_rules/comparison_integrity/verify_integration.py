@@ -1,4 +1,5 @@
 """Verify Core A against current Platform/Core B in an isolated disposable copy."""
+import argparse
 import hashlib
 import json
 import os
@@ -18,18 +19,19 @@ def hashes(directory):
             for p in directory.rglob("*") if p.is_file() and "__pycache__" not in p.parts}
 
 
-def main():
+def main(output=OUTPUT):
     original = hashes(ROOT / "contracts")
-    candidate = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-    base = subprocess.check_output(["git", "rev-parse", "origin/main"], cwd=ROOT, text=True).strip()
+    candidate = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, encoding="utf-8").strip()
+    base = subprocess.check_output(["git", "rev-parse", "origin/main"], cwd=ROOT, encoding="utf-8").strip()
     environment = dict(os.environ)
+    environment.update(PYTHONUTF8="1", PYTHON_DOTENV_DISABLED="1")
     located = Path("/Users/danny/Downloads/participant-final-no-hour16")
     if "NAVIGATOR_PACK" not in environment and located.exists():
         environment["NAVIGATOR_PACK"] = str(located)
     runs = []
     with tempfile.TemporaryDirectory(prefix="realpage-core-a-integration-") as temporary:
         copied = Path(temporary)
-        for name in ("navigator", "tests", "fixtures", "config", "contracts", "scripts"):
+        for name in ("navigator", "tests", "fixtures", "config", "contracts", "scripts", "deploy"):
             shutil.copytree(ROOT / name, copied / name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
         for name in ("pyproject.toml", "requirements.lock"):
             shutil.copy2(ROOT / name, copied / name)
@@ -37,22 +39,22 @@ def main():
             (copied / name).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / name, copied / name)
         environment["NAVIGATOR_DATA_DIR"] = str(copied / "data")
-        inputs = {f"{name}/{path}": sha for name in ("navigator", "tests", "scripts", "docs")
+        inputs = {f"{name}/{path}": sha for name in ("navigator", "tests", "scripts", "docs", "deploy")
                   for path, sha in hashes(copied / name).items()}
         replay = (
             "import json; from pathlib import Path; "
             "from navigator.evidence_package import replay_evidence_package; "
             "names = ['property_package', 'package_missing_support']; "
             "results = {name: replay_evidence_package(json.loads("
-            "Path(f'contracts/evidence_examples/{name}.json').read_text())['response']).status "
+            "Path(f'contracts/evidence_examples/{name}.json').read_text(encoding='utf-8'))['response']).status "
             "for name in names}; assert set(results.values()) == {'reproduced'}; "
             "print(json.dumps(results, sort_keys=True))"
         )
         for command in (["-m", "pytest", "-q", "-rs"],
-                        ["-m", "compileall", "-q", "navigator", "tests"],
+                        ["-m", "compileall", "-q", "navigator", "tests", "deploy"],
                         ["-m", "navigator", "contracts"], ["-c", replay]):
             result = subprocess.run([sys.executable, *command], cwd=copied, env=environment,
-                                    capture_output=True, text=True)
+                                    capture_output=True, encoding="utf-8")
             runs.append({"command": ["python", *command], "exit_code": result.returncode,
                          "stdout": result.stdout, "stderr": result.stderr})
             print("python", " ".join(command[:3]), "exit", result.returncode, flush=True)
@@ -64,7 +66,7 @@ def main():
         differences = sorted(k for k in generated.keys() | original.keys()
                              if generated.get(k) != original.get(k))
     schemas = [p for p in differences if "/" not in p]
-    check = subprocess.run(["git", "diff", "--check"], cwd=ROOT, text=True, capture_output=True)
+    check = subprocess.run(["git", "diff", "--check"], cwd=ROOT, encoding="utf-8", capture_output=True)
     runs.append({"command": ["git", "diff", "--check"], "exit_code": check.returncode,
                  "stdout": check.stdout, "stderr": check.stderr})
     preserved = original == hashes(ROOT / "contracts")
@@ -75,9 +77,11 @@ def main():
               "disposable_copy": True, "working_contracts_unchanged": preserved,
               "generated_contract_differences": differences, "schema_differences": schemas,
               "checks": runs}
-    OUTPUT.write_text(json.dumps(report, indent=2) + "\n")
+    output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     return int(not preserved or bool(schemas) or any(r["exit_code"] for r in runs))
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=OUTPUT, help="Verification report path")
+    raise SystemExit(main(parser.parse_args().output))
