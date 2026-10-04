@@ -74,6 +74,12 @@ lineage. A source result that would merge new evidence into an older record with
 outside-context evidence fails instead of borrowing its run ID.
 
 Each uncached segment receives a draft and separate review, with at most one repair.
+The v5 prompt includes the registered fact names, meanings, types and allowed
+values in every pass. Its contract digest participates in run and cache identity.
+Machine-detected enum mismatches and missing field evidence can use the same
+single repair opportunity; unresolved issues remain visible after that attempt.
+Legal terms are not automatically converted to superficially similar registry
+values, and source-defined facts remain possible where their meanings differ.
 Cached work can run without another reservation. An oversized review is refused
 before sending it, and already-returned draft output is retained. A budget boundary,
 provider failure or validation error leaves the private partial output for inspection;
@@ -98,3 +104,8 @@ Supplemental captures remain admission-unverified research. Resolve the supplied
 corpus policy before making a competition artifact. Only replace a release after
 its data gate, ordinary tests, source review and export validation all pass against
 the same frozen Store.
+
+The historical export's corpus-only scope is a team decision, not an independently
+verified blanket organizer ban. The original participant guide is absent from this
+checkout. Retained instructions permit consultation of official sources while
+distinguishing their provenance; final submission admission remains unverified.

@@ -25,9 +25,15 @@ No organizer submission is performed by publishing this directory.
 
 ## Citation eligibility and omissions
 
-Only supplied corpus text counts toward these citations. Independently saved link-only
-texts require an official organizer addition and mapping to become eligible; none was
-provided. The projection excludes 113 supplemental research rules. Another 379 corpus-backed
+This historical export deliberately counts supplied-corpus text only. Supplemental
+official captures remain separately labeled; their admission under the final competition
+instructions has not been independently verified. This export scope is not evidence of
+a competition-wide prohibition on supplemental public texts. The original guide is not
+available in this checkout; [the retained source-policy reading](../docs/DATA_SOURCE_RULES.md)
+and [historical build instructions](../docs/reference/RealPage_Codex_Initial_Build_Prompt.txt)
+allow consultation of permitted official sources while preserving provenance.
+
+The projection excludes 113 supplemental research rules. Another 379 corpus-backed
 rules have temporal status that the supplied schema cannot represent and are omitted
 without inventing dates or status. Two override IDs pointing to omitted records are removed
 from this projection, with the original interaction text retained and both omissions recorded.
