@@ -1,5 +1,10 @@
 # Task board and merge queue
 
+October 4 Platform update: the user authorized parallel agents in isolated checkouts, pushes and
+merges of completed tasks. PLAT-06 is in [PR #14](https://github.com/vzhu08/realpage-eggs/pull/14).
+PLAT-07/08/09 run in disjoint scopes; root also owns PLAT-10 automated integration checks.
+Current assignments are in OWNERSHIP and task cards. Other human lanes retain their paths.
+
 Current assignment: October 3, 2026 readiness follow-up. This board supersedes older
 status summaries in task cards; preserve their historical evidence. Four existing lanes:
 Vincent / Platform, Daniel / Core A, Oliver / Core B, and Frontend/UX using Claude
@@ -21,7 +26,11 @@ Docker runtime and public deployment are not verified by those checks.
 | --- | --- | --- | --- |
 | [COORD-04](tasks/COORD-04.md) | Vincent / current readiness session | Verified software; [integration PR #11](https://github.com/vzhu08/realpage-eggs/pull/11) | Fix LF/CRLF contract checks and non-finite model inputs; assign next work. Isolated branch `codex/readiness-fixes-and-plan`, base `3b2d201`. |
 | [PLAT-05](tasks/PLAT-05.md) | Vincent / existing Platform session | Verified software and bounded live review | [PR #10](https://github.com/vzhu08/realpage-eggs/pull/10), tested merge `e81c3f4` includes main `ad0881a`; 260 unique backend tests pass and schemas match. One D001 live review passes, replay makes zero calls; 140-rule inputs unchanged. This is not full-corpus/legal acceptance. |
-| [PLAT-06](tasks/PLAT-06.md) | Vincent / Platform | Assigned; prep Ready | After PLAT-05: integrate saved rules/geography, reconcile local PLAT-04 continuation, publish additive contracts, evidence package and complete runnable release. |
+| [PLAT-06](tasks/PLAT-06.md) | Vincent / Platform | Platform software complete; local integration review ready; corpus release partial | Integrated Daniel's saved store and approved Census reconciliation: 500 addresses, 487 resolved, 140 review-needed rules. Shared APIs, evidence replay, immutable local frontend/API release and backup verified on `codex/platform-release`; 342 backend / 90 frontend unit / 80 browser-suite tests pass (14 browser skips). Real browser, seven-file export replay and rollback pass. T1 partial; T2-T5 blocked; Core evidence/review and UX-04 controls remain. See `docs/evidence/plat06_release.json`. |
+| [PLAT-07](tasks/PLAT-07.md) | Platform evidence agent | Verified; included in PR #14 | Fixed concurrent output overwrite and unchecked cache/rule behavior. 45 focused tests pass; real assembly preserves 804 input files and snapshot ID. Combined PLAT-06/07 suite: 351 passed. |
+| [PLAT-08](tasks/PLAT-08.md) | Platform deployment agent | Running | Complete frontend/API container candidate and unattended verification; local Docker engine is stopped. |
+| [PLAT-09](tasks/PLAT-09.md) | Platform handoff agent | Running | Hash-verified private export handoff and method note, preserving partial/blocked status. |
+| PLAT-10 | Root Platform | Running after PLAT-08 | Automated backend/contracts, frontend/browser and Linux container checks on GitHub PRs. |
 | [CORE-06](tasks/CORE-06.md) | Daniel / Core A | Assigned; saved review Ready | T1-T5 evidence, lifecycle gaps and source comparisons. Corpus provider run remains paused pending explicit human resumption. |
 | [CORE-07](tasks/CORE-07.md) | Oliver / Core B | Assigned; existing-interface work Ready | Actionable uncertainty, faithful change/conflict explanations and reviewed real-case planner benchmark. Real acceptance needs CORE-06/PLAT-06. |
 | [UX-04](tasks/UX-04.md) | Frontend/UX / Claude | Assigned; existing-contract UI Ready | Portfolio timeline/drill-down, disagreement view, evidence download and real-data judge demo. New payloads depend on PLAT-06. |

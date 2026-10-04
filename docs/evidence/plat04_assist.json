@@ -1,0 +1,174 @@
+{
+  "task": "PLAT-04",
+  "mode": "synthetic_software_checks_not_legal_review",
+  "branch": "codex/platform-assist",
+  "base": "c57107a53f74f4cfcfa21d25bf21ae1e72d995be",
+  "dependencies": "COORD-01, PLAT-03 and Core planner/renderer already merged; no teammate artifact required",
+  "checks": {
+    "before_fix": {
+      "command": "python -m pytest tests/test_assist_api.py -q --tb=short",
+      "passed": 20,
+      "failed": 2,
+      "failure": "Empty address_id returned HTTP 500 on lookup and assist"
+    },
+    "focused": {
+      "command": "python -m pytest tests/test_assist_api.py tests/test_api_exports.py -q",
+      "passed": 28,
+      "exit_code": 0
+    },
+    "full_suite": {
+      "command": "python -m pytest -q",
+      "passed": 179,
+      "exit_code": 0,
+      "isolated_copy": "artifacts/plat04-assist-check",
+      "log_sha256": "7689f904832e2015346336169d066588842127e06727cbb04f3bffc54aba7bc8"
+    },
+    "contracts": {
+      "command": "python -m navigator contracts",
+      "exit_code": 0,
+      "unchanged_schemas": [
+        "openapi.json",
+        "domain.schema.json",
+        "research.schema.json",
+        "competition_rule.schema.json"
+      ]
+    },
+    "warning": "Existing Starlette/httpx TestClient deprecation warning"
+  },
+  "http_observations": [
+    {
+      "path": "/api/v1/lookup",
+      "request": {
+        "address_id": "",
+        "as_of": "2026-11-15"
+      },
+      "status_code": 404,
+      "response": {
+        "detail": {
+          "code": "unknown_id",
+          "message": "Unknown address ID "
+        }
+      }
+    },
+    {
+      "path": "/api/v1/lookup/assist",
+      "request": {
+        "address_id": "",
+        "as_of": "2026-11-15"
+      },
+      "status_code": 404,
+      "response": {
+        "detail": {
+          "code": "unknown_id",
+          "message": "Unknown address ID "
+        }
+      }
+    },
+    {
+      "step": "before_answer",
+      "request": {
+        "address_id": "SYNTH-003",
+        "as_of": "2026-11-15",
+        "scenario_id": "synthetic-ui-history"
+      },
+      "status_code": 200,
+      "response_selection": {
+        "results": [
+          "unknown"
+        ],
+        "question_fields": [
+          "units"
+        ],
+        "answers_applied": [],
+        "scenario_id": "synthetic-ui-history",
+        "capabilities": {
+          "lookup": "implemented",
+          "evidence": "implemented",
+          "question_planner": "implemented",
+          "rule_renderer": "implemented"
+        },
+        "mode": "synthetic"
+      }
+    },
+    {
+      "step": "with_answer",
+      "request": {
+        "address_id": "SYNTH-003",
+        "as_of": "2026-11-15",
+        "scenario_id": "synthetic-ui-history",
+        "answers": [
+          {
+            "field": "units",
+            "value": 8,
+            "provenance": "demo",
+            "note": "Synthetic user answer"
+          }
+        ]
+      },
+      "status_code": 200,
+      "response_selection": {
+        "results": [
+          "applies"
+        ],
+        "question_fields": [],
+        "answers_applied": [
+          {
+            "field": "units",
+            "value": 8,
+            "provenance": "demo",
+            "note": "Synthetic user answer"
+          }
+        ],
+        "scenario_id": "synthetic-ui-history",
+        "capabilities": {
+          "lookup": "implemented",
+          "evidence": "implemented",
+          "question_planner": "implemented",
+          "rule_renderer": "implemented"
+        },
+        "mode": "synthetic"
+      }
+    },
+    {
+      "step": "same_scenario_without_answers",
+      "request": {
+        "address_id": "SYNTH-003",
+        "as_of": "2026-11-15",
+        "scenario_id": "synthetic-ui-history"
+      },
+      "status_code": 200,
+      "response_selection": {
+        "results": [
+          "unknown"
+        ],
+        "question_fields": [
+          "units"
+        ],
+        "answers_applied": [],
+        "scenario_id": "synthetic-ui-history",
+        "capabilities": {
+          "lookup": "implemented",
+          "evidence": "implemented",
+          "question_planner": "implemented",
+          "rule_renderer": "implemented"
+        },
+        "mode": "synthetic"
+      }
+    }
+  ],
+  "stored_json_unchanged_after_http": true,
+  "identical_export_payload_sha256": {
+    "change_details.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "changes.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "evidence_checks.json": "85542784e4463cd440626451bd3e2edf1a881902ff95b49609474ab23ea3be4d",
+    "evidence_inventory.json": "5b7361e8947a772347e893a41f78621081fc9ead99ecd23fae9d873a586ef79f",
+    "lookups.json": "83d6187898b6b2156162288440ba0fb7670b88d2e77a94ab31d71f198cea78ba",
+    "rules.json": "093e06496622cd22dc2291db67f14c8cc3e63f64a6630e6c117ba8140164612f",
+    "validation.json": "7dc1bd567fd4f7a0f2328bb7499f08a03f0fab0a8f5fc0fca7246825a5a26565"
+  },
+  "export_note": "Separate export-run IDs/timestamps remain in run_manifest.json; payloads are synthetic and not for submission.",
+  "limitations": [
+    "No browser UI or deployed end-to-end verification.",
+    "No live provider call, independent legal review, push, PR, merge or deployment for this continuation."
+  ]
+}

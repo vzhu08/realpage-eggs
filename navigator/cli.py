@@ -16,6 +16,7 @@ from .models import ChangeRequest, LookupRequest, Model
 from .service import lookup, DatasetUnavailable
 from .store import Store, write_json, digest
 from .validation import validate
+from .assist_service import CoreUnavailable, CoreContractError
 
 
 def batch_evaluate(store, as_of, output, allow_partial=False):
@@ -76,6 +77,11 @@ def parser():
     cmd.add_argument("rule_id")
     cmd.add_argument("--refresh", action="store_true", help="Perform a new paid review instead of replaying cached output")
     cmd.add_argument("--output", type=Path)
+    cmd = sub.add_parser("evidence-package", help="Save one property's facts, answers, evidence and offline replay inputs")
+    cmd.add_argument("--request", type=Path, required=True, help="JSON EvidencePackageRequest, including a saved address_id")
+    cmd.add_argument("--output", type=Path, required=True)
+    cmd = sub.add_parser("replay-evidence-package", help="Verify hashes and reproduce a package offline with matching code")
+    cmd.add_argument("file", type=Path)
     return p
 
 
@@ -112,10 +118,16 @@ def main(argv=None):
             from .semantic_review import review_rule
             result = review_rule(store, args.rule_id, refresh=args.refresh)
             if args.output: write_json(args.output, result)
+        elif args.command == "evidence-package":
+            from .evidence_package import write_evidence_package
+            result = write_evidence_package(store, json.loads(args.request.read_text(encoding="utf-8")), args.output)
+        elif args.command == "replay-evidence-package":
+            from .evidence_package import replay_evidence_package
+            result = replay_evidence_package(json.loads(args.file.read_text(encoding="utf-8")))
         if isinstance(result, Model): result = result.model_dump(mode="json")
         print(json.dumps(result, indent=2, ensure_ascii=False, default=str))
         return 1 if isinstance(result, dict) and (result.get("outcome") == "failed" or result.get("errors")) else 0
-    except (ValueError, KeyError, DatasetUnavailable, ProviderUnavailable, ProviderFailure, FileNotFoundError) as exc:
+    except (ValueError, KeyError, DatasetUnavailable, ProviderUnavailable, ProviderFailure, CoreUnavailable, CoreContractError, FileNotFoundError) as exc:
         print(json.dumps({"error": type(exc).__name__, "message": str(exc), "disclaimer": DISCLAIMER}), file=sys.stderr)
         return 2
 

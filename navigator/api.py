@@ -1,23 +1,30 @@
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 import os
+from pathlib import Path
 
 from .changes import compute_changes
 from .config import DISCLAIMER, VERSION, data_dir
 from .models import LookupRequest, LookupResponse, ChangeRequest, ChangeResult, SourceDocument, HealthResponse, AddressPage, RuleDetail
 from .service import DatasetUnavailable, lookup
-from .store import Store
+from .store import Store, cached_changes
 from .assist_service import assist, CoreUnavailable, CoreContractError
 from .evidence import prepare_rules, EvidenceStoreView
 from .fact_inputs import FACT_DEFINITIONS
 from .models import AssistRequest, AssistResponse, EvidenceReport, FactDefinition, SourceContext
 from .retrieval import ContextRetriever, span
+from .models import EvidencePackageRequest, EvidencePackage
+from .evidence_package import build_evidence_package
+from .models import SourceComparisonsResponse, ChangeSummary
+from .service import source_comparisons, change_summary
 
 
-def create_app(root=None, core_services=None):
+def create_app(root=None, core_services=None, frontend_dist=None):
     store = Store(root or data_dir())
     app = FastAPI(title="Rental Housing Law Navigator", version=VERSION, description=DISCLAIMER, responses={404: {"description": "Unknown ID"}, 422: {"description": "Invalid request"}, 503: {"description": "Dataset or extracted rules unavailable"}})
-    app.add_middleware(CORSMiddleware, allow_origins=[x.strip() for x in os.getenv("NAVIGATOR_CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",") if x.strip()], allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
+    app.add_middleware(CORSMiddleware, allow_origins=[x.strip() for x in os.getenv("NAVIGATOR_CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",") if x.strip()], allow_methods=["GET", "POST"], allow_headers=["Content-Type"], expose_headers=["Content-Disposition"])
 
     def call(fn, *args):
         try: return fn(*args)
@@ -45,6 +52,13 @@ def create_app(root=None, core_services=None):
 
     @app.post("/api/v1/lookup/assist", response_model=AssistResponse, responses={502: {"description": "Core output violated the shared contract"}})
     def assisted_lookup(request: AssistRequest): return call(assist, store, request, core_services)
+
+    @app.post("/api/v1/lookup/evidence-package", response_model=EvidencePackage, responses={502: {"description": "Core output violated the shared contract"}})
+    def evidence_package(request: EvidencePackageRequest, response: Response):
+        package = call(build_evidence_package, store, request, core_services)
+        response.headers["Content-Disposition"] = f'attachment; filename="evidence-package-{package.package_sha256[:12]}.json"'
+        response.headers["Cache-Control"] = "no-store"
+        return package
 
     @app.get("/api/v1/facts", response_model=dict[str, FactDefinition])
     def fact_definitions(): return FACT_DEFINITIONS
@@ -82,7 +96,35 @@ def create_app(root=None, core_services=None):
     def changes(request: ChangeRequest):
         if not store.addresses(): raise HTTPException(503, detail={"code": "dataset_unavailable", "message": "Run navigator ingest"})
         prepared, _ = prepare_rules(store)
-        return call(compute_changes, EvidenceStoreView(store, prepared), request)
+        return call(cached_changes, EvidenceStoreView(store, prepared), request)
+
+    @app.post("/api/v1/changes/summary", response_model=ChangeSummary)
+    def summarized_changes(request: ChangeRequest):
+        return call(change_summary, store, request)
+
+    @app.get("/api/v1/source-comparisons", response_model=SourceComparisonsResponse)
+    def compared_sources():
+        return call(source_comparisons, store)
+
+    frontend_dist = frontend_dist or os.getenv("NAVIGATOR_FRONTEND_DIST")
+    if frontend_dist:
+        public = Path(frontend_dist).resolve()
+        if not (public / "index.html").is_file():
+            raise RuntimeError("NAVIGATOR_FRONTEND_DIST must contain a built index.html")
+
+        # Reserve the API namespace even when a static build contains an api/ directory.
+        @app.api_route("/api", methods=["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], include_in_schema=False)
+        @app.api_route("/api/{path:path}", methods=["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], include_in_schema=False)
+        def unknown_api(path: str = ""):
+            raise HTTPException(404, detail="Not Found")
+
+        @app.get("/", include_in_schema=False)
+        @app.get("/index.html", include_in_schema=False)
+        def frontend_index():
+            # A rollback must revalidate the entry point before loading its hashed assets.
+            return FileResponse(public / "index.html", headers={"Cache-Control": "no-cache"})
+
+        app.mount("/", StaticFiles(directory=public), name="frontend")
 
     return app
 
