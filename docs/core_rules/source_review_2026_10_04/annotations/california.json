@@ -1,0 +1,1310 @@
+{
+  "label": "AGENT_REVIEWED_CANDIDATES_NEEDS_REVIEW_NOT_LEGAL_APPROVAL",
+  "reviewed_base": "9ff4396de5b6bdc5d8daed159a0778f993dd49cc",
+  "case": "T1",
+  "review_date": "2026-10-04",
+  "scope": "Eight immutable P11_CA captures plus preserved D022 and existing two rule records. Offline source-content review; no provider/network calls; no store mutation.",
+  "sources": {
+    "P11_CA_AB325_HISTORY": {
+      "url": "https://leginfo.legislature.ca.gov/faces/billHistoryClient.xhtml?bill_id=202520260AB325",
+      "retrieved_at": "2026-10-04T07:05:04.181297+00:00",
+      "derivative_text_sha256": "b89c2fcdb90580c9b9016017b222f9261ebaa82bcaaad631364bbfb4b009f6ee",
+      "raw_sha256": "8732bd97d19cc890adfbe55cef22d77e4743124330ca0cfe14a19d9ddbd645ad",
+      "text_characters": 3218,
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_CA_AB325_HISTORY.txt",
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_CA_AB325_HISTORY.html",
+      "integrity_verified": true,
+      "issues_retained": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Flattened table preserves date/action order; version selector dates are distinct from history events."
+      ]
+    },
+    "P11_CA_AB325_TEXT": {
+      "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB325",
+      "retrieved_at": "2026-10-04T07:05:03.801231+00:00",
+      "derivative_text_sha256": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "raw_sha256": "cee911155967ad2fbe28dab9acdb91cfb2b22b00a4889a77b3579ad0332b5288",
+      "text_characters": 6434,
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_CA_AB325_TEXT.txt",
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_CA_AB325_TEXT.html",
+      "integrity_verified": true,
+      "issues_retained": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Chaptering is not itself effectiveness; see the separate code annotations."
+      ]
+    },
+    "P11_CA_BPC_ART1": {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=1.",
+      "retrieved_at": "2026-10-04T07:05:04.743441+00:00",
+      "derivative_text_sha256": "2384f2fc2d33b25366bafec58796c99e9abd411446bd61a15ecaea2067329bf5",
+      "raw_sha256": "ad2c110c83c1defb0528493ef15e1eab759cea215f8aeddd59bf9b79ae8af91f",
+      "text_characters": 2435,
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_CA_BPC_ART1.txt",
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_CA_BPC_ART1.html",
+      "integrity_verified": true,
+      "issues_retained": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Current consolidated article includes neighboring provisions and older amendment dates."
+      ]
+    },
+    "P11_CA_BPC_ART2": {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=2.",
+      "retrieved_at": "2026-10-04T07:05:05.248997+00:00",
+      "derivative_text_sha256": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "raw_sha256": "fe376081059f58ce36c12bd4b8062ed0e2a9cc5da7450b23ac080f5a851ae7f0",
+      "text_characters": 12247,
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_CA_BPC_ART2.txt",
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_CA_BPC_ART2.html",
+      "integrity_verified": true,
+      "issues_retained": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Effective-date annotation does not determine provision-specific application."
+      ]
+    },
+    "P11_CA_BPC_ART3": {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=7.&title=&part=2.&chapter=2.&article=3.",
+      "retrieved_at": "2026-10-04T07:05:06.791726+00:00",
+      "derivative_text_sha256": "38bd66c93d6363c00b125620c79e8e967aa7a1f56da16f9ea9769525e63de04a",
+      "raw_sha256": "2a5746bc2b0d69caf73647df2fcf7435b891a12e45b2b6c9e22b71b185c8f247",
+      "text_characters": 30918,
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_CA_BPC_ART3.txt",
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_CA_BPC_ART3.html",
+      "integrity_verified": true,
+      "issues_retained": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Broader article includes older sections with different dates; do not apply one date to all sections."
+      ]
+    },
+    "P11_CA_CONS_ART4": {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CONS&article=IV",
+      "retrieved_at": "2026-10-04T07:05:07.260959+00:00",
+      "derivative_text_sha256": "fc5cd24041f3ab6bf8b5d7bf8c54d8ac3b8743d8e71798211b1468e8ea489661",
+      "raw_sha256": "0bee76e543b7f308daa721660d6ea772c884ba8ddc44bce404cffead16680700",
+      "text_characters": 39965,
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_CA_CONS_ART4.txt",
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_CA_CONS_ART4.html",
+      "integrity_verified": true,
+      "issues_retained": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Conditional general provisions; Core must assess applicability."
+      ]
+    },
+    "P11_CA_SB763_HISTORY": {
+      "url": "https://leginfo.legislature.ca.gov/faces/billHistoryClient.xhtml?bill_id=202520260SB763",
+      "retrieved_at": "2026-10-04T07:05:06.224268+00:00",
+      "derivative_text_sha256": "d5760b35751b382bba28102d11d7d4ac6baf07ec64f018268a0f108a4ad11c53",
+      "raw_sha256": "9fd7bc7abc918999cc7ace05c93f613a4bd8f25e6573bb6eb0a12e5cfbc232e0",
+      "text_characters": 2760,
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_CA_SB763_HISTORY.txt",
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_CA_SB763_HISTORY.html",
+      "integrity_verified": true,
+      "issues_retained": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Version selector publication dates are not enactment/effective dates."
+      ]
+    },
+    "P11_CA_SB763_TEXT": {
+      "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB763",
+      "retrieved_at": "2026-10-04T07:05:05.716755+00:00",
+      "derivative_text_sha256": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "raw_sha256": "0ca3015a8a48ede7edfe6cd84e2cb43213204aa8decf1ff468f609327a56994a",
+      "text_characters": 7602,
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_CA_SB763_TEXT.txt",
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_CA_SB763_TEXT.html",
+      "integrity_verified": true,
+      "issues_retained": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Digest includes prior-law summaries; distinguish enacted sections from digest."
+      ]
+    },
+    "D022": {
+      "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB325",
+      "retrieved_at": "2026-10-01T22:35Z",
+      "derivative_text_sha256": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "organizer_manifest_sha256": "90e2901ce96a4d4b0e698c8a2954e3f2468c5b4e8e3f0a79fb8d7d4a9001fa51",
+      "text_characters": 6577,
+      "store_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/data/core06-working/sources.json",
+      "integrity_verified": true,
+      "issues_retained": [
+        "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+      ]
+    }
+  },
+  "offset_semantics": "zero-based Python Unicode character offsets [start,end) into exact canonical derivative text; source_hash is derivative UTF-8 SHA256, never raw HTML hash",
+  "evidence": {
+    "old_d022_0": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 1183,
+      "end": 1275,
+      "text": "[\nApproved  by\nGovernor\nOctober 06, 2025.\nFiled with\nSecretary of State\nOctober 06, 2025.\n]\n",
+      "section": null
+    },
+    "old_d022_1": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 3785,
+      "end": 4003,
+      "text": "(a) It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of this chapter.",
+      "section": null
+    },
+    "old_d022_2": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 4004,
+      "end": 4305,
+      "text": "(b) It shall be unlawful for a person to use or distribute a common pricing algorithm if the person coerces another person to set or adopt a recommended price or commercial term recommended by the common pricing algorithm for the same or similar products or services in the jurisdiction of this state.",
+      "section": null
+    },
+    "old_d022_3": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 4306,
+      "end": 4515,
+      "text": "(c) Nothing in this section shall impair or limit the applicability of antitrust laws.\n(d) For purposes of this section, the following definitions apply:\n(1) “Antitrust laws” means the provisions of this part.",
+      "section": null
+    },
+    "old_d022_4": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 4516,
+      "end": 4742,
+      "text": "(2) “Commercial term” includes, without limitation, any of the following:\n(A) Level of service.\n(B) Availability.\n(C) Output, including quantities of products produced or distributed or the amount or level of service provided.",
+      "section": null
+    },
+    "old_d022_5": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 4743,
+      "end": 4992,
+      "text": "(3) “Common pricing algorithm” means any\nmethodology, including a computer, software, or other technology, used by two or more persons, that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial\nterm.",
+      "section": null
+    },
+    "old_d022_6": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 4993,
+      "end": 5197,
+      "text": "(4) “Distribute,” “distribution,” and “distributing” include selling, licensing, providing access to, or otherwise making available by any means, including through a subscription or the sale of a service.",
+      "section": null
+    },
+    "old_d022_7": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 5198,
+      "end": 5322,
+      "text": "(5) “Person” has the same meaning as defined in Section 16702 and does not include the end consumer of a product or service.",
+      "section": null
+    },
+    "old_d022_8": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 5323,
+      "end": 5570,
+      "text": "(6) “Price” means the amount of money or other thing of value, whether tangible or not, expected, required, or given in payment for any product or service, including compensation paid to an employee or independent contractor for services provided.",
+      "section": null
+    },
+    "old_d022_9": {
+      "doc_id": "D022",
+      "source_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "start": 3048,
+      "end": 3238,
+      "text": "Because the bill would expand the scope of activities prohibited by the Cartwright Act, the violation of which is punishable as a crime, the bill would impose a state-mandated local program.",
+      "section": null
+    },
+    "ab_enacted_text": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 1039,
+      "end": 1130,
+      "text": "[\nApproved  by\nGovernor\nOctober 06, 2025.\nFiled with\nSecretary of State\nOctober 06, 2025.\n]",
+      "section": "AB325 chapter header"
+    },
+    "sb_enacted_text": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 957,
+      "end": 1048,
+      "text": "[\nApproved  by\nGovernor\nOctober 06, 2025.\nFiled with\nSecretary of State\nOctober 06, 2025.\n]",
+      "section": "SB763 chapter header"
+    },
+    "ab_enacted_history": {
+      "doc_id": "P11_CA_AB325_HISTORY",
+      "source_hash": "b89c2fcdb90580c9b9016017b222f9261ebaa82bcaaad631364bbfb4b009f6ee",
+      "start": 839,
+      "end": 947,
+      "text": "10/06/25\nChaptered by Secretary of State - Chapter 338, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+      "section": "AB325 history dated actions"
+    },
+    "sb_enacted_history": {
+      "doc_id": "P11_CA_SB763_HISTORY",
+      "source_hash": "d5760b35751b382bba28102d11d7d4ac6baf07ec64f018268a0f108a4ad11c53",
+      "start": 723,
+      "end": 831,
+      "text": "10/06/25\nChaptered by Secretary of State.  Chapter 426, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+      "section": "SB763 history dated actions"
+    },
+    "ab_restraint": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 3641,
+      "end": 3859,
+      "text": "(a) It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of this chapter.",
+      "section": "16729(a)"
+    },
+    "ab_coercion": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 3860,
+      "end": 4161,
+      "text": "(b) It shall be unlawful for a person to use or distribute a common pricing algorithm if the person coerces another person to set or adopt a recommended price or commercial term recommended by the common pricing algorithm for the same or similar products or services in the jurisdiction of this state.",
+      "section": "16729(b)"
+    },
+    "ab_nonimpairment": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 4162,
+      "end": 4248,
+      "text": "(c) Nothing in this section shall impair or limit the applicability of antitrust laws.",
+      "section": "16729(c)"
+    },
+    "ab_antitrust_definition": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 4316,
+      "end": 4371,
+      "text": "(1) “Antitrust laws” means the provisions of this part.",
+      "section": "16729(d)(1)"
+    },
+    "ab_distribution": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 4849,
+      "end": 5053,
+      "text": "(4) “Distribute,” “distribution,” and “distributing” include selling, licensing, providing access to, or otherwise making available by any means, including through a subscription or the sale of a service.",
+      "section": "16729(d)(4)"
+    },
+    "ab_person_exclusion": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 5054,
+      "end": 5178,
+      "text": "(5) “Person” has the same meaning as defined in Section 16702 and does not include the end consumer of a product or service.",
+      "section": "16729(d)(5)"
+    },
+    "ab_price": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 5179,
+      "end": 5426,
+      "text": "(6) “Price” means the amount of money or other thing of value, whether tangible or not, expected, required, or given in payment for any product or service, including compensation paid to an employee or independent contractor for services provided.",
+      "section": "16729(d)(6)"
+    },
+    "ab_commercial_term": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 4372,
+      "end": 4598,
+      "text": "(2) “Commercial term” includes, without limitation, any of the following:\n(A) Level of service.\n(B) Availability.\n(C) Output, including quantities of products produced or distributed or the amount or level of service provided.",
+      "section": "16729(d)(2)"
+    },
+    "ab_algorithm_definition": {
+      "doc_id": "P11_CA_AB325_TEXT",
+      "source_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+      "start": 4599,
+      "end": 4848,
+      "text": "(3) “Common pricing algorithm” means any\nmethodology, including a computer, software, or other technology, used by two or more persons, that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial\nterm.",
+      "section": "16729(d)(3)"
+    },
+    "ab_restraint_code": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 10339,
+      "end": 10557,
+      "text": "(a) It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of this chapter.",
+      "section": "16729(a)"
+    },
+    "ab_coercion_code": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 10558,
+      "end": 10859,
+      "text": "(b) It shall be unlawful for a person to use or distribute a common pricing algorithm if the person coerces another person to set or adopt a recommended price or commercial term recommended by the common pricing algorithm for the same or similar products or services in the jurisdiction of this state.",
+      "section": "16729(b)"
+    },
+    "ab_nonimpairment_code": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 10860,
+      "end": 10946,
+      "text": "(c) Nothing in this section shall impair or limit the applicability of antitrust laws.",
+      "section": "16729(c)"
+    },
+    "ab_antitrust_definition_code": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 11014,
+      "end": 11069,
+      "text": "(1) “Antitrust laws” means the provisions of this part.",
+      "section": "16729(d)(1)"
+    },
+    "ab_distribution_code": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 11547,
+      "end": 11751,
+      "text": "(4) “Distribute,” “distribution,” and “distributing” include selling, licensing, providing access to, or otherwise making available by any means, including through a subscription or the sale of a service.",
+      "section": "16729(d)(4)"
+    },
+    "ab_person_exclusion_code": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 11752,
+      "end": 11876,
+      "text": "(5) “Person” has the same meaning as defined in Section 16702 and does not include the end consumer of a product or service.",
+      "section": "16729(d)(5)"
+    },
+    "ab_price_code": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 11877,
+      "end": 12124,
+      "text": "(6) “Price” means the amount of money or other thing of value, whether tangible or not, expected, required, or given in payment for any product or service, including compensation paid to an employee or independent contractor for services provided.",
+      "section": "16729(d)(6)"
+    },
+    "ab_commercial_term_code": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 11070,
+      "end": 11296,
+      "text": "(2) “Commercial term” includes, without limitation, any of the following:\n(A) Level of service.\n(B) Availability.\n(C) Output, including quantities of products produced or distributed or the amount or level of service provided.",
+      "section": "16729(d)(2)"
+    },
+    "ab_algorithm_definition_code": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 11297,
+      "end": 11546,
+      "text": "(3) “Common pricing algorithm” means any\nmethodology, including a computer, software, or other technology, used by two or more persons, that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial\nterm.",
+      "section": "16729(d)(3)"
+    },
+    "person_16702": {
+      "doc_id": "P11_CA_BPC_ART1",
+      "source_hash": "2384f2fc2d33b25366bafec58796c99e9abd411446bd61a15ecaea2067329bf5",
+      "start": 2023,
+      "end": 2227,
+      "text": "As used in this chapter “person” or “persons” includes corporations, firms, partnerships and associations existing under or authorized by the laws of this State or any other State, or any foreign country.",
+      "section": "16702"
+    },
+    "labor_not_commodity": {
+      "doc_id": "P11_CA_BPC_ART1",
+      "source_hash": "2384f2fc2d33b25366bafec58796c99e9abd411446bd61a15ecaea2067329bf5",
+      "start": 2268,
+      "end": 2360,
+      "text": "Within the meaning of this chapter, labor, whether skilled or unskilled, is not a commodity.",
+      "section": "16703"
+    },
+    "trust_definition_16720": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 1121,
+      "end": 2811,
+      "text": "16720.\nA trust is a combination of capital, skill or acts by two or more persons for any of the following purposes:\n(a) To create or carry out restrictions in trade or commerce.\n(b) To limit or reduce the production, or increase the price of merchandise or of any commodity.\n(c) To prevent competition in manufacturing, making, transportation, sale or purchase of merchandise, produce or any commodity.\n(d) To fix at any standard or\nfigure, whereby its price to the public or consumer shall be in any manner controlled or established, any article or commodity of merchandise, produce or commerce intended for sale, barter, use or consumption in this State.\n(e) To make or enter into or execute or carry out any contracts, obligations or agreements of any kind or description, by which they do all or any or any combination of any of the following:\n(1) Bind themselves not to sell, dispose of or transport any article or any commodity or any article of trade, use, merchandise, commerce or consumption below a common standard figure, or fixed value.\n(2) Agree in any manner to keep the price of such article, commodity or transportation at a fixed or graduated figure.\n(3) Establish or settle the\nprice of any article, commodity or transportation between them or themselves and others, so as directly or indirectly to preclude a free and unrestricted competition among themselves, or any purchasers or consumers in the sale or transportation of any such article or commodity.\n(4) Agree to pool, combine or directly or indirectly unite any interests that they may have connected with the sale or transportation of any such article or commodity, that its price might in any manner be affected.",
+      "section": "16720"
+    },
+    "competition_16725": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 7286,
+      "end": 7512,
+      "text": "It is not unlawful to enter into agreements or form associations or combinations, the purpose and effect of which is to promote, encourage or increase competition in any trade or industry, or which are in furtherance of trade.",
+      "section": "16725"
+    },
+    "trust_16726": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 7553,
+      "end": 7645,
+      "text": "Except as provided in this chapter, every trust is unlawful, against public policy and void.",
+      "section": "16726"
+    },
+    "motor_carrier_16728": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 8440,
+      "end": 10331,
+      "text": "16728.\n(a) Notwithstanding any other provision of law, motor carriers of property, as defined in Section 34601 of the Vehicle Code, may voluntarily elect to participate in uniform cargo liability rules, uniform bills of lading or receipts for property being transported, uniform cargo credit rules, joint line rates or routes, classifications, mileage guides, and pooling. Motor carriers of property that so elect shall comply with all requirements of Section 14501(c) of Title 49 of the United States Code and with federal regulations promulgated pursuant\nto that section. The Legislature intends by this section to provide to motor carriers of property the antitrust immunity authorized by state action pursuant to Section 14501(c) of Title 49 of the United States Code.\n(b) The election authorized by this section shall be exercised in either of the following ways:\n(1) Participation in an agreement pursuant to Section 13703 of Title 49 of the United States Code.\n(2) Filing with the Department of Motor Vehicles a notice of adoption of any or all of the uniform cargo liability rules, uniform bills of lading or receipts for property being transported, uniform cargo credit rules, joint rates or routes, classifications, mileage guides, and pooling contained in an identified publication authorized by Section 13703 of Title 49 of the United States Code, along with a written\ncertification issued by the organization establishing those uniform rules or provisions in accordance with Section 13703(g)(1)(B) of Title 49 of the United States Code, affirming participation of the motor carrier of property in the collective publication. The certification shall be made available for public inspection.\n(c) The elections made by a motor carrier of property pursuant to this section may be canceled by the motor carrier.\n(Amended by Stats. 1998, Ch. 829, Sec. 3.   Effective January 1, 1999.)",
+      "section": "16728"
+    },
+    "ab_16729_effective": {
+      "doc_id": "P11_CA_BPC_ART2",
+      "source_hash": "38414eac4117ee05baa3862e842deee70b9b6a47faa1c22a79d6f2e32cc7ebef",
+      "start": 12125,
+      "end": 12205,
+      "text": "(Added by Stats. 2025, Ch. 338, Sec. 1.   (AB 325)   Effective January 1, 2026.)",
+      "section": "16729 legislative history annotation"
+    },
+    "ab_16756_1_effective": {
+      "doc_id": "P11_CA_BPC_ART3",
+      "source_hash": "38bd66c93d6363c00b125620c79e8e967aa7a1f56da16f9ea9769525e63de04a",
+      "start": 19632,
+      "end": 19712,
+      "text": "(Added by Stats. 2025, Ch. 338, Sec. 2.   (AB 325)   Effective January 1, 2026.)",
+      "section": "16756.1 legislative history annotation"
+    },
+    "sb_16755_effective": {
+      "doc_id": "P11_CA_BPC_ART3",
+      "source_hash": "38bd66c93d6363c00b125620c79e8e967aa7a1f56da16f9ea9769525e63de04a",
+      "start": 17168,
+      "end": 17250,
+      "text": "(Amended by Stats. 2025, Ch. 426, Sec. 1.   (SB 763)   Effective January 1, 2026.)",
+      "section": "16755 legislative history annotation"
+    },
+    "sb_16755_1_effective": {
+      "doc_id": "P11_CA_BPC_ART3",
+      "source_hash": "38bd66c93d6363c00b125620c79e8e967aa7a1f56da16f9ea9769525e63de04a",
+      "start": 18754,
+      "end": 18834,
+      "text": "(Added by Stats. 2025, Ch. 426, Sec. 2.   (SB 763)   Effective January 1, 2026.)",
+      "section": "16755.1 legislative history annotation"
+    },
+    "sb_16762_effective": {
+      "doc_id": "P11_CA_BPC_ART3",
+      "source_hash": "38bd66c93d6363c00b125620c79e8e967aa7a1f56da16f9ea9769525e63de04a",
+      "start": 30796,
+      "end": 30876,
+      "text": "(Added by Stats. 2025, Ch. 426, Sec. 3.   (SB 763)   Effective January 1, 2026.)",
+      "section": "16762 legislative history annotation"
+    },
+    "ab_pleading": {
+      "doc_id": "P11_CA_BPC_ART3",
+      "source_hash": "38bd66c93d6363c00b125620c79e8e967aa7a1f56da16f9ea9769525e63de04a",
+      "start": 19247,
+      "end": 19631,
+      "text": "Notwithstanding any other law, in a complaint for any violation of this chapter, it is sufficient to contain factual allegations demonstrating that the existence of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce is plausible, and the complaint shall not be required to allege facts tending to exclude the possibility of independent action.",
+      "section": "16756.1"
+    },
+    "constitutional_effectiveness": {
+      "doc_id": "P11_CA_CONS_ART4",
+      "source_hash": "fc5cd24041f3ab6bf8b5d7bf8c54d8ac3b8743d8e71798211b1468e8ea489661",
+      "start": 19250,
+      "end": 21228,
+      "text": "(c) (1) Except as provided in paragraphs (2) and (3) of this subdivision, a statute enacted at a regular session shall go into effect on January 1 next following a 90-day period from the date of enactment of the statute and a statute enacted at a special session shall go into effect on the 91st day after adjournment of the special session at which the bill was passed.\n(2) A statute, other than a statute establishing or changing\nboundaries of any legislative, congressional, or other election district, enacted by a bill passed by the Legislature on or before the date the Legislature adjourns for a joint recess to reconvene in the second calendar year of the biennium of the legislative session, and in the possession of the Governor after that date, shall go into effect on January 1 next following the enactment date of the statute unless, before January 1, a copy of a referendum petition affecting the statute is submitted to the Attorney General pursuant to subdivision (d) of Section 10 of Article II, in which event the statute shall go into effect on the 91st day after the enactment date unless the petition has been presented to the Secretary of State pursuant to subdivision (b) of Section 9 of Article II.\n(3) Statutes calling elections, statutes providing for tax levies or appropriations for the usual current expenses of the State, and urgency statutes shall go into\neffect immediately upon their enactment.\n(d) Urgency statutes are those necessary for immediate preservation of the public peace, health, or safety. A statement of facts constituting the necessity shall be set forth in one section of the bill. In each house the section and the bill shall be passed separately, each by rollcall vote entered in the journal, two thirds of the membership concurring. An urgency statute may not create or abolish any office or change the salary, term, or duties of any office, or grant any franchise or special privilege, or create any vested right or interest.",
+      "section": "California Constitution Article IV section8(c)-(d)"
+    },
+    "sb_criminal_scope": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 2699,
+      "end": 3191,
+      "text": "16755. (a) Any violation of this chapter is a conspiracy against trade, and any person who engages in any such conspiracy or takes part therein, or aids or advises in its commission, or who as principal, manager, director, agent, servant or employee, or in any other capacity, knowingly carries out any of the stipulations, purposes, prices, rates, or furnishes any information to assist in carrying out those purposes, or orders thereunder or in pursuance thereof, is punishable, as follows:",
+      "section": "16755(a)"
+    },
+    "sb_corporate_fine": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 3192,
+      "end": 3357,
+      "text": "(1) If the violator is a corporation, by a fine of not more than\nsix million dollars ($6,000,000) or the applicable amount under paragraph (3), whichever is greater.",
+      "section": "16755(a)(1)"
+    },
+    "sb_individual_penalty": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 3358,
+      "end": 3732,
+      "text": "(2) If the violator is an individual, by imprisonment pursuant to subdivision (h) of Section 1170 of the Penal Code for one, two, or three years, by imprisonment for not more than one year in a county jail, by a fine of not more than the greater of one million dollars ($1,000,000) and a fine of the applicable amount under paragraph (3), or by both a fine and imprisonment.",
+      "section": "16755(a)(2)"
+    },
+    "sb_gain_loss_alternative": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 3733,
+      "end": 4088,
+      "text": "(3) If any\nperson derives pecuniary gain from a violation of this chapter, or the violation results in pecuniary loss to a person other than the violator, the violator may be fined not more than an amount equal to the amount of the gross gain multiplied by two or an amount equal to the amount of the gross loss multiplied by two, whichever is applicable.",
+      "section": "16755(a)(3)"
+    },
+    "sb_criminal_limitations": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 4089,
+      "end": 4434,
+      "text": "(b) Any action pursuant to this section may be commenced at any time within four years after the commission of the last act comprising a part of any violation. No cause of action barred under existing law on the effective date of the amendment of this section at the 1977–78 Regular Session of the Legislature shall be revived by that amendment.",
+      "section": "16755(b)"
+    },
+    "sb_civil_penalty": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 5831,
+      "end": 6102,
+      "text": "16755.1. (a) A civil penalty of not more than one million dollars ($1,000,000) shall be assessed and recovered in any civil action brought by the Attorney General or district attorney against any person, corporation, or business entity for each violation of this chapter.",
+      "section": "16755.1(a)"
+    },
+    "sb_civil_factors": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 6103,
+      "end": 6795,
+      "text": "(b) In assessing the amount of a civil penalty pursuant to this section, a court or jury shall consider any relevant circumstances presented by any of the parties to the case, including, but not limited to, all of the following:\n(1) The nature and seriousness of the misconduct.\n(2) The number of violations committed by the defendant.\n(3) The persistence of the defendant’s misconduct.\n(4) The length of time over which the defendant’s misconduct occurred.\n(5) The willfulness of the defendant’s misconduct.\n(6) The defendant’s assets, liabilities, and net worth.\n(7) The extent to which the defendant cooperated in the Attorney General’s or district attorney’s investigation and litigation.",
+      "section": "16755.1(b)"
+    },
+    "sb_civil_enforcers": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 6796,
+      "end": 7053,
+      "text": "(c) The penalty described in this\nsection shall be recovered only in a civil action brought by the Attorney General or a district attorney, or by any of that person’s attorneys designated by it for that purpose, against any party that violates this chapter.",
+      "section": "16755.1(c)"
+    },
+    "sb_civil_recipient": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 7054,
+      "end": 7333,
+      "text": "(d) A penalty collected pursuant to this section shall accrue only to the State of California or the county treasurer of the county in which the court is situated, and all proceeds retained pursuant to this section shall be deposited pursuant to subdivision (c) of Section 16755.",
+      "section": "16755.1(d)"
+    },
+    "sb_cumulative_remedies": {
+      "doc_id": "P11_CA_SB763_TEXT",
+      "source_hash": "2d0ae05f9c2e990a86d87e8e94080aca510fe9ab31a1d8a9c45d1ac2f1f75e34",
+      "start": 7412,
+      "end": 7601,
+      "text": "16762. Unless otherwise expressly provided, the remedies or penalties provided by this chapter are cumulative to each other and to the remedies or penalties available under other state law.",
+      "section": "16762"
+    },
+    "old_treble_damages": {
+      "doc_id": "P11_CA_BPC_ART3",
+      "source_hash": "38bd66c93d6363c00b125620c79e8e967aa7a1f56da16f9ea9769525e63de04a",
+      "start": 1103,
+      "end": 1893,
+      "text": "(a) Any person who is injured in his or her business or property by reason of anything forbidden or declared unlawful by this chapter, may sue therefor in any court having jurisdiction in the county where the defendant resides or is found, or any agent resides or is found, or where service may be obtained, without respect to the amount in controversy, and to recover three times the damages sustained by him or her, interest on his or her actual damages pursuant to Section 16761,  and preliminary or permanent injunctive relief when and under the same conditions and principles as injunctive relief is granted by courts generally under the laws of this state and the rules governing these proceedings, and shall be awarded a reasonable attorneys’ fee together with the costs of the suit.",
+      "section": "16750(a)"
+    }
+  },
+  "findings": [
+    {
+      "finding_id": "AB325-two-clauses",
+      "conclusion": "16729(a) prohibits use/distribution of a common pricing algorithm as part of a chapter-violating contract, trust combination or conspiracy restraining trade;16729(b) separately prohibits use/distribution coupled with coercion of another person to set/adopt algorithm-recommended price/commercial term for same/similar products/services in California. Do not import (a) conspiracy precondition into(b), or replace either with all pricing software.",
+      "evidence": [
+        "ab_restraint",
+        "ab_coercion",
+        "ab_algorithm_definition"
+      ],
+      "status": "agent_reviewed_candidate_needs_review"
+    },
+    {
+      "finding_id": "AB325-person-definition-gap-addressed",
+      "conclusion": "16702 includes corporations, firms, partnerships and associations under California/other-state/foreign laws;16729(d)(5) expressly excludes end consumers. Includes is not an exhaustive entity enumeration. Presence of the definition does not establish qualifying actual actors or user counts.",
+      "evidence": [
+        "person_16702",
+        "ab_person_exclusion"
+      ],
+      "status": "agent_reviewed_candidate_needs_review"
+    },
+    {
+      "finding_id": "AB325-definitions",
+      "conclusion": "Common pricing algorithm: methodology used by two or more qualifying persons, using competitor data to recommend/align/stabilize/set/otherwise influence price or commercial term. Commercial terms include service level, availability and output; distribution includes sale/license/access/other availability by any means; price includes money or other tangible/intangible value and employee/contractor compensation. No construction-year, unit-count, occupancy-date or residential-only restriction is stated in these clauses.",
+      "evidence": [
+        "ab_algorithm_definition",
+        "ab_distribution",
+        "ab_commercial_term",
+        "ab_price",
+        "ab_person_exclusion",
+        "person_16702",
+        "ab_nonimpairment"
+      ],
+      "status": "agent_reviewed_candidate_needs_review"
+    },
+    {
+      "finding_id": "AB325-exceptions-context",
+      "conclusion": "16729(c) preserves antitrust laws; it is not a directional state/local preemption rule.16725 and16726 require interpretation of qualifying chapter context;16728 is specific motor-carrier immunity.16703 labor-not-commodity language must be read with16729(d)(6) express compensation text, not turned into an automatic labor exemption. Captures do not establish an exhaustive survey of exemptions or judicial interpretation.",
+      "evidence": [
+        "ab_nonimpairment",
+        "ab_antitrust_definition",
+        "competition_16725",
+        "trust_16726",
+        "motor_carrier_16728",
+        "labor_not_commodity",
+        "ab_price"
+      ],
+      "status": "agent_reviewed_candidate_needs_review"
+    },
+    {
+      "finding_id": "SB763-penalties",
+      "conclusion": "SB763 amends chapter-wide16755 criminal punishment and adds16755.1 civil penalties and16762 cumulative remedies. It creates no separately worded algorithm-use prohibition. Corporate fine ceiling is the greater of $6m and the applicable paragraph3 amount; individual ceiling is the greater of $1m and applicable paragraph3 amount, with alternative/combined imprisonment terms. Paragraph3 preserves twice gross gain or twice gross loss, whichever applicable. Civil penalty is not more than $1m for each chapter violation, only through specified public-enforcement civil action, subject to assessment factors; it is not an automatic fixed $1m payment or tenant private penalty.",
+      "evidence": [
+        "sb_criminal_scope",
+        "sb_corporate_fine",
+        "sb_individual_penalty",
+        "sb_gain_loss_alternative",
+        "sb_civil_penalty",
+        "sb_civil_factors",
+        "sb_civil_enforcers",
+        "sb_civil_recipient",
+        "sb_cumulative_remedies"
+      ],
+      "status": "agent_reviewed_candidate_needs_review"
+    },
+    {
+      "finding_id": "dates-not-from-retrieval",
+      "conclusion": "Separate dated approval/chaptering is October6,2025. Each relevant current-code annotation explicitly identifies January1,2026 effectiveness for the named bill section. Do not infer January1 using ArtIV8(c)(1) alone:8(c)(2) has special first-year joint-recess/Governor timing and referendum conditions; subsection3/urgency are further exceptions. Code annotations provide direct date support. Retrieval October4,2026 and publication October7,2025 are not operative dates.",
+      "evidence": [
+        "ab_enacted_history",
+        "sb_enacted_history",
+        "constitutional_effectiveness",
+        "ab_16729_effective",
+        "ab_16756_1_effective",
+        "sb_16755_effective",
+        "sb_16755_1_effective",
+        "sb_16762_effective"
+      ],
+      "status": "agent_reviewed_candidate_needs_review"
+    },
+    {
+      "finding_id": "procedural-and-old-remedies",
+      "conclusion": "AB32516756.1 sets complaint sufficiency, not a separate rental-property obligation. SB763 does not newly create existing16750 treble-damages language. Do not tag neighboring old enforcement sections with the2026 date.",
+      "evidence": [
+        "ab_pleading",
+        "ab_16756_1_effective",
+        "old_treble_damages"
+      ],
+      "status": "agent_reviewed_candidate_needs_review"
+    }
+  ],
+  "lifecycle_candidates": [
+    {
+      "provision": "16729",
+      "bill": "AB325",
+      "lifecycle_candidate": "enacted",
+      "enactment_date_candidate": "2025-10-06",
+      "enactment_evidence": [
+        "ab_enacted_text",
+        "ab_enacted_history"
+      ],
+      "effective_date_candidate": "2026-01-01",
+      "effective_date_evidence": [
+        "ab_16729_effective"
+      ],
+      "separate_delayed_operative_clause_found": false,
+      "application_status": "needs_review",
+      "note": "The named official code annotation supplies this provision-specific statutory effective date. Enactment, publication, retrieval and factual applicability are separate. No universal date is assigned to neighboring sections."
+    },
+    {
+      "provision": "16756.1",
+      "bill": "AB325",
+      "lifecycle_candidate": "enacted",
+      "enactment_date_candidate": "2025-10-06",
+      "enactment_evidence": [
+        "ab_enacted_text",
+        "ab_enacted_history"
+      ],
+      "effective_date_candidate": "2026-01-01",
+      "effective_date_evidence": [
+        "ab_16756_1_effective"
+      ],
+      "separate_delayed_operative_clause_found": false,
+      "application_status": "needs_review",
+      "note": "The named official code annotation supplies this provision-specific statutory effective date. Enactment, publication, retrieval and factual applicability are separate. No universal date is assigned to neighboring sections."
+    },
+    {
+      "provision": "16755",
+      "bill": "SB763",
+      "lifecycle_candidate": "enacted",
+      "enactment_date_candidate": "2025-10-06",
+      "enactment_evidence": [
+        "sb_enacted_text",
+        "sb_enacted_history"
+      ],
+      "effective_date_candidate": "2026-01-01",
+      "effective_date_evidence": [
+        "sb_16755_effective"
+      ],
+      "separate_delayed_operative_clause_found": false,
+      "application_status": "needs_review",
+      "note": "The named official code annotation supplies this provision-specific statutory effective date. Enactment, publication, retrieval and factual applicability are separate. No universal date is assigned to neighboring sections."
+    },
+    {
+      "provision": "16755.1",
+      "bill": "SB763",
+      "lifecycle_candidate": "enacted",
+      "enactment_date_candidate": "2025-10-06",
+      "enactment_evidence": [
+        "sb_enacted_text",
+        "sb_enacted_history"
+      ],
+      "effective_date_candidate": "2026-01-01",
+      "effective_date_evidence": [
+        "sb_16755_1_effective"
+      ],
+      "separate_delayed_operative_clause_found": false,
+      "application_status": "needs_review",
+      "note": "The named official code annotation supplies this provision-specific statutory effective date. Enactment, publication, retrieval and factual applicability are separate. No universal date is assigned to neighboring sections."
+    },
+    {
+      "provision": "16762",
+      "bill": "SB763",
+      "lifecycle_candidate": "enacted",
+      "enactment_date_candidate": "2025-10-06",
+      "enactment_evidence": [
+        "sb_enacted_text",
+        "sb_enacted_history"
+      ],
+      "effective_date_candidate": "2026-01-01",
+      "effective_date_evidence": [
+        "sb_16762_effective"
+      ],
+      "separate_delayed_operative_clause_found": false,
+      "application_status": "needs_review",
+      "note": "The named official code annotation supplies this provision-specific statutory effective date. Enactment, publication, retrieval and factual applicability are separate. No universal date is assigned to neighboring sections."
+    }
+  ],
+  "old_new_source_comparison": {
+    "before_doc_id": "D022",
+    "after_doc_id": "P11_CA_AB325_TEXT",
+    "old_hash": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+    "new_hash": "a0c259cbdeb05e966f0b2b3cacbf899db7ffc0119d392d0fcd9fa608bb7f6c58",
+    "operative_text_byte_identical": false,
+    "operative_text_whitespace_normalized_equal": true,
+    "classification": "operative wording matches after whitespace-only section-heading reflow; capture wrappers/header formatting differ",
+    "legal_amendment_inferred": false,
+    "old_source_and_offsets_unchanged": true,
+    "note": "Comparison is scoped from the enacting clause through section3; not a blanket finding that whole capture bytes match. All nine sampled provision/definition quotes occur exactly in both originals. New definition/date sources are additional support, not an AB325 amendment."
+  },
+  "rule_patch_candidates": [
+    {
+      "candidate_id": "candidate-r-57328356379e89d4f338",
+      "existing_team_rule_id": "r-57328356379e89d4f338",
+      "candidate_kind": "existing_rule_patch_not_applied",
+      "semantic_verification": "needs_review",
+      "old_primary_source_preserved": "D022",
+      "new_primary_source_not_required": true,
+      "provision_key": "common_pricing_algorithm_restraint",
+      "requirement_summary": "A person may not use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of the Cartwright Act. A common pricing algorithm is a methodology used by two or more persons that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial term. Distribution includes selling, licensing, providing access to, or otherwise making available by any means. Commercial terms include, without limitation, level of service, availability, and output. Section 16729 does not impair or limit the applicability of antitrust laws. This is a general commercial prohibition, not a rental-specific prohibition on all pricing algorithms.",
+      "requirement_support": [
+        "ab_restraint",
+        "ab_algorithm_definition",
+        "ab_distribution",
+        "ab_commercial_term",
+        "ab_price",
+        "ab_person_exclusion",
+        "person_16702",
+        "ab_nonimpairment"
+      ],
+      "proposed_patch": {
+        "effective_date": "2026-01-01",
+        "semantic_verification": "needs_review",
+        "coverage_conditions/args/0/reason": "The actor and each person counted as an algorithm user require factual and interpretive classification under BPC16702 and16729(d)(5); the incorporated definition is now available, but qualifying persons cannot be inferred from an address or software account count.",
+        "status_events": [
+          {
+            "status": "enacted",
+            "on": "2025-10-06",
+            "evidence": [
+              {
+                "doc_id": "P11_CA_AB325_HISTORY",
+                "quote": "10/06/25\nChaptered by Secretary of State - Chapter 338, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+                "start": 839,
+                "end": 947,
+                "supports": [
+                  "status",
+                  "on"
+                ]
+              }
+            ]
+          }
+        ],
+        "evidence_append": [
+          {
+            "doc_id": "P11_CA_BPC_ART2",
+            "quote": "(Added by Stats. 2025, Ch. 338, Sec. 1.   (AB 325)   Effective January 1, 2026.)",
+            "start": 12125,
+            "end": 12205,
+            "supports": [
+              "effective_date"
+            ]
+          },
+          {
+            "doc_id": "P11_CA_BPC_ART1",
+            "quote": "As used in this chapter “person” or “persons” includes corporations, firms, partnerships and associations existing under or authorized by the laws of this State or any other State, or any foreign country.",
+            "start": 2023,
+            "end": 2227,
+            "supports": [
+              "coverage_conditions/args/0"
+            ]
+          },
+          {
+            "doc_id": "P11_CA_AB325_HISTORY",
+            "quote": "10/06/25\nChaptered by Secretary of State - Chapter 338, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+            "start": 839,
+            "end": 947,
+            "supports": [
+              "lifecycle",
+              "status_as_of"
+            ]
+          }
+        ],
+        "review_issues": [
+          "All six categories were reviewed. The supplied text supports two distinct algorithmic-pricing prohibitions but supplies no rules or express negative findings for rent increase limits, just-cause eviction, security deposits, application screening fees, or screening restrictions. Silence does not establish that no such rules exist.",
+          "Earlier bill versions are listed, but their substantive text is not supplied. No earlier substantive requirements, repeal events, or supersession dates are reconstructed.",
+          "Price includes money or other tangible or intangible value expected, required, or given for a product or service, including employee or independent-contractor compensation.",
+          "Section 16729(c) preserves antitrust-law applicability. No exact target citation and directional supersession or conflict are established, so no structured interaction is inferred.",
+          "Section 16756.1 establishes a general Cartwright Act pleading standard: factual allegations demonstrating a plausible contract, combination, or conspiracy to restrain trade or commerce suffice, and allegations tending to exclude independent action are not required. This procedural provision is not a separate rental-housing obligation within the six requested categories, but may apply to litigation involving the extracted prohibitions.",
+          "Section 3 addresses reimbursement of local agencies and school districts, not a rental-housing obligation within the requested categories.",
+          "The applicability-preservation clause in subsection (c) does not establish a directional supersession or conflict with an exactly identified provision.",
+          "The dated chaptering entry establishes enactment independently of the operative bill language. The lifecycle snapshot is tied to that entry, not to retrieval, and does not establish the effective date.",
+          "The predicate concerning a Cartwright Act violation requires an independently established legal and factual determination; the supplied section does not compile the underlying antitrust standard.",
+          "The prohibition applies generally to products and services and does not expressly identify rental housing.",
+          "The actor and each person counted as an algorithm user require factual and interpretive classification under BPC16702 and16729(d)(5); the incorporated definition is now available, but qualifying persons cannot be inferred from an address or software account count.",
+          "Official consolidated BPC16729 annotation expressly records January 1, 2026 as the effective date of AB325 section1. The bill/header and dated history separately establish October6,2025 enactment. No end date is supplied; none is invented.",
+          "These are agent-reviewed candidate amendments only. Independent human review, conduct facts, interpretation and any relevant chapter-wide exceptions remain unresolved; semantic_verification remains needs_review."
+        ]
+      },
+      "resolved_in_candidate_only": [
+        {
+          "original_issue": "The incorporated definition of person in Section 16702 is not supplied. Algorithm user count must count qualifying persons, not merely software accounts.",
+          "resolution_evidence": [
+            "person_16702",
+            "ab_person_exclusion"
+          ],
+          "scope": "missing source/date evidence only; not factual applicability, end date or legal verification"
+        },
+        {
+          "original_issue": "The source establishes enactment but does not state an effective date or an end date; neither is inferred.",
+          "resolution_evidence": [
+            "ab_16729_effective"
+          ],
+          "scope": "missing source/date evidence only; not factual applicability, end date or legal verification"
+        }
+      ],
+      "preserve_unchanged": [
+        "team_rule_id",
+        "evidence_mode",
+        "extraction_run_id",
+        "quoted_span",
+        "source_doc_id",
+        "source_url",
+        "existing evidence and offsets",
+        "all existing conduct predicates except replacement unsupported reason",
+        "end_consumer exemption predicate",
+        "interactions",
+        "end_date"
+      ],
+      "unresolved_dependencies": [
+        "human_review",
+        "qualifying_person_and_conduct_facts",
+        "unregistered_algorithm_input_fields",
+        "chapter_scope_and_legal_interpretation"
+      ]
+    },
+    {
+      "candidate_id": "candidate-r-912998e64d23de87a92c",
+      "existing_team_rule_id": "r-912998e64d23de87a92c",
+      "candidate_kind": "existing_rule_patch_not_applied",
+      "semantic_verification": "needs_review",
+      "old_primary_source_preserved": "D022",
+      "new_primary_source_not_required": true,
+      "provision_key": "common_pricing_algorithm_coercion",
+      "requirement_summary": "A person may not use or distribute a common pricing algorithm if the person coerces another person to set or adopt a price or commercial term recommended by that algorithm for the same or similar products or services in California. A common pricing algorithm is a methodology used by two or more persons that uses competitor data to recommend, align, stabilize, set, or otherwise influence a price or commercial term. Distribution includes selling, licensing, providing access to, or otherwise making available by any means. Commercial terms include, without limitation, level of service, availability, and output. Section 16729 does not impair or limit the applicability of antitrust laws.",
+      "requirement_support": [
+        "ab_coercion",
+        "ab_algorithm_definition",
+        "ab_distribution",
+        "ab_commercial_term",
+        "ab_price",
+        "ab_person_exclusion",
+        "person_16702",
+        "ab_nonimpairment"
+      ],
+      "proposed_patch": {
+        "effective_date": "2026-01-01",
+        "semantic_verification": "needs_review",
+        "coverage_conditions/args/0/reason": "The actor, coerced person and each person counted as an algorithm user require factual and interpretive classification under BPC16702 and16729(d)(5); the incorporated definition is now available, but qualifying persons cannot be inferred from an address or software account count.",
+        "status_events": [
+          {
+            "status": "enacted",
+            "on": "2025-10-06",
+            "evidence": [
+              {
+                "doc_id": "P11_CA_AB325_HISTORY",
+                "quote": "10/06/25\nChaptered by Secretary of State - Chapter 338, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+                "start": 839,
+                "end": 947,
+                "supports": [
+                  "status",
+                  "on"
+                ]
+              }
+            ]
+          }
+        ],
+        "evidence_append": [
+          {
+            "doc_id": "P11_CA_BPC_ART2",
+            "quote": "(Added by Stats. 2025, Ch. 338, Sec. 1.   (AB 325)   Effective January 1, 2026.)",
+            "start": 12125,
+            "end": 12205,
+            "supports": [
+              "effective_date"
+            ]
+          },
+          {
+            "doc_id": "P11_CA_BPC_ART1",
+            "quote": "As used in this chapter “person” or “persons” includes corporations, firms, partnerships and associations existing under or authorized by the laws of this State or any other State, or any foreign country.",
+            "start": 2023,
+            "end": 2227,
+            "supports": [
+              "coverage_conditions/args/0"
+            ]
+          },
+          {
+            "doc_id": "P11_CA_AB325_HISTORY",
+            "quote": "10/06/25\nChaptered by Secretary of State - Chapter 338, Statutes of 2025.\n10/06/25\nApproved by the Governor.",
+            "start": 839,
+            "end": 947,
+            "supports": [
+              "lifecycle",
+              "status_as_of"
+            ]
+          }
+        ],
+        "review_issues": [
+          "All six categories were reviewed. The supplied text supports two distinct algorithmic-pricing prohibitions but supplies no rules or express negative findings for rent increase limits, just-cause eviction, security deposits, application screening fees, or screening restrictions. Silence does not establish that no such rules exist.",
+          "Coercion and whether products or services are the same or similar require factual evaluation; coercion is not defined in the supplied text.",
+          "Earlier bill versions are listed, but their substantive text is not supplied. No earlier substantive requirements, repeal events, or supersession dates are reconstructed.",
+          "Price includes money or other tangible or intangible value expected, required, or given for a product or service, including employee or independent-contractor compensation.",
+          "Section 16729(c) preserves antitrust-law applicability. No exact target citation and directional supersession or conflict are established, so no structured interaction is inferred.",
+          "Section 16756.1 establishes a general Cartwright Act pleading standard: factual allegations demonstrating a plausible contract, combination, or conspiracy to restrain trade or commerce suffice, and allegations tending to exclude independent action are not required. This procedural provision is not a separate rental-housing obligation within the six requested categories, but may apply to litigation involving the extracted prohibitions.",
+          "Section 3 addresses reimbursement of local agencies and school districts, not a rental-housing obligation within the requested categories.",
+          "Subsection (b) does not expressly require proof of the contract, combination, or conspiracy specified separately in subsection (a); that condition is not imported.",
+          "The applicability-preservation clause in subsection (c) does not establish a directional supersession or conflict with an exactly identified provision.",
+          "The dated chaptering entry establishes enactment independently of the operative bill language. The lifecycle snapshot is tied to that entry, not to retrieval, and does not establish the effective date.",
+          "The text applies generally to products and services and does not expressly identify rental housing.",
+          "The actor, coerced person and each person counted as an algorithm user require factual and interpretive classification under BPC16702 and16729(d)(5); the incorporated definition is now available, but qualifying persons cannot be inferred from an address or software account count.",
+          "Official consolidated BPC16729 annotation expressly records January 1, 2026 as the effective date of AB325 section1. The bill/header and dated history separately establish October6,2025 enactment. No end date is supplied; none is invented.",
+          "These are agent-reviewed candidate amendments only. Independent human review, conduct facts, interpretation and any relevant chapter-wide exceptions remain unresolved; semantic_verification remains needs_review."
+        ]
+      },
+      "resolved_in_candidate_only": [
+        {
+          "original_issue": "The incorporated definition of person in Section 16702 is not supplied. It affects the actor, the coerced person, and the algorithm's qualifying user count.",
+          "resolution_evidence": [
+            "person_16702",
+            "ab_person_exclusion"
+          ],
+          "scope": "missing source/date evidence only; not factual applicability, end date or legal verification"
+        },
+        {
+          "original_issue": "The source establishes enactment but does not state an effective date or an end date; neither is inferred.",
+          "resolution_evidence": [
+            "ab_16729_effective"
+          ],
+          "scope": "missing source/date evidence only; not factual applicability, end date or legal verification"
+        }
+      ],
+      "preserve_unchanged": [
+        "team_rule_id",
+        "evidence_mode",
+        "extraction_run_id",
+        "quoted_span",
+        "source_doc_id",
+        "source_url",
+        "existing evidence and offsets",
+        "all existing conduct predicates except replacement unsupported reason",
+        "end_consumer exemption predicate",
+        "interactions",
+        "end_date"
+      ],
+      "unresolved_dependencies": [
+        "human_review",
+        "qualifying_person_and_conduct_facts",
+        "unregistered_algorithm_input_fields",
+        "chapter_scope_and_legal_interpretation"
+      ]
+    }
+  ],
+  "optional_penalty_patch": {
+    "applies_to_candidates": [
+      "r-57328356379e89d4f338",
+      "r-912998e64d23de87a92c"
+    ],
+    "purpose": "Replace obsolete statement that available text specifies no penalty amount, if root includes SB763 companion context in this bounded candidate. Do not add a separate fake property obligation.",
+    "penalties": "Chapter violations may trigger BPC16755 criminal penalties: corporations face a fine of not more than the greater of $6,000,000 or the applicable twice-gross-gain/loss amount; individuals face the stated one/two/three-year or up-to-one-year imprisonment alternatives and/or a fine of not more than the greater of $1,000,000 or the applicable twice-gross-gain/loss amount. Under16755.1, a qualifying Attorney General/district attorney civil action may assess up to $1,000,000 for each violation, considering statutory factors. Under16762, remedies/penalties are cumulative unless expressly provided otherwise. Application and amount remain subject to legal/factual review.",
+    "support_refs": [
+      "sb_criminal_scope",
+      "sb_corporate_fine",
+      "sb_individual_penalty",
+      "sb_gain_loss_alternative",
+      "sb_civil_penalty",
+      "sb_civil_factors",
+      "sb_civil_enforcers",
+      "sb_cumulative_remedies",
+      "sb_16755_effective",
+      "sb_16755_1_effective",
+      "sb_16762_effective"
+    ],
+    "missing_dependency": "Penal Code1170(h) is referenced but not captured; preserve exact incorporated reference and do not expand sentencing eligibility/detail. Historical pre-2026 operative16755 text is not captured here; the bill digest prior-law summary is not a replacement for a prior-version source."
+  },
+  "remaining_dependencies": [
+    {
+      "id": "human_review",
+      "status": "pending",
+      "remedy": "Independent human review of consequential requirements, classifications, dates, exceptions and applicability before any reviewed/legal-accuracy claim."
+    },
+    {
+      "id": "qualifying_person_and_conduct_facts",
+      "status": "unresolved",
+      "remedy": "Establish actual actors, qualifying users, competitor data, algorithm use/distribution and specific restraint/coercion conditions; California property location alone proves none of these."
+    },
+    {
+      "id": "unregistered_algorithm_input_fields",
+      "status": "integration_dependency",
+      "remedy": "Existing stored AST uses algorithm conduct fields not found in current fixed fact registry. Retain them and unsupported reason in candidates; any new user-answer registry fields/meanings require Platform stewardship."
+    },
+    {
+      "id": "chapter_scope_and_legal_interpretation",
+      "status": "unresolved",
+      "remedy": "Review chapter standard, relevant exemptions/immunities and undefined competitor data/coercion/same-or-similar terms as relevant. Do not convert contextual or procedural clauses into blanket exemptions or presumptions."
+    },
+    {
+      "id": "prior_law_and_current_completeness",
+      "status": "not_established",
+      "remedy": "No complete prior-version amendment/repeal/judicial-effect survey was performed. An annotated effective date supports this transition candidate, not exhaustive current legal status."
+    }
+  ],
+  "suggested_single_evaluator_checks": [
+    {
+      "as_of": "2025-12-31",
+      "expected_temporal_only": "not_yet_effective",
+      "condition": "Candidate enacted rules with supported2026-01-01 effective date; this does not prove no preexisting antitrust obligation."
+    },
+    {
+      "as_of": "2026-01-01",
+      "expected_temporal_only": "in_force",
+      "expected_evaluation": "unknown unless excluded by known geography/coverage; review and conduct gaps remain"
+    },
+    {
+      "as_of": "2026-01-02",
+      "expected_temporal_only": "in_force",
+      "expected_evaluation": "unknown unless excluded by known geography/coverage; no fabricated all-CA affected set"
+    },
+    {
+      "condition": "Known state outsideCA or decisive covered-conduct false",
+      "expected_evaluation": "inapplicable via existing evaluator"
+    },
+    {
+      "condition": "Existing immutable original rules/source bytes",
+      "expected": "unchanged; candidate facts/probes remain request-local and labeled synthetic when hypothetical"
+    }
+  ],
+  "evidence_supports": {
+    "old_d022_0": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "old_d022_1": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "old_d022_2": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "old_d022_3": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "old_d022_4": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "old_d022_5": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "old_d022_6": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "old_d022_7": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "old_d022_8": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "old_d022_9": [
+      "historical_primary_evidence_unchanged"
+    ],
+    "ab_enacted_text": [
+      "lifecycle",
+      "status_as_of",
+      "status_events"
+    ],
+    "sb_enacted_text": [
+      "lifecycle",
+      "status_as_of",
+      "status_events"
+    ],
+    "ab_enacted_history": [
+      "lifecycle",
+      "status_as_of",
+      "status_events"
+    ],
+    "sb_enacted_history": [
+      "lifecycle",
+      "status_as_of",
+      "status_events"
+    ],
+    "ab_restraint": [
+      "requirement",
+      "coverage_conditions"
+    ],
+    "ab_coercion": [
+      "requirement",
+      "coverage_conditions"
+    ],
+    "ab_nonimpairment": [
+      "requirement",
+      "coverage_conditions"
+    ],
+    "ab_antitrust_definition": [
+      "requirement",
+      "coverage_conditions"
+    ],
+    "ab_distribution": [
+      "requirement",
+      "coverage_conditions"
+    ],
+    "ab_person_exclusion": [
+      "coverage_conditions",
+      "exemption_conditions",
+      "exemptions"
+    ],
+    "ab_price": [
+      "requirement",
+      "coverage_conditions"
+    ],
+    "ab_commercial_term": [
+      "requirement",
+      "coverage_conditions"
+    ],
+    "ab_algorithm_definition": [
+      "requirement",
+      "coverage_conditions"
+    ],
+    "ab_restraint_code": [
+      "provision_identity",
+      "same_claim_in_code"
+    ],
+    "ab_coercion_code": [
+      "provision_identity",
+      "same_claim_in_code"
+    ],
+    "ab_nonimpairment_code": [
+      "provision_identity",
+      "same_claim_in_code"
+    ],
+    "ab_antitrust_definition_code": [
+      "provision_identity",
+      "same_claim_in_code"
+    ],
+    "ab_distribution_code": [
+      "provision_identity",
+      "same_claim_in_code"
+    ],
+    "ab_person_exclusion_code": [
+      "provision_identity",
+      "same_claim_in_code"
+    ],
+    "ab_price_code": [
+      "provision_identity",
+      "same_claim_in_code"
+    ],
+    "ab_commercial_term_code": [
+      "provision_identity",
+      "same_claim_in_code"
+    ],
+    "ab_algorithm_definition_code": [
+      "provision_identity",
+      "same_claim_in_code"
+    ],
+    "person_16702": [
+      "coverage_conditions",
+      "incorporated_person_definition"
+    ],
+    "labor_not_commodity": [
+      "chapter_context_not_automatic_algorithm_exemption"
+    ],
+    "trust_definition_16720": [
+      "coverage_conditions",
+      "underlying_cartwright_standard"
+    ],
+    "competition_16725": [
+      "chapter_context",
+      "qualified_exception_review"
+    ],
+    "trust_16726": [
+      "chapter_context",
+      "qualified_exception_review"
+    ],
+    "motor_carrier_16728": [
+      "chapter_context_not_automatic_housing_exception"
+    ],
+    "ab_16729_effective": [
+      "effective_date"
+    ],
+    "ab_16756_1_effective": [
+      "effective_date"
+    ],
+    "sb_16755_effective": [
+      "effective_date"
+    ],
+    "sb_16755_1_effective": [
+      "effective_date"
+    ],
+    "sb_16762_effective": [
+      "effective_date"
+    ],
+    "ab_pleading": [
+      "procedural_pleading_standard"
+    ],
+    "constitutional_effectiveness": [
+      "conditional_general_effectiveness_authority"
+    ],
+    "sb_criminal_scope": [
+      "penalties",
+      "penalty_trigger"
+    ],
+    "sb_corporate_fine": [
+      "penalties"
+    ],
+    "sb_individual_penalty": [
+      "penalties"
+    ],
+    "sb_gain_loss_alternative": [
+      "penalties"
+    ],
+    "sb_criminal_limitations": [
+      "penalty_action_limitations"
+    ],
+    "sb_civil_penalty": [
+      "penalties",
+      "penalty_trigger"
+    ],
+    "sb_civil_factors": [
+      "penalty_assessment_discretion"
+    ],
+    "sb_civil_enforcers": [
+      "penalty_enforcement_scope"
+    ],
+    "sb_civil_recipient": [
+      "penalty_recipient"
+    ],
+    "sb_cumulative_remedies": [
+      "penalties",
+      "qualified_cumulative_remedies"
+    ],
+    "old_treble_damages": [
+      "existing_remedies_not_added_by_SB763"
+    ]
+  }
+}

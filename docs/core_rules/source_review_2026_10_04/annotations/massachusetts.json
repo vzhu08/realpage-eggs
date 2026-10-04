@@ -1,0 +1,2256 @@
+{
+  "task": "CORE-06 Massachusetts P11 source review",
+  "base_commit": "9ff4396de5b6bdc5d8daed159a0778f993dd49cc",
+  "review_status": "agent_reviewed_candidates_needs_review",
+  "independent_human_review": false,
+  "provider_calls": 0,
+  "store_writes": 0,
+  "sources": {
+    "P11_MA_CELLA_OPINION_MIRROR": {
+      "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.uschamber.com/assets/documents/Opinion-Cella-v.-Campbell-Mass.pdf",
+      "retrieved_at": "2026-10-04T07:07:27.482921+00:00",
+      "sha256": "378a2c17f7280575937c072bbaaafcb83b713b204ffec1e6c1bcc686eb9baff4",
+      "manifest_sha256": null,
+      "capture_status": "supplementary",
+      "authority": "court_authored_third_party_mirror",
+      "source_type": "Court-authored disposition, third-party mirror",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Hosted by amicus participant US Chamber, not official court; official-hosted opinion/docket and final county judgment not verified.",
+        "Slip opinion subject to revision; majority and concurrence must remain distinct.",
+        "The opinion does not address all alternative challenges (footnote6)."
+      ],
+      "duplicate_of": null,
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_MA_CELLA_OPINION_MIRROR.pdf",
+      "raw_sha256": "6bc6f2e3e10be5e4c4dc39edbc8bc53798ab41714182969fff6e329ee0a030ef",
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_MA_CELLA_OPINION_MIRROR.txt",
+      "text_characters": 42199,
+      "integrity": "raw, derivative and canonical text hashes verified"
+    },
+    "P11_MA_H5008": {
+      "doc_id": "P11_MA_H5008",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/H5008.pdf",
+      "retrieved_at": "2026-10-04T07:07:27.182317+00:00",
+      "sha256": "1436cfb89c41b875f5cb69cf52685a723a44671cedc508b3dc6225c9e93b42f5",
+      "manifest_sha256": null,
+      "capture_status": "supplementary",
+      "authority": "official",
+      "source_type": "Official petition legislative transmission",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Prior certification/transmission is not proof of current ballot eligibility."
+      ],
+      "duplicate_of": null,
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_MA_H5008.pdf",
+      "raw_sha256": "277e0e09f2180dc2d3a2881081019347b0b672a496a830bcd24459ab94ceb193",
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_MA_H5008.txt",
+      "text_characters": 7510,
+      "integrity": "raw, derivative and canonical text hashes verified"
+    },
+    "P11_MA_H5222_STATUS": {
+      "doc_id": "P11_MA_H5222_STATUS",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/H5222",
+      "retrieved_at": "2026-10-04T07:06:40.919682+00:00",
+      "sha256": "6ad96053828823b69a204d8af97116a768766526378ee46982e66928630543c2",
+      "manifest_sha256": null,
+      "capture_status": "supplementary",
+      "authority": "official",
+      "source_type": "H5222 observed status/history",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Observed October4,2026; do not backdate retrieval or infer historical status solely from current absence of later actions."
+      ],
+      "duplicate_of": null,
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_MA_H5222_STATUS.html",
+      "raw_sha256": "6b4eadfd6a7598bf2d970fd59619512f7380f6d3be5416de3c14a33e5137a6f6",
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_MA_H5222_STATUS.txt",
+      "text_characters": 5843,
+      "integrity": "raw, derivative and canonical text hashes verified"
+    },
+    "P11_MA_H5222_TEXT": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/H5222/House/Bill/Text",
+      "retrieved_at": "2026-10-04T07:06:38.713282+00:00",
+      "sha256": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "manifest_sha256": null,
+      "capture_status": "supplementary",
+      "authority": "official",
+      "source_type": "H5222 substantive pending proposal text",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Proposal text, not enactment evidence."
+      ],
+      "duplicate_of": null,
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_MA_H5222_TEXT.html",
+      "raw_sha256": "48e2426130b3a258f1d05d1a0aa62255f21b0dc3c07f40f092c9d70af07ed832",
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_MA_H5222_TEXT.txt",
+      "text_characters": 5074,
+      "integrity": "raw, derivative and canonical text hashes verified"
+    },
+    "P11_MA_IP25_21_ORIGINAL": {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+      "retrieved_at": "2026-10-04T07:08:11.983868+00:00",
+      "sha256": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "manifest_sha256": null,
+      "capture_status": "supplementary",
+      "authority": "official",
+      "source_type": "Original IP25-21 petition",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Petition text does not establish later failure."
+      ],
+      "duplicate_of": null,
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_MA_IP25_21_ORIGINAL.pdf",
+      "raw_sha256": "11c071b03ff75eaa54d3e2f66092915a2d053d860e2a4ffa4db46c5d8d21ac60",
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_MA_IP25_21_ORIGINAL.txt",
+      "text_characters": 3313,
+      "integrity": "raw, derivative and canonical text hashes verified"
+    },
+    "P11_MA_S2983_STATUS": {
+      "doc_id": "P11_MA_S2983_STATUS",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/S2983",
+      "retrieved_at": "2026-10-04T07:06:43.402125+00:00",
+      "sha256": "9ac8888c7d059eebd0d1bbbf36745987213cd5ab20ab9e6368480f55c270805f",
+      "manifest_sha256": null,
+      "capture_status": "supplementary",
+      "authority": "official",
+      "source_type": "S2983 observed status/history",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Observed October4,2026; no enacted status inferred."
+      ],
+      "duplicate_of": null,
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_MA_S2983_STATUS.html",
+      "raw_sha256": "b31aa32381547a01b38cf38f8e024537f952da2f72173fcae1e27242615ebc01",
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_MA_S2983_STATUS.txt",
+      "text_characters": 6292,
+      "integrity": "raw, derivative and canonical text hashes verified"
+    },
+    "P11_MA_S2983_TEXT": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/S2983/Senate/Bill/Text",
+      "retrieved_at": "2026-10-04T07:06:41.719883+00:00",
+      "sha256": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "manifest_sha256": null,
+      "capture_status": "supplementary",
+      "authority": "official",
+      "source_type": "S2983 substantive pending proposal text",
+      "issues": [
+        "New acquisition; Core review pending. Not installed in any existing store.",
+        "Text is a derived representation. Raw response identity is retained separately in manifest.json.",
+        "Proposal text, not enactment evidence."
+      ],
+      "duplicate_of": null,
+      "raw_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/raw/P11_MA_S2983_TEXT.html",
+      "raw_sha256": "021f5871ad83a37ceeca4e6cfb00144444d08e8cc9e0a95e2d4a64e188011646",
+      "text_path": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/docs/platform_sources/2026-10-04/text/P11_MA_S2983_TEXT.txt",
+      "text_characters": 4633,
+      "integrity": "raw, derivative and canonical text hashes verified"
+    },
+    "D045": {
+      "doc_id": "D045",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/H5222",
+      "retrieved_at": "2026-10-01T22:36Z",
+      "sha256": "8bc537dfe4d0e00b829147ae82ba11d40bef8a2b0696f487c417ca517673bba7",
+      "manifest_sha256": "cc3a2eee30cb567368f01c10da2da5c38703954d3640199539737980a4caf8ca",
+      "capture_status": "supplied",
+      "authority": "official",
+      "source_type": "unclassified",
+      "issues": [
+        "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+      ],
+      "duplicate_of": null,
+      "input_location": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/data/core06-working/sources.json"
+    },
+    "D046": {
+      "doc_id": "D046",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/S2983",
+      "retrieved_at": "2026-10-01T22:36Z",
+      "sha256": "6ea5313d0a656ab73b683e72b594cf143ee61bd6923ee1d9f3df46682248004d",
+      "manifest_sha256": "d6ea7aaf0dd90e92cbb141ec127402e0db1e00fa3aa67d67a0f1264dd2b96827",
+      "capture_status": "supplied",
+      "authority": "official",
+      "source_type": "unclassified",
+      "issues": [
+        "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+      ],
+      "duplicate_of": null,
+      "input_location": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/data/core06-working/sources.json"
+    },
+    "D047": {
+      "doc_id": "D047",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Bills/194/S2983/BillHistory",
+      "retrieved_at": "2026-10-01T22:36Z",
+      "sha256": "9af3e5eba834b37a5115fef298f5e2a1c1fc0b93c1d69500aea9d6bc7ee24b93",
+      "manifest_sha256": "7216d5e2d65f6e8080124eb2fff6b6c209b14a400166df4d2ab1bcc1c351ef12",
+      "capture_status": "supplied",
+      "authority": "official",
+      "source_type": "unclassified",
+      "issues": [
+        "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+      ],
+      "duplicate_of": null,
+      "input_location": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/data/core06-working/sources.json"
+    },
+    "D048": {
+      "doc_id": "D048",
+      "jurisdictions": [
+        "MA"
+      ],
+      "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40P/Section4",
+      "retrieved_at": "2026-10-01T22:36Z",
+      "sha256": "090647f489ec5f03c114df23b74c28a107a7e0b855e382969c27dbf58a55837d",
+      "manifest_sha256": "713cae78081e4354df2926b45984dcacdb2299cf4edb8dcd7064d7da7fa3c06e",
+      "capture_status": "supplied",
+      "authority": "official",
+      "source_type": "unclassified",
+      "issues": [
+        "Manifest hash differs from delivered file bytes; both retained, original unmodified"
+      ],
+      "duplicate_of": null,
+      "input_location": "/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence/data/core06-working/sources.json"
+    }
+  },
+  "offset_convention": "All quote offsets are [start,end) Python Unicode character indices into the exact canonical derivative text; source_hash binds the derivative, raw_sha256 binds downloaded bytes separately. No source normalization.",
+  "source_spans": {
+    "H_identity": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "source_hash": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "start": 2,
+      "end": 180,
+      "text": "Bill H.5222\nThe General Laws are hereby amended by inserting after chapter 40Y the following chapter:-\nCHAPTER 40Z\nPREVENTING ALGORITHMIC RENT FIXING IN THE RENTAL HOUSING MARKET",
+      "section": null
+    },
+    "H_coordinate": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "source_hash": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "start": 320,
+      "end": 979,
+      "text": "“Coordinate”, with respect to a service provider, the:\n(i) collecting of historical or contemporaneous actual rent prices, price changes, supply levels, occupancy rates or lease or rental contract termination and renewal dates of residential dwelling units;\n(ii) analyzing or processing of the information described in clause (i), including with the use of a system, software or process that uses computation; and\n(iii) recommending of rental prices, lease terms, occupancy levels, or other commercial term to a real estate lessor, provided that publication of a fair market rent calculated using publicly available data shall not constitute a recommendation.",
+      "section": null
+    },
+    "H_lessor": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "source_hash": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "start": 1591,
+      "end": 1841,
+      "text": "“Real estate lessor”, any individual, corporation, partnership, association, joint-stock company, trust or unincorporated organization that owns real property and leases such property or any portion thereof in the form of a residential dwelling unit.",
+      "section": null
+    },
+    "H_unit": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "source_hash": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "start": 1842,
+      "end": 2125,
+      "text": "“Residential dwelling unit”, any house, apartment, accessory unit or other unit intended to be used as a person’s primary residence; provided, that “residential dwelling unit” shall not include inpatient medical care, licensed long-term care and detention or correctional facilities.",
+      "section": null
+    },
+    "H_provider": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "source_hash": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "start": 2126,
+      "end": 2232,
+      "text": "“Service provider”, any person that performs a coordination function for any real estate lessor or rentor.",
+      "section": null
+    },
+    "H_2a": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "source_hash": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "start": 2233,
+      "end": 2433,
+      "text": "Section 2. (a) No real estate lessor, or any agent or subcontractor thereof, shall subscribe to, contract with or otherwise exchange anything of value in return for the services of a service provider.",
+      "section": null
+    },
+    "H_2b": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "source_hash": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "start": 2434,
+      "end": 2572,
+      "text": "(b) No service provider shall facilitate an agreement to not compete among real estate lessors with respect to residential dwelling units.",
+      "section": null
+    },
+    "H_enforcement": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "source_hash": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "start": 2573,
+      "end": 4047,
+      "text": "Section 3. (a) A violation of this section shall also constitute an unfair method of competition, and a violation of the provisions of chapter 93 and chapter 93A. Nothing in this section shall impair or limit the applicability of either chapter or the antitrust laws, generally.\n(b) Pursuant to a motion by the plaintiff promptly made, the court may award simple interest on actual damages sustained by the plaintiff for the period beginning on the date of service of the pleading of the plaintiff setting forth a claim under this chapter and ending on the date of judgment, or for any shorter period therein.\n(c) At the election of the person alleging conduct constituting a violation of this section, or the named representative of a class or in a collective action alleging such conduct, no predispute arbitration agreement or predispute joint-action waiver shall be valid or enforceable with respect to a case which is filed under federal, tribal or state or local law and relates to a violation of this chapter.\n(d) In the case of any successful action to enforce liability pursuant to this chapter, the costs of the action together with reasonable attorney fees, expert fees and the costs of investigation as determined by the court shall be awarded to plaintiffs. Costs and attorney fees, expert fees and the costs of investigation shall be awarded to the attorney general or municipality where the attorney general or municipality successfully enforces this chapter.",
+      "section": null
+    },
+    "H_pleading": {
+      "doc_id": "P11_MA_H5222_TEXT",
+      "source_hash": "e00471a91467c4b006c76a013046a38549484acfd3225c03d13fb6028b4ebd6e",
+      "start": 4048,
+      "end": 4510,
+      "text": "Section 4. In a civil action filed pursuant to the provisions of chapter 93, a complaint:\n(i) plausibly pleads a violation of chapter 93A if the complaint contains factual allegations demonstrating that the existence of a contract, combination in the form of trust or otherwise, or conspiracy in restraint of trade or commerce is among the realm of plausible possibilities; and\n(ii) need not allege facts tending to exclude the possibility of independent action.",
+      "section": null
+    },
+    "S_identity": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "source_hash": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "start": 2,
+      "end": 97,
+      "text": "Bill S.2983\nChapter 186 of the General Laws is hereby amended by adding the following section:-",
+      "section": null
+    },
+    "S_device": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "source_hash": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "start": 241,
+      "end": 1036,
+      "text": "\"Algorithmic device\", any computational process derived from machine learning or other artificial intelligence techniques, that processes or calculates nonpublic competitor data for the purpose of advising a lessor or landlord concerning the amount of rent that the lessor or landlord may consider charging a tenant; provided, however that \"algorithmic device\" shall not include: (i) any report published periodically, but not more frequently than monthly, by a trade association that receives renter data and publishes it in an aggregated and anonymous matter; or (ii) a product used for the purpose of establishing rent or income limits in accordance with the affordable housing program guidelines of a local government, the commonwealth, the federal government or other political subdivision.",
+      "section": null
+    },
+    "S_coordination": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "source_hash": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "start": 1037,
+      "end": 1834,
+      "text": "“Coordinating function”, any action utilizing nonpublic competitor data that includes: (i) collecting historical or contemporaneous actual rent prices, supply levels or lease or rental contract termination and renewal dates of residential dwelling units from two or more rental property lessors or landlords; (ii) analyzing or processing of historical or contemporaneous actual rent prices, supply levels or lease or rental contract termination and renewal dates of residential dwelling units from two or more rental property lessors or landlords through use of a system, software or process that uses computation, including by using the information to train an algorithm; and (iii) recommending rental prices, lease renewal terms or ideal occupancy levels to a rental property lessor or landlord.",
+      "section": null
+    },
+    "S_coordinator": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "source_hash": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "start": 1835,
+      "end": 2142,
+      "text": "\"Coordinator\", any person who operates an algorithmic device, software or data analytics service that performs a coordinating function for any residential rental property lessor or landlord, including a residential rental property lessor or landlord performing a coordinating function for their own benefit.",
+      "section": null
+    },
+    "S_data": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "source_hash": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "start": 2143,
+      "end": 2526,
+      "text": "\"Nonpublic competitor data\", information that is not widely available or easily accessible to the public, including information about actual rent prices, occupancy rates, lease start and end dates, and similar data, regardless of whether the data are attributable to a specific competitor or anonymized, and that is derived from or otherwise provided by any other lessor or landlord.",
+      "section": null
+    },
+    "S_unit": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "source_hash": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "start": 2643,
+      "end": 2779,
+      "text": "\"Residential Dwelling Unit\", any house, apartment, accessory unit or other unit intended to be used as a primary residence in the state.",
+      "section": null
+    },
+    "S_15Gb": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "source_hash": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "start": 2780,
+      "end": 3265,
+      "text": "(b) In setting the amount of rent to be charged to a tenant for the occupancy of a residential dwelling unit, determining any change in the amount of rent to be charged to a tenant for the renewed occupancy of a residential dwelling unit, or otherwise determining what amount to charge a tenant to rent a residential dwelling unit, or determining occupancy levels of residential dwelling units, no lessor or landlord shall employ, use or rely upon an algorithmic device or coordinator.",
+      "section": null
+    },
+    "S_penalty": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "source_hash": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "start": 3266,
+      "end": 3611,
+      "text": "(c) A violation of this section shall constitute a violation of section 2 of Chapter 93A. The civil penalty for each violation of this section shall not exceed $5,000 per violation. For the purposes of this section, each time a rent is determined, increased or otherwise set under subsection (b) shall constitute a single and separate violation.",
+      "section": null
+    },
+    "S_fees": {
+      "doc_id": "P11_MA_S2983_TEXT",
+      "source_hash": "f13c13cdc504498d3b19473af1dcdc05a1a4ab84e3a10c42c93dbe26de825fb8",
+      "start": 3612,
+      "end": 4069,
+      "text": "(d) In the case of any successful action to enforce liability pursuant to this chapter, the costs of the action together with reasonable attorney fees, expert fees and the costs of investigation as determined by the court shall be awarded to plaintiffs. Costs and attorney fees, expert fees and the costs of investigation shall be awarded to the attorney general or municipality where the attorney general or municipality successfully enforces this chapter.",
+      "section": null
+    },
+    "H_status_current": {
+      "doc_id": "P11_MA_H5222_STATUS",
+      "source_hash": "6ad96053828823b69a204d8af97116a768766526378ee46982e66928630543c2",
+      "start": 2756,
+      "end": 2809,
+      "text": "Status:\nReferred to House Committee on Ways and Means",
+      "section": null
+    },
+    "H_referral": {
+      "doc_id": "P11_MA_H5222_STATUS",
+      "source_hash": "6ad96053828823b69a204d8af97116a768766526378ee46982e66928630543c2",
+      "start": 2951,
+      "end": 3147,
+      "text": "3/12/2026\nHouse\nReported from the committee on Housing\n3/12/2026\nHouse\nNew draft of H1564\n3/12/2026\nHouse\nBill reported favorably by committee and referred to the committee on House Ways and Means",
+      "section": null
+    },
+    "H_status_oct1": {
+      "doc_id": "D045",
+      "source_hash": "8bc537dfe4d0e00b829147ae82ba11d40bef8a2b0696f487c417ca517673bba7",
+      "start": 382,
+      "end": 435,
+      "text": "Status:\nReferred to\nHouse Committee on Ways and Means",
+      "section": null
+    },
+    "H_old_capture_identity": {
+      "doc_id": "D045",
+      "source_hash": "8bc537dfe4d0e00b829147ae82ba11d40bef8a2b0696f487c417ca517673bba7",
+      "start": 0,
+      "end": 122,
+      "text": "SOURCE: https://malegislature.gov/Bills/194/H5222\nRETRIEVED: 2026-10-01 22:36 UTC\n\nBill H.5222\nSkip to Content\nBill H.5222",
+      "section": null
+    },
+    "S_status_current": {
+      "doc_id": "P11_MA_S2983_STATUS",
+      "source_hash": "9ac8888c7d059eebd0d1bbbf36745987213cd5ab20ab9e6368480f55c270805f",
+      "start": 3191,
+      "end": 3245,
+      "text": "Status:\nReferred to Senate Committee on Ways and Means",
+      "section": null
+    },
+    "S_referral": {
+      "doc_id": "P11_MA_S2983_STATUS",
+      "source_hash": "9ac8888c7d059eebd0d1bbbf36745987213cd5ab20ab9e6368480f55c270805f",
+      "start": 3387,
+      "end": 3596,
+      "text": "3/12/2026\nSenate\nReported from the committee on Housing\n3/12/2026\nSenate\nNew draft of S994 and S1016\n3/12/2026\nSenate\nBill reported favorably by committee and referred to the committee on Senate Ways and Means",
+      "section": null
+    },
+    "S_status_oct1": {
+      "doc_id": "D046",
+      "source_hash": "6ea5313d0a656ab73b683e72b594cf143ee61bd6923ee1d9f3df46682248004d",
+      "start": 817,
+      "end": 871,
+      "text": "Status:\nReferred to\nSenate Committee on Ways and Means",
+      "section": null
+    },
+    "S_old_capture_identity": {
+      "doc_id": "D046",
+      "source_hash": "6ea5313d0a656ab73b683e72b594cf143ee61bd6923ee1d9f3df46682248004d",
+      "start": 0,
+      "end": 122,
+      "text": "SOURCE: https://malegislature.gov/Bills/194/S2983\nRETRIEVED: 2026-10-01 22:36 UTC\n\nBill S.2983\nSkip to Content\nBill S.2983",
+      "section": null
+    },
+    "S_history_oct1": {
+      "doc_id": "D047",
+      "source_hash": "9af3e5eba834b37a5115fef298f5e2a1c1fc0b93c1d69500aea9d6bc7ee24b93",
+      "start": 1025,
+      "end": 1234,
+      "text": "3/12/2026\nSenate\nReported from the committee on\nHousing\n3/12/2026\nSenate\nNew draft of\nS994\nand\nS1016\n3/12/2026\nSenate\nBill reported favorably by committee and referred to the committee on\nSenate Ways and Means",
+      "section": null
+    },
+    "I_identity": {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "source_hash": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "start": 13,
+      "end": 329,
+      "text": "INITIATIVE PETITION  FOR  A  LAW\nAn  Initiative Petition to Protect Tenants by Limiting Rent Increases\nBe  it enacted by the People, and  by their authority:\nThe General Laws  are hereby amended  by striking out chapter 40P  and  inserting in place thereof the following \nchapter\nCHAPTER 40P. LIMITING RENT INCREASES",
+      "section": null
+    },
+    "I_purpose": {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "source_hash": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "start": 350,
+      "end": 573,
+      "text": "The purpose of this act is to provide housing stability for tenants, landlords, and communities across the \ncommonwealth, and curb displacement as a result of the housing shortage and affordability crisis in \nMassachusetts.",
+      "section": null
+    },
+    "I_scope": {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "source_hash": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "start": 632,
+      "end": 1441,
+      "text": "covered Dwelling Units” shall mean all dwelling units leased for residential, but not commercial, use, except:\n(a) Dwelling units in owner-occupied buildings with four or fewer units.\n(b) Dwelling units whose rents are subject to regulation by a public authority; provided, however, that \noccupancy by a tenant with a mobile housing voucher does not constitute being regulated by a public \nauthority.\n(c) Dwelling units that are rented primarily to transient guests for a period of less than 14 consecutive days.\n(d) Dwelling units in facilities operated solely for educational, religious, or non-profit purposes.\n(e) Dwelling units for which the first residential certificate of occupancy is less than 10  years old, for a \nperiod of 10  years from the date at which such certificate of occupancy was issued.",
+      "section": null
+    },
+    "I_cap": {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "source_hash": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "start": 1475,
+      "end": 1813,
+      "text": "This chapter shall establish a limit on any annual rent increase for a covered dwelling unit in the \ncommonwealth, which shall not exceed the annual increase in Consumer Price Index or 5%, whichever is lower, \nin any 12-month period. This limit shall apply whether or not there is a change in-tenancy during the relevant \n12-month period.",
+      "section": null
+    },
+    "I_base_rent": {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "source_hash": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "start": 1830,
+      "end": 2349,
+      "text": "For purposes of this chapter, the rent amount in place on January 31, 2026, shall serve as the base rent upon \nwhich any annual rent increase shall be applied. If a covered dwelling unit is vacant on the date of adoption, the \nlast rent amount charged shall serve as the base rent. If there was no previous rent amount, or if no rent has been \ncharged for at least the previous five years, for a covered dwelling unit the rent amount the owner first charges \nfollowing the date of adoption shall serve as the base rent.",
+      "section": null
+    },
+    "I_exemption_notice": {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "source_hash": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "start": 2350,
+      "end": 2636,
+      "text": "Where dwelling units are exempt, a notice of exemption must be provided with the lease for all tenancies. If \nthere is no written lease for such dwelling units, the tenants-at-will must be provided with a written notice of \nexemption prior to the acceptance of the initial rent payment.",
+      "section": null
+    },
+    "I_penalties": {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "source_hash": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "start": 2659,
+      "end": 3115,
+      "text": "Any violation of this chapter shall be deemed an unfair and deceptive act under chapter 93A of the General \nLaws. Any person claiming a violation of this chapter may pursue remedies under section 9 of chapter 93A. The \nattorney general is hereby authorized to bring an action under section 4 of chapter 93A to enforce this provision \nand to obtain restitution, civil penalties, injunctive relief, and any other relief awarded pursuant to said chapter \n93A.",
+      "section": null
+    },
+    "I_savings": {
+      "doc_id": "P11_MA_IP25_21_ORIGINAL",
+      "source_hash": "c628b36b39401730dcbf99c8350e31bc8f91e6f86892cc554253b0f77f1268f2",
+      "start": 3159,
+      "end": 3311,
+      "text": "Nothing in this section shall be construed to interfere with any existing rights or protections afforded to tenants \nunder current state or federal law.",
+      "section": null
+    },
+    "I_transmission_date": {
+      "doc_id": "P11_MA_H5008",
+      "source_hash": "1436cfb89c41b875f5cb69cf52685a723a44671cedc508b3dc6225c9e93b42f5",
+      "start": 218,
+      "end": 242,
+      "text": "BOSTON, January 7, 2026.",
+      "section": null
+    },
+    "I_transmission": {
+      "doc_id": "P11_MA_H5008",
+      "source_hash": "1436cfb89c41b875f5cb69cf52685a723a44671cedc508b3dc6225c9e93b42f5",
+      "start": 346,
+      "end": 796,
+      "text": "Sir: — I herewith transmit to you, in accordance with the requirements \nof Article XLVIII of the Amendments to the Constitution “An Initiative Petition \nto Protect Tenants by Limiting Rent Increases,” signed by ten qualified voters and \nfiled with this department on or before December 3, 2025, together with additional \nsignatures of qualified voters in the number of 88,132, being a sufficient number \nto comply with the provisions of said Article.",
+      "section": null
+    },
+    "I_filed": {
+      "doc_id": "P11_MA_H5008",
+      "source_hash": "1436cfb89c41b875f5cb69cf52685a723a44671cedc508b3dc6225c9e93b42f5",
+      "start": 1228,
+      "end": 1309,
+      "text": "FILED ON: 1/21/2026 \nHOUSE  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  No. 5008",
+      "section": null
+    },
+    "I_certification_identity": {
+      "doc_id": "P11_MA_H5008",
+      "source_hash": "1436cfb89c41b875f5cb69cf52685a723a44671cedc508b3dc6225c9e93b42f5",
+      "start": 5407,
+      "end": 5722,
+      "text": "CERTIFICATE OF THE ATTORNEY GENERAL. \n \n \n            September 3, 2025. \n \n \n \nHonorable William Francis Galvin \nSecretary of the Commonwealth \nOne Ashburton Place, Room 1705 \nBoston, Massachusetts 02108 \n \n \nRe: Initiative Petition No. 25-21:  An Initiative Petition to Protect Tenants \nby Limiting Rent Increases",
+      "section": null
+    },
+    "I_certification": {
+      "doc_id": "P11_MA_H5008",
+      "source_hash": "1436cfb89c41b875f5cb69cf52685a723a44671cedc508b3dc6225c9e93b42f5",
+      "start": 6000,
+      "end": 6503,
+      "text": "I hereby certify that this measure is in proper form for submission to \nthe people; that the measure is not, either affirmatively or negatively, \nsubstantially the same as any measure which has been qualified for submission \nor submitted to the people at either of the two preceding biennial state elections; \nand that it contains only subjects that are related or are mutually dependent and \nwhich are not excluded from the initiative process pursuant to Article 48, the \nInitiative, Part 2, Section 2.",
+      "section": null
+    },
+    "I_majority_identity_date": {
+      "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+      "source_hash": "378a2c17f7280575937c072bbaaafcb83b713b204ffec1e6c1bcc686eb9baff4",
+      "start": 408,
+      "end": 531,
+      "text": "SJC-13893 \n \nARCANGELO CELLA & others1  vs.  ATTORNEY GENERAL & another.2 \n \n \n \nSuffolk.     May 6, 2026. - June 23, 2026.",
+      "section": null
+    },
+    "I_slip_notice": {
+      "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+      "source_hash": "378a2c17f7280575937c072bbaaafcb83b713b204ffec1e6c1bcc686eb9baff4",
+      "start": 0,
+      "end": 154,
+      "text": "NOTICE:  All slip opinions and orders are subject to formal \nrevision and are superseded by the advance sheets and bound \nvolumes of the Official Reports.",
+      "section": null
+    },
+    "I_majority_opening": {
+      "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+      "source_hash": "378a2c17f7280575937c072bbaaafcb83b713b204ffec1e6c1bcc686eb9baff4",
+      "start": 2247,
+      "end": 3040,
+      "text": "GAZIANO, J.  The plaintiffs, a group of registered voters, \nchallenge the Attorney General's certification of Initiative \nPetition 25-21, titled \"An Initiative Petition to Protect \nTenants by Limiting Rent Increases.\"  The petition proposes a \nlimit on annual rent increases for residential dwelling units \nbut exempts several categories of units, including those in \n\"facilities operated solely for . . . religious . . . purposes.\"  \nBecause of this exemption, we conclude that the petition \n\"relates to religion, religious practices or religious \ninstitutions,\" an excluded matter under art. 48 of the \nAmendments to the Massachusetts Constitution.  See art. 48, The \nInitiative, II, § 2.  Accordingly, art. 48 bars placement of the \npetition on the November 2026 Statewide election ballot.3",
+      "section": null
+    },
+    "I_majority_disposition": {
+      "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+      "source_hash": "378a2c17f7280575937c072bbaaafcb83b713b204ffec1e6c1bcc686eb9baff4",
+      "start": 23491,
+      "end": 23973,
+      "text": "Conclusion.  The petition contains matters \"relat[ing] to \nreligion, religious practices or religious institutions\" in \nviolation of art. 48.  Art. 48, The Initiative, II, § 2.  We \nremand the matter to the county court for entry of a judgment \ndeclaring that Initiative Petition 25-21 is not in compliance \nwith the excluded matters section of art. 48, and enjoining the \nSecretary from taking steps to place the measure on the 2026 \nStatewide election ballot.  \n       So ordered.",
+      "section": null
+    },
+    "I_concurrence": {
+      "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+      "source_hash": "378a2c17f7280575937c072bbaaafcb83b713b204ffec1e6c1bcc686eb9baff4",
+      "start": 23976,
+      "end": 24851,
+      "text": "KAFKER, J. (concurring).  I concur albeit on narrower \ngrounds.  Although most of the initiative, which proposes to \nlimit residential rent increases for large for-profit landlords, \nclearly has nothing to do with religion or religious \ninstitutions, its exemption for \"[d]welling units in facilities \noperated solely for . . . religious . . . purposes\" requires \napplication of a test based on religion (emphasis added).  This \nreligious test also invites an intrusive review of religious \nbeliefs and practices proscribed by art. 48 of the Amendments to \nthe Massachusetts Constitution, as the test whether a rental \nunit is being operated \"solely for . . . religious . . . \npurposes\" requires an inquiry into the internal affairs of, and \neven the motives and purposes of, a religious institution, as \nwell as its finances.  That, in my opinion, is prohibited by \nart. 48.",
+      "section": null
+    },
+    "I_unreached_challenges": {
+      "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+      "source_hash": "378a2c17f7280575937c072bbaaafcb83b713b204ffec1e6c1bcc686eb9baff4",
+      "start": 9138,
+      "end": 9536,
+      "text": "6 Given the result we reach, we do not address the \nplaintiffs' alternative arguments that the petition is \ninconsistent with the right to receive compensation for private \nproperty appropriated to public use, that it violates art. 48's \nrelated subjects requirement, or that the Attorney General's \nsummary of the petition is unfair.  See Anderson v. Attorney \nGen., 479 Mass. 780, 798 n.9 (2018).",
+      "section": null
+    },
+    "D048_existing_statute": {
+      "doc_id": "D048",
+      "source_hash": "090647f489ec5f03c114df23b74c28a107a7e0b855e382969c27dbf58a55837d",
+      "start": 414,
+      "end": 1878,
+      "text": "Section 4. No city or town may enact, maintain or enforce rent control of any kind, except that any city or town that accepts this chapter may adopt rent control regulation that provides:\n(a) after six months from the date of the initial adoption of rent control regulation by a particular city or town, compliance on the part of property owners as to the rent control regulation or any subsequently adopted rent control regulation shall be entirely voluntary and uncoerced, and the property of a person or entity declining to have his or its property subjected to such regulation shall be wholly unaffected by any aspect of the rent control regulation or any subsequently adopted rent control regulation;\n(b) such regulation may not include the regulation of occupancy, services, evictions, condominium conversion or the removal of properties from such regulation, nor may such regulation apply to any rental unit that is owned by a person or entity owning less than ten rental units or that has a fair market rent exceeding $400; and\n(c) a municipality adopting such regulation shall compensate owners of rent controlled units for each unit in the amount of the difference between the unit's fair market rent and the unit's below market, rent controlled rent, with such compensation coming from the municipality's general funds, so that the cost of any rent control shall be borne by all taxpayers of a municipality and not by the owners of regulated units only.",
+      "section": null
+    }
+  },
+  "rule_drafts": [
+    {
+      "candidate_id": "H5222_2a_paid_coordination",
+      "review_status": "needs_review",
+      "candidate_only": true,
+      "eligible_for_store_import": false,
+      "rule_draft": {
+        "jurisdiction": "MA",
+        "level": "state",
+        "category": "algorithmic_rent_setting",
+        "provision_key": "paid_coordination_service",
+        "title": "H.5222 proposed paid coordination-service prohibition",
+        "requirement": "A real estate lessor, its agent or subcontractor would be prohibited from subscribing to, contracting with, or exchanging anything of value for a service provider that performs the defined coordination function.",
+        "key_value": null,
+        "citation": "H.5222, proposed G.L. c.40Z §2(a)",
+        "quoted_span": "Section 2. (a) No real estate lessor, or any agent or subcontractor thereof, shall subscribe to, contract with or otherwise exchange anything of value in return for the services of a service provider.",
+        "source_doc_id": "P11_MA_H5222_TEXT",
+        "source_url": "https://malegislature.gov/Bills/194/H5222/House/Bill/Text",
+        "coverage_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled subject and transaction: actual real-estate lessor/agent/subcontractor and paid services of a provider performing defined coordination; preserve collection, processing and recommendation conjunction."
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled definition limits: primary-residence unit and excluded facility kinds; public-data fair-market-rent publication is not a recommendation."
+        },
+        "exemptions": "Residential dwelling unit excludes inpatient medical care, licensed long-term care, detention and correctional facilities. Publicly available-data fair-market-rent publication is outside recommendation.",
+        "lifecycle": "pending",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": "2026-10-04",
+        "status_events": [
+          {
+            "status": "pending",
+            "on": "2026-03-12",
+            "evidence": [
+              {
+                "doc_id": "P11_MA_H5222_STATUS",
+                "quote": "3/12/2026\nHouse\nReported from the committee on Housing\n3/12/2026\nHouse\nNew draft of H1564\n3/12/2026\nHouse\nBill reported favorably by committee and referred to the committee on House Ways and Means",
+                "start": 2951,
+                "end": 3147,
+                "supports": [
+                  "status_events/0",
+                  "lifecycle"
+                ]
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "Section 2. (a) No real estate lessor, or any agent or subcontractor thereof, shall subscribe to, contract with or otherwise exchange anything of value in return for the services of a service provider.",
+            "start": 2233,
+            "end": 2433,
+            "supports": [
+              "requirement",
+              "quoted_span"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "Bill H.5222\nThe General Laws are hereby amended by inserting after chapter 40Y the following chapter:-\nCHAPTER 40Z\nPREVENTING ALGORITHMIC RENT FIXING IN THE RENTAL HOUSING MARKET",
+            "start": 2,
+            "end": 180,
+            "supports": [
+              "citation",
+              "title"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "“Coordinate”, with respect to a service provider, the:\n(i) collecting of historical or contemporaneous actual rent prices, price changes, supply levels, occupancy rates or lease or rental contract termination and renewal dates of residential dwelling units;\n(ii) analyzing or processing of the information described in clause (i), including with the use of a system, software or process that uses computation; and\n(iii) recommending of rental prices, lease terms, occupancy levels, or other commercial term to a real estate lessor, provided that publication of a fair market rent calculated using publicly available data shall not constitute a recommendation.",
+            "start": 320,
+            "end": 979,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions",
+              "exemptions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "“Real estate lessor”, any individual, corporation, partnership, association, joint-stock company, trust or unincorporated organization that owns real property and leases such property or any portion thereof in the form of a residential dwelling unit.",
+            "start": 1591,
+            "end": 1841,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "“Residential dwelling unit”, any house, apartment, accessory unit or other unit intended to be used as a person’s primary residence; provided, that “residential dwelling unit” shall not include inpatient medical care, licensed long-term care and detention or correctional facilities.",
+            "start": 1842,
+            "end": 2125,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions",
+              "exemptions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "“Service provider”, any person that performs a coordination function for any real estate lessor or rentor.",
+            "start": 2126,
+            "end": 2232,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "Section 3. (a) A violation of this section shall also constitute an unfair method of competition, and a violation of the provisions of chapter 93 and chapter 93A. Nothing in this section shall impair or limit the applicability of either chapter or the antitrust laws, generally.\n(b) Pursuant to a motion by the plaintiff promptly made, the court may award simple interest on actual damages sustained by the plaintiff for the period beginning on the date of service of the pleading of the plaintiff setting forth a claim under this chapter and ending on the date of judgment, or for any shorter period therein.\n(c) At the election of the person alleging conduct constituting a violation of this section, or the named representative of a class or in a collective action alleging such conduct, no predispute arbitration agreement or predispute joint-action waiver shall be valid or enforceable with respect to a case which is filed under federal, tribal or state or local law and relates to a violation of this chapter.\n(d) In the case of any successful action to enforce liability pursuant to this chapter, the costs of the action together with reasonable attorney fees, expert fees and the costs of investigation as determined by the court shall be awarded to plaintiffs. Costs and attorney fees, expert fees and the costs of investigation shall be awarded to the attorney general or municipality where the attorney general or municipality successfully enforces this chapter.",
+            "start": 2573,
+            "end": 4047,
+            "supports": [
+              "penalties"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_STATUS",
+            "quote": "Status:\nReferred to House Committee on Ways and Means",
+            "start": 2756,
+            "end": 2809,
+            "supports": [
+              "lifecycle",
+              "status_as_of"
+            ]
+          },
+          {
+            "doc_id": "D045",
+            "quote": "Status:\nReferred to\nHouse Committee on Ways and Means",
+            "start": 382,
+            "end": 435,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": "Proposed §3: chapter 93/93A treatment, simple interest and litigation remedies; no fixed numeric fine in this text.",
+        "review_issues": [
+          "Agent-reviewed draft only; needs_review; no independent human legal verification.",
+          "No provider extraction, extraction_run_id, evidence_mode, official Rule ID or accepted property impact is asserted.",
+          "Property/predicate mappings are uncompiled; unsupported expressions deliberately retain uncertainty.",
+          "Pending proposal; neither referral nor observed status is enactment or an effective date.",
+          "Current text captured October 4 is tied to H.5222; comparison against a historical authenticated bill version is still needed before claiming exact October 1 text identity.",
+          "Coordinate is defined, but service provider refers to a coordination function; preserve the wording and review the terminology mismatch.",
+          "H.5222 contains no express two-lessor or nonpublic-data condition; do not import S.2983 conditions.",
+          "Chapter 40Z sections 3 and 4 contain scope/cross-reference wording requiring review (this section; chapter 93 versus 93A)."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      }
+    },
+    {
+      "candidate_id": "H5222_2b_agreement_not_compete",
+      "review_status": "needs_review",
+      "candidate_only": true,
+      "eligible_for_store_import": false,
+      "rule_draft": {
+        "jurisdiction": "MA",
+        "level": "state",
+        "category": "algorithmic_rent_setting",
+        "provision_key": "facilitate_noncompetition_agreement",
+        "title": "H.5222 proposed service-provider noncompetition-agreement prohibition",
+        "requirement": "A service provider would be prohibited from facilitating an agreement not to compete among real estate lessors with respect to residential dwelling units.",
+        "key_value": null,
+        "citation": "H.5222, proposed G.L. c.40Z §2(b)",
+        "quoted_span": "(b) No service provider shall facilitate an agreement to not compete among real estate lessors with respect to residential dwelling units.",
+        "source_doc_id": "P11_MA_H5222_TEXT",
+        "source_url": "https://malegislature.gov/Bills/194/H5222/House/Bill/Text",
+        "coverage_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled service-provider subject, qualifying coordination function and actual facilitated agreement not to compete among real-estate lessors; property attribution is not established merely by MA address."
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled definition limits: primary-residence scope, excluded facility kinds and public-data fair-market-rent publication; no independent numeric-unit exception stated."
+        },
+        "exemptions": "Same defined residential-unit and recommendation exclusions as §2(a); do not infer a universal prohibition on all algorithms.",
+        "lifecycle": "pending",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": "2026-10-04",
+        "status_events": [
+          {
+            "status": "pending",
+            "on": "2026-03-12",
+            "evidence": [
+              {
+                "doc_id": "P11_MA_H5222_STATUS",
+                "quote": "3/12/2026\nHouse\nReported from the committee on Housing\n3/12/2026\nHouse\nNew draft of H1564\n3/12/2026\nHouse\nBill reported favorably by committee and referred to the committee on House Ways and Means",
+                "start": 2951,
+                "end": 3147,
+                "supports": [
+                  "status_events/0",
+                  "lifecycle"
+                ]
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "(b) No service provider shall facilitate an agreement to not compete among real estate lessors with respect to residential dwelling units.",
+            "start": 2434,
+            "end": 2572,
+            "supports": [
+              "requirement",
+              "quoted_span"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "Bill H.5222\nThe General Laws are hereby amended by inserting after chapter 40Y the following chapter:-\nCHAPTER 40Z\nPREVENTING ALGORITHMIC RENT FIXING IN THE RENTAL HOUSING MARKET",
+            "start": 2,
+            "end": 180,
+            "supports": [
+              "citation",
+              "title"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "“Coordinate”, with respect to a service provider, the:\n(i) collecting of historical or contemporaneous actual rent prices, price changes, supply levels, occupancy rates or lease or rental contract termination and renewal dates of residential dwelling units;\n(ii) analyzing or processing of the information described in clause (i), including with the use of a system, software or process that uses computation; and\n(iii) recommending of rental prices, lease terms, occupancy levels, or other commercial term to a real estate lessor, provided that publication of a fair market rent calculated using publicly available data shall not constitute a recommendation.",
+            "start": 320,
+            "end": 979,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions",
+              "exemptions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "“Real estate lessor”, any individual, corporation, partnership, association, joint-stock company, trust or unincorporated organization that owns real property and leases such property or any portion thereof in the form of a residential dwelling unit.",
+            "start": 1591,
+            "end": 1841,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "“Residential dwelling unit”, any house, apartment, accessory unit or other unit intended to be used as a person’s primary residence; provided, that “residential dwelling unit” shall not include inpatient medical care, licensed long-term care and detention or correctional facilities.",
+            "start": 1842,
+            "end": 2125,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions",
+              "exemptions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "“Service provider”, any person that performs a coordination function for any real estate lessor or rentor.",
+            "start": 2126,
+            "end": 2232,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_TEXT",
+            "quote": "Section 3. (a) A violation of this section shall also constitute an unfair method of competition, and a violation of the provisions of chapter 93 and chapter 93A. Nothing in this section shall impair or limit the applicability of either chapter or the antitrust laws, generally.\n(b) Pursuant to a motion by the plaintiff promptly made, the court may award simple interest on actual damages sustained by the plaintiff for the period beginning on the date of service of the pleading of the plaintiff setting forth a claim under this chapter and ending on the date of judgment, or for any shorter period therein.\n(c) At the election of the person alleging conduct constituting a violation of this section, or the named representative of a class or in a collective action alleging such conduct, no predispute arbitration agreement or predispute joint-action waiver shall be valid or enforceable with respect to a case which is filed under federal, tribal or state or local law and relates to a violation of this chapter.\n(d) In the case of any successful action to enforce liability pursuant to this chapter, the costs of the action together with reasonable attorney fees, expert fees and the costs of investigation as determined by the court shall be awarded to plaintiffs. Costs and attorney fees, expert fees and the costs of investigation shall be awarded to the attorney general or municipality where the attorney general or municipality successfully enforces this chapter.",
+            "start": 2573,
+            "end": 4047,
+            "supports": [
+              "penalties"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5222_STATUS",
+            "quote": "Status:\nReferred to House Committee on Ways and Means",
+            "start": 2756,
+            "end": 2809,
+            "supports": [
+              "lifecycle",
+              "status_as_of"
+            ]
+          },
+          {
+            "doc_id": "D045",
+            "quote": "Status:\nReferred to\nHouse Committee on Ways and Means",
+            "start": 382,
+            "end": 435,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": "Proposed §3 chapter 93/93A and litigation remedies; retain this section scope ambiguity.",
+        "review_issues": [
+          "Agent-reviewed draft only; needs_review; no independent human legal verification.",
+          "No provider extraction, extraction_run_id, evidence_mode, official Rule ID or accepted property impact is asserted.",
+          "Property/predicate mappings are uncompiled; unsupported expressions deliberately retain uncertainty.",
+          "Pending proposal; neither referral nor observed status is enactment or an effective date.",
+          "Current text captured October 4 is tied to H.5222; comparison against a historical authenticated bill version is still needed before claiming exact October 1 text identity.",
+          "Coordinate is defined, but service provider refers to a coordination function; preserve the wording and review the terminology mismatch.",
+          "H.5222 contains no express two-lessor or nonpublic-data condition; do not import S.2983 conditions.",
+          "Chapter 40Z sections 3 and 4 contain scope/cross-reference wording requiring review (this section; chapter 93 versus 93A).",
+          "This prohibition targets the service provider; rental-property coverage/impact requires the relationship and facilitated agreement, not just a lessor address."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      }
+    },
+    {
+      "candidate_id": "S2983_15Gb_device_or_coordinator",
+      "review_status": "needs_review",
+      "candidate_only": true,
+      "eligible_for_store_import": false,
+      "rule_draft": {
+        "jurisdiction": "MA",
+        "level": "state",
+        "category": "algorithmic_rent_setting",
+        "provision_key": "use_algorithmic_device_or_coordinator",
+        "title": "S.2983 proposed algorithmic-device or coordinator restriction",
+        "requirement": "In determining rent, renewed rent or occupancy levels for residential dwelling units, a lessor or landlord would be prohibited from employing, using or relying upon an algorithmic device or coordinator as separately defined.",
+        "key_value": "Civil penalty not exceeding $5,000 per violation; separate rent determination/increase/setting counting stated in subsection (c).",
+        "citation": "S.2983, proposed G.L. c.186 §15G(b)",
+        "quoted_span": "(b) In setting the amount of rent to be charged to a tenant for the occupancy of a residential dwelling unit, determining any change in the amount of rent to be charged to a tenant for the renewed occupancy of a residential dwelling unit, or otherwise determining what amount to charge a tenant to rent a residential dwelling unit, or determining occupancy levels of residential dwelling units, no lessor or landlord shall employ, use or rely upon an algorithmic device or coordinator.",
+        "source_doc_id": "P11_MA_S2983_TEXT",
+        "source_url": "https://malegislature.gov/Bills/194/S2983/Senate/Bill/Text",
+        "coverage_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled residential-unit rent/occupancy decision by lessor/landlord and qualifying algorithmic-device OR coordinator route; preserve AI/nonpublic-data device conditions and separately defined coordinating-function conditions."
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled device exclusions for sufficiently infrequent aggregated anonymous trade-association reports and affordable-housing-program rent/income-limit products; their interaction with independent coordinator coverage needs review."
+        },
+        "exemptions": "Device definition excludes specified trade-association reports published no more frequently than monthly and products used to establish affordable-program rent/income limits.",
+        "lifecycle": "pending",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": "2026-10-04",
+        "status_events": [
+          {
+            "status": "pending",
+            "on": "2026-03-12",
+            "evidence": [
+              {
+                "doc_id": "P11_MA_S2983_STATUS",
+                "quote": "3/12/2026\nSenate\nReported from the committee on Housing\n3/12/2026\nSenate\nNew draft of S994 and S1016\n3/12/2026\nSenate\nBill reported favorably by committee and referred to the committee on Senate Ways and Means",
+                "start": 3387,
+                "end": 3596,
+                "supports": [
+                  "status_events/0",
+                  "lifecycle"
+                ]
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "doc_id": "P11_MA_S2983_TEXT",
+            "quote": "(b) In setting the amount of rent to be charged to a tenant for the occupancy of a residential dwelling unit, determining any change in the amount of rent to be charged to a tenant for the renewed occupancy of a residential dwelling unit, or otherwise determining what amount to charge a tenant to rent a residential dwelling unit, or determining occupancy levels of residential dwelling units, no lessor or landlord shall employ, use or rely upon an algorithmic device or coordinator.",
+            "start": 2780,
+            "end": 3265,
+            "supports": [
+              "requirement",
+              "quoted_span"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_S2983_TEXT",
+            "quote": "Bill S.2983\nChapter 186 of the General Laws is hereby amended by adding the following section:-",
+            "start": 2,
+            "end": 97,
+            "supports": [
+              "citation",
+              "title"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_S2983_TEXT",
+            "quote": "\"Algorithmic device\", any computational process derived from machine learning or other artificial intelligence techniques, that processes or calculates nonpublic competitor data for the purpose of advising a lessor or landlord concerning the amount of rent that the lessor or landlord may consider charging a tenant; provided, however that \"algorithmic device\" shall not include: (i) any report published periodically, but not more frequently than monthly, by a trade association that receives renter data and publishes it in an aggregated and anonymous matter; or (ii) a product used for the purpose of establishing rent or income limits in accordance with the affordable housing program guidelines of a local government, the commonwealth, the federal government or other political subdivision.",
+            "start": 241,
+            "end": 1036,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions",
+              "exemptions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_S2983_TEXT",
+            "quote": "“Coordinating function”, any action utilizing nonpublic competitor data that includes: (i) collecting historical or contemporaneous actual rent prices, supply levels or lease or rental contract termination and renewal dates of residential dwelling units from two or more rental property lessors or landlords; (ii) analyzing or processing of historical or contemporaneous actual rent prices, supply levels or lease or rental contract termination and renewal dates of residential dwelling units from two or more rental property lessors or landlords through use of a system, software or process that uses computation, including by using the information to train an algorithm; and (iii) recommending rental prices, lease renewal terms or ideal occupancy levels to a rental property lessor or landlord.",
+            "start": 1037,
+            "end": 1834,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_S2983_TEXT",
+            "quote": "\"Coordinator\", any person who operates an algorithmic device, software or data analytics service that performs a coordinating function for any residential rental property lessor or landlord, including a residential rental property lessor or landlord performing a coordinating function for their own benefit.",
+            "start": 1835,
+            "end": 2142,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_S2983_TEXT",
+            "quote": "\"Nonpublic competitor data\", information that is not widely available or easily accessible to the public, including information about actual rent prices, occupancy rates, lease start and end dates, and similar data, regardless of whether the data are attributable to a specific competitor or anonymized, and that is derived from or otherwise provided by any other lessor or landlord.",
+            "start": 2143,
+            "end": 2526,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_S2983_TEXT",
+            "quote": "\"Residential Dwelling Unit\", any house, apartment, accessory unit or other unit intended to be used as a primary residence in the state.",
+            "start": 2643,
+            "end": 2779,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_S2983_TEXT",
+            "quote": "(c) A violation of this section shall constitute a violation of section 2 of Chapter 93A. The civil penalty for each violation of this section shall not exceed $5,000 per violation. For the purposes of this section, each time a rent is determined, increased or otherwise set under subsection (b) shall constitute a single and separate violation.",
+            "start": 3266,
+            "end": 3611,
+            "supports": [
+              "key_value",
+              "penalties"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_S2983_TEXT",
+            "quote": "(d) In the case of any successful action to enforce liability pursuant to this chapter, the costs of the action together with reasonable attorney fees, expert fees and the costs of investigation as determined by the court shall be awarded to plaintiffs. Costs and attorney fees, expert fees and the costs of investigation shall be awarded to the attorney general or municipality where the attorney general or municipality successfully enforces this chapter.",
+            "start": 3612,
+            "end": 4069,
+            "supports": [
+              "penalties"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_S2983_STATUS",
+            "quote": "Status:\nReferred to Senate Committee on Ways and Means",
+            "start": 3191,
+            "end": 3245,
+            "supports": [
+              "lifecycle",
+              "status_as_of"
+            ]
+          },
+          {
+            "doc_id": "D046",
+            "quote": "Status:\nReferred to\nSenate Committee on Ways and Means",
+            "start": 817,
+            "end": 871,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": "Proposed §15G(c)-(d): G.L. c.93A §2 violation; civil penalty <= $5,000 per violation, each rent determination/increase/setting separate; successful enforcement costs and fees.",
+        "review_issues": [
+          "Agent-reviewed draft only; needs_review; no independent human legal verification.",
+          "No provider extraction, extraction_run_id, evidence_mode, official Rule ID or accepted property impact is asserted.",
+          "Property/predicate mappings are uncompiled; unsupported expressions deliberately retain uncertainty.",
+          "Pending proposal; neither referral nor observed status is enactment or an effective date.",
+          "Current text captured October 4 is tied to S.2983; comparison against a historical authenticated bill version is still needed before claiming exact October 1 text identity.",
+          "The algorithmic-device route has machine-learning/AI and nonpublic-competitor-data conditions; the separately defined coordinator route also includes software/data analytics and self-benefiting landlords.",
+          "Coordinating-function clauses use i, ii, and iii; preserve that connective and the two-or-more-lessors limitations on collection/analysis; do not collapse into uses any rent software.",
+          "The device definition contains trade-association-report and affordable-program exclusions. Whether an excluded product separately falls within the coordinator route needs interpretation; do not make a blanket property exemption.",
+          "Penalty says each rent determination/increase/setting is a separate violation; do not assume the same enumerated counting rule for an occupancy-only act."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      }
+    },
+    {
+      "candidate_id": "IP25_21_rent_cap",
+      "review_status": "needs_review",
+      "candidate_only": true,
+      "eligible_for_store_import": false,
+      "rule_draft": {
+        "jurisdiction": "MA",
+        "level": "state",
+        "category": "rent_increase_limits",
+        "provision_key": "annual_rent_increase_cap",
+        "title": "IP25-21 proposed annual rent-increase limit",
+        "requirement": "For covered Massachusetts residential rental units, annual rent increases in any 12-month period would not exceed the lesser of the annual CPI increase and 5%, despite tenancy changes; proposed base-rent rules and all five exclusions are retained.",
+        "key_value": "min(annual CPI increase, 5%) within any 12-month period; base rent reference January 31, 2026 with vacancy/never-rented/five-year exceptions.",
+        "citation": "Initiative Petition 25-21 / H.5008, proposed G.L. c.40P §§2-3",
+        "quoted_span": "This chapter shall establish a limit on any annual rent increase for a covered dwelling unit in the \ncommonwealth, which shall not exceed the annual increase in Consumer Price Index or 5%, whichever is lower, \nin any 12-month period. This limit shall apply whether or not there is a change in-tenancy during the relevant \n12-month period.",
+        "source_doc_id": "P11_MA_IP25_21_ORIGINAL",
+        "source_url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+        "coverage_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled dwelling unit leased for residential rather than commercial use in Massachusetts; covered unit and rent-increase/base-rent facts are not derivable solely from supplied property address."
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled alternatives: owner-occupied <=4 units; regulated rents with mobile-voucher carveback; primarily transient <14 consecutive days; facilities solely educational/religious/nonprofit; first residential certificate age <10 years."
+        },
+        "exemptions": "All five §2 exclusions retained. A mobile housing voucher alone does not establish public-authority rent regulation.",
+        "lifecycle": "unknown",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": null,
+        "status_events": [],
+        "evidence": [
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "This chapter shall establish a limit on any annual rent increase for a covered dwelling unit in the \ncommonwealth, which shall not exceed the annual increase in Consumer Price Index or 5%, whichever is lower, \nin any 12-month period. This limit shall apply whether or not there is a change in-tenancy during the relevant \n12-month period.",
+            "start": 1475,
+            "end": 1813,
+            "supports": [
+              "requirement",
+              "quoted_span"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "INITIATIVE PETITION  FOR  A  LAW\nAn  Initiative Petition to Protect Tenants by Limiting Rent Increases\nBe  it enacted by the People, and  by their authority:\nThe General Laws  are hereby amended  by striking out chapter 40P  and  inserting in place thereof the following \nchapter\nCHAPTER 40P. LIMITING RENT INCREASES",
+            "start": 13,
+            "end": 329,
+            "supports": [
+              "citation",
+              "title"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "The purpose of this act is to provide housing stability for tenants, landlords, and communities across the \ncommonwealth, and curb displacement as a result of the housing shortage and affordability crisis in \nMassachusetts.",
+            "start": 350,
+            "end": 573,
+            "supports": [
+              "jurisdiction"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "covered Dwelling Units” shall mean all dwelling units leased for residential, but not commercial, use, except:\n(a) Dwelling units in owner-occupied buildings with four or fewer units.\n(b) Dwelling units whose rents are subject to regulation by a public authority; provided, however, that \noccupancy by a tenant with a mobile housing voucher does not constitute being regulated by a public \nauthority.\n(c) Dwelling units that are rented primarily to transient guests for a period of less than 14 consecutive days.\n(d) Dwelling units in facilities operated solely for educational, religious, or non-profit purposes.\n(e) Dwelling units for which the first residential certificate of occupancy is less than 10  years old, for a \nperiod of 10  years from the date at which such certificate of occupancy was issued.",
+            "start": 632,
+            "end": 1441,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions",
+              "exemptions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "This chapter shall establish a limit on any annual rent increase for a covered dwelling unit in the \ncommonwealth, which shall not exceed the annual increase in Consumer Price Index or 5%, whichever is lower, \nin any 12-month period. This limit shall apply whether or not there is a change in-tenancy during the relevant \n12-month period.",
+            "start": 1475,
+            "end": 1813,
+            "supports": [
+              "key_value"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "For purposes of this chapter, the rent amount in place on January 31, 2026, shall serve as the base rent upon \nwhich any annual rent increase shall be applied. If a covered dwelling unit is vacant on the date of adoption, the \nlast rent amount charged shall serve as the base rent. If there was no previous rent amount, or if no rent has been \ncharged for at least the previous five years, for a covered dwelling unit the rent amount the owner first charges \nfollowing the date of adoption shall serve as the base rent.",
+            "start": 1830,
+            "end": 2349,
+            "supports": [
+              "key_value",
+              "requirement"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "Any violation of this chapter shall be deemed an unfair and deceptive act under chapter 93A of the General \nLaws. Any person claiming a violation of this chapter may pursue remedies under section 9 of chapter 93A. The \nattorney general is hereby authorized to bring an action under section 4 of chapter 93A to enforce this provision \nand to obtain restitution, civil penalties, injunctive relief, and any other relief awarded pursuant to said chapter \n93A.",
+            "start": 2659,
+            "end": 3115,
+            "supports": [
+              "penalties"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5008",
+            "quote": "CERTIFICATE OF THE ATTORNEY GENERAL. \n \n \n            September 3, 2025. \n \n \n \nHonorable William Francis Galvin \nSecretary of the Commonwealth \nOne Ashburton Place, Room 1705 \nBoston, Massachusetts 02108 \n \n \nRe: Initiative Petition No. 25-21:  An Initiative Petition to Protect Tenants \nby Limiting Rent Increases",
+            "start": 5407,
+            "end": 5722,
+            "supports": [
+              "citation"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5008",
+            "quote": "I hereby certify that this measure is in proper form for submission to \nthe people; that the measure is not, either affirmatively or negatively, \nsubstantially the same as any measure which has been qualified for submission \nor submitted to the people at either of the two preceding biennial state elections; \nand that it contains only subjects that are related or are mutually dependent and \nwhich are not excluded from the initiative process pursuant to Article 48, the \nInitiative, Part 2, Section 2.",
+            "start": 6000,
+            "end": 6503,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": "Proposed §4: chapter 93A unfair/deceptive act, private §9 remedies and AG §4 enforcement; no numeric penalty specified.",
+        "review_issues": [
+          "Agent-reviewed draft only; needs_review; no independent human legal verification.",
+          "No provider extraction, extraction_run_id, evidence_mode, official Rule ID or accepted property impact is asserted.",
+          "Property/predicate mappings are uncompiled; unsupported expressions deliberately retain uncertainty.",
+          "Current actual lifecycle is left unknown: court-authored slip opinion from amicus-participant mirror supports a conditional failed candidate, while official docket/opinion and final county judgment remain unverified.",
+          "January 31, 2026 is a proposed base-rent reference date, not enactment/effectiveness; no effective date is supplied.",
+          "No adoption, enactment, voter rejection or current operative rent cap is established by the petition/transmission.",
+          "CPI index/series, measurement convention, negative-CPI behavior and application of overlapping 12-month periods require interpretation; do not invent an annual cap amount.",
+          "Use actual first residential certificate-of-occupancy date with preserved precision, not construction year.",
+          "Raw petition heading reads Covered Dwelling Units; derivative drops/changes the initial quoted capital. Offsets intentionally reference the unchanged derivative, and raw pages were visually inspected."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      }
+    },
+    {
+      "candidate_id": "IP25_21_exemption_notice",
+      "review_status": "needs_review",
+      "candidate_only": true,
+      "eligible_for_store_import": false,
+      "rule_draft": {
+        "jurisdiction": "MA",
+        "level": "state",
+        "category": "rent_increase_limits",
+        "provision_key": "exempt_unit_notice",
+        "title": "IP25-21 proposed exemption notice duty",
+        "requirement": "For an exempt dwelling unit, an exemption notice would accompany the lease for every tenancy; without a written lease, tenants-at-will would receive written exemption notice before acceptance of the initial rent payment.",
+        "key_value": null,
+        "citation": "Initiative Petition 25-21 / H.5008, proposed G.L. c.40P §3",
+        "quoted_span": "Where dwelling units are exempt, a notice of exemption must be provided with the lease for all tenancies. If \nthere is no written lease for such dwelling units, the tenants-at-will must be provided with a written notice of \nexemption prior to the acceptance of the initial rent payment.",
+        "source_doc_id": "P11_MA_IP25_21_ORIGINAL",
+        "source_url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+        "coverage_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled exempt dwelling unit under proposed §2, tenancy/written-lease status and initial-rent-payment timing. This duty covers exempt units rather than covered cap units."
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Review notice-duty scope; do not reuse the five cap exclusions as notice exemptions, because the proposal expressly imposes notice on exempt units."
+        },
+        "exemptions": "No additional notice exception stated in the supplied clause; §2 cap exclusions define this notice duty target, not an exclusion from notice.",
+        "lifecycle": "unknown",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": null,
+        "status_events": [],
+        "evidence": [
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "Where dwelling units are exempt, a notice of exemption must be provided with the lease for all tenancies. If \nthere is no written lease for such dwelling units, the tenants-at-will must be provided with a written notice of \nexemption prior to the acceptance of the initial rent payment.",
+            "start": 2350,
+            "end": 2636,
+            "supports": [
+              "requirement",
+              "quoted_span"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "INITIATIVE PETITION  FOR  A  LAW\nAn  Initiative Petition to Protect Tenants by Limiting Rent Increases\nBe  it enacted by the People, and  by their authority:\nThe General Laws  are hereby amended  by striking out chapter 40P  and  inserting in place thereof the following \nchapter\nCHAPTER 40P. LIMITING RENT INCREASES",
+            "start": 13,
+            "end": 329,
+            "supports": [
+              "citation",
+              "title"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "The purpose of this act is to provide housing stability for tenants, landlords, and communities across the \ncommonwealth, and curb displacement as a result of the housing shortage and affordability crisis in \nMassachusetts.",
+            "start": 350,
+            "end": 573,
+            "supports": [
+              "jurisdiction"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "covered Dwelling Units” shall mean all dwelling units leased for residential, but not commercial, use, except:\n(a) Dwelling units in owner-occupied buildings with four or fewer units.\n(b) Dwelling units whose rents are subject to regulation by a public authority; provided, however, that \noccupancy by a tenant with a mobile housing voucher does not constitute being regulated by a public \nauthority.\n(c) Dwelling units that are rented primarily to transient guests for a period of less than 14 consecutive days.\n(d) Dwelling units in facilities operated solely for educational, religious, or non-profit purposes.\n(e) Dwelling units for which the first residential certificate of occupancy is less than 10  years old, for a \nperiod of 10  years from the date at which such certificate of occupancy was issued.",
+            "start": 632,
+            "end": 1441,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "Any violation of this chapter shall be deemed an unfair and deceptive act under chapter 93A of the General \nLaws. Any person claiming a violation of this chapter may pursue remedies under section 9 of chapter 93A. The \nattorney general is hereby authorized to bring an action under section 4 of chapter 93A to enforce this provision \nand to obtain restitution, civil penalties, injunctive relief, and any other relief awarded pursuant to said chapter \n93A.",
+            "start": 2659,
+            "end": 3115,
+            "supports": [
+              "penalties"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5008",
+            "quote": "CERTIFICATE OF THE ATTORNEY GENERAL. \n \n \n            September 3, 2025. \n \n \n \nHonorable William Francis Galvin \nSecretary of the Commonwealth \nOne Ashburton Place, Room 1705 \nBoston, Massachusetts 02108 \n \n \nRe: Initiative Petition No. 25-21:  An Initiative Petition to Protect Tenants \nby Limiting Rent Increases",
+            "start": 5407,
+            "end": 5722,
+            "supports": [
+              "citation"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5008",
+            "quote": "I hereby certify that this measure is in proper form for submission to \nthe people; that the measure is not, either affirmatively or negatively, \nsubstantially the same as any measure which has been qualified for submission \nor submitted to the people at either of the two preceding biennial state elections; \nand that it contains only subjects that are related or are mutually dependent and \nwhich are not excluded from the initiative process pursuant to Article 48, the \nInitiative, Part 2, Section 2.",
+            "start": 6000,
+            "end": 6503,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": "Proposed §4 chapter 93A private/AG remedies; no numeric penalty specified.",
+        "review_issues": [
+          "Agent-reviewed draft only; needs_review; no independent human legal verification.",
+          "No provider extraction, extraction_run_id, evidence_mode, official Rule ID or accepted property impact is asserted.",
+          "Property/predicate mappings are uncompiled; unsupported expressions deliberately retain uncertainty.",
+          "Current actual lifecycle is left unknown: court-authored slip opinion from amicus-participant mirror supports a conditional failed candidate, while official docket/opinion and final county judgment remain unverified.",
+          "January 31, 2026 is a proposed base-rent reference date, not enactment/effectiveness; no effective date is supplied.",
+          "No adoption, enactment, voter rejection or current operative rent cap is established by the petition/transmission.",
+          "CPI index/series, measurement convention, negative-CPI behavior and application of overlapping 12-month periods require interpretation; do not invent an annual cap amount.",
+          "Use actual first residential certificate-of-occupancy date with preserved precision, not construction year.",
+          "Raw petition heading reads Covered Dwelling Units; derivative drops/changes the initial quoted capital. Offsets intentionally reference the unchanged derivative, and raw pages were visually inspected.",
+          "The cap and exemption notice have different scope; modeling one rule with shared cap exemptions would erase the expressly imposed notice duty."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      }
+    }
+  ],
+  "conditional_failed_rule_drafts": [
+    {
+      "candidate_id": "IP25_21_rent_cap_conditional_failed",
+      "review_status": "needs_review",
+      "candidate_only": true,
+      "eligible_for_store_import": false,
+      "condition": "Only as a labeled conditional lifecycle probe assuming the captured mirror accurately reproduces the June 23, 2026 SJC disposition; official validation remains outstanding.",
+      "rule_draft": {
+        "jurisdiction": "MA",
+        "level": "state",
+        "category": "rent_increase_limits",
+        "provision_key": "annual_rent_increase_cap",
+        "title": "IP25-21 proposed annual rent-increase limit",
+        "requirement": "For covered Massachusetts residential rental units, annual rent increases in any 12-month period would not exceed the lesser of the annual CPI increase and 5%, despite tenancy changes; proposed base-rent rules and all five exclusions are retained.",
+        "key_value": "min(annual CPI increase, 5%) within any 12-month period; base rent reference January 31, 2026 with vacancy/never-rented/five-year exceptions.",
+        "citation": "Initiative Petition 25-21 / H.5008, proposed G.L. c.40P §§2-3",
+        "quoted_span": "This chapter shall establish a limit on any annual rent increase for a covered dwelling unit in the \ncommonwealth, which shall not exceed the annual increase in Consumer Price Index or 5%, whichever is lower, \nin any 12-month period. This limit shall apply whether or not there is a change in-tenancy during the relevant \n12-month period.",
+        "source_doc_id": "P11_MA_IP25_21_ORIGINAL",
+        "source_url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+        "coverage_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled dwelling unit leased for residential rather than commercial use in Massachusetts; covered unit and rent-increase/base-rent facts are not derivable solely from supplied property address."
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled alternatives: owner-occupied <=4 units; regulated rents with mobile-voucher carveback; primarily transient <14 consecutive days; facilities solely educational/religious/nonprofit; first residential certificate age <10 years."
+        },
+        "exemptions": "All five §2 exclusions retained. A mobile housing voucher alone does not establish public-authority rent regulation.",
+        "lifecycle": "failed",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": null,
+        "status_events": [
+          {
+            "status": "pending",
+            "on": "2025-09-03",
+            "evidence": [
+              {
+                "doc_id": "P11_MA_H5008",
+                "quote": "CERTIFICATE OF THE ATTORNEY GENERAL. \n \n \n            September 3, 2025. \n \n \n \nHonorable William Francis Galvin \nSecretary of the Commonwealth \nOne Ashburton Place, Room 1705 \nBoston, Massachusetts 02108 \n \n \nRe: Initiative Petition No. 25-21:  An Initiative Petition to Protect Tenants \nby Limiting Rent Increases",
+                "start": 5407,
+                "end": 5722,
+                "supports": [
+                  "status_events/0",
+                  "lifecycle"
+                ]
+              },
+              {
+                "doc_id": "P11_MA_H5008",
+                "quote": "I hereby certify that this measure is in proper form for submission to \nthe people; that the measure is not, either affirmatively or negatively, \nsubstantially the same as any measure which has been qualified for submission \nor submitted to the people at either of the two preceding biennial state elections; \nand that it contains only subjects that are related or are mutually dependent and \nwhich are not excluded from the initiative process pursuant to Article 48, the \nInitiative, Part 2, Section 2.",
+                "start": 6000,
+                "end": 6503,
+                "supports": [
+                  "status_events/0",
+                  "lifecycle"
+                ]
+              }
+            ]
+          },
+          {
+            "status": "failed",
+            "on": "2026-06-23",
+            "evidence": [
+              {
+                "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+                "quote": "SJC-13893 \n \nARCANGELO CELLA & others1  vs.  ATTORNEY GENERAL & another.2 \n \n \n \nSuffolk.     May 6, 2026. - June 23, 2026.",
+                "start": 408,
+                "end": 531,
+                "supports": [
+                  "status_events/1",
+                  "lifecycle"
+                ]
+              },
+              {
+                "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+                "quote": "Conclusion.  The petition contains matters \"relat[ing] to \nreligion, religious practices or religious institutions\" in \nviolation of art. 48.  Art. 48, The Initiative, II, § 2.  We \nremand the matter to the county court for entry of a judgment \ndeclaring that Initiative Petition 25-21 is not in compliance \nwith the excluded matters section of art. 48, and enjoining the \nSecretary from taking steps to place the measure on the 2026 \nStatewide election ballot.  \n       So ordered.",
+                "start": 23491,
+                "end": 23973,
+                "supports": [
+                  "status_events/1",
+                  "lifecycle"
+                ]
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "This chapter shall establish a limit on any annual rent increase for a covered dwelling unit in the \ncommonwealth, which shall not exceed the annual increase in Consumer Price Index or 5%, whichever is lower, \nin any 12-month period. This limit shall apply whether or not there is a change in-tenancy during the relevant \n12-month period.",
+            "start": 1475,
+            "end": 1813,
+            "supports": [
+              "requirement",
+              "quoted_span"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "INITIATIVE PETITION  FOR  A  LAW\nAn  Initiative Petition to Protect Tenants by Limiting Rent Increases\nBe  it enacted by the People, and  by their authority:\nThe General Laws  are hereby amended  by striking out chapter 40P  and  inserting in place thereof the following \nchapter\nCHAPTER 40P. LIMITING RENT INCREASES",
+            "start": 13,
+            "end": 329,
+            "supports": [
+              "citation",
+              "title"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "The purpose of this act is to provide housing stability for tenants, landlords, and communities across the \ncommonwealth, and curb displacement as a result of the housing shortage and affordability crisis in \nMassachusetts.",
+            "start": 350,
+            "end": 573,
+            "supports": [
+              "jurisdiction"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "covered Dwelling Units” shall mean all dwelling units leased for residential, but not commercial, use, except:\n(a) Dwelling units in owner-occupied buildings with four or fewer units.\n(b) Dwelling units whose rents are subject to regulation by a public authority; provided, however, that \noccupancy by a tenant with a mobile housing voucher does not constitute being regulated by a public \nauthority.\n(c) Dwelling units that are rented primarily to transient guests for a period of less than 14 consecutive days.\n(d) Dwelling units in facilities operated solely for educational, religious, or non-profit purposes.\n(e) Dwelling units for which the first residential certificate of occupancy is less than 10  years old, for a \nperiod of 10  years from the date at which such certificate of occupancy was issued.",
+            "start": 632,
+            "end": 1441,
+            "supports": [
+              "coverage_conditions",
+              "exemption_conditions",
+              "exemptions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "This chapter shall establish a limit on any annual rent increase for a covered dwelling unit in the \ncommonwealth, which shall not exceed the annual increase in Consumer Price Index or 5%, whichever is lower, \nin any 12-month period. This limit shall apply whether or not there is a change in-tenancy during the relevant \n12-month period.",
+            "start": 1475,
+            "end": 1813,
+            "supports": [
+              "key_value"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "For purposes of this chapter, the rent amount in place on January 31, 2026, shall serve as the base rent upon \nwhich any annual rent increase shall be applied. If a covered dwelling unit is vacant on the date of adoption, the \nlast rent amount charged shall serve as the base rent. If there was no previous rent amount, or if no rent has been \ncharged for at least the previous five years, for a covered dwelling unit the rent amount the owner first charges \nfollowing the date of adoption shall serve as the base rent.",
+            "start": 1830,
+            "end": 2349,
+            "supports": [
+              "key_value",
+              "requirement"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "Any violation of this chapter shall be deemed an unfair and deceptive act under chapter 93A of the General \nLaws. Any person claiming a violation of this chapter may pursue remedies under section 9 of chapter 93A. The \nattorney general is hereby authorized to bring an action under section 4 of chapter 93A to enforce this provision \nand to obtain restitution, civil penalties, injunctive relief, and any other relief awarded pursuant to said chapter \n93A.",
+            "start": 2659,
+            "end": 3115,
+            "supports": [
+              "penalties"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5008",
+            "quote": "CERTIFICATE OF THE ATTORNEY GENERAL. \n \n \n            September 3, 2025. \n \n \n \nHonorable William Francis Galvin \nSecretary of the Commonwealth \nOne Ashburton Place, Room 1705 \nBoston, Massachusetts 02108 \n \n \nRe: Initiative Petition No. 25-21:  An Initiative Petition to Protect Tenants \nby Limiting Rent Increases",
+            "start": 5407,
+            "end": 5722,
+            "supports": [
+              "citation"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5008",
+            "quote": "I hereby certify that this measure is in proper form for submission to \nthe people; that the measure is not, either affirmatively or negatively, \nsubstantially the same as any measure which has been qualified for submission \nor submitted to the people at either of the two preceding biennial state elections; \nand that it contains only subjects that are related or are mutually dependent and \nwhich are not excluded from the initiative process pursuant to Article 48, the \nInitiative, Part 2, Section 2.",
+            "start": 6000,
+            "end": 6503,
+            "supports": [
+              "lifecycle"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+            "quote": "SJC-13893 \n \nARCANGELO CELLA & others1  vs.  ATTORNEY GENERAL & another.2 \n \n \n \nSuffolk.     May 6, 2026. - June 23, 2026.",
+            "start": 408,
+            "end": 531,
+            "supports": [
+              "lifecycle"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+            "quote": "Conclusion.  The petition contains matters \"relat[ing] to \nreligion, religious practices or religious institutions\" in \nviolation of art. 48.  Art. 48, The Initiative, II, § 2.  We \nremand the matter to the county court for entry of a judgment \ndeclaring that Initiative Petition 25-21 is not in compliance \nwith the excluded matters section of art. 48, and enjoining the \nSecretary from taking steps to place the measure on the 2026 \nStatewide election ballot.  \n       So ordered.",
+            "start": 23491,
+            "end": 23973,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": "Proposed §4: chapter 93A unfair/deceptive act, private §9 remedies and AG §4 enforcement; no numeric penalty specified.",
+        "review_issues": [
+          "Agent-reviewed draft only; needs_review; no independent human legal verification.",
+          "No provider extraction, extraction_run_id, evidence_mode, official Rule ID or accepted property impact is asserted.",
+          "Property/predicate mappings are uncompiled; unsupported expressions deliberately retain uncertainty.",
+          "Current actual lifecycle is left unknown: court-authored slip opinion from amicus-participant mirror supports a conditional failed candidate, while official docket/opinion and final county judgment remain unverified.",
+          "January 31, 2026 is a proposed base-rent reference date, not enactment/effectiveness; no effective date is supplied.",
+          "No adoption, enactment, voter rejection or current operative rent cap is established by the petition/transmission.",
+          "CPI index/series, measurement convention, negative-CPI behavior and application of overlapping 12-month periods require interpretation; do not invent an annual cap amount.",
+          "Use actual first residential certificate-of-occupancy date with preserved precision, not construction year.",
+          "Raw petition heading reads Covered Dwelling Units; derivative drops/changes the initial quoted capital. Offsets intentionally reference the unchanged derivative, and raw pages were visually inspected.",
+          "CONDITIONAL ONLY: failed on 2026-06-23 represents the mirror-reported appellate disposition barring the 2026 ballot; not proof of final county judgment, docket finality, no stay/rehearing, or voter defeat."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      }
+    },
+    {
+      "candidate_id": "IP25_21_exemption_notice_conditional_failed",
+      "review_status": "needs_review",
+      "candidate_only": true,
+      "eligible_for_store_import": false,
+      "condition": "Only as a labeled conditional lifecycle probe assuming the captured mirror accurately reproduces the June 23, 2026 SJC disposition; official validation remains outstanding.",
+      "rule_draft": {
+        "jurisdiction": "MA",
+        "level": "state",
+        "category": "rent_increase_limits",
+        "provision_key": "exempt_unit_notice",
+        "title": "IP25-21 proposed exemption notice duty",
+        "requirement": "For an exempt dwelling unit, an exemption notice would accompany the lease for every tenancy; without a written lease, tenants-at-will would receive written exemption notice before acceptance of the initial rent payment.",
+        "key_value": null,
+        "citation": "Initiative Petition 25-21 / H.5008, proposed G.L. c.40P §3",
+        "quoted_span": "Where dwelling units are exempt, a notice of exemption must be provided with the lease for all tenancies. If \nthere is no written lease for such dwelling units, the tenants-at-will must be provided with a written notice of \nexemption prior to the acceptance of the initial rent payment.",
+        "source_doc_id": "P11_MA_IP25_21_ORIGINAL",
+        "source_url": "https://www.mass.gov/doc/25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download",
+        "coverage_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Uncompiled exempt dwelling unit under proposed §2, tenancy/written-lease status and initial-rent-payment timing. This duty covers exempt units rather than covered cap units."
+        },
+        "exemption_conditions": {
+          "op": "unsupported",
+          "args": [],
+          "fact": null,
+          "value": null,
+          "reason": "Review notice-duty scope; do not reuse the five cap exclusions as notice exemptions, because the proposal expressly imposes notice on exempt units."
+        },
+        "exemptions": "No additional notice exception stated in the supplied clause; §2 cap exclusions define this notice duty target, not an exclusion from notice.",
+        "lifecycle": "failed",
+        "effective_date": null,
+        "end_date": null,
+        "status_as_of": null,
+        "status_events": [
+          {
+            "status": "pending",
+            "on": "2025-09-03",
+            "evidence": [
+              {
+                "doc_id": "P11_MA_H5008",
+                "quote": "CERTIFICATE OF THE ATTORNEY GENERAL. \n \n \n            September 3, 2025. \n \n \n \nHonorable William Francis Galvin \nSecretary of the Commonwealth \nOne Ashburton Place, Room 1705 \nBoston, Massachusetts 02108 \n \n \nRe: Initiative Petition No. 25-21:  An Initiative Petition to Protect Tenants \nby Limiting Rent Increases",
+                "start": 5407,
+                "end": 5722,
+                "supports": [
+                  "status_events/0",
+                  "lifecycle"
+                ]
+              },
+              {
+                "doc_id": "P11_MA_H5008",
+                "quote": "I hereby certify that this measure is in proper form for submission to \nthe people; that the measure is not, either affirmatively or negatively, \nsubstantially the same as any measure which has been qualified for submission \nor submitted to the people at either of the two preceding biennial state elections; \nand that it contains only subjects that are related or are mutually dependent and \nwhich are not excluded from the initiative process pursuant to Article 48, the \nInitiative, Part 2, Section 2.",
+                "start": 6000,
+                "end": 6503,
+                "supports": [
+                  "status_events/0",
+                  "lifecycle"
+                ]
+              }
+            ]
+          },
+          {
+            "status": "failed",
+            "on": "2026-06-23",
+            "evidence": [
+              {
+                "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+                "quote": "SJC-13893 \n \nARCANGELO CELLA & others1  vs.  ATTORNEY GENERAL & another.2 \n \n \n \nSuffolk.     May 6, 2026. - June 23, 2026.",
+                "start": 408,
+                "end": 531,
+                "supports": [
+                  "status_events/1",
+                  "lifecycle"
+                ]
+              },
+              {
+                "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+                "quote": "Conclusion.  The petition contains matters \"relat[ing] to \nreligion, religious practices or religious institutions\" in \nviolation of art. 48.  Art. 48, The Initiative, II, § 2.  We \nremand the matter to the county court for entry of a judgment \ndeclaring that Initiative Petition 25-21 is not in compliance \nwith the excluded matters section of art. 48, and enjoining the \nSecretary from taking steps to place the measure on the 2026 \nStatewide election ballot.  \n       So ordered.",
+                "start": 23491,
+                "end": 23973,
+                "supports": [
+                  "status_events/1",
+                  "lifecycle"
+                ]
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "Where dwelling units are exempt, a notice of exemption must be provided with the lease for all tenancies. If \nthere is no written lease for such dwelling units, the tenants-at-will must be provided with a written notice of \nexemption prior to the acceptance of the initial rent payment.",
+            "start": 2350,
+            "end": 2636,
+            "supports": [
+              "requirement",
+              "quoted_span"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "INITIATIVE PETITION  FOR  A  LAW\nAn  Initiative Petition to Protect Tenants by Limiting Rent Increases\nBe  it enacted by the People, and  by their authority:\nThe General Laws  are hereby amended  by striking out chapter 40P  and  inserting in place thereof the following \nchapter\nCHAPTER 40P. LIMITING RENT INCREASES",
+            "start": 13,
+            "end": 329,
+            "supports": [
+              "citation",
+              "title"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "The purpose of this act is to provide housing stability for tenants, landlords, and communities across the \ncommonwealth, and curb displacement as a result of the housing shortage and affordability crisis in \nMassachusetts.",
+            "start": 350,
+            "end": 573,
+            "supports": [
+              "jurisdiction"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "covered Dwelling Units” shall mean all dwelling units leased for residential, but not commercial, use, except:\n(a) Dwelling units in owner-occupied buildings with four or fewer units.\n(b) Dwelling units whose rents are subject to regulation by a public authority; provided, however, that \noccupancy by a tenant with a mobile housing voucher does not constitute being regulated by a public \nauthority.\n(c) Dwelling units that are rented primarily to transient guests for a period of less than 14 consecutive days.\n(d) Dwelling units in facilities operated solely for educational, religious, or non-profit purposes.\n(e) Dwelling units for which the first residential certificate of occupancy is less than 10  years old, for a \nperiod of 10  years from the date at which such certificate of occupancy was issued.",
+            "start": 632,
+            "end": 1441,
+            "supports": [
+              "coverage_conditions"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_IP25_21_ORIGINAL",
+            "quote": "Any violation of this chapter shall be deemed an unfair and deceptive act under chapter 93A of the General \nLaws. Any person claiming a violation of this chapter may pursue remedies under section 9 of chapter 93A. The \nattorney general is hereby authorized to bring an action under section 4 of chapter 93A to enforce this provision \nand to obtain restitution, civil penalties, injunctive relief, and any other relief awarded pursuant to said chapter \n93A.",
+            "start": 2659,
+            "end": 3115,
+            "supports": [
+              "penalties"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5008",
+            "quote": "CERTIFICATE OF THE ATTORNEY GENERAL. \n \n \n            September 3, 2025. \n \n \n \nHonorable William Francis Galvin \nSecretary of the Commonwealth \nOne Ashburton Place, Room 1705 \nBoston, Massachusetts 02108 \n \n \nRe: Initiative Petition No. 25-21:  An Initiative Petition to Protect Tenants \nby Limiting Rent Increases",
+            "start": 5407,
+            "end": 5722,
+            "supports": [
+              "citation"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_H5008",
+            "quote": "I hereby certify that this measure is in proper form for submission to \nthe people; that the measure is not, either affirmatively or negatively, \nsubstantially the same as any measure which has been qualified for submission \nor submitted to the people at either of the two preceding biennial state elections; \nand that it contains only subjects that are related or are mutually dependent and \nwhich are not excluded from the initiative process pursuant to Article 48, the \nInitiative, Part 2, Section 2.",
+            "start": 6000,
+            "end": 6503,
+            "supports": [
+              "lifecycle"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+            "quote": "SJC-13893 \n \nARCANGELO CELLA & others1  vs.  ATTORNEY GENERAL & another.2 \n \n \n \nSuffolk.     May 6, 2026. - June 23, 2026.",
+            "start": 408,
+            "end": 531,
+            "supports": [
+              "lifecycle"
+            ]
+          },
+          {
+            "doc_id": "P11_MA_CELLA_OPINION_MIRROR",
+            "quote": "Conclusion.  The petition contains matters \"relat[ing] to \nreligion, religious practices or religious institutions\" in \nviolation of art. 48.  Art. 48, The Initiative, II, § 2.  We \nremand the matter to the county court for entry of a judgment \ndeclaring that Initiative Petition 25-21 is not in compliance \nwith the excluded matters section of art. 48, and enjoining the \nSecretary from taking steps to place the measure on the 2026 \nStatewide election ballot.  \n       So ordered.",
+            "start": 23491,
+            "end": 23973,
+            "supports": [
+              "lifecycle"
+            ]
+          }
+        ],
+        "interactions": [],
+        "penalties": "Proposed §4 chapter 93A private/AG remedies; no numeric penalty specified.",
+        "review_issues": [
+          "Agent-reviewed draft only; needs_review; no independent human legal verification.",
+          "No provider extraction, extraction_run_id, evidence_mode, official Rule ID or accepted property impact is asserted.",
+          "Property/predicate mappings are uncompiled; unsupported expressions deliberately retain uncertainty.",
+          "Current actual lifecycle is left unknown: court-authored slip opinion from amicus-participant mirror supports a conditional failed candidate, while official docket/opinion and final county judgment remain unverified.",
+          "January 31, 2026 is a proposed base-rent reference date, not enactment/effectiveness; no effective date is supplied.",
+          "No adoption, enactment, voter rejection or current operative rent cap is established by the petition/transmission.",
+          "CPI index/series, measurement convention, negative-CPI behavior and application of overlapping 12-month periods require interpretation; do not invent an annual cap amount.",
+          "Use actual first residential certificate-of-occupancy date with preserved precision, not construction year.",
+          "Raw petition heading reads Covered Dwelling Units; derivative drops/changes the initial quoted capital. Offsets intentionally reference the unchanged derivative, and raw pages were visually inspected.",
+          "The cap and exemption notice have different scope; modeling one rule with shared cap exemptions would erase the expressly imposed notice duty.",
+          "CONDITIONAL ONLY: failed on 2026-06-23 represents the mirror-reported appellate disposition barring the 2026 ballot; not proof of final county judgment, docket finality, no stay/rehearing, or voter defeat."
+        ],
+        "conflict_flag": false,
+        "conflict_note": null
+      }
+    }
+  ],
+  "temporal_probes": [
+    {
+      "candidate_id": "H5222_2a_paid_coordination",
+      "scope": "software temporal probe only, no real property evaluation or legal acceptance",
+      "actual": [
+        {
+          "as_of": "2026-10-01",
+          "temporal_status": "pending"
+        }
+      ],
+      "hypothetical_oct1": "in_force"
+    },
+    {
+      "candidate_id": "H5222_2b_agreement_not_compete",
+      "scope": "software temporal probe only, no real property evaluation or legal acceptance",
+      "actual": [
+        {
+          "as_of": "2026-10-01",
+          "temporal_status": "pending"
+        }
+      ],
+      "hypothetical_oct1": "in_force"
+    },
+    {
+      "candidate_id": "S2983_15Gb_device_or_coordinator",
+      "scope": "software temporal probe only, no real property evaluation or legal acceptance",
+      "actual": [
+        {
+          "as_of": "2026-10-01",
+          "temporal_status": "pending"
+        }
+      ],
+      "hypothetical_oct1": "in_force"
+    },
+    {
+      "candidate_id": "IP25_21_rent_cap",
+      "scope": "software temporal probe only, no real property evaluation or legal acceptance",
+      "actual": [
+        {
+          "as_of": "2025-09-02",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2025-09-03",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2026-06-22",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2026-06-23",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2026-10-01",
+          "temporal_status": "unknown"
+        }
+      ],
+      "hypothetical_oct1": "unknown"
+    },
+    {
+      "candidate_id": "IP25_21_exemption_notice",
+      "scope": "software temporal probe only, no real property evaluation or legal acceptance",
+      "actual": [
+        {
+          "as_of": "2025-09-02",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2025-09-03",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2026-06-22",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2026-06-23",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2026-10-01",
+          "temporal_status": "unknown"
+        }
+      ],
+      "hypothetical_oct1": "unknown"
+    },
+    {
+      "candidate_id": "IP25_21_rent_cap_conditional_failed",
+      "scope": "software temporal probe only, no real property evaluation or legal acceptance",
+      "actual": [
+        {
+          "as_of": "2025-09-02",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2025-09-03",
+          "temporal_status": "pending"
+        },
+        {
+          "as_of": "2026-06-22",
+          "temporal_status": "pending"
+        },
+        {
+          "as_of": "2026-06-23",
+          "temporal_status": "failed"
+        },
+        {
+          "as_of": "2026-10-01",
+          "temporal_status": "failed"
+        }
+      ],
+      "hypothetical_oct1": "failed"
+    },
+    {
+      "candidate_id": "IP25_21_exemption_notice_conditional_failed",
+      "scope": "software temporal probe only, no real property evaluation or legal acceptance",
+      "actual": [
+        {
+          "as_of": "2025-09-02",
+          "temporal_status": "unknown"
+        },
+        {
+          "as_of": "2025-09-03",
+          "temporal_status": "pending"
+        },
+        {
+          "as_of": "2026-06-22",
+          "temporal_status": "pending"
+        },
+        {
+          "as_of": "2026-06-23",
+          "temporal_status": "failed"
+        },
+        {
+          "as_of": "2026-10-01",
+          "temporal_status": "failed"
+        }
+      ],
+      "hypothetical_oct1": "failed"
+    }
+  ],
+  "findings": {
+    "T4": {
+      "new_readiness": "Substantive H5222/S2983 text available, with distinct pending prohibitions; ready for draft review and hypothetical lifecycle probes, not accepted property impacts.",
+      "history": "Both official new status pages report March 12, 2026 referral to their chamber Ways and Means committee. D045/D046/D047 supply direct October 1 captured pending-status observations; new snapshots observed October 4 corroborate. Neither retrieval date is a legislative event.",
+      "encoding": "Primary algorithm drafts use lifecycle=pending, a supported March 12 pending/referral event, status_as_of=October 4 latest explicit observation, effective_date=null. Earlier October 1 status is independently anchored.",
+      "hypothetical": "Existing temporal(...,hypothetical=True) assumes selected pending proposals in force for the scenario; it does not establish adoption/effectiveness or eliminate unsupported coverage and needs_review.",
+      "remaining": [
+        "Historical exact bill-text version continuity, property condition semantics/facts, human review.",
+        "Do not infer addresses from organizer descriptions or turn all-MA membership into definite impact."
+      ]
+    },
+    "T5": {
+      "new_readiness": "Official petition/transmission identify actual IP25-21 proposal; court-authored mirror supplies a June 23 appellate disposition. Full actual lifecycle acceptance remains limited by official docket/opinion/final-judgment verification.",
+      "majority": "GAZIANO majority concludes on PDF page 16: remand for county judgment declaring IP25-21 outside art.48 excluded-matters rule and enjoining Secretary from steps to put it on 2026 ballot. This is ballot exclusion, not a vote rejecting a law or repeal of enacted law.",
+      "concurrence": "KAFKER concurrence starts PDF page 17 and agrees on narrower reasoning; its large-for-profit-landlords description is not an operative statutory coverage definition. It is not a separate contrary disposition.",
+      "unreached": "Footnote 6 declines alternative compensation/related-subjects/summary challenges; do not describe those as adjudicated holdings.",
+      "draft_policy": "Primary IP candidates keep lifecycle unknown; failed June 23 variant is separate and explicitly conditional. No official empty T5 affected set is asserted.",
+      "historical_dates": [
+        {
+          "date": "2025-09-03",
+          "event": "AG certification",
+          "support": [
+            "I_certification_identity",
+            "I_certification"
+          ],
+          "not": "enactment or effectiveness"
+        },
+        {
+          "date": "2025-12-03",
+          "event": "Filed with Secretary on or before date, according to transmission; preserve bounded wording",
+          "support": [
+            "I_transmission"
+          ]
+        },
+        {
+          "date": "2026-01-07",
+          "event": "Secretary transmission letter",
+          "support": [
+            "I_transmission_date",
+            "I_transmission"
+          ]
+        },
+        {
+          "date": "2026-01-21",
+          "event": "H5008 filed label",
+          "support": [
+            "I_filed"
+          ]
+        },
+        {
+          "date": "2026-01-31",
+          "event": "Proposed base-rent reference only",
+          "support": [
+            "I_base_rent"
+          ],
+          "not": "effective date"
+        },
+        {
+          "date": "2026-06-23",
+          "event": "Mirror-reported appellate disposition; conditional failed lifecycle candidate",
+          "support": [
+            "I_majority_identity_date",
+            "I_majority_disposition"
+          ],
+          "not": "verified date of final county judgment or voter defeat"
+        },
+        {
+          "date": "2026-10-04",
+          "event": "Source retrieval",
+          "not": "legal lifecycle transition"
+        }
+      ],
+      "D048": "Existing chapter40P section4 addresses existing local rent-control restrictions; it is neither the initiative text nor failed-ballot evidence. It must retain its own source identity."
+    }
+  },
+  "visual_review": {
+    "method": "Poppler rendered original captured PDF pages; manually inspected pixels and derivative anchors",
+    "pages": {
+      "P11_MA_IP25_21_ORIGINAL": [
+        1,
+        2
+      ],
+      "P11_MA_H5008": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "P11_MA_CELLA_OPINION_MIRROR": [
+        1,
+        2,
+        6,
+        16,
+        17
+      ]
+    },
+    "notes": [
+      "Full relevant petition substantive pages visually reviewed.",
+      "Original petition derivative omits signature material and changes Covered heading; raw retained and no signatures used as rule evidence.",
+      "H5008 certification is prior history, not current eligibility.",
+      "Opinion majority/concurrence page boundary confirmed."
+    ]
+  },
+  "remaining_acquisition_requests": [
+    {
+      "owner": "Platform",
+      "need": "Official-hosted SJC-13893 opinion/current docket, any revisions/rehearing/stay and final county-court judgment; verify June 23 disposition/current status before accepting a failed lifecycle."
+    }
+  ],
+  "acceptance_limits": [
+    "All five canonical RuleDraft candidates and two conditional variants validate structurally; none is a Rule or a stored extracted record.",
+    "No Rule evidence_mode, extraction_run_id, semantic_verification claim, selector change, store write, property address set or accepted T4/T5 result.",
+    "Source exactness and software temporal outputs do not independently verify legal interpretation."
+  ],
+  "source_span_locations": {
+    "H_identity": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_coordinate": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_lessor": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_unit": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_provider": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_2a": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_2b": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_enforcement": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_pleading": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_identity": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_device": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_coordination": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_coordinator": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_data": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_unit": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_15Gb": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_penalty": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_fees": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_status_current": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_referral": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_status_oct1": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "H_old_capture_identity": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_status_current": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_referral": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_status_oct1": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_old_capture_identity": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "S_history_oct1": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_identity": {
+      "pdf_page": 1,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_purpose": {
+      "pdf_page": 1,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_scope": {
+      "pdf_page": 1,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_cap": {
+      "pdf_page": 1,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_base_rent": {
+      "pdf_page": 2,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_exemption_notice": {
+      "pdf_page": 2,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_penalties": {
+      "pdf_page": 2,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_savings": {
+      "pdf_page": 2,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_transmission_date": {
+      "pdf_page": 1,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_transmission": {
+      "pdf_page": 1,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_filed": {
+      "pdf_page": 2,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_certification_identity": {
+      "pdf_page": 6,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_certification": {
+      "pdf_page": 6,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_majority_identity_date": {
+      "pdf_page": 1,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_slip_notice": {
+      "pdf_page": 1,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_majority_opening": {
+      "pdf_page": 2,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_majority_disposition": {
+      "pdf_page": 16,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_concurrence": {
+      "pdf_page": 17,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "I_unreached_challenges": {
+      "pdf_page": 6,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    },
+    "D048_existing_statute": {
+      "pdf_page": null,
+      "offset_unit": "zero-based Python Unicode character offsets [start,end) into unchanged UTF-8 derivative"
+    }
+  }
+}

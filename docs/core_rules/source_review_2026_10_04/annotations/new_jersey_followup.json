@@ -1,0 +1,157 @@
+{
+  "review_status": "needs_review",
+  "review_type": "bounded agent source-content review; not independent human legal review",
+  "source_bundle_revision": "3809c8a3c30a8ee35ae47e427bf60bd3e47b2c54",
+  "reviewed_checkout_revision": "0b96a55a093eda13fd9ebb47020039fb7b55da24",
+  "source": {
+    "doc_id": "P12_NJ_CHARTER",
+    "url": "https://nj.gov/dca/dlgs/resources/misc_publications/Optional%20Municipal%20Charter%20Law%20-%20Updated%20July%202026.pdf",
+    "retrieved_at": "2026-10-04T07:23:58.993274+00:00",
+    "text_sha256": "674ac5befcd070b0c21be28195c212cdfa586ecb0c5697ede8d3d1855e11b484",
+    "raw_pdf_path": "docs/platform_sources/2026-10-04-followup/raw/P12_NJ_CHARTER.pdf",
+    "raw_pdf_sha256": "3c6fdde0b35e2889d2d08e5c1af355dbda593207981532860100fb31c883e3cb",
+    "edition": "NJ DCA Optional Municipal Charter Law, July2026",
+    "visual_pages_reviewed": [
+      19,
+      20,
+      49
+    ]
+  },
+  "evidence": {
+    "full_181": {
+      "doc_id": "P12_NJ_CHARTER",
+      "source_hash": "674ac5befcd070b0c21be28195c212cdfa586ecb0c5697ede8d3d1855e11b484",
+      "start": 177890,
+      "end": 178895,
+      "text": "40:69A-181. Adoption and publication of ordinances; effective date \n(a) Except as may otherwise be provided in this act, all ordinances shall be adopted and published in \nthe manner required by general law; provided, however, that any ordinance may incorporate by \nreference any standard technical regulations or code, official or unofficial, which need not be so \npublished whenever ten copies of said regulations or code have been placed on file in the office \nof the municipal clerk and in the office of the body or department charged with the enforcement \nof said ordinance for the examination of the public so long as said ordinance is in effect. \n(b) No ordinance other than the local budget ordinance shall take effect less than twenty days after its \nfinal passage by council and approval by the mayor where such approval is required, unless the \ncouncil shall adopt a resolution declaring an emergency and at least two-thirds of all the members of \nthe council vote in favor of such resolution. \n",
+      "section": "40:69A-181"
+    },
+    "publication_and_incorporation_exception": {
+      "doc_id": "P12_NJ_CHARTER",
+      "source_hash": "674ac5befcd070b0c21be28195c212cdfa586ecb0c5697ede8d3d1855e11b484",
+      "start": 177958,
+      "end": 178543,
+      "text": "(a) Except as may otherwise be provided in this act, all ordinances shall be adopted and published in \nthe manner required by general law; provided, however, that any ordinance may incorporate by \nreference any standard technical regulations or code, official or unofficial, which need not be so \npublished whenever ten copies of said regulations or code have been placed on file in the office \nof the municipal clerk and in the office of the body or department charged with the enforcement \nof said ordinance for the examination of the public so long as said ordinance is in effect. \n",
+      "section": "40:69A-181(a)"
+    },
+    "twenty_day_minimum_and_emergency_exception": {
+      "doc_id": "P12_NJ_CHARTER",
+      "source_hash": "674ac5befcd070b0c21be28195c212cdfa586ecb0c5697ede8d3d1855e11b484",
+      "start": 178543,
+      "end": 178895,
+      "text": "(b) No ordinance other than the local budget ordinance shall take effect less than twenty days after its \nfinal passage by council and approval by the mayor where such approval is required, unless the \ncouncil shall adopt a resolution declaring an emergency and at least two-thirds of all the members of \nthe council vote in favor of such resolution. \n",
+      "section": "40:69A-181(b)"
+    },
+    "optional_plan_applicability": {
+      "doc_id": "P12_NJ_CHARTER",
+      "source_hash": "674ac5befcd070b0c21be28195c212cdfa586ecb0c5697ede8d3d1855e11b484",
+      "start": 76755,
+      "end": 77358,
+      "text": "40:69A-26. Laws governing after adoption of optional form of government \nUpon the adoption by the qualified voters of any municipality of any of the optional forms of government set \nforth in this act, the municipality shall thereafter be governed by the plan adopted, by the provisions of this \nact common to optional plans and by all applicable provisions of general law, subject to the transitional \nprovisions of article 17 of this act, unless and until the municipality should adopt another form of \n\f\nOptional Municipal Charter Law \nN.J.S.A. 40:69A-1 et seq. \n20  \ngovernment as provided by law. \n",
+      "section": "40:69A-26"
+    },
+    "general_law_definition": {
+      "doc_id": "P12_NJ_CHARTER",
+      "source_hash": "674ac5befcd070b0c21be28195c212cdfa586ecb0c5697ede8d3d1855e11b484",
+      "start": 77852,
+      "end": 78418,
+      "text": "40:69A-28. \"General law\" defined \nFor the purposes of this act, a \"general law\" shall be deemed to be any law or provision of law, not \ninconsistent with this act, heretofore or hereafter enacted which is by its terms applicable or available to all \nmunicipalities, and the following additional laws whether or not such additional laws are so applicable or \navailable to all municipalities: legislation relating to taxation, local courts, education, health, public \nauthorities serving more than one municipality, and municipalities in unsound financial condition. \n",
+      "section": "40:69A-28"
+    },
+    "minutes_signature_requirement": {
+      "doc_id": "P12_NJ_CHARTER",
+      "source_hash": "674ac5befcd070b0c21be28195c212cdfa586ecb0c5697ede8d3d1855e11b484",
+      "start": 176971,
+      "end": 177370,
+      "text": "(b) Each ordinance or resolution shall be introduced in written or typewritten form and shall be read \nand considered as provided by general law. The vote upon every motion, resolution or ordinance \nshall be taken by roll call and the yeas and nays shall be entered on the minutes. The minutes of each \nmeeting shall be signed by the officer presiding at such meeting and by the municipal clerk. \n \n",
+      "section": "40:69A-180(b)"
+    }
+  },
+  "findings": [
+    {
+      "subject": "Applicability",
+      "evidence": [
+        "optional_plan_applicability"
+      ],
+      "finding": "Section40:69A-26 ties governance to adoption of an optional governmental plan, this Act common to optional plans, and applicable general law. This compilation alone does not establish the two municipalities' operative charter plans and any relevant2025-version/transitional qualifications.",
+      "encoding": "Do not apply a date formula unconditionally."
+    },
+    {
+      "subject": "Publication",
+      "evidence": [
+        "publication_and_incorporation_exception",
+        "general_law_definition"
+      ],
+      "finding": "Section181(a) generally requires adoption/publication in the manner required by general law, subject to other provisions of this Act. The specified nonpublication exception is for incorporated standard technical regulations/code when ten copies have been filed in BOTH named offices for public examination while ordinance is effective; it is not a blanket publication waiver for the ordinance itself.",
+      "encoding": "No known publication date, completed publication predicate or exception satisfaction is supplied."
+    },
+    {
+      "subject": "Effectiveness",
+      "evidence": [
+        "twenty_day_minimum_and_emergency_exception"
+      ],
+      "finding": "Other than the local budget ordinance, an ordinance shall not take effect LESS THAN twenty days after final council passage and mayor approval WHERE approval is required, unless council adopts an emergency resolution supported by at least two-thirds of ALL council members. The text supplies a conditional minimum waiting period, not proof that every ordinance automatically takes effect on day20.",
+      "encoding": "Preserve effective_date=null for all four local ordinance candidates; do not compute adoption+20 or approval+20 as actual effectiveness."
+    },
+    {
+      "subject": "Emergency exception",
+      "evidence": [
+        "twenty_day_minimum_and_emergency_exception"
+      ],
+      "finding": "A qualifying emergency requires the separate resolution and two-thirds-of-all-members vote. An ordinary ordinance adoption vote, including a unanimous one, does not alone establish that resolution.",
+      "encoding": "Emergency acceleration remains unestablished; no inference from9-0/unanimous adoption."
+    },
+    {
+      "subject": "Hoboken immediate clause",
+      "evidence": [
+        "publication_and_incorporation_exception",
+        "twenty_day_minimum_and_emergency_exception"
+      ],
+      "finding": "B-781's earlier captured immediate-upon-passage-and-publication clause must be read against applicable governing law; it does not by itself prove emergency exception, satisfy publication, or authorize a definite operative date.",
+      "encoding": "Maintain unknown local effective date and existing title158-2/body154-8 discrepancy."
+    },
+    {
+      "subject": "Minutes",
+      "evidence": [
+        "minutes_signature_requirement"
+      ],
+      "finding": "Section180(b) states minutes of each meeting shall be signed by presiding officer and municipal clerk. Earlier Hoboken PDF signature/certification gaps are not cured by this general requirement.",
+      "encoding": "Do not label earlier minutes certified from this compilation."
+    }
+  ],
+  "affected_original_candidates": [
+    "nj-hob-b781-prohibited-conduct",
+    "nj-jc21812-service-purchase",
+    "nj-jc21812-provider-agreement",
+    "nj-jc21812-disclosure"
+  ],
+  "unchanged_result": {
+    "effective_date": null,
+    "temporal_status": "unknown",
+    "semantic_verification": "needs_review",
+    "prior_nj_annotation_rewritten": false,
+    "new_rule_drafts": 0
+  },
+  "remaining_dependencies": [
+    {
+      "owner": "Platform/source acquisition",
+      "request": "Ordinance-specific post-adoption legal notices, affidavit/proof and date of publication; final signed ordinance; complete mayor action record; certified effective date; any emergency-effectiveness resolution and vote; subsequent amendment chain."
+    },
+    {
+      "owner": "Core A/human legal review",
+      "request": "Confirm relevant municipal optional-plan applicability and statutory version, required general-law procedure, any valid exception, and interaction with each ordinance's effective clause before assigning an operative day."
+    }
+  ],
+  "scope_limits": [
+    "No external acquisition, clerk contact, provider call, repository edit or store mutation.",
+    "The twenty-day clause is not an independently verified publication event or calendar date.",
+    "No conclusion that a missing publication or emergency record does not exist.",
+    "No broad municipal-preemption conclusion is derived from this compilation."
+  ],
+  "verification": {
+    "canonical_source_spans_valid": true,
+    "exact_quote_and_hash_checks_passed": true,
+    "new_provider_calls": 0,
+    "stored_rules_modified": 0
+  }
+}
