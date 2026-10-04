@@ -258,7 +258,7 @@ export function LookupView({ mode, initial, onParams, onSwitchToDemo, disagreeme
         </div>
       ) : (
         <div className="lookup__result" ref={mainRef} tabIndex={-1}>
-          <PropertySummary item={outcome && outcome.lookup.address.address_id === state.selection.property.address_id ? { property: outcome.lookup.address, resolution: outcome.lookup.jurisdiction } : state.selection} onChange={() => setPickerOpen(true)} />
+          <PropertySummary item={outcome && outcome.lookup.address.address_id === state.selection.property.address_id ? { property: outcome.lookup.address, resolution: outcome.lookup.jurisdiction } : state.selection} onChange={() => setPickerOpen(true)} answers={outcome ? outcome.query.answers : []} />
           <AsOfControl
             value={state.asOf}
             onChange={session.setAsOf}

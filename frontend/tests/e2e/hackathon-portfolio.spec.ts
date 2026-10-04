@@ -10,7 +10,6 @@ import {
   RESULT_WORD,
   banner,
   comparisonResult,
-  defect,
   dev,
   example,
   openAllDisclosures,

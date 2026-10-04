@@ -58,12 +58,29 @@ not typed into the test: the counts are the lengths of the recorded lists, the b
 rows are the evaluator output recorded for the alternative that contains the typed answer, the
 statements are the plan’s recorded statements, and so on.
 
-**Defect tests.** A test whose title starts with `DEFECT:` documents a defect in the audited
-build. It is `fixme` by default, with the reproduction in its title and in the comment above
-it. `QA_RUN_DEFECTS=1` runs them: each must fail while its defect exists and pass once it is
-fixed. When one passes, change `defect(` to `test(` in that spec.
+**Regression tests.** Each finding below that has been fixed is covered by a test whose title
+starts with `regression:` in the `hackathon-*.spec.ts` files. They are ordinary tests: none is
+`fixme`, skipped or expected to fail, and `QA_RUN_DEFECTS` is no longer read.
 
-    QA_RUN_DEFECTS=1 npx playwright test hackathon -g DEFECT --workers=2
+    npx playwright test hackathon -g regression --workers=2
+
+## Status after integration (October 4, 2026)
+
+The table under "Findings" is the audit of the checkpoint build and is kept as written. In the
+merged branch `codex/frontend-hackathon-polish`:
+
+- **Fixed, with an active regression test:** F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F16.
+- **Fixed, without a dedicated browser test:** F17 (a plan statement that already carries an
+  evaluator reason for the same rule is not listed twice), F18 (source titles now carry
+  their jurisdictions).
+- The one phone-only regression (F6) is skipped on the desktop project by design.
+- **Changed by lane B, not re-audited:** F15.
+- **Open or unverified:** F12, F13, F14 (visual; lane A's second pass may cover them, not
+  re-checked), F19 (the chooser's contract error names no field).
+
+These statuses come from runs with the stand-in toolchain against recordings and mocked
+routes. The native `npm run verify` and two-worker browser suite on the final commit are the
+integration session's to run.
 
 ## Findings
 
@@ -171,7 +188,7 @@ From the validation checkout, after the integrated branch has been synced into i
        npm ci
        npm run verify
        npm run test:e2e -- --workers=2
-       QA_RUN_DEFECTS=1 npx playwright test hackathon -g DEFECT --workers=2
+       npx playwright test hackathon -g regression --workers=2
 
    `npm run verify` is the contract check, typecheck, unit tests and build. `test:e2e` builds
    and serves the app itself and needs no backend: its live tests are mocked. Report the counts

@@ -10,7 +10,6 @@ import { type Claim, banner, dev, example, fullText, openDemo, recordedAssist, s
 /** The interface's heading for each classification the service can return. */
 const CLASSIFICATION_HEADING = {
   different_claims: 'The two claims differ',
-  missing_support: 'Support is missing or does not check out',
   same_claim: 'The two claims are the same',
 } as const;
 
@@ -42,7 +41,13 @@ test.describe('recorded demo · step 7: compare sources', () => {
     for (const [id, observation] of observations) {
       const card = section.locator(`[data-comparison="${id}"]`);
       await expect(card).toHaveAttribute('data-classification', observation.classification);
-      await expect(card.getByRole('heading')).toHaveText(CLASSIFICATION_HEADING[observation.classification]);
+      // The heading says what was found, in the words for this classification. For missing support
+      // it names which kind (no passage, a passage that does not check out, a missing source).
+      const heading = card.getByRole('heading');
+      if (observation.classification === 'missing_support') await expect(heading).toHaveText(/no captured passage|does not check out|not in (the|this) snapshot|no longer matches/i);
+      else await expect(heading).toHaveText(CLASSIFICATION_HEADING[observation.classification]);
+      // A difference between two texts is never headed as a conflict.
+      await expect(heading).not.toHaveText(/conflict/i);
       await expect(card).toContainText('No source is preferred');
       await expect(card).toContainText('Meaning not checked');
       // The remedy is the service's own sentence.
@@ -78,8 +83,8 @@ test.describe('recorded demo · step 7: compare sources', () => {
       // Nothing on the card ranks the two sides or asserts an amendment.
       const text = await fullText(card);
       expect(text).not.toMatch(/prevails|takes precedence|controlling source|is correct|supersedes|winner:|preferred source:/i);
-      expect(text).toMatch(/Precedence\s*None selected/);
-      expect(text).toMatch(/Meaning\s*Not checked/);
+      expect(text).toMatch(/Precedence:\s*No source preferred, no winner, and no amendment asserted/);
+      expect(text).toMatch(/Meaning:\s*Semantic support not checked/);
       for (const ruleId of observation.rule_ids) expect(text).toContain(ruleId);
     }
 

@@ -11,7 +11,6 @@ import {
   RESULT_WORD,
   addressLine,
   banner,
-  defect,
   dev,
   distinctStatements,
   evidenceDialog,

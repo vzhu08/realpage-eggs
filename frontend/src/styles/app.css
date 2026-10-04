@@ -4360,3 +4360,110 @@ select.input {
     left: 0.4rem;
   }
 }
+
+/* ---------------------------------------------------------------- integration: late additions */
+
+/* A request-local answer echoed into the property is marked, never shown as a stored fact. */
+.subject__cell--answer {
+  background: var(--accent-wash);
+}
+
+.subject__cell--answer .tag {
+  background: var(--surface);
+  white-space: normal;
+}
+
+/* The answers a re-evaluation was run with, with their provenance, above what moved. */
+.changed__answers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem var(--s-3);
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.changed__answers-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.changed__answer strong {
+  color: var(--ink);
+}
+
+.changed__quiet {
+  border-top: 0;
+}
+
+.changed__quiet > summary {
+  padding: 0.15rem 0;
+  font-weight: 500;
+}
+
+.uncertainty__remedy--more {
+  padding-left: 6.5rem;
+  text-indent: 0;
+  color: var(--ink-3);
+}
+
+/*
+ * One long unbroken token (an ID pasted into a title, a URL without separators) must wrap
+ * inside its container instead of widening the page. Ordinary words are never broken.
+ */
+.app {
+  overflow-wrap: break-word;
+}
+
+.finder__address,
+.subject__title,
+.rule__title,
+.rule__meta,
+.rule__requirement,
+.rule__explanation,
+.question__prompt,
+.question__affects,
+.evidence__title,
+.evidence__meta,
+.statement__message,
+.statement__line,
+.uncertainty__title,
+.uncertainty__affects,
+.uncertainty__remedy,
+.changed__rule,
+.changed__note,
+.context__subject,
+.property-name__street,
+.rule-name__title,
+.rule-name__meta,
+.example__title,
+.cue__title,
+.next__text,
+.quote__text,
+.passage__text,
+.link {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* On a phone the three views share the row, so none is clipped or hidden behind a scroll. */
+@media (max-width: 560px) {
+  .nav {
+    width: 100%;
+    overflow-x: visible;
+  }
+
+  .nav a {
+    flex: 1 1 0;
+    justify-content: center;
+    min-width: 0;
+    padding: 0 0.25rem;
+    font-size: var(--text-xs);
+    white-space: normal;
+    text-align: center;
+    line-height: 1.15;
+  }
+}

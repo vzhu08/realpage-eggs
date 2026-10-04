@@ -12,7 +12,6 @@ import {
   clone,
   contract,
   contractHandlers,
-  defect,
   dev,
   evidenceDialog,
   example,
@@ -433,14 +432,14 @@ test.describe('390px-wide phone: nothing scrolls sideways and the labels stay', 
   // the question card and the evidence dialog title do not break inside the token: the card grows to
   // ≈1,580px, its right part is clipped, and with the disclosures open the page scrolls sideways by
   // ≈975px (the evidence dialog by ≈2,000px). Hashes and IDs in `.mono.break` already wrap.
-  defect('DEFECT: mocked live API (fixture check): a long unbroken token in a title, address or statement wraps instead of widening the page (repro: 390px, rule title containing a 192-character token → page scrolls sideways ≈975px)', async ({ page }) => {
+  test('regression: mocked live API (fixture check): a long unbroken token in a title, address or statement wraps instead of widening the page (repro: 390px, rule title containing a 192-character token → page scrolls sideways ≈975px)', async ({ page }) => {
     await walkLongContent(page, 'Unbroken'.repeat(24));
   });
 
   // DEFECT (minor, lane A: styles/shell). Reproduction: 390px wide, any view. The three view links sit in a
   // horizontally scrolling strip and the third, "Compare sources", is cut off at the right edge
   // ("Compare sou") with nothing showing that the strip scrolls.
-  defect('DEFECT: at 390px all three view links are fully inside the window (repro: #/lookup?mode=demo at 390x844; "Compare sources" is clipped to "Compare sou")', async ({ page }) => {
+  test('regression: at 390px all three view links are fully inside the window (repro: #/lookup?mode=demo at 390x844; "Compare sources" is clipped to "Compare sou")', async ({ page }) => {
     await openDemo(page);
     for (const name of ['Property lookup', 'Portfolio changes', 'Compare sources']) {
       const box = (await page.getByRole('navigation', { name: 'Views' }).getByRole('link', { name }).boundingBox())!;

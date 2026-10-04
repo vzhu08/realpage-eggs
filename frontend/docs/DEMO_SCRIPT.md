@@ -128,20 +128,16 @@ The numbered frames and the recording in `docs/demo-backup/` were made with the 
 layout. Until they are regenerated (`DEMO_BACKUP=1 npm run demo:backup`), they are not a
 picture of this interface; do not show them as one.
 
-## Rough edges in the build this script was checked against
+## Status of the rough edges this script was first checked against
 
-Each is described, with its reproduction, in `QA_HACKATHON.md`. Until they are fixed:
-
-- After choosing a property or card 1, the counts and “Go to the question” are below the first
-  screen. Scroll to “Rules for this property on *date*” before speaking (steps A2 and B2).
-- After card 2 or “Compare”, the result is below the form. Scroll to “Impact on sample
-  properties” (steps A6 and B6).
-- The question card says “2 of 6 results can change” where the result above it lists 3 rules.
-  Say “two results can change” and do not read the “of 6”.
-- Track A: after an answer, the property header shows the answered value (for example
-  “Units 8”) beside the recorded facts without a label. Say “that value is my answer, not a
-  recorded fact”.
-- On a phone, the evidence sheet covers the synthetic banner. Present Track B on a laptop.
+This script was written against the checkpoint build. The five workarounds it listed are no
+longer needed in the merged build: the result and the portfolio totals now scroll into the
+first window after a one-click example (F1, F2), the question card counts only the results
+listed above it (F7), an answered value in the property header carries a "Your answer ·
+unverified, not on record" tag (F3), and the evidence sheet carries its own "Synthetic data ·
+not actual law" tag (F6). Each has an active regression test in `tests/e2e/hackathon-*.spec.ts`.
+Those tests were run with a stand-in toolchain; re-check each step on the natively built
+branch before presenting, and re-check control labels against the screen.
 
 ## Words to keep, and words to avoid
 

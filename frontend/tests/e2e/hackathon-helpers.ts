@@ -18,13 +18,6 @@ const read = (relative: string) => JSON.parse(readFileSync(fileURLToPath(new URL
 
 export const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
 
-/**
- * A test that documents a known defect. It is reported as fixme (skipped) by default, with the
- * reproduction in its title. `QA_RUN_DEFECTS=1` runs these tests for real: each must fail while
- * its defect exists and pass once it is fixed, at which point it becomes an ordinary `test`.
- */
-export const defect = process.env.QA_RUN_DEFECTS ? test : test.fixme;
-
 /* ---------- recordings and contract examples ---------- */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

@@ -14,7 +14,6 @@ import {
   comparisonResult,
   contract,
   contractHandlers,
-  defect,
   fullText,
   gate,
   health,
@@ -133,7 +132,7 @@ test.describe('mocked live API (fixture check) · step 8: the evidence package',
   // provenance "Demo answer (synthetic scenario)"). The property header then shows "Units 8" as a
   // plain cell beside "Residential Yes" — an unverified answer presented like a recorded fact. Its
   // provenance is only inside the collapsed "Property record" disclosure.
-  defect('DEFECT: mocked live API (fixture check): a request-local answer echoed into the property facts is labeled as an unverified answer in the property header (repro: live SYNTH-003, 2026-11-15, units = 8 → header cell "Units 8" with no label)', async ({ page }) => {
+  test('regression: mocked live API (fixture check): a request-local answer echoed into the property facts is labeled as an unverified answer in the property header (repro: live SYNTH-003, 2026-11-15, units = 8 → header cell "Units 8" with no label)', async ({ page }) => {
     await mockLive(page, contractHandlers());
     await openLive(page);
     await runLiveLookup(page, STREET, REQUEST.as_of);
@@ -282,7 +281,7 @@ test.describe('mocked live API (fixture check) · step 8: the evidence package',
     await button.click();
     const missing = packageCard(page).getByRole('alert');
     await expect(missing).toContainText('This capability is not available on the connected backend');
-    await expect(missing).toContainText('The working export beside it is still available.');
+    await expect(missing).toContainText('The working export beside this card is still available');
 
     expect(downloads).toBe(0);
     await expect(page.locator('[data-rule-id][data-result]')).toHaveCount(contract.assist.response.lookup.evaluations.length);
