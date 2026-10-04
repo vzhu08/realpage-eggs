@@ -28,6 +28,8 @@ all original/copied file hashes match (artifacts/final-snapshot-verification.jso
 Final browser-profile claim: frontend/src/lib/openItems.ts and
 frontend/tests/unit/uncertainty-rendering.test.ts for exact indexed statement lookup.
 Both existing UX checkouts have no edits to these paths; preserve their merged behavior/design.
+CI follow-up claim: .github/workflows/render-free.yml, to use a synthetic request manifest
+with its synthetic snapshot and verify the baked assist cache under the existing resource limit.
 
 Read-only claim audit: both existing Claude checkouts preserved. Active design edits and
 origin/codex/tenent-frontend-preview touch LookupView, Results, main, styling and visuals;
