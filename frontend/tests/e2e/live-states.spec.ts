@@ -229,11 +229,11 @@ test.describe('live API: questions and evidence against the agreed assist contra
     ]);
     expect(calls.filter((call) => call.path === '/lookup/assist')).toHaveLength(1);
 
-    // Evidence still works; the six checks say the service has not run them.
+    // Evidence still works; each check says the service has not run it.
     const panel = await openEvidence(page);
     await panel.getByRole('tab', { name: /Checks/ }).click();
     await expect(panel).toContainText('GET /rules/{id}/evidence is not available on this backend');
-    await expect(panel.getByText('Not checked by the service')).toHaveCount(6);
+    await expect(panel.getByText('Not checked by the service')).toHaveCount(7);
   });
 
   test('with the assist route: answers are resent in full, evidence statuses stay separate, rendering is shown beside the source', async ({ page }) => {
