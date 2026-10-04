@@ -194,7 +194,7 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
                   <p className="cue__title">
                     {reviewTopics} open review {reviewTopics === 1 ? 'topic' : 'topics'} for returned rules
                   </p>
-                  <p className="cue__text">These are evidence, interpretation or analysis gaps, not a count of missing property facts. Property answers cannot close these gaps.</p>
+                  <p className="cue__text">These are evidence, interpretation or analysis gaps. Some require source review or more analysis rather than another property answer.</p>
                 </div>
                 <button type="button" className="button button--small button--quiet cue__action" onClick={() => jumpTo('uncertainty-heading')}>
                   See what remains

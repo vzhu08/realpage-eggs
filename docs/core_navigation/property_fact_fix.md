@@ -101,3 +101,27 @@ All 500 property records have at least residential-use metadata, but public asse
 facts are sparse: precise unit counts exist for 207/250 CA, 1/140 NJ and 50/110 MA
 properties, with explicit unit bounds for another 43 CA properties. Construction
 year is never substituted for an occupancy or certificate date.
+
+## Integrated local-app verification
+
+The combined change also prioritizes supported questions for otherwise unblocked
+rules before the field limit, and adds direct browsing, text search and topic
+filters for returned provisions. Neither filtering nor question ranking changes
+an evaluation's coverage result.
+
+On October 4, 2026, the running local app was checked against all 678 research
+rules and A0001 as of October 1, 2026. A full default `/lookup/assist` request used
+64 of 64 permitted evaluations and presented the two actor questions first,
+followed by tenancy start, owner occupancy and certificate of occupancy. It
+remained explicitly partial. Four actual HTTP `/lookup` requests verified the
+baseline, hypothetical answers, null answers and a subsequent unanswered request
+with the counts above. Every request returned HTTP 200, and the subsequent
+unanswered response exactly matched the original response hash. Stored addresses,
+resolutions, rules, sources and extraction-index hashes were unchanged.
+
+Browser checks confirmed that all 221 returned provisions are readable; text
+search selected the requested provision, the algorithmic-pricing topic selected
+four records, and the evidence drawer displayed captured source quotes. These
+checks do not establish coverage for the 217 records that remain unknown after
+the hypothetical actor answers. The full backend suite passed 754 tests with one
+skip; no provider calls were made for this verification.
