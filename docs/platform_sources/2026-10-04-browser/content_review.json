@@ -1,0 +1,69 @@
+{
+  "review_kind": "Agent visual/source-content review, not independent legal review",
+  "JC_25_057_ADOPTION_NOTICE": {
+    "pages": 1,
+    "ordinance": "25-057",
+    "adoption_date_stated": "2025-05-21",
+    "introduction_date_stated": "2025-05-07",
+    "insert_date_stated": "2025-05-30",
+    "source_role": "Clerk post-adoption public notice / advertisement",
+    "publication_proven": false,
+    "effective_date_established": false,
+    "text_extraction": "image-only PDF; pypdf returned zero characters"
+  },
+  "JC_25_098_ADOPTION_NOTICE": {
+    "pages": 1,
+    "ordinance": "25-098",
+    "adoption_date_stated": "2025-09-24",
+    "introduction_date_stated": "2025-09-10",
+    "insert_date_stated": "2025-10-03",
+    "source_role": "Clerk post-adoption public notice / advertisement",
+    "publication_proven": false,
+    "effective_date_established": false,
+    "text_extraction": "image-only PDF; pypdf returned zero characters"
+  },
+  "JC_25_105_ADOPTION_NOTICE": {
+    "pages": 1,
+    "ordinance": "25-105",
+    "adoption_date_stated": "2025-10-08",
+    "introduction_date_stated": "2025-09-24",
+    "insert_date_stated": "2025-10-17",
+    "source_role": "Clerk post-adoption public notice / advertisement",
+    "publication_proven": false,
+    "effective_date_established": false,
+    "text_extraction": "image-only PDF; pypdf returned zero characters"
+  },
+  "HOB_B781_PRINTOUT": {
+    "pages": 3,
+    "meeting_date_stated": "2025-07-09",
+    "source_role": "Printout attachment to official adopted legislative record",
+    "limitations": [
+      "Unsigned template; ordinance number, votes, adoption date and mayor approval are blank",
+      "Blank date fields include stale 2023 year placeholders",
+      "Chapter/section title 158-2 differs from body 154-8",
+      "Effective clause requires passage and publication as provided by law; publication evidence not supplied",
+      "Existing HTML meeting histories are labeled Draft"
+    ]
+  },
+  "MA_SJC_13893_DOCKET": {
+    "official_docket_access": "verified through ordinary browser",
+    "originating_case": "SJ-2026-0063",
+    "decision_date": "2026-06-23",
+    "rescript_paper": "43",
+    "rescript_issued_date": "2026-07-21",
+    "citation_stated": "497 Mass. 706",
+    "displayed_as_of": "07/21/2026 10:20am",
+    "full_opinion_pdf_acquired": false
+  },
+  "MA_SJ_2026_0063_DOCKET": {
+    "official_docket_access": "verified through ordinary browser",
+    "identity": "matching parties and originating case link verified",
+    "case_status_exact": "Disposed: judgment after rescrpt",
+    "judgment_entry_date": "2026-07-21",
+    "judgment_paper": "18",
+    "judgment_entry_exact": "Declaratory Judgment In Accordance with the Rescript Opinion, as on file. (Gaziano, J.,)",
+    "displayed_as_of": "07/21/2026 2:25pm",
+    "signed_judgment_acquired": false,
+    "limitation": "Docket entry is visible but has no attached download; signed judgment text remains outstanding"
+  }
+}
