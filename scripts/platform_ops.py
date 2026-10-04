@@ -5,6 +5,7 @@ from hashlib import sha256
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import socket
 import subprocess
@@ -32,12 +33,16 @@ def snapshot_hashes(root):
     return {p.relative_to(root).as_posix(): fingerprint(p) for p in sorted(root.rglob("*")) if p.is_file()}
 
 
-def child_env(data=None):
+def child_env(data=None, frontend=None):
     env = os.environ.copy()
     # Offline checks and the HTTP-only launch never inherit extraction credentials.
-    env.update(OPENAI_API_KEY="", OPENAI_MODEL="", PYTHON_DOTENV_DISABLED="1")
+    env.update(OPENAI_API_KEY="", OPENAI_MODEL="", PYTHON_DOTENV_DISABLED="1", PYTHONDONTWRITEBYTECODE="1")
+    env.pop("NAVIGATOR_FRONTEND_DIST", None)
+    env.pop("PYTHONPATH", None)
     if data is not None:
         env["NAVIGATOR_DATA_DIR"] = str(data)
+    if frontend is not None:
+        env["NAVIGATOR_FRONTEND_DIST"] = str(frontend)
     return env
 
 
@@ -65,8 +70,121 @@ def bootstrap(args):
 def serve(args):
     data = args.data_dir.resolve()
     require(data.is_dir(), "--data-dir must be an existing directory; empty stores expose absent readiness")
+    frontend = args.frontend_dist.resolve() if args.frontend_dist else None
+    if frontend:
+        require((frontend / "index.html").is_file(), "--frontend-dist must contain a built index.html")
+    require(not (data / "ASSEMBLY_INCOMPLETE").exists(), "Snapshot assembly is incomplete")
+    return launch_server(ROOT, data, frontend, args.port)
+
+
+def launch_server(code, data, frontend, port):
     return subprocess.call([sys.executable, "-m", "uvicorn", "navigator.api:app", "--host", "127.0.0.1",
-                            "--port", str(args.port), "--workers", "1"], cwd=ROOT, env=child_env(data))
+                            "--port", str(port), "--workers", "1"], cwd=code, env=child_env(data, frontend))
+
+
+SERVING_FILES = ("addresses.json", "resolutions.json", "rules.json", "sources.json", "dataset.json",
+                 "extraction_index.json", "latest_extract.json", "change_tests.json", "competition_schema.json",
+                 "negative_findings.json", "latest_ingest.json", "assembly_manifest.json")
+PUBLIC_SUFFIXES = {".html", ".js", ".css", ".map", ".json", ".svg", ".png", ".ico", ".jpg", ".jpeg", ".webp", ".woff", ".woff2", ".ttf", ".txt"}
+
+
+def release_files(root):
+    """Inventory ordinary files only; never follow symlinks or Windows junctions."""
+    require(root.is_dir(), f"Missing directory: {root}")
+    found = {}
+    for path in [root, *sorted(root.rglob("*"))]:
+        require(not path.is_symlink() and not path.is_junction(), f"Linked release input: {path}")
+        require(path.resolve().is_relative_to(root.resolve()), f"Release input escapes root: {path}")
+        if path.is_file():
+            found[path.relative_to(root).as_posix()] = fingerprint(path)
+    return found
+
+
+def release_inputs(data, frontend):
+    require(not (data / "ASSEMBLY_INCOMPLETE").exists(), "Snapshot assembly is incomplete")
+    data_hashes, public_hashes = release_files(data), release_files(frontend)
+    required = {"addresses.json", "resolutions.json", "rules.json", "sources.json", "dataset.json"}
+    require(required <= data_hashes.keys(), "Snapshot is missing required serving files")
+    require("index.html" in public_hashes, "Frontend must contain a built index.html")
+    for name in public_hashes:
+        path = Path(name)
+        require(not any(part.startswith(".") for part in path.parts) and path.suffix.lower() in PUBLIC_SUFFIXES,
+                f"Unexpected public file: {name}")
+        require(path.parts[0] not in {"api", "data", "navigator", "config"}, f"Reserved public path: {name}")
+    selected = {name: value for name, value in data_hashes.items() if name in SERVING_FILES
+                or (name.startswith("semantic_reviews/") and name.endswith(".json"))}
+    return selected, public_hashes
+
+
+def prepare_release(args):
+    data, frontend, output = args.data_dir.resolve(), args.frontend_dist.resolve(), args.output.resolve()
+    require(not output.exists(), "Choose a new --output directory; previous releases are preserved")
+    for source in (data, frontend, ROOT / "navigator", ROOT / "config"):
+        require(not output.is_relative_to(source) and not source.is_relative_to(output), "Release output and inputs must be separate trees")
+    require(bool(re.fullmatch(r"[0-9a-fA-F]{40}", args.code_revision)), "--code-revision must be a full Git SHA")
+    data_hashes, public_hashes = release_inputs(data, frontend)
+    dataset = json.loads((data / "dataset.json").read_text(encoding="utf-8"))
+    rules = json.loads((data / "rules.json").read_text(encoding="utf-8"))
+    sources = json.loads((data / "sources.json").read_text(encoding="utf-8"))
+    synthetic = (dataset.get("mode") == "synthetic" or any(r.get("evidence_mode") == "synthetic" for r in rules.values())
+                 or any(s.get("capture_status") == "synthetic" for s in sources.values()))
+    require(synthetic == args.synthetic, "Synthetic inputs require --synthetic; real inputs must omit it")
+    inputs = {f"data/{name}": (data / name, value) for name, value in data_hashes.items()}
+    inputs.update({f"frontend/{name}": (frontend / name, value) for name, value in public_hashes.items()})
+    for directory, suffix in (("navigator", ".py"), ("config", ".json")):
+        for name, value in release_files(ROOT / directory).items():
+            if Path(name).suffix == suffix:
+                inputs[f"runtime/{directory}/{name}"] = (ROOT / directory / name, value)
+    inputs["runtime/requirements.lock"] = (ROOT / "requirements.lock", fingerprint(ROOT / "requirements.lock"))
+    output.mkdir(parents=True)
+    marker = output / "RELEASE_INCOMPLETE"
+    marker.write_text("Preparation has not completed. Do not launch.\n", encoding="utf-8")
+    for name, (source, expected) in inputs.items():
+        target = output / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+        require(fingerprint(target) == expected and fingerprint(source) == expected, "Release input changed during copy")
+    require(release_inputs(data, frontend) == (data_hashes, public_hashes), "Snapshot or frontend changed during preparation")
+    require(all(fingerprint(source) == expected for source, expected in inputs.values()), "Code changed during preparation")
+    manifest = {"format_version": "local-release-v1", "source_revision": args.code_revision,
+                "artifact_label": "SYNTHETIC_NOT_FOR_SUBMISSION" if synthetic else "RESEARCH_RELEASE_NOT_VALIDATED",
+                "ready_for_submission": False,
+                "files_sha256": {name: value for name, (_, value) in sorted(inputs.items())},
+                "limitations": ["Local packaging verifies file integrity, not legal accuracy, source coverage or release acceptance.",
+                                "Source revision is operator-supplied; file hashes identify the actual bundled bytes.",
+                                "Serving inputs are copied; original provider/geocoder caches and run history stay in the source store.",
+                                "Python and dependencies are installed separately from the included requirements.lock."]}
+    save(output / "release.json", manifest)
+    marker.unlink()
+    verify_release(output)
+    print(json.dumps({"status": "prepared", "release": str(output), "manifest_sha256": fingerprint(output / "release.json"),
+                      "artifact_label": manifest["artifact_label"], "ready_for_submission": False}, indent=2))
+
+
+def verify_release(root):
+    root = root.resolve()
+    files = release_files(root)
+    require("RELEASE_INCOMPLETE" not in files, "Release preparation is incomplete")
+    require("release.json" in files, "Missing release manifest")
+    manifest = json.loads((root / "release.json").read_text(encoding="utf-8"))
+    require(manifest.get("format_version") == "local-release-v1", "Unsupported release manifest")
+    files.pop("release.json")
+    require(files == manifest.get("files_sha256"), "Release files changed, missing or added; restore the saved release")
+    require({"runtime/navigator/api.py", "runtime/requirements.lock", "frontend/index.html", "data/addresses.json"} <= files.keys(),
+            "Release is missing required launch files")
+    return manifest
+
+
+def verify_release_command(args):
+    manifest = verify_release(args.release)
+    print(json.dumps({"status": "verified", "manifest_sha256": fingerprint(args.release / "release.json"),
+                      "artifact_label": manifest["artifact_label"], "ready_for_submission": False}, indent=2))
+
+
+def serve_release(args):
+    release = args.release.resolve()
+    verify_release(release)
+    return launch_server(release / "runtime", release / "data", release / "frontend", args.port)
 
 
 @contextmanager
@@ -189,14 +307,27 @@ def main():
     setup.add_argument("--venv", type=Path, default=ROOT / ".venv")
     launch = commands.add_parser("serve", help="Launch the existing HTTP API on loopback without provider credentials")
     launch.add_argument("--data-dir", type=Path, required=True)
+    launch.add_argument("--frontend-dist", type=Path, help="Optional existing frontend build served from the same origin")
     launch.add_argument("--port", type=int, choices=range(1, 65536), metavar="PORT", default=8000)
     verify = commands.add_parser("smoke", help="Offline real HTTP, missing-key and export replay checks")
     verify.add_argument("--output", type=Path, required=True)
     verify.add_argument("--real-data", type=Path, help="Optional real store copied into the output before checks")
+    bundle = commands.add_parser("prepare-release", help="Copy code, serving inputs and a built frontend into a new local release")
+    bundle.add_argument("--data-dir", type=Path, required=True)
+    bundle.add_argument("--frontend-dist", type=Path, required=True)
+    bundle.add_argument("--output", type=Path, required=True)
+    bundle.add_argument("--code-revision", required=True, help="Full source SHA; manifest hashes also identify any local changes")
+    bundle.add_argument("--synthetic", action="store_true")
+    check = commands.add_parser("verify-release", help="Verify every file of a previously prepared release")
+    check.add_argument("--release", type=Path, required=True)
+    frozen = commands.add_parser("serve-release", help="Verify and launch a saved frontend/API release on loopback")
+    frozen.add_argument("--release", type=Path, required=True)
+    frozen.add_argument("--port", type=int, choices=range(1, 65536), metavar="PORT", default=8000)
     args = parser.parse_args()
     try:
-        return {"bootstrap": bootstrap, "serve": serve, "smoke": smoke}[args.command](args) or 0
-    except (RuntimeError, OSError, subprocess.SubprocessError) as exc:
+        return {"bootstrap": bootstrap, "serve": serve, "smoke": smoke, "prepare-release": prepare_release,
+                "verify-release": verify_release_command, "serve-release": serve_release}[args.command](args) or 0
+    except (RuntimeError, OSError, ValueError, subprocess.SubprocessError) as exc:
         print(f"Packaging check failed: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 2
 
