@@ -6,7 +6,7 @@ import jsonschema
 from .engine import temporal
 from .extraction import anchor_evidence
 from .models import CATEGORIES, NegativeFinding
-from .source_policy import source_use
+from .source_policy import rule_source_issues, source_use
 from .store import digest
 
 
@@ -50,7 +50,7 @@ def inventory(store):
         missing = [s.doc_id for s in primary_docs if not s.text]
         unresolved = [s.doc_id for s in primary_docs if s.text and (not source_use(s).operative_allowed or index.get(s.doc_id, {}).get("status") != "complete" or index.get(s.doc_id, {}).get("sha256") != s.sha256)]
         for category in CATEGORIES:
-            supported = [r.team_rule_id for r in rules if r.jurisdiction == jurisdiction and r.category == category and not r.review_issues and r.semantic_verification != "needs_review" and r.source_doc_id in sources and source_use(sources[r.source_doc_id]).operative_allowed]
+            supported = [r.team_rule_id for r in rules if r.jurisdiction == jurisdiction and r.category == category and not r.review_issues and r.semantic_verification != "needs_review" and not rule_source_issues(r, sources)]
             negative = [n for batch in negatives.values() for n in batch if n["jurisdiction"] == jurisdiction and n["category"] == category and eligible_negative_finding(n, sources)]
             state = "supported_rule" if supported else "supported_negative_finding" if negative else "incomplete_source_coverage" if missing else "unresolved_extraction"
             rows.append({"jurisdiction": jurisdiction, "category": category, "state": state, "rule_ids": supported, "negative_findings": negative, "missing_documents": missing, "unresolved_documents": unresolved, "source_coverage_complete": bool(primary_docs) and not missing and not unresolved})
@@ -65,8 +65,7 @@ def validate(store, as_of=date(2026, 10, 1)):
     quote_failures = schema_failures = 0
     exportable, ineligible = [], []
     for rule in rules:
-        source = sources.get(rule.source_doc_id)
-        eligible = source is not None and source_use(source).operative_allowed
+        eligible = not rule_source_issues(rule, sources)
         if not eligible:
             ineligible.append(rule.team_rule_id)
         quote_ok = True

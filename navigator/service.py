@@ -4,7 +4,7 @@ from .evidence import prepare_rules, EvidenceStoreView
 from .fact_inputs import validate_facts
 from .models import LookupResponse, JurisdictionResolution, PropertyFacts
 from .store import digest
-from .source_policy import source_use
+from .source_policy import rule_source_issues, source_use
 
 
 class DatasetUnavailable(RuntimeError): pass
@@ -48,7 +48,7 @@ def lookup(store, request, answer_provenance=None):
     primary_candidates = [s for s in sources.values() if uses[s.doc_id].status != "context_only"]
     missing = sorted(s.doc_id for s in primary_candidates if not s.text)
     unprocessed = sorted(s.doc_id for s in primary_candidates if s.text and (not uses[s.doc_id].operative_allowed or extraction_index.get(s.doc_id, {}).get("status") != "complete" or extraction_index.get(s.doc_id, {}).get("sha256") != s.sha256))
-    source_review = sorted(r.team_rule_id for r in relevant_rules if r.source_doc_id not in uses or not uses[r.source_doc_id].operative_allowed)
+    source_review = sorted(r.team_rule_id for r in relevant_rules if rule_source_issues(r, sources))
     warnings = []
     if source_ids - sources.keys(): warnings.append("Supporting source records are missing; evidence review required")
     if any(any(i.startswith("evidence_check:") for i in r.review_issues) for r in rules): warnings.append("Current evidence checks have unresolved failures; inspect rule evidence reports")

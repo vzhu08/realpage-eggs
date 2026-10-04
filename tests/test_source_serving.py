@@ -8,6 +8,7 @@ from navigator.api import create_app
 from navigator.evidence import check_rule
 from navigator.export import export_all
 from navigator.models import Evidence, Expression, Interaction
+from navigator.source_policy import rule_source_issues
 from navigator.store import digest, read_json
 from navigator.validation import inventory, validate
 
@@ -159,3 +160,94 @@ def test_exported_overrides_never_reference_excluded_contextual_rules(demo, tmp_
     records = read_json(tmp_path / "out/rules.json")
     assert len(records) == 1 and records[0]["team_rule_id"] == rule.team_rule_id
     assert records[0]["overrides"] == []
+
+
+def add_role_copy(demo, *, authority="secondary", kind="secondary", capture="supplied"):
+    """A fictional second publisher quoting the fixture, with a separately recorded role."""
+    sources = demo.sources()
+    primary = next(iter(sources.values()))
+    other = primary.model_copy(deep=True, update={"doc_id": "OTHER-SUPPORT", "url": "https://example.invalid/other",
+                                               "authority": authority, "source_type": kind, "capture_status": capture})
+    sources[other.doc_id] = other
+    demo.save_collection("sources", sources)
+    return other
+
+
+def test_legacy_primary_rule_cannot_use_news_as_only_critical_support(demo, tmp_path):
+    set_primary_role(demo)
+    news = add_role_copy(demo)
+    rule = next(iter(demo.rules().values()))
+    rule.evidence[0].doc_id = news.doc_id
+    demo.save_collection("rules", {rule.team_rule_id: rule})
+    with TestClient(create_app(demo.root)) as client:
+        lookup = client.post("/api/v1/lookup", json={"address_id": "SYNTH-001", "as_of": "2026-11-15"}).json()
+        assert lookup["evaluations"][0]["result"] == "unknown"
+        assert lookup["metadata"]["source_review_rule_ids"] == [rule.team_rule_id]
+        assert client.get("/api/v1/health").json()["source_review_rules"] == 1
+    assert any("source_eligibility:requirement:" in issue for issue in rule_source_issues(rule, demo.sources()))
+    assert next(r for r in inventory(demo) if r["category"] == "security_deposits")["state"] != "supported_rule"
+    report = export_all(demo, tmp_path / "out", date(2026, 11, 15), allow_partial=True, synthetic=True)
+    assert report["source_ineligible_rule_ids"] == [rule.team_rule_id]
+    assert read_json(tmp_path / "out/rules.json") == []
+
+
+def test_primary_support_and_secondary_corroboration_remain_eligible(demo):
+    set_primary_role(demo)
+    news = add_role_copy(demo)
+    rule = next(iter(demo.rules().values()))
+    rule.evidence.append(rule.evidence[0].model_copy(deep=True, update={"doc_id": news.doc_id}))
+    demo.save_collection("rules", {rule.team_rule_id: rule})
+    assert rule_source_issues(rule, demo.sources()) == []
+    with TestClient(create_app(demo.root)) as client:
+        assert client.post("/api/v1/lookup", json={"address_id": "SYNTH-001", "as_of": "2026-11-15"}).json()["evaluations"][0]["result"] == "applies"
+        assert client.get("/api/v1/health").json()["source_review_rules"] == 0
+    assert validate(demo, date(2026, 11, 15))["exportable_rule_ids"] == [rule.team_rule_id]
+
+
+@pytest.mark.parametrize("capture,allowed", [("supplied", True), ("supplementary", True), ("terms_review", False)])
+def test_official_status_evidence_supports_dates_but_still_obeys_access_restrictions(demo, capture, allowed):
+    set_primary_role(demo)
+    status = add_role_copy(demo, authority="official", kind="status_record", capture=capture)
+    rule = next(iter(demo.rules().values()))
+    # Substantive fields remain supported by legal text. The official status
+    # record supplies only the effective date and enactment history.
+    rule.evidence.append(rule.evidence[0].model_copy(deep=True, update={"doc_id": status.doc_id, "supports": ["effective_date"]}))
+    rule.evidence[0].supports.remove("effective_date")
+    rule.evidence[2].doc_id = status.doc_id
+    for event in rule.status_events:
+        for evidence in event.evidence:
+            evidence.doc_id = status.doc_id
+    demo.save_collection("rules", {rule.team_rule_id: rule})
+    assert bool(rule_source_issues(rule, demo.sources())) is not allowed
+    with TestClient(create_app(demo.root)) as client:
+        response = client.post("/api/v1/lookup", json={"address_id": "SYNTH-001", "as_of": "2026-11-15"}).json()
+        assert response["evaluations"][0]["result"] == ("applies" if allowed else "unknown")
+    assert bool(validate(demo, date(2026, 11, 15))["exportable_rule_ids"]) is allowed
+
+
+def test_official_status_evidence_cannot_support_substantive_requirement(demo):
+    set_primary_role(demo)
+    status = add_role_copy(demo, authority="official", kind="status_record")
+    rule = next(iter(demo.rules().values()))
+    rule.evidence[0].doc_id = status.doc_id
+    issues = rule_source_issues(rule, demo.sources())
+    assert any("source_eligibility:requirement:" in issue for issue in issues)
+    assert not any("source_eligibility:effective_date:" in issue for issue in issues)
+
+
+@pytest.mark.parametrize("structure", ["status_event", "interaction"])
+def test_structural_claims_cannot_hide_secondary_authority_as_background(demo, structure):
+    set_primary_role(demo)
+    news = add_role_copy(demo)
+    rule = next(iter(demo.rules().values()))
+    if structure == "status_event":
+        for evidence in rule.status_events[0].evidence:
+            evidence.doc_id, evidence.supports = news.doc_id, ["background"]
+        path = "status_events/0"
+    else:
+        evidence = rule.evidence[0].model_copy(deep=True, update={"doc_id": news.doc_id, "supports": ["background"]})
+        rule.interactions.append(Interaction(kind="supersedes", target_citation="Fictional target", target_jurisdiction=rule.jurisdiction,
+                                            category=rule.category, scope=Expression(op="literal", value=True),
+                                            evidence=[evidence], note="Fictional interaction"))
+        path = "interactions/0/scope"
+    assert any(f"source_eligibility:{path}:" in issue for issue in rule_source_issues(rule, demo.sources()))
