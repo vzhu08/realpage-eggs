@@ -2,7 +2,7 @@
 
 **Synthetic rehearsal on fictional data. Not actual law, not a real property, not a real result.**
 
-These frames follow Track B of `../DEMO_SCRIPT.md`. They exist so the journey can still be
+These frames are an alternative Track B rehearsal described in `../DEMO_SCRIPT.md`. They exist so the journey can still be
 shown if the live real-data demo cannot run. Every frame carries the app’s own “Synthetic
 demo” banner. Say that it is a rehearsal on fictional data before showing any of it.
 
@@ -19,7 +19,12 @@ What it is not: a recording of the real-data journey. That recording has to be m
 the integrated snapshot once PLAT-06 and CORE-06 land, with the examples chosen in
 `../DEMO_SCRIPT.md`, and labeled with the snapshot it was made from.
 
-Integration note (October 4, 2026): the checked-in frames are Claude’s pre-integration
-UX-04 capture. Core B v3 explanations and CORE-06’s additional uncertain comparison rows
-are verified in the integration branch but are not depicted by these historical frames.
-Regenerate the backup before a presentation of the integrated build.
+Integration note (October 4, 2026): the frames and local video were regenerated from the
+native Vite build after the three Claude workers were integrated. The lookup is DEV-P08
+(61 Ember Road), Jan 15, 2027. Applying the recorded “No” owner-occupancy answer leaves the
+conflicting fee rules unknown; the recording then shows portfolio totals, the timeline,
+source → rule → property detail, evaluator conflicts and a working export. The shorter
+one-click walkthrough in `../DEMO_SCRIPT.md` instead uses DEV-P04 with a units answer.
+
+The backup is software/demo evidence only. Real-snapshot rehearsal remains separate; see
+`../NATIVE_UX_REVIEW.md` for the native verification record and its limits.

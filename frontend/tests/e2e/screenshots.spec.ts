@@ -16,6 +16,7 @@ const settle = async (page: Page) => {
 const MOBILE_SET = new Set([
   '02-lookup-unknown', '03-useful-question', '04-reevaluated', '05-evidence-source', '08-stays-unknown', '10-changes-comparison', '11-changes-blocked', '14-evidence-failure',
   '15-portfolio-impact', '16-portfolio-timeline', '18-portfolio-drilldown', '19-disagreement-records', '21-question-consequence',
+  '24-portfolio-properties',
 ]);
 
 const shot = async (page: Page, name: string, isMobile: boolean) => {
@@ -112,10 +113,11 @@ const frame = async (page: Page, selector: string, name: string, isMobile: boole
 test('portfolio: impact, timeline, summaries and drill-down (development fixture)', async ({ page, isMobile }) => {
   const result = await openPortfolio(page);
   await frame(page, '.change-result .context', '15-portfolio-impact', isMobile);
+  await frame(page, '#change-diffs', '24-portfolio-properties', isMobile);
   await showView(result, 'Timeline');
   await frame(page, '.drill__timeline', '16-portfolio-timeline', isMobile);
   await frame(page, '#change-summaries', '17-portfolio-summaries', isMobile);
-  await showView(result, 'By property');
+  await showView(result, 'By source and rule');
   await result.locator('.impact-row[data-address="DEV-P01"] summary').first().click();
   await frame(page, '#change-diffs', '18-portfolio-drilldown', isMobile);
 });

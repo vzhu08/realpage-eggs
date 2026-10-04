@@ -23,7 +23,13 @@ export function groupUncertainty(items: Uncertainty[]): GroupedUncertainty[] {
     groups.set(key, group);
     for (const ruleId of item.rule_ids ?? []) if (!group.ruleIds.includes(ruleId)) group.ruleIds.push(ruleId);
     for (const ref of item.source_refs ?? []) {
-      if (!group.sourceRefs.some((existing) => existing.doc_id === ref.doc_id && existing.start === ref.start && existing.end === ref.end)) group.sourceRefs.push(ref);
+      // Offsets identify a passage only within one source version. Keep every distinct
+      // version, quote and section when identical statements are grouped for reading.
+      if (!group.sourceRefs.some((existing) =>
+        existing.doc_id === ref.doc_id && existing.source_hash === ref.source_hash &&
+        existing.start === ref.start && existing.end === ref.end &&
+        existing.text === ref.text && (existing.section ?? null) === (ref.section ?? null)
+      )) group.sourceRefs.push(ref);
     }
   }
   return [...groups.values()];

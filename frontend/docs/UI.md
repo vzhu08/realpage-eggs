@@ -63,7 +63,8 @@ Tokens live in `src/styles/tokens.css`; text/background pairs are tested for WCA
   result → about this result.
 - **Evidence** opens as a right-hand drawer over the page (a full-height sheet on a phone),
   only when a rule's "Evidence" button is used. It holds focus, closes on Escape and returns
-  focus to the button that opened it.
+  focus to the button that opened it. The phone sheet repeats the synthetic-data label when
+  applicable; closed disclosures are excluded from its keyboard focus loop.
 - **Property chooser:** inline on the start page; once a property is on screen it opens from
   "Change property" as a dialog (a full sheet on a phone) with the search field focused.
 - **Portfolio changes, top to bottom:** the form → the pinned comparison bar → the three
@@ -74,6 +75,9 @@ Tokens live in `src/styles/tokens.css`; text/background pairs are tested for WCA
   claims sit side by side on desktop and stack on a phone.
 - The pinned bar (property, query date, synthetic/partial/jurisdiction tags, disclaimer) is
   sticky, so the date a result was computed for is always visible while scrolling.
+- A newly run lookup or one-click portfolio comparison scrolls to its result and next step.
+  On narrow screens the three navigation links fit without horizontal clipping. Header
+  controls wrap, while long identifiers and source URLs wrap inside their reading column.
 
 ## Journey → components
 
@@ -156,6 +160,9 @@ Each state has a deliberate presentation and an automated check (`tests/e2e`).
 - **Answers** are request-local: kept only in page state, resent in full on every request,
   cleared when the property, date or fixture changes. `null` is sent as an explicit unknown
   on the assist route; on the `/lookup` fallback (older backends only) an unknown is not sent.
+  A previous result retained after editing the date still displays and exports its original
+  answers, read-only. Facts echoed by the service from those answers are labeled as answers,
+  unverified and not on the stored record.
 - **No client-side planner.** Questions, their order, alternatives and intervals come from
   `question_plan`. With no plan, the UI lists the facts the evaluator reported missing and
   types their inputs from `GET /facts`; it does not rank them or predict outcomes.

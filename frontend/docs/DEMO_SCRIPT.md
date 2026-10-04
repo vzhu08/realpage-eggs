@@ -12,8 +12,8 @@ The journey: start page → one property on one date → the one question that m
 answer and what it moved → the evidence → what stays uncertain → keep the result → what
 changes across the portfolio → two sources side by side.
 
-Every label in quotation marks below is the text on screen in the build this script was
-checked against (the checkpoint build of October 4, 2026; see `QA_HACKATHON.md`). If a label
+Labels below were reviewed against the integrated native build on October 4, 2026
+(see `NATIVE_UX_REVIEW.md` and the historical audit in `QA_HACKATHON.md`). If a label
 on screen differs, say what the screen says.
 
 ## Before the demo
@@ -45,7 +45,7 @@ links) and “Choose a property”. Times are targets. Say what is on screen; do
 | 4 | 1:35–2:00 | On one rule under “Rule by rule”, press “Evidence”. Show the quote and “characters *n*–*m*” on “Source text”, then open “Checks”. Press Escape. | “Every result opens onto the exact text it rests on and where that text sits in the source. The checks are separate; there is no single score.” | Read any check that says “Not checked”. “Finding the words in the source is not a check that they mean what the rule encodes. No independent human review is recorded.” |
 | 5 | 2:00–2:25 | Scroll to “What remains uncertain”; open one “All *N* statements from the service”. Then, under “Keep this result”, press “Download evidence package”. Point at “Saved as evidence-package-….json” and the label beside it. | “What is still open is grouped by what it needs: a fact, a source, or review. And I can keep this exact result: the service builds a package for this property, this date and my answers.” | Read the label: “Research evidence · not legal validation”. “The hashes identify the content. A package that replays to the same output does not show the law was read correctly.” |
 | 6 | 2:25–3:10 | “Portfolio changes”. Set “From date” and “To date” to the chosen dates. Press “Compare”. Scroll to “Impact on sample properties” and read the three counts. Under “By property”, open one row to show “Before · *date*” and “After · *date*”. Point at the “By source and rule” and “Timeline” tabs. | “Across these two dates: this many properties are definitely affected, this many are uncertain, this many carry a conflict flag. Each row shows the result before and after, with its evidence.” | “The three counts are separate lists and they overlap, so they do not add up.” If the tag reads “Partial”, read the “Partial result” notice. |
-| 7 | 3:10–3:50 | “Compare sources”. On the first card under “Claims compared across sources”, show “First claim” and “Second claim”, each source’s authority and “Retrieved” date, then “What would resolve it”. | “Where two sources were compared, both exact texts are shown. Nothing here picks one.” | Read the tags: “No source is preferred”, “Meaning not checked”. “A difference between two texts is not yet a legal conflict.” |
+| 7 | 3:10–3:50 | “Compare sources”. On the first card under “Claims compared across sources”, show “First claim” and “Second claim”, each source’s authority and “Retrieved” date, then “Next action”. | “Where two sources were compared, both exact texts are shown. Nothing here picks one.” | Read the tags: “No source is preferred”, “Meaning not checked”. “A difference between two texts is not yet a legal conflict.” |
 | 8 | 3:50–4:00 | Press “Start over”. | “That is one property, the portfolio and the sources, each with its evidence and its open questions.” | |
 
 If “Claims compared across sources” says “No claim comparisons are saved with this snapshot”,
@@ -113,7 +113,7 @@ The start page has “Start with an example” with three cards. Each opens in o
 | 4 | 1:30–1:55 | “Evidence” on the deposit cap. “Source text”, then “Checks”. Escape. | The quote beginning “Beginning November 1, 2026 …” with “characters 154–292”; six separate checks, with “Citation anchor” and “Semantic support” reading “Not checked”. | “The words are in the source. Whether they support the rule is a separate check, and here it has not been done.” |
 | 5 | 1:55–2:15 | Scroll to “What remains uncertain”; open one “All *N* statements from the service”. Then “Keep this result”. | Three topics that need a source, interpretation review or more analysis. Under “Evidence package”: “Not available in the synthetic demo: the package is built by the live service …”. “Download working export (JSON)” works. | “The demo has no evidence package, and says so. The working export is a different file: no source texts, no hashes.” |
 | 6 | 2:15–3:05 | “Restart demo”. Card 2, “What changes across the portfolio”. Scroll to “Impact on sample properties”. Open one row under “By property”. | Oct 1, 2026 → Jan 15, 2027, tagged “Partial”: 11 “Definitely affected”, 10 “Uncertain”, 10 “Conflict flagged”. A row shows “Before · Oct 1, 2026” and “After · Jan 15, 2027”. The “Timeline” tab shows “Dec 2026” marked “month only”. | “The lists overlap and do not add up. This comparison is partial, and it says so.” |
-| 7 | 3:05–3:50 | “Restart demo”. Card 3, “Two sources, side by side”. Read the first card. | “The two texts state different things”: an ordinance says Nov 1, 2026 and a clerk’s notice says Dec 1, 2026 for the same effective date. Tags “Unresolved”, “No source is preferred”, “Meaning not checked”. | “Both texts are shown. Nothing here picks one, and a difference between texts is not yet a legal conflict.” |
+| 7 | 3:05–3:50 | “Restart demo”. Card 3, “Two sources, side by side”. Read the first card. | “The two claims differ”: an ordinance says Nov 1, 2026 and a clerk’s notice says Dec 1, 2026 for the same effective date. Tags “Unresolved”, “No source is preferred”, “Meaning not checked”. | “Both texts are shown. Nothing here picks one, and a difference between texts is not yet a legal conflict.” |
 | 8 | 3:50–4:00 | “Restart demo”. | The start page, with no property, answers or results. | |
 
 Optional, if asked about conflicts inside a lookup: under “Compare sources”, in “Recorded
@@ -124,9 +124,11 @@ The values in this table are what the recordings contain; the acceptance tests i
 `tests/e2e/hackathon-*.spec.ts` read the same recordings and fail if the screen says anything
 else. If a recording is re-made, re-check this table against the screen.
 
-The numbered frames and the recording in `docs/demo-backup/` were made with the previous
-layout. Until they are regenerated (`DEMO_BACKUP=1 npm run demo:backup`), they are not a
-picture of this interface; do not show them as one.
+The numbered frames and recording in `docs/demo-backup/` were regenerated on the integrated
+native build. They show an alternative synthetic rehearsal: DEV-P08 on Jan 15, 2027, answering
+the owner-occupancy question with “No” and showing that the source conflict stays unknown,
+then the same portfolio, source review and working-export features. They do not depict the
+DEV-P04 units-answer example in the table above. See that folder's README before presenting.
 
 ## Status of the rough edges this script was first checked against
 
@@ -136,8 +138,9 @@ first window after a one-click example (F1, F2), the question card counts only t
 listed above it (F7), an answered value in the property header carries a "Your answer ·
 unverified, not on record" tag (F3), and the evidence sheet carries its own "Synthetic data ·
 not actual law" tag (F6). Each has an active regression test in `tests/e2e/hackathon-*.spec.ts`.
-Those tests were run with a stand-in toolchain; re-check each step on the natively built
-branch before presenting, and re-check control labels against the screen.
+The final native verification and current limitations are recorded in `NATIVE_UX_REVIEW.md`.
+Rehearse the chosen real snapshot before presenting; synthetic and mocked-route checks do
+not fill in the real-example acceptance table above.
 
 ## Words to keep, and words to avoid
 

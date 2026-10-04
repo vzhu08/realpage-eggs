@@ -1,5 +1,11 @@
 # Hackathon QA audit: the judge journey
 
+**Current native status:** the combined build, verification results, refreshed screenshots,
+actual-API checks on fictional data, and remaining limits are in
+[NATIVE_UX_REVIEW.md](NATIVE_UX_REVIEW.md). The cloud checkpoint audit below is preserved
+as historical evidence; its old failures and toolchain limitations do not describe the
+integrated native build.
+
 An independent pass over the journey a judge will take: start page, one property and date,
 the useful question, the evidence, what stays uncertain, the portfolio, two sources side by
 side, keeping the result, and restart.

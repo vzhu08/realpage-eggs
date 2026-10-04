@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
+import { recordedAssist } from './hackathon-helpers';
 import { expectNoHorizontalOverflow, openDemo, questionCard, showHypotheticals } from './helpers';
 
 const OWNER = 'Whether the owner occupies the property?';
@@ -69,8 +70,10 @@ test.describe('consequential questions and what stays uncertain after an answer'
     await expect(conflict.locator('.uncertainty__head')).toContainText('Sources conflict and no precedence is established');
     await expect(conflict).toContainText('Holds back');
     await expect(conflict).toContainText('Next step Interpretation review: compare both authorities and their dated support; factual answers do not resolve legal conflicts');
-    // Identical statements are listed once, and items about rules that do not reach this property are set aside.
-    await expect(remaining.getByText('Different supported interpretations of the same provision/version; no automatic precedence', { exact: true })).toHaveCount(1);
+    // The complete, version-specific planner statements already carry this evaluator reason.
+    // Do not repeat it as a standalone item; retain every original statement below instead.
+    const conflictMessage = 'Different supported interpretations of the same provision/version; no automatic precedence';
+    await expect(remaining.getByText(conflictMessage, { exact: true })).toHaveCount(0);
     await expect(remaining.getByText(/more statements? concerns? (a rule|rules) that do not reach this property/)).toBeVisible();
     await expect(notice).toBeVisible();
     // Every statement behind the topic is kept, with the rule ID and encoding hash it names.
@@ -80,6 +83,14 @@ test.describe('consequential questions and what stays uncertain after an answer'
     await expect(statements).toHaveCount(Number(await conflict.getAttribute('data-statements')));
     expect(await statements.count()).toBeGreaterThan(1);
     await expect(statements.first().locator('.statement__message')).toContainText(/\[r-[0-9a-f-]+; encoding [0-9a-f]{64}\]/);
+    const recorded = recordedAssist('DEV-P08', '2027-01-15');
+    const no = recorded.question_plan.questions.find((item) => item.fact.field === 'owner_occupied')!.alternatives.find((alternative) => alternative.probe_facts.owner_occupied === false)!;
+    const expectedMessages = [...new Set(no.remaining_uncertainty.filter((item) => item.kind === 'conflict' && item.message.includes(conflictMessage)).map((item) => item.message))];
+    expect(expectedMessages.length).toBeGreaterThan(1);
+    for (const message of expectedMessages) {
+      await expect(statements.locator('.statement__message').filter({ hasText: message })).toHaveCount(1);
+      await expect(statements.locator('.statement__message').filter({ hasText: message })).toBeVisible();
+    }
 
     await conflict.getByRole('link', { name: 'Compare the conflicting sources' }).click();
     await expect(page.locator('.disagreement[data-basis]')).toHaveAttribute('data-basis', 'same_provision');
