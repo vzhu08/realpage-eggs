@@ -4,7 +4,7 @@ from __future__ import annotations
 import calendar
 import math
 import re
-from datetime import date
+from datetime import date, datetime
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -212,11 +212,105 @@ class RuleDraft(Model):
         return self
 
 
+class SourceReviewReferenceSpan(Evidence):
+    # References may be shorter than ordinary supporting evidence quotations.
+    quote: str = Field(min_length=1)
+    start: int = Field(ge=0)
+    end: int = Field(ge=1)
+    supports: list[str] = Field(default_factory=lambda: ["context_dependency"], min_length=1)
+
+
+class SourceReviewReferenceDecision(Model):
+    origin: SourceReviewReferenceSpan
+    status: Literal["resolved", "not_applicable"]
+    explanation: str = Field(min_length=1)
+    target_spans: list[Evidence] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_decision(self):
+        if not self.explanation.strip():
+            raise ValueError("Reference decision requires a nonblank explanation")
+        if self.status == "resolved" and not self.target_spans:
+            raise ValueError("Resolved reference decision requires target spans")
+        return self
+
+
+class SourceReview(Model):
+    """Post-extraction correction provenance, not independent legal certification."""
+    review_id: str = Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$")
+    reviewer: str = Field(default="Codex source review", min_length=1)
+    reviewed_at: str
+    original_rule_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    original_extraction_run_id: str = Field(min_length=1)
+    changed_fields: list[Literal[
+        "title", "requirement", "key_value", "coverage_conditions", "exemption_conditions",
+        "exemptions", "lifecycle", "effective_date", "end_date", "status_as_of", "status_events",
+        "evidence", "interactions", "penalties", "review_issues", "conflict_flag", "conflict_note",
+        "semantic_verification",
+    ]] = Field(min_length=1)
+    source_hashes: dict[str, str] = Field(min_length=1)
+    evidence: list[Evidence] = Field(min_length=1)
+    notes: list[str] = Field(min_length=1)
+    review_scope: Literal["selected_fields", "complete_rule"] = "selected_fields"
+    reviewed_fields: list[str] = Field(default_factory=list)
+    context_scope: list[Evidence] = Field(default_factory=list)
+    context_scope_note: str | None = None
+    context_reference_decisions: list[SourceReviewReferenceDecision] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_provenance(self):
+        stamp = datetime.fromisoformat(self.reviewed_at)
+        if stamp.tzinfo is None or stamp.utcoffset() is None:
+            raise ValueError("Source review timestamp requires a timezone")
+        if len(self.changed_fields) != len(set(self.changed_fields)):
+            raise ValueError("Source review changed_fields must be unique")
+        if (len(self.reviewed_fields) != len(set(self.reviewed_fields))
+                or any(field not in RuleDraft.model_fields for field in self.reviewed_fields)):
+            raise ValueError("Source review reviewed_fields must name unique rule fields")
+        if any(not key or not re.fullmatch(r"[0-9a-f]{64}", value)
+               for key, value in self.source_hashes.items()):
+            raise ValueError("Source review requires document IDs and SHA-256 source hashes")
+        if any(not note.strip() for note in self.notes):
+            raise ValueError("Source review notes cannot be blank")
+        references = [item for decision in self.context_reference_decisions
+                      for item in [decision.origin, *decision.target_spans]]
+        if any(item.start is None or item.end != item.start + len(item.quote)
+               for item in [*self.evidence, *self.context_scope, *references]):
+            raise ValueError("Source review evidence requires exact start/end offsets")
+        if self.review_scope != "complete_rule" and (self.context_scope or self.context_scope_note is not None):
+            raise ValueError("Only a complete_rule source review may declare context scope")
+        if self.context_scope and not (self.context_scope_note and self.context_scope_note.strip()):
+            raise ValueError("Reviewed context scope requires a source-supported rationale")
+        if self.context_reference_decisions and (self.review_scope != "complete_rule" or not self.context_scope):
+            raise ValueError("Reference decisions require complete_rule review with context scope")
+        return self
+
+
 class Rule(RuleDraft):
     team_rule_id: str
     evidence_mode: Literal["live", "synthetic", "replay"]
     extraction_run_id: str
     semantic_verification: Literal["model_reviewed", "needs_review", "synthetic_fixture"]
+    source_review: SourceReview | None = Field(default=None, description="Separate post-extraction correction record. evidence_mode and extraction_run_id retain the original extraction origin.")
+
+    @model_validator(mode="after")
+    def preserve_extraction_origin(self):
+        if self.source_review and self.source_review.original_extraction_run_id != self.extraction_run_id:
+            raise ValueError("Source review must preserve the original extraction run ID")
+        if self.source_review and self.source_review.review_scope == "complete_rule":
+            required = {"requirement", "coverage_conditions", "exemption_conditions", "lifecycle"}
+            required.update(field for field in ("key_value", "effective_date", "end_date", "status_as_of",
+                            "exemptions", "penalties", "interactions", "status_events") if getattr(self, field))
+            if not required <= set(self.source_review.reviewed_fields):
+                raise ValueError("Complete source review must cover every required semantic field")
+        return self
+
+
+class SourceReviewRecord(Model):
+    version: Literal["rule-source-review-v1"] = "rule-source-review-v1"
+    rule_id: str
+    original_rule: dict[str, Any]
+    amended_rule_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
 
 
 class NegativeFinding(Model):
@@ -485,7 +579,7 @@ class EvidenceCheck(Model):
 class SourceDependency(Model):
     reference: str
     origin: SourceSpan
-    status: Literal["resolved", "missing", "ambiguous", "cycle", "depth_limit", "budget_limit"]
+    status: Literal["resolved", "not_applicable", "missing", "ambiguous", "cycle", "depth_limit", "budget_limit"]
     target_doc_id: str | None = None
     target_section: str | None = None
     spans: list[SourceSpan] = Field(default_factory=list)
@@ -584,6 +678,7 @@ class EvidencePackageInputs(Model):
     extraction_index: dict[str, Any]
     dataset: dict[str, Any]
     semantic_reviews: dict[str, SemanticReview] = Field(default_factory=dict)
+    source_reviews: dict[str, SourceReviewRecord] = Field(default_factory=dict)
 
 
 class EvidenceCodeVersion(Model):

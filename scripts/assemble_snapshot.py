@@ -19,6 +19,7 @@ from navigator.evidence import all_evidence
 from navigator.extraction import substantive, validate_bundle
 from navigator.geocode import CensusGeocoder
 from navigator.models import ExtractionBundle, NegativeFinding, RunManifest
+from navigator.source_review import SourceReviewError, source_review_original
 from navigator.store import Store, digest, write_json
 
 VERSION = "snapshot-assembly-v1"
@@ -27,7 +28,7 @@ CORE_REQUIRED = ("addresses.json", "sources.json", "rules.json", "dataset.json",
                  "change_tests.json", "competition_schema.json")
 GEO_REQUIRED = ("addresses.json", "sources.json", "resolutions.json", "dataset.json")
 CORE_OPTIONAL = ("negative_findings.json", "latest_ingest.json", "source_comparisons.json")
-CORE_DIRS = ("runs", "extraction_cache", "provider_outputs", "semantic_reviews")
+CORE_DIRS = ("runs", "extraction_cache", "provider_outputs", "semantic_reviews", "source_reviews")
 GEO_DIRS = ("runs", "geocode_cache")
 
 
@@ -172,7 +173,11 @@ def extraction_provenance(core, sources, rules, hashes):
             require(len(Path(name).parts) == 3 and Path(name).parts[1] in runs, f"Missing provider-output origin: {name}")
     for rule in rules.values():
         require((rule.extraction_run_id, rule.source_doc_id) in cached_origins, f"Missing reviewed cache provenance: {rule.team_rule_id}")
-        require((rule.extraction_run_id, rule.source_doc_id, digest(substantive(rule))) in cached_behaviors,
+        try:
+            original = source_review_original(core, rule, sources) if rule.source_review else rule
+        except SourceReviewError as exc:
+            raise SnapshotError(str(exc)) from exc
+        require((original.extraction_run_id, original.source_doc_id, digest(substantive(original))) in cached_behaviors,
                 f"Rule behavior differs from reviewed cache: {rule.team_rule_id}")
     for doc_id, findings in core.read("negative_findings.json", {}).items():
         require(doc_id in index, f"Unindexed negative finding: {doc_id}")
