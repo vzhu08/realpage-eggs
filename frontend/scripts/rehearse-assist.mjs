@@ -21,18 +21,21 @@ const context = await browser.newContext({ viewport: { width: 1440, height: 1000
 const page = await context.newPage();
 page.setDefaultTimeout(120_000);
 const requests = [];
+const browserErrors = [];
+page.on('pageerror', error => browserErrors.push(String(error)));
 page.on('response', response => {
   if (response.url().includes('/lookup/assist')) requests.push({ status: response.status(), ...response.headers(), at: Date.now() });
 });
 const report = { base, mode, serverState: args['server-state'] ?? 'warm-or-uncontrolled', freshBrowser: true,
   checkedAt: new Date().toISOString(), targetMs: 2000, narrationBudgetSeconds: 60,
-  steps: [], requests, warnings: [], success: false };
+  steps: [], requests, browserErrors, warnings: [], completeFlow: !args['opening-only'], success: false };
 try {
   const manifestResponse = await context.request.get(`${base}/api/v1/demo-requests`);
   if (!manifestResponse.ok()) throw new Error('No configurable demo manifest on selected host');
   const manifest = await manifestResponse.json();
   report.identity = manifest.identity;
   report.manifest = manifest;
+  if (args['opening-only']) manifest.steps = manifest.steps.slice(0, 1);
   const opening = manifest.steps[0].request;
   const url = `${base}/${mode === 'preloaded' ? '?preload=1' : ''}#/lookup?mode=live&address=${opening.address_id}&as_of=${opening.as_of}`;
   await page.goto(url);
@@ -54,6 +57,7 @@ try {
       measures: performance.getEntriesByType('measure').map(e => ({ name: e.name, ms: e.duration, detail: e.detail })),
       resources: performance.getEntriesByType('resource').filter(e => e.name.includes('/api/')).map(e => ({ name: e.name, transferSize: e.transferSize, encodedBodySize: e.encodedBodySize, decodedBodySize: e.decodedBodySize, duration: e.duration })),
       nodes: document.querySelectorAll('*').length,
+      browserHeapBytes: performance.memory?.usedJSHeapSize ?? null,
     }));
     const click = metrics.measures.find(e => e.name === 'realpage:click-to-usable')?.ms;
     report.steps.push({ id, automationWallMs: performance.now() - started, ...metrics, underTarget: click < 2000 });
@@ -89,7 +93,7 @@ try {
     }
   }
   report.measuredInteractionMs = report.steps.reduce((n, step) => n + step.measures.find(e => e.name === 'realpage:click-to-usable').ms, 0);
-  if (args.paced) {
+  if (args.paced && !args['opening-only']) {
     const remaining = 55_000 - (performance.now() - rehearsalStarted);
     if (remaining > 0) await new Promise(resolve => setTimeout(resolve, remaining));
     const started = performance.now();
@@ -110,6 +114,10 @@ try {
   await page.screenshot({ path: output.replace(/\.json$/, '.png'), fullPage: false });
 } catch (error) {
   report.error = String(error);
+  try {
+    report.failureState = await page.locator('main').innerText({ timeout: 5000 });
+    await page.screenshot({ path: output.replace(/\.json$/, '-failed.png'), timeout: 5000 });
+  } catch { report.warnings.push('Browser state could not be captured after failure.'); }
   process.exitCode = 1;
 } finally {
   await writeFile(output, JSON.stringify(report, null, 2));

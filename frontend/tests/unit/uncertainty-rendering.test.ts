@@ -5,6 +5,21 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { DemoSource } from '../../src/api/demo';
 import { RemainingUncertainty } from '../../src/features/questions/RemainingUncertainty';
 import { WhatChanged } from '../../src/features/questions/WhatChanged';
+import { openItems } from '../../src/lib/openItems';
+
+test('statement indexing preserves rule-specific reasons and accumulated missing facts', async () => {
+  const outcome = await new DemoSource().lookup({ address_id: 'DEV-P08', as_of: '2027-01-15', answers: [] });
+  const original = outcome.lookup.evaluations[0]!;
+  outcome.lookup.evaluations = ['one', 'two', 'one'].map(team_rule_id => ({ ...original, team_rule_id,
+    uncertainty_reasons: ['unsupported_condition: unsupported clause', 'missing_property_fact: owner_type'] }));
+  outcome.assist!.question_plan.questions = [];
+  outcome.assist!.question_plan.remaining_uncertainty = [{ kind: 'interpretation', message: 'Review this unsupported clause',
+    remedy: 'Review', field: 'owner_type', rule_ids: ['two'], predicate_ids: [], source_refs: [] }];
+  const rows = openItems(outcome, []);
+  assert.deepEqual(rows.find(row => row.key === 'fact-owner_type')?.ruleIds, ['one']);
+  assert.deepEqual(rows.find(row => row.key === 'reason-unsupported_condition: unsupported clause')?.ruleIds, ['one']);
+  assert.equal(rows.filter(row => row.key.startsWith('plan-')).length, 1);
+});
 
 test('a partial property date keeps Core B’s factual remedy without a contradictory review row', async () => {
   const outcome = await new DemoSource().lookup({ address_id: 'DEV-P08', as_of: '2027-01-15', answers: [] });

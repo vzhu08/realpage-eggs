@@ -1,6 +1,7 @@
 """Offline-only canonical result priming; no providers, source edits or deployment."""
 import argparse
 from hashlib import sha256
+import gzip
 import json
 from pathlib import Path
 import sys
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from navigator.assist_cache import AssistCache, Artifact, identity
 from navigator.assist_service import assist
+from navigator.assist_wire import unpack
 from navigator.models import AssistRequest
 from navigator.store import Store, digest, write_json
 
@@ -48,30 +50,43 @@ def prime(store_path, cache_path, manifest_path, report_path, verify=False):
         if not isinstance(artifact, Artifact):
             raise RuntimeError("Result could not be cached within configured disk/result bounds")
         seconds = time.perf_counter() - started
-        canonical = b"".join(artifact.chunks(False))
-        value = json.loads(canonical)
-        verified = None
-        if verify:
-            expected = assist(store, request).model_dump_json().encode("utf-8")
-            verified = expected == canonical
-            if not verified:
-                raise RuntimeError("Cached result differs from independently computed result")
-            del expected
+        # Inspect the lossless shared graph, not a second expanded 250+ MB tree.
+        canonical_size = artifact.decoded_size
+        canonical_hash = sha256()
+        for chunk in artifact.chunks(False):
+            canonical_hash.update(chunk)
         wire = cache.get(artifact.key, "dag")
         if wire is None:
             raise RuntimeError("Missing compact representation")
+        with gzip.GzipFile(fileobj=wire.stream, mode="rb") as source:
+            value = unpack(json.load(source))
         wire.stream.close()
+        verified = None
+        if verify:
+            expected = assist(store, request).model_dump_json()
+            comparison = cache.get(artifact.key)
+            verified = comparison is not None
+            if comparison is not None:
+                with gzip.GzipFile(fileobj=comparison.stream, mode="rb") as source:
+                    for offset in range(0, len(expected), 64 * 1024):
+                        chunk = expected[offset:offset + 64 * 1024].encode("utf-8")
+                        verified = verified and source.read(len(chunk)) == chunk
+                    verified = verified and source.read(1) == b""
+                comparison.stream.close()
+            if not verified:
+                raise RuntimeError("Cached result differs from independently computed result")
+            del expected
         row = {"id": step["id"], "key": artifact.key, "cache": "hit" if artifact.hit else "miss",
-               "seconds": round(seconds, 4), "canonical_bytes": len(canonical), "canonical_gzip_bytes": artifact.size,
+               "seconds": round(seconds, 4), "canonical_bytes": canonical_size, "canonical_gzip_bytes": artifact.size,
                "dag_bytes": wire.decoded_size, "dag_gzip_bytes": wire.size,
-               "canonical_sha256": sha256(canonical).hexdigest(), "uncached_equivalent": verified,
+               "canonical_sha256": canonical_hash.hexdigest(), "uncached_equivalent": verified,
                "plan": {k: value["question_plan"][k] for k in ("status", "evaluations_used", "limits_hit")},
                "question_fields": [q["fact"]["field"] for q in value["question_plan"]["questions"]],
                "evaluation_counts": {status: sum(e["result"] == status for e in value["lookup"]["evaluations"])
                                      for status in {e["result"] for e in value["lookup"]["evaluations"]}}}
         report["steps"].append(row)
         print(json.dumps(row), flush=True)
-        del canonical, value
+        del value
         write_json(report_path, report)
     if identity(store) != stamp:
         raise RuntimeError("Input snapshot/code changed while priming; discard this receipt and re-prime")

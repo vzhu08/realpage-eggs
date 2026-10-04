@@ -3,7 +3,7 @@
 Owner: Vincent / session 01a1067b-43a7-7cf1-813d-b0d807b6171f, sole writer.
 Branch: codex/assist-demo-cache. Base: 5475b69cafd7dac4ca324099ee3b60a9a1d280e8.
 Checkout: C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/assist-demo-cache.
-Status: implementation and local verification complete; hosted release/rehearsal pending publishing authority and final snapshot selection.
+Status: final-snapshot local verification complete; authorized publication and hosted rehearsal in progress.
 
 User explicitly authorizes Platform caching and narrowly necessary frontend preloading.
 Exclusive claim: navigator/assist_cache.py, assist_wire.py, api.py, assist_service.py;
@@ -19,6 +19,15 @@ frontend/src/state/source.tsx, session.ts; frontend/src/features/demo/**;
 frontend/tests/unit/assist-cache.test.ts; frontend/tests/e2e/assist-preload.spec.ts;
 frontend/scripts/rehearse-assist.mjs; deploy/Dockerfile; docs/ASSIST_DEMO.md,
 docs/evidence/assist-demo.json; this card and generated contracts if required.
+
+Final-snapshot follow-up claim: scripts/render_snapshot.py and tests/test_render_snapshot.py
+for optional lossless LZMA packaging. RENDER-01 is completed/merged; no active writer found.
+Publishing authority received from the user's "authaorize" reply. Final 666-rule snapshot
+independently verified against the extraction owner's completed run and source policy;
+all original/copied file hashes match (artifacts/final-snapshot-verification.json).
+Final browser-profile claim: frontend/src/lib/openItems.ts and
+frontend/tests/unit/uncertainty-rendering.test.ts for exact indexed statement lookup.
+Both existing UX checkouts have no edits to these paths; preserve their merged behavior/design.
 
 Read-only claim audit: both existing Claude checkouts preserved. Active design edits and
 origin/codex/tenent-frontend-preview touch LookupView, Results, main, styling and visuals;
@@ -56,3 +65,11 @@ handoff and re-prime/rehearse any newly selected immutable snapshot before relea
 Next: obtain explicit authority for this branch's push/merge and existing-service deployment,
 then verify actual hosted cold/uncached/cached/preloaded behavior. Preserve this active checkout
 and ignored snapshots, caches, browser receipts and screenshots; no branch cleanup is due yet.
+
+Final selection: 666 rules / 83 sources / 500 properties. Five independent canonical comparisons
+pass. Final preloaded clicks 1.07–1.64 s; actual source quote at 55.57 s. Server-cache-only
+follow-up/second-answer clicks were 2.05/2.13 s and miss target. Offline cold preparation is
+43.76–77.04 s, still memory-heavy. Backend 523 passed / 2 skipped; frontend 241 full unit checks
+plus added uncertainty regression, typecheck/build, 32 final affected E2E checks passed.
+User authorized publication/deployment; no additional service purchase. See updated runbook
+and authoritative evidence receipt. Root and all other active checkouts remain untouched.

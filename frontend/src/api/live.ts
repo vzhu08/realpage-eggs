@@ -30,7 +30,7 @@ import type {
   SourceDocument,
 } from './types';
 import { validate, type SchemaName } from './validate';
-import { ASSIST_MEDIA, decodeAssistWire, metric } from './assistWire';
+import { ASSIST_MEDIA, assistRetainedBytes, decodeAssistWire, metric } from './assistWire';
 import { AssistPreload } from './assistPreload';
 
 type FetchLike = typeof fetch;
@@ -159,7 +159,9 @@ export class LiveSource implements DataSource {
       if (data.lookup.address.address_id !== query.address_id || data.lookup.as_of !== query.as_of || data.scenario_id != null || JSON.stringify(echoed) !== JSON.stringify(asked)) {
         throw new ApiError({ kind: 'contract', endpoint: 'POST /lookup/assist', message: 'The result describes another property, date or set of answers, so it is not shown.' });
       }
-      return { value, identity: value.headers?.get('x-assist-identity') ?? '', bytes: value.headers?.get('content-type')?.includes(ASSIST_MEDIA) ? value.text.length * 8 : Infinity };
+      const bytes = assistRetainedBytes(data);
+      value.text = ''; // Assist UI consumes the validated graph; retain no duplicate wire text.
+      return { value, identity: value.headers?.get('x-assist-identity') ?? '', bytes };
     }, signal);
   }
 

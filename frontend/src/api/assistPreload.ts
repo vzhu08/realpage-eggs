@@ -6,7 +6,7 @@ const abortError = () => new DOMException('The request was cancelled.', 'AbortEr
 export class AssistPreload<T> {
   private entries = new Map<string, CachedAnswer<T>>();
   private flights = new Map<string, Flight<T>>();
-  constructor(private readonly maxEntries = 8, private readonly maxBytes = 128 * 1024 * 1024) {}
+  constructor(private readonly maxEntries = 8, private readonly maxBytes = 256 * 1024 * 1024) {}
 
   clear() { this.entries.clear(); }
   has(key: string) { return this.entries.has(key); }

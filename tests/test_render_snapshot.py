@@ -135,6 +135,17 @@ def test_changed_source_release_is_not_packaged(release, tmp_path):
     assert not (tmp_path / "package").exists()
 
 
+def test_lzma_preserves_every_snapshot_byte_through_private_install(release, tmp_path):
+    report = render.prepare(release, tmp_path / "lzma", "lzma")
+    archive = Path(report["archive"])
+    output = tmp_path / "private/snapshot.b64"
+    render.secret_file(archive, report["sha256"], output)
+    receipt = render.build_secret(output, report["sha256"], tmp_path / "installed", True,
+                                  render.secret_part_two(output))
+    for name, expected in receipt["manifest"]["files_sha256"].items():
+        assert fingerprint(Path(receipt["NAVIGATOR_DATA_DIR"]) / name) == expected
+
+
 def test_secret_file_build_installs_verified_inputs_and_hides_content(tmp_path, package, capsys):
     archive, digest = package
     output = tmp_path / "private/snapshot.b64"

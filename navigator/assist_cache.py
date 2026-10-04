@@ -19,7 +19,7 @@ import threading
 import time
 
 from . import assist_service
-from .assist_wire import pack
+from .assist_wire import pack_json
 from .config import ROOT
 from .models import AssistRequest
 from .store import digest, write_json
@@ -138,7 +138,7 @@ class AssistCache:
     def save(self, key, result):
         # assist returns the canonical validated response; never accept an arbitrary
         # caller-supplied serialized cache body. This is an internal write boundary.
-        canonical = result.model_dump_json().encode("utf-8")
+        canonical = result.model_dump_json()
         if len(canonical) > self.max_result_bytes:
             return False
         with self.lock, self.writer():
@@ -147,15 +147,21 @@ class AssistCache:
                 meta = {"format": FORMAT, "key": key, "created": time.time()}
                 for name, raw in (("canonical", canonical), ("dag", None)):
                     if name == "dag":
-                        raw = json.dumps(pack(json.loads(canonical)), ensure_ascii=False,
-                                         separators=(",", ":"), allow_nan=False).encode("utf-8")
+                        raw = json.dumps(pack_json(canonical), ensure_ascii=False,
+                                         separators=(",", ":"), allow_nan=False)
                     if len(raw) > self.max_result_bytes:
                         return False
                     path = folder / f"{name}.json.gz"
+                    byte_count = 0
                     with path.open("wb") as target:
                         with gzip.GzipFile(fileobj=target, mode="wb", compresslevel=6, mtime=0) as compressed:
-                            compressed.write(raw)
-                    meta[name] = {"bytes": path.stat().st_size, "decoded_bytes": len(raw), "sha256": file_hash(path)}
+                            for offset in range(0, len(raw), CHUNK):
+                                chunk = raw[offset:offset + CHUNK].encode("utf-8")
+                                byte_count += len(chunk)
+                                if byte_count > self.max_result_bytes:
+                                    return False
+                                compressed.write(chunk)
+                    meta[name] = {"bytes": path.stat().st_size, "decoded_bytes": byte_count, "sha256": file_hash(path)}
                 write_json(folder / "entry.json", meta)
                 needed = sum(p.stat().st_size for p in folder.iterdir())
                 if needed > self.max_bytes:

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { AssistPreload } from '../../src/api/assistPreload';
-import { decodeAssistWire } from '../../src/api/assistWire';
+import { assistRetainedBytes, decodeAssistWire } from '../../src/api/assistWire';
 import { validate } from '../../src/api/validate';
 
 test('compact transport preserves false, null, unicode and literal keys without alias mutation', () => {
@@ -10,6 +10,8 @@ test('compact transport preserves false, null, unicode and literal keys without 
   assert.equal(output[0]?.$ref, null);
   assert.equal(output[0]?.__proto__, 'é');
   assert.equal(output[0], output[1]);
+  assert.ok(assistRetainedBytes(output) > 0 && assistRetainedBytes(output) < 2048);
+  assert.equal(assistRetainedBytes({}), Infinity);
   assert.throws(() => { output[0]!.a = true; });
   assert.throws(() => decodeAssistWire({ format: 'realpage-assist-dag-v1', nodes: [{ a: [0] }], root: 0 }));
 });
