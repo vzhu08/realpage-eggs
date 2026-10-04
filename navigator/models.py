@@ -2,11 +2,12 @@
 from __future__ import annotations
 
 import calendar
+import math
 import re
 from datetime import date
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 Category = Literal["rent_increase_limits", "just_cause_eviction", "security_deposits", "application_screening_fees", "screening_restrictions", "algorithmic_rent_setting"]
 CATEGORIES = list(Category.__args__)
@@ -36,6 +37,22 @@ class Expression(Model):
     fact: str | None = None
     value: Any = None
     reason: str | None = None
+
+    @field_validator("value")
+    @classmethod
+    def finite_numbers(cls, value):
+        # Any-valued thresholds bypass Pydantic's typed-float constraints.
+        # Keep exact integers and nonnumeric facts unchanged, including membership lists.
+        pending = [value]
+        while pending:
+            item = pending.pop()
+            if isinstance(item, float) and not math.isfinite(item):
+                raise ValueError("Expression numbers must be finite")
+            if isinstance(item, (list, tuple)):
+                pending.extend(item)
+            elif isinstance(item, dict):
+                pending.extend(item.values())
+        return value
 
     @model_validator(mode="after")
     def shape(self):
@@ -87,8 +104,8 @@ class SourceDocument(Model):
 
 
 class Bound(Model):
-    lower: float | None = None
-    upper: float | None = None
+    lower: float | None = Field(default=None, allow_inf_nan=False)
+    upper: float | None = Field(default=None, allow_inf_nan=False)
     provenance: str
 
     @model_validator(mode="after")
@@ -386,8 +403,8 @@ class FactDefinition(Model):
     data_type: Literal["boolean", "integer", "number", "date", "enum", "string"]
     unit: str | None = None
     allowed_values: list[str] = Field(default_factory=list)
-    minimum: float | None = None
-    maximum: float | None = None
+    minimum: float | None = Field(default=None, allow_inf_nan=False)
+    maximum: float | None = Field(default=None, allow_inf_nan=False)
     answer_effort: int = Field(default=1, ge=1, le=5)
     allow_partial_date: bool = True
 
