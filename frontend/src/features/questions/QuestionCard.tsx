@@ -20,9 +20,21 @@ interface Props {
   onInspect: (ruleId: string) => void;
 }
 
+// Short labels only: the service's complete qualification remains visible below.
+const CONCISE_TITLES: Record<string, string> = {
+  person_under_bpc_16702: 'Is the actor a “person” under BPC §16702?',
+  end_consumer_of_product_or_service: 'Is the same actor the end consumer?',
+};
+
 export function QuestionCard({ question, rank, names, current, busy, allowDemoAnswers, onAnswer, onInspect }: Props) {
   const { fact } = question;
   const form = formFromDefinition(fact);
+  const conciseTitle = CONCISE_TITLES[fact.field];
+  // The planner prefixes these prompts with the exact meaning. Display that meaning
+  // once as guidance, while retaining any following format instruction in details.
+  const promptRemainder = conciseTitle && question.prompt.startsWith(fact.meaning)
+    ? question.prompt.slice(fact.meaning.length).replace(/^\?\s*/, '').trim()
+    : null;
   const headingId = `question-${question.question_id.replace(/[^A-Za-z0-9_-]/g, '-')}`;
   // Results at least one recorded answer would move — the reason this question is worth asking.
   const count = movableResults(current, question);
@@ -32,8 +44,9 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
     <article className={rank === 1 ? 'question question--lead' : 'question'} aria-labelledby={headingId} data-question={question.question_id} data-fact-field={fact.field}>
       <p className="question__rank">{rank === 1 ? 'Most useful question' : `Question ${rank}`}</p>
       <h3 id={headingId} className="question__prompt">
-        {fact.meaning}?
+        {conciseTitle ?? `${fact.meaning}?`}
       </h3>
+      {conciseTitle && <p className="question__meaning"><span className="question__meaning-label">Answer guidance:</span> {fact.meaning}</p>}
 
       {question.alternatives.length > 0 && (
         <p className="question__consequence" data-consequence={count.movable}>
@@ -56,7 +69,7 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
 
       <AnswerInput
         form={form}
-        legend={question.prompt}
+        legend={conciseTitle ?? question.prompt}
         unit={fact.unit}
         limits={{ minimum: fact.minimum, maximum: fact.maximum }}
         busy={busy}
@@ -79,10 +92,10 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
 
         <Disclosure summary="Why this is asked, in the planner’s words">
           <dl className="facts facts--dense">
-            <div className="facts__row">
-              <dt>Question as planned</dt>
-              <dd>{question.prompt}</dd>
-            </div>
+            {promptRemainder !== '' && <div className="facts__row">
+              <dt>{promptRemainder === null ? 'Question as planned' : 'Answer format as planned'}</dt>
+              <dd>{promptRemainder ?? question.prompt}</dd>
+            </div>}
             <div className="facts__row">
               <dt>Why this matters</dt>
               <dd>{question.why}</dd>
