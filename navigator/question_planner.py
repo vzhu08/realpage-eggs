@@ -296,7 +296,7 @@ def _uncertainty(context, evaluations, traces, prop=None):
                 ("More analysis: increase the bounded source-context limits (" + ", ".join(report.context.limits_hit) + ") and recheck references" if bounded else
                  "Source acquisition: retrieve missing original context with Platform before relying on this result"), [report.rule_id])
         for dep in report.context.dependencies:
-            if dep.status != "resolved":
+            if dep.status not in {"resolved", "not_applicable"}:
                 bounded = dep.status in {"depth_limit", "budget_limit"}
                 add("analysis_limit" if bounded else "cross_reference",
                     f"{dep.reference} ({dep.status}): {dep.explanation}; the referenced condition or exception may change the outcome",
@@ -367,7 +367,7 @@ def _factual_priority_fields(context, evaluations, traces, definitions):
                 or rule.review_issues or rule.semantic_verification == "needs_review"
                 or len(evidence) != 1 or evidence[0].blocking_issues
                 or evidence[0].context.status != "available" or evidence[0].context.limits_hit
-                or any(dep.status != "resolved" for dep in evidence[0].context.dependencies)):
+                or any(dep.status not in {"resolved", "not_applicable"} for dep in evidence[0].context.dependencies)):
             continue
         if any(not any(target.team_rule_id != rule.team_rule_id
                        and target.citation.casefold() == interaction.target_citation.casefold()

@@ -64,6 +64,9 @@ def _source_review_original(store, rule, sources):
     require(changed == set(review.changed_fields), f"Source review changed fields mismatch: {name}")
     require(original.extraction_run_id == review.original_extraction_run_id,
             f"Source review original extraction mismatch: {name}")
+    require(review.review_scope == "complete_rule" or original.semantic_verification != "needs_review"
+            or rule.semantic_verification == "needs_review",
+            "Selected-field review cannot clear the original semantic review gate")
     references = [item for decision in review.context_reference_decisions
                   for item in [decision.origin, *decision.target_spans]]
     evidence = [*rule_evidence(original), *rule_evidence(rule), *review.evidence, *review.context_scope, *references]

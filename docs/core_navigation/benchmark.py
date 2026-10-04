@@ -155,7 +155,7 @@ def run_case(directory, case):
                 ident: 'pending' for ident in case['rule_ids']}
             record = json.loads((ROOT / case['record']).read_text())
             assert [r.model_dump(mode='json') for r in store.rules().values()] == sorted(
-                [r for r in record['rules'] if r['team_rule_id'] in case['rule_ids']], key=lambda r: r['team_rule_id'])
+                [Rule.model_validate(r).model_dump(mode='json') for r in record['rules'] if r['team_rule_id'] in case['rule_ids']], key=lambda r: r['team_rule_id'])
         # Count route evaluator invocations separately: two common calls plus
         # the planner's declared budget, regardless of candidate count.
         actual_evaluator = engine.evaluate_rules

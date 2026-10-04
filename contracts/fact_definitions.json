@@ -87,6 +87,17 @@
     "answer_effort": 2,
     "allow_partial_date": true
   },
+  "used_as_tenant_dwelling": {
+    "field": "used_as_tenant_dwelling",
+    "meaning": "Whether the residential property is used as the tenant's dwelling under a rental agreement. Answer for the tenancy being evaluated, using the rental agreement and actual dwelling use. Do not infer this from residential classification, unit count, year built, or an owner's name. Leave unknown if either the rental agreement or tenant dwelling use is unconfirmed. This does not establish that a deposit was collected or that any duty was violated.",
+    "data_type": "boolean",
+    "unit": null,
+    "allowed_values": [],
+    "minimum": null,
+    "maximum": null,
+    "answer_effort": 2,
+    "allow_partial_date": true
+  },
   "owner_occupied": {
     "field": "owner_occupied",
     "meaning": "Whether the owner occupies the property",

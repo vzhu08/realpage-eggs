@@ -24,6 +24,7 @@ interface Schema {
   maxLength?: number;
   minItems?: number;
   maxItems?: number;
+  minProperties?: number;
   pattern?: string;
 }
 
@@ -112,6 +113,7 @@ function checkValue(schema: Schema, value: unknown, path: string, out: Validatio
     if (schema.items) value.forEach((item, index) => check(schema.items as Schema, item, `${path}[${index}]`, out, checked));
   } else if (value !== null && typeof value === 'object') {
     const record = value as Record<string, unknown>;
+    if (schema.minProperties !== undefined && Object.keys(record).length < schema.minProperties) out.errors.push(`${path}: fewer than ${schema.minProperties} properties`);
     const properties = schema.properties ?? {};
     for (const name of schema.required ?? []) {
       if (!(name in record)) out.errors.push(`${path}.${name}: required field is missing`);

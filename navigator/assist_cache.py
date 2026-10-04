@@ -46,7 +46,8 @@ def sha256_file(stream):
 
 def identity(store):
     names = [*INPUTS, *(p.relative_to(store.root).as_posix()
-                        for p in sorted((store.root / "semantic_reviews").glob("*.json")))]
+                        for directory in ("semantic_reviews", "source_reviews")
+                        for p in sorted((store.root / directory).glob("*.json")))]
     snapshot = {name: file_hash(store.path(name)) if store.path(name).is_file() else None for name in names}
     # Hash the complete runtime package/config so new transitive imports cannot be
     # silently missed. Normalize only code line endings for portable release builds.

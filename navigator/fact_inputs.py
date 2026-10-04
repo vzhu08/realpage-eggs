@@ -18,6 +18,13 @@ FACT_DEFINITIONS = {
 }
 for field, meaning in {
     "residential": "Whether this property is used for residential rental housing",
+    "used_as_tenant_dwelling": (
+        "Whether the residential property is used as the tenant's dwelling under a rental agreement. "
+        "Answer for the tenancy being evaluated, using the rental agreement and actual dwelling use. "
+        "Do not infer this from residential classification, unit count, year built, or an owner's name. "
+        "Leave unknown if either the rental agreement or tenant dwelling use is unconfirmed. "
+        "This does not establish that a deposit was collected or that any duty was violated."
+    ),
     "owner_occupied": "Whether the owner occupies the property",
     "subsidized": "Whether the rental is subject to a housing subsidy",
     "condominium": "Whether this property is a condominium",

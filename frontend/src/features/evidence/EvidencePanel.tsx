@@ -145,6 +145,8 @@ export function EvidencePanel({ rule, evaluation, lookup, assist, modal, synthet
               { label: 'Evidence mode', value: sentence(rule.evidence_mode), note: rule.evidence_mode === 'synthetic' ? 'Synthetic fixture, not actual law' : undefined },
               { label: 'Semantic status', value: sentence(rule.semantic_verification) },
               { label: 'Extraction run', value: <span className="mono break">{rule.extraction_run_id}</span> },
+              ...(rule.source_review ? [{ label: 'Source correction', value: rule.source_review.reviewer,
+                note: `Post-extraction AI review (${sentence(rule.source_review.review_scope)}); original extracted record retained. Not independent legal validation.` }] : []),
             ]}
           />
         </Disclosure>
