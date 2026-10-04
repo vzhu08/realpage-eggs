@@ -57,7 +57,7 @@ jobs:
             --build-arg NAVIGATOR_REQUIRE_SNAPSHOT=1 \
             --build-arg NAVIGATOR_SNAPSHOT_SHA256="$(cat artifacts/free/package/snapshot.zip.sha256)" \
             --secret id=snapshot_b64,src=artifacts/free/snapshot.b64 \
-            --secret id=snapshot_part_2_b64,src=artifacts/free/snapshot-part-2.b64 .
+            --secret id=snapshot-part-2_b64,src=artifacts/free/snapshot-part-2.b64 .
       - name: Exercise cold start, HTTP and baked caches under Free resource limits
         run: |
           set -euo pipefail
