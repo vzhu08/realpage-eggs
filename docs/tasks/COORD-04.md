@@ -9,7 +9,9 @@ Base: `3b2d2011de3d0319f96702bbeddb6ec72323dc27` (merged PR #9).
 Branch: `codex/readiness-fixes-and-plan`.
 Checkout: `C:\Users\vzhu0\PycharmProjects\realpage-eggs\artifacts\readiness-fixes-and-plan`.
 The active `codex/platform-review` checkout and its PLAT-05 edits are preserved.
-No live provider calls, extraction restart, teammate messages, push, merge or deployment.
+Initial implementation made no live provider calls, extraction restart, teammate messages,
+push, merge or deployment. The user subsequently authorized publishing and merging these
+fixes/task assignments. PLAT-05 remains a separate open PR #10 and is not included.
 
 Claimed paths: `navigator/models.py`, `tests/test_numeric_contracts.py`, the existing
 planner/renderer defensive tests, `frontend/scripts/generate-contract-types.mjs`,
@@ -53,3 +55,12 @@ Limitations: stricter ingress rejects previously accepted non-finite stored valu
 must use null. No model calls, original-store writes, new feature implementation or remote operations.
 Next action: review/integrate this branch with PLAT-05's latest changes, then execute the assigned
 four-lane cards from the recorded common base. Preserve local PLAT-04 continuation `11afb55`.
+
+## Authorized integration
+
+The user requested merging the fixes and task assignments. Fresh fetch confirms main remains
+`3b2d201`, the exact tested base; the six runtime/test fingerprints match the passing evidence.
+PLAT-05 has a separate open PR #10 at `c0b3be3`; it is preserved and not merged by this task.
+Only docs/status metadata changes follow the verified fixes. Resolve the shared TASKS board
+against its latest owner status when PLAT-05 later integrates. The primary checkout remains
+on its Platform branch; this operation uses only the isolated readiness checkout.

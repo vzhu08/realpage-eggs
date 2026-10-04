@@ -19,8 +19,8 @@ Docker runtime and public deployment are not verified by those checks.
 
 | ID | Owner | State | Deliverable / dependency |
 | --- | --- | --- | --- |
-| [COORD-04](tasks/COORD-04.md) | Vincent / current readiness session | Review; verified locally | Fix LF/CRLF contract checks and non-finite model inputs; assign next work. Isolated branch `codex/readiness-fixes-and-plan`, base `3b2d201`. |
-| [PLAT-05](tasks/PLAT-05.md) | Vincent / existing Platform session | Running separately | Complete inventory/verifier work and distinguish offline/live acceptance. Preserve current `codex/platform-review` changes and latest card; real-store/provider prerequisites belong to that session. |
+| [COORD-04](tasks/COORD-04.md) | Vincent / current readiness session | Verified locally; user-authorized merge queued | Fix LF/CRLF contract checks and non-finite model inputs; assign next work. Isolated branch `codex/readiness-fixes-and-plan`, base `3b2d201`. |
+| [PLAT-05](tasks/PLAT-05.md) | Vincent / existing Platform session | Software review; live inputs pending | Separate [PR #10](https://github.com/vzhu08/realpage-eggs/pull/10), `c0b3be3`; 26 focused / 226 full checks reported. Preserve its latest card; live store/provider prerequisites remain with that session. |
 | [PLAT-06](tasks/PLAT-06.md) | Vincent / Platform | Assigned; prep Ready | After PLAT-05: integrate saved rules/geography, reconcile local PLAT-04 continuation, publish additive contracts, evidence package and complete runnable release. |
 | [CORE-06](tasks/CORE-06.md) | Daniel / Core A | Assigned; saved review Ready | T1-T5 evidence, lifecycle gaps and source comparisons. Corpus provider run remains paused pending explicit human resumption. |
 | [CORE-07](tasks/CORE-07.md) | Oliver / Core B | Assigned; existing-interface work Ready | Actionable uncertainty, faithful change/conflict explanations and reviewed real-case planner benchmark. Real acceptance needs CORE-06/PLAT-06. |
