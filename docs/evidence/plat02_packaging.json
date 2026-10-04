@@ -1,0 +1,473 @@
+{
+  "task": "PLAT-02",
+  "status": "Review",
+  "label": "PACKAGING_VERIFICATION_NOT_LEGAL_VALIDATION",
+  "branch": "codex/platform-packaging",
+  "base_commit": "9a96fda205c75536d81b17d7d1baf5b3c0ced0e6",
+  "preceding_merge": {
+    "pull_request": "https://github.com/vzhu08/realpage-eggs/pull/5",
+    "head_commit": "5cef6d8e83b040e989faa87141cd238674c30ddd",
+    "merge_commit": "9a96fda205c75536d81b17d7d1baf5b3c0ced0e6",
+    "state": "MERGED",
+    "merged_at": "2026-10-03T23:30:59Z"
+  },
+  "environment": {
+    "os": "win32",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "fresh_venv": "artifacts/plat02-venv",
+    "pip_check": "No broken requirements found",
+    "install_source": "requirements.lock; pip wheel cache reused, no installed packages inherited",
+    "installed_locked_versions": {
+      "annotated-doc": "0.0.5",
+      "annotated-types": "0.8.0",
+      "anyio": "4.15.1",
+      "attrs": "26.1.0",
+      "certifi": "2026.7.22",
+      "click": "8.5.0",
+      "colorama": "0.4.6",
+      "fastapi": "0.142.2",
+      "h11": "0.16.0",
+      "httpcore": "1.0.9",
+      "httpx": "0.28.1",
+      "idna": "3.20",
+      "iniconfig": "2.3.0",
+      "jsonschema": "4.26.0",
+      "jsonschema-specifications": "2025.9.1",
+      "opentelemetry-api": "1.45.0",
+      "packaging": "26.3",
+      "pluggy": "1.6.0",
+      "pydantic": "2.13.5",
+      "pydantic_core": "2.46.5",
+      "Pygments": "2.21.0",
+      "pytest": "9.1.1",
+      "python-dotenv": "1.2.4",
+      "referencing": "0.37.0",
+      "rpds-py": "2026.6.3",
+      "starlette": "1.7.0",
+      "typing-inspection": "0.4.4",
+      "typing_extensions": "4.16.0",
+      "uvicorn": "0.54.0"
+    }
+  },
+  "checks": {
+    "full_suite": {
+      "command": ".\\artifacts\\plat02-venv\\Scripts\\python.exe -m pytest -q",
+      "exit_code": 0,
+      "passed": 96,
+      "warnings": [
+        "Existing Starlette TestClient/httpx deprecation warning"
+      ]
+    },
+    "smoke": {
+      "command": ".\\artifacts\\plat02-venv\\Scripts\\python.exe scripts/platform_ops.py smoke --output artifacts/plat02-smoke-clean --real-data data/plat01-recovery",
+      "exit_code": 0,
+      "report": {
+        "label": "PACKAGING_CHECK_NOT_LEGAL_VALIDATION",
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "lock_sha256": "508e85aa572051bdd5bac9eb9cd6076e94cf8cbe754371e355e8f5f6d83e9d70",
+        "checks": {
+          "absent_http": {
+            "status": "ok",
+            "version": "0.1.0",
+            "dataset_readiness": "absent",
+            "sources": 0,
+            "rules": 0,
+            "addresses": 0,
+            "resolved_municipalities": 0,
+            "last_extraction_outcome": null,
+            "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+          },
+          "missing_provider": {
+            "exit_code": 2,
+            "error": "ProviderUnavailable"
+          },
+          "synthetic_http": {
+            "status": "ok",
+            "version": "0.1.0",
+            "dataset_readiness": "available",
+            "sources": 1,
+            "rules": 1,
+            "addresses": 3,
+            "resolved_municipalities": 3,
+            "last_extraction_outcome": "success",
+            "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+          },
+          "synthetic_validation": {
+            "report_type": "internal_validation_not_official_scoring",
+            "as_of": "2026-10-01",
+            "schema_valid": true,
+            "quote_valid": true,
+            "ready_for_submission": false,
+            "counts": {
+              "sources": 1,
+              "source_texts": 1,
+              "addresses": 3,
+              "rules": 1,
+              "exportable_rules": 1,
+              "quote_failures": 0,
+              "schema_failures": 0,
+              "resolved_municipalities": 3,
+              "synthetic_rules": 1,
+              "review_rules": 0
+            },
+            "capture_status_counts": {
+              "synthetic": 1
+            },
+            "missing_source_ids": [],
+            "unresolved_extraction_ids": [],
+            "unresolved_address_ids": [],
+            "exportable_rule_ids": [
+              "r-694ad9fbae9083966e86"
+            ],
+            "errors": [],
+            "warnings": [
+              "Synthetic rules present: not competition output"
+            ],
+            "official_score": null
+          },
+          "synthetic_exports": {
+            "payload_sha256": {
+              "change_details.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+              "changes.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+              "evidence_checks.json": "85542784e4463cd440626451bd3e2edf1a881902ff95b49609474ab23ea3be4d",
+              "evidence_inventory.json": "5b7361e8947a772347e893a41f78621081fc9ead99ecd23fae9d873a586ef79f",
+              "lookups.json": "34d07aaa589ed62e157a461503589a0121d6b7498f06dd49737a92e8f0bff13a",
+              "rules.json": "3068bdb2ce80af3e870bea18c52ed2db285e05d9d55166e9f3a1fcc4d3b46308",
+              "validation.json": "c4f61dce3084f60002b47e59ac331f6ecc36865efdd7917506e23b7978941af3"
+            },
+            "input_hashes": {
+              "rules": "38888311342733eed6e8317eb68f6e2fcdd1feddaaf3cdf13307e9a449e52d62",
+              "addresses": "5578f655db0bc6182327e6144d6923d95f760e30b214ad3b88f585ec5d646b26",
+              "resolutions": "bd244b288daac7c641aed0cf7d0d5abd5f7aca6b3deccd51858feb3d7bc400e3"
+            },
+            "run_ids": [
+              "a9f40088cce140a583f5cd167bd78f50",
+              "e023df0dd4b248b1a83b5ea7fbb57470"
+            ],
+            "artifact_label": "SYNTHETIC_NOT_FOR_SUBMISSION",
+            "ready_for_submission": false,
+            "counts": {
+              "sources": 1,
+              "source_texts": 1,
+              "addresses": 3,
+              "rules": 1,
+              "exportable_rules": 1,
+              "quote_failures": 0,
+              "schema_failures": 0,
+              "resolved_municipalities": 3,
+              "synthetic_rules": 1,
+              "review_rules": 0
+            }
+          },
+          "real_http": {
+            "status": "ok",
+            "version": "0.1.0",
+            "dataset_readiness": "partial",
+            "sources": 87,
+            "rules": 0,
+            "addresses": 500,
+            "resolved_municipalities": 491,
+            "last_extraction_outcome": "failed",
+            "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+          },
+          "real_validation": {
+            "report_type": "internal_validation_not_official_scoring",
+            "as_of": "2026-10-01",
+            "schema_valid": true,
+            "quote_valid": true,
+            "ready_for_submission": false,
+            "counts": {
+              "sources": 87,
+              "source_texts": 54,
+              "addresses": 500,
+              "rules": 0,
+              "exportable_rules": 0,
+              "quote_failures": 0,
+              "schema_failures": 0,
+              "resolved_municipalities": 491,
+              "synthetic_rules": 0,
+              "review_rules": 0
+            },
+            "capture_status_counts": {
+              "supplied": 54,
+              "link_only": 23,
+              "terms_review": 9,
+              "failed": 1
+            },
+            "missing_source_ids": [
+              "D002",
+              "D015",
+              "D017",
+              "D018",
+              "D019",
+              "D020",
+              "D021",
+              "D028",
+              "D030",
+              "D032",
+              "D033",
+              "D034",
+              "D035",
+              "D037",
+              "D038",
+              "D044",
+              "D054",
+              "D055",
+              "D056",
+              "D059",
+              "D060",
+              "D061",
+              "D062",
+              "D063",
+              "D064",
+              "D070",
+              "D071",
+              "D072",
+              "D074",
+              "D075",
+              "D077",
+              "D086",
+              "D087"
+            ],
+            "unresolved_extraction_ids": [
+              "D001",
+              "D003",
+              "D004",
+              "D005",
+              "D006",
+              "D007",
+              "D008",
+              "D009",
+              "D010",
+              "D011",
+              "D012",
+              "D013",
+              "D014",
+              "D016",
+              "D022",
+              "D023",
+              "D024",
+              "D025",
+              "D026",
+              "D027",
+              "D029",
+              "D031",
+              "D036",
+              "D039",
+              "D040",
+              "D041",
+              "D042",
+              "D043",
+              "D045",
+              "D046",
+              "D047",
+              "D048",
+              "D049",
+              "D050",
+              "D051",
+              "D052",
+              "D053",
+              "D057",
+              "D058",
+              "D065",
+              "D066",
+              "D067",
+              "D068",
+              "D069",
+              "D073",
+              "D076",
+              "D078",
+              "D079",
+              "D080",
+              "D081",
+              "D082",
+              "D083",
+              "D084",
+              "D085"
+            ],
+            "unresolved_address_ids": [
+              "A0009",
+              "A0098",
+              "A0128",
+              "A0295",
+              "A0346",
+              "A0352",
+              "A0376",
+              "A0380",
+              "A0384"
+            ],
+            "exportable_rule_ids": [],
+            "errors": [],
+            "warnings": [
+              "No extracted rules: empty lookup arrays do not establish absence of law",
+              "Missing text for 33 manifest sources",
+              "Incomplete/review-needed extraction for 54 sources",
+              "Legal municipality unresolved for 9 addresses"
+            ],
+            "official_score": null
+          },
+          "real_exports": {
+            "payload_sha256": {
+              "change_details.json": "bc939f7c393b9a5065d8287090aa1abca999f0ca290069ff39aec67841388036",
+              "changes.json": "04b66164f5e741be71f6d54582774c2ec80a24a4cc62e321eb369f1925b6cc37",
+              "evidence_checks.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+              "evidence_inventory.json": "2d8c1a86b3d633b08060c71eb84e1d91ef14de91c4794b2da54ab05e2d0a6d58",
+              "lookups.json": "da6738c7efd1d66f686cbce28a78f22ec94dac30e5601cb1e2cbe43ed33409ed",
+              "rules.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+              "validation.json": "02578746ffcc3adf0c8e7d5d6a8839c02995288fc394f972fe79ce2186744977"
+            },
+            "input_hashes": {
+              "rules": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "addresses": "22a052a13f29d8b310a6b2474edeee44419c6872739d811cbe9286b37f23ae37",
+              "resolutions": "9130d25de8876a6b18f244691cb3e5fe5cf163d6b2f6e39bcf26242458f55bac"
+            },
+            "run_ids": [
+              "70a0369316d842aab8acdaacccf9fe59",
+              "298c2fe992a04e469e87ca3f249a5b42"
+            ],
+            "artifact_label": "PARTIAL_NOT_JUDGE_READY",
+            "ready_for_submission": false,
+            "counts": {
+              "sources": 87,
+              "source_texts": 54,
+              "addresses": 500,
+              "rules": 0,
+              "exportable_rules": 0,
+              "quote_failures": 0,
+              "schema_failures": 0,
+              "resolved_municipalities": 491,
+              "synthetic_rules": 0,
+              "review_rules": 0
+            }
+          },
+          "original_real_store_unchanged": true
+        },
+        "status": "passed"
+      }
+    },
+    "launcher": {
+      "command": ".\\artifacts\\plat02-venv\\Scripts\\python.exe scripts/platform_ops.py serve --data-dir data/plat01-recovery --port 8011",
+      "http_status": 200,
+      "health": {
+        "status": "ok",
+        "version": "0.1.0",
+        "dataset_readiness": "partial",
+        "sources": 87,
+        "rules": 0,
+        "addresses": 500,
+        "resolved_municipalities": 491,
+        "last_extraction_outcome": "failed",
+        "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+      },
+      "temporary_server_stopped": true
+    },
+    "preservation_guards": {
+      "existing_venv": "exit 2",
+      "existing_smoke_output": "exit 2; all prior files byte-identical",
+      "missing_serve_store": "exit 2"
+    },
+    "compose": {
+      "command": "docker compose -f deploy/compose.yaml config --quiet",
+      "exit_code": 0,
+      "expanded_config_checked": true,
+      "host_binding": "127.0.0.1:8000",
+      "data_mount": "read-only /data",
+      "container_root_read_only": true,
+      "runtime_user": "10001:10001",
+      "provider_credentials_configured": false
+    },
+    "diff_check": "passed",
+    "unchanged_models_runtime_and_lock": true
+  },
+  "limitations": [
+    "Docker Desktop Linux engine was not running; image build and container runtime were not exercised.",
+    "Python base image tag floats and dependency lock lacks wheel hashes; no reproducible-image claim.",
+    "No production authentication, public ingress, deployment or new billable route.",
+    "Real validation remains partial with zero rules, 33 source texts missing and nine unresolved municipalities.",
+    "Native testing was Windows/Python 3.12.14 only; no Linux runtime claim.",
+    "Synthetic demonstrations are not live model extraction or legal ground truth.",
+    "Existing Core candidate and frontend were not integrated or modified."
+  ],
+  "next_action": "Review PLAT-02 checkpoint; with Docker running, verify image build and runtime before authorizing deployment. Public ingress/authentication requires separate design and authority.",
+  "core_integration_followup": {
+    "main_merge": "3b1ef065a69c832daf92740a910bd3f33d8b150b",
+    "core_pr": "https://github.com/vzhu08/realpage-eggs/pull/3",
+    "platform_pr": "https://github.com/vzhu08/realpage-eggs/pull/6",
+    "application_tests_fixtures_config_lock_and_contracts_identical_to_main": true,
+    "combined_main_tests": 167,
+    "packaging_smoke": {
+      "command": "python scripts/platform_ops.py smoke --output artifacts/plat02-smoke-core-integrated --real-data data/plat01-recovery",
+      "status": "passed",
+      "full_local_report_sha256": "59559539383c7b6795a95df50a1f2cf3f63c702aa86b54d759743b20b46dd888",
+      "synthetic_exports": {
+        "payload_sha256": {
+          "change_details.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+          "changes.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+          "evidence_checks.json": "85542784e4463cd440626451bd3e2edf1a881902ff95b49609474ab23ea3be4d",
+          "evidence_inventory.json": "5b7361e8947a772347e893a41f78621081fc9ead99ecd23fae9d873a586ef79f",
+          "lookups.json": "34d07aaa589ed62e157a461503589a0121d6b7498f06dd49737a92e8f0bff13a",
+          "rules.json": "3068bdb2ce80af3e870bea18c52ed2db285e05d9d55166e9f3a1fcc4d3b46308",
+          "validation.json": "c4f61dce3084f60002b47e59ac331f6ecc36865efdd7917506e23b7978941af3"
+        },
+        "input_hashes": {
+          "rules": "030940f85ad30a708508db156e04f58b794a072dd45bcf1cfbe6d1a9303637a4",
+          "addresses": "5578f655db0bc6182327e6144d6923d95f760e30b214ad3b88f585ec5d646b26",
+          "resolutions": "bd244b288daac7c641aed0cf7d0d5abd5f7aca6b3deccd51858feb3d7bc400e3"
+        },
+        "run_ids": [
+          "9d47cfd545ae43909dcc332654dfd70a",
+          "87cf35c082754100bba51f7813a77ba7"
+        ],
+        "artifact_label": "SYNTHETIC_NOT_FOR_SUBMISSION",
+        "ready_for_submission": false,
+        "counts": {
+          "sources": 1,
+          "source_texts": 1,
+          "addresses": 3,
+          "rules": 1,
+          "exportable_rules": 1,
+          "quote_failures": 0,
+          "schema_failures": 0,
+          "resolved_municipalities": 3,
+          "synthetic_rules": 1,
+          "review_rules": 0
+        }
+      },
+      "real_exports": {
+        "payload_sha256": {
+          "change_details.json": "bc939f7c393b9a5065d8287090aa1abca999f0ca290069ff39aec67841388036",
+          "changes.json": "04b66164f5e741be71f6d54582774c2ec80a24a4cc62e321eb369f1925b6cc37",
+          "evidence_checks.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+          "evidence_inventory.json": "2d8c1a86b3d633b08060c71eb84e1d91ef14de91c4794b2da54ab05e2d0a6d58",
+          "lookups.json": "da6738c7efd1d66f686cbce28a78f22ec94dac30e5601cb1e2cbe43ed33409ed",
+          "rules.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+          "validation.json": "02578746ffcc3adf0c8e7d5d6a8839c02995288fc394f972fe79ce2186744977"
+        },
+        "input_hashes": {
+          "rules": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "addresses": "22a052a13f29d8b310a6b2474edeee44419c6872739d811cbe9286b37f23ae37",
+          "resolutions": "9130d25de8876a6b18f244691cb3e5fe5cf163d6b2f6e39bcf26242458f55bac"
+        },
+        "run_ids": [
+          "c9c758d109dc47b6ad62636740cbae34",
+          "71ab519db7784dbda6db5fd73e8d2d78"
+        ],
+        "artifact_label": "PARTIAL_NOT_JUDGE_READY",
+        "ready_for_submission": false,
+        "counts": {
+          "sources": 87,
+          "source_texts": 54,
+          "addresses": 500,
+          "rules": 0,
+          "exportable_rules": 0,
+          "quote_failures": 0,
+          "schema_failures": 0,
+          "resolved_municipalities": 491,
+          "synthetic_rules": 0,
+          "review_rules": 0
+        }
+      },
+      "original_real_store_unchanged": true
+    }
+  }
+}

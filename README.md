@@ -8,6 +8,9 @@ Current baseline: real pack ingestion works (87 manifest rows, 54 text files, 50
 Census resolved 479 legal municipalities; 21 remain unresolved. Live legal extraction has **not**
 run: configure `OPENAI_API_KEY` and `OPENAI_MODEL` in local `.env`. Existing real exports are
 explicitly partial with zero rules; their empty arrays do not mean no laws apply.
+PLAT-01's isolated `data/plat01-recovery/` store resolves 491/500 municipalities; the original default
+store and historical counts are preserved. See the [Platform runbook](docs/PLATFORM_RUNBOOK.md)
+for fresh locked setup, explicit snapshot launch, offline HTTP/export checks and the deployment candidate.
 
 ## Setup
 
@@ -66,8 +69,8 @@ Batch and export were run with `--allow-partial`. Full live extraction and legal
 .\.venv\Scripts\python.exe -m navigator contracts
 ```
 
-Swagger: <http://127.0.0.1:8000/docs>. Six routes: health, addresses, lookup, rule detail,
-source detail and changes, all under `/api/v1`. See [frontend handoff](docs/FRONTEND_HANDOFF.md)
+Swagger: <http://127.0.0.1:8000/docs>. Routes cover health, addresses, lookup/assist, facts,
+rule detail/evidence, source detail/context and changes, all under `/api/v1`. See [frontend handoff](docs/FRONTEND_HANDOFF.md)
 and generated [OpenAPI](contracts/openapi.json). CORS defaults to localhost ports 3000 and 5173;
 configure `NAVIGATOR_CORS_ORIGINS` as comma-separated origins. No billable ingestion HTTP route.
 

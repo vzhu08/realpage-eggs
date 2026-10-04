@@ -1,0 +1,16 @@
+# Explicit allowlist: no .env, private data, caches, input pack or Git history in build context.
+**
+!requirements.lock
+!navigator/
+!navigator/**
+!config/
+!config/**
+!contracts/
+!contracts/**
+!fixtures/
+!fixtures/**
+!deploy/
+!deploy/Dockerfile
+**/__pycache__/
+**/*.pyc
+**/.env*
