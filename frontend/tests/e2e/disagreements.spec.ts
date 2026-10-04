@@ -178,6 +178,8 @@ test.describe('source disagreements', () => {
   test('live API: conflicts for one property work without the comparisons route, and failures are not agreement', async ({ page }) => {
     const fixture = devFixture();
     const handlers = devHandlers(fixture);
+    // An older backend: every other route answers, the claim-comparison route does not exist.
+    delete handlers['GET /source-comparisons'];
     let unavailable = false;
     const calls = await mockApi(page, {
       ...handlers,
