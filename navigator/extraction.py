@@ -159,7 +159,7 @@ def validate_bundle(bundle, sources, allowed_doc_id=None):
             issue = f"Missing field-level evidence for {field}"
             if issue not in rule.review_issues: rule.review_issues.append(issue)
         for ident in sorted({source.doc_id} | {span.doc_id for span in spans}):
-            use = source_use(sources[ident], bundle.source_kind if ident == source.doc_id else None)
+            use = source_use(sources[ident], bundle.source_kind if ident == allowed_doc_id else None)
             if not use.operative_allowed:
                 issue = f"source_use:{use.status}: {ident}: {use.reason}"
                 if issue not in rule.review_issues: rule.review_issues.append(issue)

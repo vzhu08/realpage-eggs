@@ -96,6 +96,15 @@ def test_unscoped_bundle_cannot_reclassify_negative_finding_support(demo):
     assert any('GUIDANCE: needs_review' in issue for issue in result.issues)
 
 
+def test_unscoped_bundle_cannot_reclassify_guidance_rule_as_primary(demo):
+    guidance = real_source(demo, source_type='agency_guidance')
+    bundle = ExtractionBundle.model_validate(synthetic_bundle(guidance))
+    assert bundle.source_kind == 'legal_text'
+    result = validate_bundle(bundle, {guidance.doc_id: guidance})
+    assert all(any(issue.startswith('source_use:needs_review:') for issue in rule.review_issues)
+               for rule in result.rules)
+
+
 def test_existing_cache_is_regated_without_new_calls_or_rewriting_origin(demo):
     source = real_source(demo, source_type='agency_guidance')
     demo.save_collection('sources', {source.doc_id: source})
