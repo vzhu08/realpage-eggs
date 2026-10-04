@@ -83,6 +83,19 @@ def test_context_from_secondary_supporting_source_keeps_rule_unresolved(demo):
     assert any('source_use:context_only: SECONDARY' in issue for issue in result.rules[0].review_issues)
 
 
+def test_unscoped_bundle_cannot_reclassify_negative_finding_support(demo):
+    primary = real_source(demo)
+    guidance = primary.model_copy(update={'doc_id': 'GUIDANCE', 'source_type': 'agency_guidance'})
+    bundle = ExtractionBundle.model_validate(synthetic_bundle(primary))
+    assert bundle.source_kind == 'legal_text'
+    bundle.negative_findings = [NegativeFinding(jurisdiction='Maple Harbor, CA',
+        category='security_deposits', statement='Fictional scope limitation for this fixture.',
+        evidence=[bundle.rules[0].evidence[0].model_copy(update={'doc_id': guidance.doc_id}, deep=True)])]
+    result = validate_bundle(bundle, {s.doc_id: s for s in (primary, guidance)})
+    assert result.negative_findings == []
+    assert any('GUIDANCE: needs_review' in issue for issue in result.issues)
+
+
 def test_existing_cache_is_regated_without_new_calls_or_rewriting_origin(demo):
     source = real_source(demo, source_type='agency_guidance')
     demo.save_collection('sources', {source.doc_id: source})

@@ -169,7 +169,7 @@ def validate_bundle(bundle, sources, allowed_doc_id=None):
         anchor_evidence(negative.evidence, sources)
         blocked = []
         for ident in sorted({span.doc_id for span in negative.evidence}):
-            use = source_use(sources[ident], bundle.source_kind if not allowed_doc_id or ident == allowed_doc_id else None)
+            use = source_use(sources[ident], bundle.source_kind if ident == allowed_doc_id else None)
             if not use.operative_allowed:
                 blocked.append(f"{ident}: {use.status}: {use.reason}")
         if blocked:
