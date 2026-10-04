@@ -2,8 +2,10 @@
 from copy import deepcopy
 from importlib.metadata import version
 import json
+import os
 from pathlib import Path
 import platform
+from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 
 from .assist_service import assist, core_module, CoreUnavailable
@@ -163,5 +165,11 @@ def write_evidence_package(store, request, output):
     if output.exists() or output.is_relative_to(store.root.resolve()):
         raise ValueError("Choose a new package file outside the input store")
     package = build_evidence_package(store, request)
-    write_json(output, package)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    # Publish complete bytes without replacing an output created while assist ran.
+    # Same-filesystem link creation is atomic and fails if the destination exists.
+    with TemporaryDirectory(prefix=".evidence-package-", dir=output.parent) as staging:
+        staged = Path(staging) / "package.json"
+        write_json(staged, package)
+        os.link(staged, output)
     return {"output": str(output), "package_sha256": package.package_sha256, "artifact_label": package.artifact_label}

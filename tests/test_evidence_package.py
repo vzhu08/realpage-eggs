@@ -9,7 +9,7 @@ import pytest
 from navigator.api import create_app
 from navigator.cli import main
 from navigator.evidence import semantic_key
-from navigator.evidence_package import build_evidence_package, package_digest, replay_evidence_package
+from navigator.evidence_package import build_evidence_package, package_digest, replay_evidence_package, write_evidence_package
 from navigator.models import EvidencePackage, SemanticReview
 from navigator.service import DatasetUnavailable
 from navigator.store import Store, digest, write_json
@@ -180,3 +180,21 @@ def test_cli_package_and_offline_replay_preserve_input_and_existing_output(demo,
     assert hashes(demo.root) == before
     assert main([*args[:-1], str(demo.path("package.json"))]) == 2
     assert not demo.path("package.json").exists()
+
+
+def test_package_publication_preserves_output_created_during_computation(demo, tmp_path, monkeypatch):
+    output = tmp_path / "package.json"
+    original = build_evidence_package
+
+    def concurrent_writer(*args, **kwargs):
+        package = original(*args, **kwargs)
+        output.write_bytes(b"Existing work from another writer\n")
+        return package
+
+    monkeypatch.setattr("navigator.evidence_package.build_evidence_package", concurrent_writer)
+    before = hashes(demo.root)
+    with pytest.raises(FileExistsError):
+        write_evidence_package(demo, REQUEST, output)
+    assert output.read_bytes() == b"Existing work from another writer\n"
+    assert hashes(demo.root) == before
+    assert sorted(p.name for p in tmp_path.iterdir()) == sorted([demo.root.name, output.name])

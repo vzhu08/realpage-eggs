@@ -8,8 +8,9 @@ import pytest
 
 from navigator.api import create_app
 from navigator.export import export_all
+from navigator.extraction import validate_bundle
 from navigator.geocode import CensusGeocoder
-from navigator.models import JurisdictionResolution
+from navigator.models import ExtractionBundle, Expression, JurisdictionResolution
 from navigator.store import Store, digest, read_json
 from scripts import assemble_snapshot as assembly
 
@@ -241,3 +242,42 @@ def test_legacy_range_match_to_one_endpoint_is_not_verified_geography(inputs, mo
     assert audit["counts"] == {"addresses": 3, "stored_resolved": 2, "verified_resolved": 1, "rejected_records": 1}
     assert audit["status"] == "blocked" and set(audit["rejections"]) == {"SYNTH-001"}
     assert audit["provider_calls"] == 0 and hashes(geo.root) == before
+
+
+@pytest.mark.parametrize("field", ["coverage_conditions", "requirement", "effective_date"])
+def test_rule_behavior_must_match_its_reviewed_cache(inputs, field):
+    core, geo, output = inputs
+    rules = core.rules()
+    rule = next(iter(rules.values()))
+    if field == "coverage_conditions":
+        rule.coverage_conditions.args[1].value = 80
+    elif field == "requirement":
+        rule.requirement = "A different requirement without a reviewed extraction origin."
+    else:
+        rule.effective_date = "2026-12-15"
+    core.save_collection("rules", rules)
+    before = [hashes(s.root) for s in (core, geo)]
+    with pytest.raises(assembly.SnapshotError, match="Rule behavior differs from reviewed cache"):
+        combine(inputs)
+    assert not output.exists()
+    assert [hashes(s.root) for s in (core, geo)] == before
+
+
+def test_legacy_cache_fact_guard_replays_without_rewriting_cache(inputs):
+    core, geo, output = inputs
+    path = next(core.path("extraction_cache").glob("*.json"))
+    cached = read_json(path)
+    bundle = ExtractionBundle.model_validate(cached["bundle"])
+    bundle.rules[0].coverage_conditions = Expression(op="eq", fact="owner_type", value="natural_person")
+    cached["bundle"] = bundle.model_dump(mode="json")
+    core.write(str(path.relative_to(core.root)), cached)
+    # A saved cache from before enum guards is replayed through current Core.
+    guarded = validate_bundle(bundle, core.sources()).rules[0]
+    assert guarded.coverage_conditions.op == "unsupported"
+    rules = core.rules()
+    next(iter(rules.values())).coverage_conditions = guarded.coverage_conditions
+    core.save_collection("rules", rules)
+    before = [hashes(s.root) for s in (core, geo)]
+    assert combine(inputs)["status"] == "assembled"
+    assert [hashes(s.root) for s in (core, geo)] == before
+    assert (output / path.relative_to(core.root)).read_bytes() == path.read_bytes()
