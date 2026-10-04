@@ -40,26 +40,36 @@ def mark_irrelevant(trace: PredicateTrace) -> None:
 
 def evaluate_with_trace(expr: Expression, prop: PropertyFacts, as_of: date,
                         rule_id: str, path: str, evidence: list[Evidence] = (), depth=0):
-    """One semantic traversal for both the public result and the canonical trace."""
+    """Return the result and an isolated canonical audit tree."""
+    return _evaluate(expr, prop, as_of, rule_id, path, evidence, depth, collect_trace=True)
+
+
+def _evaluate(expr, prop, as_of, rule_id, path, evidence, depth, *, collect_trace):
+    """One semantic traversal; result-only probes omit discarded audit allocations."""
     children = []
     if depth > 32:
         result = PredicateResult(value="unknown", unresolved=["unsupported_condition: expression nesting exceeds limit"])
     elif expr.op in {"all", "any", "not"}:
-        evaluated = [evaluate_with_trace(a, prop, as_of, rule_id, f"{path}/args/{i}", evidence, depth + 1)
+        evaluated = [_evaluate(a, prop, as_of, rule_id, f"{path}/args/{i}" if collect_trace else "",
+                               evidence, depth + 1, collect_trace=collect_trace)
                      for i, a in enumerate(expr.args)]
-        results, children = [r for r, _ in evaluated], [t for _, t in evaluated]
+        results = [r for r, _ in evaluated]
+        if collect_trace:
+            children = [t for _, t in evaluated]
         if expr.op == "not":
             result = results[0].model_copy(deep=True)
             result.value = {"true": "false", "false": "true", "unknown": "unknown"}[result.value]
         else:
             result = combine(expr.op, results)
             decisive = "false" if expr.op == "all" else "true"
-            if result.value == decisive:
+            if collect_trace and result.value == decisive:
                 for child in children:
                     if child.result != decisive:
                         mark_irrelevant(child)
     else:
         result = _evaluate_leaf(expr, prop, as_of)
+    if not collect_trace:
+        return result, None
     residual = None
     if result.value == "unknown":
         if children:
@@ -77,7 +87,7 @@ def evaluate_with_trace(expr: Expression, prop: PropertyFacts, as_of: date,
 
 
 def evaluate_expression(expr: Expression, prop: PropertyFacts, as_of: date, depth=0) -> PredicateResult:
-    return evaluate_with_trace(expr, prop, as_of, "", "expression", depth=depth)[0]
+    return _evaluate(expr, prop, as_of, "", "", (), depth, collect_trace=False)[0]
 
 
 def _evaluate_leaf(expr: Expression, prop: PropertyFacts, as_of: date) -> PredicateResult:

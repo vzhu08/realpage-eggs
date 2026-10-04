@@ -1,0 +1,834 @@
+{
+  "label": "LOCAL_CORE_SNAPSHOT_NOT_HOSTED_LATENCY_ACCEPTANCE",
+  "baseline_commit": "912643a047568f6df4bddf3c1222ea7043676ec2",
+  "candidate_parent_commit": "912643a047568f6df4bddf3c1222ea7043676ec2",
+  "python": "3.13.15",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "repeats_per_request": 3,
+  "snapshot_sha256": "157581d64b1c19fdfcc0414d08bbd0ffeeeca60e3142bd621a7152fe5c6e44bc",
+  "input_files_unchanged": true,
+  "provider_calls": 0,
+  "store_writes": 0,
+  "complete_results_and_traces_equal": true,
+  "baseline_code_sha256": {
+    "navigator/engine.py": "e9e9b01e2d131f66052917b08575b62d6ca05f6a8b47439d0df8d7ff6ff66414",
+    "navigator/predicates.py": "bf00596766fce89bfc07d204a2a759cd2802ea2b0b26cc413aa0b23801edc8f3",
+    "navigator/models.py": "6666d33eb6c248f2edb1bface343979fb4cb4849ddb43b773850f720cb442890",
+    "navigator/question_planner.py": "8429b1bfe8e1daafdcc7bbde36d3d895c1455c7e041da7f74b44eddfe32ae9d6"
+  },
+  "candidate_code_sha256": {
+    "navigator/engine.py": "adef99bc3d59abb1a4cc8e30bd24b7dd37f84fbebeab8fd8bda753d1344d474b",
+    "navigator/predicates.py": "36e6cd612f6847405088b06c0695b25f3c184c8336211791bf513a0a63770cf8",
+    "navigator/models.py": "6666d33eb6c248f2edb1bface343979fb4cb4849ddb43b773850f720cb442890",
+    "navigator/question_planner.py": "8429b1bfe8e1daafdcc7bbde36d3d895c1455c7e041da7f74b44eddfe32ae9d6"
+  },
+  "baseline": {
+    "rows": [
+      {
+        "kind": "evaluate_rules",
+        "address_id": "A0001",
+        "state": "CA",
+        "as_of": "2026-10-01",
+        "trace_sha256": "d315862ae0e51e31fcb1f15a320b22155c72294b0a362f956f07f72151a3985b",
+        "wall_seconds": [
+          0.03169670900388155,
+          0.029936208011349663,
+          0.029831374995410442
+        ],
+        "cpu_seconds": [
+          0.031533000000000005,
+          0.02993399999999999,
+          0.029830999999999996
+        ],
+        "median_wall_seconds": 0.029936208011349663,
+        "median_cpu_seconds": 0.02993399999999999,
+        "output_sha256": "f8ad0c3960f9131e51e33011162ec40e4d203fcd964543ec52c8fe0a596cba37"
+      },
+      {
+        "kind": "evaluate_rules",
+        "address_id": "A0002",
+        "state": "NJ",
+        "as_of": "2026-10-01",
+        "trace_sha256": "64531c02a91b436377e5cce5e2768710be971199cde80895430a871659e52c4d",
+        "wall_seconds": [
+          0.030179166002199054,
+          0.029460042002028786,
+          0.02943049999885261
+        ],
+        "cpu_seconds": [
+          0.030164999999999997,
+          0.02945700000000001,
+          0.02942900000000004
+        ],
+        "median_wall_seconds": 0.029460042002028786,
+        "median_cpu_seconds": 0.02945700000000001,
+        "output_sha256": "2d294fa8c7565de18dc11e0f16f62a7cc7aa1947f58daf505f75553424b92115"
+      },
+      {
+        "kind": "evaluate_rules",
+        "address_id": "A0005",
+        "state": "CA",
+        "as_of": "2026-10-01",
+        "trace_sha256": "a9c9857d7b66dc8b90742b998c60b11b25c25a9094881fba136bb4cc500e2813",
+        "wall_seconds": [
+          0.030014749994734302,
+          0.030224665999412537,
+          0.030854833996272646
+        ],
+        "cpu_seconds": [
+          0.030011999999999983,
+          0.030218000000000023,
+          0.03085300000000002
+        ],
+        "median_wall_seconds": 0.030224665999412537,
+        "median_cpu_seconds": 0.030218000000000023,
+        "output_sha256": "fcb32894511730b4d2a18987fc9a223eb664963442041b906680124a10111537"
+      },
+      {
+        "kind": "evaluate_rules",
+        "address_id": "A0006",
+        "state": "MA",
+        "as_of": "2026-10-01",
+        "trace_sha256": "2607b9f535175cee845bede779e2686a6dc05fd593a91a40e7100d964d200ea7",
+        "wall_seconds": [
+          0.03073049998783972,
+          0.029879291003453545,
+          0.029823750010109507
+        ],
+        "cpu_seconds": [
+          0.030727999999999978,
+          0.02987799999999996,
+          0.029819999999999958
+        ],
+        "median_wall_seconds": 0.029879291003453545,
+        "median_cpu_seconds": 0.02987799999999996,
+        "output_sha256": "11f59b203561785e7c83afe000f49c21ae22e3e5920250473b9c005984ecfd26"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          4.8878583750047255,
+          5.3733330000104615,
+          5.860715666989563
+        ],
+        "cpu_seconds": [
+          4.881178,
+          5.3693040000000005,
+          5.857837
+        ],
+        "median_wall_seconds": 5.3733330000104615,
+        "median_cpu_seconds": 5.3693040000000005,
+        "output_sha256": "ddcb1cfab20440aeda0368223737ae84c3aa0a6767dc69e7dbd9d81d5a41f7fa"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0002",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "complete",
+        "evaluations_used": 1,
+        "question_count": 0,
+        "wall_seconds": [
+          0.2098087089980254,
+          0.20618512500368524,
+          0.20720258400251623
+        ],
+        "cpu_seconds": [
+          0.209699999999998,
+          0.20615899999999954,
+          0.20718899999999962
+        ],
+        "median_wall_seconds": 0.20720258400251623,
+        "median_cpu_seconds": 0.20718899999999962,
+        "output_sha256": "d3db89d751071a9a8b5cfaca4d5dd9decc5d2ecf3fd11a8427bbb2614fad9fd8"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0005",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          5.052262666009483,
+          5.3425433749944204,
+          5.565023083996493
+        ],
+        "cpu_seconds": [
+          5.048518999999999,
+          5.340480999999997,
+          5.563482999999998
+        ],
+        "median_wall_seconds": 5.3425433749944204,
+        "median_cpu_seconds": 5.340480999999997,
+        "output_sha256": "c65e58077c33ab8f17ec731c32ce24628c4d753cb8ef76469ebfb70b823f31ad"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0006",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 1,
+        "question_count": 0,
+        "wall_seconds": [
+          0.31998441700125113,
+          0.2443877500045346,
+          0.2424304579908494
+        ],
+        "cpu_seconds": [
+          0.31984399999999624,
+          0.24436000000000035,
+          0.2424259999999947
+        ],
+        "median_wall_seconds": 0.2443877500045346,
+        "median_cpu_seconds": 0.24436000000000035,
+        "output_sha256": "519170c959f405300fa16804cfb9b289be62ed5c886a351a750c3adcccf38df0"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [
+            {
+              "field": "owner_occupied",
+              "value": false,
+              "provenance": "user_provided",
+              "note": null
+            }
+          ],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          5.086121583008207,
+          5.524971999999252,
+          5.490626458005863
+        ],
+        "cpu_seconds": [
+          5.065469,
+          5.523474,
+          5.479439000000006
+        ],
+        "median_wall_seconds": 5.490626458005863,
+        "median_cpu_seconds": 5.479439000000006,
+        "output_sha256": "a38747823493dadedb1eb87813a599b29ccbaddb31bde6069101058ef9e7063b"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [
+            {
+              "field": "owner_occupied",
+              "value": true,
+              "provenance": "user_provided",
+              "note": null
+            }
+          ],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          5.398533458006568,
+          5.616829457998392,
+          5.490152666010545
+        ],
+        "cpu_seconds": [
+          5.381619000000001,
+          5.594216999999993,
+          5.482771
+        ],
+        "median_wall_seconds": 5.490152666010545,
+        "median_cpu_seconds": 5.482771,
+        "output_sha256": "3956a12df231a14158cf0e111b331a1e419a00ca7a3abfb806e997bfaf198849"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [
+            {
+              "field": "owner_occupied",
+              "value": null,
+              "provenance": "user_provided",
+              "note": null
+            }
+          ],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          5.6824694169918075,
+          5.903608249995159,
+          6.535430957999779
+        ],
+        "cpu_seconds": [
+          5.671129000000008,
+          5.7962459999999965,
+          6.440888000000001
+        ],
+        "median_wall_seconds": 5.903608249995159,
+        "median_cpu_seconds": 5.7962459999999965,
+        "output_sha256": "0dc8ed773bce06cdc3309a801c1b18558c1fc91e91ba75901d8e5dab9dec30fd"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2027-07-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          4.8723300420097075,
+          6.106006540998351,
+          5.641553957990254
+        ],
+        "cpu_seconds": [
+          4.861006000000003,
+          6.067361000000005,
+          5.607225
+        ],
+        "median_wall_seconds": 5.641553957990254,
+        "median_cpu_seconds": 5.607225,
+        "output_sha256": "381ac8b1d29e3bcfed0b883e3dc75d1db19ea3d5817d21a043b1cd4d221691a6"
+      }
+    ],
+    "input_files_sha256": "815c5eebc217c7730467d38083af276303c15f44388ca2e7a95408bebedf6c20",
+    "rules": 140,
+    "addresses": 500,
+    "resolved_municipalities": 0
+  },
+  "candidate": {
+    "rows": [
+      {
+        "kind": "evaluate_rules",
+        "address_id": "A0001",
+        "state": "CA",
+        "as_of": "2026-10-01",
+        "trace_sha256": "d315862ae0e51e31fcb1f15a320b22155c72294b0a362f956f07f72151a3985b",
+        "wall_seconds": [
+          0.01000729200313799,
+          0.008323207992361858,
+          0.008232332998886704
+        ],
+        "cpu_seconds": [
+          0.010002999999999984,
+          0.008321999999999996,
+          0.008231000000000016
+        ],
+        "median_wall_seconds": 0.008323207992361858,
+        "median_cpu_seconds": 0.008321999999999996,
+        "output_sha256": "f8ad0c3960f9131e51e33011162ec40e4d203fcd964543ec52c8fe0a596cba37"
+      },
+      {
+        "kind": "evaluate_rules",
+        "address_id": "A0002",
+        "state": "NJ",
+        "as_of": "2026-10-01",
+        "trace_sha256": "64531c02a91b436377e5cce5e2768710be971199cde80895430a871659e52c4d",
+        "wall_seconds": [
+          0.008605832990724593,
+          0.007740499990177341,
+          0.007700874994043261
+        ],
+        "cpu_seconds": [
+          0.008603,
+          0.007739000000000024,
+          0.007700000000000012
+        ],
+        "median_wall_seconds": 0.007740499990177341,
+        "median_cpu_seconds": 0.007739000000000024,
+        "output_sha256": "2d294fa8c7565de18dc11e0f16f62a7cc7aa1947f58daf505f75553424b92115"
+      },
+      {
+        "kind": "evaluate_rules",
+        "address_id": "A0005",
+        "state": "CA",
+        "as_of": "2026-10-01",
+        "trace_sha256": "a9c9857d7b66dc8b90742b998c60b11b25c25a9094881fba136bb4cc500e2813",
+        "wall_seconds": [
+          0.008930457988753915,
+          0.008212083994294517,
+          0.008153208007570356
+        ],
+        "cpu_seconds": [
+          0.008928999999999965,
+          0.008210999999999968,
+          0.00815100000000002
+        ],
+        "median_wall_seconds": 0.008212083994294517,
+        "median_cpu_seconds": 0.008210999999999968,
+        "output_sha256": "fcb32894511730b4d2a18987fc9a223eb664963442041b906680124a10111537"
+      },
+      {
+        "kind": "evaluate_rules",
+        "address_id": "A0006",
+        "state": "MA",
+        "as_of": "2026-10-01",
+        "trace_sha256": "2607b9f535175cee845bede779e2686a6dc05fd593a91a40e7100d964d200ea7",
+        "wall_seconds": [
+          0.008178708012565039,
+          0.007972457999130711,
+          0.007925874990178272
+        ],
+        "cpu_seconds": [
+          0.008175999999999961,
+          0.007972000000000035,
+          0.007925000000000015
+        ],
+        "median_wall_seconds": 0.007972457999130711,
+        "median_cpu_seconds": 0.007972000000000035,
+        "output_sha256": "11f59b203561785e7c83afe000f49c21ae22e3e5920250473b9c005984ecfd26"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          3.5772406659962144,
+          4.096807458001422,
+          4.601873207997414
+        ],
+        "cpu_seconds": [
+          3.5703440000000004,
+          4.096198000000001,
+          4.599342
+        ],
+        "median_wall_seconds": 4.096807458001422,
+        "median_cpu_seconds": 4.096198000000001,
+        "output_sha256": "ddcb1cfab20440aeda0368223737ae84c3aa0a6767dc69e7dbd9d81d5a41f7fa"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0002",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "complete",
+        "evaluations_used": 1,
+        "question_count": 0,
+        "wall_seconds": [
+          0.1878787080058828,
+          0.1826640840008622,
+          0.18162079200556036
+        ],
+        "cpu_seconds": [
+          0.18785600000000002,
+          0.18266000000000027,
+          0.18161800000000028
+        ],
+        "median_wall_seconds": 0.1826640840008622,
+        "median_cpu_seconds": 0.18266000000000027,
+        "output_sha256": "d3db89d751071a9a8b5cfaca4d5dd9decc5d2ecf3fd11a8427bbb2614fad9fd8"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0005",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          3.5261700409901096,
+          4.1053501249989495,
+          4.390100667005754
+        ],
+        "cpu_seconds": [
+          3.5231619999999992,
+          4.100729999999999,
+          4.389305
+        ],
+        "median_wall_seconds": 4.1053501249989495,
+        "median_cpu_seconds": 4.100729999999999,
+        "output_sha256": "c65e58077c33ab8f17ec731c32ce24628c4d753cb8ef76469ebfb70b823f31ad"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0006",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 1,
+        "question_count": 0,
+        "wall_seconds": [
+          0.2903420410002582,
+          0.21682966699881945,
+          0.2160525830113329
+        ],
+        "cpu_seconds": [
+          0.2903359999999999,
+          0.21681799999999996,
+          0.21603100000000097
+        ],
+        "median_wall_seconds": 0.21682966699881945,
+        "median_cpu_seconds": 0.21681799999999996,
+        "output_sha256": "519170c959f405300fa16804cfb9b289be62ed5c886a351a750c3adcccf38df0"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [
+            {
+              "field": "owner_occupied",
+              "value": false,
+              "provenance": "user_provided",
+              "note": null
+            }
+          ],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          3.5838675830018474,
+          3.9726742500060936,
+          4.191232541998033
+        ],
+        "cpu_seconds": [
+          3.583223000000004,
+          3.9627459999999957,
+          4.190201000000002
+        ],
+        "median_wall_seconds": 3.9726742500060936,
+        "median_cpu_seconds": 3.9627459999999957,
+        "output_sha256": "a38747823493dadedb1eb87813a599b29ccbaddb31bde6069101058ef9e7063b"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [
+            {
+              "field": "owner_occupied",
+              "value": true,
+              "provenance": "user_provided",
+              "note": null
+            }
+          ],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          4.149847125008819,
+          4.297435875007068,
+          4.305193583000801
+        ],
+        "cpu_seconds": [
+          4.148775999999998,
+          4.282932000000002,
+          4.295713999999997
+        ],
+        "median_wall_seconds": 4.297435875007068,
+        "median_cpu_seconds": 4.282932000000002,
+        "output_sha256": "3956a12df231a14158cf0e111b331a1e419a00ca7a3abfb806e997bfaf198849"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2026-10-01",
+          "supplemental_facts": {},
+          "answers": [
+            {
+              "field": "owner_occupied",
+              "value": null,
+              "provenance": "user_provided",
+              "note": null
+            }
+          ],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          4.1768962500063935,
+          4.287149708994548,
+          4.7049423749995185
+        ],
+        "cpu_seconds": [
+          4.172539,
+          4.281160000000007,
+          4.698642000000007
+        ],
+        "median_wall_seconds": 4.287149708994548,
+        "median_cpu_seconds": 4.281160000000007,
+        "output_sha256": "0dc8ed773bce06cdc3309a801c1b18558c1fc91e91ba75901d8e5dab9dec30fd"
+      },
+      {
+        "kind": "assist",
+        "request": {
+          "address_id": "A0001",
+          "address": null,
+          "as_of": "2027-07-01",
+          "supplemental_facts": {},
+          "answers": [],
+          "scenario_id": null,
+          "limits": {
+            "max_questions": 5,
+            "max_fields": 8,
+            "max_evaluations": 64,
+            "max_joint_fields": 3
+          }
+        },
+        "plan_status": "partial",
+        "evaluations_used": 64,
+        "question_count": 5,
+        "wall_seconds": [
+          3.9510572080034763,
+          4.233984250007779,
+          4.921539250004571
+        ],
+        "cpu_seconds": [
+          3.9471539999999976,
+          4.227187000000001,
+          4.916585999999995
+        ],
+        "median_wall_seconds": 4.233984250007779,
+        "median_cpu_seconds": 4.227187000000001,
+        "output_sha256": "381ac8b1d29e3bcfed0b883e3dc75d1db19ea3d5817d21a043b1cd4d221691a6"
+      }
+    ],
+    "input_files_sha256": "815c5eebc217c7730467d38083af276303c15f44388ca2e7a95408bebedf6c20",
+    "rules": 140,
+    "addresses": 500,
+    "resolved_municipalities": 0
+  },
+  "comparisons": [
+    {
+      "kind": "evaluate_rules",
+      "address_id": "A0001",
+      "speedup": 3.5967151173948655
+    },
+    {
+      "kind": "evaluate_rules",
+      "address_id": "A0002",
+      "speedup": 3.805961118714998
+    },
+    {
+      "kind": "evaluate_rules",
+      "address_id": "A0005",
+      "speedup": 3.6805110639895586
+    },
+    {
+      "kind": "evaluate_rules",
+      "address_id": "A0006",
+      "speedup": 3.747814163048771
+    },
+    {
+      "kind": "assist",
+      "address_id": "A0001",
+      "speedup": 1.3115903188264009
+    },
+    {
+      "kind": "assist",
+      "address_id": "A0002",
+      "speedup": 1.1343367533682112
+    },
+    {
+      "kind": "assist",
+      "address_id": "A0005",
+      "speedup": 1.3013612024128607
+    },
+    {
+      "kind": "assist",
+      "address_id": "A0006",
+      "speedup": 1.1270955371889457
+    },
+    {
+      "kind": "assist",
+      "address_id": "A0001",
+      "speedup": 1.3820983328792793
+    },
+    {
+      "kind": "assist",
+      "address_id": "A0001",
+      "speedup": 1.2775414981617417
+    },
+    {
+      "kind": "assist",
+      "address_id": "A0001",
+      "speedup": 1.3770473742984157
+    },
+    {
+      "kind": "assist",
+      "address_id": "A0001",
+      "speedup": 1.332445664619534
+    }
+  ],
+  "limits": "Sequential local diagnostic runs, includes serialization, no hosted/cold-start/concurrent-user/p95 claim. All municipalities are unresolved in this Core snapshot. Follow-up answers are hypothetical request-local probes. No response cache or reduced planner limits."
+}

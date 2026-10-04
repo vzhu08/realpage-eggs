@@ -75,19 +75,23 @@ def jurisdiction_match(rule, resolution):
     return "true" if f"{resolution.municipality}, {resolution.state}".casefold() == rule.jurisdiction.casefold() else "false"
 
 
-def evaluate_coverage(rule: Rule, prop: PropertyFacts, as_of: date):
-    inclusion, included = evaluate_with_trace(rule.coverage_conditions, prop, as_of,
-                                              rule.team_rule_id, "coverage_conditions", rule.evidence)
-    exemption, exempted = evaluate_with_trace(rule.exemption_conditions, prop, as_of,
-                                              rule.team_rule_id, "exemption_conditions", rule.evidence)
+def evaluate_coverage(rule: Rule, prop: PropertyFacts, as_of: date, *, collect_traces=True):
+    if collect_traces:
+        inclusion, included = evaluate_with_trace(rule.coverage_conditions, prop, as_of,
+                                                  rule.team_rule_id, "coverage_conditions", rule.evidence)
+        exemption, exempted = evaluate_with_trace(rule.exemption_conditions, prop, as_of,
+                                                  rule.team_rule_id, "exemption_conditions", rule.evidence)
+    else:
+        inclusion = evaluate_expression(rule.coverage_conditions, prop, as_of)
+        exemption = evaluate_expression(rule.exemption_conditions, prop, as_of)
     nonexempt = exemption.model_copy(deep=True)
     nonexempt.value = {"true": "false", "false": "true", "unknown": "unknown"}[exemption.value]
     coverage = combine("all", [inclusion, nonexempt])
-    if inclusion.value == "false":
+    if collect_traces and inclusion.value == "false":
         mark_irrelevant(exempted)
-    if exemption.value == "true":
+    if collect_traces and exemption.value == "true":
         mark_irrelevant(included)
-    return coverage, [included, exempted]
+    return coverage, [included, exempted] if collect_traces else []
 
 
 def rule_traces(rule: Rule, prop: PropertyFacts, resolution: JurisdictionResolution, as_of: date):
@@ -106,7 +110,7 @@ def rule_traces(rule: Rule, prop: PropertyFacts, resolution: JurisdictionResolut
 
 def evaluate_rule(rule: Rule, prop: PropertyFacts, resolution: JurisdictionResolution, as_of: date, hypothetical=False):
     jurisdiction = jurisdiction_match(rule, resolution)
-    coverage, _ = evaluate_coverage(rule, prop, as_of)
+    coverage, _ = evaluate_coverage(rule, prop, as_of, collect_traces=False)
     time = temporal(rule, as_of, hypothetical)
     reasons = []
     if jurisdiction == "false" or coverage.value == "false" or time == "inapplicable":
