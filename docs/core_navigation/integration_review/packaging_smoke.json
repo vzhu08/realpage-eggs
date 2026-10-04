@@ -1,0 +1,101 @@
+{
+  "label": "PACKAGING_CHECK_NOT_LEGAL_VALIDATION",
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "lock_sha256": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8",
+  "checks": {
+    "absent_http": {
+      "status": "ok",
+      "version": "0.1.0",
+      "dataset_readiness": "absent",
+      "sources": 0,
+      "rules": 0,
+      "addresses": 0,
+      "resolved_municipalities": 0,
+      "last_extraction_outcome": null,
+      "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+    },
+    "missing_provider": {
+      "exit_code": 2,
+      "error": "ProviderUnavailable"
+    },
+    "synthetic_http": {
+      "status": "ok",
+      "version": "0.1.0",
+      "dataset_readiness": "available",
+      "sources": 1,
+      "rules": 1,
+      "addresses": 3,
+      "resolved_municipalities": 3,
+      "last_extraction_outcome": "success",
+      "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+    },
+    "synthetic_validation": {
+      "report_type": "internal_validation_not_official_scoring",
+      "as_of": "2026-10-01",
+      "schema_valid": true,
+      "quote_valid": true,
+      "ready_for_submission": false,
+      "counts": {
+        "sources": 1,
+        "source_texts": 1,
+        "addresses": 3,
+        "rules": 1,
+        "exportable_rules": 1,
+        "quote_failures": 0,
+        "schema_failures": 0,
+        "resolved_municipalities": 3,
+        "synthetic_rules": 1,
+        "review_rules": 0
+      },
+      "capture_status_counts": {
+        "synthetic": 1
+      },
+      "missing_source_ids": [],
+      "unresolved_extraction_ids": [],
+      "unresolved_address_ids": [],
+      "exportable_rule_ids": [
+        "r-694ad9fbae9083966e86"
+      ],
+      "errors": [],
+      "warnings": [
+        "Synthetic rules present: not competition output"
+      ],
+      "official_score": null
+    },
+    "synthetic_exports": {
+      "payload_sha256": {
+        "change_details.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+        "changes.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+        "evidence_checks.json": "fe0a9650fb75c2f32653ade29ecad2f5c2988a381fe5962d3d1129e72b34c6fb",
+        "evidence_inventory.json": "afe1d8567a0ac1ae044468b6c8476ae19ef2f2008d8168b6fa1bf5d83d4f57a9",
+        "lookups.json": "348154f567baf363436d4668060894e049ff6315447878bfd7c2dfce2c51468d",
+        "rules.json": "23e6deb09c31c72df3f3a01a9bea21cf0c0bc5b0c98e942e45400b3b868891c3",
+        "validation.json": "a6a07a25fad0988571bf7c435d4ebc3b12efbc24b6bfbc96edb3cc12e8f579ec"
+      },
+      "input_hashes": {
+        "rules": "9e2904b39aaf4a914381d880669bbb1b447b661a1d451891839944c384fabcf7",
+        "addresses": "5578f655db0bc6182327e6144d6923d95f760e30b214ad3b88f585ec5d646b26",
+        "resolutions": "bd244b288daac7c641aed0cf7d0d5abd5f7aca6b3deccd51858feb3d7bc400e3"
+      },
+      "run_ids": [
+        "6e06ab0131fd40bb8fa62d577fb492c6",
+        "7f97d91a60984b0b8af69274cc795566"
+      ],
+      "artifact_label": "SYNTHETIC_NOT_FOR_SUBMISSION",
+      "ready_for_submission": false,
+      "counts": {
+        "sources": 1,
+        "source_texts": 1,
+        "addresses": 3,
+        "rules": 1,
+        "exportable_rules": 1,
+        "quote_failures": 0,
+        "schema_failures": 0,
+        "resolved_municipalities": 3,
+        "synthetic_rules": 1,
+        "review_rules": 0
+      }
+    }
+  },
+  "status": "passed"
+}

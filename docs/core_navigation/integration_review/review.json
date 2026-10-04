@@ -1,0 +1,46 @@
+{
+  "reviewed_refs": {
+    "origin/main": "9a96fda205c75536d81b17d7d1baf5b3c0ced0e6",
+    "origin/codex/core-backend": "3cf0361abb81f073f7f9df02544995c4e8355097",
+    "origin/codex/platform-packaging": "aa7a2260d03d7a60bdb99a20aaf459ceada78b68",
+    "review/claude-frontend": "f72ee7d4ccad0234849f32d1f278037f8e7bf704",
+    "HEAD": "88cd1e57ff3d9b3230594fac684560162deb34d0"
+  },
+  "conflicts_found": [
+    "docs/tasks/UX-03.md"
+  ],
+  "conflict_resolution": "Preserve Claude delivery record alongside current four-lane coordination and combined-candidate status.",
+  "compatibility_fix": "Regenerate frontend/src/api/generated/{contract.ts,meta.ts,schemas.json} from current canonical contracts; no backend schema or handwritten frontend logic change.",
+  "frontend_dependencies": "Copied installed node_modules into isolated checkout; no changes to active frontend or dependency manifests.",
+  "frontend_versions": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "6.0.3",
+    "vite": "7.3.6",
+    "@playwright/test": "1.63.0"
+  },
+  "checks": {
+    "frontend_generate_check": "passed; digest 8393dfe64420bf16",
+    "frontend_typecheck": "passed with real installed packages",
+    "frontend_unit": "79 passed",
+    "frontend_build": "passed; Vite production build",
+    "browser": "60 passed, 12 skipped: 10 opt-in screenshots, 2 viewport-specific cases",
+    "backend": "176 passed, 1 skipped: organizer pack absent",
+    "platform_smoke": "passed; real loopback HTTP, missing-provider and synthetic export replay",
+    "merge_tree": "clean with all four reviewed refs",
+    "diff_check": "passed"
+  },
+  "generated_file_sha256": {
+    "frontend/src/api/generated/meta.ts": "72091790228f0fc936807d6cd1378855bebc9fa5ff7e5ee3a40d281298f7a5a5",
+    "frontend/src/api/generated/contract.ts": "0aa3bf35f46595300eb5fa278b943a4a1e8520aaee11fe1697b4f30cba054a91",
+    "frontend/src/api/generated/schemas.json": "592aa3f9ed4b0c4800f4afe005c1932ad29bd983087eb068df5a75fc8cce1fe7"
+  },
+  "limitations": [
+    "Remote refs are checked snapshots; later pushes may need another merge check.",
+    "Browser tests use recorded synthetic fixtures and API doubles; a deployed browser/backend flow was not tested.",
+    "Docker image build and container runtime were not tested.",
+    "No organizer pack, real legal extraction or deployment verification."
+  ],
+  "publication": "Local integration candidate only; no push or remote merge.",
+  "preserved_user_change": "Uncommitted edit to docs/core_navigation/HANDOFF.md remains in original Core B checkout."
+}
