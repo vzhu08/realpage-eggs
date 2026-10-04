@@ -21,7 +21,10 @@ import type {
   SupplementalAnswer,
 } from './generated/contract';
 
+import type { PackageRequestBody } from './evidencePackage';
+
 export type * from './generated/contract';
+export type { PackageRequestBody, WireAnswer } from './evidencePackage';
 
 export type DataMode = 'live' | 'demo';
 export type RuleResult = Evaluation['result'];
@@ -139,6 +142,10 @@ export interface EvidencePackageDownload {
   package: EvidencePackage;
   /** The response body exactly as the service sent it; this is what is saved. */
   text: string;
+  /** Size of that body in bytes, as received. */
+  byteLength: number;
+  /** The request body that was sent, and that the package was checked to echo. */
+  request: PackageRequestBody;
   /** From Content-Disposition when it is a safe name; otherwise evidence-package.json. */
   filename: string;
   origin: Origin;

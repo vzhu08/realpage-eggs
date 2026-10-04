@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { type ApiError, isAbort, toApiError } from '../../api/errors';
+import { PACKAGE_ENDPOINT, packageFailure, packageRequestBody } from '../../api/evidencePackage';
 import type { DataMode, EvidencePackage, LookupOutcome } from '../../api/types';
 import { Icon } from '../../components/Icon';
 import { Disclosure, ErrorNotice, Facts, SectionHeading, Spinner, Tag } from '../../components/ui';
 import { DEMO_ONLY } from '../../config';
 import { formatDate } from '../../lib/dates';
 import { buildWorkingExport, downloadJson, downloadText, workingExportFilename } from '../../lib/exportPackage';
+import { formatValue, humanize } from '../../lib/labels';
 import type { SessionState } from '../../state/session';
 import { useSource } from '../../state/source';
 
@@ -16,9 +18,9 @@ const ARTIFACT_LABEL: Record<EvidencePackage['artifact_label'], string> = {
 };
 
 type PackageState =
-  | { status: 'idle' }
+  | { status: 'idle'; withdrawn?: boolean }
   | { status: 'loading' }
-  | { status: 'saved'; pack: EvidencePackage; filename: string; delivered: boolean }
+  | { status: 'saved'; pack: EvidencePackage; filename: string; bytes: number; delivered: boolean }
   | { status: 'error'; error: ApiError };
 
 interface Props {
@@ -29,10 +31,14 @@ interface Props {
   busy: boolean;
 }
 
+const kilobytes = (bytes: number) => (bytes < 1024 ? `${bytes} bytes` : bytes < 1024 * 1024 ? `${Math.round(bytes / 1024)} kB` : `${(bytes / (1024 * 1024)).toFixed(1)} MB`);
+const count = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
+
 /**
  * Two ways to keep a result, kept apart because they are different things. The evidence
- * package is built by the service for exactly the request on screen and carries the source
- * texts and hashes. The working export is assembled in the browser from what is on screen.
+ * package is built by the service for exactly the request that produced the result on screen
+ * and carries the source texts and hashes. The working export is assembled in the browser from
+ * what is on screen.
  */
 export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
   const source = useSource();
@@ -42,19 +48,32 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
   const [exported, setExported] = useState<'idle' | 'done' | 'failed'>('idle');
   const [shownExport, setShownExport] = useState<string | null>(null);
 
-  // A package belongs to one result. A new result (another date, property or answer) withdraws
-  // any request still in flight and clears what was reported for the earlier one.
+  // A package belongs to one result. A new result (another date, property or answer), or this
+  // section leaving the page, withdraws any request still in flight: its response can then
+  // neither save a file nor show a receipt.
   useEffect(() => {
-    setPack({ status: 'idle' });
+    setPack((current) => ({ status: 'idle', withdrawn: current.status === 'loading' || (current.status === 'idle' && current.withdrawn === true) }));
     setExported('idle');
     setShownExport(null);
     return () => controller.current?.abort();
   }, [outcome]);
 
-  const answers = outcome.query.answers;
-  const answerWords = answers.length === 0 ? 'no answers' : `${answers.length} request-local ${answers.length === 1 ? 'answer' : 'answers'}`;
-  // The service builds packages for saved properties through the assist route's request shape.
-  const supported = !!source.evidencePackage && outcome.origin.kind === 'live';
+  // While the result is being re-evaluated it is about to be replaced, so a package still being
+  // built would describe an answer or date state the reader has already left.
+  useEffect(() => {
+    if (!busy || !controller.current || controller.current.signal.aborted) return;
+    controller.current.abort();
+    setPack((current) => (current.status === 'loading' ? { status: 'idle', withdrawn: true } : current));
+  }, [busy]);
+
+  // The request is the one that produced the result on screen: its property, its date and every
+  // request-local answer, explicit unknowns included. Never the form's current, unsent state.
+  const request = packageRequestBody(outcome.query);
+  const unknowns = request.answers.filter((answer) => answer.value === null).length;
+  const answerWords = request.answers.length === 0 ? 'no answers' : `${count(request.answers.length, 'answer', 'answers')} of yours${unknowns ? ` (${unknowns} marked unknown)` : ''}`;
+  const subject = lookup.address.raw_address.street_address || outcome.query.address_id;
+  // The service builds packages for saved properties, through the live API only.
+  const supported = !!source.evidencePackage && outcome.origin.kind === 'live' && !outcome.fixture;
 
   const downloadPackage = async () => {
     if (!source.evidencePackage) return;
@@ -63,13 +82,13 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
     controller.current = abort;
     setPack({ status: 'loading' });
     try {
-      // The request is the one that produced the result on screen: same property, date and answers.
       const result = await source.evidencePackage(outcome.query, abort.signal);
+      // The result changed, the property changed or this section left the page while waiting.
       if (abort.signal.aborted) return;
-      setPack({ status: 'saved', pack: result.package, filename: result.filename, delivered: downloadText(result.filename, result.text) });
+      setPack({ status: 'saved', pack: result.package, filename: result.filename, bytes: result.byteLength, delivered: downloadText(result.filename, result.text) });
     } catch (error) {
       if (abort.signal.aborted || isAbort(error)) return;
-      setPack({ status: 'error', error: toApiError(error, 'POST /lookup/evidence-package') });
+      setPack({ status: 'error', error: toApiError(error, PACKAGE_ENDPOINT) });
     }
   };
   const cancelPackage = () => {
@@ -80,6 +99,7 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
   // The export time is the only clock value in the file, and it is labeled as such there.
   const buildExport = () => buildWorkingExport({ outcome, answers: session.answers, history: session.history, mode, apiBase, exportedAt: new Date().toISOString() });
   const exportResult = () => setExported(downloadJson(workingExportFilename(lookup.address.address_id, lookup.as_of), buildExport()) ? 'done' : 'failed');
+  const failure = pack.status === 'error' ? packageFailure(pack.error) : null;
 
   return (
     <section className="section keep" aria-labelledby="export-heading">
@@ -88,7 +108,7 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
         title="Keep this result"
         aside={
           <span className="hint">
-            <span className="mono">{outcome.query.address_id}</span> · as of {formatDate(lookup.as_of)} · {answerWords}
+            {subject} · as of {formatDate(lookup.as_of)} · {answerWords}
           </span>
         }
       />
@@ -98,7 +118,7 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
             Evidence package
           </h3>
           <p className="keep__text">
-            Built by the service for exactly this request: the original property record, every rule and source text used, the full response with your answers and their provenance, and hashes of the inputs, the response and the code version.
+            Built by the service for exactly the result on screen: the original property record, every rule and source text used, the full response with your answers and their provenance, and hashes of the inputs, the response and the code version.
           </p>
           {supported ? (
             <>
@@ -116,12 +136,45 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
                   </>
                 )}
               </div>
+              {busy && <p className="hint">Available again when the result has finished updating. A package is always built for the result on screen.</p>}
+              {pack.status === 'idle' && pack.withdrawn && (
+                <p className="hint" role="status" data-package-withdrawn>
+                  The package request was withdrawn because the result was being updated. Nothing was saved.
+                </p>
+              )}
+              <Disclosure summary="What is sent to the service">
+                <Facts
+                  dense
+                  rows={[
+                    { label: 'Request', value: <span className="mono break">{PACKAGE_ENDPOINT}</span>, note: apiBase ? `At ${apiBase}` : undefined },
+                    { label: 'Property', value: <span className="mono break">{request.address_id}</span>, note: 'A saved property ID. Typed addresses are not supported by this route.' },
+                    { label: 'As of', value: <span className="mono">{request.as_of}</span> },
+                    {
+                      label: 'Answers',
+                      value:
+                        request.answers.length === 0 ? (
+                          'None'
+                        ) : (
+                          <ul className="plain-list plain-list--tight">
+                            {request.answers.map((answer) => (
+                              <li key={answer.field}>
+                                <span className="mono">{answer.field}</span> = {answer.value === null ? 'unknown (sent as null)' : <span className="mono break">{JSON.stringify(answer.value)}</span>} · {humanize(answer.provenance)}
+                              </li>
+                            ))}
+                          </ul>
+                        ),
+                      note: 'Every answer behind this result is sent, including those marked unknown. Answers are unverified and are not stored by the service.',
+                    },
+                  ]}
+                />
+                <p className="hint">The service echoes this request inside the package. A package that names another property, date or set of answers is refused and not saved.</p>
+              </Disclosure>
               {pack.status === 'saved' && (
-                <div className="keep__receipt" role="status">
+                <div className="keep__receipt" role="status" data-label={pack.pack.artifact_label}>
                   <p className="keep__saved">
                     {pack.delivered ? (
                       <>
-                        Saved as <span className="mono break">{pack.filename}</span>
+                        Saved as <span className="mono break">{pack.filename}</span> · {kilobytes(pack.bytes)}, exactly as the service sent it
                       </>
                     ) : (
                       'The package was built, but this browser did not allow the download.'
@@ -132,6 +185,14 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
                     <span className="mono">{pack.pack.artifact_label}</span>
                   </p>
                   <p className="keep__text">{pack.pack.disclaimer}</p>
+                  <p className="keep__text" data-package-contents>
+                    Inside: the original record for this property, {count(Object.keys(pack.pack.inputs.rules).length, 'rule', 'rules')}, {count(Object.keys(pack.pack.inputs.sources).length, 'source text', 'source texts')}, and the full response as of{' '}
+                    {formatDate(pack.pack.response.lookup.as_of)} with{' '}
+                    {pack.pack.response.answers_applied.length === 0
+                      ? 'no answers applied'
+                      : `${count(pack.pack.response.answers_applied.length, 'answer', 'answers')} applied (${pack.pack.response.answers_applied.map((answer) => `${humanize(answer.field)}: ${answer.value === null || answer.value === undefined ? 'unknown' : formatValue(answer.value)}, ${humanize(answer.provenance ?? 'user_provided')}`).join('; ')})`}
+                    .
+                  </p>
                   <Disclosure summary={`Hashes and limitations (${pack.pack.limitations.length})`}>
                     <Facts
                       dense
@@ -140,10 +201,10 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
                         { label: 'Inputs', value: <span className="mono break">{pack.pack.input_sha256}</span>, note: 'Identifies the replay inputs for this property, not the whole dataset.' },
                         { label: 'Response', value: <span className="mono break">{pack.pack.response_sha256}</span> },
                         { label: 'Code version', value: <span className="mono break">{pack.pack.code.fingerprint}</span>, note: `Pipeline ${pack.pack.code.pipeline_version} · Python ${pack.pack.code.python_version}` },
-                        { label: 'Format', value: pack.pack.format_version ?? 'evidence-package-v1' },
+                        { label: 'Format', value: <span className="mono">{pack.pack.format_version ?? 'evidence-package-v1'}</span> },
                       ]}
                     />
-                    <ul className="plain-list plain-list--tight">
+                    <ul className="plain-list plain-list--tight" aria-label="Limitations stated in the package">
                       {pack.pack.limitations.map((limitation) => (
                         <li key={limitation}>{limitation}</li>
                       ))}
@@ -152,19 +213,20 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
                   </Disclosure>
                 </div>
               )}
-              {pack.status === 'error' && (
+              {pack.status === 'error' && failure && (
                 <ErrorNotice
                   error={pack.error}
                   context={`Evidence package for ${outcome.query.address_id} as of ${formatDate(lookup.as_of)}`}
                   actions={
-                    pack.error.kind === 'not_implemented' || pack.error.kind === 'invalid_request' ? undefined : (
-                      <button type="button" className="button button--small" onClick={() => void downloadPackage()}>
+                    failure.retry ? (
+                      <button type="button" className="button button--small" onClick={() => void downloadPackage()} disabled={busy}>
                         Try again
                       </button>
-                    )
+                    ) : undefined
                   }
                 >
-                  <p>Nothing was saved. {pack.error.kind === 'not_implemented' ? 'The working export beside it is still available.' : 'The result on screen is unaffected.'}</p>
+                  <p>{failure.text}</p>
+                  <p>The result on screen is unaffected.</p>
                 </ErrorNotice>
               )}
             </>
@@ -173,8 +235,8 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
               {outcome.fixture
                 ? 'Not available for a contract example: the package is built by the live service for a saved property.'
                 : mode === 'demo'
-                  ? 'Not available in the synthetic demo: the package is built by the live service (POST /lookup/evidence-package), and the demo replays recordings without one.'
-                  : 'Not available for this result.'}
+                  ? 'Not available in the synthetic demo: the package is built by the live service for a saved property, and the demo only replays recordings. Switch to the live API to download one.'
+                  : 'Not available for this result: it did not come from the live service.'}
             </p>
           )}
         </article>

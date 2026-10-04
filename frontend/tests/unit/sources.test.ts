@@ -5,7 +5,7 @@ import { DemoSource } from '../../src/api/demo';
 import { ApiError } from '../../src/api/errors';
 import { LiveSource } from '../../src/api/live';
 import type { Answer } from '../../src/api/types';
-import { ASSIST_EXAMPLE, ERROR_EXAMPLES, LOOKUP_EXAMPLES, RESEARCH_FIXTURES } from '../../src/demo/fixtures';
+import { ASSIST_EXAMPLE, DEV_ASSISTS, DEV_CHANGES, DEV_RULES, DEV_SOURCES, ERROR_EXAMPLES, LOOKUP_EXAMPLES, RECORDED_ASSISTS, RECORDED_CHANGES, RECORDED_RULES, RECORDED_SOURCES, RESEARCH_FIXTURES } from '../../src/demo/fixtures';
 
 const rejects = async (promise: Promise<unknown>): Promise<ApiError> => {
   try {
@@ -139,6 +139,52 @@ test('demo: recorded comparisons replay; anything else is refused', async () => 
   const error = await rejects(demo.changes({ before: '2026-01-01', after: '2026-02-01' }));
   assert.equal(error.kind, 'not_recorded');
   assert.ok(error.suggestions.length >= 9);
+});
+
+test('demo: a replayed comparison says which recorded store it came from, with that store’s own summary', async () => {
+  const demo = new DemoSource();
+  const maple = await demo.changes({ before: '2026-10-01', after: '2026-11-15', scenario: 'actual' });
+  assert.equal(maple.recordedStore, 'synthetic');
+  assert.equal(maple.origin.label, 'Recorded backend output');
+  assert.deepEqual(Object.keys(maple.summary?.by_jurisdiction ?? {}), ['Maple Harbor, CA']);
+  assert.deepEqual(maple.notices, []);
+  const portfolio = await demo.changes({ before: '2026-10-01', after: '2027-01-15', scenario: 'actual' });
+  assert.equal(portfolio.recordedStore, 'dev_portfolio');
+  assert.equal(portfolio.origin.label, 'UX development fixture');
+  assert.ok(Object.keys(portfolio.summary?.property_labels ?? {}).every((id) => id.startsWith('DEV-P')), 'labels come from the same store as the result');
+  // An omitted scenario is the contract default, so it replays the "actual" recording and no other.
+  assert.deepEqual((await demo.changes({ before: '2026-10-01', after: '2027-01-15' })).result, portfolio.result);
+  assert.notDeepEqual((await demo.changes({ before: '2026-10-01', after: '2027-01-15', scenario: 'if_enacted' })).result, portfolio.result);
+});
+
+test('demo: the recorded stores are never mixed', async () => {
+  // No request is answerable from two stores, so a replay can only ever come from one.
+  const key = (request: { address_id: string; as_of: string }) => `${request.address_id}|${request.as_of}`;
+  const overlap = <T>(a: T[], b: T[]) => a.filter((item) => b.includes(item));
+  assert.deepEqual(overlap(DEV_ASSISTS.map((entry) => key(entry.request)), RECORDED_ASSISTS.map((entry) => key(entry.request))), []);
+  assert.deepEqual(overlap(DEV_CHANGES.map((entry) => JSON.stringify(entry.request)), RECORDED_CHANGES.map((entry) => JSON.stringify(entry.request))), []);
+  assert.deepEqual(overlap(Object.keys(DEV_RULES), Object.keys(RECORDED_RULES)), []);
+  assert.deepEqual(overlap(Object.keys(DEV_SOURCES), Object.keys(RECORDED_SOURCES)), []);
+  // A development-fixture lookup carries only development-fixture rules and sources, and says where it came from.
+  const outcome = await new DemoSource().lookup({ address_id: 'DEV-P07', as_of: '2027-01-15', answers: [] });
+  assert.equal(outcome.origin.label, 'UX development fixture');
+  assert.ok(outcome.lookup.rules.length > 0);
+  assert.ok(outcome.lookup.rules.every((rule) => rule.team_rule_id in DEV_RULES && rule.source_doc_id in DEV_SOURCES));
+  assert.ok(outcome.lookup.sources.every((source) => source.doc_id in DEV_SOURCES));
+  // The claim comparisons are the development fixture's, and cite only its sources.
+  const comparisons = await new DemoSource().sourceComparisons();
+  assert.equal(comparisons.recordedStore, 'dev_portfolio');
+  assert.ok(Object.keys(comparisons.response.source_hashes).every((docId) => docId in DEV_SOURCES));
+});
+
+test('demo: a request with no recording is refused in every adapter method, never answered from elsewhere', async () => {
+  const demo = new DemoSource();
+  assert.equal((await rejects(demo.lookup({ address_id: 'DEV-P07', as_of: '2030-01-01', answers: [] }))).kind, 'not_recorded');
+  assert.equal((await rejects(demo.changes({ before: '2030-01-01', after: '2030-02-01' }))).kind, 'not_recorded');
+  assert.equal((await rejects(demo.ruleDetail('r-not-recorded'))).kind, 'not_recorded');
+  assert.equal((await rejects(demo.source('NOT-RECORDED'))).kind, 'not_recorded');
+  assert.equal(await demo.health(), null, 'there is no service, so no health is reported');
+  assert.equal((demo as { evidencePackage?: unknown }).evidencePackage, undefined, 'the evidence package is a live-service artifact');
 });
 
 test('demo: no evidence report is fabricated', async () => {
