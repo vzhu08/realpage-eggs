@@ -6,8 +6,15 @@ Frontend implementation is reserved for the UX / Claude Code owner.
 
 ## RealPage submission files
 
-**[Download the three JSON submission files (.zip)](submission/submission.zip?raw=true)**
+**[Download the saved three-file JSON archive (.zip)](submission/submission.zip?raw=true)**
 — saved October 4, 2026; query date **2026-10-01**.
+
+**Source-eligibility revalidation is pending.** This archive's validation report
+does not record a check against the `source-use-v2` safeguards in
+[PR #35](https://github.com/vzhu08/realpage-eggs/pull/35).
+Supplied-corpus membership alone does not establish operative legal authority.
+Regenerate from the original frozen Store with the current exporter before treating this
+archive as an export validated under the current source policy.
 
 The ZIP contains `rules.json` (174 schema-valid corpus-backed records), `lookups.json`
 (all 500 supplied addresses), and `changes.json` (T1–T5). These are **partial results**:

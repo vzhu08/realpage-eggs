@@ -1,5 +1,14 @@
 # RealPage submission files
 
+**Historical export: source-eligibility revalidation is pending.** This archive's
+validation report does not record a check against the `source-use-v2` safeguards in
+[PR #35](https://github.com/vzhu08/realpage-eggs/pull/35).
+Its supplied-corpus citation checks do not establish that each document is operative
+legal authority. The published metadata does not include the source roles, full rule
+evidence or extraction index needed to rerun that check. Regenerate from the original
+frozen Store using the current exporter before treating these files as validated under
+the current source policy. The archive and its original validation records are preserved.
+
 [Download submission.zip](submission.zip?raw=true) (about 14 MB). Extract it to obtain
 exactly the three JSON files specified in section 5 of the original participant README:
 

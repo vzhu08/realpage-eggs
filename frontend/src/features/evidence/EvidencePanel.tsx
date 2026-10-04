@@ -122,7 +122,7 @@ export function EvidencePanel({ rule, evaluation, lookup, assist, modal, synthet
         tabs={[
           { id: 'source', label: 'Source text', badge: evidence.length },
           { id: 'encoded', label: 'Encoded rule' },
-          { id: 'checks', label: 'Checks', badge: 6 },
+          { id: 'checks', label: 'Checks', badge: 7 },
           { id: 'versions', label: 'Versions', badge: versionCount },
         ]}
       />
