@@ -6,6 +6,9 @@ from collections import Counter
 from .models import SourceSpan, SourceContext, SourceDependency
 
 HEADINGS = re.compile(r"(?im)^[ \t]*(?:(?:section|sec\.?|§)\s+(\d[\w.()\-]*)|((?:\d+\.){2,}\d+))[^\n]*")
+# Conservative code-compilation headings: a standalone, unindented statutory
+# number. Short or inline numbered list items remain ordinary section text.
+BARE_STATUTORY_HEADINGS = re.compile(r"(?m)^(\d{3,}(?:\.\d+)*)\.[ \t]*\r?$")
 REFERENCES = re.compile(r"(?i)\b(?:see|under|pursuant to|subject to|defined in|as defined in|as provided in|except as provided in|except as stated in)\s+(?:(?P<doc>[A-Z][A-Z0-9_-]*\d[A-Z0-9_-]*)\s+)?(?:section|sec\.?|§)\s+(?P<section>\d[\w.()\-]*)")
 
 
@@ -14,12 +17,14 @@ def section_key(value):
 
 
 def sections(source):
-    matches = list(HEADINGS.finditer(source.text))
-    if not matches:
+    headings = {match.start(): section_key(match[1] or match[2]) for match in HEADINGS.finditer(source.text)}
+    headings.update({match.start(): section_key(match[1]) for match in BARE_STATUTORY_HEADINGS.finditer(source.text)})
+    starts = sorted(headings)
+    if not starts:
         return [(None, 0, len(source.text))] if source.text else []
-    result = [(None, 0, matches[0].start())] if matches[0].start() else []
-    for i, match in enumerate(matches):
-        result.append((section_key(match[1] or match[2]), match.start(), matches[i+1].start() if i+1 < len(matches) else len(source.text)))
+    result = [(None, 0, starts[0])] if starts[0] else []
+    for i, start in enumerate(starts):
+        result.append((headings[start], start, starts[i+1] if i+1 < len(starts) else len(source.text)))
     return result
 
 
@@ -60,6 +65,20 @@ class ContextRetriever:
     def context(self, anchors, max_depth=2, max_chars=24000, max_spans=12, radius=800):
         result, dependencies, hits, visited = [], [], [], set()
         chars = 0
+        valid_anchors, anchored_sections = [], set()
+        for anchor in anchors:
+            source = self.sources.get(anchor.doc_id)
+            if not source or not source.text:
+                hits.append(f"missing_source:{anchor.doc_id}")
+                continue
+            if (not 0 <= anchor.start < anchor.end <= len(source.text)
+                    or anchor.source_hash != source.sha256 or source.text[anchor.start:anchor.end] != anchor.text):
+                hits.append(f"stale_anchor:{anchor.doc_id}")
+                continue
+            valid_anchors.append(anchor)
+            anchored_sections.update((anchor.doc_id, label, a, b)
+                                     for label, a, b in self.section_index[anchor.doc_id]
+                                     if label is not None and a < anchor.end and anchor.start < b)
 
         def append_span(item):
             nonlocal chars
@@ -81,14 +100,28 @@ class ContextRetriever:
                 target_section = section_key(match.group("section"))
                 origin = span(self.sources[item.doc_id], item.start + match.start(), item.start + match.end(), item.section)
                 candidates = [(label, a, b) for label, a, b in self.section_index.get(target_doc, []) if label == target_section]
+                used_support = False
+                if not candidates and not match.group("doc"):
+                    # An implicit reference can use only a section already cited
+                    # by exact evidence in this request, never a corpus-wide hit.
+                    foreign_docs = {doc for doc, label, _, _ in anchored_sections
+                                    if doc != item.doc_id and label == target_section}
+                    foreign = [(doc, label, a, b) for doc in sorted(foreign_docs)
+                               for label, a, b in self.section_index[doc] if label == target_section]
+                    if foreign:
+                        used_support = True
+                        target_doc = foreign[0][0] if len(foreign) == 1 else None
+                        candidates = [(label, a, b) for _, label, a, b in foreign]
                 key = (target_doc, target_section)
                 status, explanation, targets = "resolved", "Exact source section heading located; meaning not verified", []
+                if used_support:
+                    explanation = "Unique explicitly anchored supporting section located; legal relationship and meaning not verified"
                 if key in trail:
                     status, explanation = "cycle", "Cross-reference cycle; no completeness inferred"
                 elif not candidates:
                     status, explanation = "missing", "Referenced section not present in available snapshots; not proof the authority does not exist"
                 elif len(candidates) > 1:
-                    status, explanation = "ambiguous", "More than one matching section heading"
+                    status, explanation = "ambiguous", "More than one explicitly anchored supporting section" if used_support else "More than one matching section heading"
                 elif depth >= max_depth:
                     status, explanation = "depth_limit", "Explicit cross-reference depth budget reached"
                     hits.append("max_depth")
@@ -105,17 +138,16 @@ class ContextRetriever:
                         visit(target, depth + 1, trail | {key})
                 dependencies.append(SourceDependency(reference=match.group(), origin=origin, status=status, target_doc_id=target_doc, target_section=target_section, spans=targets, explanation=explanation))
 
-        for anchor in anchors:
-            source = self.sources.get(anchor.doc_id)
-            if not source or not source.text:
-                hits.append(f"missing_source:{anchor.doc_id}")
-                continue
-            if anchor.source_hash != source.sha256 or source.text[anchor.start:anchor.end] != anchor.text:
-                hits.append(f"stale_anchor:{anchor.doc_id}")
-                continue
+        for anchor in valid_anchors:
+            source = self.sources[anchor.doc_id]
             if any(s.doc_id == source.doc_id and s.start <= anchor.start and anchor.end <= s.end for s in result): continue
             containing = [(label, a, b) for label, a, b in self.section_index[source.doc_id] if a <= anchor.start and anchor.end <= b]
-            label, start, end = containing[-1] if containing else (None, 0, len(source.text))
+            if containing:
+                label, start, end = containing[-1]
+            else:
+                overlapping = [(a, b) for _, a, b in self.section_index[source.doc_id]
+                               if a < anchor.end and anchor.start < b]
+                label, start, end = None, overlapping[0][0], overlapping[-1][1]
             remaining = max_chars - chars
             if end - start > remaining:
                 hits.append("section_windowed")
