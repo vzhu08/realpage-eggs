@@ -2,7 +2,7 @@ import re
 from datetime import date
 
 from .config import DISCLAIMER, ROOT
-from .engine import evaluate_rules
+from .engine import evaluate_rules, temporal
 from .models import ChangeRequest, ChangeResult
 from .store import read_json
 
@@ -56,6 +56,10 @@ def compute_changes(store, request: ChangeRequest):
     if scenario == "if_enacted": notes.append("Hypothetical only: selected pending rules are assumed enacted and effective on the comparison date; stored law is unchanged")
     if kind == "negative" and any(r.lifecycle != "failed" for r in rules if r.team_rule_id in selected):
         notes.append("Failed lifecycle is not established for all referenced proposal records")
+    unresolved = sorted(r.team_rule_id for r in rules if r.team_rule_id in selected
+                        and (r.review_issues or r.semantic_verification == "needs_review"))
+    if unresolved:
+        notes.append("Unresolved rule evidence: " + ", ".join(unresolved))
     affected, uncertain, conflicts, differences = [], [], [], {}
     by_id = {r.team_rule_id: r for r in rules}
     for ident, prop in sorted(addresses.items()):
@@ -68,10 +72,13 @@ def compute_changes(store, request: ChangeRequest):
             old, new = left[rid], right[rid]
             old_signature = None if kind in {"boundary", "negative"} else signature(old, by_id[rid])
             new_signature = signature(new, by_id[rid])
-            if old_signature == new_signature: continue
             if kind == "negative" and new.result == "pending": continue
             relevant = [new] if kind in {"boundary", "negative"} else [old, new]
             uncertain_delta = any(e.result == "unknown" or e.jurisdiction == "unknown" or e.coverage.value == "unknown" or e.uncertainty_reasons for e in relevant if e.result not in {"inapplicable", "failed"})
+            # Equal unknown results cannot establish that nothing changed between
+            # dates. Keep possible impacts separate, excluding known inactive rules.
+            if old_signature == new_signature and not (before != after and uncertain_delta):
+                continue
             if uncertain_delta: possible = True
             else: definite = True
             deltas.append({"team_rule_id": rid, "certainty": "uncertain" if uncertain_delta else "definite", "before": None if kind in {"boundary", "negative"} else old.model_dump(mode="json"), "after": new.model_dump(mode="json")})
@@ -80,7 +87,8 @@ def compute_changes(store, request: ChangeRequest):
         if any(e.conflict_flag for rid, e in right.items() if rid in selected): conflicts.append(ident)
         if deltas: differences[ident] = deltas
     if uncertain: notes.append("Uncertain impacts are separate from definitely affected addresses")
-    if kind == "negative" and selected and not affected and not uncertain:
+    failed_at_query = selected and all(temporal(by_id[rid], after) == "failed" for rid in selected)
+    if kind == "negative" and failed_at_query and not unresolved and not affected and not uncertain:
         notes.append("Extracted proposal history creates no operative obligation on the query date")
-    status = "blocked" if not selected or not addresses else "partial" if notes and any(n.startswith(("Missing", "No evidence", "Failed lifecycle")) for n in notes) or uncertain else "complete"
+    status = "blocked" if not selected or not addresses else "partial" if notes and any(n.startswith(("Missing", "No evidence", "Failed lifecycle", "Unresolved rule evidence")) for n in notes) or uncertain else "complete"
     return ChangeResult(test_id=request.test_id, scenario=scenario, status=status, before=before, after=after, affected_address_ids=affected, uncertain_address_ids=uncertain, conflict_flag_address_ids=conflicts, differences=differences, mapped_rule_ids=mapping, notes=notes, disclaimer=DISCLAIMER)

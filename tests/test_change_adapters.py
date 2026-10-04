@@ -79,7 +79,8 @@ def test_partial_end_date_preserves_uncertain_changes(demo, rule):
     before = demo.read('rules.json')
     result = compute_changes(demo, ChangeRequest(before=date(2026, 11, 30), after=date(2026, 12, 1)))
     assert not result.affected_address_ids
-    assert result.uncertain_address_ids == ['SYNTH-001']
+    # The unresolved property can also be affected within the imprecise interval.
+    assert result.uncertain_address_ids == ['SYNTH-001', 'SYNTH-003']
     assert result.status == 'partial'
     assert demo.read('rules.json') == before
     exact = rule.model_copy(deep=True)
@@ -88,3 +89,30 @@ def test_partial_end_date_preserves_uncertain_changes(demo, rule):
     result = compute_changes(demo, ChangeRequest(before=date(2026, 11, 30), after=date(2026, 12, 1)))
     assert result.affected_address_ids == ['SYNTH-001']
     assert result.uncertain_address_ids == ['SYNTH-003']
+
+
+def test_equal_unknown_results_do_not_hide_unestablished_change(demo, rule):
+    rule.effective_date = None
+    demo.save_collection('rules', {rule.team_rule_id: rule})
+    result = compute_changes(demo, ChangeRequest(before=date(2026, 11, 14), after=date(2026, 11, 16)))
+    assert result.status == 'partial' and not result.affected_address_ids
+    assert set(result.uncertain_address_ids) == {'SYNTH-001', 'SYNTH-003'}
+    assert 'SYNTH-002' not in result.uncertain_address_ids  # Known outside geography remains excluded.
+
+
+def test_review_needed_rule_prevents_complete_empty_change_claim(demo, rule):
+    rule.review_issues = ['Synthetic missing legal dependency']
+    demo.save_collection('rules', {rule.team_rule_id: rule})
+    result = compute_changes(demo, ChangeRequest(before=date(2026, 11, 16), after=date(2026, 11, 17)))
+    assert result.status == 'partial' and not result.affected_address_ids
+    assert any('Unresolved rule evidence' in note for note in result.notes)
+
+
+def test_unestablished_failed_proposal_does_not_claim_no_operative_obligation(scenarios):
+    rules = scenarios.rules()
+    rules['failed'].lifecycle = 'pending'
+    rules['failed'].status_events = [StatusEvent(status='pending', on='2025-01-01', evidence=rules['failed'].evidence)]
+    scenarios.save_collection('rules', rules)
+    result = compute_changes(scenarios, ChangeRequest(test_id='T5'))
+    assert result.status == 'partial'
+    assert not any('creates no operative obligation' in note for note in result.notes)
