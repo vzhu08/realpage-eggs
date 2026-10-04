@@ -1,4 +1,7 @@
-from fastapi import FastAPI, HTTPException, Query, Response
+from fastapi import FastAPI, HTTPException, Query, Response, Request
+from fastapi.responses import StreamingResponse
+import json
+import time
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse
@@ -20,12 +23,17 @@ from .models import EvidencePackageRequest, EvidencePackage
 from .evidence_package import build_evidence_package
 from .models import SourceComparisonsResponse, ChangeSummary
 from .service import source_comparisons, change_summary
+from .assist_cache import AssistCache, Artifact, CacheBusy, identity
+from .assist_wire import MEDIA_TYPE, pack
+from .store import digest
 
 
-def create_app(root=None, core_services=None, frontend_dist=None):
+def create_app(root=None, core_services=None, frontend_dist=None, assist_cache_dir=None):
     store = Store(root or data_dir())
+    cache_path = assist_cache_dir or os.getenv("NAVIGATOR_ASSIST_CACHE_DIR")
+    cache = AssistCache(cache_path) if cache_path else None
     app = FastAPI(title="Rental Housing Law Navigator", version=VERSION, description=DISCLAIMER, responses={404: {"description": "Unknown ID"}, 422: {"description": "Invalid request"}, 503: {"description": "Dataset or extracted rules unavailable"}})
-    app.add_middleware(CORSMiddleware, allow_origins=[x.strip() for x in os.getenv("NAVIGATOR_CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",") if x.strip()], allow_methods=["GET", "POST"], allow_headers=["Content-Type"], expose_headers=["Content-Disposition"])
+    app.add_middleware(CORSMiddleware, allow_origins=[x.strip() for x in os.getenv("NAVIGATOR_CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",") if x.strip()], allow_methods=["GET", "POST"], allow_headers=["Content-Type"], expose_headers=["Content-Disposition", "X-Assist-Cache", "X-Assist-Identity", "Server-Timing"])
     # Repeated evidence in assist responses can be large. Compress transport only;
     # preserve every result, quote and trace and use a low CPU compression level.
     app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=1)
@@ -34,6 +42,7 @@ def create_app(root=None, core_services=None, frontend_dist=None):
         try: return fn(*args)
         except CoreContractError as exc: raise HTTPException(502, detail={"code": "core_contract_error", "message": str(exc)}) from None
         except CoreUnavailable as exc: raise HTTPException(503, detail={"code": "core_unavailable", "message": str(exc)}) from None
+        except CacheBusy as exc: raise HTTPException(503, detail={"code": "analysis_busy", "message": str(exc)}, headers={"Retry-After": "2"}) from None
         except DatasetUnavailable as exc: raise HTTPException(503, detail={"code": "dataset_unavailable", "message": str(exc)}) from None
         except KeyError as exc: raise HTTPException(404, detail={"code": "unknown_id", "message": str(exc).strip("'")}) from None
         except ValueError as exc: raise HTTPException(422, detail={"code": "invalid_input", "message": str(exc)}) from None
@@ -55,11 +64,55 @@ def create_app(root=None, core_services=None, frontend_dist=None):
     def address_lookup(request: LookupRequest): return call(lookup, store, request)
 
     @app.post("/api/v1/lookup/assist", response_model=AssistResponse, responses={502: {"description": "Core output violated the shared contract"}})
-    def assisted_lookup(request: AssistRequest):
-        result = call(assist, store, request, core_services)
-        # assist already constructs the canonical validated AssistResponse. Use
-        # its serializer directly to avoid a second giant Python dict/list tree.
-        return Response(content=result.model_dump_json(), media_type="application/json")
+    def assisted_lookup(request: AssistRequest, http_request: Request):
+        started = time.perf_counter()
+        stamp = digest(identity(store))
+        representation = "dag" if MEDIA_TYPE in http_request.headers.get("accept", "") else "canonical"
+        result = call(lambda: cache.resolve(store, request, representation, core_services=core_services)) if cache else call(assist, store, request, core_services)
+        if digest(identity(store)) != stamp:
+            if isinstance(result, Artifact):
+                result.stream.close()
+            raise HTTPException(503, detail={"code": "snapshot_changed", "message": "Serving inputs changed during analysis; retry against the frozen snapshot"})
+        headers = {"Cache-Control": "no-store", "Vary": "Accept, Accept-Encoding",
+                   "X-Assist-Identity": stamp,
+                   "Server-Timing": f'assist;dur={(time.perf_counter()-started)*1000:.2f}'}
+        media = MEDIA_TYPE if representation == "dag" else "application/json"
+        if isinstance(result, Artifact):
+            headers["X-Assist-Cache"] = "hit" if result.hit else "miss"
+            # Honor q=0; identity encoding remains available for canonical clients.
+            compressed = False
+            for token in http_request.headers.get("accept-encoding", "").lower().split(","):
+                coding, *parameters = token.strip().split(";")
+                if coding != "gzip":
+                    continue
+                try:
+                    quality = next((float(p.split("=", 1)[1]) for p in parameters if p.strip().startswith("q=")), 1.0)
+                    compressed = 0 < quality <= 1
+                except ValueError:
+                    compressed = False
+            if compressed:
+                headers.update({"Content-Encoding": "gzip", "Content-Length": str(result.size)})
+            else:
+                # Prevent the general GZipMiddleware from treating gzip;q=0 as
+                # permission to compress this explicitly negotiated response.
+                headers["Content-Encoding"] = "identity"
+            return StreamingResponse(result.chunks(compressed), media_type=media, headers=headers)
+        headers["X-Assist-Cache"] = "bypass"
+        body = result.model_dump_json()
+        if representation == "dag":
+            body = json.dumps(pack(json.loads(body)), ensure_ascii=False, separators=(",", ":"))
+        return Response(content=body, media_type=media, headers=headers)
+
+    @app.get("/api/v1/assist-cache/identity", include_in_schema=False)
+    def assist_identity():
+        return Response(content=json.dumps({"identity": digest(identity(store))}), media_type="application/json", headers={"Cache-Control": "no-store"})
+
+    @app.get("/api/v1/demo-requests", include_in_schema=False)
+    def demo_requests():
+        from scripts.prime_assist import load_manifest
+        from .config import ROOT
+        manifest = load_manifest(Path(os.getenv("NAVIGATOR_DEMO_MANIFEST", str(ROOT / "config/demo_requests.json"))))
+        return {"identity": digest(identity(store)), "steps": manifest["steps"], "label": manifest["label"]}
 
     @app.post("/api/v1/lookup/evidence-package", response_model=EvidencePackage, responses={502: {"description": "Core output violated the shared contract"}})
     def evidence_package(request: EvidencePackageRequest, response: Response):

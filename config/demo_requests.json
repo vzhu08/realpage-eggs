@@ -1,0 +1,11 @@
+{
+  "format": "realpage-demo-requests-v1",
+  "label": "Real computed research snapshot; hypothetical user answers, not verified property facts",
+  "steps": [
+    {"id": "opening", "request": {"address_id": "A0001", "as_of": "2026-10-01", "answers": []}},
+    {"id": "follow-up", "request": {"address_id": "A0001", "as_of": "2026-10-01", "answers": [{"field": "owner_occupied", "value": false, "provenance": "user_provided"}]}},
+    {"id": "second-answer", "request": {"address_id": "A0001", "as_of": "2026-10-01", "answers": [{"field": "owner_occupied", "value": false, "provenance": "user_provided"}, {"field": "tenancy_start", "value": "2020-01-01", "provenance": "user_provided"}]}},
+    {"id": "unknown", "request": {"address_id": "A0001", "as_of": "2026-10-01", "answers": [{"field": "tenancy_start", "value": "2020-01-01", "provenance": "user_provided"}, {"field": "owner_occupied", "value": null, "provenance": "user_provided"}]}},
+    {"id": "date-change", "request": {"address_id": "A0001", "as_of": "2025-10-01", "answers": []}}
+  ]
+}

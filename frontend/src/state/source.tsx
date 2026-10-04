@@ -1,9 +1,16 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
 import type { DataSource } from '../api/types';
+import { LiveSource } from '../api/live';
+import { DemoPreloader } from '../features/demo/DemoPreloader';
 
 const SourceContext = createContext<DataSource | null>(null);
 
-export const SourceProvider = SourceContext.Provider;
+export function SourceProvider({ value, children }: { value: DataSource; children: ReactNode }) {
+  return <SourceContext.Provider value={value}>
+    {value instanceof LiveSource && <DemoPreloader source={value} />}
+    {children}
+  </SourceContext.Provider>;
+}
 
 export function useSource(): DataSource {
   const source = useContext(SourceContext);

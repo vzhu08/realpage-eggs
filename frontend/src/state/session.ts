@@ -6,6 +6,8 @@
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { type ApiError, isAbort, toApiError } from '../api/errors';
 import type { AddressItem, Answer, AnswerValue, DataSource, FactDefinition, FixtureCaseSummary, LookupOutcome } from '../api/types';
+import { metric } from '../api/assistWire';
+import { LiveSource } from '../api/live';
 
 export interface AnswerEvent {
   seq: number;
@@ -39,6 +41,7 @@ export interface SessionState {
 }
 
 type Action =
+  | { type: 'cancel' }
   | { type: 'select'; item: AddressItem; fixtureCase: FixtureCaseSummary | null; asOf?: string }
   | { type: 'clear' }
   | { type: 'asOf'; value: string }
@@ -66,6 +69,8 @@ export const initialSession = (asOf: string): SessionState => ({
 
 export function sessionReducer(state: SessionState, action: Action): SessionState {
   switch (action.type) {
+    case 'cancel':
+      return { ...state, status: state.outcome ? 'ready' : 'idle', dirty: true, reevaluating: false, previous: null };
     case 'select':
       return { ...initialSession(action.asOf ?? state.asOf), selection: action.item, fixtureCase: action.fixtureCase, dirty: true };
     case 'clear':
@@ -104,10 +109,25 @@ export function withAnswer(answers: Answer[], field: string, next: Answer | unde
 export function useSession(source: DataSource, defaultAsOf: string) {
   const [state, dispatch] = useReducer(sessionReducer, defaultAsOf, initialSession);
   const controller = useRef<AbortController | null>(null);
+  const requestKey = useRef<string | null>(null);
+  const navigationEpoch = useRef(0);
+  const timing = useRef<{ click: number; ready: number } | null>(null);
   const latest = useRef(state);
   latest.current = state;
 
   useEffect(() => () => controller.current?.abort(), []);
+  useEffect(() => {
+    if (state.status !== 'ready' || !timing.current || state.dirty) return;
+    const sample = timing.current;
+    const first = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (timing.current !== sample) return;
+        metric('render', sample.ready);
+        metric('click-to-usable', sample.click);
+      });
+    });
+    return () => cancelAnimationFrame(first);
+  }, [state.runs, state.status, state.dirty]);
 
   const execute = useCallback(
     async (overrides: { answers?: Answer[]; keepPrevious: boolean; item?: AddressItem; fixtureCase?: FixtureCaseSummary | null; asOf?: string }) => {
@@ -115,25 +135,38 @@ export function useSession(source: DataSource, defaultAsOf: string) {
       const item = overrides.item ?? current.selection;
       if (!item) return;
       const fixtureCase = overrides.fixtureCase === undefined ? current.fixtureCase : overrides.fixtureCase;
+      const query = { address_id: item.property.address_id, as_of: overrides.asOf ?? current.asOf, answers: overrides.answers ?? current.answers, fixtureCase: fixtureCase?.id };
+      const key = JSON.stringify(query);
+      if (requestKey.current === key && controller.current && !controller.current.signal.aborted) return;
+      navigationEpoch.current++;
       controller.current?.abort();
       const abort = new AbortController();
       controller.current = abort;
+      requestKey.current = key;
+      const click = performance.now();
       dispatch({ type: 'start', keepPrevious: overrides.keepPrevious });
       try {
         const outcome = await source.lookup(
-          { address_id: item.property.address_id, as_of: overrides.asOf ?? current.asOf, answers: overrides.answers ?? current.answers, fixtureCase: fixtureCase?.id },
+          query,
           abort.signal,
         );
-        if (!abort.signal.aborted) dispatch({ type: 'success', outcome });
+        if (!abort.signal.aborted) {
+          timing.current = { click, ready: performance.now() };
+          dispatch({ type: 'success', outcome });
+        }
       } catch (error) {
-        if (abort.signal.aborted || isAbort(error)) return;
+        if (abort.signal.aborted) return;
+        if (isAbort(error)) { dispatch({ type: 'cancel' }); return; }
         dispatch({ type: 'failure', error: toApiError(error, 'lookup'), keepOutcome: overrides.keepPrevious });
+      } finally {
+        if (controller.current === abort) requestKey.current = null;
       }
     },
     [source],
   );
 
   const select = useCallback((item: AddressItem) => {
+    navigationEpoch.current++;
     // Invalidate the old completion even when the transport cannot stop its response.
     controller.current?.abort();
     dispatch({ type: 'select', item, fixtureCase: null });
@@ -154,11 +187,25 @@ export function useSession(source: DataSource, defaultAsOf: string) {
     [execute],
   );
   const clear = useCallback(() => {
+    navigationEpoch.current++;
     controller.current?.abort();
     dispatch({ type: 'clear' });
   }, []);
+  useEffect(() => {
+    if (!(source instanceof LiveSource)) return;
+    let alive = true;
+    const unsubscribe = source.onDemoOpen((query) => {
+      const current = ++navigationEpoch.current;
+      void source.addresses({ q: query.address_id, offset: 0, limit: 100 }).then((page) => {
+        const item = page.items.find((row) => row.property.address_id === query.address_id);
+        if (alive && current === navigationEpoch.current && item) open(item, query.as_of);
+      }).catch(() => { /* The existing address search remains available on failure. */ });
+    });
+    return () => { alive = false; unsubscribe(); };
+  }, [source, open]);
   const setAsOf = useCallback((value: string) => {
     if (value === latest.current.asOf) return;
+    navigationEpoch.current++;
     controller.current?.abort();
     dispatch({ type: 'asOf', value });
   }, []);

@@ -35,12 +35,17 @@ def core_call(fn, model, *args):
         raise CoreContractError("Core output did not satisfy the shared contract") from exc
 
 
-def assist(store, request, core_services=None):
+def validate_request(store, request):
     mode = "synthetic" if store.read("dataset.json", {}).get("mode") == "synthetic" else "dataset"
     answers = [SupplementalAnswer(field=k, value=v) for k,v in request.supplemental_facts.items()] + request.answers
     if mode != "synthetic" and any(a.provenance == "demo" for a in answers):
         raise ValueError("Demo answers require the separate synthetic dataset")
     facts = validate_facts({a.field: a.value for a in answers})
+    return mode, answers, facts
+
+
+def assist(store, request, core_services=None):
+    mode, answers, facts = validate_request(store, request)
     prepared, reports = prepare_rules(store)
     view = EvidenceStoreView(store, prepared)
     actual = lookup(view, LookupRequest(address_id=request.address_id, address=request.address, as_of=request.as_of, supplemental_facts=facts), {a.field: a.provenance for a in answers})

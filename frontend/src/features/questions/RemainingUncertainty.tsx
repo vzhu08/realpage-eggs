@@ -31,6 +31,10 @@ export function RemainingUncertainty({ outcome, answers, onInspect, definitions 
   if (!items.length) return null;
   const groups = groupOpenItems(items, new Set(titles.keys()));
   const topicCount = groups.answerable.length + groups.other.length;
+  // Small results keep their existing DOM; large repeated source quotes are
+  // mounted on demand so closed disclosures do not delay the usable screen.
+  const deferDetails = items.length > 32 || items.reduce((size, row) =>
+    size + row.sourceRefs.reduce((sum, ref) => sum + ref.text.length, 0), 0) > 50_000;
 
   const heading = (topic: UncertaintyTopic<OpenItem>) => {
     if (topic.kind === 'property_fact' && topic.field) {
@@ -137,6 +141,7 @@ export function RemainingUncertainty({ outcome, answers, onInspect, definitions 
           </p>
         )}
         <Disclosure
+          lazy={deferDetails}
           className="uncertainty__original"
           summary={`${entry.statements.length === 1 ? 'The service’s statement' : `All ${entry.statements.length} statements from the service`}${quotes > 0 ? ` · ${quotes} source ${quotes === 1 ? 'quote' : 'quotes'}` : ''}`}
         >
@@ -182,7 +187,7 @@ export function RemainingUncertainty({ outcome, answers, onInspect, definitions 
         </>
       )}
       {groups.outside.length > 0 && (
-        <Disclosure summary={`${groups.outside.reduce((total, entry) => total + entry.statements.length, 0)} more ${groups.outside.reduce((total, entry) => total + entry.statements.length, 0) === 1 ? 'statement concerns a rule' : 'statements concern rules'} that do not reach this property`}>
+        <Disclosure lazy={deferDetails} summary={`${groups.outside.reduce((total, entry) => total + entry.statements.length, 0)} more ${groups.outside.reduce((total, entry) => total + entry.statements.length, 0) === 1 ? 'statement concerns a rule' : 'statements concern rules'} that do not reach this property`}>
           <p className="hint">The service reported these for rules outside this result. They do not hold back anything listed above.</p>
           <ul className="uncertainty">{groups.outside.map(topic)}</ul>
         </Disclosure>

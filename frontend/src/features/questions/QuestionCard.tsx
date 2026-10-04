@@ -29,7 +29,7 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
   // Rules this question is about, by name. Two records of one provision are named once each.
   const affected = question.rule_ids;
   return (
-    <article className={rank === 1 ? 'question question--lead' : 'question'} aria-labelledby={headingId} data-question={question.question_id}>
+    <article className={rank === 1 ? 'question question--lead' : 'question'} aria-labelledby={headingId} data-question={question.question_id} data-fact-field={fact.field}>
       <p className="question__rank">{rank === 1 ? 'Most useful question' : `Question ${rank}`}</p>
       <h3 id={headingId} className="question__prompt">
         {fact.meaning}?
@@ -63,11 +63,11 @@ export function QuestionCard({ question, rank, names, current, busy, allowDemoAn
         onSubmit={(value) => onAnswer(fact.field, value, 'user_provided')}
         onUnknown={() => onAnswer(fact.field, null, 'user_provided')}
       />
-      <p className="question__scope">Your answer is unverified, applies to this request only and is never stored.</p>
+      <p className="question__scope">Your answer is unverified, applies to this request only, and never changes the stored property record. Identical requests may reuse cached analysis.</p>
 
       <div className="question__more">
         {question.alternatives.length > 0 && (
-          <Disclosure summary={`What each answer would mean (${question.alternatives.length} hypothetical${question.alternatives.length === 1 ? '' : 's'})`}>
+          <Disclosure lazy={current.length > 32 || question.alternatives.length > 8} summary={`What each answer would mean (${question.alternatives.length} hypothetical${question.alternatives.length === 1 ? '' : 's'})`}>
             <p className="hint">Each line is the evaluator’s output for a probe value. Probe values are hypothetical; they are not facts about this property.</p>
             <ul className="alternatives">
               {question.alternatives.map((alternative) => (

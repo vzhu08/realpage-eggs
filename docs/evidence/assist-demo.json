@@ -1,0 +1,1153 @@
+{
+  "label": "LOCAL_REAL_COMPUTED_RESEARCH_DEMO_NOT_HOSTED_ACCEPTANCE",
+  "branch": "codex/assist-demo-cache",
+  "base": "5475b69cafd7dac4ca324099ee3b60a9a1d280e8",
+  "hosted": {
+    "url": "https://realpage-navigator.onrender.com",
+    "service": "srv-db10ntfavr4c739nf3f0",
+    "dashboard_observed_compute": "1 CPU / 2 GB; $25/month; one instance; autoscaling off",
+    "observed_live_commit": "4e994b0",
+    "new_implementation_deployed": false,
+    "hosted_rehearsal": "pending explicit publishing authority"
+  },
+  "snapshot": {
+    "selected_local_rules": 140,
+    "archive_sha256": "f2e384742924b1555b25c44205585367d039983daaf1d131e0095a4fda076e77",
+    "copy": "artifacts/snapshot-initial",
+    "original": "artifacts/render-setup/artifacts/render/local-data/snapshot-v1",
+    "selection_note": "Existing immutable hosted snapshot; 147-rule candidate not promoted; 506-rule combined candidate not admitted. Extraction owner has authoritative-30-v2 running and final demo-authoritative-final-v1 pending. Re-select and re-prime before release if final admitted data changes."
+  },
+  "prime": {
+    "label": "REAL_COMPUTED_RESULTS_RESEARCH_NOT_LEGAL_VALIDATION",
+    "identity": {
+      "format": "assist-cache-v1",
+      "snapshot": {
+        "dataset.json": "01a9321c6e2568c9d953fe36ab20623a64960ca829cfab8a5ab6c2ef7265e4fd",
+        "addresses.json": "47876fe94bac5200ffc991b68117867dbc8121aab528441d33e5d28a568b8c18",
+        "resolutions.json": "9b0dd85ce049f1f27fedfa68b008ab9e090dbf8038dd36a1eac76853fb28e6a5",
+        "rules.json": "9b27278b231ef70979604356657958456a281741501c475fb4644cce58f896ed",
+        "sources.json": "0337104f1cfc110c1385df4bc4be7116ac94e8b7c42d72ef9f2d5de0285e4e39",
+        "extraction_index.json": "5c65c0698ceb8beaab0827b89beed13eec0d81fc64738a2b6a6c3dec11cbd727"
+      },
+      "code": {
+        "navigator/__init__.py": "279710f99c5c14d54c4b5bf7336be4848dd252749083477baddd35b10ef95531",
+        "navigator/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+        "navigator/api.py": "063d9df3fed3a1b01c4aa22434e08b460bcb133ff29cbcd98c31c9314f9b9bbe",
+        "navigator/assist_cache.py": "be5d21fb419282ffe29a27a0f39a5ea273cb55cc1394777c94aeea290d24b04b",
+        "navigator/assist_service.py": "f01800c14d24a4592c5ac6ca21435d058e85c23e2f702c78c21f8e492a0056d4",
+        "navigator/assist_wire.py": "8ba8ccbec1bb243e64f1ad10edc0ffe9b87a2a7381d89768b45a584c92a311d8",
+        "navigator/changes.py": "2060c6d521001d2bf0721d2bd1b372cce07f0110c4726b435d60cc4eee62b5f7",
+        "navigator/cli.py": "f747386e95c2a6119c2534ac104b85f3a08363b2a9f4593f4840900b844b27c2",
+        "navigator/config.py": "ab3c3b0a8135e2816ad6e46e2a12a4ff999820e414d20073dabf4852d671f7ce",
+        "navigator/contracts.py": "24bca26db980819d2945e96bee523c8ebfed9db3b3aea13ba248c162ec0d163f",
+        "navigator/core_assist.py": "79128ba6cdb95cb5afc104d9b993105cd12928ba65c568b702fcb5c490d68e61",
+        "navigator/demo.py": "db337c9e6c4adb583e9dcba4b6fa39d9bb531b42a9f4711bcdbeeffc9b0a0d47",
+        "navigator/engine.py": "adef99bc3d59abb1a4cc8e30bd24b7dd37f84fbebeab8fd8bda753d1344d474b",
+        "navigator/evidence.py": "55212cb5afd85d5f189ecdc8381176bcc1e6d9be207f860102ec2e000b8273c9",
+        "navigator/evidence_package.py": "c380327a7c2a3582c4a575e95703adba9c43f8a2f448ecaeff6234d0bf4eef99",
+        "navigator/export.py": "346b8d16029876cacf147ab11c37274cbab793e6dd107450d94b0b83cf4f402f",
+        "navigator/extraction.py": "d45b3284a7cb565c88df095ae125aea95363671054b48ee6761835ab00866e8e",
+        "navigator/fact_inputs.py": "c9c503e1e1d36a61c417bb85c9b705d7ec42294f65e28079a7b5d14e5f26e054",
+        "navigator/geocode.py": "f5ce5fd996950fe701f8dc556f706c4eac80db396efd39d2c9703517dd9f7d27",
+        "navigator/ingest.py": "dcdabbc16dbf90d2a899f30fca65a3bc0336098b4afd5b30adeeb6b3792e9f2c",
+        "navigator/models.py": "6666d33eb6c248f2edb1bface343979fb4cb4849ddb43b773850f720cb442890",
+        "navigator/predicates.py": "36e6cd612f6847405088b06c0695b25f3c184c8336211791bf513a0a63770cf8",
+        "navigator/question_planner.py": "8429b1bfe8e1daafdcc7bbde36d3d895c1455c7e041da7f74b44eddfe32ae9d6",
+        "navigator/research_fixtures.py": "7de7a954f3c22f27f66297335dce19ce5ceb94f6d1e759b494ea35849f12b4fb",
+        "navigator/retrieval.py": "6a7a7940fe94887ca7470b7e4d9ddc999e4a7e262694645256e931e14f745048",
+        "navigator/rule_renderer.py": "794f9ca6a2aadd76b0928dd1838ea0380379b746fbd09f9d25a53f5f163bf8b6",
+        "navigator/semantic_review.py": "2f53998d2c36585846ffae9126b91f6254341e8a47a256ef3e463eff70305da0",
+        "navigator/service.py": "73ce09f1d93f72054313bae1f248e5a1e0d82b3c54091487ba2d98d71400ce31",
+        "navigator/source_comparison.py": "21913cf58bc6703f7f882e343c53e31f95de93452a8b25aca538ee9823ed1140",
+        "navigator/source_inventory.py": "3f90d627fce96a33a21925f1e3a44237c8f89f6931d5dd9708f4dd92106afae1",
+        "navigator/store.py": "9b800afea3685c29690512d2f266fe6850340c03b70bfb0f4dff90ed002ba31d",
+        "navigator/validation.py": "cbe09ebe67cbe2096eb66b0017368fb388df772994355543b6e4b392448edb09",
+        "config/demo_requests.json": "237315c4c1dafbe805feb86442d8e85ca74266ae73f24ef3f17d91148840ee40",
+        "config/test_rule_selectors.json": "8e9904c3fbadda017afe4cc6d5a274375ec5de25af123f0876cc9e8baac2683b"
+      },
+      "runtime": {
+        "pydantic": "2.13.5",
+        "pydantic_core": "2.46.5",
+        "fastapi": "0.142.2",
+        "starlette": "1.7.0",
+        "python": "3.12.14",
+        "implementation": "CPython"
+      }
+    },
+    "identity_sha256": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+    "manifest_sha256": "ac22393fe85f97dfe36ffe9f4cd62f0454596fc98fbad2beb274e8aa9394de6d",
+    "command": [
+      "scripts/prime_assist.py",
+      "--store",
+      "artifacts/snapshot-initial",
+      "--cache",
+      "artifacts/cache-release",
+      "--manifest",
+      "config/demo_requests.json",
+      "--report",
+      "artifacts/prime-release.json",
+      "--verify"
+    ],
+    "rules": 140,
+    "steps": [
+      {
+        "id": "opening",
+        "key": "43ab14c0fb6951a7b840e6bc810c39eeac1a4b2fe7840a531d08cb41b4838407",
+        "cache": "miss",
+        "seconds": 5.325,
+        "canonical_bytes": 28957297,
+        "canonical_gzip_bytes": 2437194,
+        "dag_bytes": 3267859,
+        "dag_gzip_bytes": 399731,
+        "canonical_sha256": "96bcc97fba7187fdc144af860b83956fdb75b9a9c43bc81c7bf56a623b497c95",
+        "uncached_equivalent": true,
+        "plan": {
+          "status": "partial",
+          "evaluations_used": 64,
+          "limits_hit": [
+            "max_fields",
+            "max_evaluations"
+          ]
+        },
+        "question_fields": [
+          "owner_occupied",
+          "tenancy_start",
+          "owner_total_units"
+        ],
+        "evaluation_counts": {
+          "unknown": 52
+        }
+      },
+      {
+        "id": "follow-up",
+        "key": "98ff4fa7060c2077ad6828e9690046b2a062dca7a8783f4d5eb4a2562782123c",
+        "cache": "miss",
+        "seconds": 3.7372,
+        "canonical_bytes": 23920940,
+        "canonical_gzip_bytes": 2041735,
+        "dag_bytes": 3173361,
+        "dag_gzip_bytes": 396246,
+        "canonical_sha256": "fcb897a2908740338a3bfc1a625da8b93a75807fa1831276689c38201cb6b7ea",
+        "uncached_equivalent": true,
+        "plan": {
+          "status": "partial",
+          "evaluations_used": 24,
+          "limits_hit": [
+            "max_fields"
+          ]
+        },
+        "question_fields": [
+          "tenancy_start",
+          "owner_total_units"
+        ],
+        "evaluation_counts": {
+          "unknown": 51
+        }
+      },
+      {
+        "id": "second-answer",
+        "key": "ec92ede4fa600042b7f11c87941c9d9d4d92c3f0d2f5cd8ddeefc0d920467a13",
+        "cache": "miss",
+        "seconds": 1.9916,
+        "canonical_bytes": 12312201,
+        "canonical_gzip_bytes": 1106379,
+        "dag_bytes": 3081844,
+        "dag_gzip_bytes": 377537,
+        "canonical_sha256": "2541ffc83cf88f57da51a51debecc5e7c67ac9ecef021271078fab7204604807",
+        "uncached_equivalent": true,
+        "plan": {
+          "status": "partial",
+          "evaluations_used": 4,
+          "limits_hit": [
+            "max_fields"
+          ]
+        },
+        "question_fields": [
+          "owner_total_units"
+        ],
+        "evaluation_counts": {
+          "unknown": 50
+        }
+      },
+      {
+        "id": "unknown",
+        "key": "8a67a3886385834d5e9b7d41077103b9e6cb0be942f44915f2a44c4738d425be",
+        "cache": "miss",
+        "seconds": 3.1911,
+        "canonical_bytes": 17121495,
+        "canonical_gzip_bytes": 1491541,
+        "dag_bytes": 3175573,
+        "dag_gzip_bytes": 389943,
+        "canonical_sha256": "29e7fc30378ada10744f3f627fcbcc16427f5620995d472290bad49f394d6524",
+        "uncached_equivalent": true,
+        "plan": {
+          "status": "partial",
+          "evaluations_used": 12,
+          "limits_hit": [
+            "max_fields"
+          ]
+        },
+        "question_fields": [
+          "owner_occupied",
+          "owner_total_units"
+        ],
+        "evaluation_counts": {
+          "unknown": 51
+        }
+      },
+      {
+        "id": "date-change",
+        "key": "65d9e229f840ba936f97abb408393268828329dee7f566b8c2ea4298c095f640",
+        "cache": "miss",
+        "seconds": 5.4265,
+        "canonical_bytes": 28401053,
+        "canonical_gzip_bytes": 2398211,
+        "dag_bytes": 3252635,
+        "dag_gzip_bytes": 398529,
+        "canonical_sha256": "9d8da8b786ff9cac5bb46f925f01443183dc50548d89e83ff4b6e45625303b15",
+        "uncached_equivalent": true,
+        "plan": {
+          "status": "partial",
+          "evaluations_used": 64,
+          "limits_hit": [
+            "max_fields",
+            "max_evaluations"
+          ]
+        },
+        "question_fields": [
+          "owner_occupied",
+          "tenancy_start",
+          "owner_total_units"
+        ],
+        "evaluation_counts": {
+          "not_yet_effective": 2,
+          "unknown": 50
+        }
+      }
+    ]
+  },
+  "runs": {
+    "cold_uncached": {
+      "base": "http://127.0.0.1:8017",
+      "mode": "uncached",
+      "serverState": "cold",
+      "freshBrowser": true,
+      "checkedAt": "2026-10-04T11:18:44.007Z",
+      "identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+      "success": true,
+      "withinClickTarget": false,
+      "warnings": [],
+      "measuredInteractionMs": 20914.900000035763,
+      "steps": [
+        {
+          "id": "opening",
+          "click_to_usable_ms": 5828.2,
+          "automation_wall_ms": 6048.3,
+          "under_target": false,
+          "dom_nodes": 5426,
+          "click-to-usable": {
+            "ms": 5828.2,
+            "detail": {}
+          },
+          "request": {
+            "ms": 5665.6,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "miss",
+              "serverTiming": "assist;dur=5593.40"
+            }
+          },
+          "transfer": {
+            "ms": 26.5,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3265388
+            }
+          },
+          "parse": {
+            "ms": 18.5,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 20.5,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 161.6,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/addresses?q=&offset=0&limit=25",
+              "transferSize": 9059,
+              "encodedBodySize": 8759,
+              "decodedBodySize": 42691,
+              "duration": 79.80000001192093
+            },
+            {
+              "name": "http://127.0.0.1:8017/api/v1/facts",
+              "transferSize": 4613,
+              "encodedBodySize": 4313,
+              "decodedBodySize": 25950,
+              "duration": 36.60000002384186
+            },
+            {
+              "name": "http://127.0.0.1:8017/api/v1/addresses?q=A0001&offset=0&limit=100",
+              "transferSize": 1098,
+              "encodedBodySize": 798,
+              "decodedBodySize": 1550,
+              "duration": 97.39999997615814
+            },
+            {
+              "name": "http://127.0.0.1:8017/api/v1/health",
+              "transferSize": 559,
+              "encodedBodySize": 259,
+              "decodedBodySize": 259,
+              "duration": 102.5
+            },
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 400031,
+              "encodedBodySize": 399731,
+              "decodedBodySize": 3267859,
+              "duration": 5606.5
+            }
+          ]
+        },
+        {
+          "id": "follow-up",
+          "click_to_usable_ms": 4102.2,
+          "automation_wall_ms": 4173.3,
+          "under_target": false,
+          "dom_nodes": 6276,
+          "click-to-usable": {
+            "ms": 4102.2,
+            "detail": {}
+          },
+          "request": {
+            "ms": 3913.7,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "miss",
+              "serverTiming": "assist;dur=3853.37"
+            }
+          },
+          "transfer": {
+            "ms": 22.4,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3170890
+            }
+          },
+          "parse": {
+            "ms": 14.3,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 18,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 187.8,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 396546,
+              "encodedBodySize": 396246,
+              "decodedBodySize": 3173361,
+              "duration": 3864.100000023842
+            }
+          ]
+        },
+        {
+          "id": "second-answer",
+          "click_to_usable_ms": 2467.9,
+          "automation_wall_ms": 2532.5,
+          "under_target": false,
+          "dom_nodes": 6153,
+          "request": {
+            "ms": 2299.2,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "miss",
+              "serverTiming": "assist;dur=2244.04"
+            }
+          },
+          "click-to-usable": {
+            "ms": 2467.9,
+            "detail": {}
+          },
+          "transfer": {
+            "ms": 20.2,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3079373
+            }
+          },
+          "parse": {
+            "ms": 14.8,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 15.3,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 168.2,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 377837,
+              "encodedBodySize": 377537,
+              "decodedBodySize": 3081844,
+              "duration": 2253.2000000476837
+            }
+          ]
+        },
+        {
+          "id": "unknown",
+          "click_to_usable_ms": 3019,
+          "automation_wall_ms": 3080.2,
+          "under_target": false,
+          "dom_nodes": 6275,
+          "request": {
+            "ms": 2856.4,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "miss",
+              "serverTiming": "assist;dur=2800.79"
+            }
+          },
+          "click-to-usable": {
+            "ms": 3019,
+            "detail": {}
+          },
+          "transfer": {
+            "ms": 25.3,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3173102
+            }
+          },
+          "parse": {
+            "ms": 12.7,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 12.6,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 162.2,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 390243,
+              "encodedBodySize": 389943,
+              "decodedBodySize": 3175573,
+              "duration": 2810.300000011921
+            }
+          ]
+        },
+        {
+          "id": "date-change",
+          "click_to_usable_ms": 5497.6,
+          "automation_wall_ms": 5604.0,
+          "under_target": false,
+          "dom_nodes": 5434,
+          "click-to-usable": {
+            "ms": 5497.6,
+            "detail": {}
+          },
+          "request": {
+            "ms": 5330.2,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "miss",
+              "serverTiming": "assist;dur=5274.15"
+            }
+          },
+          "transfer": {
+            "ms": 24.5,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3250184
+            }
+          },
+          "parse": {
+            "ms": 11.4,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 15.4,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 166.7,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 398829,
+              "encodedBodySize": 398529,
+              "decodedBodySize": 3252635,
+              "duration": 5283.299999952316
+            }
+          ]
+        }
+      ],
+      "assist_http_responses": [
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "miss",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=5593.40",
+          "content-length": "399731",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "miss",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=3853.37",
+          "content-length": "396246",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "miss",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=2244.04",
+          "content-length": "377537",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "miss",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=2800.79",
+          "content-length": "389943",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "miss",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=5274.15",
+          "content-length": "398529",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        }
+      ]
+    },
+    "server_cached": {
+      "base": "http://127.0.0.1:8017",
+      "mode": "cached",
+      "serverState": "warm-or-uncontrolled",
+      "freshBrowser": true,
+      "checkedAt": "2026-10-04T11:19:06.829Z",
+      "identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+      "success": true,
+      "withinClickTarget": true,
+      "warnings": [],
+      "measuredInteractionMs": 1659.6000000834465,
+      "steps": [
+        {
+          "id": "opening",
+          "click_to_usable_ms": 292.5,
+          "automation_wall_ms": 455.9,
+          "under_target": true,
+          "dom_nodes": 5426,
+          "click-to-usable": {
+            "ms": 292.5,
+            "detail": {}
+          },
+          "request": {
+            "ms": 128.7,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "hit",
+              "serverTiming": "assist;dur=59.96"
+            }
+          },
+          "transfer": {
+            "ms": 22.5,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3265388
+            }
+          },
+          "parse": {
+            "ms": 18.2,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 22,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 162.9,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/addresses?q=&offset=0&limit=25",
+              "transferSize": 9059,
+              "encodedBodySize": 8759,
+              "decodedBodySize": 42691,
+              "duration": 45.39999997615814
+            },
+            {
+              "name": "http://127.0.0.1:8017/api/v1/facts",
+              "transferSize": 4613,
+              "encodedBodySize": 4313,
+              "decodedBodySize": 25950,
+              "duration": 14.199999988079071
+            },
+            {
+              "name": "http://127.0.0.1:8017/api/v1/addresses?q=A0001&offset=0&limit=100",
+              "transferSize": 1098,
+              "encodedBodySize": 798,
+              "decodedBodySize": 1550,
+              "duration": 65.09999996423721
+            },
+            {
+              "name": "http://127.0.0.1:8017/api/v1/health",
+              "transferSize": 559,
+              "encodedBodySize": 259,
+              "decodedBodySize": 259,
+              "duration": 92.39999997615814
+            },
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 400031,
+              "encodedBodySize": 399731,
+              "decodedBodySize": 3267859,
+              "duration": 69.90000003576279
+            }
+          ]
+        },
+        {
+          "id": "follow-up",
+          "click_to_usable_ms": 345.5,
+          "automation_wall_ms": 427.3,
+          "under_target": true,
+          "dom_nodes": 6276,
+          "click-to-usable": {
+            "ms": 345.5,
+            "detail": {}
+          },
+          "request": {
+            "ms": 136.4,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "hit",
+              "serverTiming": "assist;dur=59.74"
+            }
+          },
+          "transfer": {
+            "ms": 23,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3170890
+            }
+          },
+          "parse": {
+            "ms": 17.4,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 16,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 208.4,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 396546,
+              "encodedBodySize": 396246,
+              "decodedBodySize": 3173361,
+              "duration": 85.19999998807907
+            }
+          ]
+        },
+        {
+          "id": "second-answer",
+          "click_to_usable_ms": 321.2,
+          "automation_wall_ms": 394.3,
+          "under_target": true,
+          "dom_nodes": 6153,
+          "request": {
+            "ms": 156,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "hit",
+              "serverTiming": "assist;dur=62.50"
+            }
+          },
+          "click-to-usable": {
+            "ms": 321.2,
+            "detail": {}
+          },
+          "transfer": {
+            "ms": 23.4,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3079373
+            }
+          },
+          "parse": {
+            "ms": 17.8,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 13.7,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 164.7,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 377837,
+              "encodedBodySize": 377537,
+              "decodedBodySize": 3081844,
+              "duration": 106.89999997615814
+            }
+          ]
+        },
+        {
+          "id": "unknown",
+          "click_to_usable_ms": 341.5,
+          "automation_wall_ms": 411.7,
+          "under_target": true,
+          "dom_nodes": 6275,
+          "click-to-usable": {
+            "ms": 341.5,
+            "detail": {}
+          },
+          "request": {
+            "ms": 148.6,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "hit",
+              "serverTiming": "assist;dur=64.95"
+            }
+          },
+          "transfer": {
+            "ms": 23.4,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3173102
+            }
+          },
+          "parse": {
+            "ms": 21,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 15.9,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 192.3,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 390243,
+              "encodedBodySize": 389943,
+              "decodedBodySize": 3175573,
+              "duration": 93.90000003576279
+            }
+          ]
+        },
+        {
+          "id": "date-change",
+          "click_to_usable_ms": 358.9,
+          "automation_wall_ms": 462.8,
+          "under_target": true,
+          "dom_nodes": 5434,
+          "click-to-usable": {
+            "ms": 358.9,
+            "detail": {}
+          },
+          "request": {
+            "ms": 134.4,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "cache": "hit",
+              "serverTiming": "assist;dur=72.19"
+            }
+          },
+          "transfer": {
+            "ms": 24.7,
+            "detail": {
+              "endpoint": "POST /lookup/assist",
+              "decodedCharacters": 3250184
+            }
+          },
+          "parse": {
+            "ms": 13,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "validate": {
+            "ms": 19.7,
+            "detail": {
+              "endpoint": "POST /lookup/assist"
+            }
+          },
+          "render": {
+            "ms": 223.8,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/lookup/assist",
+              "transferSize": 398829,
+              "encodedBodySize": 398529,
+              "decodedBodySize": 3252635,
+              "duration": 82.69999998807907
+            }
+          ]
+        }
+      ],
+      "assist_http_responses": [
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=59.96",
+          "content-length": "399731",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=59.74",
+          "content-length": "396246",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=62.50",
+          "content-length": "377537",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=64.95",
+          "content-length": "389943",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=72.19",
+          "content-length": "398529",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        }
+      ]
+    },
+    "browser_preloaded_paced": {
+      "base": "http://127.0.0.1:8017",
+      "mode": "preloaded",
+      "serverState": "warm-or-uncontrolled",
+      "freshBrowser": true,
+      "checkedAt": "2026-10-04T11:22:51.425Z",
+      "identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+      "success": true,
+      "withinClickTarget": true,
+      "warnings": [],
+      "measuredInteractionMs": 1791.699999988079,
+      "evidenceClickMs": 213.15610000000015,
+      "pacedFlowSeconds": 55.224867700000004,
+      "pacedWithin60Seconds": true,
+      "narration": "Timed presenter cues; see docs/ASSIST_DEMO.md for the spoken script. No audio recording was made.",
+      "steps": [
+        {
+          "id": "opening",
+          "click_to_usable_ms": 207.5,
+          "automation_wall_ms": 256.3,
+          "under_target": true,
+          "dom_nodes": 5436,
+          "click-to-usable": {
+            "ms": 207.5,
+            "detail": {}
+          },
+          "render": {
+            "ms": 171.1,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/assist-cache/identity",
+              "transferSize": 380,
+              "encodedBodySize": 80,
+              "decodedBodySize": 80,
+              "duration": 33.5
+            }
+          ]
+        },
+        {
+          "id": "follow-up",
+          "click_to_usable_ms": 464.2,
+          "automation_wall_ms": 526.4,
+          "under_target": true,
+          "dom_nodes": 6286,
+          "click-to-usable": {
+            "ms": 464.2,
+            "detail": {}
+          },
+          "render": {
+            "ms": 328.5,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/assist-cache/identity",
+              "transferSize": 380,
+              "encodedBodySize": 80,
+              "decodedBodySize": 80,
+              "duration": 36.09999996423721
+            }
+          ]
+        },
+        {
+          "id": "second-answer",
+          "click_to_usable_ms": 357.3,
+          "automation_wall_ms": 419.7,
+          "under_target": true,
+          "dom_nodes": 6163,
+          "click-to-usable": {
+            "ms": 357.3,
+            "detail": {}
+          },
+          "render": {
+            "ms": 231.8,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/assist-cache/identity",
+              "transferSize": 380,
+              "encodedBodySize": 80,
+              "decodedBodySize": 80,
+              "duration": 32.69999998807907
+            }
+          ]
+        },
+        {
+          "id": "unknown",
+          "click_to_usable_ms": 440.9,
+          "automation_wall_ms": 489.3,
+          "under_target": true,
+          "dom_nodes": 6285,
+          "click-to-usable": {
+            "ms": 440.9,
+            "detail": {}
+          },
+          "render": {
+            "ms": 284,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/assist-cache/identity",
+              "transferSize": 380,
+              "encodedBodySize": 80,
+              "decodedBodySize": 80,
+              "duration": 36.10000002384186
+            }
+          ]
+        },
+        {
+          "id": "date-change",
+          "click_to_usable_ms": 321.8,
+          "automation_wall_ms": 449.2,
+          "under_target": true,
+          "dom_nodes": 5444,
+          "click-to-usable": {
+            "ms": 321.8,
+            "detail": {}
+          },
+          "render": {
+            "ms": 281.8,
+            "detail": {}
+          },
+          "resources": [
+            {
+              "name": "http://127.0.0.1:8017/api/v1/assist-cache/identity",
+              "transferSize": 380,
+              "encodedBodySize": 80,
+              "decodedBodySize": 80,
+              "duration": 35.90000003576279
+            }
+          ]
+        }
+      ],
+      "assist_http_responses": [
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=80.21",
+          "content-length": "399731",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=80.71",
+          "content-length": "396246",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=90.11",
+          "content-length": "377537",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=94.75",
+          "content-length": "389943",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        },
+        {
+          "status": 200,
+          "x-assist-identity": "6a253373f34e94a73dcdb08f6c977c39780049d432140c8107f09a855404a4ab",
+          "x-assist-cache": "hit",
+          "content-encoding": "gzip",
+          "server-timing": "assist;dur=92.20",
+          "content-length": "398529",
+          "content-type": "application/vnd.realpage.assist-dag+json"
+        }
+      ]
+    }
+  },
+  "heavy_a0005": {
+    "property": "A0005",
+    "uncached_compute_serialize_cache_seconds": 27.399052100023255,
+    "decoded_bytes": 120502306,
+    "compressed_bytes": 10178959,
+    "cached_hash_lookup_seconds": 0.03366760001517832,
+    "dag_bytes": 5651755,
+    "dag_gzip_bytes": 796239
+  },
+  "memory": {
+    "scope": "local Windows server after five cold analyses then cached/preloaded requests; not A0005",
+    "working_set_bytes": 109633536,
+    "peak_working_set_bytes": 304955392,
+    "hosted_2gb_acceptance_proven": false
+  },
+  "checks": {
+    "backend_full": "521 passed, 2 skipped before last API encoding/identity guards",
+    "backend_cache_wire_final": "20 passed with final guards",
+    "contracts": "generation succeeded; schemas/OpenAPI unchanged; Windows synthetic fixture offset churn restored",
+    "frontend_typecheck": "passed",
+    "frontend_units": "233 passed",
+    "frontend_production_build": "passed; ~509 kB JS chunk warning remains",
+    "desktop_full": "128 passed, 11 skipped, two failures fixed afterwards",
+    "desktop_affected_recheck": "15 passed; includes both prior failures",
+    "container_execution": "not run: Docker daemon unavailable"
+  },
+  "limitations": [
+    "Single observations on localhost, not hosted p95 or general readiness",
+    "Cold misses still exceed two-second click target",
+    "Final authoritative snapshot pending; new data may change planned questions",
+    "A0005 not browser/hosted memory tested",
+    "Expanded large disclosures and working exports outside timed path",
+    "Narration is a provided script with paced browser cues; no human speech or audio timing",
+    "Initial paced script used an incorrect evidence selector, failed, then corrected and successfully rerun",
+    "No legal accuracy claim"
+  ],
+  "artifact_sha256": {
+    "prime-release.json": "47168caf9d723dd733703abff283b1e2c899c5f82b31921931de26f30ba1f5a2",
+    "rehearsal-release-cold.json": "fffc3dd022551a020007b32b87891b308ccd8a189f26b5935fc3a6f15ccb0c32",
+    "rehearsal-release-cached.json": "bc5d81dd8f98d9c43223d69b31f190bceb7a7609b88bd28fcc8ef67655ac6824",
+    "rehearsal-release-paced-verified.json": "41ae8c3f49b5cea8ab8321f97a7147e81c4e4637440ed03625fb47180b9f1cc1",
+    "rehearsal-release-paced-verified.png": "21d648032f3a582ae4fca1ffdb7ec06e9ddd848aed31f39f645ee1c4545c7b3d",
+    "browser-prepared.png": "96182c03189600b0f4d1a28faa913344eb028eae8aae471ea34591058d08c9e8",
+    "heavy-cache.json": "5f1d97bdb38ce48b5c241b5d3f4f64ccb557218e1ed1d622bbc9f400f377198e",
+    "backend-tests.log": "067fce76feb094748fc46622d99958d88f81bff324b92139ba936ddd775e6f19",
+    "cache-tests-final.log": "9137aa2ca3cd7e4bb7069b144c5461e4db01f2535a6cb7d8220a2e052836a773",
+    "frontend-e2e-final.log": "816ab8497468416e074b948e8ebd72aae723d8314bc8cb00bed6591c8df80226",
+    "frontend-e2e-recheck.log": "e8fc346c54265c685acde274037e8924b013203da8c88d59b2cdcd108d1cf28c"
+  }
+}
