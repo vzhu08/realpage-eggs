@@ -1,5 +1,21 @@
 # Four-developer ownership
 
+## Final scope and board claim — October 4, 06:10 ET
+
+The user confirms Daniel leads the demo/frontend redesign and requests a task-board update for
+less than two hours of remaining coding. [FINAL-01](tasks/FINAL-01.md) and the top of TASKS control
+current scope. Daniel coordinates the existing sole frontend writer; this does not add a second
+simultaneous frontend writer. Oliver retains Core B paths. Vincent's active Platform session retains
+runtime, dataset, deployment, release and existing card/runbook claims. Core A retains semantic fixes.
+
+Documentation session `01a10660-7e93-7790-83ef-277a6ccd63f1` is the sole writer for this update of
+`docs/TASKS.md`, `docs/PLAN.md`, `docs/OWNERSHIP.md`, `docs/starters/PLATFORM_API.md` and new
+`docs/tasks/FINAL-01.md`, in isolated checkout
+`C:/Users/vzhu0/PycharmProjects/realpage-eggs/artifacts/final-product-scope`, branch
+`codex/final-product-scope`, clean base `4e994b0a577399e77d771af5a95960707f1de3cb` (PR #31).
+Other cards, runtime files, stores and active checkouts remain with their writers. This claim ends
+when integrated. Preserve these narrowed assignments during subsequent board/status merges.
+
 ## PLAT-13/14/15 integration claim — October 4
 
 User-assigned session `01a1061b-41fb-7180-9973-b0937d2f95c9` is the sole writer in

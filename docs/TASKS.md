@@ -1,5 +1,45 @@
 # Task board and merge queue
 
+## Final product scope — October 4, 06:10 ET
+
+The user requires coding to finish in **less than two hours** and confirms Daniel is leading
+the demo/frontend redesign. This section and [FINAL-01](tasks/FINAL-01.md) supersede older
+assignments, broad acceptance work and three-hour windows below. These narrow existing cards.
+
+**Targets:** implementation candidates and dataset/host decision by **07:10 ET**, code freeze
+by **07:25 ET**, exports/rehearsal complete by **07:55 ET**. These internal cutoffs are anchored
+to this update, not an organizer deadline; an earlier team deadline wins. Do not reset the clock.
+
+| Priority / cards | Owner | Necessary work and reason | Completion condition |
+| --- | --- | --- | --- |
+| P0 — UX-04 / PERF-01 | Daniel, coordinating the existing sole frontend writer | Finish the selected real-data demo flow and fix slow-assist handling. A slow question plan must not make the whole lookup fail. | Lookup/date/citations/unknowns, answer/reset when offered and evidence download work. Visible loading/cancel and basic-lookup fallback preserve provenance and stale-response guards. Candidate by 07:10. |
+| P0 — PERF-01, Core B | Oliver | Timebox one contract-preserving planner improvement to 45 minutes; large assisted responses threaten memory, transfer and usability. | Same-snapshot before/after measurements, preserved outcomes/evidence/uncertainty, focused tests and answer replay. Deliver by 07:10; if no safe fix is ready, stop optimization and use the explicit UX/local fallback. |
+| P0 — PLAT-13/14/15 closeout | Vincent / current Platform session | Finish hosted retest and select one immutable permitted dataset. Extraction alone does not make new rules ready to serve. | By 07:10 record dataset and hosted/local mode; check lineage, IDs, source anchors and demo-critical dates/unknowns. Admit only completed checked output, otherwise keep the verified partial release. |
+| P0 — PLAT-16 | Vincent leads; Daniel rehearses; Oliver checks results | Freeze, export and rehearse one code/data version so the finished pieces work together and produce deliverables. | Freeze 07:25; by 07:55 record real-browser checks, rules.json/lookups.json/changes.json, honest T1–T5 status, method note and working local fallback. Spare reviewers help here. |
+
+**Release floor:** real automated-source lookup, geography, citations, explicit uncertainty and
+consistent exports. Preserve existing change/disagreement views and truthful partial/blocked states.
+Questions must either work with tested answer replay or be explicitly pending/unavailable while
+basic lookup stays usable. Local success does not count as verified public hosting.
+
+**Deferred:** broad CORE-07 baseline/human-review benchmarking, full-corpus semantic review,
+new D069/manual-Draft admission, municipal/court source hunts, new law/field coverage without a
+reproduced blocker, async infrastructure, speculative cache/hosting migrations, translations and
+redesign beyond Daniel's selected flow. Selected-demo evidence checks remain mandatory; deferred
+review is not claimed done. Existing authorized extraction remains independent within its cap;
+this update does not start, stop, duplicate or enlarge that job.
+
+Observed base: `4e994b0` includes Platform PR #31 and Core PRs #28/#29. At 06:10 ET the active
+Platform session reports the redeployed service live, basic/source/input/answer checks passing
+and a small assist around 3 seconds; heavy-case checks remain underway. This session report
+does not close PERF-01. The 147-rule research candidate remains distinct from the served release.
+This board update starts no coding sessions and sends no teammate messages.
+
+## Historical board and checkpoints
+
+Everything below preserves earlier evidence/scope. Use FINAL-01 and the table above for current
+owners, work and deadlines; historical unclaimed/paused/next-task wording does not restart work.
+
 ## Current integration — October 4
 
 Daniel's PRs #28/#29 are merged. PLAT-15 typed inputs are implemented (35 requested/inherited

@@ -1,5 +1,27 @@
 # Current plan: real-data change intelligence
 
+## Controlling final scope — October 4, 06:10 ET
+
+The user now requires coding in less than two hours. Follow the current [task board](TASKS.md)
+and [FINAL-01](tasks/FINAL-01.md), superseding older three-hour and broad feature plans below.
+Daniel leads the existing demo/frontend effort; Oliver handles one timeboxed, contract-preserving
+planner fix; Vincent finishes dataset/hosting closeout and owns release. Spare review capacity
+goes to the selected real browser journey and evidence checks, not another feature lane.
+
+Candidates and dataset/host decision: 07:10 ET. Code freeze: 07:25 ET. Exports and rehearsal:
+07:55 ET. An earlier actual team deadline wins; no clock reset on chat changes. Keep the verified
+partial dataset and local launch if new extraction or hosted assistance is not ready. Local/partial
+success does not establish public-host acceptance or corpus completeness.
+
+Required: real lookup/geography/citations, honest uncertainty, usable slow-request handling,
+tested answer/reset when offered, existing evidence download, consistent official-format exports,
+one frozen version and local recovery. Existing change views keep partial/blocked states.
+Defer broad benchmarks, full-corpus review, source hunts, new law/field coverage, schema or async
+architecture changes, translations and additional design scope. Authorized extraction remains
+independent; no provider job or budget is created by this plan.
+
+Everything below is historical planning unless FINAL-01 explicitly carries it forward.
+
 ## Current demo-delivery priority — October 4, 2026
 
 Next Platform session follows [PLAT-13](tasks/PLAT-13.md) through
