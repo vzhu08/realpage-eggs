@@ -126,12 +126,13 @@ test.describe('recorded demo · step 2: the result of example 1', () => {
     await expect(page.getByRole('heading', { name: /^Useful questions/ })).toBeFocused();
   });
 
-  // DEFECT (major, integrator: features/lookup/LookupView.tsx revealMain + result order).
+  // DEFECT (major, integrator: features/lookup/LookupView.tsx revealMain and the order of the result).
   // Reproduction: #/lookup?mode=demo → click [data-example=consequential_fact]. The page stays at
-  // scrollY 0 with the property header and the date form filling the window: at 1440x900 the "Next"
-  // action starts below the fold (y≈917) and at 1512x744 the counts start at y≈670 and "Next" at
-  // y≈917; on a Pixel 7 the counts start at y≈1161 of 839. The result does not lead; a judge must scroll.
-  defect('DEFECT: after the one-click example the counts by status and the "Go to the question" action are inside the first window (repro: click example 1; scrollY stays 0, .next top ≈ 917px > viewport)', async ({ page }) => {
+  // scrollY 0 with the property header and the date form filling the window. At 1440x900 the counts
+  // start at y≈737 and the "Go to the question" action at y≈934 (below the fold); at 1512x744 the
+  // verdict card starts at y≈670 and its counts and action are below the fold; on a Pixel 7 the card
+  // starts at y≈1161 of 839. The result does not lead: a judge must scroll to see any of it.
+  defect('DEFECT: after the one-click example the counts by status and the "Go to the question" action are inside the first window (repro: click example 1; scrollY stays 0 and the action starts at y≈934 in a 900px window)', async ({ page }) => {
     await openExampleOne(page);
     await expect(page.getByRole('list', { name: 'Results by status' })).toBeVisible();
     expect(await topInViewport(page.getByRole('list', { name: 'Results by status' }))).toBe(true);

@@ -78,9 +78,10 @@ test.describe('recorded demo · step 6: portfolio changes', () => {
   // DEFECT (major, integrator: features/changes/ChangesView.tsx — the result is not revealed when a
   // comparison is opened from a link). Reproduction: #/lookup?mode=demo → click
   // [data-example=portfolio_impact]. The window shows the page title and the comparison form; the
-  // totals start about 1,180px down at 1512x744 (about 3,300px on a Pixel 7), below the form and the
-  // list of recorded comparisons. The judge sees a form, not "totals first".
-  defect('DEFECT: the one-click portfolio example shows its totals in the first window (repro: click example 2; [data-impact] starts ≈1,180px down at 1512x744, below the form and the recorded-comparison pills)', async ({ page }) => {
+  // totals start about 1,316px down at 1440x900 and 1512x744 (about 2,000px on a Pixel 7), below the
+  // form and the list of recorded comparisons, and the page does not scroll to them. The judge sees a
+  // form, not "totals first".
+  defect('DEFECT: the one-click portfolio example shows its totals in the first window (repro: click example 2; the totals start ≈1,316px down at 1440x900 and 1512x744, below the form and the recorded-comparison pills)', async ({ page }) => {
     await openPortfolioExample(page);
     expect(await topInViewport(comparisonResult(page).locator('[data-impact]').first())).toBe(true);
   });
