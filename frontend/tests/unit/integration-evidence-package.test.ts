@@ -9,7 +9,7 @@ import { DemoSource } from '../../src/api/demo';
 import { ApiError } from '../../src/api/errors';
 import { DEFAULT_PACKAGE_NAME, packageEchoProblems, packageFailure, packageRequestBody, safeAttachmentName, wireAnswer } from '../../src/api/evidencePackage';
 import { LiveSource, PACKAGE_TIMEOUT_MS } from '../../src/api/live';
-import type { Answer, EvidencePackage, LookupQuery } from '../../src/api/types';
+import type { Answer, DataSource, EvidencePackage, LookupQuery } from '../../src/api/types';
 import { validate } from '../../src/api/validate';
 import { type Reply, NOT_FOUND, cancelled, clone, fakeFetch, hangUntilAborted, readJson, rejects } from './integration-doubles';
 
@@ -310,6 +310,7 @@ test('abort: a withdrawn request is a cancellation, also when the response arriv
 });
 
 test('demo: the synthetic demo offers no evidence package, so none can be fabricated', () => {
-  const demo: { evidencePackage?: unknown } = new DemoSource();
+  const demo: DataSource = new DemoSource();
   assert.equal(demo.evidencePackage, undefined);
+  assert.equal('evidencePackage' in demo, false);
 });

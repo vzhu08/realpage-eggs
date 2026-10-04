@@ -184,7 +184,7 @@ test('demo: a request with no recording is refused in every adapter method, neve
   assert.equal((await rejects(demo.ruleDetail('r-not-recorded'))).kind, 'not_recorded');
   assert.equal((await rejects(demo.source('NOT-RECORDED'))).kind, 'not_recorded');
   assert.equal(await demo.health(), null, 'there is no service, so no health is reported');
-  assert.equal((demo as { evidencePackage?: unknown }).evidencePackage, undefined, 'the evidence package is a live-service artifact');
+  assert.equal('evidencePackage' in demo, false, 'the evidence package is a live-service artifact');
 });
 
 test('demo: no evidence report is fabricated', async () => {

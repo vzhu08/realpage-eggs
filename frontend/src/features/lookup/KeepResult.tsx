@@ -246,7 +246,7 @@ export function KeepResult({ session, outcome, mode, apiBase, busy }: Props) {
             Working export
           </h3>
           <p className="keep__text">
-            Assembled in this browser from what is on screen, including the order of your answers. It carries no source texts and no hashes, and nothing in it is re-verified. It is not the evidence package.
+            Assembled in this browser from what is on screen, including the order of your answers. It carries no source texts and no input, response or code hashes, and nothing in it is re-verified. It is not the evidence package.
           </p>
           {DEMO_ONLY ? (
             // A hosted preview cannot hand the viewer a file, so the same content is shown on the page.
