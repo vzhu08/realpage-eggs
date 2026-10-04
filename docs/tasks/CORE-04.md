@@ -5,9 +5,9 @@
 - Lane / future owner: Core B / Questions & Rendering. New human/name/session/checkout unallocated; Daniel authored the existing candidate. Vincent records path release before another writer starts.
 - State: Review for existing candidate; new writer handoff/allocation required.
 - Read first: AGENTS, current four-developer playbook, OWNERSHIP, ASSIST_CONTRACT, existing candidate handoff.
-- Existing candidate: origin/codex/core-backend at c92ad8f; tested candidate reported as 0c32ec4.
+- Existing candidate: PR #3 head `3cf0361`; combined integration tracked in [COORD-03](COORD-03.md).
   Existing author checkout: /Users/danny/Documents/ChatGPT/RealPage/core-backend. Preserve it and its commits.
-- Future branch/absolute checkout/base/result commit: record at handoff; do not assume current main includes this candidate.
+- Future branch/absolute checkout/base/result commit: record at handoff; use the merged PR #3 base after its completion.
 - Exclusive allowed paths for this task: navigator/question_planner.py, core_assist.py; tests/test_question_planner.py; tests/fixtures/core_navigation/**; docs/core_navigation/**; this card.
 - Reserved: the other Core lane's runtime/tests/cards, frontend, Platform APIs/services, models/contracts,
   dependencies, tests/conftest.py and shared docs/board. Core B exclusively owns core_assist.py.
@@ -51,10 +51,11 @@ Runtime versions: correlated-partitions-v2 and encoded-rule-v2. Shared contracts
 Claude's frontend checkout remain untouched. Next: Platform integration review and
 shared example regeneration; remote main/deployment/frontend acceptance remain separate.
 
-## Prior author record — preserved from Core candidate 3cf0361
+## Daniel author record — preserved from PR #3 head 3cf0361
 
-The following is the existing author’s record, imported without alteration.
-Current four-lane scope above governs new work; candidate results remain reported evidence until rerun.
+The following is Daniel's complete task record at the imported commit, including historical
+claims and checks. The current lane assignment above controls future work. His newer live
+evidence is in `docs/core/CORE01_LIVE_REVIEW.md`; COORD-03 records combined Platform verification.
 
 # CORE-04 — P1 bounded useful-question planner
 

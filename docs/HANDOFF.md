@@ -1,5 +1,24 @@
 # Current follow-up handoff
 
+## PR #3 integration — October 3, 2026
+
+The user authorized merging Daniel's Core PR and resolving documentation conflicts. Integration
+combines Core head `3cf0361` with main `9a96fda` on local `codex/core-integration`. Five Core cards
+retain four-human ownership headers and Daniel's full author records. Core implementation/tests and
+`docs/core/**` remain unchanged. Combined verification: **167 passed**, actual planner/renderer HTTP
+alternatives and answers, explicit budgets/source uncertainty, generated contracts and compileall.
+Schemas are unchanged; two actual API examples are refreshed. Details and merge status: COORD-03.
+
+Daniel's latest `docs/core/CORE01_LIVE_REVIEW.md` reports real D001/D004 slices and incomplete corpus
+work; earlier missing-key/funding statements below are historical. This integration did not make model
+calls or import his ignored store. Current Platform real data remains partial with zero local rules.
+No deployment, independent legal review, new Core B writer or path-release claim is made.
+
+PLAT-02 is separately published as https://github.com/vzhu08/realpage-eggs/pull/6 at `aa7a226`.
+It is not included in PR #3. The following four-developer and bootstrap handoffs are historical records.
+
+## Earlier four-developer coordination handoff
+
 Four-developer staffing revision complete for review. Platform implementation a034e2b remains locally
 verified; combined Core/frontend integration is pending. Branch codex/research-platform. The user-requested
 pull merged origin/main 354089f as 1f12f5b, preserving a034e2b and fixing the deleted upstream. Current

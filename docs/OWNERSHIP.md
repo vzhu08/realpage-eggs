@@ -15,14 +15,16 @@ contacted or any active remote checkout modified by this coordination pass.
 
 ## Existing work and handoff
 
-Platform implementation is a034e2b. Remote main at inspection is 354089f. The requested pull created
-local merge 1f12f5b on codex/research-platform; this branch now tracks origin/main. The deleted remote
-codex/research-platform branch is not the source to pull. Nothing was pushed by this session.
+Main integration base is 9a96fda (PLAT-01 / PR #5), including Platform implementation a034e2b and
+the four-developer coordination. PLAT-02 at aa7a226 is published separately as PR #6 and is not
+part of Daniel's PR #3 merge. Current local integration branch: codex/core-integration.
 
-Fetched origin/codex/core-backend at c92ad8f contains Daniel's Core-01 repairs and Core-02/03/04/05
-implementations. Its handoff reports 96 tests on candidate 0c32ec4; that is reported remote evidence,
-not a combined Platform/Core test result. This candidate is not merged into the current checkout/main.
-Do not rebuild these features or create competing implementations merely because they are absent locally.
+The user authorized merging Daniel's PR #3 and resolving its documentation conflicts. Imported
+head 3cf0361 contains Core-01/02/03/04/05 and reported live D001/D004 evidence. The local combined
+candidate passes 167 tests, including actual Core/API probes; see docs/tasks/COORD-03.md and
+docs/evidence/core_integration.json. No new local provider run or independent legal review is claimed.
+Core runtime/tests and docs/core/** are preserved from Daniel's exact head; five task cards combine
+the current ownership headers with his complete author records. Do not rebuild these features.
 
 The existing Core branch is a review/handoff source for both new Core lanes. Before another writer starts,
 Vincent records Daniel's release of planner/renderer files, the new Core B human/session, and the agreed
@@ -64,7 +66,8 @@ Core A can review extraction/date/trace work and prepare a real D001 run when cr
 Core B can read/review the existing renderer and planner immediately, then write after the ownership handoff.
 Renderer work is independent of live extraction. Planner integration depends on Core A's trace/evaluator
 candidate, not on completing corpus extraction. UI work can use current Platform routes and labeled fixtures.
-Platform reviews the combined candidate and refreshes shared contracts after actual integration checks.
+Platform has checked the combined candidate and refreshed actual API examples; schemas are unchanged.
+Future shared-contract changes still require actual integration checks.
 
 Each human gets a separate clone or allocated branch/worktree and private mutable data/cache directory.
 Existing Core checkout (reported): /Users/danny/Documents/ChatGPT/RealPage/core-backend, codex/core-backend;
