@@ -1,0 +1,25 @@
+{
+  "services": [
+    {
+      "type": "web",
+      "name": "realpage-navigator",
+      "runtime": "docker",
+      "plan": "1c-2g",
+      "region": "virginia",
+      "numInstances": 1,
+      "dockerfilePath": "./deploy/Dockerfile",
+      "dockerContext": ".",
+      "healthCheckPath": "/api/v1/health",
+      "autoDeployTrigger": "off",
+      "disk": { "name": "navigator-data", "mountPath": "/var/data", "sizeGB": 1 },
+      "envVars": [
+        { "key": "PORT", "value": "8000" },
+        { "key": "NAVIGATOR_DATA_DIR", "sync": false },
+        { "key": "NAVIGATOR_FRONTEND_DIST", "value": "/app/public" },
+        { "key": "PYTHON_DOTENV_DISABLED", "value": "1" },
+        { "key": "OPENAI_API_KEY", "value": "" },
+        { "key": "OPENAI_MODEL", "value": "" }
+      ]
+    }
+  ]
+}
