@@ -3,7 +3,7 @@
  *   SCREENSHOTS=1 npx playwright test screenshots
  */
 import { type Page, expect, test } from '@playwright/test';
-import { mockApi, openCase, openDemo, openEvidence, selectProperty } from './helpers';
+import { mockApi, openCase, openDemo, openEvidence, openPortfolio, selectProperty } from './helpers';
 
 test.skip(!process.env.SCREENSHOTS, 'Set SCREENSHOTS=1 to regenerate docs/screenshots');
 
@@ -13,7 +13,10 @@ const settle = async (page: Page) => {
 };
 
 /** Mobile keeps the views whose layout differs most from desktop, so the set stays small. */
-const MOBILE_SET = new Set(['02-lookup-unknown', '03-useful-question', '04-reevaluated', '05-evidence-source', '08-stays-unknown', '10-changes-comparison', '11-changes-blocked', '14-evidence-failure']);
+const MOBILE_SET = new Set([
+  '02-lookup-unknown', '03-useful-question', '04-reevaluated', '05-evidence-source', '08-stays-unknown', '10-changes-comparison', '11-changes-blocked', '14-evidence-failure',
+  '15-portfolio-impact', '16-portfolio-timeline', '18-portfolio-drilldown', '19-disagreement-records', '21-question-consequence',
+]);
 
 const shot = async (page: Page, name: string, isMobile: boolean) => {
   if (isMobile && !MOBILE_SET.has(name)) return;
@@ -95,4 +98,42 @@ test('ordinary lookup at the contract default date', async ({ page, isMobile }) 
   await page.getByRole('button', { name: 'Run lookup' }).click();
   await expect(page.getByRole('group', { name: 'Result context' })).toBeVisible();
   await shot(page, '13-not-yet-effective', isMobile);
+});
+
+/** Scroll so `selector` sits just under the sticky banner, then capture. */
+const frame = async (page: Page, selector: string, name: string, isMobile: boolean) => {
+  await page.locator(selector).first().evaluate((element) => element.scrollIntoView({ block: 'start' }));
+  await page.mouse.wheel(0, -70);
+  await shot(page, name, isMobile);
+};
+
+test('portfolio: impact, timeline, summaries and drill-down (development fixture)', async ({ page, isMobile }) => {
+  const result = await openPortfolio(page);
+  await frame(page, '.change-result .context', '15-portfolio-impact', isMobile);
+  await frame(page, '#change-timeline', '16-portfolio-timeline', isMobile);
+  await frame(page, '#change-summaries', '17-portfolio-summaries', isMobile);
+  await result.locator('.impact-row[data-address="DEV-P01"] summary').first().click();
+  await frame(page, '#change-diffs', '18-portfolio-drilldown', isMobile);
+});
+
+test('source disagreements: evaluator-flagged records and the proposed-shape fixture', async ({ page, isMobile }) => {
+  await openDemo(page, '#/disagreements?mode=demo&address=DEV-P07&as_of=2027-01-15');
+  await expect(page.locator('.disagreement')).toBeVisible();
+  await frame(page, '.disagreement', '19-disagreement-records', isMobile);
+  await openDemo(page, '#/disagreements?mode=demo');
+  await expect(page.locator('.disagreement .claim__meta').first()).toContainText('Retrieved');
+  await frame(page, '.disagreement', '20-disagreement-proposed', isMobile);
+});
+
+test('consequential question, what stays unknown after the answer, and the working export', async ({ page, isMobile }) => {
+  await openDemo(page, '#/lookup?mode=demo&address=DEV-P08&as_of=2027-01-15');
+  await page.getByRole('button', { name: 'Run lookup' }).click();
+  const question = page.getByRole('article', { name: /Whether the owner occupies the property/ });
+  await expect(question).toBeVisible();
+  await frame(page, '.question', '21-question-consequence', isMobile);
+  await question.getByRole('button', { name: 'Answer with No as a demo answer' }).click();
+  await expect(page.getByRole('region', { name: /Re-evaluated/ })).toBeVisible();
+  await page.waitForTimeout(700);
+  await shot(page, '22-after-answer', isMobile);
+  await frame(page, '#uncertainty-heading', '23-remaining-and-export', isMobile);
 });

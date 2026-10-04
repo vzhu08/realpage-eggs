@@ -4,7 +4,7 @@ Research workspace for the Rental Housing Law Navigator API: which rental rules 
 property on a given date, what is still unknown, and the exact source text behind each
 result. React + TypeScript + Vite. **Not legal advice.**
 
-Owned by the UX lane (`frontend/**`, cards `docs/tasks/UX-0{1,2,3}.md`). Backend, models and
+Owned by the UX lane (`frontend/**`, cards `docs/tasks/UX-0{1,2,3,4}.md`). Backend, models and
 `contracts/` belong to their own lanes; this app only consumes them.
 
 ## Run
@@ -50,6 +50,8 @@ npm run verify:all       # verify + test:e2e
 Backend regression (repository root, project interpreter): `python -m pytest -q`.
 
 `SCREENSHOTS=1 npm run screenshots` regenerates `docs/screenshots/`.
+`DEMO_BACKUP=1 npm run demo:backup` regenerates the labeled backup of the judge walkthrough in
+`docs/demo-backup/` (see `docs/DEMO_SCRIPT.md`).
 
 ## Data modes
 
@@ -75,8 +77,19 @@ synthetic data.
 - `src/demo/recorded/synthetic-replay.json` — verbatim backend output for the fictional Maple
   Harbor store: `assist()` responses (the function behind `POST /lookup/assist`) on four
   dates, rule detail, source text, date comparisons, and the published scenarios T1–T5
-  against a store with no extracted rules (blocked). Regenerate from the repository root with
-  `.venv/bin/python frontend/scripts/record_demo.py`.
+  against a store with no extracted rules (blocked).
+- `src/demo/recorded/portfolio-dev-fixture.json` — a **UX development fixture**: backend
+  output for a fictional portfolio (14 properties, 6 source documents, a made-up state “ZZ”).
+  The sources and properties are authored in `scripts/dev_portfolio.py` and
+  `scripts/dev_fixture/` so the changes view has several jurisdictions, categories and dates
+  to lay out; the rules are created by the backend’s own ingest and extraction validation, and
+  every lookup, comparison, conflict flag and evidence report is computed by the backend. One
+  entry, `proposed_disagreements`, is authored in a shape no contract defines yet and is
+  labeled as such wherever it appears. Repeated subtrees are stored once and expanded by
+  `src/demo/pool.ts`.
+
+Regenerate both recordings from the repository root with
+`.venv/bin/python frontend/scripts/record_demo.py`.
 
 The demo evaluates nothing. An answer changes a result only when the payload already holds
 the evaluator's recorded output for that value: an exact recorded probe, or a number inside
@@ -92,11 +105,13 @@ src/api/         generated contract types · runtime payload validation · error
                  live.ts (HTTP) and demo.ts (replay) behind one DataSource interface
 src/demo/        fixture imports and the replay rules (no evaluator)
 src/state/       lookup session (answers are request-local and resent in full), hash routing
-src/lib/         dates, labels, expression display, answer parsing, diffs — pure functions
-src/features/    shell · property · lookup · questions · evidence · changes
+src/lib/         dates, labels, expression display, answer parsing, diffs, the portfolio model,
+                 disagreements, uncertainty grouping, working export — pure functions
+src/features/    shell · property · lookup · questions · evidence · changes · disagreements
 src/styles/      tokens.css (design tokens), base.css, app.css
 tests/unit/      node:test       tests/e2e/   Playwright
-docs/UI.md       design system, state inventory, decisions, contract requests
+docs/UI.md       design system, state inventory, decisions, demo data, contract requests
+docs/DEMO_SCRIPT.md  the four-minute judge walkthrough (real-data track and synthetic backup)
 ```
 
 Types are **generated** from `contracts/openapi.json` and `contracts/research.schema.json`
@@ -119,8 +134,13 @@ implemented routes.
 | `GET /facts` | Fact definitions (type, unit, allowed values) for supplying a fact when no question was planned. |
 | `GET /rules/{id}`, `GET /rules/{id}/evidence` | Rule versions and status events; the evidence report when the lookup did not carry one. |
 | `GET /sources/{id}` | Source record and text for quotes, offsets and surrounding context. |
-| `POST /changes` | Date comparison and published scenarios. |
+| `POST /changes` | Date comparison and published scenarios. Its per-property differences are regrouped into the timeline, summaries and drill-down; names come from `GET /addresses` (paged once), `GET /rules/{id}` and `GET /sources/{id}`. |
 | `GET /sources/{id}/context` | Implemented by the backend; not called yet (context is cut from `GET /sources/{id}`). See `docs/UI.md`. |
+
+Views: **Lookup**, **Changes** (portfolio impact between two dates) and **Disagreements**
+(the conflicts the evaluator flagged for a property and date, each as two source-backed claims).
+No route lists disagreements across the dataset or returns an evidence package yet; see
+“Contract requests” in `docs/UI.md`.
 
 Errors handled by code: 404 `unknown_id`, 422, 503 `dataset_unavailable`, 503 `core_unavailable`,
 502 `core_contract_error`, plus transport, timeout and contract mismatch.

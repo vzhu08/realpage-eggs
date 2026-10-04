@@ -1,0 +1,349 @@
+{
+  "fixture_mode": "synthetic",
+  "request": {
+    "before": "2026-11-14",
+    "after": "2026-11-15"
+  },
+  "response": {
+    "result": {
+      "test_id": null,
+      "scenario": "actual",
+      "status": "partial",
+      "before": "2026-11-14",
+      "after": "2026-11-15",
+      "affected_address_ids": [
+        "SYNTH-001"
+      ],
+      "uncertain_address_ids": [
+        "SYNTH-003"
+      ],
+      "conflict_flag_address_ids": [],
+      "differences": {
+        "SYNTH-001": [
+          {
+            "team_rule_id": "r-694ad9fbae9083966e86",
+            "certainty": "definite",
+            "before": {
+              "team_rule_id": "r-694ad9fbae9083966e86",
+              "result": "not_yet_effective",
+              "jurisdiction": "true",
+              "coverage": {
+                "value": "true",
+                "matched": [
+                  "literal False",
+                  "residential eq True: true",
+                  "units gte 8: true"
+                ],
+                "unresolved": [],
+                "missing_facts": [],
+                "supporting_facts": {
+                  "residential": {
+                    "value": true,
+                    "bound": null,
+                    "provenance": "Synthetic fixture"
+                  },
+                  "units": {
+                    "value": 12,
+                    "bound": null,
+                    "provenance": "Synthetic fixture"
+                  }
+                }
+              },
+              "temporal_status": "not_yet_effective",
+              "missing_facts": [],
+              "uncertainty_reasons": [],
+              "applied_interactions": [],
+              "explanation": "As of 2026-11-14, Synthetic Maple Harbor deposit cap is not yet effective. Facts used: residential: True; units: 12. Source: Maple Harbor Ordinance TEST-42, section 2 (SYNTHETIC-42).",
+              "conflict_flag": false,
+              "evidence": [
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+                  "start": 149,
+                  "end": 289,
+                  "supports": [
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "effective_date"
+                  ]
+                },
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
+                  "start": 291,
+                  "end": 392,
+                  "supports": [
+                    "exemptions",
+                    "exemption_conditions"
+                  ]
+                },
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+                  "start": 78,
+                  "end": 147,
+                  "supports": [
+                    "lifecycle"
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "team_rule_id": "r-694ad9fbae9083966e86",
+              "result": "applies",
+              "jurisdiction": "true",
+              "coverage": {
+                "value": "true",
+                "matched": [
+                  "literal False",
+                  "residential eq True: true",
+                  "units gte 8: true"
+                ],
+                "unresolved": [],
+                "missing_facts": [],
+                "supporting_facts": {
+                  "residential": {
+                    "value": true,
+                    "bound": null,
+                    "provenance": "Synthetic fixture"
+                  },
+                  "units": {
+                    "value": 12,
+                    "bound": null,
+                    "provenance": "Synthetic fixture"
+                  }
+                }
+              },
+              "temporal_status": "in_force",
+              "missing_facts": [],
+              "uncertainty_reasons": [],
+              "applied_interactions": [],
+              "explanation": "As of 2026-11-15, Synthetic Maple Harbor deposit cap covers this property. Requirement: Covered buildings must limit security deposits to one month's rent. Facts used: residential: True; units: 12. Source: Maple Harbor Ordinance TEST-42, section 2 (SYNTHETIC-42).",
+              "conflict_flag": false,
+              "evidence": [
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+                  "start": 149,
+                  "end": 289,
+                  "supports": [
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "effective_date"
+                  ]
+                },
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
+                  "start": 291,
+                  "end": 392,
+                  "supports": [
+                    "exemptions",
+                    "exemption_conditions"
+                  ]
+                },
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+                  "start": 78,
+                  "end": 147,
+                  "supports": [
+                    "lifecycle"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "SYNTH-003": [
+          {
+            "team_rule_id": "r-694ad9fbae9083966e86",
+            "certainty": "uncertain",
+            "before": {
+              "team_rule_id": "r-694ad9fbae9083966e86",
+              "result": "not_yet_effective",
+              "jurisdiction": "true",
+              "coverage": {
+                "value": "unknown",
+                "matched": [
+                  "literal False",
+                  "residential eq True: true"
+                ],
+                "unresolved": [
+                  "missing_property_fact: units"
+                ],
+                "missing_facts": [
+                  "units"
+                ],
+                "supporting_facts": {
+                  "residential": {
+                    "value": true,
+                    "bound": null,
+                    "provenance": "Synthetic fixture"
+                  }
+                }
+              },
+              "temporal_status": "not_yet_effective",
+              "missing_facts": [
+                "units"
+              ],
+              "uncertainty_reasons": [
+                "missing_property_fact: units"
+              ],
+              "applied_interactions": [],
+              "explanation": "As of 2026-11-14, Synthetic Maple Harbor deposit cap is not yet effective. Facts used: residential: True. Review: missing_property_fact: units. Source: Maple Harbor Ordinance TEST-42, section 2 (SYNTHETIC-42).",
+              "conflict_flag": false,
+              "evidence": [
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+                  "start": 149,
+                  "end": 289,
+                  "supports": [
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "effective_date"
+                  ]
+                },
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
+                  "start": 291,
+                  "end": 392,
+                  "supports": [
+                    "exemptions",
+                    "exemption_conditions"
+                  ]
+                },
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+                  "start": 78,
+                  "end": 147,
+                  "supports": [
+                    "lifecycle"
+                  ]
+                }
+              ]
+            },
+            "after": {
+              "team_rule_id": "r-694ad9fbae9083966e86",
+              "result": "unknown",
+              "jurisdiction": "true",
+              "coverage": {
+                "value": "unknown",
+                "matched": [
+                  "literal False",
+                  "residential eq True: true"
+                ],
+                "unresolved": [
+                  "missing_property_fact: units"
+                ],
+                "missing_facts": [
+                  "units"
+                ],
+                "supporting_facts": {
+                  "residential": {
+                    "value": true,
+                    "bound": null,
+                    "provenance": "Synthetic fixture"
+                  }
+                }
+              },
+              "temporal_status": "in_force",
+              "missing_facts": [
+                "units"
+              ],
+              "uncertainty_reasons": [
+                "missing_property_fact: units"
+              ],
+              "applied_interactions": [],
+              "explanation": "As of 2026-11-15, Synthetic Maple Harbor deposit cap needs more information before coverage can be established. Facts used: residential: True. Review: missing_property_fact: units. Source: Maple Harbor Ordinance TEST-42, section 2 (SYNTHETIC-42).",
+              "conflict_flag": false,
+              "evidence": [
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Beginning November 15, 2026, residential rental buildings containing at least eight units must limit a security deposit to one month's rent.",
+                  "start": 149,
+                  "end": 289,
+                  "supports": [
+                    "requirement",
+                    "key_value",
+                    "coverage_conditions",
+                    "effective_date"
+                  ]
+                },
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "There are no exemptions to this section. This ordinance applies only within Maple Harbor city limits.",
+                  "start": 291,
+                  "end": 392,
+                  "supports": [
+                    "exemptions",
+                    "exemption_conditions"
+                  ]
+                },
+                {
+                  "doc_id": "SYNTHETIC-42",
+                  "quote": "Maple Harbor Ordinance TEST-42, section 2. Enacted September 1, 2026.",
+                  "start": 78,
+                  "end": 147,
+                  "supports": [
+                    "lifecycle"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "mapped_rule_ids": {},
+      "notes": [
+        "Uncertain impacts are separate from definitely affected addresses"
+      ],
+      "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+    },
+    "property_labels": {
+      "SYNTH-001": "1 TEST STREET, MAPLE HARBOR, CA, ",
+      "SYNTH-003": "3 TEST STREET, MAPLE HARBOR, CA, "
+    },
+    "rule_labels": {
+      "r-694ad9fbae9083966e86": "Synthetic Maple Harbor deposit cap"
+    },
+    "by_jurisdiction": {
+      "Maple Harbor, CA": {
+        "rule_ids": [
+          "r-694ad9fbae9083966e86"
+        ],
+        "affected_address_ids": [
+          "SYNTH-001"
+        ],
+        "uncertain_address_ids": [
+          "SYNTH-003"
+        ],
+        "conflict_flag_address_ids": []
+      }
+    },
+    "by_category": {
+      "security_deposits": {
+        "rule_ids": [
+          "r-694ad9fbae9083966e86"
+        ],
+        "affected_address_ids": [
+          "SYNTH-001"
+        ],
+        "uncertain_address_ids": [
+          "SYNTH-003"
+        ],
+        "conflict_flag_address_ids": []
+      }
+    },
+    "notes": [
+      "Groups are unions of Core-produced differences; a property can occur in multiple groups or certainty sets.",
+      "An empty group does not establish no impact; retain the result's status, mapping and blocker notes."
+    ]
+  }
+}

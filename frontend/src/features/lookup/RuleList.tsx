@@ -70,6 +70,8 @@ function RuleRow({ evaluation, rule, selected, changed, onInspect }: { evaluatio
             <span>{rule.jurisdiction}</span>
             <span aria-hidden="true">·</span>
             <span>{rule.citation}</span>
+            <span aria-hidden="true">·</span>
+            <span className="mono">{rule.source_doc_id}</span>
             {rule.effective_date && (
               <>
                 <span aria-hidden="true">·</span>

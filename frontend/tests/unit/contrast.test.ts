@@ -49,6 +49,12 @@ const PAIRS: Array<[string, string]> = [
   ['ink', 'highlight'],
   ['synthetic-ink', 'synthetic-bg'],
   ['synthetic-bg', 'synthetic-tag'],
+  // UX-04: timeline markers, the selected summary row, unresolved-location labels, claim cards.
+  ['ink-3', 'accent-wash'],
+  ['ink', 'accent-wash'],
+  ['unknown', 'surface'],
+  ['ink-2', 'surface'],
+  ['ink-3', 'unknown-wash'],
 ];
 
 for (const [foreground, background] of PAIRS) {

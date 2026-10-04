@@ -1,0 +1,118 @@
+{
+  "task": "PLAT-06",
+  "increment": "property evidence package independent of pending Core store",
+  "branch": "codex/platform-release",
+  "base_commit": "a7f9447815b53860c0f4a644dc0e00ca776139a1",
+  "label": "SYNTHETIC_SOFTWARE_VERIFICATION_NOT_REAL_DATA_OR_LEGAL_ACCEPTANCE",
+  "date_local": "2026-10-04",
+  "checks": {
+    "full_pytest": {
+      "passed": 303,
+      "exit_code": 0,
+      "log": "artifacts/plat06/evidence-backend-final.log"
+    },
+    "focused_evidence_tests": {
+      "passed": 16,
+      "exit_code": 0
+    },
+    "contracts": {
+      "exit_code": 0,
+      "unchanged_existing_schemas": [
+        "domain.schema.json",
+        "competition_rule.schema.json"
+      ],
+      "new_examples_replay": {
+        "property_package": "reproduced",
+        "package_missing_support": "reproduced"
+      }
+    },
+    "frontend": {
+      "verification_copy": "artifacts/plat06/evidence-verification/frontend",
+      "generated_check": "passes after disposable regeneration",
+      "typecheck_exit": 0,
+      "unit_tests_passed": 80,
+      "build_exit": 0,
+      "authored_frontend_files_changed": false,
+      "initial_failures": [
+        "Existing generated types need regeneration for additive schema",
+        "Windows regenerated legacy fixtures had CRLF offsets unlike frontend LF recordings; retained original published fixture pairs",
+        "Sandbox denied esbuild parent-directory access; build passed with approved escalation"
+      ]
+    },
+    "actual_http": {
+      "server": "Uvicorn loopback",
+      "status": 200,
+      "answer_reset_results": [
+        "unknown",
+        "applies",
+        "unknown"
+      ],
+      "download_header": "attachment; filename=\"evidence-package-000ea89cbddc.json\"",
+      "cors_filename_exposed": true,
+      "inputs_unchanged": true
+    },
+    "fresh_process_offline_replay": {
+      "exit_code": 0,
+      "original_data_directory_exists": false,
+      "result": {
+        "status": "reproduced",
+        "package_sha256": "000ea89cbddcee24a80ae2b3e0e6821fc7ed744f668f7da180133e47bd421a9e",
+        "input_sha256": "e333067b2f89c85972052f64ae7542e1ad3424cebf55760238345e0bc4448e49",
+        "response_sha256": "470c960f6563a8a166f79e23c275b132c750ad275fa062eb6bb028acb222c3c5",
+        "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+      }
+    }
+  },
+  "code": {
+    "pipeline_version": "0.1.0",
+    "python_version": "3.12.14",
+    "dependencies": {
+      "pydantic": "2.13.5",
+      "pydantic_core": "2.46.5",
+      "fastapi": "0.142.2",
+      "starlette": "1.7.0",
+      "httpx": "0.28.1",
+      "jsonschema": "4.26.0",
+      "python-dotenv": "1.2.4"
+    },
+    "files_sha256": {
+      "navigator/__init__.py": "279710f99c5c14d54c4b5bf7336be4848dd252749083477baddd35b10ef95531",
+      "navigator/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "navigator/api.py": "fbde042738ea0a04330e9c012a25256d79c6fbbfeaede0fdc7da5a63208cdc47",
+      "navigator/assist_service.py": "e5b296acd5debdcf8bc0e081741bc729a898bfe28826e1e330225169e24d78c6",
+      "navigator/changes.py": "070de5cf4150025c44d39812a53a993010f835b9a092d2d66d12377cc02e6f2f",
+      "navigator/cli.py": "f747386e95c2a6119c2534ac104b85f3a08363b2a9f4593f4840900b844b27c2",
+      "navigator/config.py": "ab3c3b0a8135e2816ad6e46e2a12a4ff999820e414d20073dabf4852d671f7ce",
+      "navigator/contracts.py": "5a9632b697260c066b689f4a6b6e18e0f5667f731f9e58610d1144ebc8daa041",
+      "navigator/core_assist.py": "9221c13c00396e415f330ad97e750e58a5e72482a00b4284a9142883d3a44ef3",
+      "navigator/demo.py": "db337c9e6c4adb583e9dcba4b6fa39d9bb531b42a9f4711bcdbeeffc9b0a0d47",
+      "navigator/engine.py": "e9e9b01e2d131f66052917b08575b62d6ca05f6a8b47439d0df8d7ff6ff66414",
+      "navigator/evidence.py": "55212cb5afd85d5f189ecdc8381176bcc1e6d9be207f860102ec2e000b8273c9",
+      "navigator/evidence_package.py": "5a3a97f8f7bcfe8e23202600dea1c9ddc307a7b3085d8ce911a2bf6df5529108",
+      "navigator/export.py": "5df99ed45711a5123c2696f1f28ace6afdbb95d3fc23041eaf0a2332cd8a7e28",
+      "navigator/extraction.py": "d45b3284a7cb565c88df095ae125aea95363671054b48ee6761835ab00866e8e",
+      "navigator/fact_inputs.py": "c8366cbd0ea945be5b2d58dee53f20904dca20effd90a048ecb829e3d9910d8e",
+      "navigator/geocode.py": "f5ce5fd996950fe701f8dc556f706c4eac80db396efd39d2c9703517dd9f7d27",
+      "navigator/ingest.py": "dcdabbc16dbf90d2a899f30fca65a3bc0336098b4afd5b30adeeb6b3792e9f2c",
+      "navigator/models.py": "9fb136c69abf2f68edfabeec03285e95b47763da46bd3e782c50b14f6aab5cf3",
+      "navigator/predicates.py": "bf00596766fce89bfc07d204a2a759cd2802ea2b0b26cc413aa0b23801edc8f3",
+      "navigator/question_planner.py": "8c38901fcbca732d120e486e5b855fe4466d181fb63c5c86e2af3505ea7a346f",
+      "navigator/research_fixtures.py": "7de7a954f3c22f27f66297335dce19ce5ceb94f6d1e759b494ea35849f12b4fb",
+      "navigator/retrieval.py": "6a7a7940fe94887ca7470b7e4d9ddc999e4a7e262694645256e931e14f745048",
+      "navigator/rule_renderer.py": "c294e328f55d00bceb208672ae9eea9771e05836ed08b8752c0092e2c7a8b9a2",
+      "navigator/semantic_review.py": "2f53998d2c36585846ffae9126b91f6254341e8a47a256ef3e463eff70305da0",
+      "navigator/service.py": "5a673364a31ae152fb2f9ed253f971af891cfac4f1c1873cf938b16680582dc9",
+      "navigator/source_inventory.py": "3f90d627fce96a33a21925f1e3a44237c8f89f6931d5dd9708f4dd92106afae1",
+      "navigator/store.py": "bb697f618ba46008b826f41f88cfd7fccf99337602e591f4151c2177ced47aaf",
+      "navigator/validation.py": "cbe09ebe67cbe2096eb66b0017368fb388df772994355543b6e4b392448edb09",
+      "requirements.lock": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8"
+    },
+    "fingerprint": "da3a93095366b81f1c848c421fbea5727c32b05562522c2a9653ebd2dbb65c0a"
+  },
+  "limitations": [
+    "Only saved address IDs are supported",
+    "Consumer type regeneration and download UI belong to UX-04",
+    "Full real Core store and geography reconciliation still block combined snapshot/browser/release acceptance",
+    "No real source acquisition, model calls, deployment, push or merge was performed"
+  ]
+}

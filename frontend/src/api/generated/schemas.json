@@ -1,5 +1,5 @@
 {
- "digest": "8393dfe64420bf16",
+ "digest": "3a71126e3e2733d4",
  "defs": {
   "AddressItem": {
    "properties": {
@@ -337,6 +337,42 @@
     "provenance"
    ]
   },
+  "ChangeImpactGroup": {
+   "properties": {
+    "rule_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "affected_address_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "uncertain_address_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "conflict_flag_address_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "rule_ids",
+    "affected_address_ids",
+    "uncertain_address_ids",
+    "conflict_flag_address_ids"
+   ]
+  },
   "ChangeRequest": {
    "properties": {
     "test_id": {
@@ -474,6 +510,241 @@
     "differences",
     "notes",
     "disclaimer"
+   ]
+  },
+  "ChangeSummary": {
+   "properties": {
+    "result": {
+     "$ref": "ChangeResult"
+    },
+    "property_labels": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object"
+    },
+    "rule_labels": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object"
+    },
+    "by_jurisdiction": {
+     "additionalProperties": {
+      "$ref": "ChangeImpactGroup"
+     },
+     "type": "object"
+    },
+    "by_category": {
+     "additionalProperties": {
+      "$ref": "ChangeImpactGroup"
+     },
+     "type": "object"
+    },
+    "notes": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "result",
+    "property_labels",
+    "rule_labels",
+    "by_jurisdiction",
+    "by_category",
+    "notes"
+   ]
+  },
+  "ClaimComparison": {
+   "properties": {
+    "field": {
+     "type": "string"
+    },
+    "rule_ids": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "before": {
+     "$ref": "ComparedClaim"
+    },
+    "after": {
+     "$ref": "ComparedClaim"
+    },
+    "classification": {
+     "type": "string",
+     "enum": [
+      "missing_support",
+      "different_claims",
+      "same_claim"
+     ]
+    },
+    "status": {
+     "type": "string",
+     "enum": [
+      "unresolved",
+      "same_observation_not_semantically_verified"
+     ]
+    },
+    "semantic_support": {
+     "type": "string",
+     "const": "not_checked"
+    },
+    "winner": {
+     "type": "null"
+    },
+    "legal_amendment": {
+     "type": "null"
+    },
+    "remedy": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "field",
+    "rule_ids",
+    "before",
+    "after",
+    "classification",
+    "status",
+    "semantic_support",
+    "remedy"
+   ]
+  },
+  "ComparedClaim": {
+   "properties": {
+    "value": {},
+    "support": {
+     "items": {
+      "$ref": "ComparisonSupport"
+     },
+     "type": "array"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "value",
+    "support"
+   ]
+  },
+  "ComparisonSourceIdentity": {
+   "properties": {
+    "doc_id": {
+     "type": "string"
+    },
+    "jurisdictions": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "url": {
+     "type": "string"
+    },
+    "retrieved_at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "sha256": {
+     "type": "string"
+    },
+    "manifest_sha256": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "capture_status": {
+     "type": "string"
+    },
+    "authority": {
+     "type": "string"
+    },
+    "source_type": {
+     "type": "string"
+    },
+    "issues": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "duplicate_of": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "actual_sha256": {
+     "type": "string"
+    },
+    "identity_valid": {
+     "type": "boolean"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "doc_id",
+    "jurisdictions",
+    "url",
+    "retrieved_at",
+    "sha256",
+    "capture_status",
+    "authority",
+    "source_type",
+    "issues",
+    "actual_sha256",
+    "identity_valid"
+   ]
+  },
+  "ComparisonSupport": {
+   "properties": {
+    "span": {
+     "$ref": "SourceSpan"
+    },
+    "anchor_valid": {
+     "type": "boolean"
+    },
+    "source": {
+     "anyOf": [
+      {
+       "$ref": "ComparisonSourceIdentity"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "span",
+    "anchor_valid",
+    "source"
    ]
   },
   "EncodedRuleRendering": {
@@ -687,6 +958,232 @@
     "status",
     "message"
    ]
+  },
+  "EvidenceCodeVersion": {
+   "properties": {
+    "pipeline_version": {
+     "type": "string"
+    },
+    "python_version": {
+     "type": "string"
+    },
+    "dependencies": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object"
+    },
+    "files_sha256": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object"
+    },
+    "fingerprint": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "pipeline_version",
+    "python_version",
+    "dependencies",
+    "files_sha256",
+    "fingerprint"
+   ]
+  },
+  "EvidencePackage": {
+   "properties": {
+    "format_version": {
+     "type": "string",
+     "const": "evidence-package-v1",
+     "default": "evidence-package-v1"
+    },
+    "artifact_label": {
+     "type": "string",
+     "enum": [
+      "SYNTHETIC_NOT_FOR_SUBMISSION",
+      "RESEARCH_EVIDENCE_NOT_LEGAL_VALIDATION"
+     ]
+    },
+    "request": {
+     "$ref": "EvidencePackageRequest"
+    },
+    "inputs": {
+     "$ref": "EvidencePackageInputs"
+    },
+    "response": {
+     "$ref": "AssistResponse"
+    },
+    "code": {
+     "$ref": "EvidenceCodeVersion"
+    },
+    "input_sha256": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "response_sha256": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "package_sha256": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "limitations": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "disclaimer": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "artifact_label",
+    "request",
+    "inputs",
+    "response",
+    "code",
+    "input_sha256",
+    "response_sha256",
+    "package_sha256",
+    "limitations",
+    "disclaimer"
+   ]
+  },
+  "EvidencePackageInputs": {
+   "properties": {
+    "original_property": {
+     "$ref": "PropertyFacts"
+    },
+    "jurisdiction": {
+     "$ref": "JurisdictionResolution"
+    },
+    "rules": {
+     "additionalProperties": {
+      "$ref": "Rule"
+     },
+     "type": "object"
+    },
+    "sources": {
+     "additionalProperties": {
+      "$ref": "SourceDocument"
+     },
+     "type": "object"
+    },
+    "extraction_index": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "dataset": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "semantic_reviews": {
+     "additionalProperties": {
+      "$ref": "SemanticReview"
+     },
+     "type": "object"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "original_property",
+    "jurisdiction",
+    "rules",
+    "sources",
+    "extraction_index",
+    "dataset"
+   ]
+  },
+  "EvidencePackageRequest": {
+   "properties": {
+    "address_id": {
+     "type": "string",
+     "description": "Saved property ID required for an evidence package"
+    },
+    "address": {
+     "anyOf": [
+      {
+       "$ref": "RawAddress"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "as_of": {
+     "type": "string",
+     "format": "date",
+     "default": "2026-10-01"
+    },
+    "supplemental_facts": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "answers": {
+     "items": {
+      "$ref": "SupplementalAnswer"
+     },
+     "type": "array",
+     "maxItems": 20
+    },
+    "scenario_id": {
+     "anyOf": [
+      {
+       "type": "string",
+       "maxLength": 100
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "limits": {
+     "$ref": "AnalysisLimits"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "address_id"
+   ]
+  },
+  "EvidenceReplayResult": {
+   "additionalProperties": false,
+   "properties": {
+    "status": {
+     "const": "reproduced",
+     "default": "reproduced",
+     "type": "string"
+    },
+    "package_sha256": {
+     "type": "string"
+    },
+    "input_sha256": {
+     "type": "string"
+    },
+    "response_sha256": {
+     "type": "string"
+    },
+    "disclaimer": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "package_sha256",
+    "input_sha256",
+    "response_sha256",
+    "disclaimer"
+   ],
+   "type": "object"
   },
   "EvidenceReport": {
    "properties": {
@@ -1800,6 +2297,58 @@
     "model",
     "decisions",
     "limitations"
+   ]
+  },
+  "SourceComparisonsResponse": {
+   "properties": {
+    "status": {
+     "type": "string",
+     "enum": [
+      "available",
+      "unavailable"
+     ]
+    },
+    "observations": {
+     "additionalProperties": {
+      "$ref": "ClaimComparison"
+     },
+     "type": "object"
+    },
+    "annotation_sha256": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "source_hashes": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object"
+    },
+    "notes": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "disclaimer": {
+     "type": "string"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "status",
+    "observations",
+    "annotation_sha256",
+    "source_hashes",
+    "notes",
+    "disclaimer"
    ]
   },
   "SourceContext": {

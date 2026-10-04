@@ -558,3 +558,119 @@ class AssistResponse(Model):
     scenario_id: str | None = None
     capabilities: dict[str, Literal["implemented", "dependency_unavailable"]]
     mode: Literal["dataset", "synthetic", "contract_fixture"]
+
+
+class EvidencePackageRequest(AssistRequest):
+    address_id: str = Field(description="Saved property ID required for an evidence package")
+
+    @model_validator(mode="after")
+    def saved_property(self):
+        if self.address_id is None:
+            raise ValueError("Evidence packages require a saved address_id")
+        return self
+
+
+class EvidencePackageInputs(Model):
+    original_property: PropertyFacts
+    jurisdiction: JurisdictionResolution
+    rules: dict[str, Rule]
+    sources: dict[str, SourceDocument]
+    extraction_index: dict[str, Any]
+    dataset: dict[str, Any]
+    semantic_reviews: dict[str, SemanticReview] = Field(default_factory=dict)
+
+
+class EvidenceCodeVersion(Model):
+    pipeline_version: str
+    python_version: str
+    dependencies: dict[str, str]
+    # Text files use LF for a portable hash across Git checkouts.
+    files_sha256: dict[str, str]
+    fingerprint: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+class EvidencePackage(Model):
+    format_version: Literal["evidence-package-v1"] = "evidence-package-v1"
+    artifact_label: Literal["SYNTHETIC_NOT_FOR_SUBMISSION", "RESEARCH_EVIDENCE_NOT_LEGAL_VALIDATION"]
+    request: EvidencePackageRequest
+    inputs: EvidencePackageInputs
+    response: AssistResponse
+    code: EvidenceCodeVersion
+    input_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    response_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    package_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    limitations: list[str]
+    disclaimer: str
+
+
+class EvidenceReplayResult(Model):
+    status: Literal["reproduced"] = "reproduced"
+    package_sha256: str
+    input_sha256: str
+    response_sha256: str
+    disclaimer: str
+
+
+class ComparisonSourceIdentity(Model):
+    doc_id: str
+    jurisdictions: list[str]
+    url: str
+    retrieved_at: str | None
+    sha256: str
+    manifest_sha256: str | None = None
+    capture_status: str
+    authority: str
+    source_type: str
+    issues: list[str]
+    duplicate_of: str | None = None
+    actual_sha256: str
+    identity_valid: bool
+
+
+class ComparisonSupport(Model):
+    span: SourceSpan
+    anchor_valid: bool
+    source: ComparisonSourceIdentity | None
+
+
+class ComparedClaim(Model):
+    value: Any
+    support: list[ComparisonSupport]
+
+
+class ClaimComparison(Model):
+    field: str
+    rule_ids: list[str]
+    before: ComparedClaim
+    after: ComparedClaim
+    classification: Literal["missing_support", "different_claims", "same_claim"]
+    status: Literal["unresolved", "same_observation_not_semantically_verified"]
+    semantic_support: Literal["not_checked"]
+    winner: None = None
+    legal_amendment: None = None
+    remedy: str
+
+
+class SourceComparisonsResponse(Model):
+    status: Literal["available", "unavailable"]
+    observations: dict[str, ClaimComparison]
+    annotation_sha256: str | None
+    source_hashes: dict[str, str]
+    notes: list[str]
+    disclaimer: str
+
+
+class ChangeImpactGroup(Model):
+    rule_ids: list[str]
+    affected_address_ids: list[str]
+    uncertain_address_ids: list[str]
+    conflict_flag_address_ids: list[str]
+
+
+class ChangeSummary(Model):
+    result: ChangeResult
+    property_labels: dict[str, str]
+    rule_labels: dict[str, str]
+    by_jurisdiction: dict[str, ChangeImpactGroup]
+    by_category: dict[str, ChangeImpactGroup]
+    notes: list[str]

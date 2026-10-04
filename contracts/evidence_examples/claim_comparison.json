@@ -1,0 +1,66 @@
+{
+  "fixture_mode": "synthetic",
+  "response": {
+    "status": "available",
+    "observations": {
+      "synthetic_missing_support": {
+        "field": "effective_date",
+        "rule_ids": [
+          "r-694ad9fbae9083966e86"
+        ],
+        "before": {
+          "value": "2026-11-15",
+          "support": [
+            {
+              "span": {
+                "doc_id": "SYNTHETIC-42",
+                "source_hash": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064",
+                "start": 0,
+                "end": 100,
+                "text": "SYNTHETIC TEST DOCUMENT. Fictional Maple Harbor, California. Not actual law.\r\nMaple Harbor Ordinance",
+                "section": null
+              },
+              "anchor_valid": true,
+              "source": {
+                "doc_id": "SYNTHETIC-42",
+                "jurisdictions": [
+                  "Maple Harbor, CA"
+                ],
+                "url": "https://example.invalid/synthetic-42",
+                "retrieved_at": "2026-10-03T00:00:00Z",
+                "sha256": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064",
+                "manifest_sha256": null,
+                "capture_status": "synthetic",
+                "authority": "official",
+                "source_type": "legal_text",
+                "issues": [],
+                "duplicate_of": null,
+                "actual_sha256": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064",
+                "identity_valid": true
+              }
+            }
+          ]
+        },
+        "after": {
+          "value": "unestablished",
+          "support": []
+        },
+        "classification": "missing_support",
+        "status": "unresolved",
+        "semantic_support": "not_checked",
+        "winner": null,
+        "legal_amendment": null,
+        "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
+      }
+    },
+    "annotation_sha256": "701e2d29674989b575c87280b2fbe5ad84dd553d710e652f9e3600f74ee73e97",
+    "source_hashes": {
+      "SYNTHETIC-42": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064"
+    },
+    "notes": [
+      "Core-authored observations; semantic support and legal precedence remain unverified.",
+      "Source hashes and exact anchors are recomputed against the selected snapshot on each request."
+    ],
+    "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+  }
+}

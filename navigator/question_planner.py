@@ -16,10 +16,11 @@ import math
 
 from . import engine
 from .fact_inputs import FACT_DEFINITIONS
+from .rule_renderer import rule_reference
 from .models import (AlternativeOutcome, AssistContext, Expression, FactDefinition,
                      FactQuestion, QuestionPlan, Uncertainty, date_bounds)
 
-ALGORITHM_VERSION = "correlated-partitions-v2"
+ALGORITHM_VERSION = "correlated-partitions-v3"
 PROBE_PROVENANCE = "Hypothetical planner probe; not a known property fact"
 
 
@@ -60,7 +61,7 @@ def _domain(definition: FactDefinition, expressions: list[Expression], prop, as_
     low = date.min.toordinal() if is_date else definition.minimum
     high = date.max.toordinal() if is_date else definition.maximum
     bound = prop.bounds.get(field)
-    # Shared models currently admit non-finite bounds. Do not round them into
+    # Guard even objects constructed without shared ingress validation. Do not round them into
     # cells, ignore them while clipping, or claim a complete feasible domain.
     if not is_date and any(v is not None and not math.isfinite(v) for v in
             (low, high, bound.lower if bound else None, bound.upper if bound else None)):
@@ -183,81 +184,143 @@ def _needs_fact(node, prop):
 
 def _uncertainty(context, evaluations, traces, prop=None):
     prop = prop if prop is not None else context.property
+    rules = {r.team_rule_id: r for r in context.rules}
+    definitions = {**FACT_DEFINITIONS, **context.fact_definitions}
+    references = {ident: rule_reference(rule) for ident, rule in rules.items()}
     items = []
+
     def add(kind, message, remedy, rule_ids=(), predicate_ids=(), field=None, source_refs=()):
+        scope = "; ".join(references.get(ident, ident) for ident in rule_ids)
+        message = f"As of {context.as_of}: {message}." + (f" Rule: {scope}" if scope else "")
         items.append(Uncertainty(kind=kind, message=message, remedy=remedy,
             rule_ids=list(rule_ids), predicate_ids=list(predicate_ids), field=field,
             source_refs=list(source_refs)))
+
+    def trace_spans(node):
+        # Evidence lacks source hashes. Reuse only existing report spans; never
+        # manufacture a verified source identity from a quotation or offset.
+        return list({span.model_dump_json(): span for report in context.evidence_reports
+            if report.rule_id == node.rule_id for check in report.checks for span in check.spans
+            if any(e.doc_id == span.doc_id and e.quote == span.text and
+                   (e.start is None or e.start == span.start) for e in node.source_refs)}.values())
+
     for trace in traces:
         for node in _walk(trace):
             if node.relevant and node.result == "unknown" and not node.children:
-                if _needs_fact(node, prop):
-                    add("property_fact", f"The factual value or precision of {node.field} remains unresolved",
-                        "Supply the documented property fact; partial dates can remain uncertain",
-                        [node.rule_id], [node.predicate_id], node.field)
+                role = ("exemption" if node.path.startswith("exemption_conditions") else
+                        "interaction scope" if node.path.startswith("interactions/") else "coverage condition")
+                if _needs_fact(node, prop) and node.field in definitions:
+                    definition = definitions.get(node.field)
+                    meaning = definition.meaning if definition else node.field
+                    existing = prop.facts.get(node.field)
+                    precision = f"; supplied value {existing!r} does not settle this boundary" if existing is not None else ""
+                    add("property_fact", f"Missing fact or precision: {meaning}{precision}. The {role} remains unresolved, so this branch cannot yet establish applicability",
+                        f"Factual answer: supply documented {meaning} ({node.field})" +
+                        (" with the recorded date precision; do not substitute construction year" if definition and definition.data_type == "date" else "") +
+                        ". Answers apply to this request; other exemptions and source issues may remain",
+                        [node.rule_id], [node.predicate_id], node.field, trace_spans(node))
                 else:
-                    add("interpretation", node.expression.reason or "Encoded comparison or legal threshold precision remains unresolved despite the supplied fact",
-                        "Core/legal reviewer must resolve the encoding against source evidence",
-                        [node.rule_id], [node.predicate_id])
-    # Source/lifecycle limitations belong to the rule, even when a factual answer
-    # rules this property out. They must not disappear with a single probe.
+                    reason = (f"No supported factual input is defined for {node.field}; it may require legal classification or a shared fact definition"
+                              if node.field and node.field not in definitions else
+                              node.expression.reason or "Encoded comparison or legal threshold precision remains unresolved despite the supplied fact")
+                    add("interpretation", reason +
+                        f"; the {role} cannot be decided from the available encoding",
+                        "Interpretation review: resolve this condition against the cited authority; repeating a property answer cannot repair a legal definition",
+                        [node.rule_id], [node.predicate_id], field=node.field, source_refs=trace_spans(node))
     if context.jurisdiction.match_quality != "resolved":
-        add("jurisdiction", "Legal location/boundary resolution remains incomplete",
-            "Platform must verify location and legal boundaries")
+        add("jurisdiction", "Legal location/boundary resolution remains incomplete; local-rule applicability may change. " +
+            "; ".join(context.jurisdiction.unresolved),
+            "Geography evidence: verify the property's legal municipality and boundary with Platform; postal city is not sufficient")
+    # Source/lifecycle gaps survive even a property answer that rules a branch out.
     for rule in context.rules:
-        if engine.jurisdiction_match(rule, context.jurisdiction) == "false": continue
+        if engine.jurisdiction_match(rule, context.jurisdiction) == "false":
+            continue
         for interaction in rule.interactions:
             if not any(target.team_rule_id != rule.team_rule_id
                        and target.citation.casefold() == interaction.target_citation.casefold()
                        and target.jurisdiction.casefold() == interaction.target_jurisdiction.casefold()
                        and target.category == interaction.category for target in context.rules):
-                add("cross_reference", f"Interaction target is not supplied: {interaction.target_citation} in {interaction.target_jurisdiction}",
-                    "Platform/Core must retrieve and encode the referenced authority", [rule.team_rule_id])
+                add("cross_reference", f"Interaction target is not supplied: {interaction.target_citation} in {interaction.target_jurisdiction}; priority or an exception may change the outcome",
+                    "Source acquisition: retrieve and encode the referenced authority with Platform/Core A before deciding the interaction", [rule.team_rule_id])
         for issue in rule.review_issues:
-            add("interpretation", f"unresolved_extraction: {issue}",
-                "Review the encoded condition, dates or lifecycle against source evidence", [rule.team_rule_id])
-        if rule.semantic_verification == "needs_review":
-            add("interpretation", "unresolved_extraction: semantic support needs review",
-                "Review the encoded condition, dates or lifecycle against source evidence", [rule.team_rule_id])
-        if engine.temporal(rule, context.as_of) == "unknown":
-            add("interpretation", "temporal_uncertainty: date precision or lifecycle history insufficient",
-                "Review the encoded condition, dates or lifecycle against source evidence", [rule.team_rule_id])
-        if rule.conflict_flag:
-            add("conflict", rule.conflict_note or "Authority conflict remains unresolved",
-                "Review source authority; factual answers do not resolve legal conflicts", [rule.team_rule_id])
-    for ev in evaluations:
-        if ev.result in {"inapplicable", "failed"}: continue
-        if ev.jurisdiction == "unknown":
-            add("jurisdiction", "Legal jurisdiction is unresolved", "Platform must verify location and legal boundaries", [ev.team_rule_id])
-        if ev.conflict_flag:
-            add("conflict", "Authority or interaction remains in conflict", "Review authority and interaction evidence; do not ask the user to decide law", [ev.team_rule_id])
-        for reason in ev.uncertainty_reasons:
-            if reason.startswith(("missing_property_fact:", "insufficient_fact_precision:", "jurisdiction_uncertainty:", "possible_interaction:", "cyclic_interaction:", "conflicting_legal_evidence:")):
+            # Structured evidence checks below already carry the specific remedy.
+            if issue.startswith("evidence_check:") and any(
+                    r.rule_id == rule.team_rule_id and issue.removeprefix("evidence_check:") in r.blocking_issues
+                    for r in context.evidence_reports):
                 continue
-            add("interpretation", reason, "Review the encoded condition, dates or lifecycle against source evidence", [ev.team_rule_id])
+            add("interpretation", f"unresolved_extraction: {issue}; the encoded result may lack legal support",
+                "Interpretation review: check the encoded condition, dates or lifecycle against the cited source evidence", [rule.team_rule_id])
+        if rule.semantic_verification == "needs_review":
+            add("interpretation", "unresolved_extraction: semantic support needs review; quotation presence alone cannot validate this result",
+                "Interpretation review: check the encoded meaning against the authority and record the reviewer and source version", [rule.team_rule_id])
+        if engine.temporal(rule, context.as_of) == "unknown":
+            add("interpretation", f"temporal_uncertainty: lifecycle/date evidence cannot establish operative status; effective={rule.effective_date or 'unspecified'}, end={rule.end_date or 'unspecified'}, snapshot={rule.status_as_of or 'unspecified'}",
+                "Interpretation review: establish adoption, effectiveness and any repeal from dated source evidence; retain partial-date precision and do not use retrieval time as enactment", [rule.team_rule_id])
+        if rule.conflict_flag:
+            add("conflict", (rule.conflict_note or "Authority conflict remains unresolved") + "; the encoded result cannot establish which authority controls",
+                "Interpretation review: compare both authorities and their dated support; factual answers do not resolve legal conflicts", [rule.team_rule_id])
+    for ev in evaluations:
+        if ev.result in {"inapplicable", "failed"}:
+            continue
+        if ev.jurisdiction == "unknown":
+            add("jurisdiction", "Legal jurisdiction is unresolved; this rule's geographic applicability is unknown",
+                "Geography evidence: verify location and legal boundaries with Platform", [ev.team_rule_id])
+        if ev.conflict_flag:
+            reasons = [r for r in ev.uncertainty_reasons if r.startswith(("conflicting_legal_evidence:", "cyclic_interaction:", "possible_interaction:"))]
+            add("conflict", "; ".join(reasons) or "Core reports an authority or interaction conflict; precedence is unresolved",
+                "Interpretation review: compare authority/version and interaction evidence; do not ask the user to decide law", [ev.team_rule_id])
+        for reason in ev.uncertainty_reasons:
+            if reason.startswith(("missing_property_fact:", "insufficient_fact_precision:", "jurisdiction_uncertainty:", "conflicting_legal_evidence:")):
+                continue
+            add("interpretation", reason + "; Core retains an unresolved result",
+                "Interpretation review: resolve this Core reason against the encoded conditions and cited authority", [ev.team_rule_id])
     for report in context.evidence_reports:
         for check in report.checks:
-            if check.status in {"pass", "supported"}: continue
-            kind = ("source_gap" if check.kind in {"source_availability", "source_identity", "quote_presence", "citation_anchor"}
-                    else "cross_reference" if check.kind == "dependencies" else "interpretation")
-            add(kind, check.message, "Platform/Core must retrieve and verify supporting source evidence", [report.rule_id], source_refs=check.spans)
+            if check.status in {"pass", "supported"}:
+                continue
+            if check.kind in {"source_availability", "source_identity", "quote_presence", "citation_anchor"}:
+                kind = "source_gap"
+                remedy = "Source acquisition: retrieve or reconcile the original source version, URL and exact quotation anchors with Platform; property answers cannot repair source support"
+            elif check.kind == "dependencies":
+                kind = "cross_reference"
+                remedy = "Source/context review: resolve the referenced authority or the reported context limits before relying on coverage"
+            else:
+                kind = "interpretation"
+                remedy = "Interpretation review: compare the encoded field with the cited source version; quote matching alone does not establish semantic support"
+            add(kind, f"{check.kind} ({check.status}): {check.message}; support for the encoded result is unresolved",
+                remedy, [report.rule_id], field=check.field, source_refs=check.spans)
         if report.context.status != "available":
-            add("source_gap", f"Source context is {report.context.status}", "Retrieve missing source context", [report.rule_id])
+            bounded = bool(report.context.limits_hit)
+            add("analysis_limit" if bounded else "source_gap",
+                f"Source context is {report.context.status}; omitted text or references may affect this result",
+                ("More analysis: increase the bounded source-context limits (" + ", ".join(report.context.limits_hit) + ") and recheck references" if bounded else
+                 "Source acquisition: retrieve missing original context with Platform before relying on this result"), [report.rule_id])
         for dep in report.context.dependencies:
             if dep.status != "resolved":
-                add("cross_reference", f"{dep.reference}: {dep.explanation}", "Resolve the cited source dependency", [report.rule_id], source_refs=[dep.origin])
+                bounded = dep.status in {"depth_limit", "budget_limit"}
+                add("analysis_limit" if bounded else "cross_reference",
+                    f"{dep.reference} ({dep.status}): {dep.explanation}; the referenced condition or exception may change the outcome",
+                    "More analysis: expand the source-context budget for this reference" if bounded else
+                    "Source acquisition/review: resolve this cited dependency while preserving its original support", [report.rule_id], source_refs=[dep.origin])
         if report.semantic_review:
             for decision in report.semantic_review.decisions:
                 if decision.status != "supported":
-                    add("interpretation", decision.explanation, "Review semantic support against cited source evidence",
-                        [report.rule_id], source_refs=decision.spans)
+                    add("interpretation", f"{decision.field} ({decision.status}): {decision.explanation}; meaning remains disputed or unsupported",
+                        "Interpretation review: resolve semantic support against the cited source evidence", [report.rule_id], field=decision.field, source_refs=decision.spans)
         for issue in report.blocking_issues:
-            add("interpretation", issue, "Resolve this evidence review issue before relying on the encoding", [report.rule_id])
-    # AssistContext carries rule reports, not a complete jurisdiction/category inventory.
-    add("source_gap", "Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered",
-        "Platform must verify the separate source inventory, including missing rules and references")
-    unique = {u.model_dump_json(): u for u in items}
-    return list(unique.values())
+            # Keep diagnostics, classified by their actual origin rather than
+            # asking for another property fact to fix law or a context budget.
+            bounded = issue.startswith("context_incomplete:")
+            source = issue.startswith(("missing_source:", "source_identity_mismatch:", "primary_quote_absent", "supporting_quote_absent:", "no_supporting_evidence", "extraction_source_version_stale"))
+            kind = "analysis_limit" if bounded else "source_gap" if source else "cross_reference" if issue.startswith("cross_reference:") else "interpretation"
+            remedy = {"analysis_limit": "More analysis: expand bounded source context and recheck the result",
+                      "source_gap": "Source acquisition: restore or reconcile the exact supporting source version and anchors",
+                      "cross_reference": "Source acquisition/review: resolve the cited dependency",
+                      "interpretation": "Interpretation review: resolve this evidence issue before relying on the encoding"}[kind]
+            add(kind, f"{issue}; evidence support for this result remains unresolved", remedy, [report.rule_id])
+    add("source_gap", "Question analysis does not establish complete source coverage; only supplied rules and evidence reports were considered, so omitted law may change the result",
+        "Source acquisition/inventory review: Platform must verify the separate source inventory, including missing rules and references")
+    return list({u.model_dump_json(): u for u in items}.values())
 
 
 def _traces(context, prop, evaluations):
@@ -312,8 +375,8 @@ def plan_questions(context: AssistContext) -> QuestionPlan:
         if not complete:
             supported = False
             remaining.append(Uncertainty(kind="interpretation", field=field,
-                message=f"No exhaustive supported partition for {field}",
-                remedy="Platform/Core must supply a supported fact definition or encoded comparison",
+                message=f"As of {context.as_of}: no exhaustive supported partition for {field}; sensitivity to this fact is not established",
+                remedy="More analysis/encoding review: Platform/Core must supply a supported fact definition or encoded comparison",
                 rule_ids=sorted({n.rule_id for n in nodes[field]}), predicate_ids=[n.predicate_id for n in nodes[field]]))
         if cells: domains[field] = cells
     fields = [f for f in fields if f in domains]
@@ -372,7 +435,7 @@ def plan_questions(context: AssistContext) -> QuestionPlan:
         for uncertainty in remaining:
             if uncertainty.kind == "property_fact" and uncertainty.field in fields and uncertainty.field not in material:
                 uncertainty.kind = "interpretation"
-                uncertainty.message = f"All explored completions of {uncertainty.field} leave the same encoded outcome; evaluator uncertainty remains"
+                uncertainty.message += f" All explored completions of {uncertainty.field} leave the same encoded outcome; evaluator uncertainty remains"
                 uncertainty.remedy = "Review the residual encoding or legal threshold; supplying this fact would not change the analyzed outcome"
     questions = []
     for field in fields:
@@ -392,7 +455,8 @@ def plan_questions(context: AssistContext) -> QuestionPlan:
             prompt=f"{fact.meaning}? {form}",
             why=("Feasible evaluator probes show this fact can change a result or unresolved coverage." if field in material else
                  "This fact remains in a relevant unresolved predicate; bounded exploration has not established whether it changes the outcome.") +
-                " Other exemptions, geography or evidence gaps may remain after answering.",
+                f" As of {context.as_of}; affects " + "; ".join(rule_reference(r) for r in context.rules if r.team_rule_id in {n.rule_id for n in references}) +
+                ". Other exemptions, geography or evidence gaps may remain after answering. Alternatives are hypothetical, not verified property facts.",
             rule_ids=sorted({n.rule_id for n in references}), predicate_ids=sorted({n.predicate_id for n in references}),
             evidence=list(evidence.values()), alternatives=alternatives, rank_score=score(field),
             ranking_rationale=f"{len(references)} relevant unresolved predicates / answer-effort {fact.answer_effort}; heuristic, not probability"))
@@ -400,12 +464,17 @@ def plan_questions(context: AssistContext) -> QuestionPlan:
         questions = questions[:limits.max_questions]
         limits_hit.append("max_questions")
         exhaustive = False
+    analysis_uncertainty = []
     for limit in limits_hit:
-        remaining.append(Uncertainty(kind="analysis_limit", message=f"Analysis reached {limit}",
-            remedy="Increase the explicit limit or retain the unexamined uncertainty"))
+        analysis_uncertainty.append(Uncertainty(kind="analysis_limit", message=f"As of {context.as_of}: analysis reached {limit}={getattr(limits, limit)}; unexamined combinations or questions may change the result",
+            remedy="More analysis: increase this explicit limit within the API ceiling, or narrow the analysis; retain unexamined uncertainty"))
     if not exhaustive and not limits_hit and not supported:
-        remaining.append(Uncertainty(kind="analysis_limit", message="Unsupported analysis prevents exhaustive coverage",
-            remedy="Review the unsupported domain or expression"))
+        analysis_uncertainty.append(Uncertainty(kind="analysis_limit", message=f"As of {context.as_of}: unsupported analysis prevents exhaustive coverage; unexamined values may change the result",
+            remedy="More analysis/interpretation review: resolve the unsupported domain or expression"))
+    remaining.extend(analysis_uncertainty)
+    for question in questions:
+        for alternative in question.alternatives:
+            alternative.remaining_uncertainty.extend(u.model_copy(deep=True) for u in analysis_uncertainty)
     return QuestionPlan(status="complete" if exhaustive else "partial", questions=questions,
         remaining_uncertainty=remaining, traces=traces, limits=limits, evaluations_used=used,
         limits_hit=limits_hit, algorithm_version=ALGORITHM_VERSION, exhaustive=exhaustive)

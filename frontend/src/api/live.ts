@@ -191,11 +191,15 @@ export class LiveSource implements DataSource {
     }
   }
 
-  /** GET /facts is a map of field → FactDefinition. Fetched once; an older backend without it yields null. */
-  facts(signal?: AbortSignal): Promise<Record<string, FactDefinition> | null> {
+  /**
+   * GET /facts is a map of field → FactDefinition. Fetched once and shared, so the request is
+   * not tied to one caller's cancellation: a caller that goes away must not leave every later
+   * caller with an aborted result. An older backend without the route yields null.
+   */
+  facts(): Promise<Record<string, FactDefinition> | null> {
     this.factDefinitions ??= (async () => {
       try {
-        const response = await this.fetchImpl(`${this.base}/facts`, { headers: { Accept: 'application/json' }, signal });
+        const response = await this.fetchImpl(`${this.base}/facts`, { headers: { Accept: 'application/json' } });
         if (!response.ok) return null;
         const body = (await response.json()) as unknown;
         if (!body || typeof body !== 'object' || Array.isArray(body)) return null;

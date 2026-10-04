@@ -3,7 +3,7 @@ import type { LookupOutcome } from '../../api/types';
 import { Icon } from '../../components/Icon';
 import { Tag } from '../../components/ui';
 import { diffOutcomes } from '../../lib/diff';
-import { humanize, resultMeta } from '../../lib/labels';
+import { humanize, parseReason, resultMeta } from '../../lib/labels';
 
 /** After a re-evaluation: exactly which results moved, and which did not. */
 export function WhatChanged({ previous, outcome }: { previous: LookupOutcome; outcome: LookupOutcome }) {
@@ -29,6 +29,8 @@ export function WhatChanged({ previous, outcome }: { previous: LookupOutcome; ou
           const after = change.after ? resultMeta(change.after.result) : change.recordedAfter ? resultMeta(change.recordedAfter.result) : null;
           const still = change.after?.missing_facts ?? [];
           const sameResult = !!change.before && !!change.after && change.before.result === change.after.result;
+          // Why a result is still open after the answer: the evaluator's own reasons other than a missing fact.
+          const open = change.after && change.after.result === 'unknown' ? [...new Set((change.after.uncertainty_reasons ?? []).map(parseReason).filter((reason) => reason.kind !== 'missing_property_fact').map((reason) => `${reason.label}: ${reason.message}`))] : [];
           return (
             <li key={change.ruleId} className="changed__item" data-change={change.kind}>
               <p className="changed__rule">{change.title}</p>
@@ -40,6 +42,11 @@ export function WhatChanged({ previous, outcome }: { previous: LookupOutcome; ou
                 {sameResult && <span className="changed__same">{change.kind === 'unchanged' ? 'No change' : 'Result unchanged; what it needs has changed'}</span>}
               </p>
               {change.after && still.length > 0 && <p className="changed__note changed__note--needs">Still needs: {still.map(humanize).join(', ')}.</p>}
+              {open.length > 0 && (
+                <p className="changed__note changed__note--needs" data-still-unknown>
+                  Still unknown: {open.join('; ')}.
+                </p>
+              )}
               {change.kind === 'no_longer_listed' && (
                 <p className="changed__note">
                   {change.recordedAfter

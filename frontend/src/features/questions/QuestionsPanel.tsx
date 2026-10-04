@@ -1,8 +1,9 @@
-import type { Answer, AnswerValue, FactDefinition, FixtureCaseSummary, LookupOutcome, Rule } from '../../api/types';
+import type { Answer, AnswerValue, FactDefinition, FixtureCaseSummary, LookupOutcome } from '../../api/types';
 import { Disclosure, Notice, SectionHeading, Tag } from '../../components/ui';
 import { formFromDefinition } from '../../lib/answers';
 import { inferAnswerForm } from '../../lib/expression';
 import { humanize, sentence } from '../../lib/labels';
+import { ruleDisplayNames } from '../../lib/ruleNames';
 import { AnswerInput } from './AnswerInput';
 import { QuestionCard } from './QuestionCard';
 
@@ -31,7 +32,7 @@ const PLAN_STATUS = {
  * panel says so; it never ranks or invents questions itself.
  */
 export function QuestionsPanel({ outcome, answers, definitions, busy, synthetic, relatedCases, onOpenCase, onAnswer, onInspect }: Props) {
-  const rules = new Map<string, Rule>(outcome.lookup.rules.map((rule) => [rule.team_rule_id, rule]));
+  const names = ruleDisplayNames(outcome.lookup.rules);
   const answered = new Set(answers.map((answer) => answer.field));
   const missing = [...new Set(outcome.lookup.evaluations.flatMap((evaluation) => evaluation.missing_facts ?? []))];
   const plan = outcome.assist?.question_plan;
@@ -124,7 +125,7 @@ export function QuestionsPanel({ outcome, answers, definitions, busy, synthetic,
 
       <div className="questions">
         {open.map((question, index) => (
-          <QuestionCard key={question.question_id} question={question} rank={index + 1} rules={rules} busy={busy} allowDemoAnswers={synthetic} onAnswer={onAnswer} onInspect={onInspect} />
+          <QuestionCard key={question.question_id} question={question} rank={index + 1} names={names} current={outcome.lookup.evaluations} busy={busy} allowDemoAnswers={synthetic} onAnswer={onAnswer} onInspect={onInspect} />
         ))}
       </div>
 
