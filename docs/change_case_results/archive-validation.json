@@ -1,0 +1,40 @@
+{
+  "label": "RESEARCH_NOT_VERIFIED_RELEASE_OR_OFFICIAL_SCORE",
+  "archive": "final-research-archive.zip",
+  "tracked_destination": "docs/change_case_results/final-research-archive.zip",
+  "archive_sha256": "0ff9f391169958bcdaa4695995a4a0b7bef9c179112ad1043134929a74ccd1a2",
+  "archive_bytes": 8093134,
+  "payload_uncompressed_bytes": 19045412,
+  "file_count": 228,
+  "manifest": "tenent-research-2026-10-04/MANIFEST.json",
+  "zip_crc_and_contents_verified": true,
+  "original_store_and_receipts_byte_identical": true,
+  "secret_scan_findings": 0,
+  "new_provider_calls": 0,
+  "offline_rebuild": {
+    "label": "RESEARCH_NOT_VERIFIED_RELEASE_OR_OFFICIAL_SCORE",
+    "request": "requests/A0001.json",
+    "source_store": "store/",
+    "runtime": "runtime/",
+    "original_receipt": "records/final-evidence-replay-receipt.json",
+    "output_file_sha256": "6056dd519e095b5c6b70077e08d0c85571e83749d89e2c908ba7d34d7ca52812",
+    "output_bytes": 43075657,
+    "replay": {
+      "status": "reproduced",
+      "package_sha256": "4d3af7c0975df54a925d6f012030851a7e53fb8e8ce1e9bfe4bed96d3cd2a4b4",
+      "input_sha256": "864e305b44f7a2b2e8134f390a38d280b116feafafea13bac833f13b98d28af0",
+      "response_sha256": "00582568bee978eb7a10df8be2942dd7f1dc2f2a09c30514e8c670bf1f725633",
+      "disclaimer": "Not legal advice. Coverage is not a finding of compliance or a violation."
+    },
+    "archive_unchanged": true,
+    "provider_calls": 0,
+    "network_calls": 0,
+    "question_plan_status": "partial",
+    "question_plan_exhaustive": false
+  },
+  "local_ignored_backup": {
+    "path_from_repository": "artifacts/repair-session-2026-10-04/",
+    "files": 509,
+    "original_file_hashes_recorded": "artifacts/repair-session-2026-10-04/SESSION_BACKUP_MANIFEST.json"
+  }
+}

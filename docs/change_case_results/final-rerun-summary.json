@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "label": "RESEARCH_RERUN_READINESS_NOT_OFFICIAL_SCORE_OR_LEGAL_ACCURACY",
+  "date": "2026-10-04",
+  "tested_code_revision": "45f8ccf1b555102fb623eeda8bcaffd48d17ffa5",
+  "source_policy_version": "source-use-v2",
+  "dataset_mode": "real",
+  "baseline": {
+    "label": "API_RECONSTRUCTED_HOSTED_CAPTURE_NOT_ORIGINAL_RELEASE_FREEZE",
+    "counts": {
+      "rules": 666,
+      "sources": 83,
+      "properties": 500,
+      "resolution_records": 500,
+      "resolved_municipalities": 487
+    },
+    "case_status_counts": {
+      "blocked": 2,
+      "partial": 3
+    },
+    "readiness_report_sha256": "f6d9543d9523866a9334cf31392f623e88c70da2875a5ec14c52ffa31cebc7df",
+    "tested_code_revision": "3ccb7f18d4be28115dc396c902469656517e827d",
+    "elapsed_seconds": 384.9357,
+    "input_files_sha256": {
+      "dataset.json": "3ae17eebcf6c94f7ab4cdfbe4f8e73217ab555a97e3d8e908796fc42ddc40a6c",
+      "sources.json": "fce57184fef81dfae96e8c2ec29efb8b5009f791098df4baa7a38be0653f3efd",
+      "rules.json": "331917d21bc715c5e833120a58c03f2206cab0ddffcce6bdff48d465d7917d4e",
+      "addresses.json": "47876fe94bac5200ffc991b68117867dbc8121aab528441d33e5d28a568b8c18",
+      "resolutions.json": "6f0610b557c11d3b75e864b384e309d8da322457ddcc74d4d799dbfec888c860",
+      "change_tests.json": "f22b82ebc8e783d13e690fc39cb52879380da8df91a23ef8677388a767d0d97f",
+      "extraction_index.json": "b02ea45382391a8115a9c7376db4d5d367f3f8bf24de383a4a395876135b543e"
+    }
+  },
+  "final": {
+    "label": "RESEARCH_RERUN_NOT_PROMOTED_TO_SERVING",
+    "counts": {
+      "rules": 678,
+      "sources": 86,
+      "properties": 500,
+      "resolution_records": 500,
+      "resolved_municipalities": 487
+    },
+    "case_status_counts": {
+      "partial": 5
+    },
+    "ready": false,
+    "fully_ready_cases": 0,
+    "total_cases": 5,
+    "all_required_cases_present": true,
+    "all_case_references_mapped": true,
+    "mapped_rule_source_policy_issues": 0,
+    "input_files_sha256": {
+      "dataset.json": "3ae17eebcf6c94f7ab4cdfbe4f8e73217ab555a97e3d8e908796fc42ddc40a6c",
+      "sources.json": "c23ee3be0c033e2ae3c251654841963b03851dccdb26fb1d99248a7b20a3f7b7",
+      "rules.json": "ec75fef75ba44f119b1b184a327ac1d9db70134249cceb64649e3e8c2a9b70a6",
+      "addresses.json": "47876fe94bac5200ffc991b68117867dbc8121aab528441d33e5d28a568b8c18",
+      "resolutions.json": "6f0610b557c11d3b75e864b384e309d8da322457ddcc74d4d799dbfec888c860",
+      "change_tests.json": "f22b82ebc8e783d13e690fc39cb52879380da8df91a23ef8677388a767d0d97f",
+      "extraction_index.json": "c59552d192c6788573bc73d3464f13ccdd2170b60b8083b3bc323513c150d8b6"
+    }
+  },
+  "cases": [
+    {
+      "test_id": "T1",
+      "scenario": "actual",
+      "before": "2025-12-31",
+      "after": "2026-01-02",
+      "baseline_status": "partial",
+      "baseline_counts": {
+        "affected": 0,
+        "uncertain": 250,
+        "conflict": 0,
+        "mapped_rules": 4
+      },
+      "status": "partial",
+      "ready": false,
+      "counts": {
+        "affected": 0,
+        "uncertain": 250,
+        "conflict": 0,
+        "mapped_rules": 4
+      },
+      "mapped_reference_counts": {
+        "CA-ALG-01": 4
+      },
+      "missing_references": [],
+      "source_policy_issue_rules": 0,
+      "unique_runtime_evidence_blockers": [],
+      "canonical_reasons": [
+        "Uncertain impacts are separate from definitely affected addresses"
+      ],
+      "remaining_gap": "Applicability remains uncertain for 250 properties despite no reported rule-review, source-policy or runtime evidence blockers.",
+      "runtime_evidence_blocker_rules": 0
+    },
+    {
+      "test_id": "T2",
+      "scenario": "actual",
+      "before": "2026-10-01",
+      "after": "2026-10-01",
+      "baseline_status": "partial",
+      "baseline_counts": {
+        "affected": 0,
+        "uncertain": 43,
+        "conflict": 0,
+        "mapped_rules": 1
+      },
+      "status": "partial",
+      "ready": false,
+      "counts": {
+        "affected": 0,
+        "uncertain": 92,
+        "conflict": 0,
+        "mapped_rules": 4
+      },
+      "mapped_reference_counts": {
+        "HOB-ALG-01": 1,
+        "JC-ALG-01": 3
+      },
+      "missing_references": [],
+      "source_policy_issue_rules": 0,
+      "unique_runtime_evidence_blockers": [
+        "cross_reference:as defined in Section 1(a)(i)(1):missing"
+      ],
+      "canonical_reasons": [
+        "Unresolved rule evidence: r-07af7f202bc0b757ae54, r-4b12d2553f25d1a2e22d, r-58f79b11dc0a26ea1abb, r-b5c1957c74214528c0b0",
+        "Uncertain impacts are separate from definitely affected addresses"
+      ],
+      "remaining_gap": "Local rules remain under review; all three Jersey City records retain the unresolved Section 1(a)(i)(1) dependency.",
+      "runtime_evidence_blocker_rules": 3
+    },
+    {
+      "test_id": "T3",
+      "scenario": "actual",
+      "before": "2026-10-01",
+      "after": "2027-07-02",
+      "baseline_status": "partial",
+      "baseline_counts": {
+        "affected": 0,
+        "uncertain": 140,
+        "conflict": 0,
+        "mapped_rules": 8
+      },
+      "status": "partial",
+      "ready": false,
+      "counts": {
+        "affected": 0,
+        "uncertain": 140,
+        "conflict": 0,
+        "mapped_rules": 11
+      },
+      "mapped_reference_counts": {
+        "NJ-ALG-01": 7,
+        "JC-ALG-01": 3,
+        "HOB-ALG-01": 1
+      },
+      "missing_references": [],
+      "source_policy_issue_rules": 0,
+      "unique_runtime_evidence_blockers": [
+        "cross_reference:as defined in Section 1(a)(i)(1):missing"
+      ],
+      "canonical_reasons": [
+        "No evidence-backed state/local interaction extracted for JC-ALG-01; expected conflict cannot be presumed from test text",
+        "No evidence-backed state/local interaction extracted for HOB-ALG-01; expected conflict cannot be presumed from test text",
+        "Unresolved rule evidence: r-156eda7678f7c8acf656, r-e4027b530a8fb5e7187d, r-f6f59f3a7df740c8a762",
+        "Uncertain impacts are separate from definitely affected addresses"
+      ],
+      "remaining_gap": "Neither Jersey City nor Hoboken has an extracted evidence-backed state/local interaction; three NJ records remain under review and related Jersey City dependencies remain unresolved.",
+      "runtime_evidence_blocker_rules": 3
+    },
+    {
+      "test_id": "T4",
+      "scenario": "if_enacted",
+      "before": "2026-10-01",
+      "after": "2026-10-01",
+      "baseline_status": "blocked",
+      "baseline_counts": {
+        "affected": 0,
+        "uncertain": 0,
+        "conflict": 0,
+        "mapped_rules": 0
+      },
+      "status": "partial",
+      "ready": false,
+      "counts": {
+        "affected": 0,
+        "uncertain": 110,
+        "conflict": 0,
+        "mapped_rules": 5
+      },
+      "mapped_reference_counts": {
+        "MA-ALG-P1": 1,
+        "MA-ALG-P2": 4
+      },
+      "missing_references": [],
+      "source_policy_issue_rules": 0,
+      "unique_runtime_evidence_blockers": [],
+      "canonical_reasons": [
+        "Hypothetical only: selected pending rules are assumed enacted and effective on the comparison date; stored law is unchanged",
+        "Unresolved rule evidence: r-2f0b60d3098e5968f66a, r-579f44ca81b27a96b52c, r-8649a18a9e48bc0e9c6c, r-9f53b3145c118ce48904, r-db8445705c9a7929e1f1",
+        "Uncertain impacts are separate from definitely affected addresses"
+      ],
+      "remaining_gap": "The comparison remains hypothetical if-enacted; all five mapped pending-rule records need review and 110 property impacts remain uncertain.",
+      "runtime_evidence_blocker_rules": 0
+    },
+    {
+      "test_id": "T5",
+      "scenario": "actual",
+      "before": "2026-10-01",
+      "after": "2026-10-01",
+      "baseline_status": "blocked",
+      "baseline_counts": {
+        "affected": 0,
+        "uncertain": 0,
+        "conflict": 0,
+        "mapped_rules": 0
+      },
+      "status": "partial",
+      "ready": false,
+      "counts": {
+        "affected": 0,
+        "uncertain": 0,
+        "conflict": 0,
+        "mapped_rules": 4
+      },
+      "mapped_reference_counts": {
+        "MA-RENT-P1": 4
+      },
+      "missing_references": [],
+      "source_policy_issue_rules": 0,
+      "unique_runtime_evidence_blockers": [
+        "context_incomplete:section_windowed",
+        "cross_reference:under section 4 of chapter 93A:missing",
+        "cross_reference:under section 9 of chapter 93A:missing"
+      ],
+      "canonical_reasons": [
+        "Unresolved rule evidence: r-0811c9cfb2a385be5f74, r-4c95fa9640cf17e9d1da, r-aff027a84fb2ed485a1a, r-bb00cfc2a48f775f97f3"
+      ],
+      "remaining_gap": "The failed-proposal records yield zero definite or uncertain operative impacts, but bounded-context and missing chapter 93A sections 4 and 9 prevent complete evidence readiness.",
+      "runtime_evidence_blocker_rules": 4
+    }
+  ],
+  "verification": {
+    "method": "Independent real full-rule/full-property cached_changes requests; unmodified canonical check_store aggregation with exact validated worker results.",
+    "worker_count_limit": 3,
+    "elapsed_seconds": 263.1052,
+    "case_elapsed_seconds": {
+      "T1": 131.6165,
+      "T2": 130.7311,
+      "T3": 130.8238,
+      "T4": 130.2074,
+      "T5": 129.8143
+    },
+    "every_case_used_all_rules": true,
+    "every_case_used_all_properties": true,
+    "provider_calls": 0,
+    "input_unchanged": true,
+    "code_unchanged": true,
+    "independent_postrun_full_store_hash_check": true,
+    "exit_code": 1,
+    "official_score": null,
+    "original_full_report_sha256": "d679328fc9fef5f1cd0d0dd27d9108dd13e4ad7dbec3e7ddb426373c3aff0484",
+    "original_parallel_metadata_sha256": "23afdb16c1ec9790e64ecedf559b0600ac70a0be15abb9f117a26ebcf04c3d98",
+    "all_store_file_count": 145,
+    "all_store_file_manifest_sha256": "77677f4f5da362f39c5dd590b407ac719b5c481e4c91bcf92da0c98856c40cb6",
+    "runtime_file_manifest_sha256": "6d399d40b03ff83590c5391f282c3daab9d8393935428f6ab46c0826100cd678",
+    "map_hash_encoding": "SHA256 of UTF-8 JSON with keys sorted, ensure_ascii=false, separators=(comma,colon); relative file paths map to SHA256 of their exact raw bytes.",
+    "gate_helper_sha256": "ca15d945880f177ab0fbcddd9e39c17877241b77e6c384095018c8b1049cffcd"
+  },
+  "extraction": {
+    "completed_final_jobs": 6,
+    "final_process_exit_code": 0,
+    "completion_receipt_sha256": "40d3b11c7506a8418f53b95c8e06a8a0c4b620abbb860bcfdb50f4e4c3b98d99",
+    "final_result_sha256": "a993e9f347eac1c7e8daf4d3b47c980d9d4a59b2ce633d811dd3dc6e4157c4dc",
+    "ledger_sha256": "8530a511bca2af3bb034ac43a5e113aea3b8c9f136c92de0a4eacbd889defbac",
+    "model": "gpt-6.1-sol",
+    "cumulative_authorized_budget_usd": "5",
+    "cumulative_request_count": 34,
+    "all_requests_usage_reconciled": true,
+    "cumulative_upper_estimate_usd": "3.55834050",
+    "actual_billing": false
+  },
+  "legal_accuracy": {
+    "independently_ground_truthed_percentage": null,
+    "official_score": null,
+    "reviewed_benchmark_cases": 0,
+    "candidate_benchmark_cases": 12,
+    "human_reviewed": false,
+    "benchmark_status": "candidate_manifest_not_scored_benchmark",
+    "source": "docs/evidence/legal_benchmark_candidates.json",
+    "source_sha256": "37212ac29f9ea86786b10180e8cf60f4b490929047a2237ae2febd46b15fd45f",
+    "note": "Readiness, software tests, exact quotation checks and model self-review are not a measured legal-accuracy percentage."
+  },
+  "provenance_limits": {
+    "retained_rules_without_historic_run_manifests": 654,
+    "notes": [
+      "Base Store was reconstructed from captured application responses; it is not the original complete release freeze.",
+      "Original provider/geocoder run outputs and caches unavailable in that capture remain unavailable; new extraction lineage does not repair historic gaps.",
+      "Resolved municipality count reports stored resolution status, not independently measured geographic accuracy.",
+      "Supplemental sources and research candidates retain source-admission and legal-review limits.",
+      "Committing this archive or receipt does not install a serving snapshot or update the deployed app."
+    ]
+  },
+  "artifact_layout": {
+    "archive": "final-research-archive.zip",
+    "archive_root": "tenent-research-2026-10-04/",
+    "canonical_report": "records/final-full-readiness.json",
+    "parallel_metadata": "records/final-full-readiness-parallel-metadata.json",
+    "store": "store/",
+    "runtime": "runtime/",
+    "offline_verification": "tools/verify_archive.py",
+    "archive_sha256": "0ff9f391169958bcdaa4695995a4a0b7bef9c179112ad1043134929a74ccd1a2",
+    "archive_bytes": 8093134,
+    "archive_file_count": 228
+  }
+}
