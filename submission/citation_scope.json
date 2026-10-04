@@ -1,0 +1,1569 @@
+{
+  "label": "SUPPLIED_CORPUS_CITATION_ELIGIBILITY_NOT_OFFICIAL_SCORE",
+  "official_score": null,
+  "organizer_added_source_mappings": [],
+  "manifest_sha256": "a5e2a29265d5c29f8cb033c360fdb8d4d9604efc21774f4ed9162ee07ca40dae",
+  "eligible_sources": {
+    "D001": {
+      "url": "https://berkeleyca.gov/sites/default/files/documents/2025-12-02%20Item%2001%20Ordinance%207992.pdf",
+      "text_file": "text/D001.txt",
+      "text_sha256": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+      "declared_manifest_sha256": "764e0430da30388ff875606eb2f551388fc85e214d549e305d7f502ff550803d"
+    },
+    "D003": {
+      "url": "https://rentboard.berkeleyca.gov/Fair_Chance",
+      "text_file": "text/D003.txt",
+      "text_sha256": "a008c846fc4edd842994d8c5ea0367546e55319670e9687c5d1c7ccfdfa1ce40",
+      "declared_manifest_sha256": "f24e09665a24fcf906ff6a75d46a7a72092ef978cfa2a1410dc8dfac48691074"
+    },
+    "D005": {
+      "url": "https://rentboard.berkeleyca.gov/laws-regulations/city-berkeley-ordinances-affecting-rental-properties/tenant-screening-and",
+      "text_file": "text/D005.txt",
+      "text_sha256": "396972b4e199efe65ff763eae53ed8a81d99e17ba900c39f16bfb44c16637bed",
+      "declared_manifest_sha256": "b5efcc2d1bfb2fbc5609bd30f83d66bfdf5a45f44f690bea0f1d37130f14a18d"
+    },
+    "D006": {
+      "url": "https://rentboard.berkeleyca.gov/laws-regulations/measure-bb-changes-berkeleys-rent-ordinance",
+      "text_file": "text/D006.txt",
+      "text_sha256": "f1960db522de7f63158e64334835b37e52ae1d8fa8b510eeb314658aef4173fa",
+      "declared_manifest_sha256": "db130d6eaf69a72123c1ef45989faf8b2b4748720425e0a2f4bf378df16ba195"
+    },
+    "D007": {
+      "url": "https://rentboard.berkeleyca.gov/rights-responsibilities/security-deposits",
+      "text_file": "text/D007.txt",
+      "text_sha256": "2ba3028382b89ee70810a45e25dd9707297bd65512e2723f4f9bda514af57203",
+      "declared_manifest_sha256": "d91318f17f00ac1906efb890b717cf2d73b7a34d5bd82f47c9e9a9ea3752404c"
+    },
+    "D008": {
+      "url": "https://rentboard.berkeleyca.gov/sites/default/files/documents/AGA%20Public%20Notice.pdf",
+      "text_file": "text/D008.txt",
+      "text_sha256": "969848595b70aa2ff7b9e8420f610c36b914521c4ea4dd1d0656be776e90c39f",
+      "declared_manifest_sha256": "654b6ecd0f7b68896b5c6e9a3b1d9bf28189d3c4e92cad1562c4743c06c45b1a"
+    },
+    "D009": {
+      "url": "https://rentboard.berkeleyca.gov/sites/default/files/documents/Rent%20Ordinance%20Coverage%20by%20Unit%20Type.pdf",
+      "text_file": "text/D009.txt",
+      "text_sha256": "bddd7d3ab24d2717a0393cf879bad9a849af3aa10dd2e426bc9da34dcd19c5e3",
+      "declared_manifest_sha256": "e5c4623e6ef6f3e65baca5ce07a9d6397297cf9d252e50224ff0aca341fa840f"
+    },
+    "D010": {
+      "url": "https://drive.google.com/file/d/1j4U3fDtmnYuwcUWhx5BMUcXc1bnKT8Ku/view?usp=sharing",
+      "text_file": "text/D010.txt",
+      "text_sha256": "61380f45cb66d87065eb029b6f5ee54dc704a0d059acc6136477337ce5f0cb73",
+      "declared_manifest_sha256": "8d2640c97add084cc59ec2de89097fc2ec9f2fe42d39c8d6c52777aa3d1a4862"
+    },
+    "D011": {
+      "url": "https://malegislature.gov/Bills/193/H3744",
+      "text_file": "text/D011.txt",
+      "text_sha256": "93835654c3483e7b169677f7a3ccdcf021b6edab4ac81ab7ad3091903de71ff2",
+      "declared_manifest_sha256": "1b2efd6622f0536e1100ef4a448593b214f4a76a47a0e1ecec93076e96927a20"
+    },
+    "D012": {
+      "url": "https://www.boston.gov/departments/fair-housing-and-equity/boston-fair-housing-regulations",
+      "text_file": "text/D012.txt",
+      "text_sha256": "aaed5c3d1e3aacb57a1f9a8fa9e855ecaa857bdbedc3d7b99a1992e7fc0aed0f",
+      "declared_manifest_sha256": "dfa99cae6edf7ab6365424961305a100c26d53385970ee5dc7efab20ef6497df"
+    },
+    "D013": {
+      "url": "https://www.boston.gov/housing-stability-notification-act",
+      "text_file": "text/D013.txt",
+      "text_sha256": "49b8ad77c47ac7a12afc5a1451cc38e8d908b45f83c922cbd2ee2eb320b715f0",
+      "declared_manifest_sha256": "372ca0bcb1bd441d5a0b966989649674a20910bbdcae3defd99485c372421bd5"
+    },
+    "D014": {
+      "url": "https://www.boston.gov/sites/default/files/file/2020/11/Housing%20Stability%20Notification%20Act%20Tenant%20FAQs.pdf",
+      "text_file": "text/D014.txt",
+      "text_sha256": "70574b2f50c363398d635ef9cc92eed83ba4eca0e404a04ec04bfba004ff9606",
+      "declared_manifest_sha256": "4976368fa1947fe1e993e2fb2f6b9d004e07398fe6fd009b0fcb9b8b862a8c94"
+    },
+    "D016": {
+      "url": "https://calcivilrights.ca.gov/housing/",
+      "text_file": "text/D016.txt",
+      "text_sha256": "21d92128daede668d6f1a824528ead345982ddf043a32e4fb5d80dd8adbcdce9",
+      "declared_manifest_sha256": "620f35253fad41fd920fc8298db66045a73a5bb5df2b1d22d5efa13f75fa8c2c"
+    },
+    "D022": {
+      "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB325",
+      "text_file": "text/D022.txt",
+      "text_sha256": "0699980875e6bf3d797abd8b734db7d449b295173e33668cc655e3b394c084ed",
+      "declared_manifest_sha256": "90e2901ce96a4d4b0e698c8a2954e3f2468c5b4e8e3f0a79fb8d7d4a9001fa51"
+    },
+    "D023": {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1946.2",
+      "text_file": "text/D023.txt",
+      "text_sha256": "fdd8d7fca42103cf630c3a9a4ed217150eb17a6e180edd80c1d845ca5e8aa1fe",
+      "declared_manifest_sha256": "823aa700801184618c5511ba5446ff5a2fc9c0687382c87ed41a65fc2fa0ca4b"
+    },
+    "D024": {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1947.12",
+      "text_file": "text/D024.txt",
+      "text_sha256": "eb9c42af2b9a5c220ca37816f409f0bd3ea92a002a973283e779fdb72de18bd7",
+      "declared_manifest_sha256": "e6e520ca190db10aa69e655ede7e91c16622f5ef21eb58a3229487746ef313b1"
+    },
+    "D025": {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.5",
+      "text_file": "text/D025.txt",
+      "text_sha256": "48b1d005fb59f73082dc625d4038272f4bde950d2c93a70ef400a43b630e1511",
+      "declared_manifest_sha256": "4fe1fd67bfbeefb49a91f6fa08ebf0cab004204289ed363aa0386be9ed775d08"
+    },
+    "D026": {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.6",
+      "text_file": "text/D026.txt",
+      "text_sha256": "35ec54ef926471876977b9cad3f0db7ff5b77393bd0baad03ed30125949f8e7a",
+      "declared_manifest_sha256": "b749f447673b318960fed3651b887c31c8ca301905cf308c9936ca50fcc178c3"
+    },
+    "D027": {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=12955",
+      "text_file": "text/D027.txt",
+      "text_sha256": "511f8074b8f4959161fb4c7ec922c8fa963735b47c13d852b8a09ca42b922ecf",
+      "declared_manifest_sha256": "0b7418e67532d04b912e6218e587650afd50ea695864ccb7425038c919c0aae3"
+    },
+    "D029": {
+      "url": "https://www.cambridgema.gov/departments/humanrightscommission",
+      "text_file": "text/D029.txt",
+      "text_sha256": "ce40e4d452c15e43e1bb07e7f03f7bd2bd738b2da614d1d21b7826f7e581e01c",
+      "declared_manifest_sha256": "2bf1d0131839b6594bda907caee3d1166c1425712d159abc6817bfd9488cffde"
+    },
+    "D031": {
+      "url": "https://www.cambridgema.gov/tenantrights",
+      "text_file": "text/D031.txt",
+      "text_sha256": "65ffa9dca5815b925debf63d1ff0974f710aed6614723f28d722209094a36b20",
+      "declared_manifest_sha256": "2a74f0750568bb7cc53620bc79c2e1df938c50f2a17eee4f0f2753b7fd0431d2"
+    },
+    "D039": {
+      "url": "https://cityclerk.lacity.org/onlinedocs/2024/24-1031_misc_9-03-24.pdf",
+      "text_file": "text/D039.txt",
+      "text_sha256": "cf36489eb7db23226ff24eb4a65615b9837c67659221630e0366a4ff4456df00",
+      "declared_manifest_sha256": "3e9c9a16ee1bc4ec4981f16a55831bb39d6fb013826178c07730ff207745044b"
+    },
+    "D040": {
+      "url": "https://housing.lacity.gov/residents/just-cause-for-eviction-ordinance-jco",
+      "text_file": "text/D040.txt",
+      "text_sha256": "13f9d54597199b73e23ad12dcc38626d53bb30bd53d89a63b6a7f55ecc570425",
+      "declared_manifest_sha256": "6633b8bd769d3795ac08c7599324beb392631f044d3f3ad5c73248fbc09e48c7"
+    },
+    "D041": {
+      "url": "https://housing.lacity.gov/residents/rso-overview",
+      "text_file": "text/D041.txt",
+      "text_sha256": "4d8837313d514bde68624c37ab37622dd950c542bdc74942702641519eae3ece",
+      "declared_manifest_sha256": "5d2e79094fcb8c09aa51120208725b130b1932bceb848b3641dd82f0a6b3656b"
+    },
+    "D042": {
+      "url": "https://housing.lacity.gov/rso-rent-increase-calculator",
+      "text_file": "text/D042.txt",
+      "text_sha256": "21a8e44f111659923f120ad5543bf46611e1b2dd5af0087cc16f98de479cd262",
+      "declared_manifest_sha256": "173b8fd5169b465fb8e634598a74881c1247f23df4a8c1f487cd53294b379995"
+    },
+    "D043": {
+      "url": "https://housing.lacity.gov/wp-content/uploads/2026/08/Relocation-Assistance-Bulletins-A-and-B-Combined.pdf",
+      "text_file": "text/D043.txt",
+      "text_sha256": "31b7db7b0e637435a30b1c9bf6db06d8e1a4b748e335bceeaa9232da266e6f04",
+      "declared_manifest_sha256": "b7a8c88e14d50821a59abd88c5c457f101c26d337351da2c7134e1fc1830309b"
+    },
+    "D045": {
+      "url": "https://malegislature.gov/Bills/194/H5222",
+      "text_file": "text/D045.txt",
+      "text_sha256": "8bc537dfe4d0e00b829147ae82ba11d40bef8a2b0696f487c417ca517673bba7",
+      "declared_manifest_sha256": "cc3a2eee30cb567368f01c10da2da5c38703954d3640199539737980a4caf8ca"
+    },
+    "D046": {
+      "url": "https://malegislature.gov/Bills/194/S2983",
+      "text_file": "text/D046.txt",
+      "text_sha256": "6ea5313d0a656ab73b683e72b594cf143ee61bd6923ee1d9f3df46682248004d",
+      "declared_manifest_sha256": "d6ea7aaf0dd90e92cbb141ec127402e0db1e00fa3aa67d67a0f1264dd2b96827"
+    },
+    "D047": {
+      "url": "https://malegislature.gov/Bills/194/S2983/BillHistory",
+      "text_file": "text/D047.txt",
+      "text_sha256": "9af3e5eba834b37a5115fef298f5e2a1c1fc0b93c1d69500aea9d6bc7ee24b93",
+      "declared_manifest_sha256": "7216d5e2d65f6e8080124eb2fff6b6c209b14a400166df4d2ab1bcc1c351ef12"
+    },
+    "D048": {
+      "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40P/Section4",
+      "text_file": "text/D048.txt",
+      "text_sha256": "090647f489ec5f03c114df23b74c28a107a7e0b855e382969c27dbf58a55837d",
+      "declared_manifest_sha256": "713cae78081e4354df2926b45984dcacdb2299cf4edb8dcd7064d7da7fa3c06e"
+    },
+    "D049": {
+      "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter151B/Section4",
+      "text_file": "text/D049.txt",
+      "text_sha256": "ac42593c79533c25223582de77eb5411d2f8ef501a0d027d2a61042b7e81d7ef",
+      "declared_manifest_sha256": "7727efb19acd13f7b10f320df75ceca00526c8584cac1af80c6848cc86c7ae5c"
+    },
+    "D050": {
+      "url": "https://malegislature.gov/Laws/GeneralLaws/PartII/TitleI/Chapter186/Section11",
+      "text_file": "text/D050.txt",
+      "text_sha256": "cdc077701a5c63533240e370c77ce86546bd2c8372d771433c52a98fadc48f19",
+      "declared_manifest_sha256": "86a6894f508e94f7257239bfcb5ffa0e560c2dd2d1fa25672e889ae9bff7d998"
+    },
+    "D051": {
+      "url": "https://malegislature.gov/Laws/GeneralLaws/PartII/TitleI/Chapter186/Section12",
+      "text_file": "text/D051.txt",
+      "text_sha256": "6c1a194983bb0ee7079919bb8ef0e77efcd35d73dd9795853024a6eaaf5b24de",
+      "declared_manifest_sha256": "94da03e3a8acc3859e73e1f0f15e93c3efcbec8b7926a9f9de9c3e9ff62b04ba"
+    },
+    "D052": {
+      "url": "https://malegislature.gov/Laws/GeneralLaws/PartII/TitleI/Chapter186/Section15B",
+      "text_file": "text/D052.txt",
+      "text_sha256": "f24c21cb2b32330c0f2f112f066d02b784887a8552cc3777ea96f1d53dd0171f",
+      "declared_manifest_sha256": "4052b3a94693be64fada21672df3f6f7368198b6b65a7686a8cc20e5f076d997"
+    },
+    "D053": {
+      "url": "https://malegislature.gov/Laws/GeneralLaws/PartII/TitleI/Chapter186/Section18",
+      "text_file": "text/D053.txt",
+      "text_sha256": "5c418b18df23a00a8b6b056e68352f67b378b94321ee42867df8ce02ce36830a",
+      "declared_manifest_sha256": "0d73e63fc5911e44aba74196703315000e18aac46965310b14142193a5658d8b"
+    },
+    "D057": {
+      "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter112/Section87DDD%201~2",
+      "text_file": "text/D057.txt",
+      "text_sha256": "c678b42f8fc6ecfc7c7a6b1bdf6c68aec877daa80a53d62d5d2ca8176c967d7b",
+      "declared_manifest_sha256": "0109f5cb48ad7951f1b8d49df1b1e277f6dbd04d3140063cc6f1ed354e623b8f"
+    },
+    "D058": {
+      "url": "https://malegislature.gov/Laws/GeneralLaws/PartII/TitleI/Chapter186/Section31",
+      "text_file": "text/D058.txt",
+      "text_sha256": "80dcf6692b891859e2601c0732252ba30ec010b5034749c4693ef68ce1fd4281",
+      "declared_manifest_sha256": "50e034e62f603fbf2437d20a85ea9a619fe6ff7e42b7e6ca85c56e0919a7eee1"
+    },
+    "D065": {
+      "url": "https://pub.njleg.gov/bills/2020/PL21/110_.HTM",
+      "text_file": "text/D065.txt",
+      "text_sha256": "c7d281ddae183438fd360bfa0b4824d6541c532efe6ae8123dad37e0f4d53e1e",
+      "declared_manifest_sha256": "2ebdb9726f7ae35a1fdecebbcf3d5aeecea142567039747009c568aa0c1408b4"
+    },
+    "D066": {
+      "url": "https://pub.njleg.gov/bills/2024/PL25/405_.HTM",
+      "text_file": "text/D066.txt",
+      "text_sha256": "e06aa61acf6ddb50631d5be3c89c4029caccb13c0dcc7be888e0e64f8b182c2e",
+      "declared_manifest_sha256": "7de900de205fe25bcb0d2d5a4f4ea1037d784cf677a886f2f6c5ab4782667115"
+    },
+    "D067": {
+      "url": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "text_file": "text/D067.txt",
+      "text_sha256": "a61f61a51b513b48a41cce48326e28861838a95e5e5a29cdedc41470d44ed505",
+      "declared_manifest_sha256": "ba627933d9acecbc4333a21ecc14f35d893a811069c53b304240031a8a08009c"
+    },
+    "D068": {
+      "url": "https://www.nj.gov/oag/dcr/downloads/kyrhousing02.pdf",
+      "text_file": "text/D068.txt",
+      "text_sha256": "857cb50fde16e0027346c44f502b2f0d854aad4bca7cf0926a31cd54adad8159",
+      "declared_manifest_sha256": "0262ee31d4e096b1e73056dff3f0511f7ef8da8a43f83d0e6eddc618c912909f"
+    },
+    "D069": {
+      "url": "https://pub.njleg.state.nj.us/Bills/2026/AL26/43_.HTM",
+      "text_file": "text/D069.txt",
+      "text_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+      "declared_manifest_sha256": "eb4d4e4797616e5bc1d641db418d4e6cfc3064e1cef925725f83c77472a154f0"
+    },
+    "D073": {
+      "url": "https://docs.sandiego.gov/municode/municodechapter09/ch09art08division07.pdf",
+      "text_file": "text/D073.txt",
+      "text_sha256": "d1d4b9874a7c4b51a97cb81809e9ece2658f0f9e52898d904f90d48f3c1a140b",
+      "declared_manifest_sha256": "9b30d1ef437a88840dcc15bfab72dee1952e183e9b7584786224c98214cf4905"
+    },
+    "D076": {
+      "url": "https://sandiego.gov/sites/default/files/2025-04/automated-rent-price-fixing-prohibition-ordinance-materials.pdf",
+      "text_file": "text/D076.txt",
+      "text_sha256": "31b29a40becda1c218d4f64aedcb56a44241857b0f5d8b451c7b20b5737edc1e",
+      "declared_manifest_sha256": "199151161d82324eee612bc44556f1a727e26a0efa0c4a6ad61a0ee5772bb244"
+    },
+    "D079": {
+      "url": "https://sf.gov/information/overview-just-cause-evictions",
+      "text_file": "text/D079.txt",
+      "text_sha256": "51f9490227bafc8a6f458c7e417f41bce3af07c1416fae77f281b987d97ef793",
+      "declared_manifest_sha256": "adeded646ba7b0ca6d9daceca173f072948928df492872febafafd487e4d04d1"
+    },
+    "D082": {
+      "url": "https://www.sf.gov/reports--archive-relocation-rates",
+      "text_file": "text/D082.txt",
+      "text_sha256": "5e1ee2ddac37eb9639650aaa15af33f6820c182edc506f4b6da787a3da7714f6",
+      "declared_manifest_sha256": "85ca3517f80d9430b1a04b2a635bbabe3acd99c3dbdc245c3c463d12c5a87c41"
+    },
+    "D083": {
+      "url": "https://www.sf.gov/reports--current-rates-including-rent-increase-relocation-sec-deposit",
+      "text_file": "text/D083.txt",
+      "text_sha256": "764e9e3a023bd434458dfea8ffbb57e57d23e5f0a4939cc10948b9e495034d2f",
+      "declared_manifest_sha256": "ad666827b1e294e0f4bd9cad28741b664a3ab043fc7c7f28ece726215f3a8756"
+    },
+    "D084": {
+      "url": "https://santa-ana.gov/departments/rent-stabilization",
+      "text_file": "text/D084.txt",
+      "text_sha256": "fc10720530c3f1eeb733fe7954d39b62ad374c8d954053c61dea0a89444f08b3",
+      "declared_manifest_sha256": "8e7e3eca334bc0206189904518c82d88732b3406289868dc833d69970c9ded7b"
+    }
+  },
+  "excluded_sources": {
+    "D032": "No distributed corpus text or official organizer mapping; research only",
+    "D033": "No distributed corpus text or official organizer mapping; research only",
+    "D034": "No distributed corpus text or official organizer mapping; research only",
+    "D038": "No distributed corpus text or official organizer mapping; research only",
+    "D070": "No distributed corpus text or official organizer mapping; research only",
+    "D071": "No distributed corpus text or official organizer mapping; research only",
+    "D072": "No distributed corpus text or official organizer mapping; research only",
+    "D074": "No distributed corpus text or official organizer mapping; research only",
+    "D075": "No distributed corpus text or official organizer mapping; research only",
+    "D077": "No distributed corpus text or official organizer mapping; research only",
+    "P11_CA_AB325_HISTORY": "No distributed corpus text or official organizer mapping; research only",
+    "P11_CA_BPC_ART1": "No distributed corpus text or official organizer mapping; research only",
+    "P11_CA_BPC_ART2": "No distributed corpus text or official organizer mapping; research only",
+    "P11_CA_BPC_ART3": "No distributed corpus text or official organizer mapping; research only",
+    "P11_CA_CONS_ART4": "No distributed corpus text or official organizer mapping; research only",
+    "P11_CA_SB763_HISTORY": "No distributed corpus text or official organizer mapping; research only",
+    "P11_CA_SB763_TEXT": "No distributed corpus text or official organizer mapping; research only",
+    "P11_MA_CELLA_OPINION_MIRROR": "No distributed corpus text or official organizer mapping; research only",
+    "P11_MA_H5008": "No distributed corpus text or official organizer mapping; research only",
+    "P11_MA_H5222_STATUS": "No distributed corpus text or official organizer mapping; research only",
+    "P11_MA_H5222_TEXT": "No distributed corpus text or official organizer mapping; research only",
+    "P11_MA_IP25_21_ORIGINAL": "No distributed corpus text or official organizer mapping; research only",
+    "P11_MA_S2983_STATUS": "No distributed corpus text or official organizer mapping; research only",
+    "P11_MA_S2983_TEXT": "No distributed corpus text or official organizer mapping; research only",
+    "P11_NJ_HOB_B781_HTML": "No distributed corpus text or official organizer mapping; research only",
+    "P11_NJ_HOB_MINUTES": "No distributed corpus text or official organizer mapping; research only",
+    "P11_NJ_JC_25_057": "No distributed corpus text or official organizer mapping; research only",
+    "P11_NJ_JC_25_098": "No distributed corpus text or official organizer mapping; research only",
+    "P11_NJ_JC_25_105": "No distributed corpus text or official organizer mapping; research only",
+    "P12_NJ_CHARTER": "No distributed corpus text or official organizer mapping; research only",
+    "MANUAL_D056_20261004": "No distributed corpus text or official organizer mapping; research only",
+    "MANUAL_D061_20261004": "No distributed corpus text or official organizer mapping; research only",
+    "MANUAL_D062_20261004": "No distributed corpus text or official organizer mapping; research only",
+    "MANUAL_D063_20261004": "No distributed corpus text or official organizer mapping; research only",
+    "MANUAL_D064_20261004": "No distributed corpus text or official organizer mapping; research only"
+  },
+  "eligible_rule_ids": [
+    "r-0059f21fe0122fe44e60",
+    "r-0059f21fe0122fe44e60-bfc70f36",
+    "r-00b1b9f3b83a8113acf7",
+    "r-00b23917cd3e5e8d87fa",
+    "r-01258fc83f40dbea642d",
+    "r-01922a1a64205dd022d0",
+    "r-035cbeeb9e048a7611c0",
+    "r-04573db12703a3cea106",
+    "r-047bb24b7ee40e6c1546",
+    "r-04950f1445b1989cad9c",
+    "r-049bd80b23f242ba2300",
+    "r-055fb59c04a0327dff2a",
+    "r-055fb59c04a0327dff2a-d81dfdae",
+    "r-05863858fb6eb35e99ec",
+    "r-05eb7010b4eb68a620f5",
+    "r-06b81e1449455bd93501",
+    "r-0717e2e09bf631cb592e",
+    "r-07583f5dd8370dd31717",
+    "r-076f34f546f84d16d7a1",
+    "r-09162989264966fc6c9a",
+    "r-0abf1a4016b7cdf9e35f",
+    "r-0acbc640e07f4810a3f2",
+    "r-0b30f8993c9c1e6f2812",
+    "r-0bb4ea166988f3bc41cb",
+    "r-0c04fe8766267f81c987",
+    "r-0d69a4e33cbab00be532",
+    "r-0d9b8b5400fc6a95de2e",
+    "r-0dd9046f84aba8efd139",
+    "r-0f8b37323a76ec9e8c68",
+    "r-0fa5ca331da840d3b97f",
+    "r-10abfa3a34a817fe9324",
+    "r-10b8edc2cb83f6fe60c4",
+    "r-11095e78b73a3521b99e",
+    "r-120dde8db4fd901cee4e",
+    "r-12c99cf95c4f2cd2242e",
+    "r-135fba391283404bc4f1",
+    "r-13e8f0f7d73f5fb0bf82",
+    "r-144151630c9b86f3a615",
+    "r-144151630c9b86f3a615-b3228780",
+    "r-144151630c9b86f3a615-e0101afb",
+    "r-14690586f8ecdac7a32c",
+    "r-15223bfd4aabc2488dc6",
+    "r-15320605b6ca52eac519",
+    "r-15b5c9b70f33d99b90f5",
+    "r-15d15bd31dd813b3385d",
+    "r-15f2c3c17d07d78b04a1",
+    "r-15fe7475e99edd0e6fe0",
+    "r-1656952c061817fe8ea2",
+    "r-16d9e3fb4750d0c4126d",
+    "r-1717b22f8558b2484daa",
+    "r-17a387b2b2e36ffb54ca",
+    "r-17daeec388a4d7006682",
+    "r-18843c1b12d68b4ff820",
+    "r-18d74eb26353c9984d3c",
+    "r-195b24fb4fe24301fd25",
+    "r-1a39e09964242a37cd10",
+    "r-1a612120dabe746df9f6",
+    "r-1ad8d6925ee02a25aa1e",
+    "r-1b77e0c0dee2b2c7570c",
+    "r-1b9cd96218738fbe9401",
+    "r-1c6948aa458fe6c515e4",
+    "r-1cbebf3ed0e38027c861",
+    "r-1dc324bee0f108ba586d",
+    "r-1e68d3ea20d9c1ac7fae",
+    "r-1ece83031a5bfc43e485",
+    "r-1fa3c564f444dfece7e4",
+    "r-1fa89f0588c3b809c33e",
+    "r-1feefbedd03b403ab84f",
+    "r-2019ecc6b2a08d491cb2",
+    "r-2093a6361e6bfd9b251c",
+    "r-2145fe4cb5fd70b5b481",
+    "r-21548d201725a70257f0",
+    "r-21b0faea2f1e4af1b9fc",
+    "r-2259376c858c99505635",
+    "r-22b005abf141ac5476ed",
+    "r-22c4c2c6e1010494d327",
+    "r-230b60e563ef1305d9b0",
+    "r-236ce8fc800aafc2ae54",
+    "r-24fd11ac5b15d5c240bc",
+    "r-26072dba911d55d0d386",
+    "r-26973319794718c1654d",
+    "r-2754376989e5cc1262a6",
+    "r-275e7f34cdfd2a43e317",
+    "r-285b6e4b252052dda714",
+    "r-285ed13759fb05a42dd5",
+    "r-289e569ca505d53f631f",
+    "r-28dbb309e96d7ad077da",
+    "r-28f044d63fc60b59a00a",
+    "r-2984e1e0f87148ffc5f0",
+    "r-2a4d981250f4aab091ab",
+    "r-2a817e247c471c2a583b",
+    "r-2abff1b7e81ebc71b288",
+    "r-2b37958efa9080b8e65b",
+    "r-2cd1e47815e330aeb444",
+    "r-2d4a25af6ea1ab16590d",
+    "r-2e978d343b0c94d7e1d9",
+    "r-3079f31ccff6082acacb",
+    "r-30907698400d1a3d0195",
+    "r-31e22e8e334b6f83a0a8",
+    "r-32b2d1a5e09504be2f5f",
+    "r-33b087bf7162772ad40f",
+    "r-33c8ab83366a90286fb0",
+    "r-34215905e6034e8a9bd5",
+    "r-3494b60377a704220270",
+    "r-35bb10ffa69a87674597",
+    "r-36095c1c7c9a90c7dd41",
+    "r-3627e1277bb51dc2cb59",
+    "r-36c25119d6ccf36d6cbf",
+    "r-36d997c6bc710666b2e2",
+    "r-37eb2428f450123d5210",
+    "r-37eb979a0b06c7971046",
+    "r-38c361eb59f9166f2ad2",
+    "r-391c1b9ae507ef8f16b0",
+    "r-3a2ace28dde19d63c32c",
+    "r-3a817ac08541108d721c",
+    "r-3b336531a2663d648d3d",
+    "r-3c09af04ec40be08398a",
+    "r-3cb87e91ea6068070af9",
+    "r-3d21c7e1b31aa7c56254",
+    "r-3d5070b9f74eace3e8c0",
+    "r-3e4485bcc0773230f6e2",
+    "r-3eb3d9d44fc40d652360",
+    "r-3f4faa985c2cba7d8f12",
+    "r-3fc282198b9b55bb461a",
+    "r-4001061f7bc33d143f41",
+    "r-402392f108a4c26bf930",
+    "r-4096c613e5f33c39892a",
+    "r-40b82c9c76d53d8698a2",
+    "r-4308e249e187d3b262fb",
+    "r-433997c40ab46473f194",
+    "r-43d9fa59ba465b4f8f21",
+    "r-44177f3b989fce85eb97",
+    "r-444df6aff6e1bc1d14ea",
+    "r-44f29c7387f3978475ba",
+    "r-45037aa1cfe6565ba6cf",
+    "r-46018b71a61fa0eba1b8",
+    "r-4650cb05dd9bdf1b4e8c",
+    "r-46edb9fe2fc51d13e407",
+    "r-471fa093a6c717d3278f",
+    "r-47a62e25826ac7c53fcb",
+    "r-47b1947ca90c00534b4e",
+    "r-47d9668b33b1e09e82ca",
+    "r-4991f993df0026a22033",
+    "r-4bb7a771d22cfba05949",
+    "r-4bcae99073b81c656068",
+    "r-4bf8e008d56950bba8de",
+    "r-4c4e03bfdb721297ff8c",
+    "r-4c6c47291ab7f3f26225",
+    "r-4cccc37ed4137bc56c62",
+    "r-4d02fb6bf463b5dfda51",
+    "r-4d3febda98961017980d",
+    "r-4e26e23d322cb0aef2c3",
+    "r-4f138304d8d597b577ca",
+    "r-4f67da8b320704c81963",
+    "r-4f92b11d0628a686deec",
+    "r-5033f5d50f384662d416",
+    "r-50a91adcfc4addb8670e",
+    "r-50d8304aa1374ed8cb81",
+    "r-50f536de5380acd9e04d",
+    "r-50f536de5380acd9e04d-9bc98483",
+    "r-510154aa5a47bfc0ebd2",
+    "r-5114b9d39beb8391c31c",
+    "r-518b4421da50a155b652",
+    "r-51cbc2de307f6c163d17",
+    "r-51ecd77c9f1a46b0cc6f",
+    "r-52b7d8f84e522f774918",
+    "r-52cbf7664d5de8e6b750",
+    "r-53d4c775d7fb740b1f9c",
+    "r-55cc74013593fa26f3d3",
+    "r-568fdf31adc81ba11ebd",
+    "r-57328356379e89d4f338",
+    "r-574c343d747c37332983",
+    "r-57cc0510a00949b50da7",
+    "r-581f4ef3d81bc6857565",
+    "r-582858e92b5fd56e9e90",
+    "r-58d5a2f6935b20a6094f",
+    "r-597ad7df6d03b44d5688",
+    "r-59cdcc26da7d616d44ce",
+    "r-5a201564c8ae83c99917",
+    "r-5ad52269b455ad7d572a",
+    "r-5af2032da87d39987c9e",
+    "r-5b8c63902553d2bee632",
+    "r-5ba306bcbc077f46af57",
+    "r-5bda807dd5c203fa95fa",
+    "r-5bf1fc744f437a8e777c",
+    "r-5c4eabf25b93297764e0",
+    "r-5c6f4ee570dbe55ac50f",
+    "r-5cd6fa940248b70f5233",
+    "r-5dab9a52289d1a72888f",
+    "r-5dd94cbe950820607718",
+    "r-5e9a4ceb2c10ac74b717",
+    "r-5ec063adf10cb228e048",
+    "r-5f0528055654a37c83b4",
+    "r-5fb3ae71c1e9a75d9637",
+    "r-60539c2f97f4e7909b34",
+    "r-6086115c21de10d04684",
+    "r-636b80f8ea1dd33b5907",
+    "r-63b2265f1222fa4d0715",
+    "r-63d1aa57633a22591af4",
+    "r-6414708d29015daed454",
+    "r-6499003c653014cebab2",
+    "r-649d60fa12a641f65ce4",
+    "r-64aa826e6c7c6fc949bf",
+    "r-653971d8dab71e387cba",
+    "r-65967f4ed868947706bb",
+    "r-660da528be5d21a022e4",
+    "r-660f351fef06c57b99d9",
+    "r-6708b29915627c9844e1",
+    "r-674a5758ae0acb3be96f",
+    "r-6846e308323cd5c21f4d",
+    "r-69216669955528cdf464",
+    "r-69601b2dca97bdd99f5f",
+    "r-697fe4a08a03ab52be47",
+    "r-69958bcea558356bdb1c",
+    "r-6a729e245c276ccf157f",
+    "r-6b545bdb85fef8f0cd1f",
+    "r-6bcf339f43ad0bd95880",
+    "r-6c3c688c19d6b26f026b",
+    "r-6e4453baf65ace6ba411",
+    "r-6e72dfd78b4d764d6ad5",
+    "r-6f3147bb58210dd57221",
+    "r-6faec6c831fb44730182",
+    "r-7073d1b8067edb37dfc5",
+    "r-710522e0c2ff928cefe1",
+    "r-711401407e2b0e959469",
+    "r-711b172ab92e8e61501a",
+    "r-714dce5c73ca7dec3747",
+    "r-717afd4b5ef87b0168af",
+    "r-71c094d6034aee09b6df",
+    "r-7268c7041334bfdab921",
+    "r-7275a769c85bbbae5523",
+    "r-7344b37630f7a2815252",
+    "r-758cba6ec041fa276091",
+    "r-766f1e4a77a81d9a75b5",
+    "r-76c7580e081164d80a5b",
+    "r-777bad850da7afdc5a57",
+    "r-77cce79b16b11fcd961e",
+    "r-7881ab5e0a739730d8e4",
+    "r-78c45508e9f9bbb3d7eb",
+    "r-78edf550abfb473e93f0",
+    "r-795ba09efd93c823a165",
+    "r-799c10edc1ca76895a8e",
+    "r-79f573ca15bf134487d7",
+    "r-7a4ad3efe671eafcd7f1",
+    "r-7a4f002f43a4bdb1e6d2",
+    "r-7b59b5f34bbdb5d25cd8",
+    "r-7c07005d7383b52e7b25",
+    "r-7c99a8307fe5461f7e69",
+    "r-7d30b700d4ecb058c0a4",
+    "r-7d78c56e90c32414a9fa",
+    "r-7dc45432f5d349e82887",
+    "r-7e033bbc284ee66cdaa9",
+    "r-7e32dd91f7cdf6cd12ef",
+    "r-7e742884f488020b3f7e",
+    "r-7ed7077477bfb3373d07",
+    "r-7f01ef9a6a220d99008d",
+    "r-7f0bb806b49f2d5fdaeb",
+    "r-7f5f5823ad84c77768db",
+    "r-7f8b382d32d6f9f5e257",
+    "r-7fe47549b99592f684ad",
+    "r-80834866b7b3d6d6288b",
+    "r-8110601c33b88aeccd1d",
+    "r-8137b7ec09ff7530cff2",
+    "r-81ced17444e9c9aaee38",
+    "r-81d467273a64061b4e61",
+    "r-82476431db36bbf670fb",
+    "r-82dd5dcedfef160dc836",
+    "r-8387ce70d9cf68d153ce",
+    "r-848d8505b00a850ae2a8",
+    "r-84d697cd66d37a908311",
+    "r-84da48ca99046ef695d7",
+    "r-8509b3d91cf7d87b0c18",
+    "r-868733158e9c30ed9ba2",
+    "r-8825eafaedd1f97246bb",
+    "r-8835392b58d339ce712b",
+    "r-88595f13858c509aa6be",
+    "r-885cbe9d95972d1ea73d",
+    "r-88ceeef72bc0c5192ff6",
+    "r-89b708d5c68d46b32e0c",
+    "r-8a0f53ed09339a3ceb95",
+    "r-8a98c17c7090a303e34a",
+    "r-8c110e06e3671ea120bb",
+    "r-8cdbdb4cbbfb118e0eac",
+    "r-8d2c4526399907050da8",
+    "r-8daf5b530f07dfaa4571",
+    "r-8db1222c152311435029",
+    "r-8e1a04828d4227bd1792",
+    "r-8e87527b626996fa81e2",
+    "r-8edbd9339038ddda7ff4",
+    "r-8f1b58f985ad90ec08e4",
+    "r-8f58d1119dbcefb25a75",
+    "r-8f6ad566c93aa0a9af59",
+    "r-8fa68489ccf9f4336e9f",
+    "r-8fd301a05af7e9590050",
+    "r-912998e64d23de87a92c",
+    "r-91f417573ab8cd2041c1",
+    "r-922ed185dd9c4eff4acc",
+    "r-928f7bbbb4e7c5e06bbd",
+    "r-92c9813fd2e2b9362ac9",
+    "r-931f9eab4f71b3b6a7bd",
+    "r-931f9eab4f71b3b6a7bd-a7baf303",
+    "r-93308cdff220553343e4",
+    "r-933cca768f79bd5411da",
+    "r-93b400bb1c4e24e7745e",
+    "r-93c988f89d25c3490570",
+    "r-93d4b8f957ec6ae07c34",
+    "r-940910646780505097ad",
+    "r-9418e1c32adc43f5e6f7",
+    "r-941ddb2fe9f2362423b6",
+    "r-94fe062730ba9a59795a",
+    "r-95099ff7dee1b95a7087",
+    "r-9524c661379e0e628922",
+    "r-9551278717ef26be4030",
+    "r-95cce732f7bcce55718d",
+    "r-96bc3eb34741327ed856",
+    "r-971712bcba95a155a0a7",
+    "r-975fea0475777d2a9d8c",
+    "r-9790fa7aec38fd7875e3",
+    "r-98114d69659c1f2705ef",
+    "r-98273ff5205850c7e750",
+    "r-9858ebaccf0d664b8b65",
+    "r-9875f863c6d4a39ba2bd",
+    "r-993729543ff295e15063",
+    "r-993729543ff295e15063-1084964f",
+    "r-9a3da08a39ec14ee9493",
+    "r-9a482b0d2288295b2fa3",
+    "r-9a6b49177d0894418e37",
+    "r-9bf228e03c696f5013c5",
+    "r-9c173c0093ca3358f711",
+    "r-9c2cfced039cd68bc1d0",
+    "r-9ceedf9499d8d03b184a",
+    "r-9d64247145c6fb9ff3ea",
+    "r-9d71d7da751b1444cdef",
+    "r-9e114cb8f6534db12028",
+    "r-9e6d465a4392b0f08e98",
+    "r-9ea05c82a37cde305c95",
+    "r-9fbb7ae95ad4887fe66f",
+    "r-9fff5c35202e81baa162",
+    "r-9fffe3e78eca8d243134",
+    "r-a08d79d28098d4ce2498",
+    "r-a153b59a14af868caaeb",
+    "r-a180e9ed733a94437e00",
+    "r-a26313b2b7087ce6f18b",
+    "r-a2d4df57395ee86b101d",
+    "r-a3086950695f9dee53de",
+    "r-a4096058dc33bfe0ee26",
+    "r-a41319ea3efe49f6d24a",
+    "r-a42e7cd49d44a9d87203",
+    "r-a52e737a904956978e76",
+    "r-a576229ecfd354733468",
+    "r-a8796a2b40e4186fed4f",
+    "r-a88b2bed36531241f07b",
+    "r-a914144c27e94c8569b4",
+    "r-a94391633c05bd690d92",
+    "r-a96f4a20a627904b41ac",
+    "r-a9897276031b6e499e1f",
+    "r-aabfadb6e6e23f9fabab",
+    "r-aae0cee3b33b1d2843cd",
+    "r-aaf16bf54011b8165932",
+    "r-ab0c498096007900876d",
+    "r-ab87457b3c0005f481b4",
+    "r-ac00ce093b85c8d87256",
+    "r-ade6d3dce4212c1261f5",
+    "r-ae181ae108510a0a362c",
+    "r-ae6bf8b690dd32748832",
+    "r-b06fd8346dadcd2553d4",
+    "r-b0f82054107b13c6925a",
+    "r-b10b46128a145c10863d",
+    "r-b1ced07296d43b431bd9",
+    "r-b314f44794062ae0bc7e",
+    "r-b34829e10694d31b2095",
+    "r-b38384760c231570b49e",
+    "r-b46d4677cfea6c8bec60",
+    "r-b4957942ed2ac9f1a0f3",
+    "r-b557a89502e37db1bddd",
+    "r-b56984729928b6929d12",
+    "r-b5d76236dd0e549c8b77",
+    "r-b5f2fe3454fc89e5e86c",
+    "r-b66f2cbfdabf458036d0",
+    "r-b6f27aeca4541448eeb9",
+    "r-b7c304b9b4a536a5616d",
+    "r-b7c7c22074e80e81670f",
+    "r-b9212520dd133bdf1584",
+    "r-b9601eaaedd1f646689b",
+    "r-b99510c7e80f36eeea1f",
+    "r-b9cffb47b5b620b17a4e",
+    "r-b9f97ef62808d9a93624",
+    "r-bb020a5e71dfb246fbd4",
+    "r-bc9996e93b739f89da94",
+    "r-bce77df13f392a072108",
+    "r-bd3d4c1f2930f27dbd89",
+    "r-bd6e76518e9e33e9bb5f",
+    "r-bdbf49a26a636c2ff5a6",
+    "r-be51cfc9622c06edd7e6",
+    "r-be7cb7513c8c43acd44a",
+    "r-c0457ebebf74a8054e4c",
+    "r-c095af75d7254f078e25",
+    "r-c0c48693d861138efea5",
+    "r-c0e5ffd84f52a57d0e5f",
+    "r-c15b2e4c1a151e1f855d",
+    "r-c1d26e482709d8a338c5",
+    "r-c22c51a3faee5546b5d0",
+    "r-c243bf954944d60c4643",
+    "r-c2f2494137e13707f4ba",
+    "r-c37093cddabf29cb735b",
+    "r-c42a10efb2a0596f08fe",
+    "r-c4f99b5344881140bec5",
+    "r-c51ece28e3f75dd00bd8",
+    "r-c5476026bb5c284e0c7a",
+    "r-c557cf8cb639475ddadb",
+    "r-c6393a9da8588247edff",
+    "r-c6714c6ea249c0eeac3a",
+    "r-c6aafcc1dc06dc1754c5",
+    "r-c6d907836300950828b5",
+    "r-c7620ba62437c7af27cd",
+    "r-c765aa61f15d990daad6",
+    "r-c782f91eeabd4c082722",
+    "r-c7b897dc5a5b2d764e88",
+    "r-c96813b2da4020cb458b",
+    "r-c9aa60788ea081e0239c",
+    "r-c9ac224b73a930b58bab",
+    "r-c9f54dd3b7eb0b301ec1",
+    "r-ca8aa05300037f6af923",
+    "r-cb50b8acc0d1dfae3c8a",
+    "r-cbd0181b003402010f74",
+    "r-cbd167169029d7a1bcab",
+    "r-cbd8cc91f38188df464c",
+    "r-cbf16f32aed82f60a512",
+    "r-cc583d37f0f7a9b99a41",
+    "r-cc62992238b362942e38",
+    "r-ccfd2679096aaefff0c4",
+    "r-cdaf079c9300d1d0797a",
+    "r-cdb055236e5c8ba88670",
+    "r-cdf0d5389c7be9fe53f0",
+    "r-ce1582815ebc32f35ba0",
+    "r-ce755691f77c0f93ea2f",
+    "r-cf5c8e4942e0641d3de4",
+    "r-d00f84a026235d3c80e6",
+    "r-d035adfecda072cdd9c5",
+    "r-d03a04271c56fbcaa71e",
+    "r-d04dc89604bf51d9c747",
+    "r-d04dc89604bf51d9c747-66117aa5",
+    "r-d1e17be5ee98e75d84c7",
+    "r-d1f463e7c652a2f799a3",
+    "r-d2e6a99359344d5d534c",
+    "r-d2f23592f3bd2aef3aa8",
+    "r-d32f2f61e784d2537735",
+    "r-d40dcc1ee8dcb4829f53",
+    "r-d42d00fe93fa3c1bfb05",
+    "r-d48102c1d5b86e4255e4",
+    "r-d4c3d4b6a3ad90e13d1a",
+    "r-d51ddcdf20a3150f1dff",
+    "r-d52ef12275381329e9c7",
+    "r-d534df37732681eb4397",
+    "r-d53e8729ce3479ff3d53",
+    "r-d5537239b94a18f4d662",
+    "r-d62c4b812fd5389f1aa5",
+    "r-d6afb21ccd0264fe0032",
+    "r-d9577d07f4f896354445",
+    "r-da5be9b8d421ba1690b3",
+    "r-da96c653ee019bb939e0",
+    "r-dab5183a64462db6792c",
+    "r-db3965aa12d9224b0893",
+    "r-dc7178d0a464c6bb2f1c",
+    "r-dd7e9b981cc7b10f2e88",
+    "r-dda2c2feb80d7ba927a9",
+    "r-dddcf81ad3ae1c5e6e7d",
+    "r-de970d18e829aaafad6d",
+    "r-df1d5095235a016a8080",
+    "r-df4dbd4b55999c60f7ae",
+    "r-df8529c24c470b70fdfd",
+    "r-e13dd80d1f7cb822472a",
+    "r-e13fb0202ca84fe1dd68",
+    "r-e1a56adab32f4709fab1",
+    "r-e1d774482f3e940d6c8f",
+    "r-e27a4301f2d3b741a659",
+    "r-e2999317af124bf2ff11",
+    "r-e302fb59c8d758317d30",
+    "r-e356315dd11fa346db75",
+    "r-e3d512e9565c6bd289af",
+    "r-e44a87e2b280bd3f5e9d",
+    "r-e49eb5a38202032cc41c",
+    "r-e4b18e6e28844dc6ceee",
+    "r-e4b6285625eedbf41155",
+    "r-e5484a9ab33575056c51",
+    "r-e58a4e550dfb5996f1b4",
+    "r-e5bfb47f38fa954bd78e",
+    "r-e5c141922e9b746b384c",
+    "r-e6942a79fb466e172cd7",
+    "r-e705359b44a81ccae69d",
+    "r-e79c9871d93c23e843ad",
+    "r-e7fcbbef6fd86c396fc8",
+    "r-e81caeda5d360636f813",
+    "r-e83fc03aa6e6514eb9fb",
+    "r-e89a85df0ef5898ccc00",
+    "r-e9802e5149caa44f5eb9",
+    "r-ea078fac07bdfa423f8a",
+    "r-ea593aef66400aa016c3",
+    "r-eaa0460c99f3282174b4",
+    "r-eac22bec353877fdc935",
+    "r-eb0803fa26199f01b1c3",
+    "r-eb5766cce3b750db298f",
+    "r-eb91bff4ea4c94549639",
+    "r-ebf3f53147e320a5062d",
+    "r-ec72b2d180d5abddad14",
+    "r-ec7f3bc29288620ce300",
+    "r-ecac9aa0545997198ff6",
+    "r-ed6fc7fbb8b91fa0aa2a",
+    "r-ed7084814ed8afa1b42a",
+    "r-edebae5ed9443e9d1306",
+    "r-ee7e02e20d4ba1bc8472",
+    "r-eec617b5fb0343169c8a",
+    "r-eecf782d22227038e273",
+    "r-ef0a078b0adb68ff48b1",
+    "r-ef975bb4faf5444a01cb",
+    "r-effe8867463b2bfe8b0d",
+    "r-f02e045611543c789378",
+    "r-f070ced4f3ea49c5d58a",
+    "r-f10aa22bc3c6695304c1",
+    "r-f115195a20352a1c8284",
+    "r-f16f8b0553546f6cc865",
+    "r-f1b8f964acfc1c2e3687",
+    "r-f219c339ff8faa1a2474",
+    "r-f372d8d7042cb492998b",
+    "r-f3a18866f21de26b727b",
+    "r-f3a86347cea20c503a11",
+    "r-f3e353e56726b50fb79c",
+    "r-f478b88f8aab43fa8766",
+    "r-f4b33491cd2c0d5cb3c9",
+    "r-f4fa127c401169f4bc64",
+    "r-f5bab186d8ca9034f0df",
+    "r-f642dfb13d333340fbcd",
+    "r-f892a21aafb36e263d7c",
+    "r-f8b206bc05c3aa73bbc0",
+    "r-f8d2fe1734d51556e860",
+    "r-f923f78946e5f3a0f0f8",
+    "r-f98b4be527da9fd81c55",
+    "r-f9f3d8a381bdf4b17b88",
+    "r-fad245c84a0284de5861",
+    "r-fb66f046dbadda9c4287",
+    "r-fc3434ba2945dc342a7a",
+    "r-fc981242ef480704ea2d",
+    "r-fcced92d8e5f49d9848c",
+    "r-fd1869542c04b5509998",
+    "r-fd1cb2b604e8d5edfeae",
+    "r-fd849ab6bcee716c4795",
+    "r-fe56b086583ac1ce9e87",
+    "r-fe989e2f5fc6c780a588",
+    "r-fec3eaef0863a0eb6ded",
+    "r-ff23f5844d2b643412d6",
+    "r-ffd24d99635bae97d2cb",
+    "r-ffe22d6282ed2b7a7b89",
+    "r-ffef537ec5bbbcf067ae"
+  ],
+  "excluded_rules": {
+    "r-002082ba1c3a5b62f3a9": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-02dbe3c6ac5b1ad3d689": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-05b6b0554f863eccf0fd": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-0a3579bf47e2275720be": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-0b609dee7560fc805502": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-1218f54b1924dae97097": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-1384f54fb9ada0e2424c": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-148ac18bde44211e91cb": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-14c936d8894cc13965dd": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-15693bd08192135e117a": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-1815760c548168e55336": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-182fc8786208dd28e12e": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-1903258e3b76557df53a": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-1a111fd3327a1a007810": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-1cae3dbc1ec7bc642c74": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-21fed2938dd3d35696fa": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-2541cb8582d926023fe5": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-296dbe9b31c6f54eddcc": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-2c358c652b8684289c17": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-2dc8a731e0c330aa5dd7": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-2ef6e7272ebd01ac6e26": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-303fa067d1cb95722e7f": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-3346879f72d7757b5835": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-33a013c0cd5c0a613bf6": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-33fc7343672ab65475e9": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-3a254f3697bb3b20e90a": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-3a90f1879389340614b3": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-3b4a42c9f32f00bf6e1b": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-3de6893f6aa8aada5921": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-3e340e21e9a55aa4c578": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-403811a37942e0ed969c": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-43de1b892b016df97e96": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-4583c6d78758350cce13": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-4b129441851e37e37448": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-4bac103d601b6bec6d69": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-4be3e70786f1a5c1a9b1": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-4c4106c3731648af18ff": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D063_20261004"
+      ]
+    },
+    "r-504b920f550b49dbe3a1": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-52a4853826b08a622a77": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-57ebdc53845175f344e2": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-581bbd61c79bf567665b": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-5a024e767f1eade79266": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-5a274a09109d745e37e0": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-5e1dcae2b75346f7d247": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-63010c97980f87f8df03": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-65af9d3ed71d05d8b0c8": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-685519397e6f99a0f6ac": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-69489c10daf5d55ca2ba": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-6a22cd9869acbbabe58a": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-7699cbf5562a0475f0cb": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-78d82ebf6034d30ccfeb": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-7cabc4a89cd541ca51a9": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-8180669199636bf6e9c6": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-82cfc05974bed30253e3": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-837f5767f39c93147785": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "P11_NJ_HOB_B781_HTML"
+      ]
+    },
+    "r-84e911a2d254fba5fe7c": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-8530ccd4f94b1a044910": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-89f2068b2b8d7ee57bc1": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-8e69e6c4f66a68276874": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-8efc5e0e84cddcefc3fc": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-90a49fda127312348fc6": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-9192ea9109c1bb1d4c0a": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-921daf82c7b29e776fd8": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-96bd307455157521db00": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-98f1ac3f544f58a2eb70": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-9c2dd763d234193d6467": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-9d745113259c0c17f062": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-9e584480d091742ec2c2": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "P11_CA_BPC_ART2"
+      ]
+    },
+    "r-a02563366b4c2be6dd4c": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D063_20261004"
+      ]
+    },
+    "r-a06046207b157b0f30f8": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-a0c7b50ea13d4b7b4fe2": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-a190c9bb2126be367468": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-a41f478a1e80fa023894": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-a58b62b7d6de1a579fb1": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-a8e8008a266b610a3e00": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-abfe9555c389bab7f96e": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-ae5e4fc167f603ae375d": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-b11b9c32c550fd4ef109": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-b8281df16e7ac4ad5761": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-b8a5a0572ac6af07a58d": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-b8b1fdaf98830eb8be96": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-b8f1660171ffce4f6071": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-bd036404dfb2ab65bc4e": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-c0f969b0f08e4c0c5135": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-c256d21ee82a4f491faf": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-c30b40899cb896ea3878": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-c31114b39b12915223fb": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-c41eb6836eb050a97278": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-c96fea1b5505d2715879": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-d4c55969744fdfad1d83": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-d4dab07243ccb021f4ac": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-d60318e42d4bb539dd53": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-d8a885d8fb9345163db3": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-d8bdb87af03e1dbc4c02": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-d9921a5cbbdb79ed9a46": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-db2f8e59d9bee753f9be": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-dbbe4da9f4747b333e3f": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-dcde3e7070fcb7028c68": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-de9e152be02b92476338": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-dee04b76ea0bad7ab513": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-e2dd02bcde895e5ea339": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-e637d583009cbb2ff58f": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-e9f09d154eee086eae32": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-ec111545c04c314d9ca9": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D062_20261004"
+      ]
+    },
+    "r-ec1c582226205fdf2891": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-ec76f3fd99ebb99421ee": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-eceeb7f9d70535af8a7c": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-f74e04b7500436bb3d4f": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-f88ce44c564093703f90": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "P11_CA_BPC_ART2"
+      ]
+    },
+    "r-f9f96a657aa815625191": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D061_20261004"
+      ]
+    },
+    "r-fafc68eb3e9de6305196": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-fb54aa4dc5ac8489461d": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    },
+    "r-fc07fe215d0310b9410d": {
+      "reason": "Citation evidence outside distributed corpus",
+      "source_ids": [
+        "MANUAL_D056_20261004"
+      ]
+    }
+  },
+  "rule": "Independently saved link-only texts remain research-only unless organizers officially add and map them to the distributed corpus."
+}

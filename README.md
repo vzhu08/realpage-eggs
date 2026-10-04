@@ -4,10 +4,25 @@ FastAPI backend and CLI for evidence-backed rule extraction, jurisdiction resolu
 three-valued coverage, date comparisons and competition-format exports. **Not legal advice.**
 Frontend implementation is reserved for the UX / Claude Code owner.
 
-Current baseline: real pack ingestion works (87 manifest rows, 54 text files, 500 properties).
-Census resolved 479 legal municipalities; 21 remain unresolved. Live legal extraction has **not**
-run: configure `OPENAI_API_KEY` and `OPENAI_MODEL` in local `.env`. Existing real exports are
-explicitly partial with zero rules; their empty arrays do not mean no laws apply.
+## RealPage submission files
+
+**[Download the three JSON submission files (.zip)](submission/submission.zip?raw=true)**
+— saved October 4, 2026; query date **2026-10-01**.
+
+The ZIP contains `rules.json` (174 schema-valid corpus-backed records), `lookups.json`
+(all 500 supplied addresses), and `changes.json` (T1–T5). These are **partial results**:
+T1/T3 are partial and T2/T4/T5 are blocked; empty affected sets do not establish no impact.
+Supplemental link-only citations are excluded. See the [submission notes](submission/README.md)
+and [validation report](submission/submission_report.json) for omissions, uncertainty and hashes.
+
+## Historical bootstrap baseline
+
+The original bootstrap ingested 87 manifest rows, 54 text files and 500 properties.
+Census initially resolved 479 legal municipalities; 21 remained unresolved. That bootstrap
+had not run live legal extraction, and its exports were explicitly partial with zero rules;
+those historical empty arrays did not mean no laws applied. These counts are superseded by
+the saved submission linked above. Configure `OPENAI_API_KEY` and `OPENAI_MODEL` in local
+`.env` when running new extraction.
 PLAT-01's isolated `data/plat01-recovery/` store resolves 491/500 municipalities; the original default
 store and historical counts are preserved. See the [Platform runbook](docs/PLATFORM_RUNBOOK.md)
 for fresh locked setup, explicit snapshot launch, offline HTTP/export checks and the deployment candidate.
@@ -57,8 +72,9 @@ plus validation, detailed uncertain impacts, inventory and a run manifest. Synth
 `--synthetic` too. Records whose temporal status cannot be represented by the competition enum,
 or whose quotes fail, are omitted and reported. All input address IDs remain present.
 
-The commands above through ingestion/geocoding and the provider-unavailable path have been run.
-Batch and export were run with `--allow-partial`. Full live extraction and legal outcomes are unverified.
+The original bootstrap ran ingestion/geocoding and the provider-unavailable path, and used
+`--allow-partial` for batch/export. Later saved extraction/export results are documented in
+the submission notes above. Legal outcomes remain unverified.
 
 ## API and checks
 
