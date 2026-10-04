@@ -16,6 +16,9 @@ from .store import digest
 PROMPT_VERSION = "extract-v4-applicability-and-review-notes"
 CONTEXT_VERSION = "explicit-support-v1"
 MAX_SUPPORTING_TEXT_CHARS = 128_000
+REVIEW_INSTRUCTIONS = "\nReview the draft against the source. Check interpretation, numeric values/formulas, all coverage/exemptions, date/status support, directional interactions and omitted provisions across all categories. Distinguish covered property/actor classes from proof of prohibited conduct: preserve the prohibited acts in requirement and retain genuine conditional applicability. Never substitute blanket coverage for an unresolved eligibility condition. Keep rule-specific blockers in review_issues, source-wide blockers in issues, and non-blocking observations in notes. Correct the draft while retaining unresolved legal or evidence problems. Return the complete corrected ExtractionBundle JSON, not a verdict."
+DRAFT_INSTRUCTIONS = "\nExtract the supported rules from this source segment."
+REPAIR_INSTRUCTIONS = "\nRepair the validation errors without inventing evidence. Return complete ExtractionBundle JSON."
 CONTEXT_INSTRUCTIONS = """\nThis extraction includes explicitly supplied supporting_sources.
 Extract rules only from the primary doc_id; retain its source_doc_id, source_url and primary quoted_span.
 Evidence may quote the primary document or the explicitly supplied supporting_sources doc_ids.
@@ -70,6 +73,16 @@ Do not claim legal compliance, advise evasion, or assign confidence percentages.
 """
 
 
+def build_provider_request(model, max_output_tokens, instruction, payload):
+    """Build the exact JSON body for transport or offline request-size checks."""
+    # Responses JSON mode checks the input for an explicit JSON instruction;
+    # the separate instructions field alone does not satisfy that guard.
+    input_text = "Return JSON matching the supplied schema.\n" + json.dumps(payload, ensure_ascii=False)
+    return {"model": model, "store": False, "instructions": SYSTEM + instruction,
+            "input": input_text, "text": {"format": {"type": "json_object"}},
+            "max_output_tokens": max_output_tokens}
+
+
 class ProviderUnavailable(RuntimeError): pass
 class ProviderFailure(RuntimeError): pass
 
@@ -88,12 +101,10 @@ class OpenAIProvider:
 
     def generate(self, instruction, payload):
         response = None
-        # Responses JSON mode checks the input for an explicit JSON instruction;
-        # the separate instructions field alone does not satisfy that guard.
-        input_text = "Return JSON matching the supplied schema.\n" + json.dumps(payload, ensure_ascii=False)
+        request = build_provider_request(self.model, self.max_output_tokens, instruction, payload)
         for attempt in range(3):
             try:
-                response = self.client.post("https://api.openai.com/v1/responses", headers={"Authorization": f"Bearer {self.key}"}, json={"model": self.model, "store": False, "instructions": SYSTEM + instruction, "input": input_text, "text": {"format": {"type": "json_object"}}, "max_output_tokens": self.max_output_tokens})
+                response = self.client.post("https://api.openai.com/v1/responses", headers={"Authorization": f"Bearer {self.key}"}, json=request)
                 if response.status_code in {429, 500, 502, 503, 504} and attempt < 2:
                     time.sleep(2 ** attempt)
                     continue
@@ -187,6 +198,18 @@ def supporting_payload(sources):
              "retrieved_at": source.retrieved_at, "jurisdictions": source.jurisdictions,
              "source_authority": source.authority, "source_type": source.source_type,
              "capture_status": source.capture_status, "source_text": source.text} for source in sources]
+
+
+def source_segment_payload(source, offset, text, supporting_sources=(), *, schema=None):
+    """Build a segment payload from already validated source/context records."""
+    payload = {"schema": ExtractionBundle.model_json_schema() if schema is None else schema,
+               "doc_id": source.doc_id, "source_url": source.url, "retrieved_at": source.retrieved_at,
+               "jurisdictions": source.jurisdictions, "source_authority": source.authority,
+               "original_offset": offset, "source_text": text}
+    if supporting_sources:
+        payload["source_sha256"] = source.sha256
+        payload["supporting_sources"] = supporting_payload(supporting_sources)
+    return payload
 
 
 def check_context_origin(store, run_id, primary, support, context_hash):
@@ -418,11 +441,8 @@ def extract(store, doc_ids=None, provider=None, limit=None, *, supporting_doc_id
                         bundle = validate_bundle(ExtractionBundle.model_validate(cached["bundle"]), sources, source.doc_id, supporting_doc_ids=support_ids)
                         cache_hits += 1
                     else:
-                        payload = {"schema": schema, "doc_id": source.doc_id, "source_url": source.url, "retrieved_at": source.retrieved_at, "jurisdictions": source.jurisdictions, "source_authority": source.authority, "original_offset": offset, "source_text": text}
+                        payload = source_segment_payload(source, offset, text, support, schema=schema)
                         instruction = CONTEXT_INSTRUCTIONS if support else ""
-                        if support:
-                            payload["source_sha256"] = source.sha256
-                            payload["supporting_sources"] = context
                         output, origin_run_id = saved_draft(store, cache_key, provider)
                         if origin_run_id:
                             if support:
@@ -430,10 +450,10 @@ def extract(store, doc_ids=None, provider=None, limit=None, *, supporting_doc_id
                             run.config["draft_replays"].append({"doc_id": source.doc_id, "offset": offset, "origin_run_id": origin_run_id})
                             store.save_run(run)
                         else:
-                            output = provider.generate(instruction + "\nExtract the supported rules from this source segment.", payload)
+                            output = provider.generate(instruction + DRAFT_INSTRUCTIONS, payload)
                         store.write(f"provider_outputs/{run.run_id}/{cache_key}-draft.json", output)
                         # Every segment gets a separate semantic/omission pass, including empty results.
-                        reviewed = provider.generate(instruction + "\nReview the draft against the source. Check interpretation, numeric values/formulas, all coverage/exemptions, date/status support, directional interactions and omitted provisions across all categories. Distinguish covered property/actor classes from proof of prohibited conduct: preserve the prohibited acts in requirement and retain genuine conditional applicability. Never substitute blanket coverage for an unresolved eligibility condition. Keep rule-specific blockers in review_issues, source-wide blockers in issues, and non-blocking observations in notes. Correct the draft while retaining unresolved legal or evidence problems. Return the complete corrected ExtractionBundle JSON, not a verdict.", {**payload, "draft": output})
+                        reviewed = provider.generate(instruction + REVIEW_INSTRUCTIONS, {**payload, "draft": output})
                         store.write(f"provider_outputs/{run.run_id}/{cache_key}-review.json", reviewed)
                         for repair in range(2):
                             try:
@@ -441,7 +461,7 @@ def extract(store, doc_ids=None, provider=None, limit=None, *, supporting_doc_id
                                 break
                             except (ValueError, ValidationError) as exc:
                                 if repair: raise ValueError(f"Extraction validation failed for {source.doc_id}: {str(exc)[:500]}") from None
-                                reviewed = provider.generate(instruction + "\nRepair the validation errors without inventing evidence. Return complete ExtractionBundle JSON.", {**payload, "draft": reviewed, "validation_error": str(exc)[:2000]})
+                                reviewed = provider.generate(instruction + REPAIR_INSTRUCTIONS, {**payload, "draft": reviewed, "validation_error": str(exc)[:2000]})
                                 store.write(f"provider_outputs/{run.run_id}/{cache_key}-repair.json", reviewed)
                         store.write(f"extraction_cache/{cache_key}.json", {"bundle": bundle.model_dump(mode="json"), "origin_run_id": run.run_id, "mode": provider.mode, "model": provider.model, **({"supporting_context_sha256": context_hash} if support else {})})
                     source_kinds.add(bundle.source_kind)

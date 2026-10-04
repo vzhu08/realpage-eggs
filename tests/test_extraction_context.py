@@ -2,8 +2,10 @@
 from copy import deepcopy
 import json
 
+import httpx
 import pytest
 
+from navigator import extraction
 from navigator.demo import SyntheticProvider, synthetic_bundle
 from navigator.extraction import extract, stable_id, validate_bundle
 from navigator.models import ExtractionBundle, Interaction, SourceDocument
@@ -61,6 +63,7 @@ def test_explicit_status_context_anchors_dates_without_extracting_or_promoting_s
     assert run.config['primary_doc_ids'] == [primary.doc_id]
     assert run.config['supporting_doc_ids'] == [support.doc_id]
     payload = provider.payloads[0]
+    assert payload == extraction.source_segment_payload(primary, 0, primary.text, [support])
     assert payload['source_sha256'] == primary.sha256
     supplied = payload['supporting_sources'][0]
     assert supplied['source_text'] == support.text and supplied['sha256'] == support.sha256
@@ -78,6 +81,48 @@ def test_explicit_status_context_anchors_dates_without_extracting_or_promoting_s
     replay = extract(demo, [primary.doc_id], provider=NoCalls(primary, bundle), supporting_doc_ids=[support.doc_id])
     assert replay.counts['cache_hits'] == 1 and cache_path.read_bytes() == cache_before
     assert next(iter(demo.rules().values())).extraction_run_id == run.run_id
+
+
+@pytest.mark.parametrize('name,expected_hash', [
+    ('DRAFT_INSTRUCTIONS', '4dd9a10951107e10cefc602bf1bdda5712a3d3ba2303e5d27d1ac48b03c5c241'),
+    ('REVIEW_INSTRUCTIONS', 'a9e51b62ace47c511439660cd9ce1014d617f1c7a7610975a9449ec8f49f2ca0'),
+    ('REPAIR_INSTRUCTIONS', 'bb945630d38be47f6b60dbf0588df9dc02717d68c471bf0193b26f70a175ac75'),
+])
+def test_request_builder_preserves_prior_transport_bytes_and_matches_generate(monkeypatch, name, expected_hash):
+    # These fingerprints were captured from generate before factoring the
+    # builders; offline sizing must preserve its JSON escaping and prompts.
+    monkeypatch.setenv('OPENAI_API_KEY', 'fictional-test-key')
+    monkeypatch.setenv('OPENAI_MODEL', 'fictional-test')
+    payload = {'source_text': 'A “quoted” line.\nSecond \\ line.', 'schema': {'type': 'object'}}
+    before = deepcopy(payload)
+    instruction = getattr(extraction, name)
+    request = extraction.build_provider_request('fictional-test', 32000, instruction, payload)
+    assert digest(json.dumps(request, ensure_ascii=False).encode('utf-8')) == expected_hash
+    def handler(sent):
+        assert json.loads(sent.content) == request
+        return httpx.Response(200, json={'status': 'completed', 'output': [
+            {'content': [{'type': 'output_text', 'text': '{"rules": []}'}]}]})
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        assert extraction.OpenAIProvider(client).generate(instruction, payload) == {'rules': []}
+    assert payload == before
+
+
+def test_segment_payload_preserves_primary_chunk_and_complete_support_metadata(context):
+    primary, support, _ = context
+    before = primary.model_dump(), support.model_dump()
+    text = primary.text[7:37]
+    single = extraction.source_segment_payload(primary, 7, text)
+    assert single['source_text'] == text and single['original_offset'] == 7
+    assert 'source_sha256' not in single and 'supporting_sources' not in single
+    contextual = extraction.source_segment_payload(primary, 7, text, [support], schema=single['schema'])
+    assert {key: contextual[key] for key in single} == single
+    assert contextual['source_sha256'] == primary.sha256
+    assert contextual['supporting_sources'] == [{
+        'doc_id': support.doc_id, 'source_url': support.url, 'sha256': support.sha256,
+        'retrieved_at': support.retrieved_at, 'jurisdictions': support.jurisdictions,
+        'source_authority': support.authority, 'source_type': support.source_type,
+        'capture_status': support.capture_status, 'source_text': support.text}]
+    assert (primary.model_dump(), support.model_dump()) == before
 
 
 def test_official_legal_context_can_support_a_substantive_field(demo, context):
