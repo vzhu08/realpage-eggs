@@ -137,7 +137,10 @@ See [current handoff](docs/HANDOFF.md), [assist contract](docs/ASSIST_CONTRACT.m
 ```
 
 Review is explicit and may call the configured OpenAI API; an existing exact-version review replays
-without a call. --refresh requests a fresh review. No model calls occur on lookup/evidence HTTP routes.
+without a call. Replay requires matching verifier version, provider mode and the selected model;
+a fixture cache cannot stand in for a CLI live review. An existing live cache can replay offline
+when no model is configured, and partial decisions remain partial in the replay manifest.
+--refresh requests a fresh review. No model calls occur on lookup/evidence HTTP routes.
 GET /api/v1/facts defines accepted supplemental inputs. POST /api/v1/lookup/assist accepts typed,
 request-local answers and reports missing Core capabilities explicitly. The full suite has 74 passing
 tests at a034e2b; live legal extraction and combined Core/UX integration remain unverified.

@@ -1,0 +1,317 @@
+{
+  "task": "PLAT-05",
+  "branch": "codex/platform-review",
+  "base_commit": "3b2d2011de3d0319f96702bbeddb6ec72323dc27",
+  "status": "verified_software_and_bounded_live_review",
+  "checks": {
+    "focused": {
+      "command": "python -m pytest tests/test_evidence.py tests/test_retrieval.py -q",
+      "exit_code": 0,
+      "log": "artifacts\\plat05-final-focused.txt",
+      "log_sha256": "b4aef07215b596fb41d5610f5cedcd742ea87f9ad10a8e625ded65d80089211f",
+      "passed": 26
+    },
+    "full_suite": {
+      "command": "python -m pytest -q",
+      "exit_code": 0,
+      "log": "artifacts\\plat05-final-full.txt",
+      "log_sha256": "2346de9b70f2046752e78fce061dfae7b614c039d5145465e636fb710828b37b",
+      "passed": 259,
+      "skipped": 1,
+      "skip_reason": "Organizer pack not copied into isolated checkout"
+    },
+    "organizer_pack_followup": {
+      "command": "python -m pytest tests/test_api_exports.py::test_real_pack_all_500_addresses_exported_without_fake_laws -q",
+      "environment": {
+        "NAVIGATOR_PACK": "C:\\Users\\vzhu0\\PycharmProjects\\realpage-eggs\\MIT-hackathon-PARTICIPANT-PACK-CLEAN-NO-HOUR16\\participant-final-no-hour16"
+      },
+      "exit_code": 0,
+      "log": "artifacts\\plat05-final-real-pack.txt",
+      "log_sha256": "e7fa46b064805640a701dcbe016bebbdc971fdc9d477d1c8fd4cb97b3c14473d",
+      "passed": 1,
+      "skipped": 0
+    },
+    "total_unique_backend_tests_passed": 260,
+    "contracts": {
+      "command": "python -m navigator contracts",
+      "exit_code": 0,
+      "log": "artifacts\\plat05-final-contracts.txt",
+      "log_sha256": "515406a4a1f49ba0afd9d2ced66ef51c935dfdf4248b418d02bf8f5267102820",
+      "unchanged_schemas": [
+        "openapi.json",
+        "domain.schema.json",
+        "research.schema.json",
+        "competition_rule.schema.json"
+      ]
+    },
+    "warning": "Existing Starlette/httpx TestClient deprecation warning"
+  },
+  "targeted_inventory": [
+    {
+      "command": "python -m navigator --data-dir artifacts/plat05-offline/utf8-original-snapshot source-inventory D001",
+      "exit_code": 0,
+      "cache_mode": "fresh",
+      "counts": {
+        "units": 15,
+        "mapped": 0,
+        "unresolved": 15
+      },
+      "source_hash": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+      "human_reviewed": false,
+      "complete_legal_coverage": false
+    },
+    {
+      "command": "python -m navigator --data-dir artifacts/plat05-offline/utf8-original-snapshot source-inventory D001",
+      "exit_code": 0,
+      "cache_mode": "replay",
+      "counts": {
+        "units": 15,
+        "mapped": 0,
+        "unresolved": 15
+      },
+      "source_hash": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+      "human_reviewed": false,
+      "complete_legal_coverage": false
+    }
+  ],
+  "original_source_file_unchanged": true,
+  "semantic_fixture": {
+    "mode": "fixture",
+    "human_reviewed": false,
+    "fixture_outcome": "partial",
+    "replay_outcome": "partial",
+    "replay_mode": "replay",
+    "replay_origin_mode": "fixture",
+    "generate_calls": 1,
+    "dependency_decisions": [
+      {
+        "field": "dependencies",
+        "status": "insufficient",
+        "explanation": "Structural/context gaps remain: cross_reference:Except as provided in section 99.:missing",
+        "spans": []
+      }
+    ],
+    "missing_provider_cli": {
+      "exit_code": 2,
+      "error": "ProviderUnavailable",
+      "fixture_cache_not_used_as_live": true
+    },
+    "offline_report_sha256": "0bc1cc2cc217c5ded7fbdd2ab161464568c41b98f67d6d91380cdf71de91d844"
+  },
+  "live_verification": {
+    "status": "verified",
+    "input_hashes": {
+      "rules.json": "9b27278b231ef70979604356657958456a281741501c475fb4644cce58f896ed",
+      "sources.json": "0337104f1cfc110c1385df4bc4be7116ac94e8b7c42d72ef9f2d5de0285e4e39"
+    },
+    "source_count": 87,
+    "rule_count": 140,
+    "selected_rule": "r-12c99cf95c4f2cd2242e",
+    "doc_id": "D001",
+    "model": "gpt-6.1-sol",
+    "live_mode": "live",
+    "decisions": [
+      {
+        "field": "coverage_conditions",
+        "status": "supported",
+        "explanation": "The conjunction correctly requires residential units in Berkeley, provision to Berkeley landlords by sale, licensing, or other provision, and an algorithm setting or recommending rents or occupancy levels. The additional predicates track the process/product definition and require the same identified input data to satisfy the Competitor Data definition: nonpublic information about another landlord's property, concerning the specified rental information, and strictly less than 90 days old. The source does not specify the reference time for measuring data age; the rule appropriately identifies that uncertainty rather than substituting construction age or another trigger.",
+        "span_count": 2
+      },
+      {
+        "field": "exemption_conditions",
+        "status": "supported",
+        "explanation": "The outer any correctly represents alternative definitional exclusions. The publication branch requires both aggregated anonymous publication and no recommendations of future lease terms. Affordable-housing limits, project-financing market research, and appraisals are separate alternatives. The software-development branch requires the stated purpose and applies the operational-input restriction to the expressly described Competitor Data predictive/machine-learning activity. Its not/any structure preserves other software-development activities without requiring irrelevant operational-input facts. This is supported by the express clarification, subject to the interpretation uncertainty already recorded concerning 'includes without limitation.'",
+        "span_count": 1
+      },
+      {
+        "field": "exemptions",
+        "status": "supported",
+        "explanation": "The narrative accurately describes exclusions from the algorithm definition, rather than blanket exemptions for landlords or properties. It retains the no-recommendation qualification for anonymous aggregated publications and the operational-input qualification for the expressly described model-development use of Competitor Data.",
+        "span_count": 1
+      },
+      {
+        "field": "key_value",
+        "status": "supported",
+        "explanation": "The summary identifies the three prohibited provision actions in subsection A. Its scope remains qualified by the requirement, coverage predicates, and definitional exclusions; it does not assert that every algorithm sale is prohibited.",
+        "span_count": 1
+      },
+      {
+        "field": "lifecycle",
+        "status": "supported",
+        "explanation": "Pending is supported as the November 18, 2025 passage-to-print snapshot, not as a finding about later status. The record distinguishes posting before adoption from adoption itself and records only passage to print. Neither the ordinance's prescriptive text nor the URL or retrieval date establishes enactment. Leaving effective_date and end_date null avoids inventing dates.",
+        "span_count": 1
+      },
+      {
+        "field": "penalties",
+        "status": "supported",
+        "explanation": "Section 13.63.040(A) expressly applies to subsection A provider violations and supports all listed remedies, the maximum of $1,000 per violation, and mandatory reasonable fees and costs when the City Attorney prevails. The rule appropriately does not import subsection B's tenant remedies or separate-month/separate-unit counting into this provider obligation.",
+        "span_count": 1
+      },
+      {
+        "field": "requirement",
+        "status": "supported",
+        "explanation": "The requirement accurately paraphrases subsection A's provider prohibition, preserves its Berkeley landlord and residential-unit scope, and incorporates the algorithm and Competitor Data definitions and exclusions. It does not collapse the separate landlord-use obligation in subsection B into this rule. This is supported as proposed ordinance content, not as evidence of an enacted prohibition.",
+        "span_count": 2
+      },
+      {
+        "field": "status_events",
+        "status": "supported",
+        "explanation": "The dated status record expressly identifies November 18, 2025 as the passage-to-print date. Encoding a pending event on that date is supported. No adoption or effective-date event is inferred from the ordinance text, publication instructions, URL date, or retrieval timestamp.",
+        "span_count": 1
+      }
+    ],
+    "evidence_blocking_issues": [],
+    "original_inputs_unchanged": true,
+    "human_reviewed": false,
+    "limitations": [
+      "Model assessment of bounded supplied passages; not independent legal accuracy or human review",
+      "Unrecognized references and omitted provisions may remain outside context"
+    ],
+    "live_manifest": {
+      "run_id": "98f8619f5cf541e8b84a5179c3be93b3",
+      "operation": "semantic_review",
+      "mode": "live",
+      "started_at": "2026-10-04T02:51:48.613546+00:00",
+      "finished_at": "2026-10-04T02:52:54.655276+00:00",
+      "elapsed_seconds": 66.042,
+      "outcome": "success",
+      "input_hashes": {
+        "cache_key": "d091b0f9083945c1a9b220ca9f2ed672458b4215cc004d041432e80944d79044"
+      },
+      "config": {
+        "rule_id": "r-12c99cf95c4f2cd2242e",
+        "verifier_version": "semantic-v1",
+        "max_attempts": 2,
+        "model": "gpt-6.1-sol"
+      },
+      "versions": {
+        "pipeline": "0.1.0",
+        "evaluator": "0.1.0"
+      },
+      "counts": {
+        "decisions": 8,
+        "model_calls": 1
+      },
+      "errors": []
+    },
+    "replay_manifest": {
+      "run_id": "b369e559619b4545ab168f26f8be645d",
+      "operation": "semantic_review",
+      "mode": "replay",
+      "started_at": "2026-10-04T02:52:54.702299+00:00",
+      "finished_at": "2026-10-04T02:52:54.706629+00:00",
+      "elapsed_seconds": 0.004,
+      "outcome": "success",
+      "input_hashes": {
+        "cache_key": "d091b0f9083945c1a9b220ca9f2ed672458b4215cc004d041432e80944d79044"
+      },
+      "config": {
+        "rule_id": "r-12c99cf95c4f2cd2242e",
+        "model": "gpt-6.1-sol",
+        "origin_mode": "live",
+        "verifier_version": "semantic-v1"
+      },
+      "versions": {
+        "pipeline": "0.1.0",
+        "evaluator": "0.1.0"
+      },
+      "counts": {
+        "decisions": 8,
+        "model_calls": 0
+      },
+      "errors": []
+    },
+    "private_input": "data/plat05-internal-input",
+    "source_context_characters": 4940,
+    "explicit_payload_transfer_approved": true,
+    "secret_values_recorded": false,
+    "property_or_address_records_in_payload": false,
+    "live_report_sha256": "8a7bf521be08d39a0fa56a01232bd182795551c88712f2d3d8a0249274ed91c4",
+    "live_review_sha256": "e794e394c3422c21d8f563822bbac769cfdd6f1599e2a53afa91846a5cb811d5",
+    "usage": [
+      {
+        "response_id": "resp_0be06195b183d364016ac1bf45c7ec87d2bdb3da76a0a109c4",
+        "usage": {
+          "input_tokens": 5647,
+          "input_tokens_details": {
+            "cache_write_tokens": 5644,
+            "cached_tokens": 0
+          },
+          "output_tokens": 4809,
+          "output_tokens_details": {
+            "reasoning_tokens": 299
+          },
+          "total_tokens": 10456
+        },
+        "model": "gpt-6.1-sol",
+        "status": "completed"
+      }
+    ],
+    "replay_provider_construction_forbidden": true
+  },
+  "limitations": [
+    "Inventory mapping is structural, not complete legal coverage.",
+    "Synthetic fixtures and transport stubs do not establish live model performance.",
+    "No independent legal or human review is claimed.",
+    "PLAT-04 local continuation 11afb55 is preserved separately.",
+    "The live check covers one D001 rule; other rules and unresolved source units are not certified by it."
+  ],
+  "previous_baseline_checks": {
+    "regressions_before_fix": {
+      "passed": 21,
+      "failed": 4
+    },
+    "focused": {
+      "command": "python -m pytest tests/test_evidence.py tests/test_retrieval.py -q",
+      "passed": 26,
+      "exit_code": 0
+    },
+    "full_suite": {
+      "command": "python -m pytest -q",
+      "passed": 226,
+      "exit_code": 0,
+      "isolated_copy": "artifacts/plat05-review-check",
+      "log_sha256": "571f96e92d01e38aae01975db0f1e0f754176341fd712feb544ac54da3d18083"
+    },
+    "contracts": {
+      "command": "python -m navigator contracts",
+      "exit_code": 0,
+      "unchanged_schemas": [
+        "openapi.json",
+        "domain.schema.json",
+        "research.schema.json",
+        "competition_rule.schema.json"
+      ]
+    },
+    "warning": "Existing Starlette/httpx TestClient deprecation warning"
+  },
+  "integrated_main": "ad0881a15d3828a7ecc3bedb83167d6416912371",
+  "tested_commit": "e81c3f4686dbdbb52583644dfea9dcce9d431c57",
+  "internal_store_audit": {
+    "rules": 140,
+    "sources": 87,
+    "captured_sources": 54,
+    "evidence_instances": 541,
+    "invalid_evidence": [],
+    "rules_digest": "4844d3cc8aada8111120c52fb35e8662fa6b468cd3f6ff848c6b6ce3ab89175a",
+    "original_download_sha256": "9b27278b231ef70979604356657958456a281741501c475fb4644cce58f896ed",
+    "original_input_copies_identical": true,
+    "source_hash_mismatches": [],
+    "matches_core_recorded_rules_digest": true
+  },
+  "targeted_internal_inventory": {
+    "doc_id": "D001",
+    "version": "source-units-v2",
+    "counts": {
+      "units": 15,
+      "mapped": 5,
+      "unresolved": 10
+    },
+    "source_hash": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17",
+    "human_reviewed": false,
+    "complete_legal_coverage": false,
+    "fresh_mode": "fresh",
+    "replay_mode": "replay",
+    "original_inputs_unchanged": true
+  }
+}

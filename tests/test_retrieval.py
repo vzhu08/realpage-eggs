@@ -60,6 +60,20 @@ def test_inventory_is_versioned_non_exhaustive_and_replays(demo):
     assert revised["cache_mode"] == "fresh" and revised["counts"]["unresolved"] > 0
 
 
+def test_inventory_rejects_quote_with_mismatched_end_offset(demo):
+    source = next(iter(demo.sources().values()))
+    rule = next(iter(demo.rules().values()))
+    # Same verbatim quote, but the supplied end no longer selects that quote.
+    for item in rule.evidence:
+        item.end += 1
+    rule.status_events = []
+    rule.interactions = []
+    demo.save_collection("rules", {rule.team_rule_id: rule})
+    result = inventory_source(demo, source.doc_id)
+    assert result["counts"]["mapped"] == 0
+    assert result["counts"]["unresolved"] == result["counts"]["units"]
+
+
 @pytest.mark.parametrize("position", [0, 2500, 4990])
 @pytest.mark.parametrize("budget", [100, 1200])
 def test_small_context_budget_preserves_anchor_and_original_offsets(demo, position, budget):

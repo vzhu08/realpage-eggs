@@ -1,4 +1,6 @@
 """Explicit, bounded review using the existing provider; never called by lookup."""
+import os
+
 from .evidence import check_rule, rule_hash, semantic_key
 from .extraction import OpenAIProvider, ProviderFailure, ProviderUnavailable
 from .models import Model, SemanticDecision, SemanticReview
@@ -49,13 +51,19 @@ def review_rule(store, rule_id, provider=None, refresh=False):
     rule = rules[rule_id]
     key = semantic_key(rule, sources, VERIFIER_VERSION)
     cached = store.read(f"semantic_reviews/{key}.json")
-    # Cache replay needs no credentials and never masquerades as a fresh live run.
+    # A CLI review requests live provenance. An injected fixture or a different
+    # configured model cannot silently satisfy that request from another cache.
     if cached and not refresh:
         original = SemanticReview.model_validate(cached)
-        replay = original.model_copy(update={"mode": "replay", "limitations": original.limitations + [f"Replayed cached {original.mode} review; no new model call"]})
-        run = store.new_run("semantic_review", "replay", input_hashes={"cache_key": key}, config={"rule_id": rule_id, "model": original.model})
-        store.finish(run, "success", decisions=len(replay.decisions), model_calls=0)
-        return replay
+        expected_mode = getattr(provider, "mode", "live")
+        expected_model = provider.model if provider is not None else os.getenv("OPENAI_MODEL") or None
+        if (original.mode == expected_mode and original.verifier_version == VERIFIER_VERSION
+                and (expected_model is None or original.model == expected_model)):
+            # Exact live-cache replay remains usable offline without credentials.
+            replay = original.model_copy(update={"mode": "replay", "limitations": original.limitations + [f"Replayed cached {original.mode} review; no new model call"]})
+            run = store.new_run("semantic_review", "replay", input_hashes={"cache_key": key}, config={"rule_id": rule_id, "model": original.model, "origin_mode": original.mode, "verifier_version": VERIFIER_VERSION})
+            store.finish(run, "partial" if any(d.status != "supported" for d in replay.decisions) else "success", decisions=len(replay.decisions), model_calls=0)
+            return replay
     report = check_rule(rule, sources)
     run = store.new_run("semantic_review", getattr(provider, "mode", "live"), input_hashes={"cache_key": key}, config={"rule_id": rule_id, "verifier_version": VERIFIER_VERSION, "max_attempts": 2})
     owned_provider = provider is None
