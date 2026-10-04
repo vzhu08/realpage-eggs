@@ -1,0 +1,7 @@
+*.pdf -text -diff
+*.png -text -diff
+*.jpg -text -diff
+*.txt -text -whitespace
+*.json -text
+*.py text eol=lf
+*.md text eol=lf

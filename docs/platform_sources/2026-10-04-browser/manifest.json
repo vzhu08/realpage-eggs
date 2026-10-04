@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "original_manifest_sha256": "1457e7df8b71aa707faf5330cb68056f86d3579000850e1c211d769eee77e80b",
+  "original_archive_sha256": "aef53a494d97dde284afc740ae089329727ceae4ad4dce41a064a9222ee5676c",
+  "pypdf_version": "6.10.0",
+  "files": [
+    {
+      "path": "HOB_B781_LEGISLATIVE_RECORD.txt",
+      "bytes": 5704,
+      "sha256": "78f52013915a7102a36f49602f1fece8e8ea3c02e1e977381bfbdbd963a68ca1",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "HOB_B781_PRINTOUT-1.png",
+      "bytes": 303596,
+      "sha256": "0dd03e584f1bf545a0d73b4506abe1ba123b8b78e7b3797d9b34571c76853a24",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "HOB_B781_PRINTOUT-2.png",
+      "bytes": 253038,
+      "sha256": "276da43deb20880b71019bb69db8f84208884b9bf800c00af16b905845bc9489",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "HOB_B781_PRINTOUT-3.png",
+      "bytes": 78401,
+      "sha256": "a62ea6ecc9ae28383b8d604f8a69e7ca915f0cb693f6aaa346cac1871b4c5857",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "HOB_B781_PRINTOUT.extracted.txt",
+      "bytes": 5196,
+      "sha256": "240725a6eb4bccd93bc8510b113afe54eb39eefcd25fdb44a259eb6b19c4c576",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "HOB_B781_PRINTOUT.pdf",
+      "bytes": 145140,
+      "sha256": "f24604ecdce01db3bbf3b9a74ff3639e1398e85c5a486d0dd31982f09faff24d",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "HOB_IQM2_ALL_NOTICES.txt",
+      "bytes": 232,
+      "sha256": "e9e0376f3225658c07de7de194c20f31704722ff8957347769faea9c34505fb5",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "HOB_PUBLIC_NOTICES_INDEX.txt",
+      "bytes": 13876,
+      "sha256": "f0981cbd0c45651d671c2e591aabde7d76fba21309b093a16411a6f35448ef8d",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_25_057_ADOPTION_NOTICE.extracted.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_25_057_ADOPTION_NOTICE.pdf",
+      "bytes": 48134,
+      "sha256": "b740c15bc34fe002db01601695f5bd0a0851b4ae9bffc86f68bfe2e8104263b8",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_25_057_ADOPTION_NOTICE.png",
+      "bytes": 158638,
+      "sha256": "4e1864bcb2caa309056420758cce871d010385eb187827925313b8c396f194e5",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_25_098_ADOPTION_NOTICE.extracted.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_25_098_ADOPTION_NOTICE.pdf",
+      "bytes": 51702,
+      "sha256": "e5410cb5bc2b6b708e3edd217a6283ae1d848cc48cc818dd75bbba077f77226a",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_25_098_ADOPTION_NOTICE.png",
+      "bytes": 171928,
+      "sha256": "0da6b3f05e713b48b7d036a8643430f7468923fc53fabf0ebcfbc85c4a42f19e",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_25_105_ADOPTION_NOTICE.extracted.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_25_105_ADOPTION_NOTICE.pdf",
+      "bytes": 52970,
+      "sha256": "20c6978e747b21874c4ce13c8d94353f1042e721dadbb7e87be64045583f503d",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_25_105_ADOPTION_NOTICE.png",
+      "bytes": 175373,
+      "sha256": "2858a95ecbfd820b183f58573d8c6daa84007d7829cdf29f69679e7b71aaebfe",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_MAY21_NOTICE_INDEX.txt",
+      "bytes": 4966,
+      "sha256": "4e7973d12f19a92f79e0cc14720fbda93595498765bb8afb8716a7b87cd8901f",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_OCT8_NOTICE_INDEX.txt",
+      "bytes": 4911,
+      "sha256": "d618cfbb29da2a773d8a77858f2437d50d0c9f7e5498c133dd49f37482e53496",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "JC_SEP24_NOTICE_INDEX.txt",
+      "bytes": 5025,
+      "sha256": "5dc4682740deb4f845a1530be30e0a15271c00b5de6627dea270f59085b5fb0b",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "MA_COUNTY_JUDGMENT_ENTRY.jpg",
+      "bytes": 210834,
+      "sha256": "0e81cf317efce5891f7c38d606ea655b94abcce676e82ea0cee7b6d92b08c280",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "MA_FULL_COURT_RESCRIPT_ENTRY.jpg",
+      "bytes": 203308,
+      "sha256": "5246b1de751ee16721d391a1ae416e11336257dbfca19a02b2cb8cce502b3824",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "MA_OFFICIAL_OPINION_PORTAL.txt",
+      "bytes": 1649,
+      "sha256": "55c9715d108ae988ce2b5ea2d5847b3098570c90c752164dfc5f017103bce32f",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "MA_SJC_13893_DOCKET.txt",
+      "bytes": 17643,
+      "sha256": "30c4e8bd039432871570f545aba8076fec1f3e975ad62cf81e2b89f7a9c2e07f",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "MA_SJ_2026_0063_DOCKET.txt",
+      "bytes": 4298,
+      "sha256": "c587b3315248dafd9d6c7edc4b0265c59e875ccd34282f807065423e3f13de82",
+      "preserved_from_original_archive": true
+    },
+    {
+      "path": "captures.json",
+      "bytes": 6764,
+      "sha256": "17d0150a070d89cb057213934da04002b5c4b7ef18c12331d2a37f35cf0cc3e6",
+      "derivation": "Original capture metadata with HTML references marked private; source URLs/timestamps/text/file fields unchanged"
+    },
+    {
+      "path": "content_review.json",
+      "bytes": 2945,
+      "sha256": "dc7f1fbfe018325a494f3c2f730028448afb092f1d12c970cd979f08d58b2774",
+      "preserved_from_original_archive": true
+    }
+  ]
+}
