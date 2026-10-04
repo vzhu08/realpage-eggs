@@ -1,5 +1,21 @@
 # CORE-06: real change-case evidence and source disagreements
 
+## Current next action: completed D069 pilot, offline follow-up ready
+
+The user asks Core A to continue after the successful one-document paid pilot. Follow
+[Daniel's next steps](../CORE_NEXT_STEPS.md) and verify the committed
+[D069-only evidence bundle](../platform_pilots/2026-10-04-d069/README.md).
+PR #23's regional source review is already merged; do not repeat it. Compare the seven
+paid rules with its grouped D069 candidate, classify/compile supported predicate gaps,
+and deliver exact-span candidate changes plus true/false/unknown checks. Six rules have
+uncompiled coverage; all seven remain review-needed. No paid rerun is needed or authorized.
+
+Municipal publication/operative records and official court verification remain Platform
+obligations. They block affected conclusions, not this offline increment. The full corpus
+run remains paused; the user-authorized $5 pilot is completed, not a blanket resumption.
+This user-requested coordination update supersedes older wait instructions only for the
+independent work listed in the next-steps document. Claim a fresh branch/path before writing.
+
 Priority: P0 T1-T5 and lifecycle support; P1 reusable source comparison.
 State: Partial; software and agent source review complete, including PLAT-11/12 delivery.
 Missing publication/court/version records and independent human review block full acceptance.

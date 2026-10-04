@@ -1,5 +1,20 @@
 # Current plan: real-data change intelligence
 
+## Current demo-delivery priority — October 4, 2026
+
+Next Platform session follows [PLAT-13](tasks/PLAT-13.md) through
+[PLAT-16](tasks/PLAT-16.md): existing deployment integration, selected snapshot assembly,
+needed typed-input support, then freeze/export/rehearsal. Read [source-use decisions](DATA_SOURCE_RULES.md).
+Work within the user's existing three-hour coding/build window; use focused checks and preserve
+citation/date/unknown behavior. Keep the local demo available if hosting/account work stalls.
+
+The municipal publication and official court-verification gaps remain external dependencies for
+particular T2/T3/T5 conclusions. Do not block all delivery on them or invent evidence. Timebox only
+concrete new leads. The participant guide prioritizes Modules A/B, then change tracking. Final
+source/extraction eligibility is separate from a successful pipeline or a public website.
+
+This section and the current board supersede historical next-task and snapshot counts below.
+
 User-assigned next work after the October 3 readiness audit. This section supersedes the historical
 planning snapshots below. Main `3b2d201` already includes Core A/B and frontend; do not rebuild them.
 The signature journey is: source -> rule -> property -> useful question -> date change -> portfolio

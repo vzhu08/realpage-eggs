@@ -1,5 +1,26 @@
 # PLAT-12: remaining source evidence and manual extraction pilot
 
+## Completed pilot and current handoff
+
+The user ran the manual pilot successfully: run `a6f959812096402480a583f7e4310452`,
+350.109 seconds, two successful API requests, seven new rules, no errors. The earlier
+no-paid-call statements below describe preparation only. All seven candidates remain
+review-needed; six retain unsupported coverage. The full corpus and live release stay unchanged.
+
+User-requested continuation: publish docs and a D069-only portable evidence bundle so Daniel
+can resume independent offline work. Branch `codex/platform-pilot-handoff`, base
+`7eef8b2799eef18c26af33338a402f172a0600dc`, clean tracked checkout at claim. Root is sole writer;
+read-only agent reviews next-step scope. Claimed paths: `docs/CORE_NEXT_STEPS.md`,
+`docs/platform_pilots/2026-10-04-d069/**`, this card, `docs/EXTRACTION_PILOT.md`,
+shared TASKS/OWNERSHIP, and user-requested coordination pointers in CORE-06 and CORE_A_HANDOFF.
+Core implementation and historical source-review artifacts remain owned by Daniel.
+The user subsequently prioritized a three-hour coding/build freeze for demo preparation.
+Keep checks focused; do not substitute unsupported dates/court outcomes for missing records.
+
+See [next steps](../CORE_NEXT_STEPS.md). Municipal publication records and official court
+verification still belong to Platform. No additional provider request or teammate message is
+part of this handoff. Existing authority covers publishing/merging the completed increment.
+
 Owner: Vincent / Platform; root is sole writer; NJ/MA agents perform bounded read-only research.
 State: manual pilot implemented and offline verified; source follow-up remains partial.
 User requested the remaining municipal dates/publication and official court
@@ -36,3 +57,9 @@ Starlette deprecation warning. Includes a mocked two-request end-to-end pilot, s
 immutability, no-retry/budget limits and explicit credential selection. No paid provider calls.
 Contract generation succeeded; all four committed schema files have zero drift. Generated
 example churn from this Windows run is excluded from the change.
+
+Completed-pilot handoff checks: six evidence payload hashes verified; seven canonical Rules
+and one SourceDocument validate; all 25 distinct evidence spans match; provider lineage,
+two HTTP 200 responses and token counts reproduce with no network/store writes. The existing
+Core source-review byte check stops on Windows CRLF checkout drift (t1_amendments.json); all
+three historical output files match Git after newline normalization and remain untouched.

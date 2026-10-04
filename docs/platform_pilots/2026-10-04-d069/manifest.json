@@ -1,0 +1,23 @@
+{
+  "label": "PARTIAL_D069_CANDIDATE_EVIDENCE_NOT_A_STORE_OR_RELEASE",
+  "run_id": "a6f959812096402480a583f7e4310452",
+  "source_sha256": "1fdbfb48743a46429c3f47dbd8d08c665739202361661e1a2f19b94bb0ec43a6",
+  "source_documents": 1,
+  "candidate_rules": 7,
+  "all_rules_need_review": true,
+  "unsupported_coverage_rules": 6,
+  "distinct_verified_quote_spans": 25,
+  "files": {
+    "sources.json": "24d8faf58c5f62ccf0b4343f7d06f4ec01f89248c6d3f95390a72132e322d5f3",
+    "rules.json": "fe172043989f6dc3c4275eb430740a27fc3f8e2168bc17c4fd79f3682bf182d5",
+    "run.json": "51fec7f40586ce9a1f72b4c4369528bf29a0c6b58919766afacbdc9bf63fd0b3",
+    "pilot_budget.json": "0d1e94b6033d6e9db2ec19c2d129db63556c6710924e8d8479bb326a4f5eefe9",
+    "usage.json": "95b56a7821f2d953a4ab10a6e2eef52c255726abefca473a5fc25123e15fa0b8",
+    "provider_review.json": "27ed7d2bea475cfa698147b5e7c2bb12c9b7147d85ed8f8bdd94506a8d4f7d5f"
+  },
+  "limits": [
+    "Original run counts describe the complete private copy; this bundle is a seven-rule subset.",
+    "No independent human/legal acceptance, served-store promotion or additional paid authorization.",
+    "Preserve original provider lineage; separately label any amended candidates."
+  ]
+}

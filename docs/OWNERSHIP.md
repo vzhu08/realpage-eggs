@@ -15,6 +15,20 @@ Core A, Core B and UX ownership remain unchanged. Root owns integration, shared 
 | PLAT-10 CI | Root | `codex/platform-ci` / `artifacts/platform-ci` | `.github/workflows/platform.yml`; PLAT-10 card/evidence |
 | PLAT-11 source acquisition | Root (only writer; agents read-only) | `codex/platform-source-acquisition` / reused clean `artifacts/platform-ci`, base `445102a` | `docs/platform_sources/**`, PLAT-11 card and shared Platform board/ownership/PLAT-06 status correction |
 | PLAT-12 source follow-up/manual pilot | Root (only writer; agents read-only) | `codex/platform-source-closeout` / `artifacts/platform-ci`, base `9ff4396` | `docs/platform_sources/2026-10-04-followup/**`, `docs/EXTRACTION_PILOT.md`, `scripts/extraction_pilot.py`, `tests/test_extraction_pilot.py`, PLAT-12 card and shared docs |
+| PLAT-12 completed-pilot handoff | Root (sole writer; read-only review) | `codex/platform-pilot-handoff` / `artifacts/platform-ci`, base `7eef8b2` | `docs/CORE_NEXT_STEPS.md`, `docs/platform_pilots/2026-10-04-d069/**`, pilot runbook/card, shared board/ownership; user-requested coordination pointers only in CORE-06 and CORE_A_HANDOFF |
+
+## Next Platform demo assignments
+
+PLAT-13/14/15/16 are assigned to Vincent for the user's next chat; execution claims are not
+allocated yet. Their cards define scope and dependencies. Existing PR #22 / RENDER-01 keeps its
+writer and checkout until reviewed/released; the new session must coordinate before overlapping
+its deployment files. Core A/B and UX path ownership remains unchanged.
+
+This board update is root-only documentation work on `codex/platform-demo-board`, clean tracked
+checkout `artifacts/platform-ci`, base `fec517db973f102c7623a22947b57eb644b2aaa5`.
+Claims: docs/TASKS.md, PLAN.md, OWNERSHIP.md, DATA_SOURCE_RULES.md,
+starter PLATFORM_API.md and new PLAT-13 through PLAT-16 cards. Read-only helper checks the
+participant rules. No runtime, source snapshot, provider run or deployment change is claimed.
 
 Full claimed paths and base commits are in each task card. Agents commit locally; root reviews and
 publishes. Shared files remain single-writer. This exception does not resume paid extraction or
