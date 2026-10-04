@@ -172,6 +172,28 @@
     "answer_effort": 3,
     "allow_partial_date": true
   },
+  "person_under_bpc_16702": {
+    "field": "person_under_bpc_16702",
+    "meaning": "Whether the identified actor is a person within California Business and Professions Code 16702. Its inclusive definition names corporations, firms, partnerships and associations existing under or authorized by California, another state's or a foreign country's laws. Use a documented classification for the same actor being evaluated; leave unknown if unsupported or disputed. Do not infer it from the property, residential use, an owner name or owner_type. This answer does not establish prohibited conduct.",
+    "data_type": "boolean",
+    "unit": null,
+    "allowed_values": [],
+    "minimum": null,
+    "maximum": null,
+    "answer_effort": 3,
+    "allow_partial_date": true
+  },
+  "end_consumer_of_product_or_service": {
+    "field": "end_consumer_of_product_or_service",
+    "meaning": "Whether that same identified actor is the end consumer of the particular product or service being evaluated under California Business and Professions Code 16729(d)(5). The captured provision excludes the end consumer from its person definition but gives no further end-consumer definition. Supply an answer only when that classification is supported; leave unknown if unclear or disputed. Do not infer it from property ownership, residential use or software use, or combine different actors or products.",
+    "data_type": "boolean",
+    "unit": null,
+    "allowed_values": [],
+    "minimum": null,
+    "maximum": null,
+    "answer_effort": 3,
+    "allow_partial_date": true
+  },
   "collected_information_nonpublic": {
     "field": "collected_information_nonpublic",
     "meaning": "Single actor/activity with documented owner, dataset, process and recipient mapping; do not combine unrelated activities. Missing or disputed facts stay null. The selected qualifying information is not available to the public at no cost; a combined dataset containing such information is nonpublic even when it also contains public information. Evaluate the same dataset used by the selected activity.",

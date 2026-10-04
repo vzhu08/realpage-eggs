@@ -670,7 +670,7 @@
         },
         "evaluations_used": 1,
         "limits_hit": [],
-        "algorithm_version": "correlated-partitions-v3",
+        "algorithm_version": "correlated-partitions-v4-fact-priority",
         "exhaustive": false
       },
       "evidence_reports": [
@@ -885,12 +885,12 @@
         "navigator/evidence_package.py": "c380327a7c2a3582c4a575e95703adba9c43f8a2f448ecaeff6234d0bf4eef99",
         "navigator/export.py": "3c4f2b6d13c93bd1be916321d30040e10b9039dcc7ae0ab65f3a81e9ebee7fdc",
         "navigator/extraction.py": "051c4217b76e0db6273e3eb1bd8ccb5c4f9fde70b2623c5ea747bf2d9860bb16",
-        "navigator/fact_inputs.py": "c9c503e1e1d36a61c417bb85c9b705d7ec42294f65e28079a7b5d14e5f26e054",
+        "navigator/fact_inputs.py": "1d945b9bce5145e1aabcb2846e1a31a1425fbdaef4f3086a025aaa63fce6632e",
         "navigator/geocode.py": "f5ce5fd996950fe701f8dc556f706c4eac80db396efd39d2c9703517dd9f7d27",
         "navigator/ingest.py": "3c72d47b0adea5c4559cc3fa6da4e9e5d5296b2f88bdc7486eb8370602915dd8",
         "navigator/models.py": "8c4b9146ce559c24567fbfbaa1273f23e4110b21f818a8e2fffe361c9c4647fe",
         "navigator/predicates.py": "36e6cd612f6847405088b06c0695b25f3c184c8336211791bf513a0a63770cf8",
-        "navigator/question_planner.py": "8429b1bfe8e1daafdcc7bbde36d3d895c1455c7e041da7f74b44eddfe32ae9d6",
+        "navigator/question_planner.py": "33263f28b849caa5e10380d919672c9bca39bf6a2ada6de2edafd329a892d23a",
         "navigator/research_fixtures.py": "7de7a954f3c22f27f66297335dce19ce5ceb94f6d1e759b494ea35849f12b4fb",
         "navigator/retrieval.py": "c4ec0a74edfaa9d780b22d838452bbeddf8e900120a4baccf71f7edcebbc0f94",
         "navigator/rule_renderer.py": "794f9ca6a2aadd76b0928dd1838ea0380379b746fbd09f9d25a53f5f163bf8b6",
@@ -903,11 +903,11 @@
         "navigator/validation.py": "3210f6145fd4a9398ed1cea132b63226c5fecc78912f37f2c8a6cbfb47c8b90a",
         "requirements.lock": "90b16e76ff91c4af74a66eeff9a92c183cc411abba66c52322bb545dffc0c5c8"
       },
-      "fingerprint": "7a264ddc2f78d269d91bf1d03b9fff697fdacf5c3bef43da984ad8c39a57027a"
+      "fingerprint": "39a24a44e5b863b16886b6922e150d6d1e3d0bb8da698e7e66061d2a7f3e4893"
     },
     "input_sha256": "543cf4f35da12265fec2ce06d0d2b8572ea3b83b057f25035bf73f40fcce19a8",
-    "response_sha256": "3021b3cc0788f691489671b7b572111f7171ca96a365781f674160f31cba4141",
-    "package_sha256": "24fd49317c400966f3f07db3ad484c693a22c403d3ebbde7d62bb4a3454db189",
+    "response_sha256": "100f59e2b636ae7475587a32fe25cdedb036a9cecc90550198a3bb4e71560707",
+    "package_sha256": "ef2420a662057d0962249b423e4a120f995e25e5f35e074bd0ce350ae9d0fb4f",
     "limitations": [
       "Reproduction verifies software output, not legal accuracy or complete source coverage.",
       "Original facts and submitted answers are separate; answers remain unverified and request-local.",

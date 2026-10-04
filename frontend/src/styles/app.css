@@ -2408,6 +2408,26 @@ select.input {
 
 /* ---------------------------------------------------------------- rule by rule */
 
+.result-browse {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  padding-block: var(--s-3);
+}
+
+.result-browse > div { flex: 1 1 24rem; }
+.result-browse__title { font-weight: 650; margin-bottom: var(--s-1); }
+.result-browse .hint { max-width: 78ch; }
+.rule-browser { display: grid; gap: var(--s-2); }
+.rule-browser__fields { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+.rule-browser__fields label { display: grid; gap: var(--s-1); flex: 1 1 15rem; min-width: 0; }
+.rule-browser__fields label:first-child { flex: 2 1 20rem; }
+.rule-browser__fields label > span { font-size: var(--text-sm); font-weight: 600; }
+.rule-browser__fields input, .rule-browser__fields select { width: 100%; min-width: 0; }
+.rule-browser__count { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2); }
+
 .rules {
   display: grid;
   gap: var(--s-5);

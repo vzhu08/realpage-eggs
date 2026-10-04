@@ -3,7 +3,7 @@
 Partitions describe feasible values of ONE fact, never independent predicate truth
 assignments. Exhaustive means the supported property domains were fully explored;
 it never certifies source coverage or legal correctness. Rank = relevant predicate
-count / answer effort (a heuristic, not a probability).
+count / answer effort within each priority tier (a heuristic, not a probability).
 """
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from .rule_renderer import rule_reference
 from .models import (AlternativeOutcome, AssistContext, Expression, FactDefinition,
                      FactQuestion, QuestionPlan, Uncertainty, date_bounds)
 
-ALGORITHM_VERSION = "correlated-partitions-v3"
+ALGORITHM_VERSION = "correlated-partitions-v4-fact-priority"
 PROBE_PROVENANCE = "Hypothetical planner probe; not a known property fact"
 
 
@@ -345,6 +345,53 @@ def _traces(context, prop, evaluations):
     return traces
 
 
+def _factual_priority_fields(context, evaluations, traces, definitions):
+    """Prefer answerable inputs without treating the ranking as legal certainty."""
+    results = {evaluation.team_rule_id: evaluation for evaluation in evaluations}
+    reports, unknown, expressions = {}, {}, {}
+    for report in context.evidence_reports:
+        reports.setdefault(report.rule_id, []).append(report)
+    for trace in traces:
+        for node in _walk(trace):
+            if not node.relevant:
+                continue
+            if node.field:
+                expressions.setdefault(node.field, []).append(node.expression)
+            if node.result == "unknown" and not node.children:
+                unknown.setdefault(node.rule_id, []).append(node)
+    domains, priority = {}, set()
+    for rule in context.rules:
+        current, evidence = results[rule.team_rule_id], reports.get(rule.team_rule_id, [])
+        if (current.jurisdiction != "true" or current.temporal_status != "in_force"
+                or current.result != "unknown" or current.conflict_flag or rule.conflict_flag
+                or rule.review_issues or rule.semantic_verification == "needs_review"
+                or len(evidence) != 1 or evidence[0].blocking_issues
+                or evidence[0].context.status != "available" or evidence[0].context.limits_hit
+                or any(dep.status != "resolved" for dep in evidence[0].context.dependencies)):
+            continue
+        if any(not any(target.team_rule_id != rule.team_rule_id
+                       and target.citation.casefold() == interaction.target_citation.casefold()
+                       and target.jurisdiction.casefold() == interaction.target_jurisdiction.casefold()
+                       and target.category == interaction.category for target in context.rules)
+               for interaction in rule.interactions):
+            continue  # Missing interaction targets cannot be repaired by property answers.
+        leaves = unknown.get(rule.team_rule_id, [])
+        fields = set()
+        for node in leaves:
+            if not _needs_fact(node, context.property) or node.field not in definitions:
+                break
+            if node.field not in domains:
+                domains[node.field] = _domain(definitions[node.field], expressions[node.field],
+                                              context.property, context.as_of)
+            cells, complete = domains[node.field]
+            if not complete or not cells:
+                break
+            fields.add(node.field)
+        else:
+            priority.update(fields)
+    return priority
+
+
 def plan_questions(context: AssistContext) -> QuestionPlan:
     # All objects used by probes, including rules/geography/provenance, are request-local.
     context = context.model_copy(deep=True)
@@ -363,7 +410,8 @@ def plan_questions(context: AssistContext) -> QuestionPlan:
     supported = not any(u.kind == "interpretation" for u in remaining)
     def score(field):
         return len(nodes[field]) / definitions[field].answer_effort if field in definitions else 0
-    fields = sorted(nodes, key=lambda field: (-score(field), field))
+    priority = _factual_priority_fields(context, actual, traces, definitions)
+    fields = sorted(nodes, key=lambda field: (field not in priority, -score(field), field))
     if len(fields) > limits.max_fields:
         limits_hit.append("max_fields")
         fields = fields[:limits.max_fields]
@@ -459,7 +507,10 @@ def plan_questions(context: AssistContext) -> QuestionPlan:
                 ". Other exemptions, geography or evidence gaps may remain after answering. Alternatives are hypothetical, not verified property facts.",
             rule_ids=sorted({n.rule_id for n in references}), predicate_ids=sorted({n.predicate_id for n in references}),
             evidence=list(evidence.values()), alternatives=alternatives, rank_score=score(field),
-            ranking_rationale=f"{len(references)} relevant unresolved predicates / answer-effort {fact.answer_effort}; heuristic, not probability"))
+            ranking_rationale=("Priority tier 1: supported facts for an otherwise unblocked rule" if field in priority else
+                               "Priority tier 2: other relevant unresolved predicates") +
+                f"; within tier, {len(references)} relevant unresolved predicates / answer-effort {fact.answer_effort}; "
+                "ties use field name; heuristic, not probability or a promise that an answer establishes coverage"))
     if len(questions) > limits.max_questions:
         questions = questions[:limits.max_questions]
         limits_hit.append("max_questions")

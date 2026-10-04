@@ -29,6 +29,32 @@ for field, meaning in {
 FACT_DEFINITIONS["owner_type"] = FactDefinition(field="owner_type", meaning="Documented form of ownership; do not infer from a name", data_type="enum", allowed_values=["individual", "corporation", "llc", "partnership", "trust", "government", "nonprofit"], answer_effort=3)
 
 
+# Existing AB 325 predicates refer to these actor classifications. Registering the
+# inputs supplies no actor facts or legal conclusion. Source anchors and limits:
+# docs/core_navigation/property_fact_fix.md.
+for field, meaning in {
+    "person_under_bpc_16702": (
+        "Whether the identified actor is a person within California Business and Professions Code "
+        "16702. Its inclusive definition names corporations, firms, partnerships and associations "
+        "existing under or authorized by California, another state's or a foreign country's laws. "
+        "Use a documented classification for the same actor being evaluated; leave unknown if "
+        "unsupported or disputed. Do not infer it from the property, residential use, an owner name "
+        "or owner_type. This answer does not establish prohibited conduct."
+    ),
+    "end_consumer_of_product_or_service": (
+        "Whether that same identified actor is the end consumer of the particular product or "
+        "service being evaluated under California Business and Professions Code 16729(d)(5). "
+        "The captured provision excludes the end consumer from its person definition but gives "
+        "no further end-consumer definition. Supply an answer only when that classification is "
+        "supported; leave unknown if unclear or disputed. Do not infer it from property ownership, "
+        "residential use or software use, or combine different actors or products."
+    ),
+}.items():
+    FACT_DEFINITIONS[field] = FactDefinition(
+        field=field, meaning=meaning, data_type="boolean", answer_effort=3,
+    )
+
+
 # Source-reviewed input definitions from Core PR #28. Registration supplies no facts
 # and does not approve the candidate rule interpretation. Evidence: docs/evidence/plat15_inputs.json.
 ACTIVITY_FACT_DEFINITIONS = {
