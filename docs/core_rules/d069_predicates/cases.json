@@ -1,0 +1,779 @@
+{
+  "label": "SYNTHETIC_SINGLE_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+  "notes": [
+    "No activity facts are copied between activities.",
+    "All candidate review issues remain present; positive coverage is not independent acceptance.",
+    "Owner counts are supplied after documented grouping; no new grouping algorithm is implemented."
+  ],
+  "cases": [
+    {
+      "name": "collection_route_true",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false
+      },
+      "expected": {
+        "coverage": "true",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [
+        {
+          "path": "coverage_conditions/args/1/args/0",
+          "result": "true",
+          "relevant": true
+        },
+        {
+          "path": "coverage_conditions/args/1/args/1",
+          "result": "false",
+          "relevant": false
+        },
+        {
+          "path": "coverage_conditions/args/1/args/2",
+          "result": "false",
+          "relevant": false
+        }
+      ],
+      "purpose": "Supported coverage remains overall unknown because the candidate needs review."
+    },
+    {
+      "name": "positive_collection_prunes_unanswered_other_routes",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true
+      },
+      "expected": {
+        "coverage": "true",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [
+        {
+          "path": "coverage_conditions/args/1/args/2",
+          "result": "unknown",
+          "relevant": false
+        }
+      ],
+      "purpose": ""
+    },
+    {
+      "name": "vacant_intended_primary_residence",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false,
+        "residential": false
+      },
+      "expected": {
+        "coverage": "true",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [],
+      "purpose": "Actual-use field cannot silently exclude an intended primary-residence rental unit."
+    },
+    {
+      "name": "controller_and_owned_entity_are_one_owner",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 1,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false,
+        "raw_legal_entity_count": 2,
+        "owner_total_units": 100
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [],
+      "purpose": "The supplied reviewed count is one for controller+owned entity. This tests consuming an aggregated count, not an ownership-normalization algorithm."
+    },
+    {
+      "name": "unresolved_owner_mapping_not_inferred_from_units",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false,
+        "owner_total_units": 100,
+        "owner_total_properties": 25,
+        "raw_legal_entity_count": 2
+      },
+      "expected": {
+        "coverage": "unknown",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": [
+          "collected_information_owner_count"
+        ]
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "collection_missing_purpose",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false
+      },
+      "expected": {
+        "coverage": "unknown",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": [
+          "collection_for_automated_analysis_or_training"
+        ]
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "public_collection_not_sensitive",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": false,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force"
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "unlisted_information_is_not_automatically_excluded",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "other_information",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false
+      },
+      "expected": {
+        "coverage": "unknown",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "nonprimary_unit_excluded",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": false,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force"
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "setting_route_true",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": false,
+        "collected_information_owner_count": 1,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": true,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": true,
+        "setting_uses_automated_analysis_or_training": true,
+        "setting_dataset_from_other_owner": true,
+        "setting_information_nonpublic": true,
+        "setting_information_category": "prices",
+        "recipient_rental_owner_count": 1
+      },
+      "expected": {
+        "coverage": "true",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [
+        {
+          "path": "coverage_conditions/args/1/args/1",
+          "result": "true",
+          "relevant": true
+        }
+      ],
+      "purpose": "Setting and the broader sets-or-recommends fact are consistent. One collected owner cannot prevent branch two; the recipient count is separately one and rules out branch three."
+    },
+    {
+      "name": "setting_only_own_owner_data_not_other_owner",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": false,
+        "collected_information_owner_count": 1,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": true,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": true,
+        "setting_uses_automated_analysis_or_training": true,
+        "setting_dataset_from_other_owner": false,
+        "setting_information_nonpublic": true,
+        "setting_information_category": "prices",
+        "recipient_rental_owner_count": 1
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force"
+      },
+      "trace_checks": [],
+      "purpose": "Setting and the broader sets-or-recommends fact are consistent. One collected owner cannot prevent branch two; the recipient count is separately one and rules out branch three."
+    },
+    {
+      "name": "recommendation_alone_is_not_setting_branch_two",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": false,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": true,
+        "setting_uses_automated_analysis_or_training": true,
+        "setting_dataset_from_other_owner": true,
+        "setting_information_nonpublic": true,
+        "setting_information_category": "prices",
+        "recipient_rental_owner_count": 1
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force"
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "third_route_does_not_require_nonpublic_data",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": false,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": false,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": true,
+        "recipient_rental_owner_count": 2,
+        "recommendations_use_algorithm_or_automated_process": true,
+        "same_underlying_process_for_recipients": true
+      },
+      "expected": {
+        "coverage": "unknown",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [
+        {
+          "path": "coverage_conditions/args/1/args/2",
+          "result": "unknown",
+          "relevant": true
+        }
+      ],
+      "purpose": "Parallel agreement and interchangeability remain legal-review residuals; public data alone cannot rule out this route."
+    },
+    {
+      "name": "research_exclusion_requires_no_lease_setting_use",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": true,
+        "sensitive_information_used_to_set_or_recommend_current_or_future_lease_prices_terms_fees_or_occupancy": false
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [
+        {
+          "path": "exemption_conditions/args/1",
+          "result": "true",
+          "relevant": false
+        },
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": false
+        }
+      ],
+      "purpose": "A supported activity exclusion is decisive without inventing or contradicting coverage facts. Unknown coverage is irrelevant."
+    },
+    {
+      "name": "research_label_does_not_override_lease_use",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": true,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false,
+        "sensitive_information_used_to_set_or_recommend_current_or_future_lease_prices_terms_fees_or_occupancy": true
+      },
+      "expected": {
+        "coverage": "true",
+        "result": "unknown",
+        "temporal_status": "in_force"
+      },
+      "trace_checks": [],
+      "purpose": "Deliberately inconsistent-input robustness probe: a claimed research-only label cannot override an affirmative lease-setting-use flag. This checks the conjunction, not a finding of qualifying research or validated facts."
+    },
+    {
+      "name": "selected_free_estimate_activity_excluded",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "developing_estimated_rent",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false,
+        "rent_estimate_public_at_no_cost": true
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force"
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "other_activity_not_exempt_because_actor_also_has_free_estimate",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false,
+        "rent_estimate_public_at_no_cost": true
+      },
+      "expected": {
+        "coverage": "true",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [],
+      "purpose": "The selected activity remains other; an unrelated free estimate does not exempt it."
+    },
+    {
+      "name": "qualifying_brokerage_activity_excluded",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "using_real_estate_brokerage_database",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "database_available_on_equal_terms_to_subscribers": true,
+        "database_lists_properties_for_rent_or_sale": true,
+        "database_sets_or_recommends_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": false,
+        "database_collects_competitively_sensitive_information_to_set_or_recommend_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": false
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [
+        {
+          "path": "exemption_conditions/args/3",
+          "result": "true",
+          "relevant": false
+        },
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": false
+        }
+      ],
+      "purpose": "A supported activity exclusion is decisive without inventing or contradicting coverage facts. Unknown coverage is irrelevant."
+    },
+    {
+      "name": "brokerage_recommending_prices_not_excluded",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "using_real_estate_brokerage_database",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false,
+        "database_available_on_equal_terms_to_subscribers": true,
+        "database_lists_properties_for_rent_or_sale": true,
+        "database_sets_or_recommends_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": true,
+        "database_collects_competitively_sensitive_information_to_set_or_recommend_rental_prices_material_lease_terms_or_occupancy_rates_or_levels": true
+      },
+      "expected": {
+        "coverage": "true",
+        "result": "unknown",
+        "temporal_status": "in_force"
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "day_before_effective",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-06-30",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false
+      },
+      "expected": {
+        "coverage": "true",
+        "result": "not_yet_effective",
+        "temporal_status": "not_yet_effective"
+      },
+      "trace_checks": [
+        {
+          "path": "coverage_conditions/args/1/args/0",
+          "result": "true",
+          "relevant": false
+        }
+      ],
+      "purpose": ""
+    },
+    {
+      "name": "effective_day_inclusive",
+      "candidate_id": "r-b557a89502e37db1bddd",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "facility_type": "other",
+        "activity": "other",
+        "actor_type": "other",
+        "sensitive_information_used_solely_for_research_statistical_analysis_or_testing": false,
+        "activity_collects_owner_information": true,
+        "collected_information_owner_count": 2,
+        "collected_information_nonpublic": true,
+        "collected_information_category": "prices",
+        "collection_for_automated_analysis_or_training": true,
+        "collection_process_used_to_set_or_recommend_rent_terms_or_occupancy": true,
+        "activity_sets_rent_terms_or_occupancy": false,
+        "activity_sets_or_recommends_rent_terms_or_occupancy": false
+      },
+      "expected": {
+        "coverage": "true",
+        "result": "unknown",
+        "temporal_status": "in_force"
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "no_services_transaction_excludes_4a",
+      "candidate_id": "r-b9212520dd133bdf1584",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "actor_role": "rental_property_owner",
+        "facility_type": "other",
+        "service_provider_type": "other",
+        "transaction_owner_rental_unit_count": 1,
+        "receives_coordinator_candidate_services": false,
+        "subscribes_to_coordinator_candidate_services": false,
+        "contracts_for_coordinator_candidate_services": false,
+        "exchanges_consideration_for_coordinator_candidate_services": false
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [
+        {
+          "path": "coverage_conditions/args/2/args/2",
+          "result": "unknown",
+          "relevant": false
+        }
+      ],
+      "purpose": ""
+    },
+    {
+      "name": "receipt_without_payment_keeps_4a_possible",
+      "candidate_id": "r-b9212520dd133bdf1584",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "actor_role": "rental_property_owner",
+        "facility_type": "other",
+        "service_provider_type": "other",
+        "transaction_owner_rental_unit_count": 1,
+        "receives_coordinator_candidate_services": true,
+        "subscribes_to_coordinator_candidate_services": false,
+        "contracts_for_coordinator_candidate_services": false,
+        "exchanges_consideration_for_coordinator_candidate_services": false
+      },
+      "expected": {
+        "coverage": "unknown",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": []
+      },
+      "trace_checks": [
+        {
+          "path": "coverage_conditions/args/2/args/1",
+          "result": "true",
+          "relevant": true
+        }
+      ],
+      "purpose": "Receipt is a separate statutory alternative; coordinator qualification remains unresolved."
+    },
+    {
+      "name": "no_owned_rental_units_excludes_4a",
+      "candidate_id": "r-b9212520dd133bdf1584",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "actor_role": "rental_property_owner",
+        "facility_type": "other",
+        "service_provider_type": "other",
+        "transaction_owner_rental_unit_count": 0,
+        "receives_coordinator_candidate_services": true,
+        "subscribes_to_coordinator_candidate_services": false,
+        "contracts_for_coordinator_candidate_services": false,
+        "exchanges_consideration_for_coordinator_candidate_services": false
+      },
+      "expected": {
+        "coverage": "false",
+        "result": "inapplicable",
+        "temporal_status": "in_force"
+      },
+      "trace_checks": [],
+      "purpose": ""
+    },
+    {
+      "name": "unknown_owner_mapping_not_zero",
+      "candidate_id": "r-b9212520dd133bdf1584",
+      "as_of": "2027-07-01",
+      "facts": {
+        "intended_primary_residence": true,
+        "actor_role": "rental_property_owner",
+        "facility_type": "other",
+        "service_provider_type": "other",
+        "receives_coordinator_candidate_services": true,
+        "subscribes_to_coordinator_candidate_services": false,
+        "contracts_for_coordinator_candidate_services": false,
+        "exchanges_consideration_for_coordinator_candidate_services": false
+      },
+      "expected": {
+        "coverage": "unknown",
+        "result": "unknown",
+        "temporal_status": "in_force",
+        "missing_facts": [
+          "transaction_owner_rental_unit_count"
+        ]
+      },
+      "trace_checks": [],
+      "purpose": ""
+    }
+  ]
+}

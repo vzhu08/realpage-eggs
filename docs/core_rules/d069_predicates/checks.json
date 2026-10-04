@@ -1,0 +1,4005 @@
+{
+  "label": "FOCUSED_SYNTHETIC_CANDIDATE_PROBES",
+  "provider_calls": 0,
+  "store_writes": 0,
+  "results": [
+    {
+      "name": "collection_route_true",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "true",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "coverage_conditions/args/1/args/0",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "coverage_conditions/args/1/args/1",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ]
+          ]
+        },
+        {
+          "path": "coverage_conditions/args/1/args/2",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "positive_collection_prunes_unanswered_other_routes",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "true",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "coverage_conditions/args/1/args/2",
+          "result": "unknown",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "vacant_intended_primary_residence",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "true",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "controller_and_owned_entity_are_one_owner",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unresolved_owner_mapping_not_inferred_from_units",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "unknown",
+      "temporal_status": "in_force",
+      "missing_facts": [
+        "collected_information_owner_count"
+      ],
+      "uncertainty_reasons": [
+        "missing_property_fact: collected_information_owner_count",
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "collection_missing_purpose",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "unknown",
+      "temporal_status": "in_force",
+      "missing_facts": [
+        "collection_for_automated_analysis_or_training"
+      ],
+      "uncertainty_reasons": [
+        "missing_property_fact: collection_for_automated_analysis_or_training",
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "public_collection_not_sensitive",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unlisted_information_is_not_automatically_excluded",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "unknown",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unsupported_condition: The competitively-sensitive-information definition gives nonexhaustive examples. Classification of other information, including materiality of other lease terms, requires legal review; do not treat an unlisted category as excluded.",
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "nonprimary_unit_excluded",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "setting_route_true",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "true",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "coverage_conditions/args/1/args/1",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "setting_only_own_owner_data_not_other_owner",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "recommendation_alone_is_not_setting_branch_two",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "third_route_does_not_require_nonpublic_data",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "unknown",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unsupported_condition: Whether this activity facilitates parallel pricing coordination remains uncompiled: tacit/express agreement between qualifying owners, reasonably interchangeable residential units, pricing conduct and affordability-control exception require evidence and legal review. Parallel prices alone do not establish agreement.",
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "coverage_conditions/args/1/args/2",
+          "result": "unknown",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "research_exclusion_requires_no_lease_setting_use",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "true",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions/args/1",
+          "result": "true",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "research_label_does_not_override_lease_use",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "true",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "selected_free_estimate_activity_excluded",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "true",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "other_activity_not_exempt_because_actor_also_has_free_estimate",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "true",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "qualifying_brokerage_activity_excluded",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "true",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions/args/3",
+          "result": "true",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "brokerage_recommending_prices_not_excluded",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "true",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "day_before_effective",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "not_yet_effective",
+      "coverage": "true",
+      "temporal_status": "not_yet_effective",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "coverage_conditions/args/1/args/0",
+          "result": "true",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "effective_day_inclusive",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "true",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Information combined with public information is deemed nonpublic.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Owner counts must respect the controlling-interest aggregation rule.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The algorithmic-device exclusions are not treated as blanket exemptions from this prohibition, whose definition also refers to other automated processes.",
+        "unresolved_extraction: The exclusion predicates apply to the activity being evaluated, not every activity of the actor.",
+        "unresolved_extraction: The research-use predicate includes rental prices, material lease terms, fees, occupancy rates or levels, and all other current or future lease contract terms.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: The third coordinating-function branch incorporates the parallel-pricing definition, including its affordability-control limitation.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3724,
+              3994
+            ],
+            [
+              "D069",
+              3724,
+              3995
+            ],
+            [
+              "D069",
+              3995,
+              5020
+            ],
+            [
+              "D069",
+              4026,
+              4427
+            ],
+            [
+              "D069",
+              4427,
+              4746
+            ],
+            [
+              "D069",
+              4746,
+              5021
+            ],
+            [
+              "D069",
+              6547,
+              6772
+            ],
+            [
+              "D069",
+              6547,
+              6773
+            ],
+            [
+              "D069",
+              6935,
+              7314
+            ],
+            [
+              "D069",
+              6935,
+              7317
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              7902,
+              8071
+            ],
+            [
+              "D069",
+              8855,
+              8908
+            ],
+            [
+              "D069",
+              8855,
+              8909
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "false",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              2577,
+              3187
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "no_services_transaction_excludes_4a",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              5021,
+              6060
+            ],
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              6060,
+              6547
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              8071,
+              8420
+            ],
+            [
+              "D069",
+              8188,
+              8421
+            ]
+          ]
+        },
+        {
+          "path": "coverage_conditions/args/2/args/2",
+          "result": "unknown",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              5021,
+              6060
+            ],
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              6060,
+              6547
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              8071,
+              8420
+            ],
+            [
+              "D069",
+              8188,
+              8421
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "unknown",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3420,
+              3719
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "receipt_without_payment_keeps_4a_possible",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "unknown",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [
+        "unsupported_condition: The actor must be the qualifying owner or its agent, representative or subcontractor, and the identified service provider must satisfy the operative coordinator/software-or-device/coordinating-function definition and scoped exclusions. Owner units and a service action do not settle these uncompiled relationships and legal qualifications.",
+        "unsupported_condition: The algorithmic-device and coordinating-function exclusions have not been compiled for this services transaction. They include qualifying non-AI spreadsheets requiring human analysis, query-only databases, research/statistical analysis/testing without lease-setting use, free public rent estimates, qualifying brokerage databases, and lawful government affordability-control activities. These are definitional limitations, not blanket exemptions from other prohibited conduct.",
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: Bracketed deleted wording and first-reprint markers are not treated as operative requirements.",
+        "unresolved_extraction: Coordinator status and its service-specific definitional exclusions remain partly uncompiled.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Intended use as a primary residence, not actual current occupancy as a primary residence, is the residential-unit trigger.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The effective date is calculated from the express approval date and section 9.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              5021,
+              6060
+            ],
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              6060,
+              6547
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              8071,
+              8420
+            ],
+            [
+              "D069",
+              8188,
+              8421
+            ]
+          ]
+        },
+        {
+          "path": "coverage_conditions/args/2/args/1",
+          "result": "true",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              8071,
+              8420
+            ],
+            [
+              "D069",
+              8188,
+              8421
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "unknown",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3420,
+              3719
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "no_owned_rental_units_excludes_4a",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "inapplicable",
+      "coverage": "false",
+      "temporal_status": "in_force",
+      "missing_facts": [],
+      "uncertainty_reasons": [],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "false",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              5021,
+              6060
+            ],
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              6060,
+              6547
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              8071,
+              8420
+            ],
+            [
+              "D069",
+              8188,
+              8421
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "unknown",
+          "relevant": false,
+          "source_spans": [
+            [
+              "D069",
+              3420,
+              3719
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unknown_owner_mapping_not_zero",
+      "label": "SYNTHETIC_ACTIVITY_FACTS_NOT_REAL_PROPERTY_FINDINGS",
+      "result": "unknown",
+      "coverage": "unknown",
+      "temporal_status": "in_force",
+      "missing_facts": [
+        "transaction_owner_rental_unit_count"
+      ],
+      "uncertainty_reasons": [
+        "missing_property_fact: transaction_owner_rental_unit_count",
+        "unsupported_condition: The actor must be the qualifying owner or its agent, representative or subcontractor, and the identified service provider must satisfy the operative coordinator/software-or-device/coordinating-function definition and scoped exclusions. Owner units and a service action do not settle these uncompiled relationships and legal qualifications.",
+        "unsupported_condition: The algorithmic-device and coordinating-function exclusions have not been compiled for this services transaction. They include qualifying non-AI spreadsheets requiring human analysis, query-only databases, research/statistical analysis/testing without lease-setting use, free public rent estimates, qualifying brokerage databases, and lawful government affordability-control activities. These are definitional limitations, not blanket exemptions from other prohibited conduct.",
+        "unresolved_extraction: All six categories were reviewed. The source supports algorithmic-rent-setting provisions but does not establish that New Jersey lacks rent-increase limits, just-cause eviction rules, security-deposit rules, application/screening-fee rules, or screening restrictions.",
+        "unresolved_extraction: Bracketed deleted wording and first-reprint markers are not treated as operative requirements.",
+        "unresolved_extraction: Coordinator status and its service-specific definitional exclusions remain partly uncompiled.",
+        "unresolved_extraction: First-reprint markers and bracketed deleted language are preserved in exact quotations but are not treated as operative legal requirements.",
+        "unresolved_extraction: Intended use as a primary residence, not actual current occupancy as a primary residence, is the residential-unit trigger.",
+        "unresolved_extraction: No exclusive end date, later amendment, repeal, or superseding version is established by this source.",
+        "unresolved_extraction: Section 5 preserves existing antitrust enforcement provisions, but their specific penalties and remedies are not reproduced.",
+        "unresolved_extraction: Section 6(a) provides that the act does not authorize conduct already unlawful under the New Jersey Antitrust Act or any other law and is additional to that act. This savings provision does not establish a directional supersedes or conflicts_with interaction.",
+        "unresolved_extraction: Section 8 authorizes discretionary Attorney General rulemaking; it does not require rulemaking or evidence an adopted implementing regulation.",
+        "unresolved_extraction: Security deposits appear as competitively sensitive information, not as a separate deposit limit or handling requirement. References to government rent controls do not supply the substantive terms of those controls.",
+        "unresolved_extraction: Several conduct-specific coverage conditions and definitional exclusions remain explicitly unsupported because they have not been compiled, rather than being assumed true or false.",
+        "unresolved_extraction: The effective date is calculated from the express approval date and section 9.",
+        "unresolved_extraction: The residential-unit definition turns on intended primary-residence use, not actual occupancy. Rental-property-owner status includes direct and indirect ownership and treats a controlling-interest holder and the owning entity as one owner.",
+        "unresolved_extraction: The supported lifecycle snapshot is July 20, 2026. Retrieval is not a lifecycle event or evidence of later legal status. Query status should be evaluated from the supported event history rather than frozen to this snapshot.",
+        "unresolved_extraction: This is an enacted public-law text with express approval evidence. July 20, 2026 approval and section 9 yield July 1, 2027 as the effective date. Enactment and effectiveness are distinct.",
+        "unresolved_extraction: Core A offline candidate overlay: original provider output is unchanged. No new provider review or independent human acceptance is claimed.",
+        "unresolved_extraction: Current expression supersedes historical uncompiled-coverage descriptions only for the selected factual gates. Original review issues are retained for audit; remaining unsupported paths are enumerated in verification.json.",
+        "unresolved_extraction: One actor, one activity or service transaction, a documented owner/principal mapping, associated datasets/processes/recipients, and an as-of date. Do not combine facts from unrelated activities to complete a branch.",
+        "unresolved_extraction: All existing coordinating-function research, free-estimate, brokerage and governmental exclusions apply to that same selected activity. A provider with an excluded estimate activity may also conduct a nonexcluded coordinating function. Keep original paid exemptions unchanged in this bounded increment, with unresolved coordinator exemptions retained.",
+        "unresolved_extraction: Controlling-interest holder and the entity it controls constitute a single owner. Map direct/indirect rental ownership first; do not substitute person count, accounts, legal-entity count, unit count or recipient count for collected-owner count. Complex shared-control/transitive mapping needs legal review; this design adds no ownership-normalization engine.",
+        "unresolved_extraction: Apply to the same selected dataset; mixtures containing nonpublic information are nonpublic. Examples are nonexhaustive. Unknown category or access facts stay null.",
+        "unresolved_extraction: Do not require competitively sensitive or nonpublic information for branch 3; its text contains no such condition. Same-process identity can satisfy the first similarity alternative but cannot settle parallel pricing coordination.",
+        "unresolved_extraction: Remove inherited residential fact from both selected coverage expressions. Registry residential describes actual use, whereas the statute defines intended primary residence. Retain intended_primary_residence, existing NJ jurisdiction routing, facility exclusions and expressly rental-related owner/conduct fields. Vacancy or current residential=false must not independently exclude intended-primary-residence rental units.",
+        "unresolved_extraction: Conduct booleans distinguish rental prices/occupancy from lease terms. If only lease terms are involved and materiality is unresolved, input must remain null and review dependency persists. Do not encode analyst confidence as a legal conclusion or infer materiality from software use.",
+        "unresolved_extraction: Incomplete owner mapping never becomes zero; absent conduct never becomes false; disputed legal characterization remains unknown. Supplemental input registration remains a Platform dependency.",
+        "unresolved_extraction: semantic support needs review"
+      ],
+      "trace_checks": [
+        {
+          "path": "coverage_conditions",
+          "result": "unknown",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              5021,
+              6060
+            ],
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              6060,
+              6547
+            ],
+            [
+              "D069",
+              7317,
+              7620
+            ],
+            [
+              "D069",
+              7317,
+              7623
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ],
+            [
+              "D069",
+              7623,
+              7902
+            ],
+            [
+              "D069",
+              8071,
+              8420
+            ],
+            [
+              "D069",
+              8188,
+              8421
+            ]
+          ]
+        },
+        {
+          "path": "exemption_conditions",
+          "result": "unknown",
+          "relevant": true,
+          "source_spans": [
+            [
+              "D069",
+              3420,
+              3719
+            ],
+            [
+              "D069",
+              5021,
+              6059
+            ],
+            [
+              "D069",
+              6060,
+              6546
+            ],
+            [
+              "D069",
+              7623,
+              7901
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

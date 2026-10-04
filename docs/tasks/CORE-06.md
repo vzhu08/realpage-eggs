@@ -2,6 +2,29 @@
 
 ## Current next action: completed D069 pilot, offline follow-up ready
 
+Execution claim: Daniel / Codex /root, session `01a10555-b81d-7281-95f5-c06399af8238`;
+base `fec517d` (PR #24), branch `codex/core-a-d069-predicates`, checkout
+`/Users/danny/Documents/ChatGPT/RealPage/core-a-change-evidence`.
+Root is sole repository writer for `docs/core_rules/d069_predicates/**`, this card and
+focused additions to `tests/test_engine.py`. Three read-only agents prepare disjoint
+temporary reconciliation/matrix, compilation design and check-plan artifacts. No runtime,
+Platform registry/schema, served store or original pilot files are claimed. The user explicitly
+sets aside the two acquisition dependencies for this increment; unsupported conclusions stay unknown.
+Root also updates the Core-owned `comparison_integrity/verify_integration.py` copy list so
+future disposable tests include the new candidate and immutable pilot test inputs.
+
+Delivery: [D069 predicate handoff](../core_rules/d069_predicates/README.md) reconciles the seven
+paid rules, covers all nine original unsupported nodes and supplies two separate RuleDraft overlays
+for sections 4(a) and 4(e), with 39 exact spans and 20 typed-input requests to Platform. Twenty-five
+synthetic activity/date probes exercise the existing evaluator and traces; the focused suite passes
+124 tests. Original paid files and stores are unchanged, all candidates retain review uncertainty,
+and no served release update or provider call occurs. Platform's next integration action is to
+review/register the consumed input definitions (PLAT-15). Under PR #25 / PLAT-14, these hand-authored
+Drafts stay review annotations: use permitted original automated output or obtain a reproducible
+extraction/provenance handoff for accepted refinements before submission integration. A one-document
+SB763 slice with a fresh $5 ceiling is proposed only; executing it requires new authorization and
+the California corpus-copy/source-use check. Deferred acquisition gaps remain scoped to their conclusions.
+
 The user asks Core A to continue after the successful one-document paid pilot. Follow
 [Daniel's next steps](../CORE_NEXT_STEPS.md) and verify the committed
 [D069-only evidence bundle](../platform_pilots/2026-10-04-d069/README.md).

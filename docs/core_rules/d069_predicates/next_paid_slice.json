@@ -1,0 +1,29 @@
+{
+  "state": "proposal_only_not_authorized_or_executed",
+  "priority": "T1 before another broad corpus pass",
+  "document_ids": [
+    "P11_CA_SB763_TEXT"
+  ],
+  "supporting_offline_source_ids": [
+    "P11_CA_SB763_HISTORY",
+    "P11_CA_BPC_ART3"
+  ],
+  "readiness": "Captured chaptered text, one source chunk, with separately captured history and section-specific effective-date annotations. Prior Core source review is available; reconcile against it after extraction. Execution readiness is conditional on the newly documented California corpus-copy/source-use check; capture availability alone is insufficient.",
+  "scope": "One document only. Review chapter-wide penalties and remedies; do not manufacture a new algorithm-use prohibition or target a predetermined rule count. A supported no-new-housing-rule result is valid.",
+  "proposed_total_budget_ceiling_usd": 5,
+  "local_pilot_limits": {
+    "maximum_requests": 3,
+    "maximum_local_reservation_usd": 4.5,
+    "retries_after_error": 0
+  },
+  "budget_limitation": "A fresh ceiling proposal, not actual billing, a price quote, or unused authorization from the completed D069 pilot. Reconfirm the launcher's current cost assumptions and project limit before a separately authorized run.",
+  "before_execution": [
+    "Explicit user authorization for this document and a fresh budget",
+    "Apply docs/DATA_SOURCE_RULES.md: compare the supplemental California capture with the supplied corpus copy and resolve intended supplemental use/access before promoting it to a submission run; choose the permitted supplied copy when available",
+    "Platform prepares a new private source-complete working copy; do not replace a Store with a partial source bundle",
+    "Use existing manual launcher dry-run and preserve its reservation ledger",
+    "Keep D069 original output and all earlier caches unchanged"
+  ],
+  "d069_rerun": false,
+  "new_provider_calls": 0
+}
