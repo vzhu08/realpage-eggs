@@ -186,51 +186,30 @@ directory; use a new output path and a private store. The smoke wrapper enforces
 real input automatically. The existing research-fixture pytest test regenerates random run IDs in
 `contracts/research_examples`; inspect and discard only that generated noise after a test run.
 
-## Deployment candidate for review
+## Complete frontend/API container
 
-`deploy/Dockerfile` installs the same lock, copies only application/config/contracts/synthetic fixtures,
-runs as UID/GID 10001, and launches the existing API. `.dockerignore` excludes secrets, private stores,
-participant inputs, Git history and caches. `deploy/compose.yaml` requires an explicitly selected
-read-only host snapshot, makes the container filesystem read-only, and publishes port 8000 to host
-loopback only. No provider credentials or production authentication are configured.
+PLAT-08 replaces the earlier backend-only Docker candidate with a multi-stage frontend/API image.
+Use [CONTAINER_RUNBOOK](CONTAINER_RUNBOOK.md) for the current commands, required source revision,
+explicit empty Compose environment, pinned base images and isolated build/runtime verification.
+The older PLAT-02 launch commands are superseded. The local engine is stopped; PLAT-10 runs the
+full synthetic Linux build/smoke in GitHub Actions. See its recorded results before claiming runtime
+acceptance. The native PLAT-06 release remains the verified local fallback.
 
-Validate configuration without starting a service:
+A container check verifies software behavior and read-only local execution. It does not approve
+incomplete legal evidence or establish production authentication, TLS, public hosting or submission.
+Public ingress still needs its own named scope and human authorization. Keep the original source
+store, frozen release and previous image/data pair for rollback.
 
-```powershell
-$env:NAVIGATOR_DATA_PATH = (Resolve-Path data/plat01-recovery).Path
-docker compose -f deploy/compose.yaml config --quiet
-```
+## Private export handoff
 
-After deployment authority and with Docker running, the proposed local launch is:
+Use [RELEASE_HANDOFF](RELEASE_HANDOFF.md) to package a previously verified partial export with exact
+payloads, original manifests, method note and independently retained hashes. PLAT-09 preserves blocked
+scenarios and validates the assembly identity against included serving files; it performs no legal
+re-evaluation. Keep the private output separate from Git and retain the original full release/store.
 
-```powershell
-docker compose -f deploy/compose.yaml build
-docker compose -f deploy/compose.yaml up -d
-Invoke-RestMethod http://127.0.0.1:8000/api/v1/health
-# Stop the service while preserving the host snapshot:
-docker compose -f deploy/compose.yaml down
-```
+## Recorded evidence
 
-The host snapshot must be readable by container UID 10001 on Linux. The image's health check tests
-HTTP liveness, not dataset completeness. The Python base image is a floating `3.12-slim` tag; after a
-successful approved build, record/pin its digest and the built image ID before claiming reproducible
-deployment. Python dependencies are version-pinned but the current lock does not include wheel hashes.
-
-Public access is a separate decision: the API has no production authentication. The concrete proposal
-is to keep this backend loopback-only and place a reviewed HTTPS reverse proxy with access control in
-front of it on an approved host. Host/domain, authentication provider and data-publication rights have
-not been selected. Do not expose port 8000 publicly by changing the binding alone. Production ingress,
-TLS and authentication configuration are outside this local packaging task and require a named claim.
-No new billable endpoint is introduced.
-
-Rollback is to stop the candidate, select the prior reviewed code/image and its matching immutable
-data snapshot, then repeat health and smoke checks before use. Preserve both prior exports and run
-manifests. There is no known-good deployed version yet.
-
-## Verified evidence
-
-See [PLAT-02 evidence](evidence/plat02_packaging.json) and [task handoff](tasks/PLAT-02.md).
-Windows/Python 3.12 clean installation and native HTTP/export behavior are tested. Compose syntax and
-expanded settings are validated. Docker's engine was stopped during verification, so no image build,
-Linux runtime, public deployment or authentication behavior is claimed. Real extraction and combined
-Core/UX integration remain separate tasks.
+The earlier [PLAT-02 evidence](evidence/plat02_packaging.json) remains historical installation and
+native HTTP/export evidence. Current release/integrity records are [PLAT-06](evidence/plat06_release.json),
+[combined integration](evidence/plat06_integration.json), [PLAT-07](evidence/plat07_integrity.json),
+[PLAT-08](evidence/plat08_container.json) and [PLAT-09](evidence/plat09_handoff.json).
