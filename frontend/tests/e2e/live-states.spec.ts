@@ -173,6 +173,7 @@ test.describe('live API: failure, partial and unavailable states', () => {
     await expect(ruleRow(page, 'r-conflict')).toContainText('Jurisdiction uncertain: legal municipality unresolved');
 
     const remaining = page.getByRole('region', { name: /What remains uncertain/ });
+    for (const summary of await remaining.locator('.uncertainty__original > summary').all()) await summary.click();
     // Each open item names the kind of next step it needs; only a property fact is answerable.
     const head = (kind: string) => remaining.locator(`.uncertainty__item[data-kind="${kind}"] .uncertainty__head`);
     const conflict = remaining.locator('.uncertainty__item[data-kind="conflict"]');
@@ -360,6 +361,7 @@ test.describe('live API: questions and evidence against the agreed assist contra
     await expect(page.getByRole('alert')).toHaveCount(0);
     const dependency = page.getByRole('region', { name: /What remains uncertain/ }).locator('.uncertainty__item[data-kind="service_dependency"]');
     await expect(dependency.locator('.uncertainty__head')).toContainText('A backend service was not available');
+    await dependency.locator('.uncertainty__original > summary').click();
     await expect(dependency.locator('.statement__message')).toHaveText('Core question planner has not been integrated');
     await expect(dependency).toContainText('Complete CORE-03/04 and supply navigator.core_assist.plan_questions');
     // The fact definition comes from GET /facts, not from inference.
@@ -380,7 +382,7 @@ test.describe('live API: questions and evidence against the agreed assist contra
     response.lookup.warnings = [];
     response.lookup.metadata = { ...response.lookup.metadata, dataset: { mode: 'real' }, rule_modes: ['live'] };
     response.lookup.rules[0].evidence_mode = 'live';
-    await mockApi(page, { ...baseHandlers(), 'POST /lookup/assist': () => ({ json: response }) });
+    await mockApi(page, { ...baseHandlers(), 'POST /lookup/assist': ({ body }) => ({ json: { ...response, lookup: { ...response.lookup, as_of: body.as_of } } }) });
     await openLive(page);
     await selectProperty(page, '3 Test Street');
     await page.getByRole('button', { name: 'Run lookup' }).click();

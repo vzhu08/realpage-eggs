@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { ApiError } from '../api/errors';
 import type { Tone } from '../lib/labels';
 import { Icon, type IconName } from './Icon';
@@ -54,14 +54,15 @@ export function Notice({ tone = 'info', title, children, actions, role = 'note',
 }
 
 /** Native <details>: keyboard and screen-reader behavior come for free. */
-export function Disclosure({ summary, children, defaultOpen = false, className }: { summary: ReactNode; children: ReactNode; defaultOpen?: boolean; className?: string }) {
+export function Disclosure({ summary, children, defaultOpen = false, className, lazy = false }: { summary: ReactNode; children: ReactNode; defaultOpen?: boolean; className?: string; lazy?: boolean }) {
+  const [expanded, setExpanded] = useState(defaultOpen);
   return (
-    <details className={className ? `disclosure ${className}` : 'disclosure'} open={defaultOpen}>
+    <details className={className ? `disclosure ${className}` : 'disclosure'} open={expanded} onToggle={(event) => setExpanded(event.currentTarget.open)}>
       <summary>
         <Icon name="chevron" size={14} className="disclosure__chevron" />
         <span>{summary}</span>
       </summary>
-      <div className="disclosure__content">{children}</div>
+      {(!lazy || expanded) && <div className="disclosure__content">{children}</div>}
     </details>
   );
 }

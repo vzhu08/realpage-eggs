@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 import sys
 from tempfile import TemporaryDirectory
-from zipfile import ZipFile, ZIP_DEFLATED
+from zipfile import ZipFile, ZIP_DEFLATED, ZIP_LZMA
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -46,7 +46,7 @@ def verify_archive(archive, expected_sha256):
     return manifest
 
 
-def prepare(release, output):
+def prepare(release, output, compression="deflate"):
     release, output = release.resolve(), output.resolve()
     require(not output.exists() and not output.is_relative_to(release), "Choose a new output outside the saved release")
     original = verify_release(release)
@@ -58,7 +58,7 @@ def prepare(release, output):
                 "release_source_revision": original["source_revision"], "files_sha256": files}
     output.mkdir(parents=True)
     archive = output / "snapshot.zip"
-    with ZipFile(archive, "x", compression=ZIP_DEFLATED) as bundle:
+    with ZipFile(archive, "x", compression={"deflate": ZIP_DEFLATED, "lzma": ZIP_LZMA}[compression]) as bundle:
         bundle.writestr("manifest.json", json.dumps(manifest, indent=2) + "\n")
         for name in sorted(files):
             bundle.write(release / "data" / name, f"data/{name}")
@@ -169,6 +169,7 @@ def main():
     package = commands.add_parser("prepare")
     package.add_argument("--release", required=True, type=Path)
     package.add_argument("--output", required=True, type=Path)
+    package.add_argument("--compression", choices=("deflate", "lzma"), default="deflate")
     for name in ("verify", "install"):
         command = commands.add_parser(name)
         command.add_argument("--archive", required=True, type=Path)
@@ -188,7 +189,7 @@ def main():
     build.add_argument("--require-snapshot", choices=("0", "1"), default="0")
     args = parser.parse_args()
     if args.command == "prepare":
-        result = prepare(args.release, args.output)
+        result = prepare(args.release, args.output, args.compression)
     elif args.command == "verify":
         verified = verify_archive(args.archive, args.sha256)
         result = {"status": "verified", "files": len(verified["files_sha256"]), "artifact_label": verified["artifact_label"]}

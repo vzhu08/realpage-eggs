@@ -32,6 +32,7 @@ jobs:
       - name: Prepare a labeled synthetic secret-file fixture
         run: |
           python - <<'PY'
+          import json
           import os
           from pathlib import Path
           from types import SimpleNamespace
@@ -40,6 +41,11 @@ jobs:
           from scripts.render_snapshot import prepare, secret_file
           root = Path("artifacts/free")
           store = build_demo(root / "synthetic")
+          # CI supplies a matching synthetic input manifest, never real property outcomes.
+          Path("config/demo_requests.json").write_text(json.dumps({
+              "format": "realpage-demo-requests-v1", "label": "SYNTHETIC_NOT_FOR_SUBMISSION",
+              "steps": [{"id": "synthetic-opening", "request": {"address_id": "SYNTH-001",
+                         "as_of": "2026-10-01", "answers": []}}]}))
           store.write("change_tests.json", [{"test_id": "SYNTHETIC-CACHE", "type": "as_of", "rule_ids": [],
                                              "as_of_before": "2026-10-01", "as_of_after": "2026-11-15"}])
           frontend = root / "placeholder-frontend"
@@ -88,6 +94,11 @@ jobs:
               expected = json.loads(Path("artifacts/free/synthetic/addresses.json").read_text())
               report = http_smoke("http://127.0.0.1:8032", expected)
               assert client.post("/api/v1/changes", json={"test_id": "SYNTHETIC-CACHE"}).status_code == 200
+              response = client.post("/api/v1/lookup/assist", json={"address_id": "SYNTH-001",
+                                     "as_of": "2026-10-01", "answers": []})
+              assert response.status_code == 200
+              assert response.headers["x-assist-cache"] == "hit"
+              assert response.json()["lookup"]["address"]["address_id"] == "SYNTH-001"
           # The baked result must be usable without calling Core again or writing to the image.
           check = '''
           from pathlib import Path
