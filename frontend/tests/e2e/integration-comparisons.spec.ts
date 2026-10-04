@@ -52,7 +52,7 @@ const claims = (page: Page) => page.getByRole('region', { name: /^Claims compare
 const open = async (page: Page) => {
   await page.goto('about:blank');
   await page.goto('/#/disagreements?mode=live');
-  await expect(page.getByRole('heading', { level: 1, name: 'Two sources, side by side.' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: /Two sources\.\s*The full context\./ })).toBeVisible();
 };
 const serve = (reply: () => Reply | 'abort') =>
   mapleHarbor({

@@ -163,7 +163,7 @@ test.describe('evidence package download (live API, mocked)', () => {
     await downloadPackageButton(page).click();
     await expect(card).toHaveAttribute('data-package', 'loading');
     await page.getByRole('link', { name: 'Compare sources' }).first().click();
-    await expect(page.getByRole('heading', { level: 1, name: 'Two sources, side by side.' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /Two sources\.\s*The full context\./ })).toBeVisible();
     hold.open();
     await page.waitForTimeout(600);
     expect(downloads).toHaveLength(0);

@@ -1,0 +1,45 @@
+TENENT frontend redesign — local review preview
+
+Branch: codex/tenent-frontend-preview
+Original design base: ebda27644ca9b1434f4a58c65943dccec25502ed
+Integration base: 5475b69 (main, including Platform typed inputs and gzip transport)
+Preview: http://127.0.0.1:5182/#/lookup?mode=demo
+Review history: the user reviewed the local preview, then authorized push and merge.
+Release status and complete CI results are recorded in the redesign pull request.
+No public deployment or demo recording is part of this redesign merge.
+
+Design
+- TENENT mark and ivory/navy/gold palette match the video-production brand assets.
+- Architectural hero, source document motifs, structured research guidance.
+- Updated lookup/results/evidence, portfolio changes, and source comparison surfaces.
+- Page fades, staggered card entry, card hover feedback, sliding evidence and picker panels.
+- Responsive layouts and reduced-motion styling.
+- Existing evaluator/API/session logic and source/uncertainty semantics preserved.
+
+Verification
+- npm run verify passed: generated contracts, TypeScript, 237 unit tests, production build.
+- After final accessibility adjustments: TypeScript, all 90 contrast/token tests, and production build passed again.
+- git diff --check passed. Original core-a-change-evidence checkout remained clean.
+- Manual computer-use checks: homepage, search focus and no-match state, recorded property example,
+  answer update, evidence source/check tabs, Escape and focus restoration, property picker,
+  status popover, portfolio comparison/timeline, and source-comparison rendering.
+- Responsive checks at 1440x960, 390x844, and 320x800 viewport overrides; browser zoom makes
+  CSS viewports narrower. No horizontal overflow on the checked start/results screens.
+- No browser console errors observed during the final inspection.
+- Automated end-to-end/integration browser suites are run by the existing PR workflow;
+  see the pull request for the final result. Local manual checks are listed above.
+- Final review retained the mobile restart button, accessible control labels, bright drawer focus,
+  and explicit keyboard traversal through the new hero actions.
+- Production build still warns about JavaScript chunks larger than 500 kB.
+
+Preview content uses explicitly labeled fictional/recorded examples. Production builds retain
+live /api/v1 access and same-origin Platform serving; they do not default to the demo.
+Render auto-deployment is disabled in the existing platform configuration.
+No real product demo footage was recorded.
+
+To restart locally:
+  cd frontend
+  npm ci
+  npm run dev:demo -- --host 127.0.0.1 --port 5182 --strictPort
+
+Review images are in docs/tenent-preview/.

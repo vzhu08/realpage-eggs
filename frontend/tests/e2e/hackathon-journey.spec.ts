@@ -485,7 +485,7 @@ test.describe('recorded demo · step 9: restart', () => {
 
     // From another view, restart also lands on the lookup start page, still in the demo.
     await page.getByRole('link', { name: 'Portfolio changes' }).click();
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('What changes');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/See change\.\s*Understand its reach\./);
     await page.getByRole('button', { name: 'Restart demo' }).click();
     await expect(page.getByRole('heading', { name: 'Start with an example' })).toBeVisible();
     await expect(banner(page)).toBeVisible();

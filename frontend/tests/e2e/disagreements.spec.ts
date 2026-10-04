@@ -89,7 +89,7 @@ test.describe('source disagreements', () => {
 
   test('without a property the demo lists the fixture’s claim observations, labeled, with both exact texts and no winner', async ({ page }) => {
     await openDemo(page, '#/disagreements?mode=demo');
-    await expect(page.getByRole('heading', { level: 1, name: 'Two sources, side by side.' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /Two sources\.\s*The full context\./ })).toBeVisible();
     await expect(conflict(page)).toHaveCount(0);
 
     const section = claimsSection(page);

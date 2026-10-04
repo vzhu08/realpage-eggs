@@ -118,7 +118,7 @@ test.describe('keyboard, focus and layout', () => {
     await page.getByRole('button', { name: 'I don’t know' }).click();
     await expect(page.getByRole('region', { name: /Your answers/ })).toBeVisible();
     await page.getByRole('button', { name: 'Restart demo' }).click();
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Which rental rules reach a property on a given date, and what is still unknown.');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('One property.Many rules.A clearer answer.');
     await expect(page.locator('[data-example]')).toHaveCount(3);
     await expect(page.getByRole('group', { name: 'Result context' })).toHaveCount(0);
     expect(new URL(page.url()).hash).toBe('#/lookup?mode=demo');

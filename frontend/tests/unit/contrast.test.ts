@@ -55,6 +55,10 @@ const TEXT: Record<string, string[]> = {
   'synthetic-bg': ['synthetic-tag'],
   'synthetic-tag': ['synthetic-bg'],
   surface: ['ink'],
+  'gold-ink': ['paper', 'surface', 'surface-2', 'hero-paper', 'gold-wash'],
+  'on-dark': ['ink'],
+  'on-dark-muted': ['ink'],
+  'on-dark-gold': ['ink'],
 };
 
 /** Edges and marks that carry meaning without text → the ground they sit on (3:1). */
@@ -93,7 +97,7 @@ for (const [foreground, grounds] of Object.entries(NON_TEXT)) {
 
 test('every color the stylesheets use is a token', () => {
   // A literal color in a component rule would escape the checks above. Shadows and scrims use rgb().
-  for (const name of ['base.css', 'app.css', 'portfolio.css']) {
+  for (const name of ['base.css', 'app.css', 'portfolio.css', 'tenent.css']) {
     const literals = [...read(name).replace(/url\([^)]*\)/g, '').matchAll(/#[0-9a-f]{3,8}\b/gi)].map((match) => match[0]);
     assert.deepEqual(literals, [], `${name} uses literal colors`);
   }
@@ -101,7 +105,7 @@ test('every color the stylesheets use is a token', () => {
 
 test('every token named in a stylesheet is defined', () => {
   const defined = new Set([...css.matchAll(/--([a-z0-9-]+)\s*:/gi)].map((match) => match[1]!));
-  for (const name of ['base.css', 'app.css', 'portfolio.css']) {
+  for (const name of ['base.css', 'app.css', 'portfolio.css', 'tenent.css']) {
     const sheet = read(name);
     const local = new Set([...sheet.matchAll(/--([a-z0-9-]+)\s*:/gi)].map((match) => match[1]!));
     const missing = [...new Set([...sheet.matchAll(/var\(--([a-z0-9-]+)/gi)].map((match) => match[1]!))].filter((token) => !defined.has(token) && !local.has(token));

@@ -1,12 +1,13 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import type { ApiError } from '../../api/errors';
-import { API_TITLE, CONTRACT_DISCLAIMER } from '../../api/generated/meta';
+import { CONTRACT_DISCLAIMER } from '../../api/generated/meta';
 import type { DataMode, DemoCatalog, HealthResponse } from '../../api/types';
 import { Icon, type IconName } from '../../components/Icon';
 import { Facts } from '../../components/ui';
 import { DEFAULT_API_BASE, DEMO_ONLY } from '../../config';
 import { sentence } from '../../lib/labels';
 import type { View } from '../../state/route';
+import { TenentMark } from './TenentVisuals';
 
 export interface HealthState {
   status: 'idle' | 'loading' | 'ready' | 'error';
@@ -74,27 +75,25 @@ export function Header({ view, hrefFor, mode, onMode, health, apiBase, onApiBase
   return (
     <header className="header">
       <div className="header__inner">
-        <a className="brand" href={hrefFor('lookup')}>
-          <span className="brand__mark" aria-hidden="true">
-            N
-          </span>
-          <span className="brand__name">{API_TITLE}</span>
+        <a className="brand" href={hrefFor('lookup')} onClick={(event) => { event.preventDefault(); onStartOver(); }}>
+          <span className="brand__mark" aria-hidden="true"><TenentMark/></span>
+          <span className="brand__name">TENENT<small>HOUSING LAW. IN CONTEXT.</small></span>
         </a>
 
         <nav className="nav" aria-label="Views">
           <a href={hrefFor('lookup')} aria-current={view === 'lookup' ? 'page' : undefined}>
-            Property lookup
+            <Icon name="building"/> Property lookup
           </a>
           <a href={hrefFor('changes')} aria-current={view === 'changes' ? 'page' : undefined}>
-            Portfolio changes
+            <Icon name="layers"/> Portfolio changes
           </a>
           <a href={hrefFor('disagreements')} aria-current={view === 'disagreements' ? 'page' : undefined}>
-            Compare sources
+            <Icon name="compare"/> Compare sources
           </a>
         </nav>
 
         <div className="header__tools">
-          <button type="button" className="button button--small button--quiet header__restart" onClick={onStartOver}>
+          <button type="button" className="button button--small button--quiet header__restart" aria-label={mode === 'demo' ? 'Restart demo' : 'Start over'} onClick={onStartOver}>
             <Icon name="restart" />
             <span className="header__restart-label">{mode === 'demo' ? 'Restart demo' : 'Start over'}</span>
           </button>
@@ -117,7 +116,7 @@ export function Header({ view, hrefFor, mode, onMode, health, apiBase, onApiBase
           </fieldset>
 
           <div className="status" ref={wrapper}>
-            <button type="button" className={`status-button status-button--${summary.tone}`} aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((value) => !value)}>
+            <button type="button" className={`status-button status-button--${summary.tone}`} aria-label={summary.label} aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((value) => !value)}>
               <Icon name={TONE_ICON[summary.tone]} size={16} className="status-button__icon" />
               {summary.short === summary.label ? (
                 <span className="status-button__label">{summary.label}</span>

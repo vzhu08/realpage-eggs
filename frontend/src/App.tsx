@@ -106,6 +106,7 @@ export function App() {
       <Header view={route.view} hrefFor={hrefFor} mode={mode} onMode={setMode} health={health} apiBase={apiBase} onApiBase={setApiBase} catalog={catalog} onStartOver={startOver} />
       <main id="main" className="main" tabIndex={-1}>
         <ServiceNotice mode={mode} health={health} onDemo={() => setMode('demo')} />
+        <div className="view-transition" key={route.view}>
         {route.view === 'changes' ? (
           <ChangesView key={`changes:${mode}:${apiBase}:${epoch}`} initial={initialChange} lookupHref={lookupHref} disagreementHref={disagreementHref} />
         ) : route.view === 'disagreements' ? (
@@ -130,7 +131,9 @@ export function App() {
             onSwitchToDemo={mode === 'live' ? () => setMode('demo') : undefined}
           />
         )}
+        </div>
       </main>
+      <footer className="app-footer"><span className="app-footer__brand">TENENT</span><span>Housing law. In context.</span><span>Built around the evidence.</span></footer>
       </div>
     </SourceProvider>
   );
