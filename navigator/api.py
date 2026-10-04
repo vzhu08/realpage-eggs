@@ -17,6 +17,8 @@ from .models import AssistRequest, AssistResponse, EvidenceReport, FactDefinitio
 from .retrieval import ContextRetriever, span
 from .models import EvidencePackageRequest, EvidencePackage
 from .evidence_package import build_evidence_package
+from .models import SourceComparisonsResponse, ChangeSummary
+from .service import source_comparisons, change_summary
 
 
 def create_app(root=None, core_services=None, frontend_dist=None):
@@ -95,6 +97,14 @@ def create_app(root=None, core_services=None, frontend_dist=None):
         if not store.addresses(): raise HTTPException(503, detail={"code": "dataset_unavailable", "message": "Run navigator ingest"})
         prepared, _ = prepare_rules(store)
         return call(compute_changes, EvidenceStoreView(store, prepared), request)
+
+    @app.post("/api/v1/changes/summary", response_model=ChangeSummary)
+    def summarized_changes(request: ChangeRequest):
+        return call(change_summary, store, request)
+
+    @app.get("/api/v1/source-comparisons", response_model=SourceComparisonsResponse)
+    def compared_sources():
+        return call(source_comparisons, store)
 
     frontend_dist = frontend_dist or os.getenv("NAVIGATOR_FRONTEND_DIST")
     if frontend_dist:

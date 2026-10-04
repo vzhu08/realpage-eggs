@@ -73,7 +73,7 @@ def serve(args):
     frontend = args.frontend_dist.resolve() if args.frontend_dist else None
     if frontend:
         require((frontend / "index.html").is_file(), "--frontend-dist must contain a built index.html")
-    require(not (data / "ASSEMBLY_INCOMPLETE").exists(), "Snapshot assembly is incomplete")
+    require(not (data / "ASSEMBLY_INCOMPLETE.json").exists(), "Snapshot assembly is incomplete")
     return launch_server(ROOT, data, frontend, args.port)
 
 
@@ -84,7 +84,7 @@ def launch_server(code, data, frontend, port):
 
 SERVING_FILES = ("addresses.json", "resolutions.json", "rules.json", "sources.json", "dataset.json",
                  "extraction_index.json", "latest_extract.json", "change_tests.json", "competition_schema.json",
-                 "negative_findings.json", "latest_ingest.json", "assembly_manifest.json")
+                 "negative_findings.json", "latest_ingest.json", "snapshot_manifest.json", "source_comparisons.json")
 PUBLIC_SUFFIXES = {".html", ".js", ".css", ".map", ".json", ".svg", ".png", ".ico", ".jpg", ".jpeg", ".webp", ".woff", ".woff2", ".ttf", ".txt"}
 
 
@@ -93,7 +93,7 @@ def release_files(root):
     require(root.is_dir(), f"Missing directory: {root}")
     found = {}
     for path in [root, *sorted(root.rglob("*"))]:
-        require(not path.is_symlink() and not path.is_junction(), f"Linked release input: {path}")
+        require(not path.is_symlink() and not getattr(path, "is_junction", lambda: False)(), f"Linked release input: {path}")
         require(path.resolve().is_relative_to(root.resolve()), f"Release input escapes root: {path}")
         if path.is_file():
             found[path.relative_to(root).as_posix()] = fingerprint(path)
@@ -101,7 +101,7 @@ def release_files(root):
 
 
 def release_inputs(data, frontend):
-    require(not (data / "ASSEMBLY_INCOMPLETE").exists(), "Snapshot assembly is incomplete")
+    require(not (data / "ASSEMBLY_INCOMPLETE.json").exists(), "Snapshot assembly is incomplete")
     data_hashes, public_hashes = release_files(data), release_files(frontend)
     required = {"addresses.json", "resolutions.json", "rules.json", "sources.json", "dataset.json"}
     require(required <= data_hashes.keys(), "Snapshot is missing required serving files")

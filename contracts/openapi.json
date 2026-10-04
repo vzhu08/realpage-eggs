@@ -496,6 +496,70 @@
           }
         }
       }
+    },
+    "/api/v1/changes/summary": {
+      "post": {
+        "summary": "Summarized Changes",
+        "operationId": "summarized_changes_api_v1_changes_summary_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangeSummary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/source-comparisons": {
+      "get": {
+        "summary": "Compared Sources",
+        "operationId": "compared_sources_api_v1_source_comparisons_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceComparisonsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown ID"
+          },
+          "422": {
+            "description": "Invalid request"
+          },
+          "503": {
+            "description": "Dataset or extracted rules unavailable"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -820,6 +884,47 @@
         ],
         "title": "Bound"
       },
+      "ChangeImpactGroup": {
+        "properties": {
+          "rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rule Ids"
+          },
+          "affected_address_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Affected Address Ids"
+          },
+          "uncertain_address_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Uncertain Address Ids"
+          },
+          "conflict_flag_address_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Conflict Flag Address Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rule_ids",
+          "affected_address_ids",
+          "uncertain_address_ids",
+          "conflict_flag_address_ids"
+        ],
+        "title": "ChangeImpactGroup"
+      },
       "ChangeRequest": {
         "properties": {
           "test_id": {
@@ -977,6 +1082,276 @@
           "disclaimer"
         ],
         "title": "ChangeResult"
+      },
+      "ChangeSummary": {
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/ChangeResult"
+          },
+          "property_labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Property Labels"
+          },
+          "rule_labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Rule Labels"
+          },
+          "by_jurisdiction": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ChangeImpactGroup"
+            },
+            "type": "object",
+            "title": "By Jurisdiction"
+          },
+          "by_category": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ChangeImpactGroup"
+            },
+            "type": "object",
+            "title": "By Category"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "result",
+          "property_labels",
+          "rule_labels",
+          "by_jurisdiction",
+          "by_category",
+          "notes"
+        ],
+        "title": "ChangeSummary"
+      },
+      "ClaimComparison": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rule Ids"
+          },
+          "before": {
+            "$ref": "#/components/schemas/ComparedClaim"
+          },
+          "after": {
+            "$ref": "#/components/schemas/ComparedClaim"
+          },
+          "classification": {
+            "type": "string",
+            "enum": [
+              "missing_support",
+              "different_claims",
+              "same_claim"
+            ],
+            "title": "Classification"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "unresolved",
+              "same_observation_not_semantically_verified"
+            ],
+            "title": "Status"
+          },
+          "semantic_support": {
+            "type": "string",
+            "const": "not_checked",
+            "title": "Semantic Support"
+          },
+          "winner": {
+            "type": "null",
+            "title": "Winner"
+          },
+          "legal_amendment": {
+            "type": "null",
+            "title": "Legal Amendment"
+          },
+          "remedy": {
+            "type": "string",
+            "title": "Remedy"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "field",
+          "rule_ids",
+          "before",
+          "after",
+          "classification",
+          "status",
+          "semantic_support",
+          "remedy"
+        ],
+        "title": "ClaimComparison"
+      },
+      "ComparedClaim": {
+        "properties": {
+          "value": {
+            "title": "Value"
+          },
+          "support": {
+            "items": {
+              "$ref": "#/components/schemas/ComparisonSupport"
+            },
+            "type": "array",
+            "title": "Support"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "value",
+          "support"
+        ],
+        "title": "ComparedClaim"
+      },
+      "ComparisonSourceIdentity": {
+        "properties": {
+          "doc_id": {
+            "type": "string",
+            "title": "Doc Id"
+          },
+          "jurisdictions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Jurisdictions"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          },
+          "sha256": {
+            "type": "string",
+            "title": "Sha256"
+          },
+          "manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manifest Sha256"
+          },
+          "capture_status": {
+            "type": "string",
+            "title": "Capture Status"
+          },
+          "authority": {
+            "type": "string",
+            "title": "Authority"
+          },
+          "source_type": {
+            "type": "string",
+            "title": "Source Type"
+          },
+          "issues": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Issues"
+          },
+          "duplicate_of": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duplicate Of"
+          },
+          "actual_sha256": {
+            "type": "string",
+            "title": "Actual Sha256"
+          },
+          "identity_valid": {
+            "type": "boolean",
+            "title": "Identity Valid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "doc_id",
+          "jurisdictions",
+          "url",
+          "retrieved_at",
+          "sha256",
+          "capture_status",
+          "authority",
+          "source_type",
+          "issues",
+          "actual_sha256",
+          "identity_valid"
+        ],
+        "title": "ComparisonSourceIdentity"
+      },
+      "ComparisonSupport": {
+        "properties": {
+          "span": {
+            "$ref": "#/components/schemas/SourceSpan"
+          },
+          "anchor_valid": {
+            "type": "boolean",
+            "title": "Anchor Valid"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ComparisonSourceIdentity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "span",
+          "anchor_valid",
+          "source"
+        ],
+        "title": "ComparisonSupport"
       },
       "EncodedRuleRendering": {
         "properties": {
@@ -2714,6 +3089,65 @@
           "limitations"
         ],
         "title": "SemanticReview"
+      },
+      "SourceComparisonsResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "available",
+              "unavailable"
+            ],
+            "title": "Status"
+          },
+          "observations": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ClaimComparison"
+            },
+            "type": "object",
+            "title": "Observations"
+          },
+          "annotation_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Annotation Sha256"
+          },
+          "source_hashes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Source Hashes"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "observations",
+          "annotation_sha256",
+          "source_hashes",
+          "notes",
+          "disclaimer"
+        ],
+        "title": "SourceComparisonsResponse"
       },
       "SourceContext": {
         "properties": {

@@ -609,3 +609,68 @@ class EvidenceReplayResult(Model):
     input_sha256: str
     response_sha256: str
     disclaimer: str
+
+
+class ComparisonSourceIdentity(Model):
+    doc_id: str
+    jurisdictions: list[str]
+    url: str
+    retrieved_at: str | None
+    sha256: str
+    manifest_sha256: str | None = None
+    capture_status: str
+    authority: str
+    source_type: str
+    issues: list[str]
+    duplicate_of: str | None = None
+    actual_sha256: str
+    identity_valid: bool
+
+
+class ComparisonSupport(Model):
+    span: SourceSpan
+    anchor_valid: bool
+    source: ComparisonSourceIdentity | None
+
+
+class ComparedClaim(Model):
+    value: Any
+    support: list[ComparisonSupport]
+
+
+class ClaimComparison(Model):
+    field: str
+    rule_ids: list[str]
+    before: ComparedClaim
+    after: ComparedClaim
+    classification: Literal["missing_support", "different_claims", "same_claim"]
+    status: Literal["unresolved", "same_observation_not_semantically_verified"]
+    semantic_support: Literal["not_checked"]
+    winner: None = None
+    legal_amendment: None = None
+    remedy: str
+
+
+class SourceComparisonsResponse(Model):
+    status: Literal["available", "unavailable"]
+    observations: dict[str, ClaimComparison]
+    annotation_sha256: str | None
+    source_hashes: dict[str, str]
+    notes: list[str]
+    disclaimer: str
+
+
+class ChangeImpactGroup(Model):
+    rule_ids: list[str]
+    affected_address_ids: list[str]
+    uncertain_address_ids: list[str]
+    conflict_flag_address_ids: list[str]
+
+
+class ChangeSummary(Model):
+    result: ChangeResult
+    property_labels: dict[str, str]
+    rule_labels: dict[str, str]
+    by_jurisdiction: dict[str, ChangeImpactGroup]
+    by_category: dict[str, ChangeImpactGroup]
+    notes: list[str]

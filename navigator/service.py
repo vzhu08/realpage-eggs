@@ -54,3 +54,67 @@ def lookup(store, request, answer_provenance=None):
     modes = sorted({r.evidence_mode for r in relevant_rules})
     if "synthetic" in modes: warnings.append("SYNTHETIC DEMONSTRATION: not actual housing law")
     return LookupResponse(address=prop, as_of=request.as_of, jurisdiction=resolution, evaluations=evaluations, rules=relevant_rules, sources=metadata_sources, warnings=warnings, metadata={"version": VERSION, "dataset": store.read("dataset.json", {}), "rule_modes": modes, "extraction_run_ids": sorted({r.extraction_run_id for r in relevant_rules}), "partial_data": bool(missing or unprocessed), "missing_source_ids": missing, "unprocessed_source_ids": unprocessed}, disclaimer=DISCLAIMER)
+def source_comparisons(store):
+    """Recheck Core-authored claim annotations against this store's unchanged sources."""
+    from .config import DISCLAIMER
+    from .models import SourceComparisonsResponse, SourceSpan, ClaimComparison
+    from .source_comparison import compare_claims
+    from .store import digest
+
+    annotations = store.read("source_comparisons.json")
+    if annotations is None:
+        return SourceComparisonsResponse(status="unavailable", observations={}, annotation_sha256=None,
+                                         source_hashes={}, notes=["Core claim annotations are absent from this snapshot."], disclaimer=DISCLAIMER)
+    sources = store.sources()
+    observations, unused = {}, []
+    for name, row in annotations.get("applied_to_saved_sources", {}).items():
+        if "field" not in row:
+            unused.append(name)
+            continue
+        def spans(side):
+            return [SourceSpan.model_validate(s["span"]) for s in row[side]["support"]]
+        compared = compare_claims(row["field"], row["before"]["value"], row["after"]["value"],
+                                  spans("before"), spans("after"), sources, sources, rule_ids=row["rule_ids"])
+        observations[name] = ClaimComparison.model_validate(compared)
+    notes = ["Core-authored observations; semantic support and legal precedence remain unverified.",
+             "Source hashes and exact anchors are recomputed against the selected snapshot on each request."]
+    if unused:
+        notes.append("Separate internal rule-version/conditional-impact records are not claim observations: " + ", ".join(sorted(unused)))
+    return SourceComparisonsResponse(status="available", observations=observations, annotation_sha256=digest(annotations),
+                                     source_hashes={k: digest(v.text.encode("utf-8")) for k, v in sources.items()},
+                                     notes=notes, disclaimer=DISCLAIMER)
+
+
+def change_summary(store, request):
+    """Group the existing Core result without evaluating legal truth a second time."""
+    from .changes import compute_changes
+    from .evidence import prepare_rules, EvidenceStoreView
+    from .models import ChangeSummary, ChangeImpactGroup
+
+    if not store.addresses():
+        raise DatasetUnavailable("Dataset absent; run navigator ingest")
+    rules, _ = prepare_rules(store)
+    result = compute_changes(EvidenceStoreView(store, rules), request)
+    by_id = rules
+    groups = [{}, {}]
+    changed_rules = set()
+    for address_id, deltas in result.differences.items():
+        for delta in deltas:
+            rid = delta["team_rule_id"]
+            changed_rules.add(rid)
+            rule = by_id[rid]
+            for group, label in zip(groups, (rule.jurisdiction, rule.category)):
+                row = group.setdefault(label, {"rule_ids": set(), "affected_address_ids": set(),
+                                               "uncertain_address_ids": set(), "conflict_flag_address_ids": set()})
+                row["rule_ids"].add(rid)
+                row["affected_address_ids" if delta["certainty"] == "definite" else "uncertain_address_ids"].add(address_id)
+                if delta.get("after", {}).get("conflict_flag"):
+                    row["conflict_flag_address_ids"].add(address_id)
+    related = set(result.affected_address_ids + result.uncertain_address_ids + result.conflict_flag_address_ids) | set(result.differences)
+    props = store.addresses()
+    return ChangeSummary(result=result, property_labels={k: props[k].normalized_address for k in sorted(related)},
+                         rule_labels={k: by_id[k].title for k in sorted(changed_rules)},
+                         by_jurisdiction={k: ChangeImpactGroup(**{f: sorted(ids) for f, ids in v.items()}) for k,v in sorted(groups[0].items())},
+                         by_category={k: ChangeImpactGroup(**{f: sorted(ids) for f, ids in v.items()}) for k,v in sorted(groups[1].items())},
+                         notes=["Groups are unions of Core-produced differences; a property can occur in multiple groups or certainty sets.",
+                                "An empty group does not establish no impact; retain the result's status, mapping and blocker notes."])

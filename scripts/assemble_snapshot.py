@@ -25,7 +25,7 @@ CORE_REQUIRED = ("addresses.json", "sources.json", "rules.json", "dataset.json",
                  "resolutions.json", "extraction_index.json", "latest_extract.json",
                  "change_tests.json", "competition_schema.json")
 GEO_REQUIRED = ("addresses.json", "sources.json", "resolutions.json", "dataset.json")
-CORE_OPTIONAL = ("negative_findings.json", "latest_ingest.json")
+CORE_OPTIONAL = ("negative_findings.json", "latest_ingest.json", "source_comparisons.json")
 CORE_DIRS = ("runs", "extraction_cache", "provider_outputs", "semantic_reviews")
 GEO_DIRS = ("runs", "geocode_cache")
 
