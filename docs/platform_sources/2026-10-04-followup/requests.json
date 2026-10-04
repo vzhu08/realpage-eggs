@@ -1,0 +1,88 @@
+[
+  {
+    "doc_id": "P12_NJ_CHARTER",
+    "cases": [
+      "T2",
+      "T3"
+    ],
+    "jurisdictions": [
+      "NJ"
+    ],
+    "url": "https://nj.gov/dca/dlgs/resources/misc_publications/Optional%20Municipal%20Charter%20Law%20-%20Updated%20July%202026.pdf",
+    "title": "NJ DCA Optional Municipal Charter Law, July 2026, section40:69A-181 p49",
+    "user_agent": null
+  },
+  {
+    "doc_id": "P12_MA_ARCHIVE_LINK",
+    "cases": [
+      "T5"
+    ],
+    "jurisdictions": [
+      "MA"
+    ],
+    "url": "https://www.mass.gov/supreme-judicial-court-single-justice-decisions",
+    "title": "Official page linking single-justice archive; not target disposition",
+    "user_agent": null
+  },
+  {
+    "doc_id": "P12_MA_ARCHIVE_SEARCH",
+    "cases": [
+      "T5"
+    ],
+    "jurisdictions": [
+      "MA"
+    ],
+    "url": "https://www.sjcsinglejusticearchive.com/disposition/searchdisposition?DocketNumber=SJ-2026-0063",
+    "title": "Exact archive search; no result is NOT proof of absence",
+    "user_agent": null
+  },
+  {
+    "doc_id": "P12_MA_FULL_DOCKET",
+    "cases": [
+      "T5"
+    ],
+    "jurisdictions": [
+      "MA"
+    ],
+    "url": "https://www.ma-appellatecourts.org/docket/SJC-13893",
+    "title": "Official full-court docket access attempt",
+    "user_agent": null
+  },
+  {
+    "doc_id": "P12_MA_COUNTY_DOCKET",
+    "cases": [
+      "T5"
+    ],
+    "jurisdictions": [
+      "MA"
+    ],
+    "url": "https://www.ma-appellatecourts.org/docket/SJ-2026-0063",
+    "title": "Official county-court docket access attempt",
+    "user_agent": null
+  },
+  {
+    "doc_id": "P12_MA_MANUAL_ACCESS",
+    "cases": [
+      "T5"
+    ],
+    "jurisdictions": [
+      "MA"
+    ],
+    "url": "https://www.mass.gov/search-court-dockets-calendars-and-case-information",
+    "title": "Official manual court-access route",
+    "user_agent": null
+  },
+  {
+    "doc_id": "P12_HOB_NOTICE_INDEX",
+    "cases": [
+      "T2",
+      "T3"
+    ],
+    "jurisdictions": [
+      "Hoboken, NJ"
+    ],
+    "url": "https://hobokennj.iqm2.com/Citizens/LegalNotice.aspx?From=1/1/1900&To=12/31/9999",
+    "title": "City notice-index access; empty/current filter does not establish historical absence",
+    "user_agent": null
+  }
+]

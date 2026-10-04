@@ -14,6 +14,7 @@ Core A, Core B and UX ownership remain unchanged. Root owns integration, shared 
 | PLAT-09 handoff | Handoff agent | `codex/platform-handoff` / `artifacts/platform-handoff` | Handoff packager/test/method/runbook; PLAT-09 card/evidence |
 | PLAT-10 CI | Root | `codex/platform-ci` / `artifacts/platform-ci` | `.github/workflows/platform.yml`; PLAT-10 card/evidence |
 | PLAT-11 source acquisition | Root (only writer; agents read-only) | `codex/platform-source-acquisition` / reused clean `artifacts/platform-ci`, base `445102a` | `docs/platform_sources/**`, PLAT-11 card and shared Platform board/ownership/PLAT-06 status correction |
+| PLAT-12 source follow-up/manual pilot | Root (only writer; agents read-only) | `codex/platform-source-closeout` / `artifacts/platform-ci`, base `9ff4396` | `docs/platform_sources/2026-10-04-followup/**`, `docs/EXTRACTION_PILOT.md`, `scripts/extraction_pilot.py`, `tests/test_extraction_pilot.py`, PLAT-12 card and shared docs |
 
 Full claimed paths and base commits are in each task card. Agents commit locally; root reviews and
 publishes. Shared files remain single-writer. This exception does not resume paid extraction or

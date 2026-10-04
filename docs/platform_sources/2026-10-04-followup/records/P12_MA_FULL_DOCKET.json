@@ -1,0 +1,18 @@
+{
+  "doc_id": "P12_MA_FULL_DOCKET",
+  "cases": [
+    "T5"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://www.ma-appellatecourts.org/docket/SJC-13893",
+  "title": "Official full-court docket access attempt",
+  "user_agent": null,
+  "attempted_at": "2026-10-04T07:24:03.775202+00:00",
+  "status": "failed",
+  "request_headers": {
+    "Accept-Encoding": "identity"
+  },
+  "error": "HTTP Error 403: Forbidden"
+}

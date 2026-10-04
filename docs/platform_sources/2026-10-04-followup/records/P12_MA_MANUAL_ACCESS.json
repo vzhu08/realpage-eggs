@@ -1,0 +1,36 @@
+{
+  "doc_id": "P12_MA_MANUAL_ACCESS",
+  "cases": [
+    "T5"
+  ],
+  "jurisdictions": [
+    "MA"
+  ],
+  "url": "https://www.mass.gov/search-court-dockets-calendars-and-case-information",
+  "title": "Official manual court-access route",
+  "user_agent": null,
+  "attempted_at": "2026-10-04T07:24:03.930181+00:00",
+  "status": "captured_pending_content_review",
+  "request_headers": {
+    "Accept-Encoding": "identity"
+  },
+  "http_status": 200,
+  "final_url": "https://www.mass.gov/search-court-dockets-calendars-and-case-information",
+  "retrieved_at": "2026-10-04T07:24:04.005701+00:00",
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8",
+    "Last-Modified": "Fri, 02 Oct 2026 18:50:41 GMT",
+    "ETag": "\"1790967041-gzip\"",
+    "Date": "Sun, 04 Oct 2026 07:24:04 GMT"
+  },
+  "raw_path": "raw/P12_MA_MANUAL_ACCESS.html",
+  "raw_sha256": "11cb0feb1913f1fe717590d75aaab4bcf8b7a072fcd6c350417614deb9c79b5a",
+  "raw_bytes": 211841,
+  "text_path": "text/P12_MA_MANUAL_ACCESS.txt",
+  "text_sha256": "5cc5d8c641f17004c344e7f736bfd9ff80f77182f56059ac8d856537cd2007c0",
+  "text_characters": 7666,
+  "derivation": {
+    "method": "capture.py VisibleText HTMLParser",
+    "charset": "utf-8"
+  }
+}
