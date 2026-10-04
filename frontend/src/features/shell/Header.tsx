@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import type { ApiError } from '../../api/errors';
 import { API_TITLE, CONTRACT_DISCLAIMER } from '../../api/generated/meta';
 import type { DataMode, DemoCatalog, HealthResponse } from '../../api/types';
-import { Icon } from '../../components/Icon';
+import { Icon, type IconName } from '../../components/Icon';
 import { Facts } from '../../components/ui';
 import { DEFAULT_API_BASE, DEMO_ONLY } from '../../config';
 import { sentence } from '../../lib/labels';
@@ -28,14 +28,23 @@ interface Props {
   onStartOver: () => void;
 }
 
-export function serviceSummary(mode: DataMode, health: HealthState): { label: string; tone: 'ok' | 'warn' | 'bad' | 'idle' } {
-  if (mode === 'demo') return { label: 'Replaying recorded data', tone: 'warn' };
-  if (health.status === 'loading' || health.status === 'idle') return { label: 'Checking the API…', tone: 'idle' };
-  if (health.status === 'error' || !health.data) return { label: 'API not reachable', tone: 'bad' };
-  if (health.data.dataset_readiness === 'available') return { label: 'Dataset ready', tone: 'ok' };
-  if (health.data.dataset_readiness === 'partial') return { label: 'Partial dataset', tone: 'warn' };
-  return { label: 'No dataset loaded', tone: 'bad' };
+type ServiceTone = 'ok' | 'warn' | 'bad' | 'idle';
+
+/**
+ * The state of the data source in words. `label` is the full statement and the button's
+ * accessible name; `short` is what fits in the header beside the navigation.
+ */
+export function serviceSummary(mode: DataMode, health: HealthState): { label: string; short: string; tone: ServiceTone } {
+  if (mode === 'demo') return { label: 'Replaying recorded data', short: 'Recorded data', tone: 'warn' };
+  if (health.status === 'loading' || health.status === 'idle') return { label: 'Checking the API…', short: 'Checking…', tone: 'idle' };
+  if (health.status === 'error' || !health.data) return { label: 'API not reachable', short: 'API not reachable', tone: 'bad' };
+  if (health.data.dataset_readiness === 'available') return { label: 'Dataset ready', short: 'Dataset ready', tone: 'ok' };
+  if (health.data.dataset_readiness === 'partial') return { label: 'Partial dataset', short: 'Partial dataset', tone: 'warn' };
+  return { label: 'No dataset loaded', short: 'No dataset', tone: 'bad' };
 }
+
+/** A shape for each state, so the header never reports a state by color alone. */
+const TONE_ICON: Record<ServiceTone, IconName> = { ok: 'applies', warn: 'info', bad: 'danger', idle: 'future' };
 
 export function Header({ view, hrefFor, mode, onMode, health, apiBase, onApiBase, catalog, onStartOver }: Props) {
   const summary = serviceSummary(mode, health);
@@ -87,24 +96,39 @@ export function Header({ view, hrefFor, mode, onMode, health, apiBase, onApiBase
         <div className="header__tools">
           <button type="button" className="button button--small button--quiet header__restart" onClick={onStartOver}>
             <Icon name="restart" />
-            {mode === 'demo' ? 'Restart demo' : 'Start over'}
+            <span className="header__restart-label">{mode === 'demo' ? 'Restart demo' : 'Start over'}</span>
           </button>
+          {/* The words "API" and "Synthetic" stay in each option's name; a phone shows the short form. */}
           <fieldset className="mode" aria-label="Data source">
             <legend className="sr-only">Data source</legend>
             <label className="mode__option">
               <input type="radio" name="data-mode" checked={mode === 'live'} disabled={DEMO_ONLY} onChange={() => onMode('live')} />
-              <span>Live API</span>
+              <span>
+                Live<span className="mode__more"> API</span>
+              </span>
             </label>
             <label className="mode__option">
               <input type="radio" name="data-mode" checked={mode === 'demo'} onChange={() => onMode('demo')} />
-              <span>Synthetic demo</span>
+              <span>
+                <span className="mode__more">Synthetic </span>
+                <span className="mode__word">demo</span>
+              </span>
             </label>
           </fieldset>
 
           <div className="status" ref={wrapper}>
             <button type="button" className={`status-button status-button--${summary.tone}`} aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((value) => !value)}>
-              <span className="status-button__dot" aria-hidden="true" />
-              <span>{summary.label}</span>
+              <Icon name={TONE_ICON[summary.tone]} size={16} className="status-button__icon" />
+              {summary.short === summary.label ? (
+                <span className="status-button__label">{summary.label}</span>
+              ) : (
+                <>
+                  <span className="sr-only">{summary.label}</span>
+                  <span className="status-button__label" aria-hidden="true">
+                    {summary.short}
+                  </span>
+                </>
+              )}
               <Icon name="chevron" size={14} className="status-button__chevron" />
             </button>
             {open && (
