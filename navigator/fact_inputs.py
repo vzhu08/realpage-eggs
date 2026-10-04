@@ -42,7 +42,7 @@ def validate_facts(facts, definitions=None):
             raise ValueError(f"{name} requires a JSON boolean")
         if kind in {"integer", "number"}:
             valid_type = type(value) is int if kind == "integer" else type(value) in (int, float)
-            if not valid_type or not math.isfinite(value): raise ValueError(f"{name} requires a finite {kind}")
+            if not valid_type or (type(value) is float and not math.isfinite(value)): raise ValueError(f"{name} requires a finite {kind}")
             if definition.minimum is not None and value < definition.minimum: raise ValueError(f"{name} is below its valid minimum")
             if definition.maximum is not None and value > definition.maximum: raise ValueError(f"{name} exceeds its valid maximum")
         if kind == "date":

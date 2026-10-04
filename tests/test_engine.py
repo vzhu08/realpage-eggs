@@ -46,14 +46,18 @@ def test_partial_effective_date_and_history(rule):
     assert temporal(rule, date(2026, 11, 30)) == "unknown"
 
 
-def test_year_proxy_preserves_cutoff_ambiguity(prop):
-    prop.facts["year_built"] = 1978
-    expr = Expression(op="date_on_or_before", fact="certificate_of_occupancy", value="1978-10-01")
-    assert evaluate_expression(expr, prop, DAY).value == "unknown"
-    prop.facts["year_built"] = 1977
-    answer = evaluate_expression(expr, prop, DAY)
-    assert answer.value == "true"
-    assert "proxy" in answer.supporting_facts["certificate_of_occupancy"]["provenance"]
+@pytest.mark.parametrize("year", [1977, 1978, 1979])
+def test_year_built_never_establishes_certificate_or_occupancy(prop, year):
+    prop.facts["year_built"] = year
+    for field in ("certificate_of_occupancy", "first_occupancy_date"):
+        expr = Expression(op="date_on_or_before", fact=field, value="1978-10-01")
+        answer = evaluate_expression(expr, prop, DAY)
+        assert answer.value == "unknown" and answer.missing_facts == [field]
+        assert field not in answer.supporting_facts
+        prop.facts[field] = "1978"
+        assert evaluate_expression(expr, prop, DAY).value == "unknown"
+        prop.facts[field] = "1978-10-01"
+        assert evaluate_expression(expr, prop, DAY).value == "true"
 
 
 def test_verified_units_bound_can_rule_out_exception(prop):
@@ -117,3 +121,72 @@ def test_overlapping_versions_need_evidenced_precedence(rule, prop, resolution):
     other.key_value = "different cap"
     results = evaluate_rules([rule, other], prop, resolution, DAY)
     assert all(e.result == "unknown" and e.conflict_flag for e in results)
+
+
+def link(source, target, scope=True):
+    return Interaction(kind='supersedes', target_citation=target.citation,
+        target_jurisdiction=target.jurisdiction, category=target.category,
+        scope=Expression(op='literal', value=scope), evidence=source.evidence, note='Synthetic priority')
+
+
+def test_false_scope_reverse_edge_does_not_create_cycle(rule, prop, resolution):
+    state = state_rule(rule)
+    rule.interactions = [link(rule, state)]
+    state.interactions = [link(state, rule, False)]
+    answers = {e.team_rule_id: e for e in evaluate_rules([rule, state], prop, resolution, DAY)}
+    assert answers['state'].result == 'superseded'
+    assert not any(e.conflict_flag for e in answers.values())
+
+
+def test_false_scope_priority_does_not_hide_overlapping_version_conflict(rule, prop, resolution):
+    other = rule.model_copy(deep=True)
+    other.team_rule_id, other.requirement = 'other-version', 'A different obligation'
+    rule.interactions = [link(rule, other, False)]
+    assert all(e.result == 'unknown' and e.conflict_flag for e in evaluate_rules([rule, other], prop, resolution, DAY))
+
+
+def test_same_citation_override_does_not_target_itself(rule, prop, resolution):
+    other = rule.model_copy(deep=True)
+    other.team_rule_id, other.requirement = 'other-version', 'Older obligation'
+    rule.interactions = [link(rule, other)]
+    answers = {e.team_rule_id: e for e in evaluate_rules([rule, other], prop, resolution, DAY)}
+    assert answers['other-version'].result == 'superseded'
+    assert answers[rule.team_rule_id].result == 'applies'
+    assert not any(e.conflict_flag for e in answers.values())
+
+
+@pytest.mark.parametrize('first,second', [('2026-01-15', '2026-01'), ('2026-01-15', '2026-01-15')])
+def test_overlapping_status_events_do_not_invent_order(rule, first, second):
+    rule.effective_date = '2026-01-01'
+    events = [StatusEvent(status='enacted', on=first, evidence=rule.evidence), StatusEvent(status='failed', on=second, evidence=rule.evidence)]
+    for order in (events, list(reversed(events))):
+        rule.status_events = order
+        assert temporal(rule, DAY) == 'unknown'
+    rule.status_events.append(StatusEvent(status='enacted', on='2026-02-01', evidence=rule.evidence))
+    assert temporal(rule, DAY) == 'in_force'
+
+
+def test_undated_failed_snapshot_does_not_establish_history(rule):
+    rule.lifecycle, rule.status_events, rule.status_as_of = 'failed', [], None
+    assert temporal(rule, date(1900, 1, 1)) == 'unknown'
+
+
+def test_exclusive_end_and_partial_end_boundaries(rule):
+    rule.end_date = '2026-12-01'
+    assert temporal(rule, date(2026, 11, 30)) == 'in_force'
+    assert temporal(rule, date(2026, 12, 1)) == 'inapplicable'
+    rule.end_date = '2026-12'
+    assert temporal(rule, date(2026, 11, 30)) == 'in_force'
+    assert temporal(rule, date(2026, 12, 1)) == 'unknown'
+    assert temporal(rule, date(2026, 12, 31)) == 'inapplicable'
+
+
+def test_parallel_conflict_edge_cannot_be_treated_as_supersession(rule, prop, resolution):
+    state = state_rule(rule)
+    priority = link(rule, state)
+    conflict = priority.model_copy(update={'kind': 'conflicts_with'}, deep=True)
+    for order in ([priority, conflict], [conflict, priority]):
+        rule.interactions = order
+        answers = evaluate_rules([rule, state], prop, resolution, DAY)
+        assert all(e.conflict_flag for e in answers)
+        assert all(e.result == 'applies' and not e.applied_interactions for e in answers)

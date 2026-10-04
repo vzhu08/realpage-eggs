@@ -1,0 +1,35 @@
+{
+  "run_id": "e7d2438cb4e745c09293536e472c92ca",
+  "mode": "actual_D001_request_error_metadata_only",
+  "errors": [
+    {
+      "http_status": 400,
+      "code": null,
+      "type": "invalid_request_error",
+      "parameter": "input",
+      "message_flags": {
+        "json_object": true,
+        "json_schema": false,
+        "not supported": false,
+        "unsupported": false,
+        "json": true,
+        "input": true,
+        "instructions": false,
+        "max_output_tokens": false,
+        "minimum": false,
+        "maximum": false,
+        "store": false,
+        "verification": false,
+        "verified": false,
+        "credit": false,
+        "quota": false,
+        "billing": false,
+        "organization": false,
+        "model": false,
+        "must contain": true,
+        "include": false,
+        "required": false
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
- "digest": "208abb7377f47b4c",
+ "digest": "8393dfe64420bf16",
  "defs": {
   "AddressItem": {
    "properties": {
@@ -49,7 +49,6 @@
    ]
   },
   "AlternativeOutcome": {
-   "additionalProperties": false,
    "properties": {
     "alternative_id": {
      "type": "string"
@@ -70,8 +69,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "evaluations": {
      "items": {
@@ -86,48 +84,49 @@
      "type": "array"
     },
     "hypothetical": {
+     "type": "boolean",
      "const": true,
-     "default": true,
-     "type": "boolean"
+     "default": true
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "alternative_id",
     "label",
     "probe_facts",
     "evaluations",
     "remaining_uncertainty"
-   ],
-   "type": "object"
+   ]
   },
   "AnalysisLimits": {
-   "additionalProperties": false,
    "properties": {
     "max_questions": {
-     "default": 5,
+     "type": "integer",
      "maximum": 10,
      "minimum": 1,
-     "type": "integer"
+     "default": 5
     },
     "max_fields": {
-     "default": 8,
+     "type": "integer",
      "maximum": 12,
      "minimum": 1,
-     "type": "integer"
+     "default": 8
     },
     "max_evaluations": {
-     "default": 64,
+     "type": "integer",
      "maximum": 256,
      "minimum": 1,
-     "type": "integer"
+     "default": 64
     },
     "max_joint_fields": {
-     "default": 3,
+     "type": "integer",
      "maximum": 4,
      "minimum": 1,
-     "type": "integer"
+     "default": 3
     }
    },
+   "additionalProperties": false,
    "type": "object"
   },
   "AssistContext": {
@@ -184,7 +183,6 @@
    "type": "object"
   },
   "AssistRequest": {
-   "additionalProperties": false,
    "properties": {
     "address_id": {
      "anyOf": [
@@ -194,8 +192,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "address": {
      "anyOf": [
@@ -205,13 +202,12 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "as_of": {
-     "default": "2026-10-01",
+     "type": "string",
      "format": "date",
-     "type": "string"
+     "default": "2026-10-01"
     },
     "supplemental_facts": {
      "additionalProperties": true,
@@ -221,29 +217,28 @@
      "items": {
       "$ref": "SupplementalAnswer"
      },
-     "maxItems": 20,
-     "type": "array"
+     "type": "array",
+     "maxItems": 20
     },
     "scenario_id": {
      "anyOf": [
       {
-       "maxLength": 100,
-       "type": "string"
+       "type": "string",
+       "maxLength": 100
       },
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "limits": {
      "$ref": "AnalysisLimits"
     }
    },
+   "additionalProperties": false,
    "type": "object"
   },
   "AssistResponse": {
-   "additionalProperties": false,
    "properties": {
     "lookup": {
      "$ref": "LookupResponse"
@@ -277,28 +272,29 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "capabilities": {
      "additionalProperties": {
+      "type": "string",
       "enum": [
        "implemented",
        "dependency_unavailable"
-      ],
-      "type": "string"
+      ]
      },
      "type": "object"
     },
     "mode": {
+     "type": "string",
      "enum": [
       "dataset",
       "synthetic",
       "contract_fixture"
-     ],
-     "type": "string"
+     ]
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "lookup",
     "question_plan",
@@ -307,8 +303,7 @@
     "answers_applied",
     "capabilities",
     "mode"
-   ],
-   "type": "object"
+   ]
   },
   "Bound": {
    "properties": {
@@ -482,7 +477,6 @@
    ]
   },
   "EncodedRuleRendering": {
-   "additionalProperties": false,
    "properties": {
     "rule_id": {
      "type": "string"
@@ -503,18 +497,19 @@
      "type": "array"
     },
     "kind": {
+     "type": "string",
      "const": "encoded_rule_not_legal_validation",
-     "default": "encoded_rule_not_legal_validation",
-     "type": "string"
+     "default": "encoded_rule_not_legal_validation"
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "rule_id",
     "text",
     "expression_hash",
     "renderer_version"
-   ],
-   "type": "object"
+   ]
   },
   "Evaluation": {
    "properties": {
@@ -639,9 +634,9 @@
    ]
   },
   "EvidenceCheck": {
-   "additionalProperties": false,
    "properties": {
     "kind": {
+     "type": "string",
      "enum": [
       "source_availability",
       "source_identity",
@@ -649,10 +644,10 @@
       "quote_presence",
       "semantic_support",
       "dependencies"
-     ],
-     "type": "string"
+     ]
     },
     "status": {
+     "type": "string",
      "enum": [
       "pass",
       "fail",
@@ -663,8 +658,7 @@
       "contradicted",
       "insufficient",
       "stale"
-     ],
-     "type": "string"
+     ]
     },
     "message": {
      "type": "string"
@@ -677,8 +671,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "spans": {
      "items": {
@@ -687,15 +680,15 @@
      "type": "array"
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "kind",
     "status",
     "message"
-   ],
-   "type": "object"
+   ]
   },
   "EvidenceReport": {
-   "additionalProperties": false,
    "properties": {
     "rule_id": {
      "type": "string"
@@ -720,8 +713,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "blocking_issues": {
      "items": {
@@ -733,6 +725,8 @@
      "type": "string"
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "rule_id",
     "rule_hash",
@@ -740,8 +734,7 @@
     "context",
     "blocking_issues",
     "disclaimer"
-   ],
-   "type": "object"
+   ]
   },
   "Expression": {
    "properties": {
@@ -800,7 +793,6 @@
    ]
   },
   "FactDefinition": {
-   "additionalProperties": false,
    "properties": {
     "field": {
      "type": "string"
@@ -809,6 +801,7 @@
      "type": "string"
     },
     "data_type": {
+     "type": "string",
      "enum": [
       "boolean",
       "integer",
@@ -816,8 +809,7 @@
       "date",
       "enum",
       "string"
-     ],
-     "type": "string"
+     ]
     },
     "unit": {
      "anyOf": [
@@ -827,8 +819,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "allowed_values": {
      "items": {
@@ -844,8 +835,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "maximum": {
      "anyOf": [
@@ -855,29 +845,28 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "answer_effort": {
-     "default": 1,
+     "type": "integer",
      "maximum": 5,
      "minimum": 1,
-     "type": "integer"
+     "default": 1
     },
     "allow_partial_date": {
-     "default": true,
-     "type": "boolean"
+     "type": "boolean",
+     "default": true
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "field",
     "meaning",
     "data_type"
-   ],
-   "type": "object"
+   ]
   },
   "FactQuestion": {
-   "additionalProperties": false,
    "properties": {
     "question_id": {
      "type": "string"
@@ -922,6 +911,8 @@
      "type": "string"
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "question_id",
     "fact",
@@ -933,8 +924,7 @@
     "alternatives",
     "rank_score",
     "ranking_rationale"
-   ],
-   "type": "object"
+   ]
   },
   "HealthResponse": {
    "properties": {
@@ -1293,7 +1283,6 @@
    ]
   },
   "PredicateTrace": {
-   "additionalProperties": false,
    "properties": {
     "predicate_id": {
      "type": "string"
@@ -1308,12 +1297,12 @@
      "$ref": "Expression"
     },
     "result": {
+     "type": "string",
      "enum": [
       "true",
       "false",
       "unknown"
-     ],
-     "type": "string"
+     ]
     },
     "field": {
      "anyOf": [
@@ -1323,12 +1312,11 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "relevant": {
-     "default": true,
-     "type": "boolean"
+     "type": "boolean",
+     "default": true
     },
     "residual": {
      "anyOf": [
@@ -1338,8 +1326,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "source_refs": {
      "items": {
@@ -1354,14 +1341,15 @@
      "type": "array"
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "predicate_id",
     "rule_id",
     "path",
     "expression",
     "result"
-   ],
-   "type": "object"
+   ]
   },
   "PropertyFacts": {
    "properties": {
@@ -1406,15 +1394,14 @@
    ]
   },
   "QuestionPlan": {
-   "additionalProperties": false,
    "properties": {
     "status": {
+     "type": "string",
      "enum": [
       "complete",
       "partial",
       "unavailable"
-     ],
-     "type": "string"
+     ]
     },
     "questions": {
      "items": {
@@ -1438,9 +1425,9 @@
      "$ref": "AnalysisLimits"
     },
     "evaluations_used": {
-     "default": 0,
+     "type": "integer",
      "minimum": 0,
-     "type": "integer"
+     "default": 0
     },
     "limits_hit": {
      "items": {
@@ -1452,18 +1439,19 @@
      "type": "string"
     },
     "exhaustive": {
-     "default": false,
-     "type": "boolean"
+     "type": "boolean",
+     "default": false
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "status",
     "questions",
     "remaining_uncertainty",
     "limits",
     "algorithm_version"
-   ],
-   "type": "object"
+   ]
   },
   "RawAddress": {
    "properties": {
@@ -1725,18 +1713,17 @@
    ]
   },
   "SemanticDecision": {
-   "additionalProperties": false,
    "properties": {
     "field": {
      "type": "string"
     },
     "status": {
+     "type": "string",
      "enum": [
       "supported",
       "contradicted",
       "insufficient"
-     ],
-     "type": "string"
+     ]
     },
     "explanation": {
      "type": "string"
@@ -1748,15 +1735,15 @@
      "type": "array"
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "field",
     "status",
     "explanation"
-   ],
-   "type": "object"
+   ]
   },
   "SemanticReview": {
-   "additionalProperties": false,
    "properties": {
     "rule_id": {
      "type": "string"
@@ -1771,12 +1758,12 @@
      "type": "object"
     },
     "mode": {
+     "type": "string",
      "enum": [
       "live",
       "fixture",
       "replay"
-     ],
-     "type": "string"
+     ]
     },
     "verifier_version": {
      "type": "string"
@@ -1797,11 +1784,13 @@
      "type": "array"
     },
     "human_reviewed": {
+     "type": "boolean",
      "const": false,
-     "default": false,
-     "type": "boolean"
+     "default": false
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "rule_id",
     "rule_hash",
@@ -1811,11 +1800,9 @@
     "model",
     "decisions",
     "limitations"
-   ],
-   "type": "object"
+   ]
   },
   "SourceContext": {
-   "additionalProperties": false,
    "properties": {
     "spans": {
      "items": {
@@ -1830,12 +1817,12 @@
      "type": "array"
     },
     "status": {
+     "type": "string",
      "enum": [
       "available",
       "partial",
       "missing"
-     ],
-     "type": "string"
+     ]
     },
     "limits": {
      "additionalProperties": {
@@ -1850,26 +1837,26 @@
      "type": "array"
     },
     "retrieval_method": {
-     "default": "exact_anchors_and_bounded_lexical_retrieval",
-     "type": "string"
+     "type": "string",
+     "default": "exact_anchors_and_bounded_lexical_retrieval"
     },
     "semantic_verification": {
+     "type": "boolean",
      "const": false,
-     "default": false,
-     "type": "boolean"
+     "default": false
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "spans",
     "dependencies",
     "status",
     "limits",
     "limits_hit"
-   ],
-   "type": "object"
+   ]
   },
   "SourceDependency": {
-   "additionalProperties": false,
    "properties": {
     "reference": {
      "type": "string"
@@ -1878,6 +1865,7 @@
      "$ref": "SourceSpan"
     },
     "status": {
+     "type": "string",
      "enum": [
       "resolved",
       "missing",
@@ -1885,8 +1873,7 @@
       "cycle",
       "depth_limit",
       "budget_limit"
-     ],
-     "type": "string"
+     ]
     },
     "target_doc_id": {
      "anyOf": [
@@ -1896,8 +1883,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "target_section": {
      "anyOf": [
@@ -1907,8 +1893,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "spans": {
      "items": {
@@ -1920,13 +1905,14 @@
      "type": "string"
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "reference",
     "origin",
     "status",
     "explanation"
-   ],
-   "type": "object"
+   ]
   },
   "SourceDocument": {
    "properties": {
@@ -2018,7 +2004,6 @@
    ]
   },
   "SourceSpan": {
-   "additionalProperties": false,
    "properties": {
     "doc_id": {
      "type": "string"
@@ -2027,12 +2012,12 @@
      "type": "string"
     },
     "start": {
-     "minimum": 0,
-     "type": "integer"
+     "type": "integer",
+     "minimum": 0
     },
     "end": {
-     "minimum": 0,
-     "type": "integer"
+     "type": "integer",
+     "minimum": 0
     },
     "text": {
      "type": "string"
@@ -2045,18 +2030,18 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "doc_id",
     "source_hash",
     "start",
     "end",
     "text"
-   ],
-   "type": "object"
+   ]
   },
   "StatusEvent": {
    "properties": {
@@ -2089,43 +2074,42 @@
    ]
   },
   "SupplementalAnswer": {
-   "additionalProperties": false,
    "properties": {
     "field": {
      "type": "string"
     },
     "value": {},
     "provenance": {
-     "default": "user_provided",
+     "type": "string",
      "enum": [
       "user_provided",
       "demo"
      ],
-     "type": "string"
+     "default": "user_provided"
     },
     "note": {
      "anyOf": [
       {
-       "maxLength": 500,
-       "type": "string"
+       "type": "string",
+       "maxLength": 500
       },
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "field",
     "value"
-   ],
-   "type": "object"
+   ]
   },
   "Uncertainty": {
-   "additionalProperties": false,
    "properties": {
     "kind": {
+     "type": "string",
      "enum": [
       "property_fact",
       "jurisdiction",
@@ -2135,8 +2119,7 @@
       "conflict",
       "analysis_limit",
       "service_dependency"
-     ],
-     "type": "string"
+     ]
     },
     "message": {
      "type": "string"
@@ -2164,8 +2147,7 @@
       {
        "type": "null"
       }
-     ],
-     "default": null
+     ]
     },
     "source_refs": {
      "items": {
@@ -2174,12 +2156,13 @@
      "type": "array"
     }
    },
+   "additionalProperties": false,
+   "type": "object",
    "required": [
     "kind",
     "message",
     "remedy"
-   ],
-   "type": "object"
+   ]
   }
  }
 }

@@ -1,0 +1,95 @@
+{
+  "checked_at": "2026-10-03T22:56:20.118205+00:00",
+  "data_dir": "/Users/danny/Documents/ChatGPT/RealPage/core-backend/data/core-session",
+  "configured": {
+    "OPENAI_API_KEY": true,
+    "OPENAI_MODEL": true
+  },
+  "local_env_parse_error_fixed": true,
+  "duplicate_model_prefix_fixed": true,
+  "runs": [
+    {
+      "run_id": "4edb554e813f40ff943a641fff17d0f7",
+      "operation": "extract",
+      "mode": "live",
+      "started_at": "2026-10-03T22:54:23.305607+00:00",
+      "finished_at": "2026-10-03T22:54:24.339381+00:00",
+      "elapsed_seconds": 1.034,
+      "outcome": "failed",
+      "input_hashes": {
+        "D001": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17"
+      },
+      "config": {
+        "prompt_version": "extract-v2-core-dates",
+        "chunk_chars": 18000,
+        "overlap_chars": 1500,
+        "concurrency": 1,
+        "transport_attempts": 3,
+        "repair_attempts": 1,
+        "model": "OPENAI_MODEL=gpt-6.1-sol"
+      },
+      "versions": {
+        "pipeline": "0.1.0",
+        "evaluator": "0.1.0"
+      },
+      "counts": {
+        "processed": 0,
+        "rules": 0,
+        "cache_hits": 0
+      },
+      "errors": [
+        "D001: OpenAI HTTP 404; no fallback rules generated"
+      ],
+      "artifacts": [
+        "rules.json",
+        "extraction_index.json",
+        "provider_outputs/4edb554e813f40ff943a641fff17d0f7/usage.json"
+      ]
+    },
+    {
+      "run_id": "7a402a6829d942a59c705954bce8db44",
+      "operation": "extract",
+      "mode": "live",
+      "started_at": "2026-10-03T22:55:12.856227+00:00",
+      "finished_at": "2026-10-03T22:55:13.258507+00:00",
+      "elapsed_seconds": 0.402,
+      "outcome": "failed",
+      "input_hashes": {
+        "D001": "7f24d692c68f42ed2ab11a2d1f8e060a951f8cf6a3974b4e8090e63081ad6f17"
+      },
+      "config": {
+        "prompt_version": "extract-v2-core-dates",
+        "chunk_chars": 18000,
+        "overlap_chars": 1500,
+        "concurrency": 1,
+        "transport_attempts": 3,
+        "repair_attempts": 1,
+        "model": "gpt-6.1-sol"
+      },
+      "versions": {
+        "pipeline": "0.1.0",
+        "evaluator": "0.1.0"
+      },
+      "counts": {
+        "processed": 0,
+        "rules": 0,
+        "cache_hits": 0
+      },
+      "errors": [
+        "D001: OpenAI HTTP 400; no fallback rules generated"
+      ],
+      "artifacts": [
+        "rules.json",
+        "extraction_index.json",
+        "provider_outputs/7a402a6829d942a59c705954bce8db44/usage.json"
+      ]
+    }
+  ],
+  "diagnostic": "core01_provider_diagnostic.json",
+  "current_blocker": "API credit_balance_exhausted / insufficient_quota from minimal diagnostic; corpus calls stopped",
+  "rules": 0,
+  "addresses": 500,
+  "sources": 87,
+  "resolved_municipalities": 0,
+  "source_store_sha256_unchanged": true
+}

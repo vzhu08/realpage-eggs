@@ -12,3 +12,7 @@
 - Non-goals: infrastructure expansion or an unauthenticated billable ingestion endpoint. Target 30–50 minutes.
 - Handoff: exact setup commands, tested environment, deployment candidate and limitations in this card.
 - Integration authority: user/Platform reviewer; merge and deploy require explicit authority.
+
+Four-developer coordination: use the current playbook and OWNERSHIP. Core A owns extraction/evaluator/traces;
+Core B owns planner/renderer. Existing Core candidate c92ad8f awaits combined review/integration; do not duplicate it.
+Platform stewards shared contracts and UX owns the entire frontend. Prior task results remain historical evidence.

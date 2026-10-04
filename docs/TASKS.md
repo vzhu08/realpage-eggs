@@ -3,33 +3,39 @@
 Board steward: Platform/API owner (provisional role). Other lanes edit only their own cards.
 States: Planned -> Ready -> Running -> Review -> Queued -> Merged -> Verified; Blocked names
 an explicit dependency. Ready means technically ready, not a human claim or permission to start.
-Only the current Platform follow-up session is allocated. Core/UX are ready for Vincent to assign,
-not claimed started. Ready is not a claim or permission to write in another developer's checkout.
+Four human lanes: Platform/API, Core A (Rules & Evaluation), Core B (Questions & Rendering), Frontend/UX.
+Daniel's PR #3 head 3cf0361 is integrated locally with main 9a96fda; Core A retains evaluator/extraction ownership.
+Core B is a new human assignment and requires the existing writer's path handoff before new edits.
+The current user-assigned Platform session claims COORD-03 for the authorized Core merge; no remote writer was interrupted or contacted.
 
 | ID | Lane | State | Outcome / dependency |
 | --- | --- | --- | --- |
 | BOOT-01 | User / bootstrap | Review | Backend and integration baseline locally checked; live extraction acceptance blocked on local provider configuration |
 | UX-01 | UX owner | Ready, unclaimed | Address/date/evidence UI using generated contracts and labeled fixtures |
 | UX-02 | UX owner | Ready, unclaimed | Change view with definite/uncertain/blocked/hypothetical states |
-| PLAT-01 | Platform/API owner | Ready, unclaimed | Evidence-based recovery of remaining 21 unresolved municipalities |
+| PLAT-01 | Vincent / Platform | Review | Recovered 12/21: 491/500 resolved in isolated real store; 28 focused / 96 total tests pass; report and nine remaining causes in card |
 | PLAT-02 | Platform/API owner | Ready, unclaimed | Reproducible launch/export/deployment package; deployment itself awaits authority |
-| CORE-01 | Core owner | Blocked, unclaimed | First live source + corpus run/review; OPENAI_API_KEY and OPENAI_MODEL required |
-| CORE-02 | Core owner | Ready, unclaimed | Independent review of temporal/interactions and extraction omissions; prioritize unresolved lifecycle linking |
-| COORD-01 | Vincent / Platform | Review P0 | Shared contracts/5 fixtures/starter prompts released; 2 contract checks passed |
-| PLAT-03 | Vincent / Platform | Running P0/P1 | Evidence identity/quote/anchor distinctions and bounded context/reference retrieval |
-| PLAT-04 | Vincent / Platform | Ready P1 | Validated answers and assist API; full flow depends CORE-04/05 |
-| PLAT-05 | Vincent / Platform | Ready P1 | Targeted source-unit inventory and semantic verifier; live mode blocked by key/model |
-| CORE-03 | Core owner | Ready P0/P1, unclaimed | Stable trace/residual AST; factual occupancy-date semantics review |
-| CORE-04 | Core owner | Planned P1, unclaimed | Bounded correlated-fact question planner; depends CORE-03 |
-| CORE-05 | Core owner | Ready P1, unclaimed | Deterministic rule renderer; independent of planner |
+| CORE-01 | Core A / Daniel | Queued software; corpus incomplete | PR #3 includes reported D001/D004 live slices and bounded resumption repairs; no local provider rerun |
+| CORE-02 | Core A / Daniel | Queued | Date/interaction implementation combined with Platform; 167 total tests pass |
+| COORD-01 | Vincent / Platform | Review P0 | Original shared contract checkpoint 3349851; historical three-lane staffing superseded |
+| COORD-02 | Vincent / Platform | Review P0 | Four-developer playbook, exclusive Core split, candidate-aware cards and starters |
+| COORD-03 | Vincent / Platform | Queued | PR #3 doc conflicts resolved with author history retained; actual Core/API verification and unchanged schemas |
+| PLAT-03 | Vincent / Platform | Review P0/P1 | Implemented evidence/context checks; targeted inventory verified; 12 focused tests pass |
+| PLAT-04 | Vincent / Platform | Review P1 | Actual Core/API integration passes 19 focused tests; synthetic alternatives and answers reproduce through HTTP |
+| PLAT-05 | Vincent / Platform | Review P1 | Inventory/verifier implemented; fixture/replay verified; live mode blocked by key/model |
+| CORE-03 | Core A / Daniel | Queued | rule_traces and actual occupancy semantics verified in combined suite; future lane handoff remains required |
+| CORE-04 | Core B / new human pending | Queued; future writer handoff required | Daniel's planner works through Platform HTTP; no new writer allocated |
+| CORE-05 | Core B / new human pending | Queued; future writer handoff required | Daniel's renderer works through Platform HTTP; no new writer allocated |
 | UX-03 | UX / Claude | Ready P1, unclaimed | Entire frontend including questions and evidence; contracts/fixtures ready |
 
 Cards: `docs/tasks/<ID>.md`. Shared stewards and exact paths: OWNERSHIP.
-Merge queue currently empty. Local tests do not mark BOOT-01 Merged or deployment Verified.
+PR #3 integration is queued for the user-authorized merge; COORD-03 records exact bases and checks.
+Main already contains Platform and four-developer docs through PR #4 and PLAT-01 through PR #5 at 9a96fda.
+PLAT-02 is published separately in PR #6 at aa7a226; it is not part of PR #3. No deployment is verified.
 For each candidate: owner reviews diff/scope -> steward orders dependencies -> update clean candidate
 against current main -> rerun required checks -> human-authorized merge -> verify main -> separately
 verify deployed demo. Never rebase an active writer. Preserve user work and actual base SHA.
 
-UX-01/02 are subflows of UX-03, not competing implementations. PLAT-01/02 remain ready after
-evidence/API work. CORE-01 keeps extraction ownership. Priorities: P0 correctness/configuration and
+UX-01/02 are subflows of UX-03, not competing implementations. PLAT-01 is in Review on base 22d271c;
+PLAT-02 remains Ready after evidence/API work. CORE-01 keeps extraction ownership in Core A. Core B alone owns planner/renderer and core_assist.py. Priorities: P0 correctness/configuration and
 contracts; P1 bounded useful-question/evidence journey; P2 broader references, ranking and reviewed benchmarks.

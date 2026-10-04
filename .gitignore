@@ -11,3 +11,4 @@ artifacts/
 .coverage
 # Organizer input stays untouched and is not redistributed by this bootstrap.
 MIT-hackathon-PARTICIPANT-PACK-CLEAN-NO-HOUR16/
+.DS_Store

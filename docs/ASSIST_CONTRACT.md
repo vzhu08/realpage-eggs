@@ -1,13 +1,14 @@
 # Shared follow-up contract (Platform steward)
 
-Canonical specification: `docs/reference/RealPage_Codex_Research_Followup_Prompt.txt`.
+Feature specification: `docs/reference/RealPage_Codex_Research_Followup_Prompt.txt`.
+Staffing override: four human lanes in `docs/OWNERSHIP.md` and `docs/Hackathon_Development_Playbook.txt`.
 Canonical types remain in `navigator/models.py`; no second AST. Existing competition projection is unchanged.
 This document establishes the interface for parallel implementation; it does not claim every service is implemented.
-Core and UX may consume these files immediately in an allocated checkout. Platform owns all schema/route/fixture changes.
+Core A, Core B and UX consume these files in their allocated checkouts. Platform owns all schema/route/fixture changes.
 
-## Core / Platform service boundary
+## Core A / Core B / Platform service boundary
 
-Core supplies `navigator/core_assist.py` with these synchronous, deterministic functions:
+Core B alone owns `navigator/core_assist.py`, exposing these synchronous, deterministic functions:
 
 ```python
 def plan_questions(context: AssistContext) -> QuestionPlan: ...
@@ -16,7 +17,7 @@ def render_rule(rule: Rule) -> EncodedRuleRendering: ...
 
 Platform passes request-local validated facts, bound/provenance data, legal geography, as-of day, all
 prepared rules, evaluations, separate evidence reports, fact definitions and explicit analysis limits.
-Core uses `navigator.engine.evaluate_rules` for every hypothetical probe and actual evaluation.
+Core A owns `navigator.engine.evaluate_rules`; Core B calls it for every hypothetical probe and actual evaluation.
 No model calls in the planner or renderer. Keep correlated predicates on one field tied to one value.
 The canonical AST remains `Expression`; trace nodes reference AST paths, not a duplicate rule language.
 Stable predicate IDs: `<team_rule_id>:<JSON-pointer-without-leading-slash>`, such as
@@ -35,7 +36,7 @@ Rule renderer returns encoded-rule text, expression hash, renderer version and u
 It is distinct from the property-specific Evaluation.explanation and is not legal verification.
 Render comparison operators, grouping, dates, exemption structure, unsupported nodes and effective boundaries.
 
-## Proposed API additions / implementation status
+## API additions / implementation status
 
 - `POST /api/v1/lookup/assist`: AssistRequest -> AssistResponse. Platform wires lookup, questions,
   evidence and rendering. Missing Core module returns an explicit unavailable plan/capability, never a mock plan.
@@ -44,7 +45,10 @@ Render comparison operators, grouping, dates, exemption structure, unsupported n
 - `GET /api/v1/sources/{id}/context`: bounded original text around exact source offsets, plus references.
 - `GET /api/v1/facts`: allowed fact definitions and answer forms.
 
-At initial contract release these endpoints are planned; see FRONTEND_HANDOFF and OpenAPI after Platform implementation.
+All four endpoints and Daniel's Core services are combined in the PR #3 integration candidate.
+Actual planner/renderer HTTP tests verify questions, answer/probe outcomes, ephemeral provenance,
+budget limits and missing support. The combined suite passes 167 tests; see COORD-03. Missing-module
+behavior is still tested explicitly with an empty injected service. No schema change was required.
 Existing `/lookup`, `/rules`, `/sources`, `/changes` and export schemas remain compatible.
 
 AssistRequest extends LookupRequest with `answers`, optional request-local `scenario_id`, and limits.
@@ -72,8 +76,38 @@ bounded_partial_analysis. Their plans are authored expectations, not implemented
 Alternative evaluation records are produced by the existing evaluator. The modified-rule examples are
 algorithmic fixtures, not source-verified legal interpretations. Core must replace assumptions with tested
 planner output; UX can build loading/partial/unavailable/answered states now.
-Renderer/source-comparison and evidence-failure examples will be supplied by Platform's evidence task.
+Implemented evidence-failure and source-comparison examples are in contracts/evidence_examples/.
+The comparison's renderer text remains an authored expectation. contracts/examples/assist.json and
+evidence_examples/missing_support.json now show the actual combined Platform/Core API on synthetic data.
 
 Platform is the sole writer of models, contracts generator/generated artifacts, API routes, fact registry,
-and shared coordination docs. Core owns its implementation/tests/card; UX owns frontend/tests/card.
+and shared coordination docs. Core A owns engine/extraction tests and CORE-01/02/03; Core B owns
+planner/renderer tests and CORE-04/05. UX owns frontend/tests/cards. Exact file boundaries: OWNERSHIP.
 Request a contract change with consumer impact; do not edit another lane's files directly.
+
+## Trace producer/consumer contract for the two Core developers
+
+The fetched candidate already uses this boundary; retain its name instead of introducing a second API:
+
+```python
+# Core A owns navigator/engine.py
+# Implemented by Daniel and imported through PR #3; see COORD-03 integration evidence.
+def rule_traces(
+    rule: Rule, prop: PropertyFacts, resolution: JurisdictionResolution, as_of: date
+) -> list[PredicateTrace]: ...
+```
+
+Core A returns the canonical coverage and exemption roots plus interaction-scope traces. Paths remain
+coverage_conditions, exemption_conditions and interactions/<index>/scope; child paths follow the AST.
+Exemption trace truth is the raw exemption expression, not its negation; the evaluator handles exclusion.
+Trace result, evidence, residual and relevance come from the same predicate semantics as evaluate_rules.
+Inapplicable/failed/inactive branches do not produce questions. Known numeric bounds and partial-date
+precision must survive. Core B owns question materiality, joint probing, ranking and final uncertainty remedies.
+The candidate additionally uses predicates.mark_irrelevant for interaction relevance; coordinate changes
+to consumed helpers with Core B rather than breaking that read-only dependency.
+
+Core A changes truth/trace behavior and its engine tests; Core B changes selection/rendering and its tests.
+No one copies an evaluator into question_planner.py. Shared PredicateTrace/QuestionPlan schema changes
+still go through Platform. An existing candidate test result is not verification of combined Platform/API
+behavior. Integration imports the actual two Core functions and reproduces alternatives through HTTP.
+Renderer-only releases may omit plan_questions entirely; Platform already marks that capability unavailable.
