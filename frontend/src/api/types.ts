@@ -3,6 +3,7 @@
  * contracts/); the types below describe how the adapters wrap them for the UI.
  */
 import type {
+  AddressItem,
   AssistResponse,
   ChangeRequest,
   ChangeResult,
@@ -14,6 +15,7 @@ import type {
   LookupResponse,
   RuleDetail,
   SourceDocument,
+  SourceSpan,
   SupplementalAnswer,
 } from './generated/contract';
 
@@ -99,13 +101,41 @@ export interface FixtureCaseSummary {
   path: string;
 }
 
+/** Which recorded dataset a demo payload came from. The three are separate stores and never mixed. */
+export type RecordedStore = 'synthetic' | 'no_extracted_rules' | 'dev_portfolio';
+
 export interface ChangeOutcome {
   request: ChangeRequest;
   result: ChangeResult;
   origin: Origin;
   /** Demo only: which recorded store produced this result. */
-  recordedStore?: 'synthetic' | 'no_extracted_rules';
+  recordedStore?: RecordedStore;
   contractWarnings: string[];
+}
+
+/**
+ * PROPOSED shape for a field-level disagreement between two source-backed claims. No contract
+ * or endpoint defines this yet (PLAT-06 / CORE-06); it exists only for the labeled development
+ * fixture, and is requested in frontend/docs/UI.md. It deliberately has no "preferred" claim.
+ */
+export interface ProposedDisagreement {
+  disagreement_id: string;
+  contract_status: string;
+  authored_by: string;
+  /** The rule field the two claims disagree about, e.g. effective_date. */
+  field: string;
+  status: string;
+  affected_rule_ids: string[];
+  claims: Array<{
+    claim_id: string;
+    /** The value as the source states it, with its own precision. */
+    stated_value: string;
+    span: SourceSpan;
+    status_dates: Array<{ status: string; on: string }>;
+  }>;
+  unresolved_reason: string;
+  remedy_kind: string;
+  remedy: string;
 }
 
 export interface EvidenceReportOutcome {
@@ -119,8 +149,18 @@ export interface DemoCatalog {
   cases: FixtureCaseSummary[];
   /** Recorded as-of dates, per address. */
   lookupDates: Record<string, string[]>;
-  changeRequests: Array<{ request: ChangeRequest; store: 'synthetic' | 'no_extracted_rules' }>;
+  changeRequests: Array<{ request: ChangeRequest; store: RecordedStore }>;
   manifest: Record<string, unknown>;
+  /** The UX development fixture: a fictional portfolio evaluated by the backend. */
+  development: {
+    path: string;
+    manifest: Record<string, unknown>;
+    properties: AddressItem[];
+    /** Recorded lookups in which the evaluator flagged a conflict. */
+    conflictLookups: Array<{ address_id: string; as_of: string }>;
+    /** Authored entries in a proposed shape (no contract yet). */
+    proposedDisagreements: ProposedDisagreement[];
+  };
 }
 
 /** One interface for both data modes; the UI never branches on transport details. */

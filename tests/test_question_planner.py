@@ -479,3 +479,85 @@ def test_real_core_http_partial_date_then_two_exemptions(demo, rule):
         assert completed.lookup.evaluations[0].result == 'applies'
         assert completed.question_plan.questions == []
         assert any(u.kind == 'source_gap' for u in completed.question_plan.remaining_uncertainty)
+
+
+def test_http_uncertainty_is_actionable_and_source_bound(demo):
+    from fastapi.testclient import TestClient
+    from navigator.api import create_app
+    with TestClient(create_app(demo.root)) as client:
+        payload = client.post('/api/v1/lookup/assist', json={
+            'address_id': 'SYNTH-003', 'as_of': DAY.isoformat()}).json()
+    plan = payload['question_plan']
+    fact = next(u for u in plan['remaining_uncertainty'] if u['kind'] == 'property_fact')
+    assert 'coverage condition' in fact['message'] and '2026-11-15' in fact['message']
+    assert 'encoding ' in fact['message'] and 'source SYNTHETIC-42' in fact['message']
+    assert fact['remedy'].startswith('Factual answer:')
+    assert fact['source_refs']
+    source = demo.sources()['SYNTHETIC-42']
+    for span in fact['source_refs']:
+        assert span['source_hash'] == source.sha256
+        assert source.text[span['start']:span['end']] == span['text']
+    assert all('hypothetical' in q['why'] for q in plan['questions'])
+    assert all(u['remedy'].startswith('Interpretation review:') for u in plan['remaining_uncertainty']
+               if u['kind'] == 'interpretation')
+
+
+def test_source_context_budget_has_analysis_action_without_fabricated_spans(rule, prop, resolution):
+    from navigator.models import SourceDependency, SourceSpan
+    prop.facts.pop('units')
+    span = SourceSpan(doc_id='source', source_hash='recorded-version', start=2, end=23,
+                      text='a cited source clause')
+    ctx = context_for(rule, prop, resolution)
+    ctx.evidence_reports = [EvidenceReport(rule_id=rule.team_rule_id, rule_hash='fixture', checks=[],
+        context=SourceContext(spans=[span], dependencies=[SourceDependency(reference='section 2', origin=span,
+            status='depth_limit', explanation='Reference exploration stopped')],
+            status='partial', limits={'max_depth': 0}, limits_hit=['max_depth']),
+        blocking_issues=['context_incomplete:max_depth'], disclaimer='synthetic')]
+    plan = plan_questions(ctx)
+    bounded = [u for u in plan.remaining_uncertainty if u.kind == 'analysis_limit']
+    assert len(bounded) == 3
+    assert all(u.remedy.startswith('More analysis:') for u in bounded)
+    assert next(u for u in bounded if u.source_refs).source_refs == [span]
+    assert next(u for u in plan.remaining_uncertainty if u.kind == 'property_fact').source_refs == []
+
+
+def test_limits_and_legal_gaps_survive_every_displayed_probe(rule, prop, resolution):
+    prop.facts.pop('units')
+    rule.review_issues = ['Missing legal exception definition']
+    plan = plan_questions(context_for(rule, prop, resolution, max_evaluations=2))
+    alternatives = [a for q in plan.questions for a in q.alternatives]
+    assert alternatives and plan.limits_hit == ['max_evaluations']
+    for alternative in alternatives:
+        assert {'analysis_limit', 'source_gap', 'interpretation'} <= {u.kind for u in alternative.remaining_uncertainty}
+        budget = next(u for u in alternative.remaining_uncertainty if u.kind == 'analysis_limit')
+        assert 'max_evaluations=2' in budget.message and 'unexamined' in budget.message
+        assert budget.remedy.startswith('More analysis:')
+
+
+def test_unregistered_legal_classification_is_not_a_property_remedy(rule, prop, resolution):
+    rule.coverage_conditions = Expression(op='eq', fact='rent_ordinance_coverage', value='full')
+    plan = plan_questions(context_for(rule, prop, resolution))
+    assert plan.questions == []
+    assert all(u.kind != 'property_fact' for u in plan.remaining_uncertainty)
+    assert any('legal classification' in u.message and u.field == 'rent_ordinance_coverage'
+               for u in plan.remaining_uncertainty)
+    assert plan.status == 'partial'
+
+
+def test_fixed_core07_http_benchmark_and_honest_cohorts():
+    from docs.core_navigation.benchmark import comparison
+    result = comparison()
+    assert result['human_reviewer'] is None or result['review_status'] != 'reviewed'
+    assert result['real_snapshot_cases_pending']
+    assert len(result['cases']) == 8
+    for row in result['cases']:
+        for count in ('planner_unnecessary', 'planner_missed', 'incorrect_certainty', 'http_mismatches',
+                      'lost_persistent_remedy_kinds'):
+            assert row[count] == 0, (row['case'], count)
+        assert not row['missing_expected_remedies']
+        assert not row['missing_expected_alternative_remedies']
+        assert row['assist_http_evaluations'] == row['planner_evaluations'] + 2
+        assert row['deterministic_repeats'] == 3 and row['store_unchanged']
+    real = result['cohorts']['real_extraction_record_synthetic_property_missing_original_source']
+    assert real['cases'] == 1 and real['planner_questions'] == 0
+    assert real['certain_rule_evaluations'] == 0

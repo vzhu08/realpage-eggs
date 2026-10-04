@@ -43,6 +43,7 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
   // Fixture cases point at sample properties; resolve them through the same address source.
   const all = useAsync(catalog ? 'addresses:all' : null, (signal) => source.addresses({ q: '', offset: 0, limit: 100 }, signal), 'GET /addresses');
 
+  const developmentIds = new Set((catalog?.development.properties ?? []).map((item) => item.property.address_id));
   const items = page.data?.items ?? [];
   const total = page.data?.total ?? 0;
 
@@ -113,6 +114,7 @@ export function PropertyFinder({ selectedId, selectedCase, onSelect, onSelectCas
                     <span aria-hidden="true">·</span>
                     <span>{item.resolution.municipality ?? 'Municipality not established'}</span>
                     {item.resolution.match_quality !== 'resolved' && quality && <Tag tone={quality.tone}>{quality.label}</Tag>}
+                    {developmentIds.has(item.property.address_id) && <span className="finder__fixture">Development fixture</span>}
                   </span>
                 </button>
               </li>

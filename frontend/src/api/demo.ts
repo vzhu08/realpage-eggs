@@ -1,9 +1,21 @@
 /**
  * Synthetic demo adapter. Replays checked-in contract examples and recorded backend output.
  * It evaluates nothing: a request it holds no recording for fails with `not_recorded`.
+ *
+ * Two fictional datasets are replayed and never mixed: the backend's own Maple Harbor store,
+ * and the UX development fixture (a fictional portfolio; see src/demo/fixtures.ts).
  */
 import {
   ASSIST_EXAMPLE,
+  DEV_ADDRESSES,
+  DEV_ASSISTS,
+  DEV_CHANGES,
+  DEV_EVIDENCE_REPORTS,
+  DEV_MANIFEST,
+  DEV_PATH,
+  DEV_PROPOSED_DISAGREEMENTS,
+  DEV_RULES,
+  DEV_SOURCES,
   EVIDENCE_FIXTURES,
   FIXTURE_COPY,
   LOOKUP_EXAMPLES,
@@ -65,6 +77,15 @@ const normalizeChange = (request: ChangeRequest) =>
 const describeChange = (request: ChangeRequest) =>
   request.test_id ? `Scenario ${request.test_id}` : `${request.before} → ${request.after}${request.scenario === 'if_enacted' ? ' (if enacted)' : ''}`;
 
+/** How a result from the UX development fixture is labeled wherever it appears. */
+const DEV_ORIGIN_LABEL = 'UX development fixture';
+
+/**
+ * Every recorded comparison. The development portfolio comes first so the changes view opens on
+ * it; the stores hold no comparison in common (asserted in tests/unit/sources.test.ts).
+ */
+const ALL_CHANGES = [...DEV_CHANGES, ...RECORDED_CHANGES];
+
 /** Fixture cases the property list offers: the five question-flow fixtures, then the evidence-failure example. */
 const CASES: ResearchFixture[] = [...RESEARCH_FIXTURES, ...EVIDENCE_FIXTURES];
 
@@ -84,6 +105,7 @@ export class DemoSource implements DataSource {
     for (const example of LOOKUP_EXAMPLES) {
       seen.set(example.response.address.address_id, { property: example.response.address, resolution: example.response.jurisdiction });
     }
+    for (const item of DEV_ADDRESSES) seen.set(item.property.address_id, item);
     return [...seen.values()].sort((a, b) => a.property.address_id.localeCompare(b.property.address_id));
   }
 
@@ -104,7 +126,7 @@ export class DemoSource implements DataSource {
   /** Fact definitions seen in any checked-in or recorded question, keyed by field. Nothing is authored here. */
   async facts(): Promise<Record<string, FactDefinition> | null> {
     const definitions: Record<string, FactDefinition> = {};
-    for (const response of [ASSIST_EXAMPLE.response, ...CASES.map((fixture) => fixture.response), ...RECORDED_ASSISTS.map((entry) => entry.response)]) {
+    for (const response of [ASSIST_EXAMPLE.response, ...CASES.map((fixture) => fixture.response), ...RECORDED_ASSISTS.map((entry) => entry.response), ...DEV_ASSISTS.map((entry) => entry.response)]) {
       for (const question of response.question_plan.questions) definitions[question.fact.field] = question.fact;
     }
     return definitions;
@@ -126,7 +148,8 @@ export class DemoSource implements DataSource {
     // The API's own checked-in response wins; other property/date pairs come from recorded backend output.
     const example = sameRequest(ASSIST_EXAMPLE.request) ? ASSIST_EXAMPLE : undefined;
     const recorded = example ? undefined : RECORDED_ASSISTS.find((candidate) => sameRequest(candidate.request));
-    const base = example?.response ?? recorded?.response;
+    const development = example || recorded ? undefined : DEV_ASSISTS.find((candidate) => sameRequest(candidate.request));
+    const base = example?.response ?? recorded?.response ?? development?.response;
     if (!base) {
       const dates = this.catalog().lookupDates[query.address_id] ?? [];
       throw new ApiError({
@@ -146,7 +169,9 @@ export class DemoSource implements DataSource {
       planner: { kind: 'response' },
       origin: example
         ? { kind: replay.replayed ? 'fixture_replay' : 'checked_in_example', label: 'Checked-in API example', detail: example.path }
-        : { kind: 'recorded_replay', label: 'Recorded backend output', detail: RECORDED_PATH },
+        : development
+          ? { kind: 'recorded_replay', label: DEV_ORIGIN_LABEL, detail: DEV_PATH }
+          : { kind: 'recorded_replay', label: 'Recorded backend output', detail: RECORDED_PATH },
       dispositions: replay.dispositions,
       replayed: replay.replayed,
       notices: replay.notices,
@@ -185,7 +210,7 @@ export class DemoSource implements DataSource {
 
   async ruleDetail(ruleId: string, signal?: AbortSignal): Promise<RuleDetail> {
     await pause(signal);
-    const detail = RECORDED_RULES[ruleId];
+    const detail = RECORDED_RULES[ruleId] ?? DEV_RULES[ruleId];
     if (!detail) throw new ApiError({ kind: 'not_recorded', endpoint: 'demo rule detail', message: `No recorded rule detail for ${ruleId}.` });
     return checked('RuleDetail', detail, 'demo rule detail').data;
   }
@@ -198,13 +223,16 @@ export class DemoSource implements DataSource {
       const record = shown.sources.find((source) => source.doc_id === docId);
       if (record) return checked('SourceDocument', { ...record, text: '' }, 'demo source').data;
     }
-    const source = RECORDED_SOURCES[docId];
+    const source = RECORDED_SOURCES[docId] ?? DEV_SOURCES[docId];
     if (!source) throw new ApiError({ kind: 'not_recorded', endpoint: 'demo source', message: `No recorded source text for ${docId}.` });
     return checked('SourceDocument', source, 'demo source').data;
   }
 
-  async evidenceReport(): Promise<EvidenceReportOutcome> {
-    // Reports travel inside assist responses. The authored question-flow fixtures carry none.
+  async evidenceReport(ruleId: string): Promise<EvidenceReportOutcome> {
+    // The development fixture records the backend's report for each of its rules.
+    const report = DEV_EVIDENCE_REPORTS[ruleId];
+    if (report) return { report: checked('EvidenceReport', report, 'demo evidence report').data, origin: { kind: 'recorded_replay', label: DEV_ORIGIN_LABEL, detail: DEV_PATH } };
+    // Otherwise reports travel inside assist responses. The authored question-flow fixtures carry none.
     return {
       report: null,
       unavailable: 'This fixture carries no evidence report (its evidence_reports list is empty and it marks evidence as dependency_unavailable).',
@@ -214,18 +242,25 @@ export class DemoSource implements DataSource {
   async changes(request: ChangeRequest, signal?: AbortSignal): Promise<ChangeOutcome> {
     await pause(signal);
     const wanted = normalizeChange(request);
-    const match = RECORDED_CHANGES.find((candidate) => normalizeChange(candidate.request) === wanted);
+    const match = ALL_CHANGES.find((candidate) => normalizeChange(candidate.request) === wanted);
     if (!match) {
       throw new ApiError({
         kind: 'not_recorded',
         endpoint: 'demo changes',
         message: `The synthetic demo holds no recorded comparison for ${describeChange(request)}.`,
         details: ['Demo mode replays recorded change results and cannot compute new comparisons. Switch to the live API to compare any dates.'],
-        suggestions: RECORDED_CHANGES.map((candidate) => describeChange(candidate.request)),
+        suggestions: ALL_CHANGES.map((candidate) => describeChange(candidate.request)),
       });
     }
     const { warnings } = checked('ChangeResult', match.response, 'demo changes');
-    return { request, result: match.response, origin: { kind: 'recorded_replay', label: 'Recorded backend output', detail: RECORDED_PATH }, recordedStore: match.store, contractWarnings: warnings };
+    const development = match.store === 'dev_portfolio';
+    return {
+      request,
+      result: match.response,
+      origin: { kind: 'recorded_replay', label: development ? DEV_ORIGIN_LABEL : 'Recorded backend output', detail: development ? DEV_PATH : RECORDED_PATH },
+      recordedStore: match.store,
+      contractWarnings: warnings,
+    };
   }
 
   catalog(): DemoCatalog {
@@ -236,6 +271,7 @@ export class DemoSource implements DataSource {
     };
     add(ASSIST_EXAMPLE.request);
     RECORDED_ASSISTS.forEach((entry) => add(entry.request));
+    DEV_ASSISTS.forEach((entry) => add(entry.request));
     Object.values(lookupDates).forEach((dates) => dates.sort());
     return {
       cases: CASES.map((fixture) => ({
@@ -248,8 +284,15 @@ export class DemoSource implements DataSource {
         path: fixture.path,
       })),
       lookupDates,
-      changeRequests: RECORDED_CHANGES.map((entry) => ({ request: entry.request, store: entry.store })),
+      changeRequests: ALL_CHANGES.map((entry) => ({ request: entry.request, store: entry.store })),
       manifest: RECORDED_MANIFEST,
+      development: {
+        path: DEV_PATH,
+        manifest: DEV_MANIFEST,
+        properties: DEV_ADDRESSES,
+        conflictLookups: DEV_ASSISTS.filter((entry) => entry.response.lookup.evaluations.some((evaluation) => evaluation.conflict_flag)).map((entry) => entry.request),
+        proposedDisagreements: DEV_PROPOSED_DISAGREEMENTS,
+      },
     };
   }
 }

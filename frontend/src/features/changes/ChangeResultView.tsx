@@ -1,8 +1,13 @@
-import type { ChangeOutcome, Evaluation } from '../../api/types';
-import { Disclosure, Empty, Facts, Notice, SectionHeading, Tag } from '../../components/ui';
-import { type AddressDiff, type RuleDelta, readDifferences } from '../../lib/changes';
+import { useMemo, useState } from 'react';
+import type { ChangeOutcome } from '../../api/types';
+import { Disclosure, Empty, Facts, Notice, SectionHeading, Spinner, Tag } from '../../components/ui';
 import { formatDate } from '../../lib/dates';
-import { humanize, parseReason, resultMeta } from '../../lib/labels';
+import { type Filters, type ImpactKind, NO_FILTERS, buildTimeline, filterRows, impactRows, propertyLabel, summarizeByCategory, summarizeByPlace } from '../../lib/portfolio';
+import { useSource } from '../../state/source';
+import { type Grouping, PortfolioDrillDown, PropertyName } from './PortfolioDrillDown';
+import { SummaryTable } from './PortfolioSummaries';
+import { PortfolioTimeline } from './PortfolioTimeline';
+import { type LoadProgress, usePortfolioDetails } from './usePortfolioDetails';
 
 const STATUS = {
   complete: { label: 'Complete', tone: 'applies' as const, gloss: 'Every referenced rule was found and evaluated without uncertainty.' },
@@ -10,14 +15,52 @@ const STATUS = {
   blocked: { label: 'Blocked', tone: 'danger' as const, gloss: 'The comparison could not be established.' },
 };
 
-export function ChangeResultView({ outcome, lookupHref }: { outcome: ChangeOutcome; lookupHref: (addressId: string, asOf: string) => string }) {
+const IMPACT: Array<{ kind: ImpactKind; title: string; tone: 'applies' | 'unknown' | 'danger'; empty: string; gloss: string }> = [
+  { kind: 'definite', title: 'Definitely affected', tone: 'applies', empty: 'No property is definitely affected.', gloss: 'A rule’s effect on these properties changes, with no open uncertainty.' },
+  { kind: 'uncertain', title: 'Uncertain', tone: 'unknown', empty: 'No property has an uncertain impact.', gloss: 'The effect may change, but a fact, source or jurisdiction is unresolved. Kept apart from the definite list.' },
+  { kind: 'conflict', title: 'Conflict flagged', tone: 'danger', empty: 'No property carries a conflict flag.', gloss: 'Rules or sources that may conflict reach these properties. Needs review, not an answer.' },
+];
+
+interface Props {
+  outcome: ChangeOutcome;
+  lookupHref: (addressId: string, asOf: string) => string;
+  disagreementHref: (addressId: string, asOf: string) => string;
+  /** Run another comparison from the timeline. */
+  onCompare: (before: string, after: string) => void;
+  busy: boolean;
+}
+
+export function ChangeResultView({ outcome, lookupHref, disagreementHref, onCompare, busy }: Props) {
+  const source = useSource();
   const { result } = outcome;
   const status = STATUS[result.status];
   const blocked = result.status === 'blocked';
   const hypothetical = result.scenario === 'if_enacted';
-  const diffs = readDifferences(result);
-  const mapped = Object.entries(result.mapped_rule_ids ?? {});
   const sameDay = result.before === result.after;
+  const mapped = Object.entries(result.mapped_rule_ids ?? {});
+
+  const details = usePortfolioDetails(source, outcome);
+  const { lookups } = details;
+  const [filters, setFilters] = useState<Filters>(NO_FILTERS);
+  const [grouping, setGrouping] = useState<Grouping>('source');
+
+  const { rows, unreadable } = useMemo(() => impactRows(result), [result]);
+  const visible = useMemo(() => filterRows(rows, filters, lookups), [rows, filters, lookups]);
+  const places = useMemo(() => summarizeByPlace(rows, lookups), [rows, lookups]);
+  const categories = useMemo(() => summarizeByCategory(rows, lookups), [rows, lookups]);
+  const timeline = useMemo(() => buildTimeline(result, [...lookups.rules.values()]), [result, lookups.rules]);
+
+  const counts: Record<ImpactKind, string[]> = { definite: result.affected_address_ids, uncertain: result.uncertain_address_ids, conflict: result.conflict_flag_address_ids };
+  // A flagged property whose result is the same on both dates has no changed row to drill into.
+  const flaggedWithoutChange = result.conflict_flag_address_ids.filter((addressId) => !rows.some((row) => row.addressId === addressId && row.conflict));
+  const syntheticRules = [...lookups.rules.values()].some((rule) => rule.evidence_mode === 'synthetic');
+  const development = outcome.recordedStore === 'dev_portfolio';
+  const activeFilters = [
+    filters.impact && { key: 'impact' as const, label: IMPACT.find((item) => item.kind === filters.impact)?.title ?? filters.impact },
+    filters.place && { key: 'place' as const, label: places.find((group) => group.key === filters.place)?.label ?? 'Location' },
+    filters.category && { key: 'category' as const, label: categories.find((group) => group.key === filters.category)?.label ?? 'Category' },
+  ].filter((item): item is { key: keyof Filters; label: string } => !!item);
+  const shownProperties = new Set(visible.map((row) => row.addressId)).size;
 
   return (
     <article className="change-result" aria-labelledby="change-heading" data-status={result.status}>
@@ -33,7 +76,7 @@ export function ChangeResultView({ outcome, lookupHref }: { outcome: ChangeOutco
         </p>
         <div className="context__tags">
           <Tag tone={status.tone}>{status.label}</Tag>
-          {outcome.recordedStore && <Tag tone="unknown">Synthetic data · not actual law</Tag>}
+          {development ? <Tag tone="unknown">Development fixture · fictional law</Tag> : (outcome.recordedStore || syntheticRules) && <Tag tone="unknown">Synthetic data · not actual law</Tag>}
           {hypothetical ? <Tag tone="pending">Hypothetical · if enacted</Tag> : <Tag tone="neutral" icon={false}>Actual law</Tag>}
           {result.test_id && (
             <Tag tone="neutral" icon={false}>
@@ -51,6 +94,13 @@ export function ChangeResultView({ outcome, lookupHref }: { outcome: ChangeOutco
         Comparison result
       </h2>
 
+      {development && (
+        <Notice tone="synthetic" title="UX development fixture: fictional sources and properties">
+          <p>
+            The state “ZZ”, its cities, their ordinances and these properties are invented so this view has several jurisdictions, categories and dates to lay out. The rules were created by the backend’s extraction checks and every result below was computed by the backend evaluator. It is not a real snapshot, not Core A’s corpus and not legal evidence.
+          </p>
+        </Notice>
+      )}
       {outcome.recordedStore === 'no_extracted_rules' && (
         <Notice tone="synthetic" title="Recorded against a store with no extracted rules">
           <p>This is the backend’s answer for the published scenario when sample properties exist but no rules have been extracted — the state of the real dataset before a provider is configured. It demonstrates the blocked state; it is not a legal result.</p>
@@ -59,7 +109,7 @@ export function ChangeResultView({ outcome, lookupHref }: { outcome: ChangeOutco
 
       {blocked && (
         <Notice tone="danger" title="Blocked: this comparison could not be established" role="status">
-          <p>The lists below are empty because the comparison could not run, not because no property is affected. Do not read this as a verified empty set.</p>
+          <p>The counts below are not zero: they could not be computed. Do not read this as a verified empty set.</p>
           <Notes notes={result.notes} />
         </Notice>
       )}
@@ -81,26 +131,106 @@ export function ChangeResultView({ outcome, lookupHref }: { outcome: ChangeOutco
       )}
 
       <section className="section section--first" aria-labelledby="change-impact">
-        <SectionHeading id="change-impact" title="Impact on sample properties" level={3} />
+        <SectionHeading id="change-impact" title="Impact on sample properties" level={3} aside={!blocked && rows.length > 0 ? <span className="hint">Select a count to filter the detail below</span> : undefined} />
         <div className="impact">
-          <ImpactList title="Definitely affected" tone="applies" ids={result.affected_address_ids} blocked={blocked} empty="No property is definitely affected." gloss="The rule’s effect on these properties changes, with no open uncertainty." after={result.after} lookupHref={lookupHref} />
-          <ImpactList title="Uncertain" tone="unknown" ids={result.uncertain_address_ids} blocked={blocked} empty="No property has an uncertain impact." gloss="The effect may change, but a fact, source or jurisdiction is unresolved. Kept apart from the definite list." after={result.after} lookupHref={lookupHref} />
-          <ImpactList title="Conflict flagged" tone="danger" ids={result.conflict_flag_address_ids} blocked={blocked} empty="No property carries a conflict flag." gloss="Rules that may conflict reach these properties. Needs review." after={result.after} lookupHref={lookupHref} />
+          {IMPACT.map((item) => {
+            const ids = counts[item.kind];
+            const active = filters.impact === item.kind;
+            return (
+              <div key={item.kind} className={`impact__column impact__column--${item.tone}`} data-impact={item.title} data-count={blocked ? 'blocked' : ids.length}>
+                <p className="impact__title">{item.title}</p>
+                {blocked || ids.length === 0 ? (
+                  <p className="impact__count">{blocked ? '—' : 0}</p>
+                ) : (
+                  <button type="button" className="impact__count impact__count--button" aria-pressed={active} onClick={() => setFilters((current) => ({ ...current, impact: active ? null : item.kind }))}>
+                    {ids.length}
+                    <span className="sr-only">
+                      {' '}
+                      {ids.length === 1 ? 'property' : 'properties'}: {item.title}. {active ? 'Showing only these. Select to show all.' : 'Select to show only these.'}
+                    </span>
+                  </button>
+                )}
+                <p className="impact__gloss">{blocked ? 'Not established: the comparison is blocked.' : ids.length ? item.gloss : item.empty}</p>
+              </div>
+            );
+          })}
         </div>
+        {!blocked && result.affected_address_ids.some((id) => result.uncertain_address_ids.includes(id)) && (
+          <p className="hint impact__overlap">A property is counted under both “definitely affected” and “uncertain” when one rule’s effect on it is settled and another’s is not.</p>
+        )}
+        {flaggedWithoutChange.length > 0 && (
+          <Disclosure summary={`${flaggedWithoutChange.length} flagged ${flaggedWithoutChange.length === 1 ? 'property has' : 'properties have'} no comparison result between these dates`}>
+            <ul className="plain-list plain-list--tight">
+              {flaggedWithoutChange.map((addressId) => (
+                <li key={addressId} className="flagged">
+                  <PropertyName label={propertyLabel(addressId, lookups.addresses.get(addressId))} />
+                  <a className="link" href={disagreementHref(addressId, result.after)}>
+                    Compare the conflicting sources
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Disclosure>
+        )}
       </section>
 
-      {diffs.length > 0 && (
-        <section className="section" aria-labelledby="change-diffs">
-          <SectionHeading id="change-diffs" title="Before and after, by property" level={3} />
-          <ul className="diffs">
-            {diffs.map((diff) => (
-              <AddressDiffView key={diff.addressId} diff={diff} before={result.before} after={result.after} conflict={result.conflict_flag_address_ids.includes(diff.addressId)} href={lookupHref(diff.addressId, result.after)} />
-            ))}
-          </ul>
+      <DetailStatus details={details} />
+
+      {!blocked && (
+        <section className="section" aria-labelledby="change-timeline">
+          <SectionHeading id="change-timeline" title="Dates behind this comparison" level={3} />
+          <p className="section__lead">Dated statements on the rule records in this comparison, in order, with the two compared dates marked. Each date is shown as its source states it.</p>
+          <PortfolioTimeline timeline={timeline} rules={lookups.rules} rows={rows} loading={details.rules.status === 'loading'} blocked={blocked} busy={busy} onCompare={onCompare} />
         </section>
       )}
 
-      {!blocked && diffs.length === 0 && (
+      {!blocked && rows.length > 0 && (
+        <section className="section" aria-labelledby="change-summaries">
+          <SectionHeading id="change-summaries" title="Where and what" level={3} />
+          <p className="section__lead">Properties with definite changes or unresolved possible impacts, grouped two ways. Select a row to filter the detail below.</p>
+          <div className="summaries">
+            <SummaryTable caption="By property location" columnLabel="Legal municipality" groups={places} selected={filters.place} onSelect={(place) => setFilters((current) => ({ ...current, place }))} pending={details.addresses.status === 'loading' ? 'Reading the property list…' : undefined} />
+            <SummaryTable caption="By rule category" columnLabel="Category" groups={categories} selected={filters.category} onSelect={(category) => setFilters((current) => ({ ...current, category }))} pending={details.rules.status === 'loading' ? 'Reading the rule records…' : undefined} />
+          </div>
+        </section>
+      )}
+
+      {rows.length > 0 && (
+        <section className="section" aria-labelledby="change-diffs">
+          <SectionHeading
+            id="change-diffs"
+            title="Source, rule and property"
+            level={3}
+            aside={
+              <span className="hint" aria-live="polite">
+                {shownProperties} {shownProperties === 1 ? 'property' : 'properties'} · {visible.length} comparison {visible.length === 1 ? 'result' : 'results'}
+              </span>
+            }
+          />
+          {activeFilters.length > 0 && (
+            <div className="filters" role="group" aria-label="Active filters">
+              {activeFilters.map((filter) => (
+                <button key={filter.key} type="button" className="pill pill--removable" onClick={() => setFilters((current) => ({ ...current, [filter.key]: null }))}>
+                  {filter.label}
+                  <span aria-hidden="true"> ×</span>
+                  <span className="sr-only"> — remove filter</span>
+                </button>
+              ))}
+              <button type="button" className="button button--small button--quiet" onClick={() => setFilters(NO_FILTERS)}>
+                Clear filters
+              </button>
+            </div>
+          )}
+          <PortfolioDrillDown result={result} rows={visible} totalRows={rows.length} lookups={lookups} grouping={grouping} onGrouping={setGrouping} lookupHref={lookupHref} disagreementHref={disagreementHref} />
+          {unreadable.length > 0 && (
+            <Disclosure summary={`${unreadable.reduce((total, item) => total + item.entries.length, 0)} entries in an unexpected shape`}>
+              <pre className="raw">{JSON.stringify(unreadable, null, 2)}</pre>
+            </Disclosure>
+          )}
+        </section>
+      )}
+
+      {!blocked && rows.length === 0 && (
         <Empty title="No differences between these dates" icon="layers">
           <p>The evaluator returned the same result for every sample property on both dates{result.status === 'partial' ? ', within the limits noted above' : ''}.</p>
         </Empty>
@@ -122,7 +252,19 @@ export function ChangeResultView({ outcome, lookupHref }: { outcome: ChangeOutco
                   <th scope="row" className="mono">
                     {reference}
                   </th>
-                  <td>{ids.length ? <span className="mono break">{ids.join(', ')}</span> : <span className="table__warn">No extracted rule matches this reference</span>}</td>
+                  <td>
+                    {ids.length ? (
+                      <ul className="plain-list plain-list--tight">
+                        {ids.map((id) => (
+                          <li key={id}>
+                            {lookups.rules.get(id)?.title ?? ''} <span className="mono break">{id}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <span className="table__warn">No extracted rule matches this reference</span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -137,6 +279,7 @@ export function ChangeResultView({ outcome, lookupHref }: { outcome: ChangeOutco
             { label: 'Source of this result', value: outcome.origin.label, note: outcome.origin.detail },
             { label: 'Request', value: <span className="mono break">{JSON.stringify(outcome.request)}</span> },
             { label: 'Scenario', value: result.scenario },
+            { label: 'Names and labels', value: 'Read from GET /addresses, GET /rules/{id} and GET /sources/{id}', note: 'Groupings and the timeline rearrange values those records and this comparison returned. Nothing is evaluated in the browser.' },
           ]}
         />
       </Disclosure>
@@ -155,112 +298,34 @@ function Notes({ notes }: { notes: string[] }) {
   );
 }
 
-function ImpactList({ title, tone, ids, blocked, empty, gloss, after, lookupHref }: { title: string; tone: 'applies' | 'unknown' | 'danger'; ids: string[]; blocked: boolean; empty: string; gloss: string; after: string; lookupHref: (addressId: string, asOf: string) => string }) {
+/** Progress and failures of the label lookups. The comparison itself is already on screen. */
+function DetailStatus({ details }: { details: ReturnType<typeof usePortfolioDetails> }) {
+  const parts: Array<[string, LoadProgress]> = [
+    ['property', details.addresses],
+    ['rule', details.rules],
+    ['source', details.sources],
+  ];
+  const loading = parts.filter(([, progress]) => progress.status === 'loading');
+  const failed = parts.filter(([, progress]) => progress.failed.length > 0);
+  if (!loading.length && !failed.length) return null;
   return (
-    <div className={`impact__column impact__column--${tone}`} data-impact={title}>
-      <p className="impact__title">{title}</p>
-      <p className="impact__count">{blocked ? '—' : ids.length}</p>
-      <p className="impact__gloss">{blocked ? 'Not established: the comparison is blocked.' : ids.length ? gloss : empty}</p>
-      {ids.length > 0 && (
-        <ul className="impact__ids">
-          {ids.map((addressId) => (
-            <li key={addressId}>
-              <a className="link mono" href={lookupHref(addressId, after)}>
-                {addressId}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-function AddressDiffView({ diff, before, after, conflict, href }: { diff: AddressDiff; before: string; after: string; conflict: boolean; href: string }) {
-  return (
-    <li className="diff" data-address={diff.addressId}>
-      <div className="diff__head">
-        <p className="diff__address mono">{diff.addressId}</p>
-        {conflict && <Tag tone="danger">Conflict flagged</Tag>}
-        <a className="link diff__open" href={href}>
-          Open lookup as of {formatDate(after)}
-        </a>
-      </div>
-      <ul className="diff__rules">
-        {diff.deltas.map((delta) => (
-          <DeltaRow key={delta.ruleId} delta={delta} before={before} after={after} />
-        ))}
-      </ul>
-      {diff.unreadable.length > 0 && (
-        <Disclosure summary={`${diff.unreadable.length} entries in an unexpected shape`}>
-          <pre className="raw">{JSON.stringify(diff.unreadable, null, 2)}</pre>
-        </Disclosure>
-      )}
-    </li>
-  );
-}
-
-function DeltaRow({ delta, before, after }: { delta: RuleDelta; before: string; after: string }) {
-  const was = delta.before ? resultMeta(delta.before.result) : null;
-  const now = delta.after ? resultMeta(delta.after.result) : null;
-  const definite = delta.certainty === 'definite';
-  return (
-    <li className="delta" data-certainty={delta.certainty}>
-      <div className="delta__flow">
-        <Tag tone={definite ? 'applies' : 'unknown'} icon={false}>
-          {definite ? 'Definite' : 'Uncertain'}
-        </Tag>
-        <span className="delta__states">
-          {was ? <Tag tone={was.tone}>{was.label}</Tag> : <Tag tone="muted">Not compared</Tag>}
-          <span aria-hidden="true">→</span>
-          <span className="sr-only">then</span>
-          {now ? <Tag tone={now.tone}>{now.label}</Tag> : <Tag tone="muted">Not listed</Tag>}
-        </span>
-        <span className="mono delta__rule">{delta.ruleId}</span>
-      </div>
-      <div className="delta__sides">
-        <Side label={`Before · ${formatDate(before)}`} evaluation={delta.before} absent="This scenario compares the later date only; there is no earlier evaluation." />
-        <Side label={`After · ${formatDate(after)}`} evaluation={delta.after} absent="No evaluation was returned." />
-      </div>
-    </li>
-  );
-}
-
-function Side({ label, evaluation, absent }: { label: string; evaluation: Evaluation | null; absent: string }) {
-  if (!evaluation) {
-    return (
-      <div className="delta__side">
-        <p className="delta__label">{label}</p>
-        <p className="hint">{absent}</p>
-      </div>
-    );
-  }
-  const reasons = (evaluation.uncertainty_reasons ?? []).map(parseReason);
-  const quote = evaluation.evidence[0];
-  return (
-    <div className="delta__side">
-      <p className="delta__label">{label}</p>
-      <p className="delta__explanation">{evaluation.explanation}</p>
-      {(evaluation.missing_facts ?? []).length > 0 && <p className="hint">Needs: {(evaluation.missing_facts ?? []).map(humanize).join(', ')}</p>}
-      {reasons.filter((reason) => reason.kind !== 'missing_property_fact').map((reason) => (
-        <p key={reason.raw} className="hint">
-          {reason.label}: {reason.message}
-        </p>
-      ))}
-      {quote && (
-        <Disclosure summary={`Evidence (${evaluation.evidence.length} ${evaluation.evidence.length === 1 ? 'quote' : 'quotes'})`}>
-          <ul className="spans">
-            {evaluation.evidence.map((item, index) => (
-              <li key={index}>
-                <blockquote>{item.quote}</blockquote>
-                <p className="hint">
-                  <span className="mono">{item.doc_id}</span>
-                  {item.start !== null && item.start !== undefined ? ` · characters ${item.start}–${item.end}` : ''} · cited for {item.supports.map(humanize).join(', ')}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </Disclosure>
+    <div className="detail-status" aria-live="polite">
+      {loading.length > 0 && <Spinner label={`Reading ${loading.map(([name]) => `${name} records`).join(' and ')}…`} />}
+      {!loading.length && failed.length > 0 && (
+        <Notice
+          tone="unknown"
+          compact
+          title="Some names could not be read"
+          actions={
+            <button type="button" className="button button--small" onClick={details.retry}>
+              Try again
+            </button>
+          }
+        >
+          <p>
+            {failed.map(([name, progress]) => `${progress.failed.length} ${name} ${progress.failed.length === 1 ? 'record' : 'records'}${progress.error ? ` (${progress.error.message})` : ''}`).join('; ')}. Those entries keep their ID as their label. The comparison itself is unaffected.
+          </p>
+        </Notice>
       )}
     </div>
   );

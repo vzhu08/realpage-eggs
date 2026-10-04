@@ -10,7 +10,7 @@ export function SyntheticBanner({ onLive }: { onLive: () => void }) {
       <div className="synthetic__inner">
         <span className="synthetic__tag">Synthetic demo</span>
         <p className="synthetic__text">
-          <span className="synthetic__long">Fictional Maple Harbor data, replayed from checked-in examples. Not actual housing law and not a live service.</span>
+          <span className="synthetic__long">Fictional data, replayed from checked-in examples and recordings. Not actual housing law and not a live service.</span>
           <span className="synthetic__short">Fictional data. Not actual law.</span>
         </p>
         {!DEMO_ONLY && (

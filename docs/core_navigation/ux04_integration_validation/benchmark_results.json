@@ -1,0 +1,641 @@
+{
+  "benchmark_version": "core07-v1",
+  "algorithm_version": "correlated-partitions-v3",
+  "renderer_version": "encoded-rule-v3",
+  "expectation_author": "Codex implementing Core B; agent-authored expectations, not held out",
+  "human_reviewer": null,
+  "review_status": "unassigned; no human or independent legal review",
+  "input_sha256": {
+    "tests/fixtures/core_navigation/benchmark_cases.json": "abab16fa991cedd8c9322e0807a94ab2c7908cbbdfccbdb82c4a6406e5927de7",
+    "docs/core/core01_d001_live.json": "f22193b88ae470b73214eec9bf7c4802a2594d718fc9f0d006e3b9abeea04546"
+  },
+  "method": "Fixed agent-authored cases. All displayed probes replayed through production HTTP handlers and actual Core; no mocked planner. Baselines make zero hypothetical certainty claims. Baseline selection includes one common evaluation, planner includes its baseline and probes. HTTP includes two additional Platform evaluations. Latencies are three observed in-process samples, not load-test or network latency.",
+  "certainty_denominator": "All displayed alternative rule evaluations; also report subset with result other than unknown. Software oracle only, never legal verification.",
+  "limitations": "Seven synthetic cases and one unchanged real extraction record with a synthetic property and unavailable original snapshot. Cohorts are separate. No integrated corpus or independent legal score. Real-case bindings, sources and human review remain pending.",
+  "cases": [
+    {
+      "case": "decisive_fact",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "units"
+      ],
+      "planner_fields": [
+        "units"
+      ],
+      "baseline_fields": [
+        "units"
+      ],
+      "planner_questions": 1,
+      "ask_every_missing_questions": 1,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "baseline_missed": 0,
+      "generic_unknown_missed": 1,
+      "missing_expected_remedies": [],
+      "missing_expected_alternative_remedies": [],
+      "displayed_alternatives": 3,
+      "alternative_rule_evaluations": 3,
+      "certain_rule_evaluations": 3,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 4,
+      "ask_every_missing_evaluations": 1,
+      "generic_unknown_evaluations": 1,
+      "assist_http_evaluations": 6,
+      "latency": {
+        "planner_ms": {
+          "samples": 3,
+          "median_ms": 1.241,
+          "min_ms": 1.115,
+          "max_ms": 1.426
+        },
+        "ask_every_missing_ms": {
+          "samples": 3,
+          "median_ms": 0.11,
+          "min_ms": 0.103,
+          "max_ms": 0.124
+        },
+        "generic_unknown_ms": {
+          "samples": 3,
+          "median_ms": 0.089,
+          "min_ms": 0.087,
+          "max_ms": 0.091
+        },
+        "assist_http_ms": {
+          "samples": 3,
+          "median_ms": 3.493,
+          "min_ms": 3.422,
+          "max_ms": 4.395
+        }
+      },
+      "deterministic_repeats": 3,
+      "store_unchanged": true,
+      "status": "partial",
+      "exhaustive": false
+    },
+    {
+      "case": "irrelevant_fact",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [],
+      "planner_fields": [],
+      "baseline_fields": [
+        "owner_occupied"
+      ],
+      "planner_questions": 0,
+      "ask_every_missing_questions": 1,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 1,
+      "planner_missed": 0,
+      "baseline_missed": 0,
+      "generic_unknown_missed": 0,
+      "missing_expected_remedies": [],
+      "missing_expected_alternative_remedies": [],
+      "displayed_alternatives": 0,
+      "alternative_rule_evaluations": 0,
+      "certain_rule_evaluations": 0,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 1,
+      "ask_every_missing_evaluations": 1,
+      "generic_unknown_evaluations": 1,
+      "assist_http_evaluations": 3,
+      "latency": {
+        "planner_ms": {
+          "samples": 3,
+          "median_ms": 0.498,
+          "min_ms": 0.47,
+          "max_ms": 0.588
+        },
+        "ask_every_missing_ms": {
+          "samples": 3,
+          "median_ms": 0.124,
+          "min_ms": 0.121,
+          "max_ms": 0.131
+        },
+        "generic_unknown_ms": {
+          "samples": 3,
+          "median_ms": 0.11,
+          "min_ms": 0.11,
+          "max_ms": 0.126
+        },
+        "assist_http_ms": {
+          "samples": 3,
+          "median_ms": 2.519,
+          "min_ms": 2.508,
+          "max_ms": 3.345
+        }
+      },
+      "deterministic_repeats": 3,
+      "store_unchanged": true,
+      "status": "partial",
+      "exhaustive": false
+    },
+    {
+      "case": "two_exemptions",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "exemption_filed",
+        "owner_occupied"
+      ],
+      "planner_fields": [
+        "exemption_filed",
+        "owner_occupied"
+      ],
+      "baseline_fields": [
+        "exemption_filed",
+        "owner_occupied"
+      ],
+      "planner_questions": 2,
+      "ask_every_missing_questions": 2,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "baseline_missed": 0,
+      "generic_unknown_missed": 2,
+      "missing_expected_remedies": [],
+      "missing_expected_alternative_remedies": [],
+      "displayed_alternatives": 4,
+      "alternative_rule_evaluations": 4,
+      "certain_rule_evaluations": 2,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 9,
+      "ask_every_missing_evaluations": 1,
+      "generic_unknown_evaluations": 1,
+      "assist_http_evaluations": 11,
+      "latency": {
+        "planner_ms": {
+          "samples": 3,
+          "median_ms": 2.384,
+          "min_ms": 2.35,
+          "max_ms": 2.606
+        },
+        "ask_every_missing_ms": {
+          "samples": 3,
+          "median_ms": 0.143,
+          "min_ms": 0.135,
+          "max_ms": 0.144
+        },
+        "generic_unknown_ms": {
+          "samples": 3,
+          "median_ms": 0.124,
+          "min_ms": 0.123,
+          "max_ms": 0.124
+        },
+        "assist_http_ms": {
+          "samples": 3,
+          "median_ms": 5.01,
+          "min_ms": 4.797,
+          "max_ms": 5.157
+        }
+      },
+      "deterministic_repeats": 3,
+      "store_unchanged": true,
+      "status": "partial",
+      "exhaustive": false
+    },
+    {
+      "case": "partial_occupancy",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "certificate_of_occupancy"
+      ],
+      "planner_fields": [
+        "certificate_of_occupancy"
+      ],
+      "baseline_fields": [],
+      "planner_questions": 1,
+      "ask_every_missing_questions": 0,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "baseline_missed": 1,
+      "generic_unknown_missed": 1,
+      "missing_expected_remedies": [],
+      "missing_expected_alternative_remedies": [],
+      "displayed_alternatives": 3,
+      "alternative_rule_evaluations": 3,
+      "certain_rule_evaluations": 3,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 4,
+      "ask_every_missing_evaluations": 1,
+      "generic_unknown_evaluations": 1,
+      "assist_http_evaluations": 6,
+      "latency": {
+        "planner_ms": {
+          "samples": 3,
+          "median_ms": 0.815,
+          "min_ms": 0.801,
+          "max_ms": 0.979
+        },
+        "ask_every_missing_ms": {
+          "samples": 3,
+          "median_ms": 0.06,
+          "min_ms": 0.059,
+          "max_ms": 0.061
+        },
+        "generic_unknown_ms": {
+          "samples": 3,
+          "median_ms": 0.053,
+          "min_ms": 0.053,
+          "max_ms": 0.054
+        },
+        "assist_http_ms": {
+          "samples": 3,
+          "median_ms": 3.027,
+          "min_ms": 2.929,
+          "max_ms": 3.133
+        }
+      },
+      "deterministic_repeats": 3,
+      "store_unchanged": true,
+      "status": "partial",
+      "exhaustive": false
+    },
+    {
+      "case": "missing_source",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "units"
+      ],
+      "planner_fields": [
+        "units"
+      ],
+      "baseline_fields": [
+        "units"
+      ],
+      "planner_questions": 1,
+      "ask_every_missing_questions": 1,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "baseline_missed": 0,
+      "generic_unknown_missed": 1,
+      "missing_expected_remedies": [],
+      "missing_expected_alternative_remedies": [],
+      "displayed_alternatives": 3,
+      "alternative_rule_evaluations": 3,
+      "certain_rule_evaluations": 1,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 4,
+      "ask_every_missing_evaluations": 1,
+      "generic_unknown_evaluations": 1,
+      "assist_http_evaluations": 6,
+      "latency": {
+        "planner_ms": {
+          "samples": 3,
+          "median_ms": 1.309,
+          "min_ms": 1.146,
+          "max_ms": 1.326
+        },
+        "ask_every_missing_ms": {
+          "samples": 3,
+          "median_ms": 0.097,
+          "min_ms": 0.095,
+          "max_ms": 0.1
+        },
+        "generic_unknown_ms": {
+          "samples": 3,
+          "median_ms": 0.087,
+          "min_ms": 0.084,
+          "max_ms": 0.095
+        },
+        "assist_http_ms": {
+          "samples": 3,
+          "median_ms": 3.324,
+          "min_ms": 3.169,
+          "max_ms": 3.529
+        }
+      },
+      "deterministic_repeats": 3,
+      "store_unchanged": true,
+      "status": "partial",
+      "exhaustive": false
+    },
+    {
+      "case": "conflicting_versions",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "units"
+      ],
+      "planner_fields": [
+        "units"
+      ],
+      "baseline_fields": [
+        "units"
+      ],
+      "planner_questions": 1,
+      "ask_every_missing_questions": 1,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "baseline_missed": 0,
+      "generic_unknown_missed": 1,
+      "missing_expected_remedies": [],
+      "missing_expected_alternative_remedies": [],
+      "displayed_alternatives": 3,
+      "alternative_rule_evaluations": 6,
+      "certain_rule_evaluations": 2,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 4,
+      "ask_every_missing_evaluations": 1,
+      "generic_unknown_evaluations": 1,
+      "assist_http_evaluations": 6,
+      "latency": {
+        "planner_ms": {
+          "samples": 3,
+          "median_ms": 2.388,
+          "min_ms": 2.047,
+          "max_ms": 2.45
+        },
+        "ask_every_missing_ms": {
+          "samples": 3,
+          "median_ms": 0.197,
+          "min_ms": 0.182,
+          "max_ms": 0.201
+        },
+        "generic_unknown_ms": {
+          "samples": 3,
+          "median_ms": 0.173,
+          "min_ms": 0.171,
+          "max_ms": 0.181
+        },
+        "assist_http_ms": {
+          "samples": 3,
+          "median_ms": 5.094,
+          "min_ms": 5.034,
+          "max_ms": 5.718
+        }
+      },
+      "deterministic_repeats": 3,
+      "store_unchanged": true,
+      "status": "partial",
+      "exhaustive": false
+    },
+    {
+      "case": "bounded_analysis",
+      "mode": "synthetic_software",
+      "expected_useful_fields": [
+        "owner_occupied",
+        "units"
+      ],
+      "planner_fields": [
+        "owner_occupied",
+        "units"
+      ],
+      "baseline_fields": [
+        "owner_occupied",
+        "units"
+      ],
+      "planner_questions": 2,
+      "ask_every_missing_questions": 2,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 0,
+      "planner_missed": 0,
+      "baseline_missed": 0,
+      "generic_unknown_missed": 2,
+      "missing_expected_remedies": [],
+      "missing_expected_alternative_remedies": [],
+      "displayed_alternatives": 1,
+      "alternative_rule_evaluations": 1,
+      "certain_rule_evaluations": 1,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 2,
+      "ask_every_missing_evaluations": 1,
+      "generic_unknown_evaluations": 1,
+      "assist_http_evaluations": 4,
+      "latency": {
+        "planner_ms": {
+          "samples": 3,
+          "median_ms": 0.857,
+          "min_ms": 0.768,
+          "max_ms": 11.021
+        },
+        "ask_every_missing_ms": {
+          "samples": 3,
+          "median_ms": 0.106,
+          "min_ms": 0.101,
+          "max_ms": 0.112
+        },
+        "generic_unknown_ms": {
+          "samples": 3,
+          "median_ms": 0.09,
+          "min_ms": 0.089,
+          "max_ms": 0.094
+        },
+        "assist_http_ms": {
+          "samples": 3,
+          "median_ms": 2.898,
+          "min_ms": 2.792,
+          "max_ms": 3.128
+        }
+      },
+      "deterministic_repeats": 3,
+      "store_unchanged": true,
+      "status": "partial",
+      "exhaustive": false
+    },
+    {
+      "case": "berkeley_pending_and_missing_original",
+      "mode": "real_extraction_record_synthetic_property_missing_original_source",
+      "expected_useful_fields": [],
+      "planner_fields": [],
+      "baseline_fields": [
+        "actor_is_landlord",
+        "algorithm_provision_action",
+        "algorithm_sets_or_recommends_rents_or_occupancy_levels",
+        "dwelling_unit_city",
+        "identified_input_data_age_days",
+        "identified_input_data_available_to_general_public",
+        "identified_input_data_concerns_actual_rents_occupancy_lease_dates_or_similar_property_data",
+        "identified_input_data_property_owned_or_managed_by_recommendation_recipient_or_user",
+        "information_provided_or_used_for_appraisal",
+        "information_provided_or_used_for_project_financing_market_research",
+        "information_provided_or_used_for_software_development_research_testing_or_training",
+        "landlord_uses_algorithm_to_set_rents_or_occupancy_levels",
+        "process_coordinates_berkeley_landlord_with_one_or_more_competitors",
+        "process_uses_identified_input_data_to_calculate_and_recommend_future_lease_rents_fees_occupancy_or_other_terms",
+        "product_or_process_publishes_aggregated_anonymous_rental_data_report_study_or_presentation",
+        "product_or_process_recommends_future_lease_rents_fees_occupancy_or_other_terms",
+        "product_or_process_uses_or_incorporates_analytical_or_computation_process",
+        "product_used_to_establish_rent_or_income_limits_under_government_affordable_housing_guidelines",
+        "recipient_is_berkeley_landlord",
+        "software_development_activity_uses_or_processes_competitor_data_to_develop_train_or_test_predictive_or_machine_learning_models",
+        "such_competitor_data_used_as_operational_model_input_when_recommendation_calculated_for_publication_or_provision_to_berkeley_landlord"
+      ],
+      "planner_questions": 0,
+      "ask_every_missing_questions": 21,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 21,
+      "planner_missed": 0,
+      "baseline_missed": 0,
+      "generic_unknown_missed": 0,
+      "missing_expected_remedies": [],
+      "missing_expected_alternative_remedies": [],
+      "displayed_alternatives": 0,
+      "alternative_rule_evaluations": 0,
+      "certain_rule_evaluations": 0,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 1,
+      "ask_every_missing_evaluations": 1,
+      "generic_unknown_evaluations": 1,
+      "assist_http_evaluations": 3,
+      "latency": {
+        "planner_ms": {
+          "samples": 3,
+          "median_ms": 4.726,
+          "min_ms": 4.576,
+          "max_ms": 4.915
+        },
+        "ask_every_missing_ms": {
+          "samples": 3,
+          "median_ms": 1.957,
+          "min_ms": 1.884,
+          "max_ms": 2.01
+        },
+        "generic_unknown_ms": {
+          "samples": 3,
+          "median_ms": 1.922,
+          "min_ms": 1.847,
+          "max_ms": 1.982
+        },
+        "assist_http_ms": {
+          "samples": 3,
+          "median_ms": 13.233,
+          "min_ms": 13.168,
+          "max_ms": 14.048
+        }
+      },
+      "deterministic_repeats": 3,
+      "store_unchanged": true,
+      "status": "partial",
+      "exhaustive": false
+    }
+  ],
+  "cohorts": {
+    "real_extraction_record_synthetic_property_missing_original_source": {
+      "cases": 1,
+      "expected_useful_facts": 0,
+      "planner_questions": 0,
+      "ask_every_missing_questions": 21,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 21,
+      "planner_missed": 0,
+      "baseline_missed": 0,
+      "generic_unknown_missed": 0,
+      "displayed_alternatives": 0,
+      "alternative_rule_evaluations": 0,
+      "certain_rule_evaluations": 0,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 1,
+      "ask_every_missing_evaluations": 1,
+      "generic_unknown_evaluations": 1,
+      "assist_http_evaluations": 3
+    },
+    "synthetic_software": {
+      "cases": 7,
+      "expected_useful_facts": 8,
+      "planner_questions": 8,
+      "ask_every_missing_questions": 8,
+      "generic_unknown_questions": 0,
+      "planner_unnecessary": 0,
+      "baseline_unnecessary": 1,
+      "planner_missed": 0,
+      "baseline_missed": 1,
+      "generic_unknown_missed": 8,
+      "displayed_alternatives": 17,
+      "alternative_rule_evaluations": 20,
+      "certain_rule_evaluations": 12,
+      "incorrect_certainty": 0,
+      "http_mismatches": 0,
+      "lost_persistent_remedy_kinds": 0,
+      "planner_evaluations": 28,
+      "ask_every_missing_evaluations": 7,
+      "generic_unknown_evaluations": 7,
+      "assist_http_evaluations": 42
+    }
+  },
+  "real_snapshot_cases_pending": [
+    {
+      "id": "real_decisive_fact",
+      "sources": [
+        "D007",
+        "D025"
+      ],
+      "basis": "docs/core/core01_cross_source_review.json",
+      "expected_remedy": "Keep narrower rental ownership/service-member qualifications unresolved; Core A must supply a consequential supported factual branch",
+      "blocked_on": "CORE-06 rule/property binding and expected useful field; PLAT-06 snapshot"
+    },
+    {
+      "id": "real_two_exemptions",
+      "sources": [
+        "D009"
+      ],
+      "basis": "docs/core/core01_d009_live.json",
+      "expected_remedy": "Retain subsidy/HUD and historical/current owner occupancy conditions separately; one answer must not settle both",
+      "blocked_on": "Complete saved rule/source/property inputs and reviewed useful field expectations"
+    },
+    {
+      "id": "real_partial_occupancy",
+      "sources": [
+        "D009"
+      ],
+      "rule_ids": [
+        "r-4bf8e008d56950bba8de"
+      ],
+      "basis": "docs/core/core01_d009_live.json",
+      "expected_useful_fields": [
+        "certificate_of_occupancy"
+      ],
+      "expected_remedy": "Ask for actual certificate precision only if Core marks the branch relevant; never infer it from construction year",
+      "blocked_on": "CORE-06 fixes/recorded branch; PLAT-06 source/property snapshot"
+    },
+    {
+      "id": "real_source_gap_outside_berkeley",
+      "sources": [
+        "D010",
+        "D056"
+      ],
+      "basis": "docs/core_rules/CORE_A_HANDOFF.md",
+      "expected_remedy": "Acquire missing CORI authority; property answers cannot establish program or legal coverage",
+      "blocked_on": "CORE-06 rule/property binding and PLAT-06 source snapshot"
+    },
+    {
+      "id": "real_nj_conflict",
+      "sources": [
+        "D069",
+        "D070",
+        "D071",
+        "D072"
+      ],
+      "basis": "docs/tasks/CORE-06.md",
+      "expected_remedy": "Preserve both source-backed claims and unresolved priority; do not hard-code the organizer's conflict expectation",
+      "blocked_on": "CORE-06 comparison evidence and PLAT-06 disagreement contract/snapshot"
+    }
+  ]
+}
