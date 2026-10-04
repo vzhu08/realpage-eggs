@@ -825,6 +825,11 @@
 }
 
 /* ---------------------------------------------------------------- working export */
+.export__preview {
+  max-height: 24rem;
+  overflow: auto;
+}
+
 .export__actions {
   display: flex;
   flex-wrap: wrap;

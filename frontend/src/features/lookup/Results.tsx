@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { Answer, AnswerValue, DataMode, FactDefinition, FixtureCaseSummary, LookupOutcome } from '../../api/types';
 import { Disclosure, Empty, ErrorNotice, Facts, Notice, SectionHeading, Tag } from '../../components/ui';
+import { DEMO_ONLY } from '../../config';
 import { formatDate } from '../../lib/dates';
 import { diffOutcomes } from '../../lib/diff';
 import { buildWorkingExport, downloadJson, workingExportFilename } from '../../lib/exportPackage';
@@ -56,11 +57,10 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
   const conflicted = lookup.evaluations.filter((evaluation) => evaluation.conflict_flag);
   const conflictHref = disagreementHref(lookup.address.address_id, lookup.as_of);
   const [exported, setExported] = useState<'idle' | 'done' | 'failed'>('idle');
-  const exportResult = () => {
-    // The export time is the only clock value in the file, and it is labeled as such there.
-    const data = buildWorkingExport({ outcome, answers: session.answers, history: session.history, mode, apiBase, exportedAt: new Date().toISOString() });
-    setExported(downloadJson(workingExportFilename(lookup.address.address_id, lookup.as_of), data) ? 'done' : 'failed');
-  };
+  const [shownExport, setShownExport] = useState<string | null>(null);
+  // The export time is the only clock value in the file, and it is labeled as such there.
+  const buildExport = () => buildWorkingExport({ outcome, answers: session.answers, history: session.history, mode, apiBase, exportedAt: new Date().toISOString() });
+  const exportResult = () => setExported(downloadJson(workingExportFilename(lookup.address.address_id, lookup.as_of), buildExport()) ? 'done' : 'failed');
   const fixtureNote = `${fixtureText.charAt(0).toUpperCase()}${fixtureText.slice(1)}${/[.!?]$/.test(fixtureText) ? '' : '.'}`;
 
   return (
@@ -192,14 +192,31 @@ export function Results({ session, outcome, selectedRuleId, relatedCases, factDe
         <p className="section__lead">
           Download what is on screen as one file: the stored facts, your request-local answers and their history, the evaluator’s results, the exact quotes and source records, each evidence check, and what remains uncertain. Each kind is kept apart.
         </p>
-        <div className="export__actions">
-          <button type="button" className="button" onClick={exportResult} disabled={busy}>
-            Download working export (JSON)
-          </button>
-          <span className="hint" role="status">
-            {exported === 'done' ? 'Download started.' : exported === 'failed' ? 'This browser did not allow the download.' : ''}
-          </span>
-        </div>
+        {DEMO_ONLY ? (
+          // A hosted preview cannot hand the viewer a file, so the same content is shown on the page.
+          <>
+            <div className="export__actions">
+              <button type="button" className="button" aria-expanded={shownExport !== null} onClick={() => setShownExport((current) => (current === null ? JSON.stringify(buildExport(), null, 2) : null))} disabled={busy}>
+                {shownExport === null ? 'Show working export (JSON)' : 'Hide working export'}
+              </button>
+              <span className="hint">This hosted preview cannot save files. Run the app locally to download the same file.</span>
+            </div>
+            {shownExport !== null && (
+              <pre className="raw export__preview" tabIndex={0} aria-label="Working export">
+                {shownExport}
+              </pre>
+            )}
+          </>
+        ) : (
+          <div className="export__actions">
+            <button type="button" className="button" onClick={exportResult} disabled={busy}>
+              Download working export (JSON)
+            </button>
+            <span className="hint" role="status">
+              {exported === 'done' ? 'Download started.' : exported === 'failed' ? 'This browser did not allow the download.' : ''}
+            </span>
+          </div>
+        )}
         <p className="hint">
           This is a working export assembled in the browser. It is not the reproducible evidence package: that needs snapshot and code hashes from the service, which the API does not provide yet. Model review is reported as the service records it; no independent human review is recorded.
         </p>
