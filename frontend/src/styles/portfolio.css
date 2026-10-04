@@ -326,7 +326,7 @@
 }
 
 .summary__table .summary__num {
-  width: 4.9rem;
+  width: 4.6rem;
   padding-left: var(--s-1);
   padding-right: 0.6rem;
   text-align: right;
@@ -1207,7 +1207,7 @@
 
 /* ---------------------------------------------------------------- narrow screens */
 
-@media (max-width: 1000px) {
+@media (max-width: 1099px) {
   .summaries {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1308,7 +1308,7 @@
     border-bottom: 0;
   }
 
-  .summary__table tbody th {
+  .summary__table tbody th:first-child {
     grid-column: 1 / -1;
     width: auto;
     padding: 0;
