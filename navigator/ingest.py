@@ -48,7 +48,8 @@ def ingest_pack(store: Store, pack: Path):
         if text_path and not text_path.is_relative_to((pack / "corpus").resolve()):
             raise ValueError("Manifest text path escapes corpus directory")
         raw = text_path.read_bytes() if text_path and text_path.is_file() else b""
-        state = "supplied" if raw else "terms_review" if row["capture"] == "check-terms" else "failed" if row["capture"] == "yes" else "link_only"
+        # A local text file does not clear the manifest's access restriction.
+        state = "terms_review" if row["capture"] == "check-terms" else "supplied" if raw else "failed" if row["capture"] == "yes" else "link_only"
         actual_hash = digest(raw)
         issues = []
         if raw and row["sha256"] != actual_hash:

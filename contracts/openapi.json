@@ -1541,6 +1541,7 @@
             "enum": [
               "source_availability",
               "source_identity",
+              "source_eligibility",
               "citation_anchor",
               "quote_presence",
               "semantic_support",
@@ -2116,6 +2117,66 @@
           "rules": {
             "type": "integer",
             "title": "Rules"
+          },
+          "captured_sources": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Captured Sources"
+          },
+          "rule_sources": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rule Sources"
+          },
+          "primary_source_rules": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Primary Source Rules"
+          },
+          "context_only_sources": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context Only Sources"
+          },
+          "source_review_rules": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Review Rules"
           },
           "addresses": {
             "type": "integer",

@@ -10,6 +10,7 @@ from pydantic import ValidationError
 from .config import VERSION
 from .fact_inputs import FACT_DEFINITIONS
 from .models import Expression, ExtractionBundle, Rule
+from .source_policy import POLICY_VERSION, source_use
 from .store import digest
 
 PROMPT_VERSION = "extract-v3-core-json-input"
@@ -157,12 +158,26 @@ def validate_bundle(bundle, sources, allowed_doc_id=None):
         for field in sorted(required - supported):
             issue = f"Missing field-level evidence for {field}"
             if issue not in rule.review_issues: rule.review_issues.append(issue)
-        if source.authority != "official":
-            issue = "Secondary evidence requires authority review"
-            if issue not in rule.review_issues: rule.review_issues.append(issue)
+        for ident in sorted({source.doc_id} | {span.doc_id for span in spans}):
+            use = source_use(sources[ident], bundle.source_kind if ident == allowed_doc_id else None)
+            if not use.operative_allowed:
+                issue = f"source_use:{use.status}: {ident}: {use.reason}"
+                if issue not in rule.review_issues: rule.review_issues.append(issue)
+    accepted_negatives = []
     for negative in bundle.negative_findings:
         if allowed_doc_id and any(e.doc_id != allowed_doc_id for e in negative.evidence): raise ValueError("Negative finding uses unprovided source")
         anchor_evidence(negative.evidence, sources)
+        blocked = []
+        for ident in sorted({span.doc_id for span in negative.evidence}):
+            use = source_use(sources[ident], bundle.source_kind if ident == allowed_doc_id else None)
+            if not use.operative_allowed:
+                blocked.append(f"{ident}: {use.status}: {use.reason}")
+        if blocked:
+            issue = "Negative finding excluded from operative evidence: " + "; ".join(blocked)
+            if issue not in bundle.issues: bundle.issues.append(issue)
+        else:
+            accepted_negatives.append(negative)
+    bundle.negative_findings = accepted_negatives
     return bundle
 
 
@@ -224,13 +239,33 @@ def saved_draft(store, cache_key, provider):
     return None, None
 
 
+def extraction_priority(source):
+    """Spend bounded extraction work on recorded primary text before guidance."""
+    kind = source.source_type.strip().casefold()
+    rank = 0 if kind == "legal_text" else 1 if kind == "unclassified" else 2
+    return rank, source.doc_id
+
+
 def extract(store, doc_ids=None, provider=None, limit=None):
     sources = store.sources()
     if not sources: raise ValueError("Dataset absent; ingest source documents first")
     if doc_ids and set(doc_ids) - set(sources): raise ValueError("Unknown document ID")
-    selected = [s for k, s in sorted(sources.items()) if s.text and (not doc_ids or k in doc_ids)][:limit]
-    if not selected: raise ValueError("No captured source text selected")
-    run = store.new_run("extract", getattr(provider, "mode", "live"), input_hashes={s.doc_id: s.sha256 for s in selected}, config={"prompt_version": PROMPT_VERSION, "chunk_chars": 18000, "overlap_chars": 1500, "concurrency": 1, "transport_attempts": 3, "repair_attempts": 1})
+    candidates, skipped = [], []
+    for ident, source in sorted(sources.items()):
+        if doc_ids and ident not in doc_ids:
+            continue
+        use = source_use(source)
+        if use.extraction_allowed:
+            candidates.append(source)
+        else:
+            skipped.append({"doc_id": ident, "status": use.status, "reason": use.reason})
+    selected = sorted(candidates, key=extraction_priority)[:limit]
+    run = store.new_run("extract", getattr(provider, "mode", "live"), input_hashes={s.doc_id: s.sha256 for s in selected}, config={"prompt_version": PROMPT_VERSION, "chunk_chars": 18000, "overlap_chars": 1500, "concurrency": 1, "transport_attempts": 3, "repair_attempts": 1, "source_policy_version": POLICY_VERSION, "skipped_sources": skipped})
+    if not selected:
+        message = "No eligible captured source text selected; inspect skipped_sources in the extraction run"
+        run.errors.append(message)
+        store.finish(run, "failed", processed=0, rules=0, skipped_sources=len(skipped))
+        raise ValueError(message)
     try:
         provider = provider or OpenAIProvider()
     except ProviderUnavailable as exc:
@@ -318,4 +353,4 @@ def extract(store, doc_ids=None, provider=None, limit=None):
         store.write(f"provider_outputs/{run.run_id}/usage.json", getattr(provider, "usage", []))
         if isinstance(provider, OpenAIProvider): provider.client.close()
     run.artifacts = ["rules.json", "extraction_index.json", f"provider_outputs/{run.run_id}/usage.json"]
-    return store.finish(run, "partial" if run.errors and processed else "failed" if run.errors else "success", processed=processed, rules=len(rules), cache_hits=cache_hits, draft_replays=len(run.config["draft_replays"]))
+    return store.finish(run, "partial" if run.errors and processed else "failed" if run.errors else "success", processed=processed, rules=len(rules), cache_hits=cache_hits, draft_replays=len(run.config["draft_replays"]), skipped_sources=len(skipped))

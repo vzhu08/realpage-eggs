@@ -186,8 +186,8 @@ function LiveDetails({ health, apiBase, onApiBase }: { health: HealthState; apiB
           dense
           rows={[
             { label: 'Dataset', value: sentence(data.dataset_readiness) },
-            { label: 'Rules extracted', value: String(data.rules) },
-            { label: 'Sources', value: String(data.sources) },
+            { label: 'Rule candidates', value: String(data.rules) },
+            { label: 'Sources listed', value: String(data.sources) },
             { label: 'Sample properties', value: String(data.addresses) },
             { label: 'Municipalities resolved', value: `${data.resolved_municipalities} of ${data.addresses}` },
             { label: 'Last extraction', value: data.last_extraction_outcome ? sentence(data.last_extraction_outcome) : 'None recorded' },

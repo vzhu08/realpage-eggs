@@ -352,6 +352,11 @@ class HealthResponse(Model):
     dataset_readiness: Literal["absent", "partial", "available"]
     sources: int
     rules: int
+    captured_sources: int | None = Field(default=None, ge=0)
+    rule_sources: int | None = Field(default=None, ge=0)
+    primary_source_rules: int | None = Field(default=None, ge=0)
+    context_only_sources: int | None = Field(default=None, ge=0)
+    source_review_rules: int | None = Field(default=None, ge=0)
     addresses: int
     resolved_municipalities: int
     last_extraction_outcome: str | None
@@ -469,7 +474,7 @@ class EncodedRuleRendering(Model):
 
 
 class EvidenceCheck(Model):
-    kind: Literal["source_availability", "source_identity", "citation_anchor", "quote_presence", "semantic_support", "dependencies"]
+    kind: Literal["source_availability", "source_identity", "source_eligibility", "citation_anchor", "quote_presence", "semantic_support", "dependencies"]
     status: Literal["pass", "fail", "missing", "ambiguous", "not_checked", "supported", "contradicted", "insufficient", "stale"]
     message: str
     field: str | None = None

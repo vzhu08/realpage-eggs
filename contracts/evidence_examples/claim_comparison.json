@@ -14,10 +14,10 @@
             {
               "span": {
                 "doc_id": "SYNTHETIC-42",
-                "source_hash": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064",
+                "source_hash": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
                 "start": 0,
                 "end": 100,
-                "text": "SYNTHETIC TEST DOCUMENT. Fictional Maple Harbor, California. Not actual law.\r\nMaple Harbor Ordinance",
+                "text": "SYNTHETIC TEST DOCUMENT. Fictional Maple Harbor, California. Not actual law.\nMaple Harbor Ordinance ",
                 "section": null
               },
               "anchor_valid": true,
@@ -28,14 +28,14 @@
                 ],
                 "url": "https://example.invalid/synthetic-42",
                 "retrieved_at": "2026-10-03T00:00:00Z",
-                "sha256": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064",
+                "sha256": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
                 "manifest_sha256": null,
                 "capture_status": "synthetic",
                 "authority": "official",
                 "source_type": "legal_text",
                 "issues": [],
                 "duplicate_of": null,
-                "actual_sha256": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064",
+                "actual_sha256": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5",
                 "identity_valid": true
               }
             }
@@ -53,9 +53,9 @@
         "remedy": "Acquire missing support or re-anchor invalid spans, then review authority, scope, dates and the meaning of both claims; retrieval recency does not decide precedence."
       }
     },
-    "annotation_sha256": "701e2d29674989b575c87280b2fbe5ad84dd553d710e652f9e3600f74ee73e97",
+    "annotation_sha256": "5847371277a2af6b813e32e9fd0670994737c57dc3834a2512e755ab2a14529f",
     "source_hashes": {
-      "SYNTHETIC-42": "f8c9d82aa20e6f3f78a56b2eff1c35714a7f99ae74c6f285e214d44f68880064"
+      "SYNTHETIC-42": "7b69c9b441ab9fd2af38ecdf6cdf78fac7c7b909b13d18c892c8b55f91a796f5"
     },
     "notes": [
       "Core-authored observations; semantic support and legal precedence remain unverified.",

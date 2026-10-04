@@ -74,7 +74,7 @@ test('the implemented-API examples match their models: assist response, evidence
   assert.deepEqual(validate('EncodedRuleRendering', SOURCE_COMPARISON.encoded_rule).errors, []);
   // The evidence report keeps its checks separate: several kinds, never one score.
   const kinds = new Set(SOURCE_COMPARISON.evidence.checks.map((check) => check.kind));
-  assert.deepEqual([...kinds].sort(), ['citation_anchor', 'dependencies', 'quote_presence', 'semantic_support', 'source_availability', 'source_identity']);
+  assert.deepEqual([...kinds].sort(), ['citation_anchor', 'dependencies', 'quote_presence', 'semantic_support', 'source_availability', 'source_eligibility', 'source_identity']);
 });
 
 test('every recorded replay payload matches its contract model', () => {

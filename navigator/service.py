@@ -4,6 +4,7 @@ from .evidence import prepare_rules, EvidenceStoreView
 from .fact_inputs import validate_facts
 from .models import LookupResponse, JurisdictionResolution, PropertyFacts
 from .store import digest
+from .source_policy import rule_source_issues, source_use
 
 
 class DatasetUnavailable(RuntimeError): pass
@@ -42,18 +43,24 @@ def lookup(store, request, answer_provenance=None):
     sources = store.sources()
     # Relevant full source text is available separately, reducing lookup payload size.
     metadata_sources = [sources[sid].model_copy(update={"text": ""}) for sid in sorted(source_ids) if sid in sources]
-    missing = [s.doc_id for s in sources.values() if not s.text]
-    unprocessed = [s.doc_id for s in sources.values() if s.text and (extraction_index.get(s.doc_id, {}).get("status") != "complete" or extraction_index.get(s.doc_id, {}).get("sha256") != s.sha256)]
+    uses = {ident: source_use(source) for ident, source in sources.items()}
+    context_only = sorted(ident for ident, use in uses.items() if use.status == "context_only")
+    primary_candidates = [s for s in sources.values() if uses[s.doc_id].status != "context_only"]
+    missing = sorted(s.doc_id for s in primary_candidates if not s.text)
+    unprocessed = sorted(s.doc_id for s in primary_candidates if s.text and (not uses[s.doc_id].operative_allowed or extraction_index.get(s.doc_id, {}).get("status") != "complete" or extraction_index.get(s.doc_id, {}).get("sha256") != s.sha256))
+    source_review = sorted(r.team_rule_id for r in relevant_rules if rule_source_issues(r, sources))
     warnings = []
     if source_ids - sources.keys(): warnings.append("Supporting source records are missing; evidence review required")
     if any(any(i.startswith("evidence_check:") for i in r.review_issues) for r in rules): warnings.append("Current evidence checks have unresolved failures; inspect rule evidence reports")
-    if missing: warnings.append(f"Missing source material: {len(missing)} documents; no-rule conclusions are not established")
+    if missing: warnings.append(f"Missing primary-source material: {len(missing)} documents; no-rule conclusions are not established")
     if unprocessed: warnings.append(f"Unresolved extraction: {len(unprocessed)} source documents")
+    if context_only: warnings.append(f"Context-only source inventory: {len(context_only)} documents; these are not primary legal authority or missing-law evidence")
+    if source_review: warnings.append(f"Primary-source review required: {len(source_review)} rule candidates lack eligible legal-text support; retained as uncertain research candidates")
     if resolution.match_quality != "resolved": warnings.append("Local jurisdiction unresolved; state answers retained and same-state local candidates marked uncertain")
     if not rules: warnings.append("No relevant rules extracted; this is not proof that no law exists")
     modes = sorted({r.evidence_mode for r in relevant_rules})
     if "synthetic" in modes: warnings.append("SYNTHETIC DEMONSTRATION: not actual housing law")
-    return LookupResponse(address=prop, as_of=request.as_of, jurisdiction=resolution, evaluations=evaluations, rules=relevant_rules, sources=metadata_sources, warnings=warnings, metadata={"version": VERSION, "dataset": store.read("dataset.json", {}), "rule_modes": modes, "extraction_run_ids": sorted({r.extraction_run_id for r in relevant_rules}), "partial_data": bool(missing or unprocessed), "missing_source_ids": missing, "unprocessed_source_ids": unprocessed}, disclaimer=DISCLAIMER)
+    return LookupResponse(address=prop, as_of=request.as_of, jurisdiction=resolution, evaluations=evaluations, rules=relevant_rules, sources=metadata_sources, warnings=warnings, metadata={"version": VERSION, "dataset": store.read("dataset.json", {}), "rule_modes": modes, "extraction_run_ids": sorted({r.extraction_run_id for r in relevant_rules}), "partial_data": bool(missing or unprocessed or source_review), "missing_source_ids": missing, "unprocessed_source_ids": unprocessed, "context_only_source_ids": context_only, "source_review_rule_ids": source_review, "source_eligibility": {ident: {"status": uses[ident].status, "operative_allowed": uses[ident].operative_allowed, "reason": uses[ident].reason} for ident in sorted(source_ids) if ident in uses}}, disclaimer=DISCLAIMER)
 def source_comparisons(store):
     """Recheck Core-authored claim annotations against this store's unchanged sources."""
     from .config import DISCLAIMER

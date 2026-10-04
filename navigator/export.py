@@ -19,7 +19,8 @@ def export_all(store, output: Path, as_of=date(2026, 10, 1), allow_partial=False
     run = store.new_run("export", "synthetic" if synthetic else "local", input_hashes={"rules": digest(store.read("rules.json", {})), "addresses": digest(store.read("addresses.json", {})), "resolutions": digest(store.read("resolutions.json", {}))}, config={"as_of": str(as_of), "allow_partial": allow_partial})
     rules = list(store.rules().values())
     exported_ids = set(report["exportable_rule_ids"])
-    exported_rules = [export_rule(r, rules, as_of) for r in sorted(rules, key=lambda r: r.team_rule_id) if r.team_rule_id in exported_ids]
+    eligible_rules = [r for r in rules if r.team_rule_id in exported_ids]
+    exported_rules = [export_rule(r, eligible_rules, as_of) for r in sorted(eligible_rules, key=lambda r: r.team_rule_id)]
     resolutions, lookups = store.resolutions(), {}
     for ident, prop in sorted(store.addresses().items()):
         evaluated = evaluate_rules(rules, prop, resolutions[ident], as_of)
