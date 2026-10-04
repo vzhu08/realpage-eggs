@@ -113,12 +113,22 @@ class ContextRetriever:
             if anchor.source_hash != source.sha256 or source.text[anchor.start:anchor.end] != anchor.text:
                 hits.append(f"stale_anchor:{anchor.doc_id}")
                 continue
+            if any(s.doc_id == source.doc_id and s.start <= anchor.start and anchor.end <= s.end for s in result): continue
             containing = [(label, a, b) for label, a, b in self.section_index[source.doc_id] if a <= anchor.start and anchor.end <= b]
             label, start, end = containing[-1] if containing else (None, 0, len(source.text))
-            if any(s.doc_id == source.doc_id and s.start <= start and end <= s.end for s in result): continue
-            if end - start > max_chars - chars:
-                start, end = max(start, anchor.start-radius), min(end, anchor.end+radius)
+            remaining = max_chars - chars
+            if end - start > remaining:
                 hits.append("section_windowed")
+                if len(anchor.text) > remaining:
+                    hits.append("max_chars")
+                    continue
+                # Fit surrounding text to the remaining budget, keeping the whole
+                # anchor and its original offsets even near either section edge.
+                left, right = max(start, anchor.start-radius), min(end, anchor.end+radius)
+                size = min(remaining, right - left)
+                start = max(left, anchor.start - (size - len(anchor.text)) // 2)
+                end = min(right, start + size)
+                start = max(left, end - size)
             visit(span(source, start, end, label), 0, {(source.doc_id, label)})
         partial = bool(hits or any(d.status != "resolved" for d in dependencies))
         return SourceContext(spans=result, dependencies=dependencies, status="missing" if not result else "partial" if partial else "available", limits={"max_depth": max_depth, "max_chars": max_chars, "max_spans": max_spans}, limits_hit=sorted(set(hits)))

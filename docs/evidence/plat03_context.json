@@ -1,0 +1,92 @@
+{
+  "task": "PLAT-03",
+  "mode": "synthetic_software_regression_not_legal_validation",
+  "branch": "codex/platform-evidence",
+  "base_commit": "3b1ef065a69c832daf92740a910bd3f33d8b150b",
+  "dependencies": "Contracts and baseline already merged; independent of PLAT-02 and new Core/UX code",
+  "checks": {
+    "before_fix_retrieval_suite": {
+      "passed": 7,
+      "failed": 6
+    },
+    "focused": {
+      "command": ".venv/Scripts/python.exe -m pytest tests/test_evidence.py tests/test_retrieval.py -q",
+      "passed": 21
+    },
+    "full_suite": {
+      "command": ".venv/Scripts/python.exe -m pytest -q",
+      "passed": 176,
+      "isolated_copy": "artifacts/plat03-context-check",
+      "log_sha256": "59a766add1344f5041bc76369e9f0299572f8cdae7ae7ff37491f6fc8a6456cb"
+    },
+    "contracts": {
+      "command": ".venv/Scripts/python.exe -m navigator contracts",
+      "exit_code": 0,
+      "unchanged_schemas": [
+        "openapi.json",
+        "domain.schema.json",
+        "research.schema.json",
+        "competition_rule.schema.json"
+      ]
+    },
+    "warning": "Existing Starlette/httpx TestClient deprecation warning"
+  },
+  "http_example": {
+    "path": "/api/v1/sources/SYNTHETIC-42/context",
+    "params": {
+      "start": 7520,
+      "end": 7561,
+      "max_chars": 100
+    },
+    "requested_quote": "Synthetic late exception; see section 99.",
+    "status_code": 200,
+    "response": {
+      "spans": [
+        {
+          "doc_id": "SYNTHETIC-42",
+          "source_hash": "dd99116e775fca00f63055d066ed242318679e3cf65d77b75fea7768d9fde82f",
+          "start": 7461,
+          "end": 7561,
+          "text": "ic text. Ordinary synthetic text. Ordinary synthetic text. Synthetic late exception; see section 99.",
+          "section": "1"
+        }
+      ],
+      "dependencies": [
+        {
+          "reference": "see section 99.",
+          "origin": {
+            "doc_id": "SYNTHETIC-42",
+            "source_hash": "dd99116e775fca00f63055d066ed242318679e3cf65d77b75fea7768d9fde82f",
+            "start": 7546,
+            "end": 7561,
+            "text": "see section 99.",
+            "section": "1"
+          },
+          "status": "missing",
+          "target_doc_id": "SYNTHETIC-42",
+          "target_section": "99",
+          "spans": [],
+          "explanation": "Referenced section not present in available snapshots; not proof the authority does not exist"
+        }
+      ],
+      "status": "partial",
+      "limits": {
+        "max_depth": 2,
+        "max_chars": 100,
+        "max_spans": 12
+      },
+      "limits_hit": [
+        "section_windowed"
+      ],
+      "retrieval_method": "exact_anchors_and_bounded_lexical_retrieval",
+      "semantic_verification": false
+    },
+    "stored_source_unchanged": true
+  },
+  "limitations": [
+    "Cross-reference detection remains heuristic; this does not certify complete legal coverage.",
+    "Windowed sections and references outside the returned window remain partial.",
+    "Anchors exceeding the remaining budget are explicitly unretrieved; referenced sections are not silently clipped.",
+    "No live provider, legal review, deployment, push, or merge performed for this continuation."
+  ]
+}
